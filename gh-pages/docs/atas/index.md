@@ -51,4 +51,6 @@ Copie o template abaixo ao criar uma nova ata:
 
 ## Índice de Atas
 
-> Nenhuma ata registrada ainda. Adicione a primeira ata seguindo o modelo acima.
+| Data | Assunto | Participantes |
+|------|---------|---------------|
+| [09/04/2026](2026-04-09.md) | Alinhamento de Projeto e Definição de Requisitos | Lucas Zanetti, Hugo, Felipe, Camille, Leonardo, Heitor, PO |

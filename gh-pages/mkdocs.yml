@@ -88,6 +88,7 @@ nav:
   - Home: index.md
   - Atas de Reunião:
     - atas/index.md
+    - "09/04/2026 — Alinhamento de Projeto": atas/2026-04-09.md
   - Backlog:
     - backlog/index.md
   - Arquitetura:
