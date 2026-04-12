@@ -4,6 +4,11 @@
 </div>
 
 <div class="crianex-cards">
+  <a class="crianex-card" href="visao/">
+    <span class="crianex-card__icon"></span>
+    <p class="crianex-card__title">Documento de Visão</p>
+    <p class="crianex-card__desc">Visão do produto, requisitos, escopo e definições do projeto Crianex.</p>
+  </a>
   <a class="crianex-card" href="atas/">
     <span class="crianex-card__icon"></span>
     <p class="crianex-card__title">Atas de Reunião</p>
