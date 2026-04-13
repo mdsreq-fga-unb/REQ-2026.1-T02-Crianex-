@@ -36,6 +36,9 @@ A empresa não possui atualmente uma ferramenta centralizada que unifique a gest
 O diagrama abaixo sintetiza as causas raiz que levam ao problema central identificado: a baixa visibilidade e a gestão descentralizada.
 
 ![Diagrama de Ishikawa](images/ishikawa.png)
+<figure class="crianex-figure">
+  <figcaption>Figura 1 — Diagrama de Ishikawa: causas da gestão descentralizada e baixa visibilidade. Fonte: Elaborado pelos autores (2026).</figcaption>
+</figure>
 
 ---
 
@@ -44,6 +47,9 @@ O diagrama abaixo sintetiza as causas raiz que levam ao problema central identif
 O Rich Picture abaixo representa o contexto do sistema e os fluxos de informação entre os principais atores e componentes do produto.
 
 ![Rich Picture](images/rich-picture.png)
+<figure class="crianex-figure">
+  <figcaption>Figura 2 — Rich Picture: contexto do sistema e fluxos de informação. Fonte: Elaborado pelos autores (2026).</figcaption>
+</figure>
 
 ---
 
@@ -52,6 +58,9 @@ O Rich Picture abaixo representa o contexto do sistema e os fluxos de informaç�
 O diagrama abaixo representa os principais stakeholders do projeto e sua relação com o produto.
 
 ![Diagrama de Stakeholders](images/stakeholders.png)
+<figure class="crianex-figure">
+  <figcaption>Figura 3 — Diagrama de Stakeholders: principais partes interessadas e seu relacionamento com o produto. Fonte: Elaborado pelos autores (2026).</figcaption>
+</figure>
 
 | Stakeholder | Papel | Interesse principal |
 |-------------|-------|---------------------|
