@@ -51,6 +51,6 @@ Copie o template abaixo ao criar uma nova ata:
 
 ## Índice de Atas
 
-| Data | Assunto | Participantes |
-|------|---------|---------------|
-| [09/04/2026](2026-04-09.md) | Alinhamento de Projeto e Definição de Requisitos | Lucas Zanetti, Hugo, Felipe, Camille, Leonardo, Heitor, PO |
+| # | Data | Assunto | Participantes |
+|---|------|---------|---------------|
+| Ata 0 | [09/04/2026](2026-04-09.md) | Alinhamento de Projeto e Definição de Requisitos | Lucas Zanetti, Hugo, Felipe, Camille, Leonardo, Heitor, PO |

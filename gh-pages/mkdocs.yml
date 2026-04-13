@@ -101,7 +101,10 @@ nav:
     - "10.1 — Lições Aprendidas": visao/10-1-licoes-aprendidas.md
   - Atas de Reunião:
     - atas/index.md
-    - "09/04/2026 — Alinhamento de Projeto": atas/2026-04-09.md
+    - "Ata 0 — 09/04/2026": atas/2026-04-09.md
+  - Sprints:
+    - sprints/index.md
+    - "Sprint 0 — Unidade 1": sprints/sprint-0.md
   - Backlog:
     - backlog/index.md
   - Arquitetura:
