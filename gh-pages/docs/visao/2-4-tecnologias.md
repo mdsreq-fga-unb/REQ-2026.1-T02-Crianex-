@@ -1,4 +1,4 @@
-# 2.4 — Tecnologias Utilizadas
+# 3. Tecnologias Utilizadas
 
 ---
 

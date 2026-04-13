@@ -1,4 +1,4 @@
-# 2.1 – 2.3 — Solução Proposta
+# 2. Solução Proposta
 
 ---
 
