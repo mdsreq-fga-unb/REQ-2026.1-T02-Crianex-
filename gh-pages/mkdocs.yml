@@ -6,8 +6,8 @@ docs_dir: docs
 theme:
   name: material
   language: pt-BR
-  logo: assets/logo.svg
-  favicon: assets/logo.svg
+  logo: assets/logo.png
+  favicon: assets/logo.png
   font:
     text: Inter
     code: JetBrains Mono
