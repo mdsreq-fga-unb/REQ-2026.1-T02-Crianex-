@@ -1,31 +1,19 @@
-# 3.2 Metodologias Adotadas
+# 3.2 Quadro Comparativo
 
----
+A tabela a seguir apresenta um comparativo entre o **Modelo em Cascata** e o **Processo Ágil Híbrido (FDD + Scrumban)** adotado, analisando as principais características relevantes para o contexto do projeto Crianex.
 
-### 3.2.1 Gestão de Produto — FDD (Feature Driven Development)
-
-O FDD organiza o desenvolvimento em torno de **funcionalidades** do produto, com foco em entregas concretas e rastreáveis. As 5 etapas do FDD serão seguidas:
-
-| Etapa | Atividade |
-|-------|-----------|
-| 1 | **Desenvolver Modelo Geral** — Modelagem de alto nível do domínio |
-| 2 | **Construir Lista de Funcionalidades** — Identificação e catalogação das features |
-| 3 | **Planejar por Funcionalidade** — Priorização e sequenciamento das features |
-| 4 | **Projetar por Funcionalidade** — Design técnico de cada feature antes da implementação |
-| 5 | **Construir por Funcionalidade** — Implementação e entrega de cada feature |
-
-A lista de funcionalidades do FDD está diretamente mapeada nas **Características do Produto (CP01–CP15)** definidas na seção 2.3, permitindo rastreabilidade direta entre planejamento e implementação.
-
----
-
-### 3.2.2 Gestão de Equipe — Scrumban
-
-A equipe combina **Scrum** (estrutura de sprints e cerimônias) com **Kanban** (fluxo visual contínuo), formando o **Scrumban**:
-
-| Dimensão | Detalhe |
-|----------|---------|
-| Duração dos Sprints | 2 semanas |
-| Board de Acompanhamento | GitHub Projects (colunas: Backlog → In Progress → Review → Done) |
-| Cerimônias | Planning, Review e Retrospectiva ao final de cada sprint |
-| Backlog | Gerenciado pelo Product Owner no GitHub Issues |
-| Limite de WIP | Máximo de 2 tarefas em progresso por membro simultaneamente |
+| Características | Modelo em Cascata | Processo Ágil Híbrido (FDD + Scrumban) |
+|---|---|---|
+| **Abordagem Geral** | Linear e preditiva. O desenvolvimento flui em uma única direção através de fases restritas e isoladas. | Orientada a valor de negócio de forma contínua. O software é construído incrementalmente, focado em entregar features tangíveis. |
+| **Foco em Arquitetura** | Forte ênfase na definição de uma arquitetura estática e detalhada antes de qualquer codificação. | Arquitetura focada na Modelagem de Domínio Global, que evolui iterativamente à medida que novas funcionalidades são projetadas. |
+| **Estrutura de Processos** | Fases rígidas e bem demarcadas (Requisitos, Design, Implementação, Testes e Manutenção). | Fluxo de trabalho contínuo guiado por demanda (Kanban), mas mantendo processos essenciais de equipe (Scrum). |
+| **Flexibilidade de Requisitos** | Baixíssima. Requisitos são congelados no início do projeto. Mudanças geram muito retrabalho. | Altíssima. Novas necessidades entram no backlog e podem ser priorizadas e "puxadas" para o desenvolvimento a qualquer momento, ideal para o cenário incerto de startups. |
+| **Colaboração com Cliente** | Envolvimento concentrado nas fases iniciais e na entrega final do sistema. | Visibilidade total. O cliente acompanha o progresso por meio de funcionalidades concluídas (features do FDD) que são fáceis de entender em linguagem de negócio. |
+| **Complexidade do Processo** | Burocrático, baseado em documentação extensa para transição de fases. | O Scrumban limita o Trabalho em Progresso, reduzindo gargalos e focando no esforço técnico que o FDD exige para cada feature. |
+| **Qualidade Técnica** | Testes e validações ocorrem maciçamente apenas no fim do ciclo de desenvolvimento. | Garantida processo a processo. O FDD exige modelar por Feature e inspeção do código antes da integração, enquanto o fluxo ágil garante testes contínuos. |
+| **Práticas de Desenvolvimento** | Estrutura formal focada na transição de fases e aprovação de documentos. Não prescreve práticas técnicas específicas de codificação para a equipe. | Inclui práticas robustas de engenharia (modelagem orientada a domínio e inspeção de código do FDD) aliadas à gestão de fluxo contínuo e limitação de WIP. |
+| **Adaptação ao Projeto da Crianex** | Aplicável em cenários onde os clientes da Crianex exijam um escopo fixo e requisitos definidos integralmente no início do contrato. | O Scrumban permite acomodar demandas urgentes de múltiplos clientes de forma visual, enquanto o FDD garante a qualidade e robustez do software entregue ao mercado B2B. |
+| **Documentação** | Documentação detalhada e padronizada é um pré-requisito obrigatório para a validação e transição entre as fases do projeto. | Focada no essencial para o negócio. A documentação principal reside no modelo de domínio global e nas listas detalhadas de features, mantendo a agilidade sem perder a organização. |
+| **Controle de Qualidade** | Realizado primordialmente em uma fase específica e dedicada a testes, alocada após a conclusão da fase de implementação do código. | Embutido no processo. Cada funcionalidade (feature) passa por Design e Inspeção antes de ser considerada pronta, e o quadro Scrumban expõe rapidamente qualquer gargalo nos testes. |
+| **Escalabilidade** | Aplicado a projetos de grande porte através da segmentação do cronograma e gestão rigorosa dos artefatos de cada fase. | Altamente escalável. O FDD foi criado originalmente para escalar projetos grandes, dividindo-os por funcionalidades, e o Scrumban se adapta facilmente ao crescimento orgânico da equipe da startup. |
+| **Suporte a Equipes de Desenvolvimento** | Funciona em silos estruturados e hierárquicos, e consequentemente em equipes de desenvolvimento grandes. | Suporta equipes colaborativas. O FDD traz papeis claros de liderança técnica, e o Scrumban promove a auto-organização e visibilidade do trabalho para todos. |

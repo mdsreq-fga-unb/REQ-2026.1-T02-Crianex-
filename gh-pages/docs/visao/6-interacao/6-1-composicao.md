@@ -11,6 +11,3 @@ A equipe é composta por 7 membros com papéis definidos, cobrindo Product Manag
 | **Hugo** | Dev | Desenvolvimento frontend e backend, stack SvelteKit + Express.js | Integral |
 | **Camile** | Dev | Desenvolvimento frontend, estratégias de ESW, documentação | Integral |
 | **Leonardo** | Dev | Desenvolvimento backend, estratégias de ESW, documentação | Integral |
-
-!!! info "Nota sobre disponibilidade"
-    Membros que cursam IHC (Interação Humano-Computador) simultaneamente podem ter disponibilidade reduzida em semanas de entrega dessa disciplina. O Tech Lead mapeia disponibilidade no início de cada sprint.
