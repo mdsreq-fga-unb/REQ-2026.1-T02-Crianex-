@@ -1,17 +1,5 @@
 # 2.6 Viabilidade do Projeto
 
----
-
-## Histórico de Revisão
-
-| Versão | Data | Descrição | Autor(es) |
-|--------|------|-----------|-----------|
-| 1.0 | 12/04/2026 | Criação da seção de viabilidade | Hugo e Philipe |
-
----
-
-## 2.6 Análise de Viabilidade
-
 Esta seção avalia a viabilidade do projeto Crianex sob três dimensões: **escopo acadêmico**, **capacidade técnica da equipe** e **riscos de infraestrutura**.
 
 ---
@@ -33,7 +21,7 @@ O escopo foi deliberadamente contido no MVP para garantir que as funcionalidades
 
 ### 2.6.2 Viabilidade Técnica — Alinhamento de Skills da Equipe
 
-A equipe é composta por 7 membros com experiência em tecnologias web modernas. A análise abaixo avalia o alinhamento entre o stack escolhido e as competências do time:
+A equipe é composta por 7 membros com experiência em tecnologias web modernas.
 
 | Tecnologia | Nível de Familiaridade da Equipe | Risco | Mitigação |
 |------------|----------------------------------|-------|-----------|
@@ -44,22 +32,18 @@ A equipe é composta por 7 membros com experiência em tecnologias web modernas.
 | **Supabase** | Médio | Baixo | BaaS bem documentado; simplifica Auth, Storage e RLS sem necessidade de configuração de infraestrutura |
 | **Kubernetes** | Baixo (infraestrutura gerenciada pela Crianex) | Médio | Ver seção 2.6.3 |
 
-A escolha de SvelteKit como novo framework para parte da equipe foi considerada aceitável dado o alto retorno em termos de SEO e performance para a vitrine digital, e a curva de aprendizado comprovadamente curta comparada ao React/Next.js.
-
 ---
 
 ### 2.6.3 Viabilidade de Infraestrutura — Kubernetes e API da Crianex
 
-O deploy da aplicação depende do cluster Kubernetes operado pela própria Crianex. Esse ponto representa o principal risco de infraestrutura do projeto:
-
 | Risco | Probabilidade | Impacto | Mitigação |
 |-------|---------------|---------|-----------|
 | **Indisponibilidade do cluster Kubernetes** | Baixa | Alto | Ambiente de desenvolvimento local com Docker Compose; deploy no Kubernetes apenas na Sprint 6 |
-| **Alterações na API da Crianex sem aviso prévio** | Média | Médio | Contratos de API documentados via OpenAPI; versionamento de endpoints; comunicação direta com CTO (Otávio Maya) |
+| **Alterações na API da Crianex sem aviso prévio** | Média | Médio | Contratos de API documentados via OpenAPI; versionamento de endpoints; comunicação direta com CTO |
 | **Acesso ao cluster não liberado no prazo** | Média | Alto | Pipeline de CI/CD preparada antecipadamente; acesso solicitado com 2 sprints de antecedência |
 | **Mudanças de requisitos de infraestrutura** | Baixa | Médio | PO mantém contato direto com a liderança da Crianex para alinhamento contínuo |
 
-**Estratégia de mitigação principal:** o desenvolvimento é independente de infraestrutura até a Sprint 6. Todos os ambientes locais e de homologação usam Docker Compose, garantindo que a equipe não seja bloqueada por dependências externas durante o desenvolvimento.
+**Estratégia de mitigação principal:** o desenvolvimento é independente de infraestrutura até a Sprint 6. Todos os ambientes locais e de homologação usam Docker Compose.
 
 ---
 
@@ -71,5 +55,3 @@ O deploy da aplicação depende do cluster Kubernetes operado pela própria Cria
 | Capacidade técnica da equipe | **Viável** (com onboarding em SvelteKit) |
 | Infraestrutura Kubernetes | **Viável com risco gerenciado** |
 | **Veredicto geral** | **Projeto viável para execução** |
-
-O projeto Crianex é considerado **viável** para ser executado dentro do semestre letivo, com o escopo definido, pelo time atual, utilizando o stack tecnológico proposto. Os riscos identificados possuem mitigações claras e não representam bloqueadores para o início do desenvolvimento.

@@ -1,17 +1,5 @@
 # 2.7 Benefícios Esperados
 
----
-
-## Histórico de Revisão
-
-| Versão | Data | Descrição | Autor(es) |
-|--------|------|-----------|-----------|
-| 1.0 | 12/04/2026 | Criação da seção de benefícios esperados | Hugo e Philipe |
-
----
-
-## 2.7 Benefícios Esperados
-
 Esta seção descreve os benefícios que o produto Crianex trará tanto para a **organização cliente** quanto para os **usuários diretos** da plataforma.
 
 ---
@@ -26,7 +14,7 @@ Esta seção descreve os benefícios que o produto Crianex trará tanto para a *
 | 4 | **Captação de leads qualificados** | Formulário de contato integrado à vitrine digital facilita a entrada de potenciais clientes interessados nos serviços da Crianex |
 | 5 | **Controle de alocação de pessoas** | Visão em tempo real de quem está alocado em qual projeto e com qual carga de trabalho, facilitando decisões de redistribuição de recursos |
 | 6 | **Rastreabilidade e governança** | Histórico de alterações de status, logs de projeto e trilha de auditoria garantem rastreabilidade e transparência nas operações internas |
-| 7 | **Plataforma própria e sem licenças recorrentes** | Rodando na infraestrutura Kubernetes da Crianex, o produto não gera custos de licenças mensais por usuário como as soluções de mercado concorrentes |
+| 7 | **Plataforma própria e sem licenças recorrentes** | Rodando na infraestrutura Kubernetes da Crianex, o produto não gera custos de licenças mensais por usuário |
 | 8 | **Identidade visual sob controle** | Customização de logo, cores e textos da vitrine diretamente pelo time da Crianex, sem dependência de agência ou desenvolvedor externo |
 
 ---
@@ -45,7 +33,7 @@ Esta seção descreve os benefícios que o produto Crianex trará tanto para a *
 
 | Perfil | Benefícios |
 |--------|-----------|
-| **Potencial Cliente B2B** | Acesso facilitado ao portfólio de projetos da Crianex com informações detalhadas sobre tecnologias utilizadas, resultados e cases; canal direto de contato |
+| **Potencial Cliente B2B** | Acesso facilitado ao portfólio de projetos com informações detalhadas sobre tecnologias, resultados e cases; canal direto de contato |
 | **Parceiro Comercial** | Visibilidade das capacidades técnicas e áreas de atuação da Crianex, facilitando avaliação de parceria |
 
 ---

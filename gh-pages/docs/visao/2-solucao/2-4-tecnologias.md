@@ -1,16 +1,4 @@
-# 3. Tecnologias Utilizadas
-
----
-
-## Histórico de Revisão
-
-| Versão | Data | Descrição | Autor(es) |
-|--------|------|-----------|-----------|
-| 1.0 | 12/04/2026 | Criação da seção de tecnologias | Hugo e Philipe |
-
----
-
-## 2.4 Stack Tecnológico
+# 2.4 Tecnologias Utilizadas
 
 O stack tecnológico do Crianex foi escolhido com base em três critérios principais: **alinhamento com os requisitos técnicos do produto**, **curva de aprendizado da equipe** e **suporte a SEO e performance** necessários para a vitrine digital pública.
 
@@ -22,7 +10,7 @@ O stack tecnológico do Crianex foi escolhido com base em três critérios princ
 [ SvelteKit + Shadcn/ui ]  ──→  [ Express.js + TypeScript ]  ──→  [ Supabase / PostgreSQL ]
        (Frontend)                        (Backend API)                    (Banco de Dados)
             │                                                                    │
-            └──────────────────  Supabase Client (fluxos simples)  ──────────────┘
+            └──────────────────  Supabase Client (fluxos simples)  ─────────────┘
                                                   │
                                     [ Kubernetes (Crianex Infra) ]
                                         (Deploy — Sprint 6)
@@ -40,8 +28,6 @@ O stack tecnológico do Crianex foi escolhido com base em três critérios princ
 | **Linguagem** | TypeScript |
 
 **Justificativa para SvelteKit em vez de React:**
-
-O SvelteKit foi escolhido como framework frontend por oferecer vantagens diretas para os requisitos do produto:
 
 | Critério | SvelteKit | React/Next.js |
 |----------|-----------|---------------|

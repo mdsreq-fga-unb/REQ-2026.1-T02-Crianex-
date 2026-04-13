@@ -1,17 +1,5 @@
 # 2.5 Posicionamento no Mercado
 
----
-
-## Histórico de Revisão
-
-| Versão | Data | Descrição | Autor(es) |
-|--------|------|-----------|-----------|
-| 1.0 | 12/04/2026 | Criação da seção de análise de mercado | Hugo e Philipe |
-
----
-
-## 2.5 Análise de Mercado e Posicionamento
-
 Esta seção analisa as soluções existentes no mercado e o posicionamento diferenciado do produto Crianex frente aos concorrentes diretos e indiretos.
 
 ---
@@ -70,8 +58,6 @@ O mercado de gestão de projetos e portfólio digital para Software Houses é do
 
 ### 2.5.3 Diferenciais do Crianex
 
-O Crianex se distingue das soluções existentes por oferecer uma proposta de valor única para Software Houses B2B de pequeno e médio porte:
-
 | Diferencial | Descrição |
 |-------------|-----------|
 | **Integração nativa gestão ↔ vitrine** | Um único produto que conecta a operação interna com a apresentação pública do portfólio — eliminando silos de informação |
@@ -84,8 +70,6 @@ O Crianex se distingue das soluções existentes por oferecer uma proposta de va
 ---
 
 ### 2.5.4 Segmento-Alvo
-
-O produto é projetado para atender primariamente a:
 
 | Segmento | Característica |
 |----------|---------------|
