@@ -6,7 +6,9 @@
 
 | Versão | Data | Descrição | Autor(es) |
 |--------|------|-----------|-----------|
-| 1.0 | 13/04/2026 | Criação das seções 6.1 a 6.6 | Lucas A. Zanetti |
+| 1.0 | 11/04/2026 | Criação das seções 6.1 a 6.6 | Lucas A. Zanetti |
+| 1.1 | 13/04/2026 | Revisão das seções 6.1 a 6.6 | Equipe Crianex |
+
 
 ---
 

@@ -3,33 +3,6 @@
   <p>Plataforma de Gestão e Portfólio de Projetos SaaS — documentação centralizada da equipe</p>
 </div>
 
-<div class="crianex-cards">
-  <a class="crianex-card" href="visao/">
-    <span class="crianex-card__icon"></span>
-    <p class="crianex-card__title">Documento de Visão</p>
-    <p class="crianex-card__desc">Visão do produto, requisitos, escopo e definições do projeto Crianex.</p>
-  </a>
-  <a class="crianex-card" href="atas/">
-    <span class="crianex-card__icon"></span>
-    <p class="crianex-card__title">Atas de Reunião</p>
-    <p class="crianex-card__desc">Registro cronológico de todas as reuniões, decisões e encaminhamentos da equipe.</p>
-  </a>
-  <a class="crianex-card" href="backlog/">
-    <span class="crianex-card__icon"></span>
-    <p class="crianex-card__title">Backlog</p>
-    <p class="crianex-card__desc">Épicos, user stories e tarefas priorizadas do produto Crianex.</p>
-  </a>
-  <a class="crianex-card" href="arquitetura/">
-    <span class="crianex-card__icon"></span>
-    <p class="crianex-card__title">Arquitetura</p>
-    <p class="crianex-card__desc">Diagramas, ADRs e documentação técnica da solução.</p>
-  </a>
-  <a class="crianex-card" href="mkdocs-guide/">
-    <span class="crianex-card__icon"></span>
-    <p class="crianex-card__title">Instruções do MkDocs</p>
-    <p class="crianex-card__desc">Como contribuir, escrever e publicar documentação neste site.</p>
-  </a>
-</div>
 
 ---
 
@@ -118,3 +91,4 @@ O produto escolhido pela equipe é a **Crianex**, uma plataforma SaaS voltada pa
 |--------|------|-----------|-----------|
 | 1.0 | 13/04/2026 | Criação da home page com cards de navegação e visão geral | Lucas A. Zanetti |
 | 1.1 | 13/04/2026 | Adição de seção de integrantes, objetivo do projeto e histórico de revisão | Equipe Crianex |
+| 1.2| 13/04/2026 | Remoção dos dos links redirecionaveis bugados| Lucas A. Zanetti |

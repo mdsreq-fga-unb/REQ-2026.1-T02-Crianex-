@@ -7,6 +7,7 @@
 | Versão | Data | Descrição | Autor(es) |
 |--------|------|-----------|-----------|
 | 1.0 | 12/04/2026 | Criação das seções 3.1 a 3.4 | Camile e Leonardo |
+| 1.1 | 13/04/2026 | Revisão da seção 3 | Equipe Crianex |
 
 ---
 

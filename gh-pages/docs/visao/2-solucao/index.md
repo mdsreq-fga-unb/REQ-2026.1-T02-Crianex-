@@ -6,9 +6,9 @@
 
 | Versão | Data | Descrição | Autor(es) |
 |--------|------|-----------|-----------|
-| 1.0 | 01/04/2026 | Criação das seções 2.1 a 2.7 | Lucas A. Zanetti / Hugo e Philipe |
-| 1.1 | 03/04/2026 | Revisão geral e ajuste de objetivos | Equipe Crianex |
-| 1.2 | 09/04/2026 | Revisão pós reunião de alinhamento | Equipe Crianex |
+| 1.0 | 03/04/2026 | Criação das seções 2.1 a 2.3 | Lucas A. Zanetti |
+| 1.1 | 09/04/2026 | Revisão geral e ajuste de objetivos | Equipe Crianex |
+| 1.2 | 12/04/2026 | Preenchimento das seções 2.4 a 2.7 | Philipe e Hugo |
 
 ---
 

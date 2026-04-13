@@ -6,7 +6,9 @@
 
 | Versão | Data | Descrição | Autor(es) |
 |--------|------|-----------|-----------|
-| 1.0 | 13/04/2026 | Criação da retrospectiva da Unidade 1 | Lucas A. Zanetti |
+| 1.0 | 11/04/2026 | Criação da retrospectiva da Unidade 1 | Lucas A. Zanetti |
+| 1.0 | 13/04/2026 | Revisão retrospectiva da Unidade 1 | Equipe Crianex |
+
 
 ---
 

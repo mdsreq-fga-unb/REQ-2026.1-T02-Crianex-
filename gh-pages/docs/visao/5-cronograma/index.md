@@ -6,7 +6,9 @@
 
 | Versão | Data | Descrição | Autor(es) |
 |--------|------|-----------|-----------|
-| 1.0 | 13/04/2026 | Criação do cronograma de sprints | Lucas A. Zanetti |
+| 1.0 | 11/04/2026 | Criação do cronograma de sprints | Lucas A. Zanetti |
+| 1.1 | 13/04/2026 | Revisão da seção 5 | Equipe Crianex |
+
 
 ---
 

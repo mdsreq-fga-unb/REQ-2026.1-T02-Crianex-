@@ -7,6 +7,8 @@
 | Versão | Data | Descrição | Autor(es) |
 |--------|------|-----------|-----------|
 | 1.0 | 12/04/2026 | Criação das seções 4.1 a 4.4 | Heitor e Lucas |
+| 1.1 | 13/04/2026 | Revisão da seção 4 | Equipe Crianex |
+
 
 ---
 
