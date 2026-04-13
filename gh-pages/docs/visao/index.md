@@ -20,15 +20,15 @@ Documento de Visão do produto **Crianex** — plataforma de gestão e vitrine d
 |-------|--------|-------------|--------|
 | [1. Cenário Atual](1-cenario-atual.md) | Contexto, problema, stakeholders e usuários | Lucas A. Zanetti | Concluído |
 | [2. Solução Proposta](2-1-2-3-solucao-proposta.md) | Objetivos estratégicos e características do produto | Lucas A. Zanetti | Concluído |
-| [3. Tecnologias Utilizadas](2-4-tecnologias.md) | Stack tecnológica detalhada | Hugo e Philipe | Concluído |
-| [4. Posicionamento no Mercado](2-5-mercado.md) | Análise de mercado e posicionamento | Hugo e Philipe | Concluído |
-| [5. Viabilidade do Projeto](2-6-viabilidade.md) | Análise de viabilidade técnica e financeira | Hugo e Philipe | Em andamento |
-| [6. Benefícios Esperados](2-7-beneficios.md) | Benefícios para a organização e usuários | Hugo e Philipe | Em andamento |
-| [7. Estratégias de ESW](3-estrategias-esw.md) | Metodologias, ciclo de vida e papéis da equipe | Camile e Leonardo | Concluído|
-| [8. Engenharia de Requisitos](4-engenharia-requisitos.md) | Abordagem de requisitos, DoR e DoD | Heitor e Lucas | Concluído |
-| [9. Cronograma](5-cronograma.md) | Sprints, marcos e entregas | Lucas A. Zanetti | Concluído |
-| [10. Interação Equipe-Cliente](6-interacao-equipe-cliente.md) | Canais de comunicação e validação com o cliente | Lucas A. Zanetti | Concluído |
-| [11. Lições Aprendidas](10-1-licoes-aprendidas.md) | Retrospectiva da Unidade 1 | Lucas A. Zanetti | Concluído |
+| [2.4 Tecnologias Utilizadas](2-4-tecnologias.md) | Stack tecnológica detalhada | Hugo e Philipe | Concluído |
+| [2.5 Posicionamento no Mercado](2-5-mercado.md) | Análise de mercado e posicionamento | Hugo e Philipe | Concluído |
+| [2.6 Viabilidade do Projeto](2-6-viabilidade.md) | Análise de viabilidade técnica e financeira | Hugo e Philipe | Em andamento |
+| [2.7 Benefícios Esperados](2-7-beneficios.md) | Benefícios para a organização e usuários | Hugo e Philipe | Em andamento |
+| [3. Estratégias de ESW](3-estrategias-esw.md) | Metodologias, ciclo de vida e papéis da equipe | Camile e Leonardo | Concluído|
+| [4. Engenharia de Requisitos](4-engenharia-requisitos.md) | Abordagem de requisitos, DoR e DoD | Heitor e Lucas | Concluído |
+| [5. Cronograma](5-cronograma.md) | Sprints, marcos e entregas | Lucas A. Zanetti | Concluído |
+| [6. Interação Equipe-Cliente](6-interacao-equipe-cliente.md) | Canais de comunicação e validação com o cliente | Lucas A. Zanetti | Concluído |
+| [10.1 Lições Aprendidas](10-1-licoes-aprendidas.md) | Retrospectiva da Unidade 1 | Lucas A. Zanetti | Concluído |
 
 ---
 

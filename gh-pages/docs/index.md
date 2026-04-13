@@ -70,7 +70,7 @@ O produto escolhido pela equipe é a **Crianex**, uma plataforma SaaS voltada pa
 <div class="crianex-members">
   <div class="crianex-member">
     <img src="https://github.com/Bappoz.png?size=200" alt="Lucas A. Zanetti">
-    <p class="crianex-member__name">Lucas A. Zanetti</p>
+    <p class="crianex-member__name">Lucas</p>
     <p class="crianex-member__role">Tech Lead</p>
   </div>
   <div class="crianex-member">

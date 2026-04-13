@@ -188,7 +188,7 @@
 .md-typeset__table::after {
   display: block;
   content: "Fonte: Elaborado pelos autores (2026).";
-  font-size: 0.78rem;
+  font-size: 0.58rem;
   font-style: italic;
   color: var(--md-default-fg-color--light);
   margin-top: 0.35rem;
