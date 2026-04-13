@@ -88,6 +88,17 @@ nav:
   - Home: index.md
   - Documento de Visão:
     - visao/index.md
+    - "1 — Cenário Atual": visao/1-cenario-atual.md
+    - "2.1–2.3 — Solução Proposta": visao/2-1-2-3-solucao-proposta.md
+    - "2.4 — Tecnologias Utilizadas": visao/2-4-tecnologias.md
+    - "2.5 — Posicionamento no Mercado": visao/2-5-mercado.md
+    - "2.6 — Viabilidade do Projeto": visao/2-6-viabilidade.md
+    - "2.7 — Benefícios Esperados": visao/2-7-beneficios.md
+    - "3 — Estratégias de ESW": visao/3-estrategias-esw.md
+    - "4 — Engenharia de Requisitos": visao/4-engenharia-requisitos.md
+    - "5 — Cronograma": visao/5-cronograma.md
+    - "6 — Interação Equipe-Cliente": visao/6-interacao-equipe-cliente.md
+    - "10.1 — Lições Aprendidas": visao/10-1-licoes-aprendidas.md
   - Atas de Reunião:
     - atas/index.md
     - "09/04/2026 — Alinhamento de Projeto": atas/2026-04-09.md
