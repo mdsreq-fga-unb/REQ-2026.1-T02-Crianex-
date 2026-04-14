@@ -49,12 +49,12 @@ O produto escolhido pela equipe é a **Crianex**, uma plataforma SaaS voltada pa
   <div class="crianex-member">
     <img src="https://github.com/knz13.png?size=200" alt="Otávio">
     <p class="crianex-member__name">Otávio</p>
-    <p class="crianex-member__role">Product Owner</p>
+    <p class="crianex-member__role">Cliente</p>
   </div>
   <div class="crianex-member">
     <img src="https://github.com/Vitor-Trancoso.png?size=200" alt="Vitor">
     <p class="crianex-member__name">Vitor</p>
-    <p class="crianex-member__role">Product Owner</p>
+    <p class="crianex-member__role">Cliente</p>
   </div>
   <div class="crianex-member">
     <img src="https://github.com/Phill-Chill.png?size=200" alt="Philipe">
@@ -91,4 +91,4 @@ O produto escolhido pela equipe é a **Crianex**, uma plataforma SaaS voltada pa
 |--------|------|-----------|-----------|
 | 1.0 | 13/04/2026 | Criação da home page com cards de navegação e visão geral | Lucas A. Zanetti |
 | 1.1 | 13/04/2026 | Adição de seção de integrantes, objetivo do projeto e histórico de revisão | Equipe Crianex |
-| 1.2| 13/04/2026 | Remoção dos dos links redirecionaveis bugados| Lucas A. Zanetti |
+| 1.2| 13/04/2026 | Remoção dos dos links redirecionaveis bugados| Lucas A. |

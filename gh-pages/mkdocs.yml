@@ -95,7 +95,6 @@ nav:
     - "1.5 Desafios": visao/1-cenario/1-5-desafios.md
     - "1.6 Mapa de Stakeholders": visao/1-cenario/1-6-stakeholders.md
     - "1.7 Segmentação de Clientes": visao/1-cenario/1-7-segmentacao.md
-    - "1.8 Ambiente dos Usuários": visao/1-cenario/1-8-ambiente.md
   - "2 · Solução":
     - visao/2-solucao/index.md
     - "2.1 Perspectiva do Produto": visao/2-solucao/2-1-perspectiva.md

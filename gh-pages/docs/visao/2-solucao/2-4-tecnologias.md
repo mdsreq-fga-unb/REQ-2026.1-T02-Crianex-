@@ -31,7 +31,6 @@ O stack tecnológico do Crianex foi escolhido com base em três critérios princ
 
 | Critério | SvelteKit | React/Next.js |
 |----------|-----------|---------------|
-| **SEO nativo (SSR)** | Embutido no framework, configuração simples | Requer Next.js separado |
 | **Bundle size** | Muito menor — sem runtime virtual DOM | Runtime React incluído |
 | **Curva de aprendizado** | Sintaxe mais próxima de HTML/CSS/JS puro | Requer conhecimento de JSX e hooks |
 | **Performance** | Compilação estática sem overhead de runtime | Diferenças notáveis em payloads grandes |
