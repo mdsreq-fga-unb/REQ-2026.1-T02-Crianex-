@@ -56,7 +56,7 @@ O mercado de gestão de projetos e portfólio digital para Software Houses é do
 
 ---
 
-### 2.5.3 Diferenciais do Crianex
+### 2.5.3 Diferenciais do Crianex Hub
 
 | Diferencial | Descrição |
 |-------------|-----------|

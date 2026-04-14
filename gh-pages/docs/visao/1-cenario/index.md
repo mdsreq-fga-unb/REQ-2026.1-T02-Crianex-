@@ -18,7 +18,7 @@
 |----------|----------|
 | [1.1 Identificação do Cliente](1-1-cliente.md) | Dados da empresa cliente, segmento e perfil operacional |
 | [1.2 Introdução ao Problema](1-2-problema.md) | Contexto organizacional, problemas de visibilidade interna e externa |
-| [1.3 Diagrama de Ishikawa](1-3-ishikawa.md) | Diagrama de causas-raiz e Rich Picture do sistema |
+| [1.3 Rich Picture](1-3-ishikawa.md) | Diagrama de causas-raiz e Rich Picture do sistema |
 | [1.4 Detalhamento do Problema](1-4-detalhamento.md) | Frame de problema: quem afeta, impacto e solução esperada |
 | [1.5 Desafios](1-5-desafios.md) | Principais desafios técnicos e organizacionais |
 | [1.6 Mapa de Stakeholders](1-6-stakeholders.md) | Partes interessadas e seus interesses no produto |

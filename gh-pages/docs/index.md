@@ -1,5 +1,5 @@
 <div class="crianex-hero">
-  <h1>Crianex</h1>
+  <h1>Crianex Hub</h1>
   <p>Plataforma de Gestão e Portfólio de Projetos SaaS — documentação centralizada da equipe</p>
 </div>
 
@@ -34,7 +34,7 @@ A disciplina tem como propósito capacitar os alunos a:
 - **Gerenciar** mudanças de requisitos de forma rastreável e documentada;
 - **Produzir** artefatos de documentação profissionais, publicados e versionados via GitHub Pages.
 
-O produto escolhido pela equipe é a **Crianex**, uma plataforma SaaS voltada para gestão interna e divulgação de portfólio de projetos de uma Software House B2B.
+O produto escolhido pela equipe é a **Crianex Hub**, uma plataforma SaaS voltada para gestão interna e divulgação de portfólio de projetos de uma Software House B2B.
 
 ---
 

@@ -107,7 +107,7 @@ nav:
   - "3 · Estratégias":
     - visao/3-estrategias/index.md
     - "3.1 Ciclo de Vida e Abordagem": visao/3-estrategias/3-1-ciclo-vida.md
-    - "3.2 Metodologias Adotadas": visao/3-estrategias/3-2-metodologias.md
+    - "3.2 Quadro Comparativo": visao/3-estrategias/3-2-metodologias.md
     - "3.3 Justificativa": visao/3-estrategias/3-3-justificativa.md
   - "4 · ER":
     - visao/4-er/index.md

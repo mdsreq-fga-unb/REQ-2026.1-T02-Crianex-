@@ -15,13 +15,3 @@ A comunicação entre a equipe de desenvolvimento e o cliente segue uma estrutur
 | **Google Meet** | Síncrono | Cerimônias de sprint (Planning, Review, Retrospectiva) | Quinzenal |
 | **Supabase Dashboard** | Assíncrono | Monitoramento do banco de dados e logs de produção | Sob demanda |
 
----
-
-### Categorias do Discord
-
-| Categoria | Canais | Finalidade |
-|-----------|--------|-----------|
-| Backlogs | #backlog-discussão, #sprint-atual | Discussão sobre user stories e prioridades |
-| Knowledge | #documentação, #referências | Compartilhamento de material técnico |
-| Gravações | #reuniões-gravadas | Registro de reuniões para consulta posterior |
-| Arquitetura | #decisões-técnicas, #adr | Discussão e registro de decisões de arquitetura |

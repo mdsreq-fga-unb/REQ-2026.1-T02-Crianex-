@@ -1,5 +1,10 @@
 # 2.1 Perspectiva do Produto
 
+!!! tip "Objetivo Geral do Produto"
+    Potencializar a conversão de novos negócios e otimizar a eficiência operacional da Crianex, através da unificação da gestão administrativa e da modernização da vitrine digital de seus produtos SaaS.
+
+--- 
+
 O **Crianex** é uma plataforma SaaS web composta por dois módulos principais e complementares:
 
 | Módulo | Acesso | Descrição |
