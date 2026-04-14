@@ -18,8 +18,8 @@ Sprint inicial de alinhamento com o cliente e fundação do projeto. O foco foi 
 |---|---------|-------------|--------|
 | 1 | Seções 2.4 a 2.7 do Documento de Visão | Hugo e Felipe | ✅ |
 | 2 | Seções 3.1 a 3.3 do Documento de Visão | Camille e Leonardo | ✅ |
-| 3 | Seções 4.1, 4.2 e Tabela de Engenharia de Requisitos | Heitor e PO | ✅ |
-| 4 | Lições Aprendidas (10.1), Cronograma e GitHub Pages | PO | ✅ |
+| 3 | Seções 4.1, 4.2 e Tabela de Engenharia de Requisitos | Heitor e Techlead| ✅ |
+| 4 | Lições Aprendidas (10.1), Cronograma e GitHub Pages | Techlead| ✅ |
 | 5 | Cenário Atual, Solução Proposta e Correções gerais | Toda a Equipe | ✅ |
 
 ---

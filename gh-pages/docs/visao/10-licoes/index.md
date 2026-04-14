@@ -29,7 +29,6 @@ Esta seção registra as **lições aprendidas** ao longo da primeira unidade do
 | **Risco sem Contingência** | A dependência da infraestrutura Kubernetes da Crianex não tinha plano de contingência documentado no início do projeto | Documentar plano de contingência (Docker Compose local) e incluir riscos de infraestrutura no registro de riscos ativo |
 | **Comunicação Interna** | Algumas decisões técnicas foram tomadas em conversas informais no Discord sem registro formal, dificultando o rastreio posterior | Usar o canal #decisões-técnicas e ADRs (Architecture Decision Records) para registrar toda decisão relevante |
 | **Ambiente de Desenvolvimento** | A configuração do ambiente local com MkDocs + GitHub Pages não estava documentada, gerando dificuldades para novos membros replicá-lo | Criar guia de setup do ambiente de desenvolvimento no repositório antes do início da Sprint 1 |
-| **Dependência Externa (Cliente)** | O PO, por acumular o papel de CTO da Crianex, teve disponibilidade reduzida para validação de requisitos em alguns momentos da Unidade 1 | Estabelecer SLA de resposta com o PO e identificar um segundo ponto de contato na Crianex para decisões urgentes |
 
 ---
 
@@ -51,8 +50,8 @@ Esta seção registra as **lições aprendidas** ao longo da primeira unidade do
 |------|-------------|-------|
 | Criar templates de issues e PRs no GitHub | Tech Lead | Início da Sprint 1 |
 | Mapear disponibilidade da equipe para a Sprint 1 | Tech Lead | Início da Sprint 1 |
-| Validar processo de commits individuais com monitoria | PO | 14/04/2026 |
-| Revisar e fechar backlog inicial com PO | PO + Tech Lead | Sprint 1 Planning |
+| Validar processo de commits individuais com monitoria | TechLead | 14/04/2026 |
+| Revisar e fechar backlog inicial com PO | Tech Lead | Sprint 1 Planning |
 | Configurar GitHub Projects com board Scrumban | Tech Lead | Início da Sprint 1 |
 | Documentar guia de setup do ambiente de desenvolvimento | Tech Lead | Sprint 1 — Semana 1 |
-| Registrar contato secundário na Crianex para decisões urgentes | PO | Início da Sprint 1 |
+| Registrar contato secundário na Crianex para decisões urgentes | TechLead | Início da Sprint 1 |

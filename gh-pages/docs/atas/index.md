@@ -53,4 +53,4 @@ Copie o template abaixo ao criar uma nova ata:
 
 | # | Data | Assunto | Participantes |
 |---|------|---------|---------------|
-| Ata 0 | [09/04/2026](2026-04-09.md) | Alinhamento de Projeto e Definição de Requisitos | Lucas Zanetti, Hugo, Felipe, Camille, Leonardo, Heitor, PO |
+| Ata 0 | [09/04/2026](2026-04-09.md) | Alinhamento de Projeto e Definição de Requisitos | Lucas Zanetti, Hugo, Felipe, Camille, Leonardo, Heitor|
