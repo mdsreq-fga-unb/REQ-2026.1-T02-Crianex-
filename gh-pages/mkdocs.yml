@@ -75,7 +75,7 @@ markdown_extensions:
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/
+      link: https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-
   generator: false
   status:
     new: Novo
@@ -90,7 +90,7 @@ nav:
     - visao/1-cenario/index.md
     - "1.1 Identificação do Cliente": visao/1-cenario/1-1-cliente.md
     - "1.2 Introdução ao Problema": visao/1-cenario/1-2-problema.md
-    - "1.3 Diagrama de Ishikawa": visao/1-cenario/1-3-ishikawa.md
+    - "1.3 Rich Picture": visao/1-cenario/1-3-ishikawa.md
     - "1.4 Detalhamento do Problema": visao/1-cenario/1-4-detalhamento.md
     - "1.5 Desafios": visao/1-cenario/1-5-desafios.md
     - "1.6 Mapa de Stakeholders": visao/1-cenario/1-6-stakeholders.md
@@ -110,13 +110,10 @@ nav:
     - "3.1 Ciclo de Vida e Abordagem": visao/3-estrategias/3-1-ciclo-vida.md
     - "3.2 Metodologias Adotadas": visao/3-estrategias/3-2-metodologias.md
     - "3.3 Justificativa": visao/3-estrategias/3-3-justificativa.md
-    - "3.4 Papéis e Responsabilidades": visao/3-estrategias/3-4-papeis.md
   - "4 · ER":
     - visao/4-er/index.md
     - "4.1 Abordagem de ER": visao/4-er/4-1-abordagem.md
     - "4.2 Alinhamento FDD – ER": visao/4-er/4-2-fdd.md
-    - "4.3 DoR e DoD": visao/4-er/4-3-dor-dod.md
-    - "4.4 Tabela Consolidada": visao/4-er/4-4-tabela.md
   - "5 · Cronograma":
     - visao/5-cronograma/index.md
     - "5.1 Visão Geral": visao/5-cronograma/5-1-visao.md

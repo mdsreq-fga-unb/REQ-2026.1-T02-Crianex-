@@ -23,4 +23,3 @@
 | [1.5 Desafios](1-5-desafios.md) | Principais desafios técnicos e organizacionais |
 | [1.6 Mapa de Stakeholders](1-6-stakeholders.md) | Partes interessadas e seus interesses no produto |
 | [1.7 Segmentação de Clientes](1-7-segmentacao.md) | Perfis de usuário por módulo (administrativo e vitrine) |
-| [1.8 Ambiente dos Usuários](1-8-ambiente.md) | Contexto de acesso de usuários internos e externos |

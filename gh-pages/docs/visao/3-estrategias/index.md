@@ -18,4 +18,3 @@
 | [3.1 Ciclo de Vida e Abordagem](3-1-ciclo-vida.md) | Abordagem ágil iterativa e comparativo com Cascata |
 | [3.2 Metodologias Adotadas](3-2-metodologias.md) | FDD e Scrumban detalhados |
 | [3.3 Justificativa das Metodologias](3-3-justificativa.md) | Por que FDD + Scrumban é a escolha certa |
-| [3.4 Papéis e Responsabilidades](3-4-papeis.md) | Papéis da equipe, fluxo de trabalho e canais |
