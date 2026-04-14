@@ -118,8 +118,6 @@ nav:
     - visao/5-cronograma/index.md
     - "5.1 Visão Geral": visao/5-cronograma/5-1-visao.md
     - "5.2 Cronograma de Sprints": visao/5-cronograma/5-2-sprints.md
-    - "5.3 Cronograma Imediato": visao/5-cronograma/5-3-imediato.md
-    - "5.4 Mapeamento de CPs": visao/5-cronograma/5-4-mapeamento.md
   - "6 · Equipe":
     - visao/6-interacao/index.md
     - "6.1 Composição da Equipe": visao/6-interacao/6-1-composicao.md
