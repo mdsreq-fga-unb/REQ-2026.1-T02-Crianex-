@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Plataforma de Gestão e Portfólio de Projetos SaaS">
+    <meta name="author" content="Equipe Crianex">
+    
+    <link rel="shortcut icon" href="../../img/favicon.ico">
+
+    
+    <title>6 · Equipe e Interação - Crianex</title>
+    
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/v4-shims.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.min.css">
+    <link href='//rsms.me/inter/inter.css' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
+    <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="../../css/base.min.css" rel="stylesheet">
+    <link href="../../css/cinder.min.css" rel="stylesheet">
+
+    
+        
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/styles/github.min.css">
+        
+    
+    <link href="../../assets/extra.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+        <![endif]-->
+
+    
+
+     
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+
+            
+              <a class="navbar-brand" href="../..">Crianex</a>
+            
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="../..">Home</a>
+                    </li>
+                
+                
+                
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Visão <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../cenario/">1 · Cenário</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../solucao/">2 · Solução</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../estrategias/">3 · Estratégias</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../er/">4 · Eng. de Requisitos</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../cronograma/">5 · Cronograma</a>
+</li>
+
+                        
+                            
+<li class="active">
+    <a href="./">6 · Equipe e Interação</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../10-licoes/">Lições Aprendidas</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Atas <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../../atas/">Atas de Reunião</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../atas/2026-04-09/">Ata 0 — 09/04/2026</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sprints <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../../sprints/">Sprints</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../sprints/sprint-0/">Sprint 0 — Unidade 1</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../../backlog/">Backlog</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../../arquitetura/">Arquitetura</a>
+                    </li>
+                
+                
+                </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                            <i class="fas fa-search"></i> Search
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="prev" href="../cronograma/">
+                            <i class="fas fa-arrow-left"></i> Previous
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="next" href="../10-licoes/">
+                            Next <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <div class="container">
+        
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="first-level active"><a href="#6-interacao-equipe-cliente">6. Interação Equipe-Cliente</a></li>
+            <li class="second-level"><a href="#historico-de-revisao">Histórico de Revisão</a></li>
+                
+            <li class="second-level"><a href="#61-composicao-da-equipe">6.1 Composição da Equipe</a></li>
+                
+            <li class="second-level"><a href="#62-estrutura-de-comunicacao">6.2 Estrutura de Comunicação</a></li>
+                
+                <li class="third-level"><a href="#ferramentas-de-comunicacao">Ferramentas de Comunicação</a></li>
+            <li class="second-level"><a href="#63-cadencia-de-cerimonias">6.3 Cadência de Cerimônias</a></li>
+                
+            <li class="second-level"><a href="#64-processo-de-validacao-com-o-cliente">6.4 Processo de Validação com o Cliente</a></li>
+                
+                <li class="third-level"><a href="#criterios-de-prontidao-e-conclusao">Critérios de Prontidão e Conclusão</a></li>
+                <li class="third-level"><a href="#definition-of-ready-dor">Definition of Ready (DoR)</a></li>
+                <li class="third-level"><a href="#definition-of-done-dod">Definition of Done (DoD)</a></li>
+                <li class="third-level"><a href="#fluxo-de-validacao">Fluxo de Validação</a></li>
+            <li class="second-level"><a href="#65-gestao-de-mudancas-de-requisitos">6.5 Gestão de Mudanças de Requisitos</a></li>
+                
+            <li class="second-level"><a href="#66-riscos-de-comunicacao">6.6 Riscos de Comunicação</a></li>
+                
+    </ul>
+</div></div>
+        <div class="col-md-9" role="main">
+
+<h1 id="6-interacao-equipe-cliente">6. Interação Equipe-Cliente<a class="headerlink" href="#6-interacao-equipe-cliente" title="Permanent link">&para;</a></h1>
+<h2 id="historico-de-revisao">Histórico de Revisão<a class="headerlink" href="#historico-de-revisao" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Versão</th>
+<th>Data</th>
+<th>Descrição</th>
+<th>Autor(es)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.0</td>
+<td>11/04/2026</td>
+<td>Criação das seções 6.1 a 6.6</td>
+<td>Lucas A. Zanetti</td>
+</tr>
+<tr>
+<td>1.1</td>
+<td>13/04/2026</td>
+<td>Revisão das seções 6.1 a 6.6</td>
+<td>Equipe Crianex</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="61-composicao-da-equipe">6.1 Composição da Equipe<a class="headerlink" href="#61-composicao-da-equipe" title="Permanent link">&para;</a></h2>
+<p>Esta seção descreve a composição da equipe de desenvolvimento, os canais e cerimônias de comunicação adotados e o processo formal de validação das entregas ao longo do projeto. Todas as decisões aqui registradas foram baseadas no mapeamento de perfil técnico dos integrantes, realizado via formulário estruturado no início do projeto.</p>
+<p><img alt="Equipe" src="../images/responsabilidades.png" /></p>
+<figure class="crianex-figure">
+</figure>
+
+<hr />
+<h2 id="62-estrutura-de-comunicacao">6.2 Estrutura de Comunicação<a class="headerlink" href="#62-estrutura-de-comunicacao" title="Permanent link">&para;</a></h2>
+<p>A comunicação entre a equipe de desenvolvimento e o cliente segue uma estrutura organizada para garantir rastreabilidade e eficiência.</p>
+<h3 id="ferramentas-de-comunicacao">Ferramentas de Comunicação<a class="headerlink" href="#ferramentas-de-comunicacao" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Ferramenta</th>
+<th>Tipo</th>
+<th>Finalidade</th>
+<th>Frequência</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Discord</strong></td>
+<td>Assíncrono + Síncrono</td>
+<td>Comunicação do dia a dia, discussões técnicas, compartilhamento de materiais</td>
+<td>Diário</td>
+</tr>
+<tr>
+<td><strong>GitHub Issues</strong></td>
+<td>Assíncrono</td>
+<td>Registro de user stories, bugs, tarefas e decisões técnicas</td>
+<td>Contínuo</td>
+</tr>
+<tr>
+<td><strong>GitHub Pull Requests</strong></td>
+<td>Assíncrono</td>
+<td>Code review, aprovação QA, rastreamento de entregas</td>
+<td>Por entrega</td>
+</tr>
+<tr>
+<td><strong>GitHub Projects</strong></td>
+<td>Assíncrono</td>
+<td>Board Scrumban — visibilidade do fluxo de trabalho da sprint</td>
+<td>Contínuo</td>
+</tr>
+<tr>
+<td><strong>Google Meet</strong></td>
+<td>Síncrono</td>
+<td>Cerimônias de sprint (Planning, Review, Retrospectiva)</td>
+<td>Quinzenal</td>
+</tr>
+<tr>
+<td><strong>Supabase Dashboard</strong></td>
+<td>Assíncrono</td>
+<td>Monitoramento do banco de dados e logs de produção</td>
+<td>Sob demanda</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="63-cadencia-de-cerimonias">6.3 Cadência de Cerimônias<a class="headerlink" href="#63-cadencia-de-cerimonias" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Cerimônia</th>
+<th>Frequência</th>
+<th>Participantes</th>
+<th>Duração</th>
+<th>Objetivo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Sprint Planning</strong></td>
+<td>Quinzenal (início de sprint)</td>
+<td>Toda a equipe + PO</td>
+<td>1h</td>
+<td>Priorizar e detalhar as user stories da próxima sprint</td>
+</tr>
+<tr>
+<td><strong>Daily Stand-up</strong></td>
+<td>Diário (assíncrono via Discord)</td>
+<td>Toda a equipe</td>
+<td>15 min</td>
+<td>O que foi feito, o que será feito, impedimentos</td>
+</tr>
+<tr>
+<td><strong>Sprint Review</strong></td>
+<td>Quinzenal (fim de sprint)</td>
+<td>Toda a equipe + PO + cliente</td>
+<td>1h</td>
+<td>Demonstrar as entregas e validar com o cliente</td>
+</tr>
+<tr>
+<td><strong>Sprint Retrospectiva</strong></td>
+<td>Quinzenal (fim de sprint)</td>
+<td>Equipe de desenvolvimento</td>
+<td>45 min</td>
+<td>Identificar melhorias de processo para o próximo sprint</td>
+</tr>
+<tr>
+<td><strong>Backlog Refinement</strong></td>
+<td>Semanal</td>
+<td>PO + Tech Lead</td>
+<td>30 min</td>
+<td>É um processo contínuo no Scrum, no qual o Dono do Produto e a Equipe de Desenvolvimento colaboram para revisar, atualizar e esclarecer itens no Backlog do Produto, garantindo que estejam prontos para as próximas sprints.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="64-processo-de-validacao-com-o-cliente">6.4 Processo de Validação com o Cliente<a class="headerlink" href="#64-processo-de-validacao-com-o-cliente" title="Permanent link">&para;</a></h2>
+<p>O Product Owner atua como interface direta com os representantes da Crianex (Otávio / Vitor), sendo responsável por:</p>
+<ol>
+<li><strong>Coletar requisitos</strong> e transformá-los em user stories no backlog</li>
+<li><strong>Priorizar</strong> o backlog conforme o valor de negócio</li>
+<li><strong>Validar entregas</strong> ao final de cada sprint na Sprint Review</li>
+<li><strong>Comunicar feedback</strong> do cliente para a equipe técnica</li>
+</ol>
+<h3 id="criterios-de-prontidao-e-conclusao">Critérios de Prontidão e Conclusão<a class="headerlink" href="#criterios-de-prontidao-e-conclusao" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Critério</th>
+<th>Verificado por</th>
+<th>Quando</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Story com critérios de aceite claros (DoR)</td>
+<td>PO + Tech Lead</td>
+<td>Sprint Planning</td>
+</tr>
+<tr>
+<td>Implementação conforme critérios de aceite (DoD)</td>
+<td>QA</td>
+<td>Durante a sprint</td>
+</tr>
+<tr>
+<td>Aprovação de PR por QA (DoD)</td>
+<td>QA</td>
+<td>Antes do merge</td>
+</tr>
+<tr>
+<td>Validação funcional pelo PO (DoD)</td>
+<td>PO</td>
+<td>Sprint Review</td>
+</tr>
+</tbody>
+</table>
+<h3 id="definition-of-ready-dor">Definition of Ready (DoR)<a class="headerlink" href="#definition-of-ready-dor" title="Permanent link">&para;</a></h3>
+<p>Uma user story está <strong>pronta para entrar no sprint</strong> quando:</p>
+<ul>
+<li>[ ] Está escrita no formato "Como [perfil], quero [ação], para [benefício]"</li>
+<li>[ ] Possui critérios de aceite claros e testáveis</li>
+<li>[ ] Foi priorizada pelo PO no backlog</li>
+<li>[ ] Não possui dependências bloqueantes não resolvidas</li>
+<li>[ ] Foi estimada pela equipe (pontos de esforço)</li>
+<li>[ ] O mockup ou fluxo de tela está disponível (quando aplicável)</li>
+</ul>
+<h3 id="definition-of-done-dod">Definition of Done (DoD)<a class="headerlink" href="#definition-of-done-dod" title="Permanent link">&para;</a></h3>
+<p>Uma user story está <strong>concluída</strong> quando:</p>
+<ul>
+<li>[ ] O código foi implementado conforme os critérios de aceite</li>
+<li>[ ] Testes unitários e/ou de integração foram escritos e passam</li>
+<li>[ ] O Pull Request foi revisado e aprovado pelo QA</li>
+<li>[ ] O código foi mergeado na branch principal (via PR aprovado)</li>
+<li>[ ] A funcionalidade foi validada pelo PO na Sprint Review</li>
+<li>[ ] A documentação relevante foi atualizada (quando aplicável)</li>
+<li>[ ] Não há regressões identificadas em funcionalidades existentes</li>
+</ul>
+<h3 id="fluxo-de-validacao">Fluxo de Validação<a class="headerlink" href="#fluxo-de-validacao" title="Permanent link">&para;</a></h3>
+<pre><code>Cliente → PO → Backlog refinado → Sprint → Entrega → Sprint Review → Validação do Cliente
+                                                                          ↓
+                                                               Feedback incorporado
+                                                               no próximo backlog
+</code></pre>
+<hr />
+<h2 id="65-gestao-de-mudancas-de-requisitos">6.5 Gestão de Mudanças de Requisitos<a class="headerlink" href="#65-gestao-de-mudancas-de-requisitos" title="Permanent link">&para;</a></h2>
+<p>Mudanças de requisitos são gerenciadas pelo PO em conjunto com o Tech Lead:</p>
+<table>
+<thead>
+<tr>
+<th>Tipo de Mudança</th>
+<th>Processo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pequeno ajuste em story existente</td>
+<td>PO atualiza a issue no GitHub, comunica no Discord</td>
+</tr>
+<tr>
+<td>Nova feature de média prioridade</td>
+<td>PO cria nova issue, prioriza no backlog, entra no próximo sprint planning</td>
+</tr>
+<tr>
+<td>Mudança de escopo significativa</td>
+<td>Reunião de alinhamento com toda a equipe e aprovação do Tech Lead</td>
+</tr>
+<tr>
+<td>Remoção de feature do escopo</td>
+<td>PO fecha a issue com justificativa documentada</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="66-riscos-de-comunicacao">6.6 Riscos de Comunicação<a class="headerlink" href="#66-riscos-de-comunicacao" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Risco</th>
+<th>Probabilidade</th>
+<th>Impacto</th>
+<th>Mitigação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PO indisponível para validação</td>
+<td>Média</td>
+<td>Alto</td>
+<td>Decisões urgentes podem ser tomadas pelo Tech Lead com registro documentado; PO valida retroativamente na próxima cerimônia</td>
+</tr>
+<tr>
+<td>Requisito mal interpretado pela equipe</td>
+<td>Média</td>
+<td>Médio</td>
+<td>DoR rigorosa exige critérios de aceite antes de iniciar a implementação; refinamento semanal de backlog</td>
+</tr>
+<tr>
+<td>Sobrecarga de membros com outras disciplinas</td>
+<td>Alta</td>
+<td>Médio</td>
+<td>Distribuição equilibrada de tarefas e comunicação proativa de impedimentos no daily stand-up</td>
+</tr>
+<tr>
+<td>Falta de feedback do cliente em tempo hábil</td>
+<td>Baixa</td>
+<td>Alto</td>
+<td>PO estabelece SLA de resposta com o cliente no início do projeto; decisões não bloqueantes são tomadas pelo PO</td>
+</tr>
+<tr>
+<td>Divergência entre expectativa do cliente e entrega</td>
+<td>Baixa</td>
+<td>Alto</td>
+<td>Sprint Reviews regulares com demonstração ao vivo garantem alinhamento contínuo</td>
+</tr>
+</tbody>
+</table></div>
+        
+        
+    </div>
+
+    
+      <footer class="col-md-12 text-center">
+          
+          
+            <hr>
+            <p>
+            <small>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</small>
+            </p>
+          
+
+          
+          
+      </footer>
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../../js/bootstrap-3.0.3.min.js"></script>
+
+    
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/highlight.min.js"></script>
+        
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    <script>var base_url = "../.."</script>
+    
+    <script src="../../js/base.js"></script>
+    <script src="../../search/main.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+    </body>
+
+</html>
