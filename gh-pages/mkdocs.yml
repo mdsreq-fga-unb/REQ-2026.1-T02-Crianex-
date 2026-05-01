@@ -3,43 +3,7 @@ site_description: Plataforma de Gestão e Portfólio de Projetos SaaS
 site_author: Equipe Crianex
 docs_dir: docs
 
-theme:
-  name: material
-  language: pt-BR
-  logo: assets/logo.png
-  favicon: assets/logo.png
-  font:
-    text: Inter
-    code: JetBrains Mono
-  palette:
-    - media: "(prefers-color-scheme: light)"
-      scheme: default
-      primary: indigo
-      accent: deep purple
-      toggle:
-        icon: material/weather-night
-        name: Modo escuro
-    - media: "(prefers-color-scheme: dark)"
-      scheme: slate
-      primary: indigo
-      accent: deep purple
-      toggle:
-        icon: material/weather-sunny
-        name: Modo claro
-  features:
-    - navigation.tabs
-    - navigation.tabs.sticky
-    - navigation.sections
-    - navigation.expand
-    - navigation.top
-    - navigation.indexes
-    - toc.follow
-    - search.suggest
-    - search.highlight
-    - search.share
-    - content.code.copy
-    - content.code.annotate
-    - header.autohide
+theme: cinder
 
 plugins:
   - search:
@@ -47,95 +11,32 @@ plugins:
 
 markdown_extensions:
   - admonition
-  - pymdownx.details
-  - pymdownx.superfences:
-      custom_fences:
-        - name: mermaid
-          class: mermaid
-          format: !!python/name:pymdownx.superfences.fence_code_format
-  - pymdownx.highlight:
-      anchor_linenums: true
-      line_spans: __span
-      pygments_lang_class: true
-  - pymdownx.inlinehilite
-  - pymdownx.snippets
-  - pymdownx.tabbed:
-      alternate_style: true
-  - pymdownx.emoji:
-      emoji_index: !!python/name:material.extensions.emoji.twemoji
-      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - tables
   - attr_list
   - md_in_html
-  - tables
-  - footnotes
+  - fenced_code
   - toc:
       permalink: true
       title: Nesta página
-
-extra:
-  social:
-    - icon: fontawesome/brands/github
-      link: https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-
-  generator: false
-  status:
-    new: Novo
-    deprecated: Obsoleto
 
 extra_css:
   - assets/extra.css
 
 nav:
   - Home: index.md
-  - "1 · Cenário":
-    - visao/1-cenario/index.md
-    - "1.1 Identificação do Cliente": visao/1-cenario/1-1-cliente.md
-    - "1.2 Introdução ao Problema": visao/1-cenario/1-2-problema.md
-    - "1.3 Rich Picture": visao/1-cenario/1-3-ishikawa.md
-    - "1.4 Detalhamento do Problema": visao/1-cenario/1-4-detalhamento.md
-    - "1.5 Desafios": visao/1-cenario/1-5-desafios.md
-    - "1.6 Mapa de Stakeholders": visao/1-cenario/1-6-stakeholders.md
-    - "1.7 Segmentação de Clientes": visao/1-cenario/1-7-segmentacao.md
-  - "2 · Solução":
-    - visao/2-solucao/index.md
-    - "2.1 Perspectiva do Produto": visao/2-solucao/2-1-perspectiva.md
-    - "2.2 Declaração de Posição": visao/2-solucao/2-2-posicao.md
-    - "2.3 Objetivos e Características": visao/2-solucao/2-3-objetivos.md
-    - "2.4 Tecnologias Utilizadas": visao/2-solucao/2-4-tecnologias.md
-    - "2.5 Posicionamento no Mercado": visao/2-solucao/2-5-mercado.md
-    - "2.6 Viabilidade do Projeto": visao/2-solucao/2-6-viabilidade.md
-    - "2.7 Benefícios Esperados": visao/2-solucao/2-7-beneficios.md
-  - "3 · Estratégias":
-    - visao/3-estrategias/index.md
-    - "3.1 Ciclo de Vida e Abordagem": visao/3-estrategias/3-1-ciclo-vida.md
-    - "3.2 Quadro Comparativo": visao/3-estrategias/3-2-metodologias.md
-    - "3.3 Justificativa": visao/3-estrategias/3-3-justificativa.md
-  - "4 · ER":
-    - visao/4-er/index.md
-    - "4.1 Abordagem de ER": visao/4-er/4-1-abordagem.md
-    - "4.2 Alinhamento FDD – ER": visao/4-er/4-2-fdd.md
-  - "5 · Cronograma":
-    - visao/5-cronograma/index.md
-    - "5.1 Visão Geral": visao/5-cronograma/5-1-visao.md
-    - "5.2 Cronograma de Sprints": visao/5-cronograma/5-2-sprints.md
-  - "6 · Equipe":
-    - visao/6-interacao/index.md
-    - "6.1 Composição da Equipe": visao/6-interacao/6-1-composicao.md
-    - "6.2 Estrutura de Comunicação": visao/6-interacao/6-2-comunicacao.md
-    - "6.3 Cadência de Cerimônias": visao/6-interacao/6-3-cerimonias.md
-    - "6.4 Validação com o Cliente": visao/6-interacao/6-4-validacao.md
-    - "6.5 Gestão de Mudanças": visao/6-interacao/6-5-mudancas.md
-    - "6.6 Riscos de Comunicação": visao/6-interacao/6-6-riscos.md
-  - "10.1 · Lições":
-    - visao/10-licoes/index.md
-  - Atas de Reunião:
+  - Visão:
+    - "1 · Cenário": visao/cenario.md
+    - "2 · Solução": visao/solucao.md
+    - "3 · Estratégias": visao/estrategias.md
+    - "4 · Eng. de Requisitos": visao/er.md
+    - "5 · Cronograma": visao/cronograma.md
+    - "6 · Equipe e Interação": visao/equipe.md
+    - "Lições Aprendidas": visao/10-licoes/index.md
+  - Atas:
     - atas/index.md
     - "Ata 0 — 09/04/2026": atas/2026-04-09.md
   - Sprints:
     - sprints/index.md
     - "Sprint 0 — Unidade 1": sprints/sprint-0.md
-  - Backlog:
-    - backlog/index.md
-  - Arquitetura:
-    - arquitetura/index.md
-  - Instruções:
-    - mkdocs-guide/index.md
+  - Backlog: backlog/index.md
+  - Arquitetura: arquitetura/index.md
