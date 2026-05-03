@@ -11,28 +11,41 @@
 
 ## 6.1 Composição da Equipe
 
-Esta seção descreve a composição da equipe de desenvolvimento, os canais e cerimônias de comunicação adotados e o processo formal de validação das entregas ao longo do projeto. Todas as decisões aqui registradas foram baseadas no mapeamento de perfil técnico dos integrantes, realizado via formulário estruturado no início do projeto.
+Os papéis seguem o modelo FDD + Kanban adotado pela equipe. Cada integrante pode acumular mais de um papel; as responsabilidades, no entanto, permanecem individuais e rastreáveis.
 
-![Equipe](images/responsabilidades.png)
-<figure class="crianex-figure">
-</figure>
+| Integrante | Papel FDD | Responsabilidades Principais | Disponibilidade |
+|---|---|---|---|
+| **Lucas Andrade Zanetti** | Project Manager · Chief Architect · Strategic Technical Contributor | Conduz Replenishment e Iteration Commitment; mantém roadmap no Miro; arbitra decisões arquiteturais; interface principal com o cliente acadêmico; garante datas-limite das unidades | 10–11 h/sem |
+| **Heitor Macedo Ricardo** | Development Manager · Chief Programmer | Coordena progresso técnico da iteração; acompanha board diariamente; desbloqueia issues em até 24 h; conduz Technical Design Review; lidera Build & Integrate (FDD etapa 5) | 5–8 h/sem |
+| **Leonardo Fachinello Bonetti** | Chief Programmer · Development Manager (backup) · Class Owner | Conduz Design Review; aprova PRs estruturais; mentora decisões técnicas; responsável por infra e Kubernetes | 5–8 h/sem |
+| **Philipe Amancio Reis Caetano** | Chief Programmer · Class Owner | Conduz Design Review; aprova PRs estruturais; implementação frontend e QA | até 4 h/sem |
+| **Hugo Freitas Silva** | Class Owner | Implementação backend; code review; atualização do board em tempo real | até 4 h/sem |
+| **Camile Barbosa Gonzaga de Oliveira** | Class Owner · Documentation Lead · Requirements Custodian | Atualização do GH Pages e Documento de Visão; gestão dos artefatos de ER (feature cards, critérios de aceite, rastreabilidade); consolidação de evidências por iteração | até 4 h/sem |
+
+**Papéis rotativos por iteração**
+
+| Papel | Responsabilidade |
+|---|---|
+| **Facilitador Metodológico** | Conduz cerimônias semanais; garante adesão ao processo; sinaliza desvios na retrospectiva |
+| **Responsável por Validação** | Coordena Partial e Formal Client Validation com Otavio; prepara checklists e materiais de demo; documenta aprovações nas issues |
 
 ---
 
 ## 6.2 Estrutura de Comunicação
 
-A comunicação entre a equipe de desenvolvimento e o cliente segue uma estrutura organizada para garantir rastreabilidade e eficiência.
+Cada ferramenta tem escopo exclusivo — o que vai para o Miro não vai para o Discord, e vice-versa. Isso evita decisões tomadas no canal errado e mantém rastreabilidade.
 
 ### Ferramentas de Comunicação
 
 | Ferramenta | Tipo | Finalidade | Frequência |
-|------------|------|-----------|-----------|
-| **Discord** | Assíncrono + Síncrono | Comunicação do dia a dia, discussões técnicas, compartilhamento de materiais | Diário |
-| **GitHub Issues** | Assíncrono | Registro de user stories, bugs, tarefas e decisões técnicas | Contínuo |
-| **GitHub Pull Requests** | Assíncrono | Code review, aprovação QA, rastreamento de entregas | Por entrega |
-| **GitHub Projects** | Assíncrono | Board Scrumban — visibilidade do fluxo de trabalho da sprint | Contínuo |
-| **Google Meet** | Síncrono | Cerimônias de sprint (Planning, Review, Retrospectiva) | Quinzenal |
-| **Supabase Dashboard** | Assíncrono | Monitoramento do banco de dados e logs de produção | Sob demanda |
+|---|---|---|---|
+| **Miro** | Assíncrono + Síncrono | Gestão estratégica e visual: roadmap IT1–IT5, backlog macro por iteração, Feature Cards, Iteration Goal, modelo de domínio, atas de cerimônias, lições aprendidas | Contínuo |
+| **GitHub Projects (Kanban)** | Assíncrono | Acompanhamento operacional de issues: features e subfeatures fluindo pelas colunas Backlog → Done; WIP limit visível | Contínuo |
+| **GitHub (repositório)** | Assíncrono | Código-fonte, Pull Requests, code review, CI/CD, evidências de execução nos comentários das issues | Por entrega |
+| **GitHub Pages (MkDocs)** | Assíncrono | Documento de Visão, rastreabilidade OE → CP → Feature, artefatos formais das unidades | Por iteração |
+| **Discord** | Assíncrono + Síncrono | Comunicação do dia a dia, dúvidas técnicas, Midweek Sync assíncrono ("Ontem fiz / Hoje farei / Bloqueios") | Diário |
+| **Google Meet** | Síncrono | Cerimônias formais: Replenishment, Iteration Commitment, Formal Client Validation, Retrospectiva | Por iteração |
+| **WhatsApp** | Assíncrono | Canal direto com Otavio (CTO Crianex) para validações parciais rápidas e alinhamentos urgentes | Sob demanda |
 
 ---
 
