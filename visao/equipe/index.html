@@ -260,14 +260,77 @@
 </table>
 <hr />
 <h2 id="61-composicao-da-equipe">6.1 Composição da Equipe<a class="headerlink" href="#61-composicao-da-equipe" title="Permanent link">&para;</a></h2>
-<p>Esta seção descreve a composição da equipe de desenvolvimento, os canais e cerimônias de comunicação adotados e o processo formal de validação das entregas ao longo do projeto. Todas as decisões aqui registradas foram baseadas no mapeamento de perfil técnico dos integrantes, realizado via formulário estruturado no início do projeto.</p>
-<p><img alt="Equipe" src="../images/responsabilidades.png" /></p>
-<figure class="crianex-figure">
-</figure>
-
+<p>Os papéis seguem o modelo FDD + Kanban adotado pela equipe. Cada integrante pode acumular mais de um papel; as responsabilidades, no entanto, permanecem individuais e rastreáveis.</p>
+<table>
+<thead>
+<tr>
+<th>Integrante</th>
+<th>Papel FDD</th>
+<th>Responsabilidades Principais</th>
+<th>Disponibilidade</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Lucas Andrade Zanetti</strong></td>
+<td>Project Manager · Chief Architect · Strategic Technical Contributor</td>
+<td>Conduz Replenishment e Iteration Commitment; mantém roadmap no Miro; arbitra decisões arquiteturais; interface principal com o cliente acadêmico; garante datas-limite das unidades</td>
+<td>10–11 h/sem</td>
+</tr>
+<tr>
+<td><strong>Heitor Macedo Ricardo</strong></td>
+<td>Development Manager · Chief Programmer</td>
+<td>Coordena progresso técnico da iteração; acompanha board diariamente; desbloqueia issues em até 24 h; conduz Technical Design Review; lidera Build &amp; Integrate (FDD etapa 5)</td>
+<td>5–8 h/sem</td>
+</tr>
+<tr>
+<td><strong>Leonardo Fachinello Bonetti</strong></td>
+<td>Chief Programmer · Development Manager (backup) · Class Owner</td>
+<td>Conduz Design Review; aprova PRs estruturais; mentora decisões técnicas; responsável por infra e Kubernetes</td>
+<td>5–8 h/sem</td>
+</tr>
+<tr>
+<td><strong>Philipe Amancio Reis Caetano</strong></td>
+<td>Chief Programmer · Class Owner</td>
+<td>Conduz Design Review; aprova PRs estruturais; implementação frontend e QA</td>
+<td>até 4 h/sem</td>
+</tr>
+<tr>
+<td><strong>Hugo Freitas Silva</strong></td>
+<td>Class Owner</td>
+<td>Implementação backend; code review; atualização do board em tempo real</td>
+<td>até 4 h/sem</td>
+</tr>
+<tr>
+<td><strong>Camile Barbosa Gonzaga de Oliveira</strong></td>
+<td>Class Owner · Documentation Lead · Requirements Custodian</td>
+<td>Atualização do GH Pages e Documento de Visão; gestão dos artefatos de ER (feature cards, critérios de aceite, rastreabilidade); consolidação de evidências por iteração</td>
+<td>até 4 h/sem</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Papéis rotativos por iteração</strong></p>
+<table>
+<thead>
+<tr>
+<th>Papel</th>
+<th>Responsabilidade</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Facilitador Metodológico</strong></td>
+<td>Conduz cerimônias semanais; garante adesão ao processo; sinaliza desvios na retrospectiva</td>
+</tr>
+<tr>
+<td><strong>Responsável por Validação</strong></td>
+<td>Coordena Partial e Formal Client Validation com Otavio; prepara checklists e materiais de demo; documenta aprovações nas issues</td>
+</tr>
+</tbody>
+</table>
 <hr />
 <h2 id="62-estrutura-de-comunicacao">6.2 Estrutura de Comunicação<a class="headerlink" href="#62-estrutura-de-comunicacao" title="Permanent link">&para;</a></h2>
-<p>A comunicação entre a equipe de desenvolvimento e o cliente segue uma estrutura organizada para garantir rastreabilidade e eficiência.</p>
+<p>Cada ferramenta tem escopo exclusivo — o que vai para o Miro não vai para o Discord, e vice-versa. Isso evita decisões tomadas no canal errado e mantém rastreabilidade.</p>
 <h3 id="ferramentas-de-comunicacao">Ferramentas de Comunicação<a class="headerlink" href="#ferramentas-de-comunicacao" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -280,39 +343,45 @@
 </thead>
 <tbody>
 <tr>
-<td><strong>Discord</strong></td>
+<td><strong>Miro</strong></td>
 <td>Assíncrono + Síncrono</td>
-<td>Comunicação do dia a dia, discussões técnicas, compartilhamento de materiais</td>
-<td>Diário</td>
-</tr>
-<tr>
-<td><strong>GitHub Issues</strong></td>
-<td>Assíncrono</td>
-<td>Registro de user stories, bugs, tarefas e decisões técnicas</td>
+<td>Gestão estratégica e visual: roadmap IT1–IT5, backlog macro por iteração, Feature Cards, Iteration Goal, modelo de domínio, atas de cerimônias, lições aprendidas</td>
 <td>Contínuo</td>
 </tr>
 <tr>
-<td><strong>GitHub Pull Requests</strong></td>
+<td><strong>GitHub Projects (Kanban)</strong></td>
 <td>Assíncrono</td>
-<td>Code review, aprovação QA, rastreamento de entregas</td>
+<td>Acompanhamento operacional de issues: features e subfeatures fluindo pelas colunas Backlog → Done; WIP limit visível</td>
+<td>Contínuo</td>
+</tr>
+<tr>
+<td><strong>GitHub (repositório)</strong></td>
+<td>Assíncrono</td>
+<td>Código-fonte, Pull Requests, code review, CI/CD, evidências de execução nos comentários das issues</td>
 <td>Por entrega</td>
 </tr>
 <tr>
-<td><strong>GitHub Projects</strong></td>
+<td><strong>GitHub Pages (MkDocs)</strong></td>
 <td>Assíncrono</td>
-<td>Board Scrumban — visibilidade do fluxo de trabalho da sprint</td>
-<td>Contínuo</td>
+<td>Documento de Visão, rastreabilidade OE → CP → Feature, artefatos formais das unidades</td>
+<td>Por iteração</td>
+</tr>
+<tr>
+<td><strong>Discord</strong></td>
+<td>Assíncrono + Síncrono</td>
+<td>Comunicação do dia a dia, dúvidas técnicas, Midweek Sync assíncrono ("Ontem fiz / Hoje farei / Bloqueios")</td>
+<td>Diário</td>
 </tr>
 <tr>
 <td><strong>Google Meet</strong></td>
 <td>Síncrono</td>
-<td>Cerimônias de sprint (Planning, Review, Retrospectiva)</td>
-<td>Quinzenal</td>
+<td>Cerimônias formais: Replenishment, Iteration Commitment, Formal Client Validation, Retrospectiva</td>
+<td>Por iteração</td>
 </tr>
 <tr>
-<td><strong>Supabase Dashboard</strong></td>
+<td><strong>WhatsApp</strong></td>
 <td>Assíncrono</td>
-<td>Monitoramento do banco de dados e logs de produção</td>
+<td>Canal direto com Otavio (CTO Crianex) para validações parciais rápidas e alinhamentos urgentes</td>
 <td>Sob demanda</td>
 </tr>
 </tbody>
