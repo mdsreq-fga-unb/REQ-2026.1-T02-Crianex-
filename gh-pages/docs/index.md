@@ -16,8 +16,6 @@
 | Turma | T02 |
 | Produto | Plataforma SaaS de Gestão de Projetos |
 
-!!! tip "Como navegar"
-    Use as **abas no topo** para acessar as seções da documentação. A barra de busca (ícone :material-magnify:) está disponível em toda a documentação.
 
 ---
 
