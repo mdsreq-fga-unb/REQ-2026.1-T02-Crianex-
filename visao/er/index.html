@@ -307,40 +307,56 @@
 <p>Onde o Valor de Negócio é a nota de impacto definida em conjunto com o Domain Expert e as variáveis do divisor representam os custos de execução (Complexidade, Esforço, e Risco/Pesquisa Técnica). Isso permite que a equipe puxe (via Kanban) primeiramente as Features que entregam o maior valor com o menor custo/risco relativo, formando o escopo principal do Produto Mínimo Viável (MVP) do Crianex Hub de forma estruturada e objetiva.</p>
 <hr />
 <h2 id="42-alinhamento-fdd-engenharia-de-requisitos">4.2 Alinhamento FDD – Engenharia de Requisitos<a class="headerlink" href="#42-alinhamento-fdd-engenharia-de-requisitos" title="Permanent link">&para;</a></h2>
-<p>O FDD (Feature Driven Development) possui etapas que mapeiam diretamente para as atividades de ER. A tabela abaixo mostra como as práticas se complementam:</p>
+<p>O FDD (Feature-Driven Development) possui cinco etapas sequenciais que mapeiam diretamente as atividades da Engenharia de Requisitos. Para garantir que os objetivos de negócio sejam traduzidos corretamente em software executável, o projeto adota uma cadeia de rastreabilidade explícita em múltiplos níveis de abstração:</p>
+<p><strong>Cadeia de Rastreabilidade</strong>: OE → CP → Feature FDD → User Story → Critério de Aceite → Teste/Validação</p>
+<p>É fundamental distinguir os elementos dessa cadeia:</p>
+<ul>
+<li><strong>OE (Objetivo Específico)</strong>: A meta de negócio que a Crianex deseja alcançar.</li>
+<li><strong>CP (Característica de Produto)</strong>: Um agrupamento de alto nível ou módulo que contribui para o OE (ex: CRM Interno). Representa o "O Quê" na visão do usuário.</li>
+<li><strong>Feature FDD</strong>: É a decomposição da CP em uma pequena funcionalidade valorizada pelo cliente, que pode ser construída em poucos dias. É escrita no formato estrito <code>&lt;ação&gt; &lt;resultado&gt; &lt;objeto&gt;</code> (ex: "Listar produtos SaaS com filtro").</li>
+<li><strong>User Story (Fatia)</strong>: É o fatiamento técnico (vertical slicing) da Feature FDD em pedaços ainda menores para facilitar o fluxo (Kanban).</li>
+<li><strong>Critério de Aceite</strong>: A regra de negócio ou restrição exata (frequentemente em formato Given/When/Then) que prova que a Story/Feature está concluída.</li>
+</ul>
+<p>A tabela a seguir demonstra o mapeamento formal das etapas do FDD com as atividades dominantes de ER e as técnicas exatas aplicadas em cada fase:</p>
 <table>
 <thead>
 <tr>
 <th>Etapa do FDD</th>
-<th>Atividade de ER Correspondente</th>
-<th>Artefato Gerado</th>
+<th>ER Dominante</th>
+<th>Técnicas de ER Adotadas</th>
+<th>Artefatos Gerados</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>1 — Desenvolver Modelo Geral</td>
-<td>Elicitação + Representação</td>
-<td>Rich Picture, Ishikawa, Mapa de Stakeholders</td>
+<td>Elicitação + Análise + Representação</td>
+<td>Feature Discovery Session e Domain Modeling Workshop. Foco em entender o contexto, os atores e delimitar o problema junto ao Domain Expert.</td>
+<td>Modelo de domínio validado, Glossário de termos e Rich Picture.</td>
 </tr>
 <tr>
 <td>2 — Construir Lista de Funcionalidades</td>
-<td>Declaração + Análise</td>
-<td>Backlog inicial com CPs (CP01–CP15), user stories no GitHub Issues</td>
+<td>Declaração + Organização</td>
+<td>Feature Card Specification (declaração no padrão <code>&lt;ação&gt; &lt;resultado&gt; &lt;objeto&gt;</code>) e Decomposição Estruturada. Mapeamento bidirecional garantindo a rastreabilidade (OE → CP → Feature).</td>
+<td>Backlog macro de Features (Feature List) rastreável e estruturado.</td>
 </tr>
 <tr>
 <td>3 — Planejar por Funcionalidade</td>
-<td>Organização + Priorização</td>
-<td>Roadmap de sprints, MoSCoW aplicado ao backlog</td>
+<td>Análise + Priorização (Organização)</td>
+<td>Cálculo do Índice de Prioridade (IP) (Matemática de Valor x Custo) e Iteration Replenishment (negociação de escopo viável com os stakeholders).</td>
+<td>Lista de Features comprometidas para a iteração (Iteration Commitment).</td>
 </tr>
 <tr>
 <td>4 — Projetar por Funcionalidade</td>
-<td>Representação + Verificação</td>
-<td>Mockups, protótipos, critérios de aceite detalhados</td>
+<td>Declaração Detalhada + Representação + Verificação</td>
+<td>Feature Slicing (decomposição em User Stories), Definição de Critérios de Aceitação (no formato Given/When/Then) e Technical Design Review (para verificação de regras antes da codificação).</td>
+<td>User Stories "Ready" com critérios de aceite precisos e Notas de Design.</td>
 </tr>
 <tr>
 <td>5 — Construir por Funcionalidade</td>
-<td>Verificação + Validação</td>
-<td>Pull Requests, testes de aceite, Sprint Review</td>
+<td>Verificação + Validação + Atualização</td>
+<td>Inspeção Formal (revisão de qualidade do design/código pelos pares), Formal Client Validation (demonstração focada em valor) e Auditoria de Rastreabilidade para refletir a entrega no escopo.</td>
+<td>Funcionalidade validada pelo cliente e Matriz de Rastreabilidade atualizada.</td>
 </tr>
 </tbody>
 </table></div>
