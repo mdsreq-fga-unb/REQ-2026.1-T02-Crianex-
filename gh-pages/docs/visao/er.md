@@ -54,12 +54,24 @@ Onde o Valor de Negócio é a nota de impacto definida em conjunto com o Domain 
 
 ## 4.2 Alinhamento FDD – Engenharia de Requisitos
 
-O FDD (Feature Driven Development) possui etapas que mapeiam diretamente para as atividades de ER. A tabela abaixo mostra como as práticas se complementam:
+O FDD (Feature-Driven Development) possui cinco etapas sequenciais que mapeiam diretamente as atividades da Engenharia de Requisitos. Para garantir que os objetivos de negócio sejam traduzidos corretamente em software executável, o projeto adota uma cadeia de rastreabilidade explícita em múltiplos níveis de abstração:
 
-| Etapa do FDD | Atividade de ER Correspondente | Artefato Gerado |
-|--------------|-------------------------------|-----------------|
-| 1 — Desenvolver Modelo Geral | Elicitação + Representação | Rich Picture, Ishikawa, Mapa de Stakeholders |
-| 2 — Construir Lista de Funcionalidades | Declaração + Análise | Backlog inicial com CPs (CP01–CP15), user stories no GitHub Issues |
-| 3 — Planejar por Funcionalidade | Organização + Priorização | Roadmap de sprints, MoSCoW aplicado ao backlog |
-| 4 — Projetar por Funcionalidade | Representação + Verificação | Mockups, protótipos, critérios de aceite detalhados |
-| 5 — Construir por Funcionalidade | Verificação + Validação | Pull Requests, testes de aceite, Sprint Review |
+**Cadeia de Rastreabilidade**: OE → CP → Feature FDD → User Story → Critério de Aceite → Teste/Validação
+
+É fundamental distinguir os elementos dessa cadeia:
+
+- **OE (Objetivo Específico)**: A meta de negócio que a Crianex deseja alcançar.
+- **CP (Característica de Produto)**: Um agrupamento de alto nível ou módulo que contribui para o OE (ex: CRM Interno). Representa o "O Quê" na visão do usuário.
+- **Feature FDD**: É a decomposição da CP em uma pequena funcionalidade valorizada pelo cliente, que pode ser construída em poucos dias. É escrita no formato estrito `<ação> <resultado> <objeto>` (ex: "Listar produtos SaaS com filtro").
+- **User Story (Fatia)**: É o fatiamento técnico (vertical slicing) da Feature FDD em pedaços ainda menores para facilitar o fluxo (Kanban).
+- **Critério de Aceite**: A regra de negócio ou restrição exata (frequentemente em formato Given/When/Then) que prova que a Story/Feature está concluída.
+
+A tabela a seguir demonstra o mapeamento formal das etapas do FDD com as atividades dominantes de ER e as técnicas exatas aplicadas em cada fase:
+
+| Etapa do FDD | ER Dominante | Técnicas de ER Adotadas | Artefatos Gerados |
+|--------------|--------------|--------------------------|-------------------|
+| 1 — Desenvolver Modelo Geral | Elicitação + Análise + Representação | Feature Discovery Session e Domain Modeling Workshop. Foco em entender o contexto, os atores e delimitar o problema junto ao Domain Expert. | Modelo de domínio validado, Glossário de termos e Rich Picture. |
+| 2 — Construir Lista de Funcionalidades | Declaração + Organização | Feature Card Specification (declaração no padrão `<ação> <resultado> <objeto>`) e Decomposição Estruturada. Mapeamento bidirecional garantindo a rastreabilidade (OE → CP → Feature). | Backlog macro de Features (Feature List) rastreável e estruturado. |
+| 3 — Planejar por Funcionalidade | Análise + Priorização (Organização) | Cálculo do Índice de Prioridade (IP) (Matemática de Valor x Custo) e Iteration Replenishment (negociação de escopo viável com os stakeholders). | Lista de Features comprometidas para a iteração (Iteration Commitment). |
+| 4 — Projetar por Funcionalidade | Declaração Detalhada + Representação + Verificação | Feature Slicing (decomposição em User Stories), Definição de Critérios de Aceitação (no formato Given/When/Then) e Technical Design Review (para verificação de regras antes da codificação). | User Stories "Ready" com critérios de aceite precisos e Notas de Design. |
+| 5 — Construir por Funcionalidade | Verificação + Validação + Atualização | Inspeção Formal (revisão de qualidade do design/código pelos pares), Formal Client Validation (demonstração focada em valor) e Auditoria de Rastreabilidade para refletir a entrega no escopo. | Funcionalidade validada pelo cliente e Matriz de Rastreabilidade atualizada. |
