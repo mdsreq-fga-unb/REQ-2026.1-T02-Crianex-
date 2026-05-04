@@ -208,20 +208,18 @@
         
         <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
-        <li class="first-level active"><a href="#5-cronograma">5. Cronograma</a></li>
+        <li class="first-level active"><a href="#5-cronograma-e-entregas">5. Cronograma e Entregas</a></li>
             <li class="second-level"><a href="#historico-de-revisao">Histórico de Revisão</a></li>
                 
-            <li class="second-level"><a href="#51-visao-geral-do-cronograma">5.1 Visão Geral do Cronograma</a></li>
+            <li class="second-level"><a href="#51-o-ciclo-de-vida-de-uma-feature-no-cronograma">5.1 O Ciclo de Vida de uma Feature no Cronograma</a></li>
                 
-                <li class="third-level"><a href="#marcos-principais">Marcos Principais</a></li>
-            <li class="second-level"><a href="#52-cronograma-de-sprints">5.2 Cronograma de Sprints</a></li>
+            <li class="second-level"><a href="#52-roadmap-de-iteracoes">5.2 Roadmap de Iterações</a></li>
                 
-                <li class="third-level"><a href="#observacoes-1-cada-sprint-tem-duracao-de-duas-semanas-sprints-6-e-7-nao-constam-a-essa-regra-devido-um-tempo-curto-de-entrega-do-projeto-com-reuniao-de-revisao-e-planejamento-ao-final-do-ciclo-2-o-backlog-sera-refinado-grooming-a-cada-sprint-com-base-no-feedback-recebido-3-linhas-destacadas-em-laranja-representam-marcos-de-entrega-parcial-formal-com-o-cliente-4-o-cronograma-e-preliminar-e-sera-atualizado-ao-longo-da-disciplina">Observações: (1) Cada sprint tem duração de duas semanas (sprints 6 e 7 não constam à essa regra, devido um tempo curto de entrega do projeto), com reunião de revisão e planejamento ao final do ciclo. (2) O backlog será refinado (grooming) a cada sprint com base no feedback recebido. (3) Linhas destacadas em laranja representam marcos de entrega parcial formal com o cliente. (4) O cronograma é preliminar e será atualizado ao longo da disciplina.</a></li>
     </ul>
 </div></div>
         <div class="col-md-9" role="main">
 
-<h1 id="5-cronograma">5. Cronograma<a class="headerlink" href="#5-cronograma" title="Permanent link">&para;</a></h1>
+<h1 id="5-cronograma-e-entregas">5. Cronograma e Entregas<a class="headerlink" href="#5-cronograma-e-entregas" title="Permanent link">&para;</a></h1>
 <h2 id="historico-de-revisao">Histórico de Revisão<a class="headerlink" href="#historico-de-revisao" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -245,56 +243,70 @@
 <td>Revisão da seção 5</td>
 <td>Equipe Crianex</td>
 </tr>
+<tr>
+<td>1.2</td>
+<td>04/05/2026</td>
+<td>Atualização do cronograma para Processo Híbrido (Iterações)</td>
+<td>Heitor</td>
+</tr>
 </tbody>
 </table>
 <hr />
-<h2 id="51-visao-geral-do-cronograma">5.1 Visão Geral do Cronograma<a class="headerlink" href="#51-visao-geral-do-cronograma" title="Permanent link">&para;</a></h2>
-<p>O projeto é organizado em <strong>sprints de 2 semanas</strong>, alinhadas ao calendário acadêmico da disciplina de Requisitos de Software (REQ-2026.1). O projeto possui 3 unidades de entrega, cada uma correspondendo a um conjunto de sprints com objetivos incrementais.</p>
-<h3 id="marcos-principais">Marcos Principais<a class="headerlink" href="#marcos-principais" title="Permanent link">&para;</a></h3>
+<p>A partir da adoção do processo híbrido (FDD + Kanban), o projeto abandona o conceito rígido de "Sprints" do framework Scrum e passa a organizar o cronograma em Iterações orientadas a valor. A dinâmica de trabalho deixa de ser em lotes fixos fechados e passa a ser um fluxo contínuo puxado pela capacidade da equipe (limitada pelo WIP).</p>
+<h2 id="51-o-ciclo-de-vida-de-uma-feature-no-cronograma">5.1 O Ciclo de Vida de uma Feature no Cronograma<a class="headerlink" href="#51-o-ciclo-de-vida-de-uma-feature-no-cronograma" title="Permanent link">&para;</a></h2>
+<p>Para garantir a consistência metodológica entre o FDD e a execução no tempo, toda Feature percorre um fluxo padronizado dentro de cada iteração:</p>
+<ul>
+<li><strong>Entrada e Refinamento</strong>: A feature nasce em uma Feature Discovery Session com o cliente (CTO da Crianex). Ela entra no backlog macro e é selecionada na reunião de Iteration Replenishment. A partir daí, ela sofre o Feature Slicing, sendo fatiada em entregas menores atômicas com critérios de aceitação.</li>
+<li><strong>Design e Construção</strong>: Antes de qualquer código ser escrito, a fatia passa por um Technical Design Review (Etapa 4 do FDD) conduzido pelo Chief Programmer. Aprovado o design estrutural, o desenvolvedor (Class Owner) puxa a tarefa para execução (Kanban Pull Execution), garantindo a etapa 5 do FDD.</li>
+<li><strong>Validação</strong>: Entregas intermediárias passam por Partial Client Validation contínua com o cliente ao longo do ciclo. Ao final da iteração, o conjunto consolidado de features que formam um Valor de Negócio passa pela Formal Client Validation.</li>
+</ul>
+<h2 id="52-roadmap-de-iteracoes">5.2 Roadmap de Iterações<a class="headerlink" href="#52-roadmap-de-iteracoes" title="Permanent link">&para;</a></h2>
+<p>O quadro a seguir apresenta os ciclos de trabalho planejados, alinhados aos Valores de Negócio e às Características de Produto (CPs) originadas no documento de visão.</p>
+<blockquote>
+<p><strong>Nota</strong>: O planejamento é preliminar e sofre reordenação contínua baseada no Índice de Prioridade (IP).</p>
+</blockquote>
 <table>
 <thead>
 <tr>
-<th>Marco</th>
-<th>Data Prevista</th>
-<th>Descrição</th>
+<th>Iteração e Período</th>
+<th>Valor de Negócio (Objetivo)</th>
+<th>Escopo FDD e Entregas Esperadas</th>
+<th>Validação com o Cliente</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Kickoff do Projeto</td>
-<td>09/04/2026</td>
-<td>Reunião de alinhamento e definição de escopo</td>
+<td><strong>IT1</strong> <br> (Finalizada)</td>
+<td>Documentação Inicial e Setup</td>
+<td>Levantamento, documentação da Visão de Produto, configuração de ambiente e definição da arquitetura macro.</td>
+<td>Reunião inicial para validação de escopo, entendimento do domínio e priorização do MVP.</td>
 </tr>
 <tr>
-<td>Entrega — Unidade 1</td>
-<td>14/04/2026</td>
-<td>Documento de Visão v1.2 + GitHub Pages</td>
+<td><strong>IT2</strong> <br> (Até 19/05)</td>
+<td>Vitrine Pública</td>
+<td>Modelagem e Construção: CP2, CP5, CP7 e CP15. Envolve o módulo de autenticação e a vitrine pública de produtos SaaS.</td>
+<td>Partial Validation contínua da navegação. Demonstração final (Formal Validation) focada na conversão da nova vitrine.</td>
 </tr>
 <tr>
-<td>Início Sprint 1</td>
-<td>14/04/2026</td>
-<td>Início do desenvolvimento do MVP</td>
+<td><strong>IT3</strong> <br> (20/05 a 16/06)</td>
+<td>Núcleo Admin</td>
+<td>Modelagem e Construção: CP1, CP3 e CP4. Envolve o CRM Interno em Kanban, Dashboard Executivo e o sistema de monitoramento de logs unificados.</td>
+<td>Demonstração do cruzamento de logs e tickets; validação das métricas operacionais diretamente com os sócios.</td>
 </tr>
 <tr>
-<td>Entrega — Unidade 2</td>
-<td>A definir</td>
-<td>Incremento do produto com funcionalidades MVP</td>
+<td><strong>IT4</strong> <br> (17/06 a 30/06)</td>
+<td>Operação Digital</td>
+<td>Modelagem e Construção: CP6, CP8 e CP9. Foco na operação de suporte e gestão contínua.</td>
+<td>Feedback focado na usabilidade da equipe de suporte e fluxos administrativos.</td>
 </tr>
 <tr>
-<td>Entrega — Unidade 3</td>
-<td>A definir</td>
-<td>Produto completo com vitrine digital e área administrativa</td>
+<td><strong>IT5</strong> <br> (01/07 a 07/07)</td>
+<td>Confiança e Consolidação</td>
+<td>Construção e Auditoria: CP10, CP11, CP12, CP13 e CP14. Envolve segurança OWASP, módulo financeiro/faturamento e testes end-to-end do MVP.</td>
+<td>Homologação final do cliente em ambiente de produção; aprovação final do MVP para o mercado.</td>
 </tr>
 </tbody>
-</table>
-<hr />
-<h2 id="52-cronograma-de-sprints">5.2 Cronograma de Sprints<a class="headerlink" href="#52-cronograma-de-sprints" title="Permanent link">&para;</a></h2>
-<p><img alt="Sprint" src="../images/sprints.png" /></p>
-<figure class="crianex-figure">
-  <figcaption>Figura 2 — Rich Picture: contexto do sistema e fluxos de informação. Fonte: Elaborado pelos autores (2026).</figcaption>
-</figure>
-
-<h6 id="observacoes-1-cada-sprint-tem-duracao-de-duas-semanas-sprints-6-e-7-nao-constam-a-essa-regra-devido-um-tempo-curto-de-entrega-do-projeto-com-reuniao-de-revisao-e-planejamento-ao-final-do-ciclo-2-o-backlog-sera-refinado-grooming-a-cada-sprint-com-base-no-feedback-recebido-3-linhas-destacadas-em-laranja-representam-marcos-de-entrega-parcial-formal-com-o-cliente-4-o-cronograma-e-preliminar-e-sera-atualizado-ao-longo-da-disciplina">Observações: (1) Cada sprint tem duração de duas semanas (sprints 6 e 7 não constam à essa regra, devido um tempo curto de entrega do projeto), com reunião de revisão e planejamento ao final do ciclo. (2) O backlog será refinado (grooming) a cada sprint com base no feedback recebido. (3) Linhas destacadas em laranja representam marcos de entrega parcial formal com o cliente. (4) O cronograma é preliminar e será atualizado ao longo da disciplina.<a class="headerlink" href="#observacoes-1-cada-sprint-tem-duracao-de-duas-semanas-sprints-6-e-7-nao-constam-a-essa-regra-devido-um-tempo-curto-de-entrega-do-projeto-com-reuniao-de-revisao-e-planejamento-ao-final-do-ciclo-2-o-backlog-sera-refinado-grooming-a-cada-sprint-com-base-no-feedback-recebido-3-linhas-destacadas-em-laranja-representam-marcos-de-entrega-parcial-formal-com-o-cliente-4-o-cronograma-e-preliminar-e-sera-atualizado-ao-longo-da-disciplina" title="Permanent link">&para;</a></h6></div>
+</table></div>
         
         
     </div>
