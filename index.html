@@ -128,40 +128,94 @@
                 
                 
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Atas <b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Iterações <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                         
                             
 <li >
-    <a href="atas/">Atas de Reunião</a>
+    <a href="iteracoes/">Visão Geral</a>
 </li>
 
                         
                             
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">IT1 — Unidade 1</a>
+    <ul class="dropdown-menu">
+        
+            
 <li >
-    <a href="atas/2026-04-09/">Ata 0 — 09/04/2026</a>
+    <a href="iteracoes/iteracao-1/">Resumo</a>
 </li>
 
-                        
-                        </ul>
-                    </li>
-                
-                
-                
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sprints <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                        
-                            
+        
+            
 <li >
-    <a href="sprints/">Sprints</a>
+    <a href="iteracoes/iteracao-1/atas/2026-04-09/">Ata — 09/04/2026</a>
 </li>
+
+        
+    </ul>
+  </li>
 
                         
                             
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">IT2 — Vitrine Pública</a>
+    <ul class="dropdown-menu">
+        
+            
 <li >
-    <a href="sprints/sprint-0/">Sprint 0 — Unidade 1</a>
+    <a href="iteracoes/iteracao-2/">Resumo</a>
 </li>
+
+        
+    </ul>
+  </li>
+
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">IT3 — Núcleo Admin</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="iteracoes/iteracao-3/">Resumo</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">IT4 — Operação Digital</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="iteracoes/iteracao-4/">Resumo</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Pós-venda</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="iteracoes/pos-venda/">Resumo</a>
+</li>
+
+        
+    </ul>
+  </li>
 
                         
                         </ul>
@@ -248,17 +302,43 @@
 </table>
 <hr />
 <h2 id="objetivo-do-projeto">Objetivo do Projeto<a class="headerlink" href="#objetivo-do-projeto" title="Permanent link">&para;</a></h2>
-<p>O projeto Crianex é desenvolvido no contexto da disciplina de <strong>Requisitos de Software (REQ — 2026.1)</strong> da Universidade de Brasília (UnB), com o objetivo de aplicar, na prática, as técnicas e processos de Engenharia de Requisitos sobre um produto de software real.</p>
-<p>A disciplina tem como propósito capacitar os alunos a:</p>
-<ul>
-<li><strong>Elicitar</strong> requisitos junto a stakeholders reais, utilizando técnicas como entrevistas, Rich Picture e Diagrama de Ishikawa;</li>
-<li><strong>Analisar e especificar</strong> requisitos de forma estruturada, por meio de user stories com critérios de aceite;</li>
-<li><strong>Priorizar</strong> requisitos utilizando técnicas como MoSCoW, alinhadas ao valor de negócio do produto;</li>
-<li><strong>Verificar e validar</strong> requisitos ao longo do ciclo de desenvolvimento iterativo;</li>
-<li><strong>Gerenciar</strong> mudanças de requisitos de forma rastreável e documentada;</li>
-<li><strong>Produzir</strong> artefatos de documentação profissionais, publicados e versionados via GitHub Pages.</li>
-</ul>
-<p>O produto escolhido pela equipe é a <strong>Crianex Hub</strong>, uma plataforma SaaS voltada para gestão interna e divulgação de portfólio de projetos de uma Software House B2B.</p>
+<p>O projeto é desenvolvido no contexto da disciplina de <strong>Requisitos de Software (REQ — 2026.1)</strong> da Universidade de Brasília (UnB), com a finalidade de aplicar, de forma sistemática, as atividades do processo de Engenharia de Requisitos (ER) sobre um produto de software com domínio e stakeholders reais.</p>
+<p>O escopo acadêmico compreende a execução das seguintes atividades de ER, organizadas conforme o processo iterativo adotado (<strong>FDD + Kanban</strong>):</p>
+<table>
+<thead>
+<tr>
+<th>Atividade de ER</th>
+<th>Técnicas / Artefatos Utilizados</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Elicitação de Requisitos</strong></td>
+<td>Entrevistas semiestruturadas, Rich Picture, Diagrama de Ishikawa, Brainstorming com stakeholders (Otávio Maya — CTO)</td>
+</tr>
+<tr>
+<td><strong>Análise e Consenso</strong></td>
+<td>Características de Produto (CPs), Conjuntos de Funcionalidades (Feature Sets) e Funcionalidades (Features) no formato FDD — <code>&lt;ação&gt; o &lt;resultado&gt; &lt;por/para&gt; um &lt;objeto&gt;</code> — com critérios de aceitação no formato <em>Dado / Quando / Então</em></td>
+</tr>
+<tr>
+<td><strong>Priorização de Requisitos</strong></td>
+<td>Modelo de Valor × Esforço — Índice de Prioridade <code>IP = VB / ((CX + ES) / 2)</code>, alinhado ao valor de negócio das CPs e Objetivos Específicos (OEs)</td>
+</tr>
+<tr>
+<td><strong>Verificação e Validação</strong></td>
+<td>Definition of Ready (DoR), Definition of Done (DoD), inspeções formais via Pull Request, validação contínua com o cliente ao longo das iterações</td>
+</tr>
+<tr>
+<td><strong>Gerenciamento de Mudanças</strong></td>
+<td>Rastreabilidade entre OEs → CPs → Funcionalidades, versionamento via Git e registro em histórico de revisão em cada artefato</td>
+</tr>
+<tr>
+<td><strong>Documentação de Requisitos</strong></td>
+<td>Artefatos publicados e versionados via GitHub Pages (MkDocs Material), cobrindo visão do produto, backlog priorizado, cronograma orientado a valor e atas de reunião</td>
+</tr>
+</tbody>
+</table>
+<p>O produto objeto deste processo de ER é a <strong>Crianex Hub</strong>: plataforma administrativa centralizada composta por painel de gestão interno e vitrine digital bilíngue (PT/EN), desenvolvida para a Software House B2B Crianex. Os requisitos derivam diretamente dos cinco Objetivos Específicos (OEs) levantados junto aos clientes reais e se materializam nas quinze Características de Produto (CPs) que compõem o backlog do projeto.</p>
 <hr />
 <h2 id="integrantes">Integrantes<a class="headerlink" href="#integrantes" title="Permanent link">&para;</a></h2>
 <div class="crianex-members">
@@ -270,11 +350,6 @@
   <div class="crianex-member">
     <img src="https://github.com/knz13.png?size=200" alt="Otávio">
     <p class="crianex-member__name">Otávio</p>
-    <p class="crianex-member__role">Cliente</p>
-  </div>
-  <div class="crianex-member">
-    <img src="https://github.com/Vitor-Trancoso.png?size=200" alt="Vitor">
-    <p class="crianex-member__name">Vitor</p>
     <p class="crianex-member__role">Cliente</p>
   </div>
   <div class="crianex-member">
@@ -342,6 +417,12 @@
 <td>13/04/2026</td>
 <td>Remoção dos dos links redirecionaveis bugados</td>
 <td>Lucas A.</td>
+</tr>
+<tr>
+<td>1.3</td>
+<td>05/05/2026</td>
+<td>Reescrita da seção Objetivo do Projeto</td>
+<td>Lucas A. Zanetti</td>
 </tr>
 </tbody>
 </table></div>
@@ -449,5 +530,5 @@
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2026-05-06 01:19:58.874681+00:00
+Build Date UTC : 2026-05-06 20:39:47.697015+00:00
 -->

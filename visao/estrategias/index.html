@@ -128,40 +128,94 @@
                 
                 
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Atas <b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Iterações <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                         
                             
 <li >
-    <a href="../../atas/">Atas de Reunião</a>
+    <a href="../../iteracoes/">Visão Geral</a>
 </li>
 
                         
                             
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">IT1 — Unidade 1</a>
+    <ul class="dropdown-menu">
+        
+            
 <li >
-    <a href="../../atas/2026-04-09/">Ata 0 — 09/04/2026</a>
+    <a href="../../iteracoes/iteracao-1/">Resumo</a>
 </li>
 
-                        
-                        </ul>
-                    </li>
-                
-                
-                
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sprints <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                        
-                            
+        
+            
 <li >
-    <a href="../../sprints/">Sprints</a>
+    <a href="../../iteracoes/iteracao-1/atas/2026-04-09/">Ata — 09/04/2026</a>
 </li>
+
+        
+    </ul>
+  </li>
 
                         
                             
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">IT2 — Vitrine Pública</a>
+    <ul class="dropdown-menu">
+        
+            
 <li >
-    <a href="../../sprints/sprint-0/">Sprint 0 — Unidade 1</a>
+    <a href="../../iteracoes/iteracao-2/">Resumo</a>
 </li>
+
+        
+    </ul>
+  </li>
+
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">IT3 — Núcleo Admin</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../iteracoes/iteracao-3/">Resumo</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">IT4 — Operação Digital</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../iteracoes/iteracao-4/">Resumo</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Pós-venda</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../iteracoes/pos-venda/">Resumo</a>
+</li>
+
+        
+    </ul>
+  </li>
 
                         
                         </ul>
@@ -282,7 +336,7 @@
 </tr>
 <tr>
 <td>3</td>
-<td><strong>Planejar por Funcionalidade</strong> — Priorização estratégica via MoSCoW e negociação de conflitos; backlog priorizado e plano de releases definido</td>
+<td><strong>Planejar por Funcionalidade</strong> — Priorização estratégica via Valor × Esforço (IP = VB/PT); backlog priorizado por índice de prioridade e plano de releases definido por iteração</td>
 </tr>
 <tr>
 <td>4</td>
@@ -294,7 +348,7 @@
 </tr>
 </tbody>
 </table>
-<p>A lista de funcionalidades do FDD está diretamente mapeada nas <strong>Características do Produto (CP01–CP15)</strong> definidas na seção 2.3, garantindo rastreabilidade total entre planejamento e implementação.</p>
+<p>A lista de funcionalidades do FDD está diretamente mapeada nas <strong>Características do Produto (CP01–CP13)</strong> definidas na seção 2.3, garantindo rastreabilidade total entre planejamento e implementação.</p>
 <h3 id="gestao-de-equipe-scrumban-scrum-kanban">Gestão de Equipe: Scrumban (Scrum + Kanban)<a class="headerlink" href="#gestao-de-equipe-scrumban-scrum-kanban" title="Permanent link">&para;</a></h3>
 <p>O Scrumban combina a estrutura de cerimônias e sprints do <strong>Scrum</strong> com a gestão de fluxo visual contínuo do <strong>Kanban</strong>, formando um modelo híbrido especialmente adequado à realidade da equipe:</p>
 <table>
@@ -306,8 +360,8 @@
 </thead>
 <tbody>
 <tr>
-<td><strong>Duração dos Sprints</strong></td>
-<td>2 semanas (exceto sprints 6 e 7, com janelas menores próximas à entrega final)</td>
+<td><strong>Duração das Iterações</strong></td>
+<td>~2 semanas por iteração (IT2 → IT3 → IT4 → Pós-venda)</td>
 </tr>
 <tr>
 <td><strong>Board de Acompanhamento</strong></td>
@@ -315,11 +369,11 @@
 </tr>
 <tr>
 <td><strong>Cerimônias</strong></td>
-<td>Sprint Planning (início), Sprint Review e Retrospectiva (fim de cada sprint)</td>
+<td>Iteration Planning (início de cada iteração) · Retrospectiva (fim de cada iteração)</td>
 </tr>
 <tr>
-<td><strong>Daily assíncrono</strong></td>
-<td>Check-in diário via texto: o que fiz / o que vou fazer / bloqueios</td>
+<td><strong>Sync assíncrono</strong></td>
+<td>Check-in diário via texto no Discord: o que fiz / o que vou fazer / bloqueios</td>
 </tr>
 <tr>
 <td><strong>Backlog</strong></td>
@@ -419,7 +473,7 @@
 <p>Cada feature passa obrigatoriamente por <strong>Design</strong> e <strong>Inspeção</strong> antes de ser integrada ao produto, garantindo que nenhuma funcionalidade seja considerada pronta sem validação técnica formal. Esse rigor é especialmente relevante para os módulos críticos da plataforma — como autenticação, CRM, sistema de tickets e controle financeiro.</p>
 <h3 id="por-que-scrumban">Por que Scrumban?<a class="headerlink" href="#por-que-scrumban" title="Permanent link">&para;</a></h3>
 <p>Já o <strong>Scrumban</strong> complementa essa abordagem ao oferecer uma gestão de fluxo mais flexível e visual, permitindo lidar com múltiplas demandas, limitar o trabalho em progresso (WIP) e identificar rapidamente gargalos no processo. Essa característica é especialmente importante para equipes que precisam responder rapidamente a solicitações urgentes sem perder o controle da produtividade.</p>
-<p>A comunicação do projeto segue um modelo <strong>assíncrono por padrão</strong>, com momentos síncronos reservados para as cerimônias de sprint e alinhamentos com o cliente — escolha que leva em consideração que três dos seis integrantes têm disponibilidade limitada (até 4h/semana), tornando reuniões síncronas frequentes inviáveis sem impacto na produtividade.</p>
+<p>A comunicação do projeto segue um modelo <strong>assíncrono por padrão</strong>, com momentos síncronos reservados para as cerimônias de iteração (Iteration Planning e Retrospectiva) e alinhamentos com o cliente — escolha que leva em consideração que três dos seis integrantes têm disponibilidade limitada (até 4h/semana), tornando reuniões síncronas frequentes inviáveis sem impacto na produtividade.</p>
 <h3 id="o-que-a-integracao-fdd-scrumban-promove">O que a integração FDD + Scrumban promove<a class="headerlink" href="#o-que-a-integracao-fdd-scrumban-promove" title="Permanent link">&para;</a></h3>
 <p>Além disso, a integração entre FDD e Scrumban promove:</p>
 <ul>
