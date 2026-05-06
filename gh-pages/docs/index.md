@@ -99,4 +99,4 @@ O produto objeto deste processo de ER é a **Crianex Hub**: plataforma administr
 | 1.0 | 13/04/2026 | Criação da home page com cards de navegação e visão geral | Lucas A. Zanetti |
 | 1.1 | 13/04/2026 | Adição de seção de integrantes, objetivo do projeto e histórico de revisão | Equipe Crianex |
 | 1.2| 13/04/2026 | Remoção dos dos links redirecionaveis bugados| Lucas A. |
-| 1.3 | 05/05/2026 | Reescrita da seção Objetivo do Projeto com terminologia formal de ER, tabela de atividades e alinhamento com OEs, CPs e metodologia FDD | Lucas A. Zanetti |
+| 1.3 | 05/05/2026 | Reescrita da seção Objetivo do Projeto | Lucas A. Zanetti |

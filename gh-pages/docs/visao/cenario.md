@@ -7,6 +7,7 @@
 | 1.0 | 01/04/2026 | Criação das seções 1.1 a 1.8 | Lucas A. Zanetti |
 | 1.1 | 03/04/2026 | Revisão geral | Equipe Crianex |
 | 1.2 | 09/04/2026 | Ajustes pós reunião de alinhamento | Equipe Crianex |
+| 1.3 | 05/05/2026 | Detalhamento narrativo da seção 1.4 com contexto do problema e solução esperada | Lucas A. Zanetti |
 
 ---
 
@@ -62,12 +63,14 @@ O Rich Picture abaixo representa o contexto do sistema e os fluxos de informaç�
 
 ## 1.4 Detalhamento do Problema
 
-| Campo | Descrição |
+| Problema Principal: | Baixo impacto competitivo no mercado de desenvolvimento de SaaS |
 |-------|-----------|
-| **O problema de** | Gestão descentralizada de projetos e baixa visibilidade do portfólio no mercado |
-| **Afeta** | A equipe interna da Crianex (colaboradores, gestores e liderança técnica) e potenciais clientes B2B |
-| **Cujo impacto é** | Dificuldade no acompanhamento em tempo real do status dos projetos, retrabalho na consolidação de informações e oportunidades comerciais perdidas por falta de vitrine digital |
-| **Uma solução bem-sucedida seria** | Uma plataforma unificada com área administrativa para gestão interna e uma vitrine digital pública para exposição do portfólio |
+
+A Crianex não dispõe de vitrine digital própria para apresentar seu portfólio de produtos SaaS ao mercado B2B. A divulgação dos produtos Avali, Pontua, Notifly e demais soluções ocorre exclusivamente por contato direto — apresentações manuais, e-mails e conversas — sem canal digital indexável por mecanismos de busca e sem formulário de captação de leads. Como consequência direta, potenciais clientes que buscam fornecedores de SaaS por meios digitais não encontram a empresa, eliminando um canal de geração de demanda sem custo por contato.
+
+Internamente, o acompanhamento de projetos é feito de forma individual por cada gestor, sem integração entre as ferramentas utilizadas — planilhas, Discord, e-mail e sistemas genéricos. A liderança não tem acesso a painel consolidado de status de projetos: o único mecanismo de alinhamento disponível são reuniões periódicas convocadas para sincronizar informações que deveriam estar disponíveis em tempo real. Esse modelo impede a identificação antecipada de riscos e atrasos e aumenta o tempo gasto com coordenação em detrimento da execução.
+
+A combinação dos dois fatores — ausência de canal digital de divulgação e gestão operacional sem ferramenta centralizada — faz com que a Crianex perca oportunidades de captação que dependem de presença digital e consuma capacidade produtiva da equipe com consolidação manual de informações que uma plataforma integrada geraria automaticamente.
 
 ### Diagrama de Ishikawa
 
