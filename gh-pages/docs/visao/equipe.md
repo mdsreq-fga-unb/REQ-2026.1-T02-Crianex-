@@ -6,6 +6,9 @@
 |--------|------|-----------|-----------|
 | 1.0 | 11/04/2026 | Criação das seções 6.1 a 6.6 | Lucas A. Zanetti |
 | 1.1 | 13/04/2026 | Revisão das seções 6.1 a 6.6 | Equipe Crianex |
+| 1.2 | 03/05/2026 | Atualização da composição da equipe | Lucas A. Zanetti |
+| 1.3 | 05/05/2026 | Seções 6.2–6.6 reescritas: metodologia FDD + fluxogramas de validação e Kanban | Lucas A. Zanetti |
+
 
 ---
 
@@ -33,105 +36,179 @@ Os papéis seguem o modelo FDD + Kanban adotado pela equipe. Cada integrante pod
 
 ## 6.2 Estrutura de Comunicação
 
-Cada ferramenta tem escopo exclusivo — o que vai para o Miro não vai para o Discord, e vice-versa. Isso evita decisões tomadas no canal errado e mantém rastreabilidade.
+Cada ferramenta tem escopo exclusivo — o que vai para o Miro não vai para o Discord. Isso evita decisões tomadas no canal errado e mantém rastreabilidade.
 
-### Ferramentas de Comunicação
-
-| Ferramenta | Tipo | Finalidade | Frequência |
+| Ferramenta | Tipo | Finalidade | Não é usado para |
 |---|---|---|---|
-| **Miro** | Assíncrono + Síncrono | Gestão estratégica e visual: roadmap IT1–IT5, backlog macro por iteração, Feature Cards, Iteration Goal, modelo de domínio, atas de cerimônias, lições aprendidas | Contínuo |
-| **GitHub Projects (Kanban)** | Assíncrono | Acompanhamento operacional de issues: features e subfeatures fluindo pelas colunas Backlog → Done; WIP limit visível | Contínuo |
-| **GitHub (repositório)** | Assíncrono | Código-fonte, Pull Requests, code review, CI/CD, evidências de execução nos comentários das issues | Por entrega |
-| **GitHub Pages (MkDocs)** | Assíncrono | Documento de Visão, rastreabilidade OE → CP → Feature, artefatos formais das unidades | Por iteração |
-| **Discord** | Assíncrono + Síncrono | Comunicação do dia a dia, dúvidas técnicas, Midweek Sync assíncrono ("Ontem fiz / Hoje farei / Bloqueios") | Diário |
-| **Google Meet** | Síncrono | Cerimônias formais: Replenishment, Iteration Commitment, Formal Client Validation, Retrospectiva | Por iteração |
-| **WhatsApp** | Assíncrono | Canal direto com Otavio (CTO Crianex) para validações parciais rápidas e alinhamentos urgentes | Sob demanda |
+| **Miro** | Assíncrono + Síncrono | Roadmap IT1–IT5, backlog macro, Feature Cards, Iteration Goal, modelo de domínio, atas de cerimônias, lições aprendidas | Acompanhamento operacional de issues |
+| **GitHub Projects (Kanban)** | Assíncrono | Issues fluindo pelas colunas Backlog → Done; WIP limit visível | Cerimônias, alinhamento estratégico |
+| **GitHub (repositório)** | Assíncrono | Código-fonte, Pull Requests, code review, CI/CD, evidências de execução | — |
+| **GitHub Pages (MkDocs)** | Assíncrono | Documento de Visão, rastreabilidade OE → CP → Feature, artefatos formais | Operação diária |
+| **Discord** | Assíncrono | Comunicação do dia a dia, dúvidas técnicas, Midweek Sync ("Ontem fiz / Hoje farei / Bloqueios") | Tomada de decisão formal (vai para reunião com ata) |
+| **WhatsApp** | Assíncrono | Canal direto com Otavio para validações parciais e alinhamentos urgentes | — |
 
 ---
 
 ## 6.3 Cadência de Cerimônias
 
-| Cerimônia | Frequência | Participantes | Duração | Objetivo |
-|-----------|-----------|---------------|---------|---------|
-| **Sprint Planning** | Quinzenal (início de sprint) | Toda a equipe + PO | 1h | Priorizar e detalhar as user stories da próxima sprint |
-| **Daily Stand-up** | Diário (assíncrono via Discord) | Toda a equipe | 15 min | O que foi feito, o que será feito, impedimentos |
-| **Sprint Review** | Quinzenal (fim de sprint) | Toda a equipe + PO + cliente | 1h | Demonstrar as entregas e validar com o cliente |
-| **Sprint Retrospectiva** | Quinzenal (fim de sprint) | Equipe de desenvolvimento | 45 min | Identificar melhorias de processo para o próximo sprint |
-| **Backlog Refinement** | Semanal | PO + Tech Lead | 30 min | É um processo contínuo no Scrum, no qual o Dono do Produto e a Equipe de Desenvolvimento colaboram para revisar, atualizar e esclarecer itens no Backlog do Produto, garantindo que estejam prontos para as próximas sprints.|
+> **Princípio:** máximo **2–3 reuniões por semana**. Cerimônias relacionadas são agrupadas no mesmo dia. O Midweek Sync e a validação parcial com o cliente são sempre **assíncronos**; apenas o encerramento formal de iteração ocorre via **reunião**.
+
+### Cerimônias por Iteração
+
+| Cerimônia | Formato | Frequência | Participantes | Duração est. |
+|---|---|---|---|---|
+| **Iteration Replenishment + Commitment + Domain Modeling** | Reunião | Início da Sem 1 | PM, Chief Arch, CPs, Otavio | ~1h 30min |
+| **Feature Discovery + Feature Card Specification** | Reunião | Sem 1 | PM, CPs, Otavio | ~1h |
+| **Feature Slicing + AC Review + Technical Design Review** | Reunião | Início da Sem 2 (e Sem 3 se necessário) | CPs, Class Owners | ~1h |
+| **Midweek Sync** | Assíncrono — Discord | Meio de cada semana de execução | Toda a equipe | ~15 min |
+| **Partial Client Validation** | Assíncrono — WhatsApp/Notion | Fim de cada Sem 2 | Resp. Validação + Otavio | — |
+| **Formal Client Validation + Retrospectiva + Artifact Closure + Backlog Reorg** | Reunião | Fim da Sem 3 | Toda a equipe + Otavio | ~2h |
+
+### Cadência Detalhada por Semana
+
+Cada iteração padrão segue três semanas com objetivos distintos.
+
+#### Semana 1 — Planejamento e Refinamento
+
+Dedicada ao alinhamento estratégico e ao refinamento de requisitos. Devs podem trabalhar em carry-over, spikes ou dívida técnica — novas features da iteração corrente só iniciam após o Technical Design Review da Semana 2.
+
+| Atividade | Etapa FDD | Formato |
+|-----------|-----------|---------|
+| Iteration Replenishment + Commitment + Domain Modeling Workshop | Etapas 1–3 | Reunião |
+| Feature Discovery Session (Otavio) + Feature Card Specification | Etapas 4–5 | Reunião |
+| Preparação individual para slicing | Pré-Etapa 6 | Assíncrono |
+
+#### Semana 2 — Build Controlado e Execução Kanban
+
+Todas as Features comprometidas começam a fluir pelo Kanban. A validação parcial ocorre de forma assíncrona ao fim da semana. Este ciclo pode se repetir dependendo do prazo da iteração.
+
+| Atividade | Etapa FDD | Formato |
+|-----------|-----------|---------|
+| Feature Slicing + Acceptance Criteria Review + Technical Design Review | Etapas 6–8 | Reunião |
+| Kanban Pull Execution + Internal Code & Design Review + Sync diário Discord | Etapas 9–11 | Assíncrono |
+| Partial Client Validation — update escrito/vídeo a Otavio | Etapa 12 | **Assíncrono** |
+
+#### Semana 3 — Consolidação, Validação e Encerramento
+
+Features consolidadas, rastreabilidade auditada e artefatos empacotados. Apenas o encerramento formal reúne a equipe e o cliente.
+
+| Atividade | Etapa FDD | Formato |
+|-----------|-----------|---------|
+| Feature Build Consolidation (smoke test) + Requirements Verification Review | Etapas 13–14 | Assíncrono |
+| Preparação da demo e fechamento de PRs pendentes | — | Assíncrono |
+| Formal Client Validation (demo) + Retrospectiva + Artifact Closure + Backlog Reorganization | Etapas 15–17 | **Reunião** |
 
 ---
 
 ## 6.4 Processo de Validação com o Cliente
 
-O Product Owner atua como interface direta com os representantes da Crianex (Otávio / Vitor), sendo responsável por:
+O processo opera em dois modos complementares: **Partial** (contínua e assíncrona, durante a iteração) e **Formal** (reunião de demo ao fim de cada iteração).
 
-1. **Coletar requisitos** e transformá-los em user stories no backlog
-2. **Priorizar** o backlog conforme o valor de negócio
-3. **Validar entregas** ao final de cada sprint na Sprint Review
-4. **Comunicar feedback** do cliente para a equipe técnica
+```mermaid
+flowchart TD
+    A([Feature mergeada em main]) --> B[Responsável por Validação\nprepara entrega + checklist]
+    B --> C{Partial Client Validation\nOtavio — até 24h\nassíncrono via WhatsApp/Notion}
+    C -->|Aprovado| D([Issue → Done ✓])
+    C -->|Ajustes solicitados| E[Issue de ajuste\n→ In Progress]
+    E --> A
+    D --> F{Todas as features\nda iteração em Done?}
+    F -->|Não| G[Continuar execução Kanban]
+    G --> A
+    F -->|Sim| H[Formal Client Validation\ndemo orientada a valor · reunião]
+    H -->|Iteration Goal aprovado| I([Artifact Closure + Retrospectiva])
+    H -->|Feedbacks capturados| J[Backlog Reorganization\npróxima iteração]
+    I --> J
 
-### Critérios de Prontidão e Conclusão
+    style A fill:#e3f2fd,stroke:#1565c0,color:#000
+    style D fill:#e8f5e9,stroke:#2e7d32,color:#000
+    style I fill:#e8f5e9,stroke:#2e7d32,color:#000
+    style C fill:#fff8e1,stroke:#f57f17,color:#000
+    style H fill:#fff8e1,stroke:#f57f17,color:#000
+```
 
-| Critério | Verificado por | Quando |
-|----------|---------------|--------|
-| Story com critérios de aceite claros (DoR) | PO + Tech Lead | Sprint Planning |
-| Implementação conforme critérios de aceite (DoD) | QA | Durante a sprint |
-| Aprovação de PR por QA (DoD) | QA | Antes do merge |
-| Validação funcional pelo PO (DoD) | PO | Sprint Review |
+*Figura 1 — Fluxo de validação: Partial (assíncrona, contínua por feature) → Formal (reunião, fim da iteração).*
+{: style="text-align:center; font-size:0.83rem; color:#666;" }
 
 ### Definition of Ready (DoR)
 
-Uma user story está **pronta para entrar no sprint** quando:
+Uma issue está **pronta para entrar em execução** quando:
 
-- [ ] Está escrita no formato "Como [perfil], quero [ação], para [benefício]"
-- [ ] Possui critérios de aceite claros e testáveis
-- [ ] Foi priorizada pelo PO no backlog
-- [ ] Não possui dependências bloqueantes não resolvidas
-- [ ] Foi estimada pela equipe (pontos de esforço)
-- [ ] O mockup ou fluxo de tela está disponível (quando aplicável)
+- [ ] Título no padrão FDD: `<ação> <resultado> <de/para/no/com> <objeto>`
+- [ ] Critérios de aceite escritos e verificáveis (Given/When/Then ou checklist)
+- [ ] Dependências identificadas e resolvidas
+- [ ] Class Owner designado e estimativa relativa registrada (CX, ES)
+- [ ] Linkada à Feature parent no Miro e à CP de origem
 
 ### Definition of Done (DoD)
 
-Uma user story está **concluída** quando:
+Uma issue está **concluída** quando:
 
-- [ ] O código foi implementado conforme os critérios de aceite
-- [ ] Testes unitários e/ou de integração foram escritos e passam
-- [ ] O Pull Request foi revisado e aprovado pelo QA
-- [ ] O código foi mergeado na branch principal (via PR aprovado)
-- [ ] A funcionalidade foi validada pelo PO na Sprint Review
-- [ ] A documentação relevante foi atualizada (quando aplicável)
-- [ ] Não há regressões identificadas em funcionalidades existentes
-
-### Fluxo de Validação
-
-```
-Cliente → PO → Backlog refinado → Sprint → Entrega → Sprint Review → Validação do Cliente
-                                                                          ↓
-                                                               Feedback incorporado
-                                                               no próximo backlog
-```
+- [ ] Código mergeado em `main` via PR aprovado por outro Class Owner
+- [ ] CI verde
+- [ ] Testes automatizados cobrindo os critérios de aceite (quando aplicável)
+- [ ] Validação parcial de Otavio registrada na issue (checklist marcado)
+- [ ] Documentação atualizada se houve mudança de contrato ou comportamento
+- [ ] Issue movida para Done no GitHub Projects
 
 ---
 
-## 6.5 Gestão de Mudanças de Requisitos
+## 6.5 Fluxo das Issues pelo Kanban
 
-Mudanças de requisitos são gerenciadas pelo PO em conjunto com o Tech Lead:
+Toda issue percorre as colunas abaixo em ordem estrita. Cada avanço depende de critério explícito — sem atalhos.
 
-| Tipo de Mudança | Processo |
-|-----------------|---------|
-| Pequeno ajuste em story existente | PO atualiza a issue no GitHub, comunica no Discord |
-| Nova feature de média prioridade | PO cria nova issue, prioriza no backlog, entra no próximo sprint planning |
-| Mudança de escopo significativa | Reunião de alinhamento com toda a equipe e aprovação do Tech Lead |
-| Remoção de feature do escopo | PO fecha a issue com justificativa documentada |
+```mermaid
+flowchart LR
+    BK([Backlog]) --> RD([Ready])
+    RD --> IP([In Progress\nWIP ≤ 2 por CO])
+    IP --> RV([Review\nWIP ≤ 3])
+    RV --> VL([Validation])
+    VL --> DN([Done ✓])
+
+    RD -.->|bloqueio| BL([Blocked])
+    IP -.->|bloqueio| BL
+    BL -.->|resolvido| RD
+    BL -.->|resolvido| IP
+
+    style BK fill:#e3f2fd,stroke:#1565c0,color:#000
+    style DN fill:#e8f5e9,stroke:#2e7d32,color:#000
+    style BL fill:#f8d7da,stroke:#721c24,color:#000
+    style VL fill:#fff8e1,stroke:#f57f17,color:#000
+```
+
+*Figura 2 — Fluxo Kanban: progressão linear obrigatória com desvio via Blocked. CO = Class Owner.*
+{: style="text-align:center; font-size:0.83rem; color:#666;" }
+
+### Critérios de Transição
+
+| De → Para | Critério de avanço | Quem move |
+|---|---|---|
+| **Backlog → Ready** | Critérios de aceite escritos; design aprovado; dependências resolvidas (DoR atendido) | Class Owner ou Chief Programmer |
+| **Ready → In Progress** | Class Owner inicia; WIP limit verificado | Class Owner que pega |
+| **In Progress → Review** | PR aberto (`closes #N`); CI verde; auto-revisão feita | Class Owner autor |
+| **Review → Validation** | PR aprovado por outro Class Owner; merge realizado | Revisor após approve |
+| **Validation → Done** | Otavio aprovou na Partial Client Validation; checklist marcado | Responsável por Validação |
+| **\* → Blocked** | Bloqueio externo identificado; comentário com motivo na issue | Quem identificou |
+| **Blocked → coluna anterior** | Bloqueio resolvido | Quem desbloqueou |
+
+### Regras invioláveis
+
+| Regra | Descrição |
+|---|---|
+| **Sem atalhos** | Issue não pode pular colunas (ex.: In Progress direto para Done). |
+| **WIP limit é lei** | Máx. 2 In Progress por Class Owner. Ao atingir o limite, ajude a destravar antes de iniciar nova issue. |
+| **Blocked é visível** | Toda issue em Blocked precisa de comentário com motivo e responsável por destravar. |
+| **Issue fecha via PR** | Não fechar issue manualmente — ela é fechada pelo merge (`closes #N`) e movida para Done após validação de Otavio. |
 
 ---
 
-## 6.6 Riscos de Comunicação
+## 6.6 Gestão de Mudanças de Requisitos
 
-| Risco | Probabilidade | Impacto | Mitigação |
-|-------|---------------|---------|-----------|
-| PO indisponível para validação | Média | Alto | Decisões urgentes podem ser tomadas pelo Tech Lead com registro documentado; PO valida retroativamente na próxima cerimônia |
-| Requisito mal interpretado pela equipe | Média | Médio | DoR rigorosa exige critérios de aceite antes de iniciar a implementação; refinamento semanal de backlog |
-| Sobrecarga de membros com outras disciplinas | Alta | Médio | Distribuição equilibrada de tarefas e comunicação proativa de impedimentos no daily stand-up |
-| Falta de feedback do cliente em tempo hábil | Baixa | Alto | PO estabelece SLA de resposta com o cliente no início do projeto; decisões não bloqueantes são tomadas pelo PO |
-| Divergência entre expectativa do cliente e entrega | Baixa | Alto | Sprint Reviews regulares com demonstração ao vivo garantem alinhamento contínuo |
+Toda mudança segue o ciclo de vida de Feature — não há alteração informal de escopo. Decisões de escopo **nunca** são tomadas no Discord; qualquer mudança que altere o Iteration Goal exige reunião com ata no Miro.
+
+| Origem | Canal de entrada | Processo |
+|---|---|---|
+| **Feedback de Otavio na demo** | Feature Card capturado na Formal Validation | PM incorpora ao backlog; entra na próxima Replenishment com IP calculado |
+| **Dúvida crítica durante execução** | Discord + issue de bloqueio | Feature Discovery pontual com Otavio; issue vai para Blocked até resolução |
+| **Issue do professor** | Issue aberta no repositório | PM triagem em até 24h; se escopo → Feature Card + backlog; se correção → issue direta |
+| **Ajuste menor em critério de aceite** | Class Owner atualiza a issue | Chief Programmer revisa e aprova; sem nova cerimônia |
+| **Mudança de escopo significativa** | PM convoca reunião de alinhamento | Equipe avalia impacto; IP recalculado; Iteration Goal pode ser renegociado com Otavio |

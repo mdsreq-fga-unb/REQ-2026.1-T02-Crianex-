@@ -53,51 +53,17 @@ O quadro abaixo apresenta os ciclos de trabalho planejados, organizados por **Va
 
 | Iteração | Status | Período | Valor de Negócio | CPs | OEs | Iteration Goal | Validação |
 |----------|--------|---------|------------------|-----|-----|----------------|-----------|
-| **IT1** | ✅ Concluída | até 26/04/2026 | Documentação Inicial e Setup | — | — | Levantar escopo, documentar Visão de Produto, configurar ambiente e definir arquitetura macro. | Reunião inicial com Otavio: validação de escopo, domínio e priorização do MVP. |
-| **IT2** | 🔄 Em andamento | 27/04 a 17/05 | **Vitrine Pública** | CP2 · CP5 · CP7 · CP15 | [OE2](solucao.md#objetivos-estrategicos-oe) · [OE5](solucao.md#objetivos-estrategicos-oe) | "Qualquer visitante acessa a vitrine pública da Crianex, vê o portfólio de produtos SaaS com página institucional em PT/EN, em layout responsivo." | Partial Validation contínua. Formal Validation com demo focada em conversão e navegação. |
-| **IT3** | ⏳ Planejada | 18/05 a 07/06 | **Núcleo Admin** | CP1 · CP3 · CP4 | [OE1](solucao.md#objetivos-estrategicos-oe) | "A equipe interna acessa o CRM Kanban, o Dashboard Executivo e o painel de logs unificados a partir de um único ponto de autenticação." | Validação do cruzamento de logs e tickets; métricas operacionais com os sócios. |
-| **IT4** | ⏳ Planejada | 08/06 a 24/06 | **Operação Digital** | CP6 · CP8 · CP9 | [OE2](solucao.md#objetivos-estrategicos-oe) · [OE3](solucao.md#objetivos-estrategicos-oe) | "A equipe de suporte opera o sistema de atendimento e gerencia produtos SaaS com autonomia, sem depender de acesso direto ao banco." | Feedback focado na usabilidade da equipe de suporte e fluxos administrativos. |
-| **IT5** | ⏳ Planejada | 25/06 a 07/07 | **Confiança e Consolidação** | CP10 · CP11 · CP12 · CP13 · CP14 | [OE3](solucao.md#objetivos-estrategicos-oe) · [OE4](solucao.md#objetivos-estrategicos-oe) · [OE5](solucao.md#objetivos-estrategicos-oe) | "O MVP passa por auditoria OWASP, testes end-to-end completos e está pronto para homologação em produção." | Homologação final em ambiente de produção; aprovação formal do MVP pelo cliente. |
+| **IT1** | ✅ | até 26/04/2026 | Documentação Inicial e Setup | — | — | Levantar escopo, documentar Visão de Produto, configurar ambiente e definir arquitetura macro. | Reunião inicial com Otavio: validação de escopo, domínio e priorização do MVP. |
+| **IT2** | 🔄 | 27/04 a 17/05 | **Vitrine Pública** | CP2 · CP5 · CP7 · CP15 | [OE2](solucao.md#objetivos-estrategicos-oe) · [OE5](solucao.md#objetivos-estrategicos-oe) | "Qualquer visitante acessa a vitrine pública da Crianex, vê o portfólio de produtos SaaS com página institucional em PT/EN, em layout responsivo." | Partial Validation contínua. Formal Validation com demo focada em conversão e navegação. |
+| **IT3** | ⏳ | 18/05 a 07/06 | **Núcleo Admin** | CP1 · CP3 · CP4 | [OE1](solucao.md#objetivos-estrategicos-oe) | "A equipe interna acessa o CRM Kanban, o Dashboard Executivo e o painel de logs unificados a partir de um único ponto de autenticação." | Validação do cruzamento de logs e tickets; métricas operacionais com os sócios. |
+| **IT4** | ⏳ | 08/06 a 24/06 | **Operação Digital** | CP6 · CP8 · CP9 | [OE2](solucao.md#objetivos-estrategicos-oe) · [OE3](solucao.md#objetivos-estrategicos-oe) | "A equipe de suporte opera o sistema de atendimento e gerencia produtos SaaS com autonomia, sem depender de acesso direto ao banco." | Feedback focado na usabilidade da equipe de suporte e fluxos administrativos. |
+| **IT5** | ⏳  | 25/06 a 07/07 | **Confiança e Consolidação** | CP10 · CP11 · CP12 · CP13 · CP14 | [OE3](solucao.md#objetivos-estrategicos-oe) · [OE4](solucao.md#objetivos-estrategicos-oe) · [OE5](solucao.md#objetivos-estrategicos-oe) | "O MVP passa por auditoria OWASP, testes end-to-end completos e está pronto para homologação em produção." | Homologação final em ambiente de produção; aprovação formal do MVP pelo cliente. |
 
 ---
 
 ## 5.3 Cadência Semanal de uma Iteração
 
-Cada iteração padrão segue uma cadência de **três semanas** com objetivos distintos. A IT2 é exceção — opera com Semana 1 reduzida (combinada parcialmente com Semana 2) para se ajustar ao prazo de 19/05. A IT5 é comprimida em 1 semana.
-
-> **Princípio:** máximo **2–3 reuniões por semana**. Cerimônias relacionadas são agrupadas no mesmo dia. A validação parcial do cliente ocorre de forma **assíncrona** (Whatsapp/Discord); apenas a validação formal de encerramento ocorre via **reunião**.
-
-### Semana 1 — Planejamento e Refinamento
-
-Dedicada ao alinhamento estratégico e ao refinamento de requisitos. Não há build de código além de spikes técnicos pontuais.
-
-| Atividade | Etapa FDD | Formato |
-|-----------|-----------|---------|
-| Iteration Replenishment + Iteration Commitment + Domain Modeling Workshop | Etapas 1–3 | Reunião |
-| Feature Discovery Session (Otavio) + Feature Card Specification | Etapas 4–5 | Reunião |
-| Preparação individual para slicing | Pré-Etapa 6 | Assíncrono |
-
-### Semana 2 — Build Controlado e Execução Kanban
-
-O coração da execução. Todas as Features comprometidas começam a fluir pelo Kanban. A validação parcial do cliente ocorre de forma assíncrona ao fim da semana.
-
-> **Nota:** Essa plano pode se repetir por mais de uma semana dependendo do tempo limite da iteração.
-
-| Atividade | Etapa FDD | Formato |
-|-----------|-----------|---------|
-| Feature Slicing + Acceptance Criteria Review + Technical Design Review | Etapas 6–8 | Reunião |
-| Kanban Pull Execution + Internal Code & Design Review + Sync diário Discord | Etapas 9–11 | Assíncrono |
-| Partial Client Validation — envio de update escrito/vídeo a Otavio | Etapa 12 | **Assíncrono** |
-
-### Semana 3 — Consolidação, Validação e Encerramento
-
-Fecha o ciclo. Features são consolidadas, rastreabilidade auditada e artefatos empacotados. Apenas o encerramento formal reúne a equipe e o cliente.
-
-| Atividade | Etapa FDD | Formato |
-|-----------|-----------|---------|
-| Feature Build Consolidation (smoke test) + Requirements Verification Review | Etapas 13–14 | Assíncrono |
-| Preparação da demo e fechamento de PRs pendentes | — | Assíncrono |
-| Formal Client Validation (demo) + Retrospectiva + Artifact Closure + Backlog Reorganization | Etapas 15–17 | **Reunião** |
+A cadência semanal — cerimônias, formatos e tabelas de atividades por semana — está documentada em **[6.3 Cadência de Cerimônias](equipe.md#63-cadencia-de-cerimonias)** na página de Interação Equipe-Cliente, onde faz mais sentido contextualmente.
 
 ---
 
