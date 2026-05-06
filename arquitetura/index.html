@@ -1,233 +1,145 @@
 <!DOCTYPE html>
+
 <html lang="en">
-
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Plataforma de Gestão e Portfólio de Projetos SaaS">
-    <meta name="author" content="Equipe Crianex">
-    
-    <link rel="shortcut icon" href="../img/favicon.ico">
-
-    
-    <title>Arquitetura - Crianex</title>
-    
-
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/v4-shims.css">
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.min.css">
-    <link href='//rsms.me/inter/inter.css' rel='stylesheet' type='text/css'>
-    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
-    <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
-    <link href="../css/base.min.css" rel="stylesheet">
-    <link href="../css/cinder.min.css" rel="stylesheet">
-
-    
-        
-        <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/styles/github.min.css">
-        
-    
-    <link href="../assets/extra.css" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Plataforma de Gestão e Portfólio de Projetos SaaS" name="description"/>
+<meta content="Equipe Crianex" name="author"/>
+<link href="../img/favicon.ico" rel="shortcut icon"/>
+<title>Arquitetura - Crianex</title>
+<link href="https://use.fontawesome.com/releases/v5.12.0/css/all.css" rel="stylesheet"/>
+<link href="https://use.fontawesome.com/releases/v5.12.0/css/v4-shims.css" rel="stylesheet"/>
+<link href="//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.min.css" rel="stylesheet"/>
+<link href="//rsms.me/inter/inter.css" rel="stylesheet" type="text/css"/>
+<link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&amp;subset=latin-ext,latin" rel="stylesheet" type="text/css"/>
+<link href="../css/bootstrap-custom.min.css" rel="stylesheet"/>
+<link href="../css/base.min.css" rel="stylesheet"/>
+<link href="../css/cinder.min.css" rel="stylesheet"/>
+<link href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/styles/github.min.css" rel="stylesheet"/>
+<link href="../assets/extra.css" rel="stylesheet"/>
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
             <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
         <![endif]-->
-
-    
-
-     
 </head>
-
 <body>
-
-    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container">
-
-        <!-- Collapsed navigation -->
-        <div class="navbar-header">
-            <!-- Expander button -->
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            
-
-            <!-- Main title -->
-
-            
-              <a class="navbar-brand" href="..">Crianex</a>
-            
-        </div>
-
-        <!-- Expanded navigation -->
-        <div class="navbar-collapse collapse">
-                <!-- Main navigation -->
-                <ul class="nav navbar-nav">
-                
-                
-                    <li >
-                        <a href="..">Home</a>
-                    </li>
-                
-                
-                
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Visão <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                        
-                            
-<li >
-    <a href="../visao/cenario/">1 · Cenário</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="../visao/solucao/">2 · Solução</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="../visao/estrategias/">3 · Estratégias</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="../visao/er/">4 · Eng. de Requisitos</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="../visao/cronograma/">5 · Cronograma</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="../visao/equipe/">6 · Equipe e Interação</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="../visao/10-licoes/">Lições Aprendidas</a>
-</li>
-
-                        
-                        </ul>
-                    </li>
-                
-                
-                
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Atas <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                        
-                            
-<li >
-    <a href="../atas/">Atas de Reunião</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="../atas/2026-04-09/">Ata 0 — 09/04/2026</a>
-</li>
-
-                        
-                        </ul>
-                    </li>
-                
-                
-                
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sprints <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                        
-                            
-<li >
-    <a href="../sprints/">Sprints</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="../sprints/sprint-0/">Sprint 0 — Unidade 1</a>
-</li>
-
-                        
-                        </ul>
-                    </li>
-                
-                
-                
-                    <li >
-                        <a href="../backlog/">Backlog</a>
-                    </li>
-                
-                
-                
-                    <li class="active">
-                        <a href="./">Arquitetura</a>
-                    </li>
-                
-                
-                </ul>
-
-            <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
-                            <i class="fas fa-search"></i> Search
-                        </a>
-                    </li>
-                    <li >
-                        <a rel="prev" href="../backlog/">
-                            <i class="fas fa-arrow-left"></i> Previous
-                        </a>
-                    </li>
-                    <li class="disabled">
-                        <a rel="next" >
-                            Next <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </li>
-            </ul>
-        </div>
-    </div>
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+<div class="container">
+<!-- Collapsed navigation -->
+<div class="navbar-header">
+<!-- Expander button -->
+<button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button">
+<span class="sr-only">Toggle navigation</span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</button>
+<!-- Main title -->
+<a class="navbar-brand" href="..">Crianex</a>
 </div>
-
-    <div class="container">
-        
-        
-        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
-    <ul class="nav bs-sidenav">
-        <li class="first-level active"><a href="#documentacao-de-arquitetura">Documentação de Arquitetura</a></li>
-            <li class="second-level"><a href="#visao-geral">Visão Geral</a></li>
-                
-            <li class="second-level"><a href="#stack-tecnologica">Stack Tecnológica</a></li>
-                
-            <li class="second-level"><a href="#adrs-architecture-decision-records">ADRs — Architecture Decision Records</a></li>
-                
-                <li class="third-level"><a href="#indice-de-adrs">Índice de ADRs</a></li>
-            <li class="second-level"><a href="#diagramas">Diagramas</a></li>
-                
-    </ul>
+<!-- Expanded navigation -->
+<div class="navbar-collapse collapse">
+<!-- Main navigation -->
+<ul class="nav navbar-nav">
+<li>
+<a href="..">Home</a>
+</li>
+<li class="dropdown">
+<a class="dropdown-toggle" data-toggle="dropdown" href="#">Visão <b class="caret"></b></a>
+<ul class="dropdown-menu">
+<li>
+<a href="../visao/cenario/">1 · Cenário</a>
+</li>
+<li>
+<a href="../visao/solucao/">2 · Solução</a>
+</li>
+<li>
+<a href="../visao/estrategias/">3 · Estratégias</a>
+</li>
+<li>
+<a href="../visao/er/">4 · Eng. de Requisitos</a>
+</li>
+<li>
+<a href="../visao/cronograma/">5 · Cronograma</a>
+</li>
+<li>
+<a href="../visao/equipe/">6 · Equipe e Interação</a>
+</li>
+<li>
+<a href="../visao/10-licoes/">Lições Aprendidas</a>
+</li>
+</ul>
+</li>
+<li class="dropdown">
+<a class="dropdown-toggle" data-toggle="dropdown" href="#">Atas <b class="caret"></b></a>
+<ul class="dropdown-menu">
+<li>
+<a href="../atas/">Atas de Reunião</a>
+</li>
+<li>
+<a href="../atas/2026-04-09/">Ata 0 — 09/04/2026</a>
+</li>
+</ul>
+</li>
+<li class="dropdown">
+<a class="dropdown-toggle" data-toggle="dropdown" href="#">Sprints <b class="caret"></b></a>
+<ul class="dropdown-menu">
+<li>
+<a href="../sprints/">Sprints</a>
+</li>
+<li>
+<a href="../sprints/sprint-0/">Sprint 0 — Unidade 1</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="../backlog/">Backlog</a>
+</li>
+<li class="active">
+<a href="./">Arquitetura</a>
+</li>
+</ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+<a data-target="#mkdocs_search_modal" data-toggle="modal" href="#">
+<i class="fas fa-search"></i> Search
+                        </a>
+</li>
+<li>
+<a href="../backlog/" rel="prev">
+<i class="fas fa-arrow-left"></i> Previous
+                        </a>
+</li>
+<li class="disabled">
+<a rel="next">
+                            Next <i class="fas fa-arrow-right"></i>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container">
+<div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+<ul class="nav bs-sidenav">
+<li class="first-level active"><a href="#documentacao-de-arquitetura">Documentação de Arquitetura</a></li>
+<li class="second-level"><a href="#visao-geral">Visão Geral</a></li>
+<li class="second-level"><a href="#stack-tecnologica">Stack Tecnológica</a></li>
+<li class="second-level"><a href="#adrs-architecture-decision-records">ADRs — Architecture Decision Records</a></li>
+<li class="third-level"><a href="#indice-de-adrs">Índice de ADRs</a></li>
+<li class="second-level"><a href="#diagramas">Diagramas</a></li>
+</ul>
 </div></div>
-        <div class="col-md-9" role="main">
-
-<h1 id="documentacao-de-arquitetura">Documentação de Arquitetura<a class="headerlink" href="#documentacao-de-arquitetura" title="Permanent link">&para;</a></h1>
+<div class="col-md-9" role="main">
+<h1 id="documentacao-de-arquitetura">Documentação de Arquitetura<a class="headerlink" href="#documentacao-de-arquitetura" title="Permanent link">¶</a></h1>
 <p>Visão técnica da plataforma Crianex — diagramas, decisões de arquitetura (ADRs) e descrição dos componentes.</p>
-<hr />
-<h2 id="visao-geral">Visão Geral<a class="headerlink" href="#visao-geral" title="Permanent link">&para;</a></h2>
+<hr/>
+<h2 id="visao-geral">Visão Geral<a class="headerlink" href="#visao-geral" title="Permanent link">¶</a></h2>
 <p>A Crianex é uma plataforma <strong>SaaS multi-tenant</strong> para gestão e portfólio de projetos, construída sobre uma arquitetura de microsserviços.</p>
-<pre><code class="language-mermaid">graph TB
+<div class="mermaid">graph TB
     subgraph Cliente
         WEB[Web App\nReact / Next.js]
         MOB[App Mobile\nReact Native]
@@ -260,9 +172,9 @@
     PROJ --&gt; PG
     PROJ --&gt; REDIS
     REPORT --&gt; S3
-</code></pre>
-<hr />
-<h2 id="stack-tecnologica">Stack Tecnológica<a class="headerlink" href="#stack-tecnologica" title="Permanent link">&para;</a></h2>
+</div>
+<hr/>
+<h2 id="stack-tecnologica">Stack Tecnológica<a class="headerlink" href="#stack-tecnologica" title="Permanent link">¶</a></h2>
 <table>
 <thead>
 <tr>
@@ -301,13 +213,13 @@
 </tr>
 </tbody>
 </table>
-<hr />
-<h2 id="adrs-architecture-decision-records">ADRs — Architecture Decision Records<a class="headerlink" href="#adrs-architecture-decision-records" title="Permanent link">&para;</a></h2>
+<hr/>
+<h2 id="adrs-architecture-decision-records">ADRs — Architecture Decision Records<a class="headerlink" href="#adrs-architecture-decision-records" title="Permanent link">¶</a></h2>
 <div class="admonition note">
 <p class="admonition-title">O que é um ADR?</p>
 <p>Um ADR documenta <strong>uma decisão arquitetural significativa</strong>, seu contexto, as alternativas consideradas e os motivos da escolha. Crie um arquivo <code>adr-NNN-titulo.md</code> para cada decisão.</p>
 </div>
-<h3 id="indice-de-adrs">Índice de ADRs<a class="headerlink" href="#indice-de-adrs" title="Permanent link">&para;</a></h3>
+<h3 id="indice-de-adrs">Índice de ADRs<a class="headerlink" href="#indice-de-adrs" title="Permanent link">¶</a></h3>
 <table>
 <thead>
 <tr>
@@ -326,109 +238,91 @@
 </tr>
 </tbody>
 </table>
-<hr />
-<h2 id="diagramas">Diagramas<a class="headerlink" href="#diagramas" title="Permanent link">&para;</a></h2>
+<hr/>
+<h2 id="diagramas">Diagramas<a class="headerlink" href="#diagramas" title="Permanent link">¶</a></h2>
 <blockquote>
 <p>Adicione diagramas de sequência, ER e implantação conforme o projeto evoluir. Use blocos <code>mermaid</code> para diagramas inline ou faça upload de imagens na pasta <code>assets/</code>.</p>
 </blockquote></div>
-        
-        
-    </div>
-
-    
-      <footer class="col-md-12 text-center">
-          
-          
-            <hr>
-            <p>
-            <small>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</small>
-            </p>
-          
-
-          
-          
-      </footer>
-    
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="../js/bootstrap-3.0.3.min.js"></script>
-
-    
-    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/highlight.min.js"></script>
-        
-    <script>hljs.initHighlightingOnLoad();</script>
-    
-
-    <script>var base_url = ".."</script>
-    
-    <script src="../js/base.js"></script>
-    <script src="../search/main.js"></script>
-
-    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">
-                    <span aria-hidden="true">&times;</span>
-                    <span class="sr-only">Close</span>
-                </button>
-                <h4 class="modal-title" id="searchModalLabel">Search</h4>
-            </div>
-            <div class="modal-body">
-                <p>
+</div>
+<footer class="col-md-12 text-center">
+<hr/>
+<p>
+<small>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</small>
+</p>
+</footer>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="../js/bootstrap-3.0.3.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script>var base_url = ".."</script>
+<script src="../js/base.js"></script>
+<script src="../search/main.js"></script>
+<div aria-hidden="true" aria-labelledby="searchModalLabel" class="modal" id="mkdocs_search_modal" role="dialog" tabindex="-1">
+<div class="modal-dialog modal-lg">
+<div class="modal-content">
+<div class="modal-header">
+<button class="close" data-dismiss="modal" type="button">
+<span aria-hidden="true">×</span>
+<span class="sr-only">Close</span>
+</button>
+<h4 class="modal-title" id="searchModalLabel">Search</h4>
+</div>
+<div class="modal-body">
+<p>
                     From here you can search these documents. Enter
                     your search terms below.
                 </p>
-                <form>
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
-                    </div>
-                </form>
-                <div id="mkdocs-search-results"></div>
-            </div>
-            <div class="modal-footer">
-            </div>
-        </div>
-    </div>
-</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            </div>
-            <div class="modal-body">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th style="width: 20%;">Keys</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="help shortcut"><kbd>?</kbd></td>
-                    <td>Open this help</td>
-                  </tr>
-                  <tr>
-                    <td class="next shortcut"><kbd>n</kbd></td>
-                    <td>Next page</td>
-                  </tr>
-                  <tr>
-                    <td class="prev shortcut"><kbd>p</kbd></td>
-                    <td>Previous page</td>
-                  </tr>
-                  <tr>
-                    <td class="search shortcut"><kbd>s</kbd></td>
-                    <td>Search</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="modal-footer">
-            </div>
-        </div>
-    </div>
+<form>
+<div class="form-group">
+<input class="form-control" id="mkdocs-search-query" placeholder="Search..." title="Type search term here" type="text"/>
 </div>
-    </body>
-
+</form>
+<div id="mkdocs-search-results"></div>
+</div>
+<div class="modal-footer">
+</div>
+</div>
+</div>
+</div><div aria-hidden="true" aria-labelledby="keyboardModalLabel" class="modal" id="mkdocs_keyboard_modal" role="dialog" tabindex="-1">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+<button class="close" data-dismiss="modal" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+</div>
+<div class="modal-body">
+<table class="table">
+<thead>
+<tr>
+<th style="width: 20%;">Keys</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="help shortcut"><kbd>?</kbd></td>
+<td>Open this help</td>
+</tr>
+<tr>
+<td class="next shortcut"><kbd>n</kbd></td>
+<td>Next page</td>
+</tr>
+<tr>
+<td class="prev shortcut"><kbd>p</kbd></td>
+<td>Previous page</td>
+</tr>
+<tr>
+<td class="search shortcut"><kbd>s</kbd></td>
+<td>Search</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="modal-footer">
+</div>
+</div>
+</div>
+</div>
+<script type="module">import mermaid from "https://unpkg.com/mermaid@10.4.0/dist/mermaid.esm.min.mjs";
+mermaid.initialize({});</script></body>
 </html>
