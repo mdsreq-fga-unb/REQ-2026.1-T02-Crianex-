@@ -6,8 +6,9 @@
 |--------|------|-----------|-----------|
 | 1.0 | 12/04/2026 | Criação das seções 4.1 a 4.4 | Heitor e Lucas |
 | 1.1 | 13/04/2026 | Revisão da seção 4 | Equipe Crianex |
-| 1.2 | 04/05/2026 | Ajustes da seção 4.1 | Heitor |
-| 1.3 | 05/05/2026 | Ajustes de clareza e consistência na seção 4 | Hugo |
+| 1.2 | 04/05/2026 | Ajustes da seção 4.1  | Heitor |
+| 1.3 | 04/05/2026 | Ajustes da seção 4.2  | Heitor |
+| 1.4 | 05/05/2026 | Ajustes de clareza e consistência na seção 4 | Hugo |
 
 ---
 

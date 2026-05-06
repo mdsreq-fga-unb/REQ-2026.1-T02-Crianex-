@@ -8,6 +8,7 @@ theme: cinder
 plugins:
   - search:
       lang: pt
+  - mermaid2
 
 markdown_extensions:
   - admonition
