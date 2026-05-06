@@ -44,8 +44,9 @@ Cada ferramenta tem escopo exclusivo — o que vai para o Miro não vai para o D
 | **GitHub Projects (Kanban)** | Assíncrono | Issues fluindo pelas colunas Backlog → Done; WIP limit visível | Cerimônias, alinhamento estratégico |
 | **GitHub (repositório)** | Assíncrono | Código-fonte, Pull Requests, code review, CI/CD, evidências de execução | — |
 | **GitHub Pages (MkDocs)** | Assíncrono | Documento de Visão, rastreabilidade OE → CP → Feature, artefatos formais | Operação diária |
-| **Discord** | Assíncrono | Comunicação do dia a dia, dúvidas técnicas, Midweek Sync ("Ontem fiz / Hoje farei / Bloqueios") | Tomada de decisão formal (vai para reunião com ata) |
+| **Discord** | Assíncrono e Síncrono | Comunicação da semana e reuniões da equipe, dúvidas técnicas, MidWeek Sync ("Ontem fiz / Hoje farei / Bloqueios") | - |
 | **WhatsApp** | Assíncrono | Canal direto com Otavio para validações parciais e alinhamentos urgentes | — |
+| **Google Meets** | Síncrono | Reuniões formais com o cliente | — |
 
 ---
 
@@ -57,12 +58,12 @@ Cada ferramenta tem escopo exclusivo — o que vai para o Miro não vai para o D
 
 | Cerimônia | Formato | Frequência | Participantes | Duração est. |
 |---|---|---|---|---|
-| **Iteration Replenishment + Commitment + Domain Modeling** | Reunião | Início da Sem 1 | PM, Chief Arch, CPs, Otavio | ~1h 30min |
-| **Feature Discovery + Feature Card Specification** | Reunião | Sem 1 | PM, CPs, Otavio | ~1h |
-| **Feature Slicing + AC Review + Technical Design Review** | Reunião | Início da Sem 2 (e Sem 3 se necessário) | CPs, Class Owners | ~1h |
-| **Midweek Sync** | Assíncrono — Discord | Meio de cada semana de execução | Toda a equipe | ~15 min |
-| **Partial Client Validation** | Assíncrono — WhatsApp/Notion | Fim de cada Sem 2 | Resp. Validação + Otavio | — |
-| **Formal Client Validation + Retrospectiva + Artifact Closure + Backlog Reorg** | Reunião | Fim da Sem 3 | Toda a equipe + Otavio | ~2h |
+| **Iteration Replenishment + Commitment + Domain Modeling** | Reunião | Início da Sem 1 | PM, Chief Arch, CPs, Otavio | ~1h |
+| **Feature Discovery + Feature Card Specification** | Reunião | Sem 1 | Todos, menos o Cliente | ~1h |
+| **Feature Slicing + AC Review + Technical Design Review** | Reunião | Início da Sem 2 (e Sem 3 se necessário) | PM, CPs, Class Owners | ~1h |
+| **Midweek Sync** | Assíncrono — Discord | Meio de cada semana de execução (sexta ou sábado) | Toda a equipe | - |
+| **Partial Client Validation** | Assíncrono — WhatsApp | Fim de cada Sem | Resp. Validação + Otavio | — |
+| **Formal Client Validation + Retrospectiva + Artifact Closure + Backlog Reorg.** | Reunião | Fim da última semana | Toda a equipe + Otavio | ~1h 30min |
 
 ### Cadência Detalhada por Semana
 
@@ -75,7 +76,7 @@ Dedicada ao alinhamento estratégico e ao refinamento de requisitos. Devs podem 
 | Atividade | Etapa FDD | Formato |
 |-----------|-----------|---------|
 | Iteration Replenishment + Commitment + Domain Modeling Workshop | Etapas 1–3 | Reunião |
-| Feature Discovery Session (Otavio) + Feature Card Specification | Etapas 4–5 | Reunião |
+| Feature Discovery Session + Feature Card Specification | Etapas 4–5 | Reunião |
 | Preparação individual para slicing | Pré-Etapa 6 | Assíncrono |
 
 #### Semana 2 — Build Controlado e Execução Kanban
