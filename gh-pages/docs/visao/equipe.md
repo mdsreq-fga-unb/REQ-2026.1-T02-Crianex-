@@ -6,6 +6,7 @@
 |--------|------|-----------|-----------|
 | 1.0 | 11/04/2026 | Criação das seções 6.1 a 6.6 | Lucas A. Zanetti |
 | 1.1 | 13/04/2026 | Revisão das seções 6.1 a 6.6 | Equipe Crianex |
+| 1.2 | 05/05/2026 | Alinhamento das seções 6.2, 6.3 e 6.4 ao processo FDD | Leonardo Bonetti |
 
 ---
 
@@ -33,19 +34,19 @@ Os papéis seguem o modelo FDD + Kanban adotado pela equipe. Cada integrante pod
 
 ## 6.2 Estrutura de Comunicação
 
-Cada ferramenta tem escopo exclusivo — o que vai para o Miro não vai para o Discord, e vice-versa. Isso evita decisões tomadas no canal errado e mantém rastreabilidade.
+Cada ferramenta tem escopo exclusivo — o que vai para o Miro não vai para o Discord, e vice-versa. Isso evita decisões tomadas no canal errado e mantém rastreabilidade plena dos artefatos.
 
 ### Ferramentas de Comunicação
 
 | Ferramenta | Tipo | Finalidade | Frequência |
 |---|---|---|---|
-| **Miro** | Assíncrono + Síncrono | Gestão estratégica e visual: roadmap IT1–IT5, backlog macro por iteração, Feature Cards, Iteration Goal, modelo de domínio, atas de cerimônias, lições aprendidas | Contínuo |
-| **GitHub Projects (Kanban)** | Assíncrono | Acompanhamento operacional de issues: features e subfeatures fluindo pelas colunas Backlog → Done; WIP limit visível | Contínuo |
-| **GitHub (repositório)** | Assíncrono | Código-fonte, Pull Requests, code review, CI/CD, evidências de execução nos comentários das issues | Por entrega |
-| **GitHub Pages (MkDocs)** | Assíncrono | Documento de Visão, rastreabilidade OE → CP → Feature, artefatos formais das unidades | Por iteração |
-| **Discord** | Assíncrono + Síncrono | Comunicação do dia a dia, dúvidas técnicas, Midweek Sync assíncrono ("Ontem fiz / Hoje farei / Bloqueios") | Diário |
-| **Google Meet** | Síncrono | Cerimônias formais: Replenishment, Iteration Commitment, Formal Client Validation, Retrospectiva | Por iteração |
-| **WhatsApp** | Assíncrono | Canal direto com Otavio (CTO Crianex) para validações parciais rápidas e alinhamentos urgentes | Sob demanda |
+| **Miro** | Assíncrono + Síncrono | Gestão visual do processo FDD: roadmap de iterações (IT1–IT4), Feature List por iteração, Feature Cards, Iteration Goal, modelo de domínio (Overall Model), atas de cerimônias e lições aprendidas | Contínuo |
+| **GitHub Projects (Feature Tracking)** | Assíncrono | Rastreamento operacional do progresso das features: Feature Cards fluindo pelas etapas FDD (Design → Code → Inspect → Done); evidências de progresso nas issues | Contínuo |
+| **GitHub (repositório)** | Assíncrono | Código-fonte, Pull Requests, Code Inspections, CI/CD, rastreabilidade de features via commits e comentários de issues | Por feature |
+| **GitHub Pages (MkDocs)** | Assíncrono | Documento de Visão, rastreabilidade OE → CP → Feature, Feature List formal, artefatos das unidades | Por iteração |
+| **Discord** | Assíncrono + Síncrono | Comunicação do dia a dia, dúvidas técnicas, Midweek Sync assíncrono de progresso de features ("Feature X: Design feito / Code em andamento / Bloqueios") | Diário |
+| **Google Meet** | Síncrono | Cerimônias formais: Replenishment Meeting, Iteration Commitment, Technical Design Review, Formal Client Validation, Retrospectiva de Iteração | Por iteração / por feature |
+| **WhatsApp** | Assíncrono | Canal direto com Otávio (Domain Expert / CTO Crianex) para Partial Client Validations rápidas e alinhamentos urgentes sobre requisitos | Sob demanda |
 
 ---
 
@@ -53,62 +54,84 @@ Cada ferramenta tem escopo exclusivo — o que vai para o Miro não vai para o D
 
 | Cerimônia | Frequência | Participantes | Duração | Objetivo |
 |-----------|-----------|---------------|---------|---------|
-| **Sprint Planning** | Quinzenal (início de sprint) | Toda a equipe + PO | 1h | Priorizar e detalhar as user stories da próxima sprint |
-| **Daily Stand-up** | Diário (assíncrono via Discord) | Toda a equipe | 15 min | O que foi feito, o que será feito, impedimentos |
-| **Sprint Review** | Quinzenal (fim de sprint) | Toda a equipe + PO + cliente | 1h | Demonstrar as entregas e validar com o cliente |
-| **Sprint Retrospectiva** | Quinzenal (fim de sprint) | Equipe de desenvolvimento | 45 min | Identificar melhorias de processo para o próximo sprint |
-| **Backlog Refinement** | Semanal | PO + Tech Lead | 30 min | É um processo contínuo no Scrum, no qual o Dono do Produto e a Equipe de Desenvolvimento colaboram para revisar, atualizar e esclarecer itens no Backlog do Produto, garantindo que estejam prontos para as próximas sprints.|
+| **Replenishment Meeting** | Quinzenal (início de iteração) | Project Manager + Development Manager + Chief Programmers | 30 min | Selecionar da Feature List as features que entram na iteração, respeitando dependências e capacidade da equipe |
+| **Iteration Commitment Meeting** | Quinzenal (início de iteração) | Toda a equipe | 30 min | Equipe revisa e se compromete formalmente com o Iteration Goal; Class Owners são designados por feature |
+| **Daily Stand-up** | Diário (assíncrono via Discord) | Toda a equipe | 15 min | Atualização de progresso por feature no formato FDD: etapa atual (Design / Code / Inspect), bloqueios e próxima ação |
+| **Technical Design Review** | Por feature (conforme necessário) | Chief Programmer + Class Owners da feature | 30–45 min | Revisar e aprovar o design package antes de iniciar a implementação |
+| **Code Inspection** | Por feature (antes do merge) | Chief Programmer + Class Owners | 20–30 min | Inspeção formal do código produzido para a feature; pré-requisito para marcar a feature como Done |
+| **Partial Client Validation** | Sob demanda (durante iteração) | Domain Expert (Otávio/Vitor) + Project Manager | 30 min | Validação informal de features em andamento; coleta antecipada de feedback para evitar retrabalho ao final |
+| **Formal Client Validation** | Quinzenal (fim de iteração) | Toda a equipe + Domain Experts (Otávio e Vitor) | 1h | Demonstração das features completadas na iteração; aprovação formal e registro de feedback para a próxima Feature List |
+| **Retrospectiva de Iteração** | Quinzenal (fim de iteração) | Equipe de desenvolvimento | 45 min | Avaliar adesão ao processo FDD, identificar impedimentos recorrentes e definir melhorias para a próxima iteração |
 
 ---
 
 ## 6.4 Processo de Validação com o Cliente
 
-O Product Owner atua como interface direta com os representantes da Crianex (Otávio / Vitor), sendo responsável por:
+No FDD, os **Domain Experts** (Otávio e Vitor, representantes da Crianex) participam ativamente em dois momentos distintos do ciclo iterativo: como fonte de conhecimento de domínio durante o design das features e como validadores formais ao final de cada iteração.
 
-1. **Coletar requisitos** e transformá-los em user stories no backlog
-2. **Priorizar** o backlog conforme o valor de negócio
-3. **Validar entregas** ao final de cada sprint na Sprint Review
-4. **Comunicar feedback** do cliente para a equipe técnica
+O **Project Manager** atua como interface principal com os Domain Experts, sendo responsável por:
+
+1. **Elicitar requisitos de domínio** junto aos Domain Experts e traduzi-los em features na Feature List
+2. **Priorizar a Feature List** conforme valor de negócio e dependências técnicas
+3. **Convocar Partial Client Validations** durante a iteração para antecipar desvios
+4. **Conduzir a Formal Client Validation** ao final de cada iteração com demonstração das features concluídas
+5. **Registrar o feedback** nas issues do GitHub e atualizar a Feature List para a próxima iteração
 
 ### Critérios de Prontidão e Conclusão
 
 | Critério | Verificado por | Quando |
 |----------|---------------|--------|
-| Story com critérios de aceite claros (DoR) | PO + Tech Lead | Sprint Planning |
-| Implementação conforme critérios de aceite (DoD) | QA | Durante a sprint |
-| Aprovação de PR por QA (DoD) | QA | Antes do merge |
-| Validação funcional pelo PO (DoD) | PO | Sprint Review |
+| Feature descrita com critérios de aceite claros | Chief Programmer + Domain Expert | Replenishment Meeting |
+| Design package aprovado | Chief Programmer + Class Owners | Technical Design Review |
+| Código inspecionado e aprovado | Chief Programmer + Class Owners | Code Inspection |
+| Feature validada funcionalmente pelos Domain Experts | Domain Expert (Otávio/Vitor) | Formal Client Validation |
 
 ### Definition of Ready (DoR)
 
-Uma user story está **pronta para entrar no sprint** quando:
+Uma feature está **pronta para entrar em Design by Feature** quando:
 
-- [ ] Está escrita no formato "Como [perfil], quero [ação], para [benefício]"
-- [ ] Possui critérios de aceite claros e testáveis
-- [ ] Foi priorizada pelo PO no backlog
-- [ ] Não possui dependências bloqueantes não resolvidas
-- [ ] Foi estimada pela equipe (pontos de esforço)
-- [ ] O mockup ou fluxo de tela está disponível (quando aplicável)
+- [ ] Está descrita no formato de feature FDD: `<ação> o/a <resultado> do/da <objeto>`
+- [ ] Possui critérios de aceite claros e testáveis, revisados com o Domain Expert
+- [ ] Pertence a um conjunto de funcionalidades priorizado para a iteração
+- [ ] Não possui dependências bloqueantes não resolvidas com outras features
+- [ ] O Class Owner responsável pela implementação foi designado
 
 ### Definition of Done (DoD)
 
-Uma user story está **concluída** quando:
+Uma feature está **concluída** quando:
 
-- [ ] O código foi implementado conforme os critérios de aceite
-- [ ] Testes unitários e/ou de integração foram escritos e passam
-- [ ] O Pull Request foi revisado e aprovado pelo QA
-- [ ] O código foi mergeado na branch principal (via PR aprovado)
-- [ ] A funcionalidade foi validada pelo PO na Sprint Review
-- [ ] A documentação relevante foi atualizada (quando aplicável)
-- [ ] Não há regressões identificadas em funcionalidades existentes
+- [ ] O design package foi produzido e aprovado no Technical Design Review
+- [ ] O código foi implementado conforme os critérios de aceite da feature
+- [ ] A Code Inspection foi realizada e aprovada pelo Chief Programmer
+- [ ] O Pull Request foi mergeado na branch principal
+- [ ] A feature foi demonstrada e aprovada pelo Domain Expert na Formal Client Validation
+- [ ] O Feature Card no GitHub Projects foi atualizado para **Done**
+- [ ] A rastreabilidade OE → CP → Feature está documentada no GitHub Pages
 
 ### Fluxo de Validação
 
 ```
-Cliente → PO → Backlog refinado → Sprint → Entrega → Sprint Review → Validação do Cliente
-                                                                          ↓
-                                                               Feedback incorporado
-                                                               no próximo backlog
+[ Domain Expert ]
+       │ (Define as necessidades de negócio)
+       ▼
+[ Feature List ] ◄─────────────────────────────────────────┐
+       │ (Priorização quinzenal)                           │
+       ▼                                                   │
+[ Replenishment ]                                          │
+       │ (Decomposição técnica)                            │
+       ▼                                                   │
+[ Design by Feature ]                                      │
+       │ (Aprovação da arquitetura)                        │
+       ▼                                                   │
+[ Build by Feature ]                                       │
+       │                                                   │
+       ├─► [ Partial Client Validation ] (Durante a iteração)
+       │                                                   │
+       ▼                                                   │
+[ Formal Client Validation ] (Fim da iteração)             │
+       │ (Gera ajustes e novos requisitos)                 │
+       ▼                                                   │
+[ Feedback Incorporado ] ──────────────────────────────────┘
 ```
 
 ---
