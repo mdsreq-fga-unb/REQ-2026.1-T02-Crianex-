@@ -231,10 +231,20 @@ pre {
 .mermaid {
   display: flex;
   justify-content: center;
-  margin: 1.5rem 0;
+  margin: 1.5rem 0 0.5rem;
 }
 
 .mermaid svg {
   max-width: 100%;
   height: auto;
+}
+
+/* ── Diagram captions (via attr_list: {: style="..."}) ───────────────────── */
+p[style*="text-align:center"] {
+  text-align: center;
+  font-size: 0.83rem;
+  font-style: italic;
+  color: #666;
+  margin-top: 0.25rem;
+  margin-bottom: 1.5rem;
 }
