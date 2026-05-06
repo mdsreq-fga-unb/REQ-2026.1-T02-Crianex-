@@ -251,60 +251,66 @@
 <td>Ajustes da seção 4.1</td>
 <td>Heitor</td>
 </tr>
+<tr>
+<td>1.3</td>
+<td>05/05/2026</td>
+<td>Ajustes de clareza e consistência na seção 4</td>
+<td>Hugo</td>
+</tr>
 </tbody>
 </table>
 <hr />
 <h2 id="41-abordagem-de-engenharia-de-requisitos">4.1 Abordagem de Engenharia de Requisitos<a class="headerlink" href="#41-abordagem-de-engenharia-de-requisitos" title="Permanent link">&para;</a></h2>
-<p>O projeto Crianex adota um Processo Híbrido (FDD + Kanban), focado em equilibrar a previsibilidade de valor para o cliente com a previsibilidade de fluxo para a equipe. Nesta abordagem, o FDD (Feature-Driven Development) estrutura o planejamento orientado a valor (o que construir), enquanto o Kanban fornece o controle visual da execução (quando puxar o trabalho e quando parar) através da limitação de Work in Progress (WIP).</p>
-<p>A seguir, detalhamos as atividades da Engenharia de Requisitos e explicamos como cada técnica será estritamente aplicada no contexto da Crianex para orientar o desenvolvimento:</p>
+<p>O projeto Crianex adota um Processo Híbrido (FDD + Kanban) para equilibrar a previsibilidade de valor para o cliente com a previsibilidade de fluxo para a equipe. Nesse arranjo, o FDD (Feature-Driven Development) organiza o planejamento orientado a valor, definindo o que construir, enquanto o Kanban controla a execução visualmente, indicando quando puxar o trabalho e limitando o Work in Progress (WIP).</p>
+<p>A seguir, detalhamos as atividades da Engenharia de Requisitos e como cada técnica será aplicada no contexto da Crianex para orientar o desenvolvimento.</p>
 <h3 id="atividades-e-tecnicas-de-requisitos">Atividades e Técnicas de Requisitos<a class="headerlink" href="#atividades-e-tecnicas-de-requisitos" title="Permanent link">&para;</a></h3>
 <ol>
 <li>
 <p><strong>Elicitação e Descoberta</strong>: Levantamento das necessidades reais do cliente e dos usuários.</p>
-<blockquote>
-<p><strong>Feature Discovery Session</strong>: Reuniões estruturadas com o Domain Expert (CTO da Crianex) para capturar o contexto, as regras de negócio e os exemplos concretos das funcionalidades desejadas, transformando necessidades puras em intenções de desenvolvimento.</p>
-</blockquote>
+<ul>
+<li><strong>Feature Discovery Session</strong>: Reuniões estruturadas com o Domain Expert (CTO da Crianex) para capturar o contexto, as regras de negócio e os exemplos concretos das funcionalidades desejadas, transformando necessidades puras em intenções de desenvolvimento.</li>
+</ul>
 </li>
 <li>
 <p><strong>Análise e Consenso</strong>: Resolução de conflitos, refinamento e negociação das prioridades do escopo.</p>
-<blockquote>
-<p><strong>Iteration Replenishment</strong>: Sessões de alinhamento nas quais as intenções capturadas são priorizadas e a equipe firma um compromisso (Iteration Commitment) sobre qual escopo será puxado para a iteração corrente, garantindo que haja um entendimento viável entre a capacidade técnica e a expectativa de negócio.</p>
-</blockquote>
+<ul>
+<li><strong>Iteration Replenishment</strong>: Sessões de alinhamento nas quais as intenções capturadas são priorizadas e a equipe firma um compromisso (Iteration Commitment) sobre qual escopo será puxado para a iteração corrente, garantindo que haja um entendimento viável entre a capacidade técnica e a expectativa de negócio.</li>
+</ul>
 </li>
 <li>
 <p><strong>Declaração</strong>: Escrita formal e estruturada das intenções e requisitos.</p>
-<blockquote>
-<p><strong>Feature Card Specification (Padrão FDD)</strong>: Os requisitos são declarados usando o template normativo do FDD no formato <code>&lt;ação&gt; &lt;resultado&gt; &lt;de/para/no/com&gt; &lt;objeto&gt;</code> (ex: "Listar produtos SaaS com filtro por categoria na vitrine pública"), garantindo foco total no valor da entrega.
-<strong>Feature Slicing e Critérios de Aceitação</strong>: Decomposição (vertical slicing) das Features em fatias atômicas executáveis que sigam o padrão INVEST. Para cada fatia, são declarados critérios de aceitação objetivos, frequentemente no formato Given/When/Then, estipulando as condições exatas de satisfação.</p>
-</blockquote>
+<ul>
+<li><strong>Feature Card Specification (padrão FDD)</strong>: Os requisitos são declarados no template normativo do FDD, no formato <code>&lt;ação&gt; &lt;resultado&gt; &lt;de/para/no/com&gt; &lt;objeto&gt;</code> (ex.: "Listar produtos SaaS com filtro por categoria na vitrine pública"), garantindo foco total no valor da entrega.</li>
+<li><strong>Feature Slicing e Critérios de Aceitação</strong>: Decomposição vertical das Features em fatias atômicas executáveis, seguindo o padrão INVEST. Cada fatia recebe critérios de aceitação objetivos, frequentemente em Given/When/Then, para explicitar as condições exatas de satisfação.</li>
+</ul>
 </li>
 <li>
 <p><strong>Representação</strong>: Comunicação visual das relações, fluxos e domínio do sistema.</p>
-<blockquote>
-<p><strong>Domain Modeling Workshop</strong>: Técnica de modelagem aplicada (como o Color Modeling do FDD) para construir diagramas de classe e identificar os agregados de negócio com o Domain Expert. Isso representa visualmente as entidades do sistema antes da escrita das Features.
-<strong>Technical Design Review</strong>: Representação de soluções através de diagramas de sequência leves para ilustrar integrações e validar o design estrutural das Features com o Chief Programmer antes do início da codificação.</p>
-</blockquote>
+<ul>
+<li><strong>Domain Modeling Workshop</strong>: Técnica de modelagem aplicada, como o Color Modeling do FDD, para construir diagramas de classe e identificar os agregados de negócio com o Domain Expert. Isso representa visualmente as entidades do sistema antes da escrita das Features.</li>
+<li><strong>Technical Design Review</strong>: Representação de soluções por meio de diagramas de sequência leves para ilustrar integrações e validar o design estrutural das Features com o Chief Programmer antes do início da codificação.</li>
+</ul>
 </li>
 <li>
 <p><strong>Verificação e Validação</strong>: Confirmação da qualidade interna dos requisitos e do alinhamento com a necessidade externa.</p>
-<blockquote>
-<p><strong>Revisão de Design e Regras (Verificação)</strong>: Inspeções conduzidas na etapa de Technical Design Review (FDD Etapa 4) para checar a completude do requisito, analisando pontos de extensão, riscos técnicos e garantindo que o requisito atende ao Definition of Ready (DoR).
-<strong>Formal Client Validation (Validação)</strong>: Sessões de demonstração contínua ao Domain Expert para atestar que a funcionalidade construída resolve efetivamente a dor operacional da Crianex (fechando o ciclo de aceitação).</p>
-</blockquote>
+<ul>
+<li><strong>Revisão de Design e Regras (Verificação)</strong>: Inspeções conduzidas na etapa de Technical Design Review (FDD Etapa 4) para checar a completude do requisito, analisando pontos de extensão, riscos técnicos e garantindo que o requisito atende ao Definition of Ready (DoR).</li>
+<li><strong>Formal Client Validation (Validação)</strong>: Sessões de demonstração contínua ao Domain Expert para atestar que a funcionalidade construída resolve efetivamente a dor operacional da Crianex e fecha o ciclo de aceitação.</li>
+</ul>
 </li>
 <li>
 <p><strong>Organização e Atualização</strong>: Manutenção do conjunto de requisitos de forma rastreável ao longo do ciclo de vida.</p>
-<blockquote>
-<p><strong>Gestão de Fluxo Visual (Kanban)</strong>: O estado dos requisitos é gerenciado e atualizado continuamente através de um quadro visual com políticas explícitas, controlando o fluxo de trabalho de Discovery até Done e evitando gargalos pela limitação de tarefas simultâneas (WIP).
-<strong>Rastreabilidade Bidirecional</strong>: Técnica utilizada para garantir que o fatiamento (slicing) técnico executado pela equipe esteja obrigatoriamente ligado (linkado) ao Feature Card pai de negócio e ao Objetivo Estratégico de origem, permitindo auditar o impacto de qualquer mudança de escopo.</p>
-</blockquote>
+<ul>
+<li><strong>Gestão de Fluxo Visual (Kanban)</strong>: O estado dos requisitos é gerenciado e atualizado continuamente por meio de um quadro visual com políticas explícitas, controlando o fluxo de trabalho de Discovery até Done e evitando gargalos pela limitação de tarefas simultâneas (WIP).</li>
+<li><strong>Rastreabilidade Bidirecional</strong>: Técnica utilizada para garantir que o fatiamento técnico executado pela equipe esteja ligado ao Feature Card pai de negócio e ao Objetivo Estratégico de origem, permitindo auditar o impacto de qualquer mudança de escopo.</li>
+</ul>
 </li>
 </ol>
 <h3 id="priorizacao-indice-de-prioridade-ip">Priorização — Índice de Prioridade (IP)<a class="headerlink" href="#priorizacao-indice-de-prioridade-ip" title="Permanent link">&para;</a></h3>
 <p>Para o sequenciamento das entregas e organização do fluxo macro, o projeto abandonou técnicas de categorização qualitativa e adotou o cálculo do Índice de Prioridade (IP).</p>
 <p>Essa técnica quantitativa matemática é aplicada na fase de Discovery para ordenar o backlog. O IP é calculado a partir da relação direta entre a importância para a Crianex e o custo da implementação técnica, utilizando a seguinte fórmula estabelecida pela equipe técnica:</p>
 <p><code>IP = Valor de Negócio / Média(CX, ES, PT)</code></p>
-<p>Onde o Valor de Negócio é a nota de impacto definida em conjunto com o Domain Expert e as variáveis do divisor representam os custos de execução (Complexidade, Esforço, e Risco/Pesquisa Técnica). Isso permite que a equipe puxe (via Kanban) primeiramente as Features que entregam o maior valor com o menor custo/risco relativo, formando o escopo principal do Produto Mínimo Viável (MVP) do Crianex Hub de forma estruturada e objetiva.</p>
+<p>Onde o Valor de Negócio é a nota de impacto definida em conjunto com o Domain Expert e as variáveis do divisor representam os custos de execução (Complexidade, Esforço, e Risco/Pesquisa Técnica). A média é usada para equilibrar essas três dimensões de custo e evitar que uma nota isolada distorça o resultado. Isso permite que a equipe puxe (via Kanban) primeiramente as Features que entregam o maior valor com o menor custo/risco relativo, formando o escopo principal do Produto Mínimo Viável (MVP) do Crianex Hub de forma estruturada e objetiva.</p>
 <hr />
 <h2 id="42-alinhamento-fdd-engenharia-de-requisitos">4.2 Alinhamento FDD – Engenharia de Requisitos<a class="headerlink" href="#42-alinhamento-fdd-engenharia-de-requisitos" title="Permanent link">&para;</a></h2>
 <p>O FDD (Feature-Driven Development) possui cinco etapas sequenciais que mapeiam diretamente as atividades da Engenharia de Requisitos. Para garantir que os objetivos de negócio sejam traduzidos corretamente em software executável, o projeto adota uma cadeia de rastreabilidade explícita em múltiplos níveis de abstração:</p>
@@ -313,8 +319,8 @@
 <ul>
 <li><strong>OE (Objetivo Específico)</strong>: A meta de negócio que a Crianex deseja alcançar.</li>
 <li><strong>CP (Característica de Produto)</strong>: Um agrupamento de alto nível ou módulo que contribui para o OE (ex: CRM Interno). Representa o "O Quê" na visão do usuário.</li>
-<li><strong>Feature FDD</strong>: É a decomposição da CP em uma pequena funcionalidade valorizada pelo cliente, que pode ser construída em poucos dias. É escrita no formato estrito <code>&lt;ação&gt; &lt;resultado&gt; &lt;objeto&gt;</code> (ex: "Listar produtos SaaS com filtro").</li>
-<li><strong>User Story (Fatia)</strong>: É o fatiamento técnico (vertical slicing) da Feature FDD em pedaços ainda menores para facilitar o fluxo (Kanban).</li>
+<li><strong>Feature FDD</strong>: É a unidade pequena e valorizada pelo cliente derivada da CP. Ela deve ser escrita no formato <code>&lt;ação&gt; &lt;resultado&gt; &lt;de/para/no/com&gt; &lt;objeto&gt;</code> e representar claramente o valor de negócio que será entregue em poucos dias.</li>
+<li><strong>User Story (Fatia)</strong>: É o fatiamento técnico vertical da Feature FDD em partes menores para facilitar o fluxo no Kanban sem perder a ligação com o valor de negócio.</li>
 <li><strong>Critério de Aceite</strong>: A regra de negócio ou restrição exata (frequentemente em formato Given/When/Then) que prova que a Story/Feature está concluída.</li>
 </ul>
 <p>A tabela a seguir demonstra o mapeamento formal das etapas do FDD com as atividades dominantes de ER e as técnicas exatas aplicadas em cada fase:</p>
