@@ -33,11 +33,18 @@ nav:
     - "5 · Cronograma": visao/cronograma.md
     - "6 · Equipe e Interação": visao/equipe.md
     - "Lições Aprendidas": visao/10-licoes/index.md
-  - Atas:
-    - atas/index.md
-    - "Ata 0 — 09/04/2026": atas/2026-04-09.md
-  - Sprints:
-    - sprints/index.md
-    - "Sprint 0 — Unidade 1": sprints/sprint-0.md
+  - Iterações:
+    - "Visão Geral": iteracoes/index.md
+    - "IT1 — Unidade 1":
+      - "Resumo": iteracoes/iteracao-1/index.md
+      - "Ata — 09/04/2026": iteracoes/iteracao-1/atas/2026-04-09.md
+    - "IT2 — Vitrine Pública":
+      - "Resumo": iteracoes/iteracao-2/index.md
+    - "IT3 — Núcleo Admin":
+      - "Resumo": iteracoes/iteracao-3/index.md
+    - "IT4 — Operação Digital":
+      - "Resumo": iteracoes/iteracao-4/index.md
+    - "Pós-venda":
+      - "Resumo": iteracoes/pos-venda/index.md
   - Backlog: backlog/index.md
   - Arquitetura: arquitetura/index.md
