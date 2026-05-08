@@ -70,7 +70,7 @@ A Crianex não dispõe de vitrine digital própria para apresentar seu portfóli
 
 Internamente, o acompanhamento de projetos é feito de forma individual por cada gestor, sem integração entre as ferramentas utilizadas — planilhas, Discord, e-mail e sistemas genéricos. A liderança não tem acesso a painel consolidado de status de projetos: o único mecanismo de alinhamento disponível são reuniões periódicas convocadas para sincronizar informações que deveriam estar disponíveis em tempo real. Esse modelo impede a identificação antecipada de riscos e atrasos e aumenta o tempo gasto com coordenação em detrimento da execução.
 
-A combinação dos dois fatores — ausência de canal digital de divulgação e gestão operacional sem ferramenta centralizada — faz com que a Crianex perca oportunidades de captação que dependem de presença digital e consuma capacidade produtiva da equipe com consolidação manual de informações que uma plataforma integrada geraria automaticamente.
+A combinação dos dois fatores — ausência de canal digital de divulgação e gestão operacional sem ferramenta centralizada — faz com que a Crianex tenha um baixo impacto competitivo no mercado de desenvolvimento SaaS, visto que a presença digital é impactada negativamente pela ausência de dados gerenciais não centralizados dos produtos da Crianex.
 
 ### Diagrama de Ishikawa
 

@@ -42,9 +42,7 @@ nav:
       - "Resumo": iteracoes/iteracao-2/index.md
     - "IT3 — Núcleo Admin":
       - "Resumo": iteracoes/iteracao-3/index.md
-    - "IT4 — Operação Digital":
+    - "IT4 — Lead Capture":
       - "Resumo": iteracoes/iteracao-4/index.md
-    - "Pós-venda":
-      - "Resumo": iteracoes/pos-venda/index.md
   - Backlog: backlog/index.md
   - Arquitetura: arquitetura/index.md
