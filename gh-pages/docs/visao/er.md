@@ -7,14 +7,16 @@
 | 1.0 | 12/04/2026 | Criação das seções 4.1 a 4.4 | Heitor e Lucas |
 | 1.1 | 13/04/2026 | Revisão da seção 4 | Equipe Crianex |
 | 1.2 | 04/05/2026 | Ajustes da seção 4.1  | Heitor |
-| 1.3 | 06/05/2026 | Revisão dos ajustes da seção 4.1 e reajustes | Philipe |
-| 1.4 | 08/05/2026 | Ajustes de cerimônias e técnicas | Lucas e Philipe |
+| 1.3 | 04/05/2026 | Ajustes da seção 4.2  | Heitor |
+| 1.4 | 06/05/2026 | Revisão dos ajustes da seção 4.1 e reajustes | Philipe |
+| 1.5 | 05/05/2026 | Ajustes de clareza e consistência na seção 4 | Hugo |
+| 1.6 | 08/05/2026 | Ajustes de cerimônias e técnicas | Lucas e Philipe |
+
 ---
 
 ## 4.1 Abordagem de Engenharia de Requisitos
 
 O projeto Crianex adota um Processo Híbrido (FDD + Kanban). Nesta abordagem, o FDD (Feature-Driven Development) estrutura o planejamento orientado a valor (o que construir), enquanto o Kanban fornece o controle visual da execução (quando puxar o trabalho e quando parar) através da limitação de Work in Progress (WIP).
-
 A seguir, detalhamos as atividades da Engenharia de Requisitos e explicamos como cada técnica será aplicada no desenvolviemnto de requisitos:
 
 ### Cerimônias, Técnicas e Artefatos do Processo Híbrido
