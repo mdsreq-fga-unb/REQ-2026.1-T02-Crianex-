@@ -18,16 +18,14 @@
 ## 2.1 Perspectiva do Produto
 
 !!! tip "Objetivo Geral do Produto"
-    Prover à Crianex uma plataforma SaaS unificada que centralize a operação administrativa interna e profissionalize a apresentação pública de seus produtos, tornando a empresa mais competitiva no mercado B2B de software.
+    Aumentar a competitividade da Crianex no mercado SaaS
 
-O **Crianex** é uma plataforma SaaS web composta por dois módulos principais e complementares:
+O **Crianex Hub** é uma plataforma que envolve duas áreas principais:
 
-| Módulo | Acesso | Descrição |
+| Área | Acesso | Descrição |
 |--------|--------|-----------|
 | **Área Administrativa** | Autenticado (login) | Gestão interna de projetos, status, logs e alocação de pessoas em tempo real |
 | **Vitrine Digital** | Público | Exposição do portfólio de projetos e cases para aumento de engajamento e captação B2B |
-
-A plataforma é acessível via navegador web moderno, sem necessidade de instalação, e utiliza uma arquitetura SaaS com banco de dados centralizado e interface responsiva.
 
 ---
 
@@ -44,35 +42,31 @@ A plataforma é acessível via navegador web moderno, sem necessidade de instala
 
 ---
 
-## 2.3 Objetivos Estratégicos e Características do Produto
+## 2.3 Objetivos Específicos e Características do Produto
 
-### Objetivos Estratégicos (OE)
+### Objetivos Específico (OE)
 
-| ID | Objetivo Estratégico | Foco
+| ID | Objetivo Específico | Foco
 |----|----------------------|------------------------|
-| OE1 | Centralizar a gestão de projetos da Crianex numa única plataforma | Módulo Admin interno|
-| OE2 | Aumentar a visibilidade do portfólio de projetos no mercado B2B | Módulo Vitrine + captação |
-| OE3 | Prover visibilidade gerencial automatizada | Inteligência Operacional |
-| OE4 | Garantir qualidade da experiência do usuário e comunicação proativa com clientes | Experiência e pós-venda |
-
+| OE1 | Centralizar a gestão de projetos | Administração/Gestão |
+| OE2 | Aumentar a visibilidade do portfólio de projetos no mercado B2B | Vitrine/Portifolio Empresarial |
+| OE3 | Centralizar a gestão de Leads e clientes | Expansão da base de clientes |
 
 ### Características do Produto (CP)
 
 | OE Principal | OE Secundária | ID | Nome da CP | Descrição Funcional | Valor de Negócio |
 |---|---|---|---|---|---|
-| OE1 | OE2 | CP1 | CRM Interno de Clientes (Kanban) | Módulo autenticado que centraliza o relacionamento com clientes e leads em um board visual Kanban. Cada card representa um cliente ou oportunidade, contendo histórico de interações, tickets vinculados e produto SaaS de interesse. O responsável interno é identificável por card. As colunas representam estágios do funil de relacionamento, configuráveis pelo administrador. O sistema emite notificações internas ao aproximar-se de prazos e ao mover cards. | Eliminar o uso de planilhas e e-mails para gestão de relacionamento; garantir rastreabilidade de cada oportunidade; reduzir perdas por falta de follow-up. |
-| OE1 | OE3 | CP2 | Dashboard de Logs e Monitoramento | Painel autenticado com visualização de logs de acesso segmentados por perfil (usuário cliente e usuário desenvolvedor), logs de atividades por produto/projeto e logs de tickets de suporte. Permite filtros por período, produto e tipo de evento. Exportável em formato estruturado (CSV/JSON). | Aumentar a visibilidade operacional interna; facilitar diagnóstico de problemas e auditorias de segurança; rastrear ações na plataforma em tempo real. |
-| OE3 | OE1 | CP3 | Dashboard Executivo de Métricas | Painel autenticado com indicadores-chave de negócio consolidados: volume de tickets abertos/resolvidos por produto, leads gerados via formulário de contato, páginas mais acessadas da vitrine e faturamento por período. Dados apresentados em gráficos e cards KPI com filtros por intervalo de data. | Substituir relatórios manuais em planilhas por um painel interativo; prover visibilidade estratégica em tempo real para tomada de decisão de priorização e investimento. |
-| OE2 | — | CP4 | Vitrine Pública de Produtos SaaS | Página pública bilíngue (PT/EN) com apresentação completa do portfólio (Avali, Pontua, Notifly e futuros produtos), incluindo descrição, screenshots, funcionalidades-chave, público-alvo e links de acesso a cada SaaS. Design responsivo e moderno, alinhado ao posicionamento técnico da empresa. | Aumentar a visibilidade externa do portfólio; atrair novos clientes e parceiros; reduzir a barreira de entrada apresentando cada produto de forma clara e atrativa. |
-| OE2 | — | CP5 | Página Institucional da Empresa | Seção pública com missão, valores, diferenciais técnicos (K8s, multi-tenant, IA, WebSocket em tempo real), stack de tecnologias utilizadas e informações de contato comercial. Conteúdo reflete a identidade e maturidade técnica da Crianex para novos públicos. | Comunicar credibilidade técnica para clientes B2B e parceiros; apoiar decisões de contratação por meio de transparência sobre a empresa e seu posicionamento. |
-| OE2 | OE1 | CP6 | Formulário de Contato e Captação de Leads | Formulário público com campos de nome, e-mail, produto de interesse e mensagem. Leads submetidos são registrados automaticamente no CRM interno (CP1) e geram notificação imediata para o time, sem necessidade de cadastro prévio pelo visitante. | Criar canal estruturado de captação de oportunidades comerciais na vitrine, integrando geração de leads ao CRM com atrito mínimo para o visitante. |
-| OE2 | — | CP7 | Suporte Multilíngue PT/EN | Alternância de idioma disponível em todas as páginas públicas da plataforma, com conteúdo traduzido e editável pelo administrador, mantendo coerência visual e de navegação entre as versões. | Ampliar o alcance da vitrine para públicos internacionais; aumentar o potencial de conversão de clientes e parcerias fora do Brasil. |
-| OE1 | OE2 | CP8 | Painel de Gerenciamento de Produtos SaaS | Interface administrativa autenticada com 2FA para adicionar, editar, remover e reordenar os produtos exibidos na vitrine. Permite edição de textos, imagens e links de cada SaaS sem necessidade de alteração direta no código. Histórico de alterações auditável por log. | Dar autonomia ao time para manter o portfólio sempre atualizado sem depender de deploy; garantir rastreabilidade de todas as mudanças realizadas pelos administradores. |
-| OE1 | OE2 | CP9 | FAQ e Base de Conhecimentos por Produto | Seção pública de perguntas frequentes organizada por produto SaaS, com artigos criados e editados pelo administrador. Cada artigo é indexável e possui categorização por tipo de dúvida, permitindo ao cliente resolver problemas comuns de forma autônoma sem abrir ticket. | Reduzir o volume de tickets para dúvidas recorrentes; liberar o time para demandas complexas; melhorar a experiência do cliente com autoatendimento. |
-| OE3 | OE1 | CP10 | Controle de Faturamento e Relatórios Financeiros | Módulo restrito ao administrador para registro de receitas por produto SaaS, acompanhamento de faturamento por cliente e período, e emissão de relatórios financeiros periódicos exportáveis em PDF/CSV. | Eliminar o uso de planilhas isoladas para controle financeiro; centralizar dados de receita com informações precisas para tomada de decisão estratégica. |
-| OE1 | OE2 | CP11 | Sistema de Tickets de Suporte | Canal autenticado de suporte via tickets onde o usuário abre chamados sobre um SaaS específico sem necessidade de cadastro prévio. Os tickets são vinculados ao produto e ao cliente no CRM (CP1), com acompanhamento de status, histórico de respostas e encerramento pelo administrador. | Centralizar todo o atendimento pós-venda num único canal rastreável; reduzir o tempo de resposta; eliminar comunicações perdidas em e-mails ou mensagens informais. |
-| OE4 | OE1 | CP12 | Notificações Automáticas no Sistema | Sistema de notificações automáticas disparadas em eventos-chave: abertura de ticket, atualização de status do chamado, novo lead via formulário de contato e resposta do administrador ao ticket. Templates configuráveis por tipo de evento com possível integração com e-mail. | Reduzir o tempo médio de resposta a clientes; garantir que nenhum ticket ou lead fique sem resposta por falta de visibilidade do time. |
-| OE4 | OE1 | CP13 | Portal do Cliente | Área autenticada exclusiva para clientes contratantes da Crianex (distintos dos usuários internos), onde cada cliente acessa seus produtos SaaS contratados, histórico completo de tickets vinculados ao seu contrato, notificações de atualização de chamados e status do relacionamento comercial. O acesso é provisionado pelo administrador interno ao formalizar um contrato, sem necessidade de cadastro autônomo pelo cliente. | Eliminar a dependência de e-mail e mensagens informais para comunicação pós-venda; aumentar a percepção de profissionalismo da Crianex perante clientes B2B; dar ao cliente rastreabilidade do seu atendimento sem intermediários. |
+| OE3 | - | CP1 | CRM Interno de Clientes (Kanban) | Módulo autenticado que centraliza o relacionamento com clientes e leads em um board visual Kanban. Cada card representa um cliente ou oportunidade, contendo histórico de interações, tickets vinculados e produto SaaS de interesse. O responsável interno é identificável por card. As colunas representam estágios do funil de relacionamento, configuráveis pelo administrador. O sistema emite notificações internas ao aproximar-se de prazos e ao mover cards. | Eliminar o uso de planilhas e e-mails para gestão de relacionamento; garantir rastreabilidade de cada oportunidade; reduzir perdas por falta de follow-up. |
+| OE1 | - | CP2 | Dashboard de Logs e Monitoramento | Painel autenticado com visualização de logs de acesso segmentados por perfil (usuário cliente e usuário desenvolvedor), logs de atividades por produto/projeto e logs de tickets de suporte. Permite filtros por período, produto e tipo de evento. Exportável em formato estruturado (CSV/JSON). | Aumentar a visibilidade operacional interna; facilitar diagnóstico de problemas e auditorias de segurança; rastrear ações na plataforma em tempo real. |
+| OE1 | OE3 | CP3 | Dashboard Executivo de Métricas | Painel autenticado com indicadores-chave de negócio consolidados: volume de tickets abertos/resolvidos por produto, páginas mais acessadas da vitrine e faturamento por período. Dados apresentados em gráficos e cards KPI com filtros por intervalo de data. | Substituir relatórios manuais em planilhas por um painel interativo; prover visibilidade estratégica em tempo real para tomada de decisão de priorização e investimento. |
+| OE2 | — | CP4 | Vitrine Pública de Produtos SaaS | Página pública bilíngue (PT/EN) com apresentação completa do portfólio (Avali, Pontua, Notifly e futuros produtos), incluindo descrição, screenshots, funcionalidades-chave, público-alvo e links de acesso a cada SaaS. Design alinhado ao posicionamento técnico da empresa. | Aumentar a visibilidade externa do portfólio; atrair novos clientes e parceiros; reduzir a barreira de entrada apresentando cada produto de forma clara e atrativa. |
+| OE2 | — | CP5 | Página Institucional da Empresa | Seção pública com missão, valores, diferenciais técnicos (K8s, multi-tenant, IA, WebSocket em tempo real) e informações de contato comercial. Conteúdo reflete a identidade e maturidade técnica da Crianex para novos públicos. | Comunicar credibilidade técnica para clientes B2B e parceiros; apoiar decisões de contratação por meio de transparência sobre a empresa e seu posicionamento. |
+| OE2 | OE3 | CP6 | Formulário de Contato e Captação de Leads | Formulário público com campos de nome, e-mail, produto de interesse e mensagem. Respostas submetidas dos Leads são registradas automaticamente no CRM interno (CP1) e geram notificação imediata para o time, sem necessidade de cadastro prévio pelo visitante. | Criar canal estruturado de captação de oportunidades comerciais na vitrine, integrando geração de leads ao CRM com atrito mínimo para o visitante. |
+| OE1 | OE2 | CP7 | Painel de Gerenciamento de Produtos SaaS | Interface administrativa autenticada com 2FA para adicionar, editar, remover e reordenar os produtos exibidos na vitrine. Permite edição de textos, imagens e links de cada SaaS sem necessidade de alteração direta no código. Histórico de alterações auditável por log. | Dar autonomia ao time para manter o portfólio sempre atualizado sem depender de deploy; garantir rastreabilidade de todas as mudanças realizadas pelos administradores. |
+| OE2 | OE1 | CP8 | FAQ e Base de Conhecimentos por Produto | Seção pública de perguntas frequentes organizada por produto SaaS, com artigos criados e editados pelo administrador. Cada artigo é indexável e possui categorização por tipo de dúvida, permitindo ao cliente resolver problemas comuns de forma autônoma sem abrir ticket. | Reduzir o volume de tickets para dúvidas recorrentes; liberar o time para demandas complexas; melhorar a experiência do cliente com autoatendimento. |
+| OE1 | - | CP9 | Controle de Faturamento e Relatórios Financeiros | Área restrita ao administrador para registro de receitas por produto SaaS, acompanhamento de faturamento por cliente e período, e emissão de relatórios financeiros periódicos exportáveis em PDF/CSV. | Eliminar o uso de planilhas isoladas para controle financeiro; centralizar dados de receita com informações precisas para tomada de decisão estratégica. |
+| OE3 | OE1 | CP10 | Sistema de Tickets de Suporte | Canal autenticado de suporte via tickets onde o usuário abre chamados sobre um SaaS específico sem necessidade de cadastro prévio. Os tickets são vinculados ao produto e ao cliente no CRM (CP1), com acompanhamento de status, histórico de respostas e encerramento pelo administrador. | Centralizar todo o atendimento pós-venda num único canal rastreável; reduzir o tempo de resposta; eliminar comunicações perdidas em e-mails ou mensagens informais. |
+| OE3 | OE1 | CP11 | Notificações Automáticas no Sistema | Sistema de notificações automáticas disparadas em eventos-chave: abertura de ticket, atualização de status do chamado, novo lead via formulário de contato e resposta do administrador ao ticket. Templates configuráveis por tipo de evento com possível integração com e-mail. | Reduzir o tempo médio de resposta a clientes; garantir que nenhum ticket ou lead fique sem resposta por falta de visibilidade do time. |
 
 ### Mapeamento de Valor das Características (Feature/Value Matrix)
 
@@ -281,12 +275,10 @@ O projeto precisa ser entregue dentro do cronograma da disciplina de Requisitos 
 
 | Dimensão | Avaliação | Justificativa |
 |----------|-----------|---------------|
-| **Escopo do MVP** | Viável | As 13 características do produto (CP01–CP13) foram priorizadas a partir da matrix de Valor x Esforço|
-| **Prazo total** | Viável com dificuldades | 4 iterações quinzenais cobrem o desenvolvimento incremental sem necessidade de paralelismo excessivo |
+| **Escopo do MVP** | Viável | As 11 características do produto foram priorizadas a partir da matrix de Valor x Esforço|
+| **Prazo total** | Viável com dificuldades | 4 iterações que cobrem o desenvolvimento incremental sem necessidade de paralelismo excessivo |
 | **Entregas incrementais** | Viável | A arquitetura modular (Área Adm. + Vitrine) permite entregas independentes por iteração |
 | **Alinhamento acadêmico** | Alto | As entregas de cada unidade estão alinhadas aos critérios de avaliação da disciplina |
-
-O escopo foi deliberadamente contido no MVP para garantir que as funcionalidades essenciais sejam entregues com qualidade dentro do prazo. Funcionalidades de menor prioridade (IP < 1,00 — quadrantes Q3/Q4 na matriz Valor × Esforço) foram explicitamente excluídas desta versão.
 
 ### 2.6.2 Viabilidade Técnica — Alinhamento de Skills da Equipe
 
@@ -305,18 +297,16 @@ A equipe é composta por 6 membros com experiência em tecnologias web modernas.
 
 | Risco | Probabilidade | Impacto | Mitigação |
 |-------|---------------|---------|-----------|
-| **Indisponibilidade do cluster Kubernetes** | Baixa | Alto | Ambiente de desenvolvimento local com Docker Compose; deploy no Kubernetes apenas na Iteração Pós-venda |
+| **Indisponibilidade do cluster Kubernetes** | Baixa | Alto | Ambiente de desenvolvimento local com Docker Compose; deploy no Kubernetes apenas na Iteração |
 | **Alterações na API da Crianex sem aviso prévio** | Média | Médio | Contratos de API documentados via OpenAPI; versionamento de endpoints; comunicação direta com CTO |
 | **Acesso ao cluster não liberado no prazo** | Média | Alto | Pipeline de CI/CD preparada antecipadamente; acesso solicitado com 2 iterações de antecedência |
-| **Mudanças de requisitos de infraestrutura** | Baixa | Médio | PO mantém contato direto com a liderança da Crianex para alinhamento contínuo |
-
-**Estratégia de mitigação principal:** o desenvolvimento é independente de infraestrutura até a Iteração Pós-venda. Todos os ambientes locais e de homologação usam Docker Compose.
+| **Mudanças de requisitos de infraestrutura** | Baixa | Médio | PM mantém contato direto com a liderança da Crianex para alinhamento contínuo |
 
 ### 2.6.4 Conclusão de Viabilidade
 
 | Dimensão | Veredicto |
 |----------|-----------|
-| Escopo dentro do semestre acadêmico | **Viável** |
+| Escopo dentro do semestre acadêmico | **Viável com dificuldades** |
 | Capacidade técnica da equipe | **Viável** (com onboarding em SvelteKit) |
 | Infraestrutura Kubernetes | **Viável com risco gerenciado** |
 | **Veredicto geral** | **Projeto viável para execução** |
@@ -334,7 +324,7 @@ Esta seção descreve os benefícios que o produto Crianex trará tanto para a *
 | 1 | **Visibilidade centralizada dos projetos** | Um painel único com o status em tempo real de todos os projetos ativos, eliminando a necessidade de consolidação manual de informações dispersas em planilhas e conversas |
 | 2 | **Redução de retrabalho operacional** | Automação dos fluxos de atualização de status e logs de projeto reduz o tempo dedicado a relatórios manuais e reuniões de alinhamento interno |
 | 3 | **Presença digital profissional** | Uma vitrine pública e customizável com o portfólio de projetos e cases de sucesso da Crianex, aumentando a credibilidade e visibilidade no mercado B2B |
-| 4 | **Captação de leads qualificados** | Formulário de contato integrado à vitrine digital facilita a entrada de potenciais clientes interessados nos serviços da Crianex |
+| 4 | **Captação de leads** | Formulário de contato integrado à vitrine digital facilita a entrada de potenciais clientes interessados nos serviços da Crianex |
 | 5 | **Controle de alocação de pessoas** | Visão em tempo real de quem está alocado em qual projeto e com qual carga de trabalho, facilitando decisões de redistribuição de recursos |
 | 6 | **Rastreabilidade e governança** | Histórico de alterações de status, logs de projeto e trilha de auditoria garantem rastreabilidade e transparência nas operações internas |
 | 7 | **Plataforma própria e sem licenças recorrentes** | Rodando na infraestrutura Kubernetes da Crianex, o produto não gera custos de licenças mensais por usuário |
@@ -346,9 +336,8 @@ Esta seção descreve os benefícios que o produto Crianex trará tanto para a *
 
 | Perfil | Benefícios |
 |--------|-----------|
-| **Administrador** | Controle centralizado de acessos e permissões; configuração da identidade visual da vitrine sem suporte técnico |
-| **Gestor de Projeto** | Dashboard consolidado de todos os projetos; atualização de status e alocação em poucos cliques; notificações automáticas de eventos críticos |
-| **Colaborador Técnico** | Clareza sobre tarefas e responsabilidades; visibilidade do progresso do sprint; redução de interrupções por dúvidas sobre status |
+| **Sócios da Crianex** | Controle centralizado de acessos e permissões; configuração da identidade visual da vitrine sem suporte técnico |
+| **Equipe de Desenvolvimento** | Dashboard consolidado de todos os projetos; atualização de status e alocação em poucos cliques; notificações automáticas de eventos críticos; Clareza sobre tarefas e responsabilidades; visibilidade do progresso do sprint; redução de interrupções por dúvidas sobre status |
 
 #### Usuários Externos (Vitrine Digital)
 

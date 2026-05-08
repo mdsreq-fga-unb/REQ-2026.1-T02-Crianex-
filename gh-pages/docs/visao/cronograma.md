@@ -57,10 +57,9 @@ O quadro abaixo apresenta os ciclos de trabalho planejados, organizados por **Va
 | Iteração | Status | Período | Valor de Negócio | CPs | Iteration Goal | Validação |
 |----------|--------|---------|------------------|-----|----------------|-----------|
 | **IT1** | ✅ | até 26/04/2026 | Documentação Inicial e Setup | — | Levantar escopo, documentar Visão de Produto, configurar ambiente e definir arquitetura macro. | Reunião inicial com Otavio: validação de escopo, domínio e priorização do MVP. |
-| **IT2** | 🔄 | 27/04 a 17/05 | **Vitrine Pública** | [CP4](solucao.md#características-do-produto-cp) · [CP5](solucao.md#características-do-produto-cp) · [CP7](solucao.md#características-do-produto-cp) | "Qualquer visitante acessa a vitrine pública da Crianex, vê o portfólio de produtos SaaS com página institucional em PT/EN, em layout responsivo." | Partial Validation contínua. Formal Validation com demo focada em conversão e navegação. |
-| **IT3** | ⏳ | 18/05 a 07/06 | **Núcleo Admin** | [CP1](solucao.md#características-do-produto-cp) · [CP2](solucao.md#características-do-produto-cp) · [CP3](solucao.md#características-do-produto-cp) | "A equipe interna acessa o CRM Kanban, o Dashboard Executivo e o painel de logs unificados a partir de um único ponto de autenticação." | Validação do cruzamento de logs e tickets; métricas operacionais com os sócios. |
-| **IT4** | ⏳ | 08/06 a 24/06 | **Operação Digital** | [CP6](solucao.md#características-do-produto-cp) · [CP8](solucao.md#características-do-produto-cp) · [CP9](solucao.md#características-do-produto-cp) | "A equipe de suporte opera o sistema de atendimento e gerencia produtos SaaS com autonomia, sem depender de acesso direto ao banco." | Feedback focado na usabilidade da equipe de suporte e fluxos administrativos. |
-| **Pós-venda** | ⏳ | 25/06 a 07/07 | **Pós-venda** | [CP10](solucao.md#características-do-produto-cp) · [CP11](solucao.md#características-do-produto-cp) · [CP12](solucao.md#características-do-produto-cp) · [CP13](solucao.md#características-do-produto-cp) | "O cliente contratante acessa seu portal exclusivo, abre e acompanha tickets, recebe notificações automáticas e a Crianex centraliza faturamento por produto." | Validação com a equipe de suporte e financeiro da Crianex e com ao menos um cliente real; aprovação formal do MVP pelo cliente. |
+| **IT2** | 🔄 | ------ | **Vitrine Pública** | *AJUSTAR* [CP4](solucao.md#características-do-produto-cp) · [CP5](solucao.md#características-do-produto-cp) · [CP7](solucao.md#características-do-produto-cp) | "Qualquer visitante acessa a vitrine pública da Crianex, vê o portfólio de produtos SaaS com página institucional em PT/EN, em layout responsivo." | Partial Validation contínua. Formal Validation com demo focada em conversão e navegação. |
+| **IT3** | ⏳ | ------ | **Núcleo Admin** | *AJUSTAR* [CP1](solucao.md#características-do-produto-cp) · [CP2](solucao.md#características-do-produto-cp) · [CP3](solucao.md#características-do-produto-cp) | "A equipe interna acessa o CRM Kanban, o Dashboard Executivo e o painel de logs unificados a partir de um único ponto de autenticação." | Validação do cruzamento de logs e tickets; métricas operacionais com os sócios. |
+| **IT4** | ⏳ | ------- | **Lead Capture** | *AJUSTAR* [CP6](solucao.md#características-do-produto-cp) · [CP8](solucao.md#características-do-produto-cp) · [CP9](solucao.md#características-do-produto-cp) | "A equipe de suporte opera o sistema de atendimento e gerencia produtos SaaS com autonomia, sem depender de acesso direto ao banco." | Feedback focado na usabilidade da equipe de suporte e fluxos administrativos. |
 
 ---
 
@@ -73,6 +72,8 @@ A cadência semanal — cerimônias, formatos e tabelas de atividades por semana
 ## 5.4 Sequência de Execução em uma Iteração
 
 A sequência abaixo apresenta a ordem obrigatória de atividades dentro de qualquer iteração, agrupada por fase. Nenhuma etapa pode ser invertida ou suprimida — desvios são registrados na retrospectiva e tratados na próxima iteração.
+
+AJUSTAR MIRO BOARD: MODELAR -> DESCOBRIR -> ESPECIFICAR -> COMPROMETER 
 
 ![Cronograma](images/cronograma.png)
 <figure class="crianex-figure">
@@ -92,5 +93,5 @@ Cada iteração só é considerada **encerrada** quando todos os critérios abai
 | 2 | Formal Client Validation realizada e aprovação de Otavio registrada na ata. | Responsável por Validação |
 | 3 | Matriz de rastreabilidade OE → CP → VN → Feature → Issue → PR → Validação atualizada. | Documentation Lead |
 | 4 | Documento de Visão (GitHub Pages) atualizado com artefatos da iteração. | Documentation Lead + PM |
-| 5 | Retrospectiva realizada e lições aprendidas registradas no Miro. | Facilitador Metodológico |
+| 5 | Retrospectiva realizada e lições aprendidas registradas. | Facilitador Metodológico |
 | 6 | Backlog macro reordenado por IP para a próxima iteração. | Project Manager |

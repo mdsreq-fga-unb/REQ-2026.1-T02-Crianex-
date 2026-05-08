@@ -18,7 +18,7 @@ Os papéis seguem o modelo FDD + Kanban adotado pela equipe. Cada integrante pod
 
 | Integrante | Papel FDD | Responsabilidades Principais | Disponibilidade |
 |---|---|---|---|
-| **Lucas Andrade Zanetti** | Project Manager · Chief Architect · Strategic Technical Contributor | Conduz Replenishment e Iteration Commitment; mantém roadmap no Miro; arbitra decisões arquiteturais; interface principal com o cliente acadêmico; garante datas-limite das unidades | 10–11 h/sem |
+| **Lucas Andrade Zanetti** | Project Manager · Chief Architect · Strategic Technical Contributor | Conduz Replenishment e Iteration Commitment; mantém roadmap no Miro; arbitra decisões arquiteturais; interface principal com o cliente acadêmico; garante datas-limite das unidades | 9 h/sem |
 | **Heitor Macedo Ricardo** | Development Manager · Chief Programmer | Coordena progresso técnico da iteração; acompanha board diariamente; desbloqueia issues em até 24 h; conduz Technical Design Review; lidera Build & Integrate (FDD etapa 5) | 5–8 h/sem |
 | **Leonardo Fachinello Bonetti** | Chief Programmer · Development Manager (backup) · Class Owner | Conduz Design Review; aprova PRs estruturais; mentora decisões técnicas; responsável por infra e Kubernetes | 5–8 h/sem |
 | **Philipe Amancio Reis Caetano** | Chief Programmer · Class Owner | Conduz Design Review; aprova PRs estruturais; implementação frontend e QA | até 4 h/sem |
@@ -59,11 +59,13 @@ Cada ferramenta tem escopo exclusivo — o que vai para o Miro não vai para o D
 | Cerimônia | Formato | Frequência | Participantes | Duração est. |
 |---|---|---|---|---|
 | **Iteration Replenishment + Commitment + Domain Modeling** | Reunião | Início da Sem 1 | PM, Chief Arch, CPs, Otavio | ~1h |
-| **Feature Discovery + Feature Card Specification** | Reunião | Sem 1 | Todos, menos o Cliente | ~1h |
-| **Feature Slicing + AC Review + Technical Design Review** | Reunião | Início da Sem 2 (e Sem 3 se necessário) | PM, CPs, Class Owners | ~1h |
-| **Midweek Sync** | Assíncrono — Discord | Meio de cada semana de execução (sexta ou sábado) | Toda a equipe | - |
+| **Feature Discovery** | Reunião | Sem 1 | Todos, menos o Cliente | ~1h |
+| **Technical Design Review** | Reunião | Início da Sem 2 (e Sem 3 se necessário) | PM, CPs, Class Owners | ~1h |
+| **Midweek Sync/Kanban Pull Execution** | Assíncrono — Discord | Meio de cada semana de execução (sexta ou sábado) | Toda a equipe | - |
 | **Partial Client Validation** | Assíncrono — WhatsApp | Fim de cada Sem | Resp. Validação + Otavio | — |
-| **Formal Client Validation + Retrospectiva + Artifact Closure + Backlog Reorg.** | Reunião | Fim da última semana | Toda a equipe + Otavio | ~1h 30min |
+| **Formal Client Validation** | Reunião | Fim da última semana da iteração | Toda a equipe + Otavio | ~1h |
+| **Artifact Closure** | Reunião | Fim da unidade + fim da iteração | Toda a equipe | ~1h 30min |
+| **Feature Build Consolidation** | Reunião | Fim da semana 2 e semana 3 | Toda a equipe | ~45min |
 
 ### Cadência Detalhada por Semana
 
