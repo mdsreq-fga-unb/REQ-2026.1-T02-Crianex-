@@ -8,7 +8,7 @@
 | 1.1 | 13/04/2026 | Revisão da seção 4 | Equipe Crianex |
 | 1.2 | 04/05/2026 | Ajustes da seção 4.1  | Heitor |
 | 1.3 | 06/05/2026 | Revisão dos ajustes da seção 4.1 e reajustes | Philipe |
-
+| 1.4 | 08/05/2026 | Ajustes de cerimônias e técnicas | Lucas e Philipe |
 ---
 
 ## 4.1 Abordagem de Engenharia de Requisitos
@@ -17,7 +17,7 @@ O projeto Crianex adota um Processo Híbrido (FDD + Kanban). Nesta abordagem, o 
 
 A seguir, detalhamos as atividades da Engenharia de Requisitos e explicamos como cada técnica será aplicada no desenvolviemnto de requisitos:
 
-### Atividades, Técnicas e Artefatos do Processo Híbrido
+### Cerimônias, Técnicas e Artefatos do Processo Híbrido
 
 #### 1. Domain Modeling Workshop
 O *Domain Modeling Workshop* é a cerimônia em que a equipe e o *Domain Expert* constroem ou refinam o modelo de domínio que sustenta as *features* da iteração. Seu objetivo é alinhar o entendimento sobre entidades, relacionamentos e regras de negócio antes do detalhamento funcional.
@@ -49,13 +49,28 @@ O *Technical Design Review* é a cerimônia em que a solução técnica da *feat
 **Técnica:** diagrama de sequência leve. Essa técnica representa as interações e integrações relevantes da solução, ajudando a equipe a antecipar dependências e pontos de extensão.  
 **Artefatos gerados:** notas de design e especificação técnica da *feature*.
 
-#### 6. Revisão de Design e Regras / Formal Client Validation
-A *Revisão de Design e Regras* é a cerimônia de verificação interna da consistência da solução, enquanto a *Formal Client Validation* confirma com o cliente real se o valor de negócio foi de fato entregue. Juntas, elas fecham a etapa de verificação e validação.
+#### 6. Formal Client Validation 
+A *Formal Client Validation* confirma com o cliente real se o valor de negócio foi de fato entregue. 
 
-**Técnicas:** inspeção formal de design e código e rastreabilidade bidirecional. Essas técnicas ajudam a verificar completude, coerência e ligação entre objetivo estratégico, *feature*, issue e validação.  
-**Artefatos gerados:** matriz de rastreabilidade e evidências de validação.
+**Técnicas:** Demo orietada a valor (Não a feature) - narrativa: "o cliente consegue X". Essas técnicas ajudam a verificar completude, coerência e ligação entre objetivo estratégico.  
+**Artefatos gerados:** Atas da demo; aprovação formal do Otávio; lista de feedback para o backlog.
 
-#### 7. Midweek Sync / Kanban Pull Execution
+#### 7. Feature Build Consolidation
+A *Feature Build Consolidation* é uma cerimômina que garante que todas as fatias de uma feature foram integradas e possíveis de rastrea-las, com as featuras end-to-end.
+
+**Técnicas**: Smoke test end-to-end, verficação de critério de aceite da feature e requirements traceability matrix.
+
+**Artefatos gerados**: Features em ambiente de homologação; matrix de rastreabilidade atualizada. 
+
+#### 8. Partial Client Validation
+O *Partial Client Validation* é uma cerimônia que valida entregas intermediárias com o cliente, idealmente assincronamente, para acelerar feedbacks.
+
+**Técnicas**: Validação assincrona via vídeo curto ou screenshots + checklists.
+
+**Artefatos gerados**: Comentário de validação na issue; checklist marcado; organização de feedback.
+
+
+#### 9. Midweek Sync / Kanban Pull Execution
 O *Midweek Sync* é a cerimônia de alinhamento rápido da equipe, enquanto o *Kanban Pull Execution* regula o fluxo de execução das issues ao longo da iteração. Em conjunto, essas cerimônias promovem visibilidade do trabalho e controle do andamento das entregas.
 
 **Técnicas:** *Kanban*, *Pull System* e *WIP limits*. Essas técnicas organizam o fluxo visual, limitam o trabalho simultâneo e garantem que novas atividades só sejam puxadas conforme a capacidade disponível.  
@@ -69,8 +84,8 @@ O *Midweek Sync* é a cerimônia de alinhamento rápido da equipe, enquanto o *K
 | **2. Decomposição Funcional** | Divisão do sistema em áreas de funcionalidade, conjuntos de *features* e *features* específicas orientadas ao cliente. | **Feature Discovery Session** | *Feature Card Specification*;*Vertical Slicing*; *INVEST*. | *Feature Cards*; ata da sessão. | — |
 | **3. Planejamento e Priorização** | Organização das *features* em conjuntos relacionais e priorização com base em valor, dependências e complexidade. | **Iteration Replenishment** | *Matriz Valor × Esforço*; *Priorização IP*. | Backlog priorizado; lista de *features* comprometidas. | — |
 | **4. Compromisso da Iteração** | Formalização do escopo da iteração e do objetivo principal a ser entregue. | **Iteration Commitment** | *Iteration Goal Statement*. | *Iteration Goal* documentado; ata do compromisso. | *Definition of Ready*; *Definition of Done*. |
-| **5. Documentação e Design** | Produção de documentação prática e objetiva, incluindo especificação funcional e decisões de design. | **Technical Design Review** |  Diagrama de sequência leve. | Notas de design; especificação da *feature*. | — |
-| **6. Verificação e Rastreabilidade** | Acompanhamento do progresso das *features* com base em marcos, inspeções e mecanismos de rastreabilidade. | **Revisão de Design e Regras**; **Formal Client Validation** | *Inspeção formal de design e código*; *Rastreabilidade Bidirecional*. | Matriz de rastreabilidade; evidências de validação. | — |
+| **5. Documentação e Design** | Produção de documentação prática e objetiva, incluindo especificação funcional e decisões de design. | **Technical Design Review** |  Diagrama de sequência leve; Prototipagem; Análise de impacto; Identiifcação de pontos de extensão | Notas de design; especificação da *feature*. | — |
+| **6. Verificação e Rastreabilidade** | Acompanhamento do progresso das *features* com base em marcos, inspeções e mecanismos de rastreabilidade. | **Feature Build Consolidation**; **Partial Client Validation**; **Formal Client Validation** | *Inspeção formal de design e código*; *Rastreabilidade Bidirecional*; *Backlog Reorganization Session*. | Matriz de rastreabilidade; evidências de validação. | — |
 | **7. Gestão de Fluxo** | Controle contínuo do estado das *features* ao longo do ciclo de vida de desenvolvimento. | **Midweek Sync**; **Kanban Pull Execution** | *Kanban*; *Pull System*; *WIP limits*. | Board atualizado; comentários de bloqueio; PRs. | — |
 
 ---
