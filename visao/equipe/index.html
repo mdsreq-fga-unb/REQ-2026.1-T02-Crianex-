@@ -216,38 +216,38 @@
 <tbody>
 <tr>
 <td><strong>Lucas Andrade Zanetti</strong></td>
-<td>Project Manager · Chief Architect · Strategic Technical Contributor</td>
-<td>Conduz Replenishment e Iteration Commitment; mantém roadmap no Miro; arbitra decisões arquiteturais; interface principal com o cliente acadêmico; garante datas-limite das unidades</td>
+<td>Project Manager · Chief Architect · Development Manager(Backup)</td>
+<td><strong>(PM/DM):</strong> Gerenciar o roadmap, prazos e interface principal com o cliente/professor; conduzir <em>Replenishment</em>.<br/><strong>(Chief Architect):</strong> Liderar a modelagem de domínio e arbitrar decisões estruturais gerais da arquitetura.<br/><strong>(DM Backup):</strong> Desbloquear issues críticas.</td>
 <td>9 h/sem</td>
 </tr>
 <tr>
 <td><strong>Heitor Macedo Ricardo</strong></td>
-<td>Development Manager · Chief Programmer</td>
-<td>Coordena progresso técnico da iteração; acompanha board diariamente; desbloqueia issues em até 24 h; conduz Technical Design Review; lidera Build &amp; Integrate (FDD etapa 5)</td>
+<td>Development Manager · Class Owner</td>
+<td><strong>(DM):</strong> Coordenar o progresso técnico diário da iteração (Kanban), acompanhar WIP limits, desbloquear issues da equipe e liderar a consolidação final da fase de Build.<br/><strong>(Class Owner):</strong> Assumir o desenvolvimento e testes de classes/features específicas.</td>
 <td>5–8 h/sem</td>
 </tr>
 <tr>
 <td><strong>Leonardo Fachinello Bonetti</strong></td>
-<td>Chief Programmer · Development Manager (backup) · Class Owner</td>
-<td>Conduz Design Review; aprova PRs estruturais; mentora decisões técnicas; responsável por infra e Kubernetes</td>
+<td>Chief Programmer · Class Owner</td>
+<td><strong>(Chief Programmer):</strong> Conduzir o <em>Technical Design Review</em> e mentorar decisões técnicas (especialmente Backend/Infra/K8s); aprovar Pull Requests estruturais.<br/><strong>(Class Owner):</strong> Desenvolver o código das responsabilidades que assumiu no design.</td>
 <td>5–8 h/sem</td>
 </tr>
 <tr>
 <td><strong>Philipe Amancio Reis Caetano</strong></td>
 <td>Chief Programmer · Class Owner</td>
-<td>Conduz Design Review; aprova PRs estruturais; implementação frontend e QA</td>
+<td><strong>(Chief Programmer):</strong> Conduzir decisões técnicas e revisões de código (PRs) focadas em Frontend e QA; auxiliar no design detalhado de features.<br/><strong>(Class Owner):</strong> Implementar de ponta a ponta as partes da interface pelas quais é responsável.</td>
 <td>até 4 h/sem</td>
 </tr>
 <tr>
 <td><strong>Hugo Freitas Silva</strong></td>
 <td>Class Owner</td>
-<td>Implementação backend; code review; atualização do board em tempo real</td>
+<td><strong>(Class Owner):</strong> Implementação primária de código , garantindo que as regras de negócio e critérios de aceite sejam codificados e testados; atualização do <em>board</em> em tempo real e <em>code review</em> em PRs entre pares.</td>
 <td>até 4 h/sem</td>
 </tr>
 <tr>
 <td><strong>Camile Barbosa Gonzaga de Oliveira</strong></td>
 <td>Class Owner · Documentation Lead · Requirements Custodian</td>
-<td>Atualização do GH Pages e Documento de Visão; gestão dos artefatos de ER (feature cards, critérios de aceite, rastreabilidade); consolidação de evidências por iteração</td>
+<td><strong>(Requirements/Docs):</strong> Gestão dos artefatos (feature cards, rastreabilidade e critérios de aceite); manutenção do Documento de Visão no MkDocs e consolidação das evidências de fechamento das iterações.<br/><strong>(Class Owner):</strong> Desenvolver e testar features alocadas.</td>
 <td>até 4 h/sem</td>
 </tr>
 </tbody>
@@ -493,8 +493,8 @@
 <h2 id="64-processo-de-validacao-com-o-cliente">6.4 Processo de Validação com o Cliente<a class="headerlink" href="#64-processo-de-validacao-com-o-cliente" title="Permanent link">¶</a></h2>
 <p>O processo opera em dois modos complementares: <strong>Partial</strong> (contínua e assíncrona, durante a iteração) e <strong>Formal</strong> (reunião de demo ao fim de cada iteração).</p>
 <div class="mermaid">flowchart TD
-    A([Feature mergeada em main]) --&gt; B[Responsável por Validação\nprepara entrega + checklist]
-    B --&gt; C{Partial Client Validation\nOtavio — até 24h\nassíncrono via WhatsApp/Notion}
+    A([Conjunto de Features da Semana mergeada na main]) --&gt; B[Responsável por Validação\nprepara entrega + checklist]
+    B --&gt; C{Partial Client Validation\nOtavio — até 24h\nassíncrono via WhatsApp}
     C --&gt;|Aprovado| D([Issue → Done ✓])
     C --&gt;|Ajustes solicitados| E[Issue de ajuste\n→ In Progress]
     E --&gt; A
@@ -525,7 +525,7 @@
 <h3 id="definition-of-done-dod">Definition of Done (DoD)<a class="headerlink" href="#definition-of-done-dod" title="Permanent link">¶</a></h3>
 <p>Uma issue está <strong>concluída</strong> quando:</p>
 <ul>
-<li>[ ] Código mergeado em <code>main</code> via PR aprovado por outro Class Owner</li>
+<li>[ ] Código mergeado em <code>main</code> via PR aprovado por Chief Programmer</li>
 <li>[ ] CI verde</li>
 <li>[ ] Testes automatizados cobrindo os critérios de aceite (quando aplicável)</li>
 <li>[ ] Validação parcial de Otavio registrada na issue (checklist marcado)</li>
