@@ -57,9 +57,9 @@ O quadro abaixo apresenta os ciclos de trabalho planejados, organizados por **Va
 | Iteração | Status | Período | Valor de Negócio | CPs | Iteration Goal | Validação |
 |----------|--------|---------|------------------|-----|----------------|-----------|
 | **IT1** | ✅ | até 26/04/2026 | Documentação Inicial e Setup | — | Levantar escopo, documentar Visão de Produto, configurar ambiente e definir arquitetura macro. | Reunião inicial com Otavio: validação de escopo, domínio e priorização do MVP. |
-| **IT2** | 🔄 | ------ | **Vitrine Pública** | *AJUSTAR* [CP4](solucao.md#características-do-produto-cp) · [CP5](solucao.md#características-do-produto-cp) · [CP7](solucao.md#características-do-produto-cp) | "Qualquer visitante acessa a vitrine pública da Crianex, vê o portfólio de produtos SaaS com página institucional em PT/EN, em layout responsivo." | Partial Validation contínua. Formal Validation com demo focada em conversão e navegação. |
-| **IT3** | ⏳ | ------ | **Núcleo Admin** | *AJUSTAR* [CP1](solucao.md#características-do-produto-cp) · [CP2](solucao.md#características-do-produto-cp) · [CP3](solucao.md#características-do-produto-cp) | "A equipe interna acessa o CRM Kanban, o Dashboard Executivo e o painel de logs unificados a partir de um único ponto de autenticação." | Validação do cruzamento de logs e tickets; métricas operacionais com os sócios. |
-| **IT4** | ⏳ | ------- | **Lead Capture** | *AJUSTAR* [CP6](solucao.md#características-do-produto-cp) · [CP8](solucao.md#características-do-produto-cp) · [CP9](solucao.md#características-do-produto-cp) | "A equipe de suporte opera o sistema de atendimento e gerencia produtos SaaS com autonomia, sem depender de acesso direto ao banco." | Feedback focado na usabilidade da equipe de suporte e fluxos administrativos. |
+| **IT2** | 🔄 | 27/04 até 19/05 | **Vitrine Pública** | [CP4](solucao.md#características-do-produto-cp) · [CP5](solucao.md#características-do-produto-cp) · [CP6](solucao.md#características-do-produto-cp) · [CP8](solucao.md#características-do-produto-cp) | "Qualquer visitante acessa a vitrine pública da Crianex, vê o portfólio de produtos SaaS com página institucional em PT/EN, em layout responsivo." | Partial Validation contínua. Formal Validation com demo focada em conversão e navegação. |
+| **IT3** | ⏳ | 20/05 até 13/06 | **Núcleo Admin** | [CP2](solucao.md#características-do-produto-cp) · [CP7](solucao.md#características-do-produto-cp) · [CP9](solucao.md#características-do-produto-cp) | "A equipe interna acessa o CRM Kanban, o Dashboard Executivo e o painel de logs unificados a partir de um único ponto de autenticação." | Validação do cruzamento de logs e tickets; métricas operacionais com os sócios. |
+| **IT4** | ⏳ | 14/06 até 07/07 | **Lead Capture** | [CP1](solucao.md#características-do-produto-cp) · [CP10](solucao.md#características-do-produto-cp) · [CP11](solucao.md#características-do-produto-cp) | "Leads de novos visitantes são capturados via formulário público e registrados automaticamente no CRM; dúvidas comuns são resolvidas pelo FAQ sem abertura de ticket; e receitas por produto são controladas centralmente com exportação de relatórios." | Validação ponta a ponta: lead submetido no formulário aparece como card no CRM (CP6); artigo de FAQ acessado sem login (CP8); relatório financeiro exportado com dados reais (CP9). |
 
 ---
 
@@ -72,8 +72,6 @@ A cadência semanal — cerimônias, formatos e tabelas de atividades por semana
 ## 5.4 Sequência de Execução em uma Iteração
 
 A sequência abaixo apresenta a ordem obrigatória de atividades dentro de qualquer iteração, agrupada por fase. Nenhuma etapa pode ser invertida ou suprimida — desvios são registrados na retrospectiva e tratados na próxima iteração.
-
-AJUSTAR MIRO BOARD: MODELAR -> DESCOBRIR -> ESPECIFICAR -> COMPROMETER 
 
 ![Cronograma](images/cronograma.png)
 <figure class="crianex-figure">
