@@ -58,8 +58,9 @@ Cada ferramenta tem escopo exclusivo — o que vai para o Miro não vai para o D
 
 | Cerimônia | Formato | Frequência | Participantes | Duração est. |
 |---|---|---|---|---|
-| **Iteration Replenishment + Commitment + Domain Modeling** | Reunião | Início da Sem 1 | PM, Chief Arch, CPs, Otavio | ~1h |
+| **Domain Modeling** | Reunião | Início da Sem 1 | PM, Chief Arch, Otavio | ~30h |
 | **Feature Discovery** | Reunião | Sem 1 | Todos, menos o Cliente | ~1h |
+| **Iteration Replenishment + Commitment** | Reunião | Sem 1 | PM, Chief Arch, CPs, Otavio | ~1h |
 | **Technical Design Review** | Reunião | Início da Sem 2 (e Sem 3 se necessário) | PM, CPs, Class Owners | ~1h |
 | **Midweek Sync/Kanban Pull Execution** | Assíncrono — Discord | Meio de cada semana de execução (sexta ou sábado) | Toda a equipe | - |
 | **Partial Client Validation** | Assíncrono — WhatsApp | Fim de cada Sem | Resp. Validação + Otavio | — |
@@ -77,19 +78,21 @@ Dedicada ao alinhamento estratégico e ao refinamento de requisitos. Devs podem 
 
 | Atividade | Etapa FDD | Formato |
 |-----------|-----------|---------|
-| Iteration Replenishment + Commitment + Domain Modeling Workshop | Etapas 1–3 | Reunião |
-| Feature Discovery Session + Feature Card Specification | Etapas 4–5 | Reunião |
-| Preparação individual para slicing | Pré-Etapa 6 | Assíncrono |
+| Domain Modeling Workshop | Etapas 1 | Síncrono |
+| Feature Discovery Session | Etapas 2 | Síncrono |
+| Iteration Replenishment + Iteration Commitment | Etapas 3 e 4 | Síncrono |
 
 #### Semana 2 — Build Controlado e Execução Kanban
 
-Todas as Features comprometidas começam a fluir pelo Kanban. A validação parcial ocorre de forma assíncrona ao fim da semana. Este ciclo pode se repetir dependendo do prazo da iteração.
+Todas as Features comprometidas começam a fluir pelo Kanban. A validação parcial ocorre de forma assíncrona ao fim da semana. 
 
 | Atividade | Etapa FDD | Formato |
 |-----------|-----------|---------|
-| Feature Slicing + Acceptance Criteria Review + Technical Design Review | Etapas 6–8 | Reunião |
-| Kanban Pull Execution + Internal Code & Design Review + Sync diário Discord | Etapas 9–11 | Assíncrono |
-| Partial Client Validation — update escrito/vídeo a Otavio | Etapa 12 | **Assíncrono** |
+| Technical Design Review | Etapa 5 | Síncrono |
+| Midweek Sync + Kanban Pull Execution | Etapa 6 | Assíncrono |
+| Feature Build Consolidation (Sem 2) | Etapa 7 | Síncrono |
+| Partial Client Validation | Etapa 6 | Assíncrono |
+
 
 #### Semana 3 — Consolidação, Validação e Encerramento
 
@@ -97,9 +100,11 @@ Features consolidadas, rastreabilidade auditada e artefatos empacotados. Apenas 
 
 | Atividade | Etapa FDD | Formato |
 |-----------|-----------|---------|
-| Feature Build Consolidation (smoke test) + Requirements Verification Review | Etapas 13–14 | Assíncrono |
+| Feature Build Consolidation | Etapa 7 | Síncrono |
 | Preparação da demo e fechamento de PRs pendentes | — | Assíncrono |
-| Formal Client Validation (demo) + Retrospectiva + Artifact Closure + Backlog Reorganization | Etapas 15–17 | **Reunião** |
+| Formal Client Validation | Etapa 7 | Síncrono |
+| Artifact Closure + Backlog Reorganization caso necessário | Etapa | Síncrono |
+
 
 ---
 
@@ -130,7 +135,6 @@ flowchart TD
 ```
 
 *Figura 1 — Fluxo de validação: Partial (assíncrona, contínua por feature) → Formal (reunião, fim da iteração).*
-{: style="text-align:center; font-size:0.83rem; color:#666;" }
 
 ### Definition of Ready (DoR)
 
