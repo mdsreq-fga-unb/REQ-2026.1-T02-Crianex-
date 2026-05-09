@@ -18,12 +18,12 @@ Os papéis seguem o modelo FDD + Kanban adotado pela equipe. Cada integrante pod
 
 | Integrante | Papel FDD | Responsabilidades Principais | Disponibilidade |
 |---|---|---|---|
-| **Lucas Andrade Zanetti** | Project Manager · Chief Architect · Strategic Technical Contributor | Conduz Replenishment e Iteration Commitment; mantém roadmap no Miro; arbitra decisões arquiteturais; interface principal com o cliente acadêmico; garante datas-limite das unidades | 9 h/sem |
-| **Heitor Macedo Ricardo** | Development Manager · Chief Programmer | Coordena progresso técnico da iteração; acompanha board diariamente; desbloqueia issues em até 24 h; conduz Technical Design Review; lidera Build & Integrate (FDD etapa 5) | 5–8 h/sem |
-| **Leonardo Fachinello Bonetti** | Chief Programmer · Development Manager (backup) · Class Owner | Conduz Design Review; aprova PRs estruturais; mentora decisões técnicas; responsável por infra e Kubernetes | 5–8 h/sem |
-| **Philipe Amancio Reis Caetano** | Chief Programmer · Class Owner | Conduz Design Review; aprova PRs estruturais; implementação frontend e QA | até 4 h/sem |
-| **Hugo Freitas Silva** | Class Owner | Implementação backend; code review; atualização do board em tempo real | até 4 h/sem |
-| **Camile Barbosa Gonzaga de Oliveira** | Class Owner · Documentation Lead · Requirements Custodian | Atualização do GH Pages e Documento de Visão; gestão dos artefatos de ER (feature cards, critérios de aceite, rastreabilidade); consolidação de evidências por iteração | até 4 h/sem |
+| **Lucas Andrade Zanetti** | Project Manager · Chief Architect · Development Manager(Backup) | **(PM/DM):** Gerenciar o roadmap, prazos e interface principal com o cliente/professor; conduzir *Replenishment*.<br>**(Chief Architect):** Liderar a modelagem de domínio e arbitrar decisões estruturais gerais da arquitetura.<br>**(DM Backup):** Desbloquear issues críticas. | 9 h/sem |
+| **Heitor Macedo Ricardo** | Development Manager · Class Owner | **(DM):** Coordenar o progresso técnico diário da iteração (Kanban), acompanhar WIP limits, desbloquear issues da equipe e liderar a consolidação final da fase de Build.<br>**(Class Owner):** Assumir o desenvolvimento e testes de classes/features específicas. | 5–8 h/sem |
+| **Leonardo Fachinello Bonetti** | Chief Programmer · Class Owner | **(Chief Programmer):** Conduzir o *Technical Design Review* e mentorar decisões técnicas (especialmente Backend/Infra/K8s); aprovar Pull Requests estruturais.<br>**(Class Owner):** Desenvolver o código das responsabilidades que assumiu no design. | 5–8 h/sem |
+| **Philipe Amancio Reis Caetano** | Chief Programmer · Class Owner | **(Chief Programmer):** Conduzir decisões técnicas e revisões de código (PRs) focadas em Frontend e QA; auxiliar no design detalhado de features.<br>**(Class Owner):** Implementar de ponta a ponta as partes da interface pelas quais é responsável. | até 4 h/sem |
+| **Hugo Freitas Silva** | Class Owner | **(Class Owner):** Implementação primária de código , garantindo que as regras de negócio e critérios de aceite sejam codificados e testados; atualização do *board* em tempo real e *code review* em PRs entre pares. | até 4 h/sem |
+| **Camile Barbosa Gonzaga de Oliveira** | Class Owner · Documentation Lead · Requirements Custodian | **(Requirements/Docs):** Gestão dos artefatos (feature cards, rastreabilidade e critérios de aceite); manutenção do Documento de Visão no MkDocs e consolidação das evidências de fechamento das iterações.<br>**(Class Owner):** Desenvolver e testar features alocadas. | até 4 h/sem |
 
 **Papéis rotativos por iteração**
 
@@ -109,8 +109,8 @@ O processo opera em dois modos complementares: **Partial** (contínua e assíncr
 
 ```mermaid
 flowchart TD
-    A([Feature mergeada em main]) --> B[Responsável por Validação\nprepara entrega + checklist]
-    B --> C{Partial Client Validation\nOtavio — até 24h\nassíncrono via WhatsApp/Notion}
+    A([Conjunto de Features da Semana mergeada na main]) --> B[Responsável por Validação\nprepara entrega + checklist]
+    B --> C{Partial Client Validation\nOtavio — até 24h\nassíncrono via WhatsApp}
     C -->|Aprovado| D([Issue → Done ✓])
     C -->|Ajustes solicitados| E[Issue de ajuste\n→ In Progress]
     E --> A
@@ -146,7 +146,7 @@ Uma issue está **pronta para entrar em execução** quando:
 
 Uma issue está **concluída** quando:
 
-- [ ] Código mergeado em `main` via PR aprovado por outro Class Owner
+- [ ] Código mergeado em `main` via PR aprovado por Chief Programmer
 - [ ] CI verde
 - [ ] Testes automatizados cobrindo os critérios de aceite (quando aplicável)
 - [ ] Validação parcial de Otavio registrada na issue (checklist marcado)
