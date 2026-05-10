@@ -80,7 +80,7 @@ Dedicada ao alinhamento estratégico e ao refinamento de requisitos. Devs podem 
 |-----------|-----------|---------|
 | Domain Modeling Workshop | Etapas 1 | Síncrono |
 | Feature Discovery Session | Etapas 2 | Síncrono |
-| Iteration Replenishment + Iteration Commitment | Etapas 3 e 4 | Síncrono |
+| Iteration Replenishment + Iteration Commitment | Etapas 3 e 4 | Síncrono e Assíncrono|
 
 #### Semana 2 — Build Controlado e Execução Kanban
 
