@@ -34,6 +34,49 @@
 
 ---
 
+## Evidências de Entrega
+
+### PRs Mergeados
+
+| # | Feature | PR | Revisor | Data de Merge |
+|---|---------|-----|---------|---------------|
+| — | — | — | — | — |
+
+### Demonstração das Features
+
+!!! tip "Como registrar"
+    Adicione abaixo links para gravações de demo, screenshots ou protótipos validados.
+
+<!-- Exemplo:
+#### CP4 — Vitrine pública de produtos SaaS
+![Vitrine publicada](./videos/vitrine-cp4.png)
+
+#### CP5 — Página Institucional
+![Página institucional](./videos/institucional-cp5.png)
+
+#### CP7 — Suporte PT/EN
+![Seletor de idioma](./videos/multilingual-cp7.png)
+-->
+
+### Critérios de Aceitação Validados
+
+| US | Feature | Critério | Validado por | Data |
+|----|---------|----------|--------------|------|
+| US-01 | F-01 — Listar catálogo SaaS | — | — | — |
+| US-02 | F-02 — Detalhes de produto | — | — | — |
+| US-03 | F-03 — Página institucional | — | — | — |
+| US-04 | F-04 — Equipe e história | — | — | — |
+| US-05 | F-05 — Vitrine em inglês | — | — | — |
+| US-06 | F-06 — Alternar idioma PT/EN | — | — | — |
+
+### Validação pelo Cliente / Professor
+
+| Data | Origem | Feedback | Issue Aberta | Resolvida |
+|------|--------|----------|--------------|-----------|
+| — | — | — | — | — |
+
+---
+
 ## Cronograma da Iteração
 
 ```mermaid

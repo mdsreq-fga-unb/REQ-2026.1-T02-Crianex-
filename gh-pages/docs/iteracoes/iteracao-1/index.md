@@ -49,6 +49,38 @@ Reunião de kickoff realizada via Discord com toda a equipe e o Domain Expert (O
 
 ---
 
+## Evidências de Entrega
+
+### Inspeções e Revisões
+
+| # | Entrega | Tipo | Link | Data |
+|---|---------|------|------|------|
+| 1 | Documento de Visão — Seções 2.4 a 2.7 | PR | — | — |
+| 2 | Documento de Visão — Seções 3.1 a 3.3 | PR | — | — |
+| 3 | Seções 4.1, 4.2 e Tabela de ER | PR | — | — |
+| 4 | Lições Aprendidas e Cronograma | PR | — | — |
+| 5 | Deploy GitHub Pages | PR | — | — |
+
+### Validação pelo Cliente / Professor
+
+!!! info "Registro de Feedback"
+    Adicione abaixo os feedbacks recebidos do professor George Marsicano ou do cliente após a entrega.
+
+| Data | Origem | Feedback | Issue Aberta | Resolvida |
+|------|--------|----------|--------------|-----------|
+| — | — | — | — | — |
+
+### Capturas de Tela / Gravações
+
+!!! tip "Como registrar"
+    Adicione imagens com `![descrição](./videos/nome.png)` ou links para gravações de demo.
+
+<!-- Exemplo:
+![GitHub Pages publicado](./videos/ghpages-it1.png)
+-->
+
+---
+
 ## Cronograma da Iteração
 
 ```mermaid
