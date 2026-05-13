@@ -46,7 +46,7 @@ gh-pages/
 ├── docs/               # Fontes da documentação (Markdown)
 │   ├── visao/          # Documento de Visão (seções 1–6, 10)
 │   ├── iteracoes/      # Registro por iteração (atas, evidências, cronograma)
-│   ├── backlog/        # FDD Feature List + User Stories
+│   ├── backlog/        # FDD Feature List + Requirements List + BDD
 │   └── arquitetura/    # ADRs e diagramas
 ├── mkdocs.yml          # Configuração do MkDocs
 └── requirements.txt    # Dependências Python
