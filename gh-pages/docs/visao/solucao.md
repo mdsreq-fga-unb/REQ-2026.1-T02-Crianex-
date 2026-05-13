@@ -46,11 +46,11 @@ O **Crianex Hub** é uma plataforma que envolve duas áreas principais:
 
 ### Objetivos Específico (OE)
 
-| ID | Objetivo Específico | Foco
+| ID | Objetivo Específico | Natureza
 |----|----------------------|------------------------|
-| OE1 | Centralizar a gestão operacional do negócio | Administração/Gestão |
-| OE2 | Aumentar a visibilidade do portfólio de projetos no mercado B2B | Vitrine/Portifolio Empresarial |
-| OE3 | Centralizar a gestão de Leads e clientes | Expansão da base de clientes |
+| OE1 | Centralizar a gestão operacional do negócio | Governança/Gestão |
+| OE2 | Aumentar a visibilidade do portfólio de projetos no mercado B2B | Aquisição/apresentação |
+| OE3 | Centralizar a gestão de Leads e clientes | Relacionamento/Operação |
 
 ### Características do Produto (CP)
 
