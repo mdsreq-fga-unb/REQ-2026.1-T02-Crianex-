@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Documentação do Projeto
+    url: https://mdsreq-fga-unb.github.io/REQ-2026.1-T02-Crianex-/
+    about: Consulte a documentação antes de abrir uma issue
