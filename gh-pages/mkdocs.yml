@@ -35,14 +35,14 @@ nav:
     - "Lições Aprendidas": visao/10-licoes/index.md
   - Iterações:
     - "Visão Geral": iteracoes/index.md
-    - "IT1 — Unidade 1":
+    - "Unidade 1":
+      - "Resumo": iteracoes/unidade-1/index.md
+      - "Ata — 09/04/2026": iteracoes/unidade-1/atas/2026-04-09.md
+    - "IT1 — Vitrine Pública":
       - "Resumo": iteracoes/iteracao-1/index.md
-      - "Ata — 09/04/2026": iteracoes/iteracao-1/atas/2026-04-09.md
-    - "IT2 — Vitrine Pública":
+    - "IT2 — Lead Capture":
       - "Resumo": iteracoes/iteracao-2/index.md
-    - "IT3 — Núcleo Admin":
+    - "IT3 — Núcleo Operacional":
       - "Resumo": iteracoes/iteracao-3/index.md
-    - "IT4 — Lead Capture":
-      - "Resumo": iteracoes/iteracao-4/index.md
   - Backlog: backlog/index.md
   - Arquitetura: arquitetura/index.md

@@ -1,51 +1,77 @@
-# IT1 — Unidade 1: Documento de Visão
+# IT1 — Vitrine Pública
 
-**Período:** 09/04/2026 – 14/04/2026
-**Status:** ✅ Concluída
-**Entrega:** Documento de Visão — GitHub Pages
-
----
-
-## Objetivo
-
-Iteração inicial de alinhamento com o cliente e fundação do projeto. O foco foi a produção do **Documento de Visão**, reconhecimento do problema do cliente e a configuração da infraestrutura de documentação (GitHub Pages via MkDocs), com entrega final em **14/04/2026**.
-
-Esta iteração cobre as **etapas 1 e 2 do FDD**:
-
-- **Etapa 1 — Desenvolver Modelo Global:** Brainstorming com o cliente, Rich Picture, Diagrama de Ishikawa, definição do problema central.
-- **Etapa 2 — Construir Lista de Funcionalidades:** Identificação dos Objetivos Específicos (OEs) e Características de Produto (CPs) iniciais.
+**Período:** 15/04/2026 – 19/05/2026
+**Status:** 🔄 Em andamento
+**Meta:** "Qualquer visitante acessa a vitrine pública da Crianex, vê o portfólio de SaaS, com página institucional e suporte PT/EN, em layout responsivo."
 
 ---
 
-## Entregas
+## Características de Produto (CPs)
 
-| # | Entrega | Responsável | Status |
-|---|---------|-------------|--------|
-| 1 | Seções 2.4 a 2.7 do Documento de Visão | Hugo e Philipe | ✅ |
-| 2 | Seções 3.1 a 3.3 do Documento de Visão | Camille e Leonardo | ✅ |
-| 3 | Seções 4.1, 4.2 e Tabela de Engenharia de Requisitos | Heitor e Lucas | ✅ |
-| 4 | Lições Aprendidas (10.1), Cronograma e GitHub Pages | Lucas | ✅ |
-| 5 | Cenário Atual, Solução Proposta e Correções gerais | Toda a Equipe | ✅ |
+| CP | Característica | OE | Prioridade |
+|----|---------------|-----|------------|
+
 
 ---
 
 ## Cerimônias e Reuniões
 
-### Iteration Planning — 09/04/2026
+!!! info "Adicionar reuniões"
+    Registre as reuniões desta iteração criando atas em `atas/YYYY-MM-DD.md` e linkando abaixo.
 
-Reunião de kickoff realizada via Discord com toda a equipe e o Domain Expert (Otávio Maya / Vitor Marconi).
+| # | Data | Cerimônia | Ata |
+|---|------|-----------|-----|
+| — | — | Iteration Planning | — |
 
-:material-file-document: [Ver Ata — 09/04/2026](atas/2026-04-09.md)
+---
 
-#### Gravação da Reunião
+## Entregas
 
-<div style="width: 100%; max-width: 900px; margin: 1.5rem 0; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.15);">
-  <video controls style="width: 100%; display: block;">
-    <source src="videos/reuniao-iteracao-1.mp4" type="video/mp4">
-    <p>Seu navegador não suporta reprodução de vídeo.
-    <a href="videos/reuniao-iteracao-1.mp4">Baixar o vídeo</a>.</p>
-  </video>
-</div>
+!!! info "Em andamento"
+    As entregas serão registradas conforme o desenvolvimento avança.
+
+---
+
+## Evidências de Entrega
+
+### PRs Mergeados
+
+| # | Feature | PR | Revisor | Data de Merge |
+|---|---------|-----|---------|---------------|
+| — | — | — | — | — |
+
+### Demonstração das Features
+
+!!! tip "Como registrar"
+    Adicione abaixo links para gravações de demo, screenshots ou protótipos validados.
+
+<!-- Exemplo:
+#### CP4 — Vitrine pública de produtos SaaS
+![Vitrine publicada](./videos/vitrine-cp4.png)
+
+#### CP5 — Página Institucional
+![Página institucional](./videos/institucional-cp5.png)
+
+#### CP7 — Suporte PT/EN
+![Seletor de idioma](./videos/multilingual-cp7.png)
+-->
+
+### Critérios de Aceitação Validados
+
+| US | Feature | Critério | Validado por | Data |
+|----|---------|----------|--------------|------|
+| US-01 | F-01 — Listar catálogo SaaS | — | — | — |
+| US-02 | F-02 — Detalhes de produto | — | — | — |
+| US-03 | F-03 — Página institucional | — | — | — |
+| US-04 | F-04 — Equipe e história | — | — | — |
+| US-05 | F-05 — Vitrine em inglês | — | — | — |
+| US-06 | F-06 — Alternar idioma PT/EN | — | — | — |
+
+### Validação pelo Cliente / Professor
+
+| Data | Origem | Feedback | Issue Aberta | Resolvida |
+|------|--------|----------|--------------|-----------|
+| — | — | — | — | — |
 
 ---
 
@@ -53,16 +79,15 @@ Reunião de kickoff realizada via Discord com toda a equipe e o Domain Expert (O
 
 ```mermaid
 gantt
-    title IT1 — Unidade 1
+    title IT2 — Vitrine Pública
     dateFormat  YYYY-MM-DD
     section Planejamento
-    Iteration Planning (kickoff)   :done, 2026-04-09, 1d
+    Iteration Planning             :done, 2026-04-15, 3d
     section Desenvolvimento
-    Seções 2.4–2.7                 :done, 2026-04-10, 3d
-    Seções 3.1–3.3                 :done, 2026-04-10, 3d
-    Seções 4.1–4.2                 :done, 2026-04-10, 3d
-    Lições Aprendidas              :done, 2026-04-10, 3d
+    CP4 — Vitrine SaaS             :active, 2026-04-18, 18d
+    CP5 — Página Institucional     :active, 2026-04-18, 18d
+    CP7 — Suporte PT/EN            :2026-05-06, 8d
     section Entrega
-    Deploy GitHub Pages            :done, 2026-04-13, 1d
-    Entrega Final                  :milestone, 2026-04-14, 0d
+    Validação com cliente          :2026-05-14, 3d
+    Entrega Final                  :milestone, 2026-05-19, 0d
 ```

@@ -103,7 +103,7 @@ Features consolidadas, rastreabilidade auditada e artefatos empacotados. Apenas 
 | Feature Build Consolidation | Etapa 7 | Síncrono |
 | Preparação da demo e fechamento de PRs pendentes | — | Assíncrono |
 | Formal Client Validation | Etapa 7 | Síncrono |
-| Artifact Closure + Backlog Reorganization caso necessário | Etapa | Síncrono |
+| Artifact Closure + Backlog Reorganization caso necessário | Etapa 7| Síncrono |
 
 
 ---

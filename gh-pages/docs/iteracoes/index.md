@@ -10,10 +10,9 @@ Cada iteração entrega um conjunto coeso de **Características de Produto (CPs)
 
 | Iteração | Período | Status | Valor Entregue | CPs |
 |----------|---------|--------|----------------|-----|
-| [IT1 — Unidade 1](iteracao-1/index.md) | 09/04 – 14/04/2026 | ✅ Concluída | Documento de Visão + Infraestrutura documental | — |
-| [IT2 — Vitrine Pública](iteracao-2/index.md) | 15/04 – 19/05/2026 | 🔄 Em andamento | Alcance de mercado — vitrine bilíngue | CP4, CP5, CP7 |
-| [IT3 — Núcleo Admin](iteracao-3/index.md) | ~20/05 – 02/06/2026 | 🕐 Planejada | Centralização da gestão interna | CP1, CP2, CP3 |
-| [IT4 — Lead Capture](iteracao-4/index.md) | ~03/06 – 16/06/2026 | 🕐 Planejada | Autonomia operacional + captação de leads | CP6, CP8, CP9 |
+| [IT1 — Vitrine Pública](iteracao-1/index.md) | 15/04 – 19/05/2026 | 🔄 Em andamento | Alcance de mercado — vitrine bilíngue | CP4, CP5, CP7 |
+| [IT2 — Lead Capture](iteracao-2/index.md) | --- | 🕐 Planejada | Captação de Leads e gestão de Clientes | --- |
+| [IT3 — Núcleo Operacional](iteracao-3/index.md) | --- | 🕐 Planejada | Autonomia operacional | --- |
 
 ---
 
