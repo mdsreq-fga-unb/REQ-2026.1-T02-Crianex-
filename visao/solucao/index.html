@@ -80,18 +80,26 @@
 <a href="../../iteracoes/">Visão Geral</a>
 </li>
 <li class="dropdown-submenu">
-<a href="" tabindex="-1">IT1 — Unidade 1</a>
+<a href="" tabindex="-1">Unidade 1</a>
 <ul class="dropdown-menu">
 <li>
-<a href="../../iteracoes/iteracao-1/">Resumo</a>
+<a href="../../iteracoes/unidade-1/">Resumo</a>
 </li>
 <li>
-<a href="../../iteracoes/iteracao-1/atas/2026-04-09/">Ata — 09/04/2026</a>
+<a href="../../iteracoes/unidade-1/atas/2026-04-09/">Ata — 09/04/2026</a>
 </li>
 </ul>
 </li>
 <li class="dropdown-submenu">
-<a href="" tabindex="-1">IT2 — Vitrine Pública</a>
+<a href="" tabindex="-1">IT1 — Vitrine Pública</a>
+<ul class="dropdown-menu">
+<li>
+<a href="../../iteracoes/iteracao-1/">Resumo</a>
+</li>
+</ul>
+</li>
+<li class="dropdown-submenu">
+<a href="" tabindex="-1">IT2 — Lead Capture</a>
 <ul class="dropdown-menu">
 <li>
 <a href="../../iteracoes/iteracao-2/">Resumo</a>
@@ -99,18 +107,10 @@
 </ul>
 </li>
 <li class="dropdown-submenu">
-<a href="" tabindex="-1">IT3 — Núcleo Admin</a>
+<a href="" tabindex="-1">IT3 — Núcleo Operacional</a>
 <ul class="dropdown-menu">
 <li>
 <a href="../../iteracoes/iteracao-3/">Resumo</a>
-</li>
-</ul>
-</li>
-<li class="dropdown-submenu">
-<a href="" tabindex="-1">IT4 — Lead Capture</a>
-<ul class="dropdown-menu">
-<li>
-<a href="../../iteracoes/iteracao-4/">Resumo</a>
 </li>
 </ul>
 </li>
@@ -153,7 +153,7 @@
 <li class="second-level"><a href="#23-objetivos-especificos-e-caracteristicas-do-produto">2.3 Objetivos Específicos e Características do Produto</a></li>
 <li class="third-level"><a href="#objetivos-especifico-oe">Objetivos Específico (OE)</a></li>
 <li class="third-level"><a href="#caracteristicas-do-produto-cp">Características do Produto (CP)</a></li>
-<li class="third-level"><a href="#mapeamento-de-valor-das-caracteristicas-featurevalue-matrix">Mapeamento de Valor das Características (Feature/Value Matrix)</a></li>
+<li class="third-level"><a href="#mapeamento-de-valor-das-caracteristicas-feature-setvalue-matrix">Mapeamento de Valor das Características (Feature set/Value Matrix)</a></li>
 <li class="second-level"><a href="#24-tecnologias-utilizadas">2.4 Tecnologias Utilizadas</a></li>
 <li class="third-level"><a href="#visao-geral-da-arquitetura">Visão Geral da Arquitetura</a></li>
 <li class="third-level"><a href="#241-frontend-sveltekit-shadcnui">2.4.1 Frontend — SvelteKit + Shadcn/ui</a></li>
@@ -306,24 +306,24 @@
 <tr>
 <th>ID</th>
 <th>Objetivo Específico</th>
-<th>Foco</th>
+<th>Natureza</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>OE1</td>
-<td>Centralizar a gestão de projetos</td>
-<td>Administração/Gestão</td>
+<td>Centralizar a gestão operacional do negócio</td>
+<td>Governança/Gestão</td>
 </tr>
 <tr>
 <td>OE2</td>
 <td>Aumentar a visibilidade do portfólio de projetos no mercado B2B</td>
-<td>Vitrine/Portifolio Empresarial</td>
+<td>Aquisição/apresentação</td>
 </tr>
 <tr>
 <td>OE3</td>
 <td>Centralizar a gestão de Leads e clientes</td>
-<td>Expansão da base de clientes</td>
+<td>Relacionamento/Operação</td>
 </tr>
 </tbody>
 </table>
@@ -352,8 +352,8 @@
 <td>OE1</td>
 <td>-</td>
 <td>CP2</td>
-<td>Dashboard de Logs e Monitoramento</td>
-<td>Painel autenticado com visualização de logs de acesso segmentados por perfil (usuário cliente e usuário desenvolvedor), logs de atividades por produto/projeto e logs de tickets de suporte. Permite filtros por período, produto e tipo de evento. Exportável em formato estruturado (CSV/JSON).</td>
+<td>Histórico de Logs e Monitoramento</td>
+<td>Painel autenticado com visualização de logs de acesso segmentados por perfil (usuário cliente e usuário desenvolvedor), logs de atividades no sistema. Permite filtros por período, produto e tipo de evento.</td>
 <td>Aumentar a visibilidade operacional interna; facilitar diagnóstico de problemas e auditorias de segurança; rastrear ações na plataforma em tempo real.</td>
 </tr>
 <tr>
@@ -369,37 +369,21 @@
 <td>—</td>
 <td>CP4</td>
 <td>Vitrine Pública de Produtos SaaS</td>
-<td>Página pública bilíngue (PT/EN) com apresentação completa do portfólio (Avali, Pontua, Notifly e futuros produtos), incluindo descrição, screenshots, funcionalidades-chave, público-alvo e links de acesso a cada SaaS. Design alinhado ao posicionamento técnico da empresa.</td>
+<td>Página pública bilíngue (PT/EN) com apresentação completa do portfólio (Avali, Pontua, Notifly e futuros produtos), incluindo descrição, screenshots, funcionalidades-chave, público-alvo e links de acesso a cada SaaS. Design alinhado ao posicionamento técnico da empresa. Tem um Formulário público com campos de nome, e-mail, produto de interesse e mensagem. Possui também uma seção de cenário institucional da Crianex.</td>
 <td>Aumentar a visibilidade externa do portfólio; atrair novos clientes e parceiros; reduzir a barreira de entrada apresentando cada produto de forma clara e atrativa.</td>
-</tr>
-<tr>
-<td>OE2</td>
-<td>—</td>
-<td>CP5</td>
-<td>Página Institucional da Empresa</td>
-<td>Seção pública com missão, valores, diferenciais técnicos (K8s, multi-tenant, IA, WebSocket em tempo real) e informações de contato comercial. Conteúdo reflete a identidade e maturidade técnica da Crianex para novos públicos.</td>
-<td>Comunicar credibilidade técnica para clientes B2B e parceiros; apoiar decisões de contratação por meio de transparência sobre a empresa e seu posicionamento.</td>
-</tr>
-<tr>
-<td>OE2</td>
-<td>OE3</td>
-<td>CP6</td>
-<td>Formulário de Contato e Captação de Leads</td>
-<td>Formulário público com campos de nome, e-mail, produto de interesse e mensagem. Respostas submetidas dos Leads são registradas automaticamente no CRM interno (CP1) e geram notificação imediata para o time, sem necessidade de cadastro prévio pelo visitante.</td>
-<td>Criar canal estruturado de captação de oportunidades comerciais na vitrine, integrando geração de leads ao CRM com atrito mínimo para o visitante.</td>
 </tr>
 <tr>
 <td>OE1</td>
 <td>OE2</td>
-<td>CP7</td>
-<td>Painel de Gerenciamento de Produtos SaaS</td>
-<td>Interface administrativa autenticada com 2FA para adicionar, editar, remover e reordenar os produtos exibidos na vitrine. Permite edição de textos, imagens e links de cada SaaS sem necessidade de alteração direta no código. Histórico de alterações auditável por log.</td>
+<td>CP5</td>
+<td>Painel de Gerenciamento do Administrador</td>
+<td>Interface administrativa autenticada com 2FA para adicionar, editar, remover e reordenar os produtos exibidos na vitrine. Permite edição de textos, imagens e links de cada SaaS sem necessidade de alteração direta no código. Histórico de alterações auditável por log. Também é um Painel adminitrativo para adicionar/remover/editar membros, permissoes, informações</td>
 <td>Dar autonomia ao time para manter o portfólio sempre atualizado sem depender de deploy; garantir rastreabilidade de todas as mudanças realizadas pelos administradores.</td>
 </tr>
 <tr>
 <td>OE2</td>
 <td>OE1</td>
-<td>CP8</td>
+<td>CP6</td>
 <td>FAQ e Base de Conhecimentos por Produto</td>
 <td>Seção pública de perguntas frequentes organizada por produto SaaS, com artigos criados e editados pelo administrador. Cada artigo é indexável e possui categorização por tipo de dúvida, permitindo ao cliente resolver problemas comuns de forma autônoma sem abrir ticket.</td>
 <td>Reduzir o volume de tickets para dúvidas recorrentes; liberar o time para demandas complexas; melhorar a experiência do cliente com autoatendimento.</td>
@@ -407,7 +391,7 @@
 <tr>
 <td>OE1</td>
 <td>-</td>
-<td>CP9</td>
+<td>CP7</td>
 <td>Controle de Faturamento e Relatórios Financeiros</td>
 <td>Área restrita ao administrador para registro de receitas por produto SaaS, acompanhamento de faturamento por cliente e período, e emissão de relatórios financeiros periódicos exportáveis em PDF/CSV.</td>
 <td>Eliminar o uso de planilhas isoladas para controle financeiro; centralizar dados de receita com informações precisas para tomada de decisão estratégica.</td>
@@ -415,26 +399,27 @@
 <tr>
 <td>OE3</td>
 <td>OE1</td>
-<td>CP10</td>
+<td>CP8</td>
 <td>Sistema de Tickets de Suporte</td>
-<td>Canal autenticado de suporte via tickets onde o usuário abre chamados sobre um SaaS específico sem necessidade de cadastro prévio. Os tickets são vinculados ao produto e ao cliente no CRM (CP1), com acompanhamento de status, histórico de respostas e encerramento pelo administrador.</td>
+<td>Os tickets já vinculados à um produto e um cliente, são captados pelo sistema para o acompanhamento de status, histórico de respostas e encerramento pelo administrador.</td>
 <td>Centralizar todo o atendimento pós-venda num único canal rastreável; reduzir o tempo de resposta; eliminar comunicações perdidas em e-mails ou mensagens informais.</td>
 </tr>
 <tr>
 <td>OE3</td>
 <td>OE1</td>
-<td>CP11</td>
-<td>Notificações Automáticas no Sistema</td>
-<td>Sistema de notificações automáticas disparadas em eventos-chave: abertura de ticket, atualização de status do chamado, novo lead via formulário de contato e resposta do administrador ao ticket. Templates configuráveis por tipo de evento com possível integração com e-mail.</td>
+<td>CP9</td>
+<td>Sistema de notificações no Sistema</td>
+<td>Sistema de notificações automáticas disparadas em eventos-chave: abertura de ticket, atualização de status do chamado, novo lead via formulário de contato e resposta do administrador ao ticket. Possível configurar os templates de notificações</td>
 <td>Reduzir o tempo médio de resposta a clientes; garantir que nenhum ticket ou lead fique sem resposta por falta de visibilidade do time.</td>
 </tr>
 </tbody>
 </table>
-<h3 id="mapeamento-de-valor-das-caracteristicas-featurevalue-matrix">Mapeamento de Valor das Características (Feature/Value Matrix)<a class="headerlink" href="#mapeamento-de-valor-das-caracteristicas-featurevalue-matrix" title="Permanent link">¶</a></h3>
+<h3 id="mapeamento-de-valor-das-caracteristicas-feature-setvalue-matrix">Mapeamento de Valor das Características (Feature set/Value Matrix)<a class="headerlink" href="#mapeamento-de-valor-das-caracteristicas-feature-setvalue-matrix" title="Permanent link">¶</a></h3>
 <p>O diagrama abaixo posiciona cada CP em relação ao <strong>valor percebido pelo cliente</strong> (eixo Y) e à <strong>profundidade de funcionalidade</strong> necessária para implementá-la (eixo X). O quadrante superior direito ("Category leaders") agrupa as CPs de maior impacto e maior complexidade — prioridades absolutas do roadmap.</p>
+<p>Esse diagrama foi importante para nos organizarmos à respeito de Iterações do FDD, determinando entregas de produto baseada em valores de negócio.</p>
 <p><img alt="Feature/Value Matrix — Crianex Hub" src="../images/matrix_valor_esforco.png"/></p>
 <figure class="crianex-figure">
-<figcaption>Figura 2 — Feature/Value Matrix das Características do Produto (CP1–CP13). Fonte: Elaborado pelos autores (2026).</figcaption>
+<figcaption>Figura 2 — Feature/Value Matrix das Características do Produto (CP1–CP9). Fonte: Elaborado pelos autores (2026).</figcaption>
 </figure>
 <hr/>
 <h2 id="24-tecnologias-utilizadas">2.4 Tecnologias Utilizadas<a class="headerlink" href="#24-tecnologias-utilizadas" title="Permanent link">¶</a></h2>

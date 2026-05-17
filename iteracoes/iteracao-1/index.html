@@ -80,18 +80,26 @@
 <a href="../">Visão Geral</a>
 </li>
 <li class="dropdown-submenu">
-<a href="" tabindex="-1">IT1 — Unidade 1</a>
+<a href="" tabindex="-1">Unidade 1</a>
 <ul class="dropdown-menu">
-<li class="active">
-<a href="./">Resumo</a>
+<li>
+<a href="../unidade-1/">Resumo</a>
 </li>
 <li>
-<a href="atas/2026-04-09/">Ata — 09/04/2026</a>
+<a href="../unidade-1/atas/2026-04-09/">Ata — 09/04/2026</a>
 </li>
 </ul>
 </li>
 <li class="dropdown-submenu">
-<a href="" tabindex="-1">IT2 — Vitrine Pública</a>
+<a href="" tabindex="-1">IT1 — Vitrine Pública</a>
+<ul class="dropdown-menu">
+<li class="active">
+<a href="./">Resumo</a>
+</li>
+</ul>
+</li>
+<li class="dropdown-submenu">
+<a href="" tabindex="-1">IT2 — Lead Capture</a>
 <ul class="dropdown-menu">
 <li>
 <a href="../iteracao-2/">Resumo</a>
@@ -99,18 +107,10 @@
 </ul>
 </li>
 <li class="dropdown-submenu">
-<a href="" tabindex="-1">IT3 — Núcleo Admin</a>
+<a href="" tabindex="-1">IT3 — Núcleo Operacional</a>
 <ul class="dropdown-menu">
 <li>
 <a href="../iteracao-3/">Resumo</a>
-</li>
-</ul>
-</li>
-<li class="dropdown-submenu">
-<a href="" tabindex="-1">IT4 — Lead Capture</a>
-<ul class="dropdown-menu">
-<li>
-<a href="../iteracao-4/">Resumo</a>
 </li>
 </ul>
 </li>
@@ -130,12 +130,12 @@
                         </a>
 </li>
 <li>
-<a href="../" rel="prev">
+<a href="../unidade-1/atas/2026-04-09/" rel="prev">
 <i class="fas fa-arrow-left"></i> Previous
                         </a>
 </li>
 <li>
-<a href="atas/2026-04-09/" rel="next">
+<a href="../iteracao-2/" rel="next">
                             Next <i class="fas fa-arrow-right"></i>
 </a>
 </li>
@@ -146,99 +146,202 @@
 <div class="container">
 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
 <ul class="nav bs-sidenav">
-<li class="first-level active"><a href="#it1-unidade-1-documento-de-visao">IT1 — Unidade 1: Documento de Visão</a></li>
-<li class="second-level"><a href="#objetivo">Objetivo</a></li>
-<li class="second-level"><a href="#entregas">Entregas</a></li>
+<li class="first-level active"><a href="#it1-vitrine-publica">IT1 — Vitrine Pública</a></li>
+<li class="second-level"><a href="#caracteristicas-de-produto-cps">Características de Produto (CPs)</a></li>
 <li class="second-level"><a href="#cerimonias-e-reunioes">Cerimônias e Reuniões</a></li>
-<li class="third-level"><a href="#iteration-planning-09042026">Iteration Planning — 09/04/2026</a></li>
+<li class="second-level"><a href="#entregas">Entregas</a></li>
+<li class="second-level"><a href="#evidencias-de-entrega">Evidências de Entrega</a></li>
+<li class="third-level"><a href="#prs-mergeados">PRs Mergeados</a></li>
+<li class="third-level"><a href="#demonstracao-das-features">Demonstração das Features</a></li>
+<li class="third-level"><a href="#criterios-de-aceitacao-validados">Critérios de Aceitação Validados</a></li>
+<li class="third-level"><a href="#validacao-pelo-cliente-professor">Validação pelo Cliente / Professor</a></li>
 <li class="second-level"><a href="#cronograma-da-iteracao">Cronograma da Iteração</a></li>
 </ul>
 </div></div>
 <div class="col-md-9" role="main">
-<h1 id="it1-unidade-1-documento-de-visao">IT1 — Unidade 1: Documento de Visão<a class="headerlink" href="#it1-unidade-1-documento-de-visao" title="Permanent link">¶</a></h1>
-<p><strong>Período:</strong> 09/04/2026 – 14/04/2026
-<strong>Status:</strong> ✅ Concluída
-<strong>Entrega:</strong> Documento de Visão — GitHub Pages</p>
+<h1 id="it1-vitrine-publica">IT1 — Vitrine Pública<a class="headerlink" href="#it1-vitrine-publica" title="Permanent link">¶</a></h1>
+<p><strong>Período:</strong> 15/04/2026 – 19/05/2026
+<strong>Status:</strong> 🔄 Em andamento
+<strong>Meta:</strong> "Qualquer visitante acessa a vitrine pública da Crianex, vê o portfólio de SaaS, com página institucional e suporte PT/EN, em layout responsivo."</p>
 <hr/>
-<h2 id="objetivo">Objetivo<a class="headerlink" href="#objetivo" title="Permanent link">¶</a></h2>
-<p>Iteração inicial de alinhamento com o cliente e fundação do projeto. O foco foi a produção do <strong>Documento de Visão</strong>, reconhecimento do problema do cliente e a configuração da infraestrutura de documentação (GitHub Pages via MkDocs), com entrega final em <strong>14/04/2026</strong>.</p>
-<p>Esta iteração cobre as <strong>etapas 1 e 2 do FDD</strong>:</p>
-<ul>
-<li><strong>Etapa 1 — Desenvolver Modelo Global:</strong> Brainstorming com o cliente, Rich Picture, Diagrama de Ishikawa, definição do problema central.</li>
-<li><strong>Etapa 2 — Construir Lista de Funcionalidades:</strong> Identificação dos Objetivos Específicos (OEs) e Características de Produto (CPs) iniciais.</li>
-</ul>
-<hr/>
-<h2 id="entregas">Entregas<a class="headerlink" href="#entregas" title="Permanent link">¶</a></h2>
+<h2 id="caracteristicas-de-produto-cps">Características de Produto (CPs)<a class="headerlink" href="#caracteristicas-de-produto-cps" title="Permanent link">¶</a></h2>
 <table>
 <thead>
 <tr>
-<th>#</th>
-<th>Entrega</th>
-<th>Responsável</th>
-<th>Status</th>
+<th>CP</th>
+<th>Característica</th>
+<th>OE</th>
+<th>Prioridade</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>1</td>
-<td>Seções 2.4 a 2.7 do Documento de Visão</td>
-<td>Hugo e Philipe</td>
-<td>✅</td>
-</tr>
-<tr>
-<td>2</td>
-<td>Seções 3.1 a 3.3 do Documento de Visão</td>
-<td>Camille e Leonardo</td>
-<td>✅</td>
-</tr>
-<tr>
-<td>3</td>
-<td>Seções 4.1, 4.2 e Tabela de Engenharia de Requisitos</td>
-<td>Heitor e Lucas</td>
-<td>✅</td>
-</tr>
-<tr>
-<td>4</td>
-<td>Lições Aprendidas (10.1), Cronograma e GitHub Pages</td>
-<td>Lucas</td>
-<td>✅</td>
-</tr>
-<tr>
-<td>5</td>
-<td>Cenário Atual, Solução Proposta e Correções gerais</td>
-<td>Toda a Equipe</td>
-<td>✅</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
 </tbody>
 </table>
 <hr/>
 <h2 id="cerimonias-e-reunioes">Cerimônias e Reuniões<a class="headerlink" href="#cerimonias-e-reunioes" title="Permanent link">¶</a></h2>
-<h3 id="iteration-planning-09042026">Iteration Planning — 09/04/2026<a class="headerlink" href="#iteration-planning-09042026" title="Permanent link">¶</a></h3>
-<p>Reunião de kickoff realizada via Discord com toda a equipe e o Domain Expert (Otávio Maya / Vitor Marconi).</p>
-<p>:material-file-document: <a href="atas/2026-04-09/">Ver Ata — 09/04/2026</a></p>
-<h4 id="gravacao-da-reuniao">Gravação da Reunião<a class="headerlink" href="#gravacao-da-reuniao" title="Permanent link">¶</a></h4>
-<div style="width: 100%; max-width: 900px; margin: 1.5rem 0; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.15);">
-<video controls="" style="width: 100%; display: block;">
-<source src="videos/reuniao-iteracao-1.mp4" type="video/mp4"/>
-<p>Seu navegador não suporta reprodução de vídeo.
-    <a href="videos/reuniao-iteracao-1.mp4">Baixar o vídeo</a>.</p>
-</video>
+<div class="admonition info">
+<p class="admonition-title">Adicionar reuniões</p>
+<p>Registre as reuniões desta iteração criando atas em <code>atas/YYYY-MM-DD.md</code> e linkando abaixo.</p>
 </div>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Data</th>
+<th>Cerimônia</th>
+<th>Ata</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>—</td>
+<td>—</td>
+<td>Iteration Planning</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h2 id="entregas">Entregas<a class="headerlink" href="#entregas" title="Permanent link">¶</a></h2>
+<div class="admonition info">
+<p class="admonition-title">Em andamento</p>
+<p>As entregas serão registradas conforme o desenvolvimento avança.</p>
+</div>
+<hr/>
+<h2 id="evidencias-de-entrega">Evidências de Entrega<a class="headerlink" href="#evidencias-de-entrega" title="Permanent link">¶</a></h2>
+<h3 id="prs-mergeados">PRs Mergeados<a class="headerlink" href="#prs-mergeados" title="Permanent link">¶</a></h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Feature</th>
+<th>PR</th>
+<th>Revisor</th>
+<th>Data de Merge</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h3 id="demonstracao-das-features">Demonstração das Features<a class="headerlink" href="#demonstracao-das-features" title="Permanent link">¶</a></h3>
+<div class="admonition tip">
+<p class="admonition-title">Como registrar</p>
+<p>Adicione abaixo links para gravações de demo, screenshots ou protótipos validados.</p>
+</div>
+<!-- Exemplo:
+#### CP4 — Vitrine pública de produtos SaaS
+![Vitrine publicada](./videos/vitrine-cp4.png)
+
+#### CP5 — Página Institucional
+![Página institucional](./videos/institucional-cp5.png)
+
+#### CP7 — Suporte PT/EN
+![Seletor de idioma](./videos/multilingual-cp7.png)
+-->
+<h3 id="criterios-de-aceitacao-validados">Critérios de Aceitação Validados<a class="headerlink" href="#criterios-de-aceitacao-validados" title="Permanent link">¶</a></h3>
+<table>
+<thead>
+<tr>
+<th>US</th>
+<th>Feature</th>
+<th>Critério</th>
+<th>Validado por</th>
+<th>Data</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>US-01</td>
+<td>F-01 — Listar catálogo SaaS</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>US-02</td>
+<td>F-02 — Detalhes de produto</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>US-03</td>
+<td>F-03 — Página institucional</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>US-04</td>
+<td>F-04 — Equipe e história</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>US-05</td>
+<td>F-05 — Vitrine em inglês</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>US-06</td>
+<td>F-06 — Alternar idioma PT/EN</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h3 id="validacao-pelo-cliente-professor">Validação pelo Cliente / Professor<a class="headerlink" href="#validacao-pelo-cliente-professor" title="Permanent link">¶</a></h3>
+<table>
+<thead>
+<tr>
+<th>Data</th>
+<th>Origem</th>
+<th>Feedback</th>
+<th>Issue Aberta</th>
+<th>Resolvida</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
 <hr/>
 <h2 id="cronograma-da-iteracao">Cronograma da Iteração<a class="headerlink" href="#cronograma-da-iteracao" title="Permanent link">¶</a></h2>
 <div class="mermaid">gantt
-    title IT1 — Unidade 1
+    title IT2 — Vitrine Pública
     dateFormat  YYYY-MM-DD
     section Planejamento
-    Iteration Planning (kickoff)   :done, 2026-04-09, 1d
+    Iteration Planning             :done, 2026-04-15, 3d
     section Desenvolvimento
-    Seções 2.4–2.7                 :done, 2026-04-10, 3d
-    Seções 3.1–3.3                 :done, 2026-04-10, 3d
-    Seções 4.1–4.2                 :done, 2026-04-10, 3d
-    Lições Aprendidas              :done, 2026-04-10, 3d
+    CP4 — Vitrine SaaS             :active, 2026-04-18, 18d
+    CP5 — Página Institucional     :active, 2026-04-18, 18d
+    CP7 — Suporte PT/EN            :2026-05-06, 8d
     section Entrega
-    Deploy GitHub Pages            :done, 2026-04-13, 1d
-    Entrega Final                  :milestone, 2026-04-14, 0d
+    Validação com cliente          :2026-05-14, 3d
+    Entrega Final                  :milestone, 2026-05-19, 0d
 </div></div>
 </div>
 <footer class="col-md-12 text-center">

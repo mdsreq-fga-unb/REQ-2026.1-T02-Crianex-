@@ -80,18 +80,26 @@
 <a href="../../iteracoes/">Visão Geral</a>
 </li>
 <li class="dropdown-submenu">
-<a href="" tabindex="-1">IT1 — Unidade 1</a>
+<a href="" tabindex="-1">Unidade 1</a>
 <ul class="dropdown-menu">
 <li>
-<a href="../../iteracoes/iteracao-1/">Resumo</a>
+<a href="../../iteracoes/unidade-1/">Resumo</a>
 </li>
 <li>
-<a href="../../iteracoes/iteracao-1/atas/2026-04-09/">Ata — 09/04/2026</a>
+<a href="../../iteracoes/unidade-1/atas/2026-04-09/">Ata — 09/04/2026</a>
 </li>
 </ul>
 </li>
 <li class="dropdown-submenu">
-<a href="" tabindex="-1">IT2 — Vitrine Pública</a>
+<a href="" tabindex="-1">IT1 — Vitrine Pública</a>
+<ul class="dropdown-menu">
+<li>
+<a href="../../iteracoes/iteracao-1/">Resumo</a>
+</li>
+</ul>
+</li>
+<li class="dropdown-submenu">
+<a href="" tabindex="-1">IT2 — Lead Capture</a>
 <ul class="dropdown-menu">
 <li>
 <a href="../../iteracoes/iteracao-2/">Resumo</a>
@@ -99,18 +107,10 @@
 </ul>
 </li>
 <li class="dropdown-submenu">
-<a href="" tabindex="-1">IT3 — Núcleo Admin</a>
+<a href="" tabindex="-1">IT3 — Núcleo Operacional</a>
 <ul class="dropdown-menu">
 <li>
 <a href="../../iteracoes/iteracao-3/">Resumo</a>
-</li>
-</ul>
-</li>
-<li class="dropdown-submenu">
-<a href="" tabindex="-1">IT4 — Lead Capture</a>
-<ul class="dropdown-menu">
-<li>
-<a href="../../iteracoes/iteracao-4/">Resumo</a>
 </li>
 </ul>
 </li>
@@ -272,7 +272,7 @@
 <h2 id="52-roadmap-de-iteracoes">5.2 Roadmap de Iterações<a class="headerlink" href="#52-roadmap-de-iteracoes" title="Permanent link">¶</a></h2>
 <p>O quadro abaixo apresenta os ciclos de trabalho planejados, organizados por <strong>Valor de Negócio</strong> entregue ao cliente real (Otavio Maya, CTO Crianex).</p>
 <blockquote>
-<p><strong>Nota:</strong> O planejamento é orientado ao Índice de Prioridade (IP = VB / PT). A ordem das CPs dentro de cada iteração pode ser reordenada conforme feedback do cliente.</p>
+<p><strong>Nota:</strong> O planejamento é orientado ao Índice de Prioridade determinado pelo <a href="../solucao/#mapeamento-de-valor-das-características-feature-setvalue-matrix">valorXesforco</a>. A ordem das CPs dentro de cada iteração pode ser reordenada conforme feedback do cliente.</p>
 </blockquote>
 <table>
 <thead>
@@ -289,39 +289,30 @@
 <tbody>
 <tr>
 <td><strong>IT1</strong></td>
-<td>✅</td>
-<td>até 26/04/2026</td>
-<td>Documentação Inicial e Setup</td>
-<td>—</td>
-<td>Levantar escopo, documentar Visão de Produto, configurar ambiente e definir arquitetura macro.</td>
-<td>Reunião inicial com Otavio: validação de escopo, domínio e priorização do MVP.</td>
-</tr>
-<tr>
-<td><strong>IT2</strong></td>
 <td>🔄</td>
-<td>27/04 até 19/05</td>
+<td>28/05 até 25/05</td>
 <td><strong>Vitrine Pública</strong></td>
-<td><a href="../solucao/#características-do-produto-cp">CP4</a> · <a href="../solucao/#características-do-produto-cp">CP5</a> · <a href="../solucao/#características-do-produto-cp">CP6</a> · <a href="../solucao/#características-do-produto-cp">CP8</a></td>
+<td><a href="../solucao/#características-do-produto-cp">CP4</a> · <a href="../solucao/#características-do-produto-cp">CP5</a> · <a href="../solucao/#características-do-produto-cp">CP6</a></td>
 <td>"Qualquer visitante acessa a vitrine pública da Crianex, vê o portfólio de produtos SaaS com página institucional em PT/EN, em layout responsivo."</td>
 <td>Partial Validation contínua. Formal Validation com demo focada em conversão e navegação.</td>
 </tr>
 <tr>
-<td><strong>IT3</strong></td>
+<td><strong>IT2</strong></td>
 <td>⏳</td>
-<td>20/05 até 13/06</td>
-<td><strong>Núcleo Admin</strong></td>
-<td><a href="../solucao/#características-do-produto-cp">CP2</a> · <a href="../solucao/#características-do-produto-cp">CP7</a> · <a href="../solucao/#características-do-produto-cp">CP9</a></td>
-<td>"A equipe interna acessa o CRM Kanban, o Dashboard Executivo e o painel de logs unificados a partir de um único ponto de autenticação."</td>
-<td>Validação do cruzamento de logs e tickets; métricas operacionais com os sócios.</td>
+<td>26/05 até 18/06</td>
+<td><strong>Lead Capture</strong></td>
+<td><a href="../solucao/#características-do-produto-cp">CP1</a> · <a href="../solucao/#características-do-produto-cp">CP8</a> · <a href="../solucao/#características-do-produto-cp">CP9</a></td>
+<td>"Leads de novos visitantes são capturados via formulário público e registrados automaticamente no CRM; dúvidas comuns são resolvidas pelo FAQ sem abertura de ticket; e receitas por produto são controladas centralmente com exportação de relatórios."</td>
+<td>Validação ponta a ponta: lead submetido no formulário aparece como card no CRM;</td>
 </tr>
 <tr>
-<td><strong>IT4</strong></td>
+<td><strong>IT3</strong></td>
 <td>⏳</td>
-<td>14/06 até 07/07</td>
-<td><strong>Lead Capture</strong></td>
-<td><a href="../solucao/#características-do-produto-cp">CP1</a> · <a href="../solucao/#características-do-produto-cp">CP10</a> · <a href="../solucao/#características-do-produto-cp">CP11</a></td>
-<td>"Leads de novos visitantes são capturados via formulário público e registrados automaticamente no CRM; dúvidas comuns são resolvidas pelo FAQ sem abertura de ticket; e receitas por produto são controladas centralmente com exportação de relatórios."</td>
-<td>Validação ponta a ponta: lead submetido no formulário aparece como card no CRM (CP6); artigo de FAQ acessado sem login (CP8); relatório financeiro exportado com dados reais (CP9).</td>
+<td>19/06 até 07/07</td>
+<td><strong>Núcleo Operacional</strong></td>
+<td><a href="../solucao/#características-do-produto-cp">CP2</a> · <a href="../solucao/#características-do-produto-cp">CP3</a> · <a href="../solucao/#características-do-produto-cp">CP7</a> ·</td>
+<td>"A equipe interna acessa o CRM Kanban, o Dashboard Executivo e o painel de logs unificados a partir de um único ponto de autenticação."</td>
+<td>Validação do cruzamento de logs e tickets; métricas operacionais com os sócios.</td>
 </tr>
 </tbody>
 </table>

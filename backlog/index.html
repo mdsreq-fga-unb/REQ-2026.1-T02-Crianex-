@@ -139,18 +139,18 @@
                         
                             
   <li class="dropdown-submenu">
-    <a tabindex="-1" href="">IT1 — Unidade 1</a>
+    <a tabindex="-1" href="">Unidade 1</a>
     <ul class="dropdown-menu">
         
             
 <li >
-    <a href="../iteracoes/iteracao-1/">Resumo</a>
+    <a href="../iteracoes/unidade-1/">Resumo</a>
 </li>
 
         
             
 <li >
-    <a href="../iteracoes/iteracao-1/atas/2026-04-09/">Ata — 09/04/2026</a>
+    <a href="../iteracoes/unidade-1/atas/2026-04-09/">Ata — 09/04/2026</a>
 </li>
 
         
@@ -160,7 +160,22 @@
                         
                             
   <li class="dropdown-submenu">
-    <a tabindex="-1" href="">IT2 — Vitrine Pública</a>
+    <a tabindex="-1" href="">IT1 — Vitrine Pública</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../iteracoes/iteracao-1/">Resumo</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">IT2 — Lead Capture</a>
     <ul class="dropdown-menu">
         
             
@@ -175,27 +190,12 @@
                         
                             
   <li class="dropdown-submenu">
-    <a tabindex="-1" href="">IT3 — Núcleo Admin</a>
+    <a tabindex="-1" href="">IT3 — Núcleo Operacional</a>
     <ul class="dropdown-menu">
         
             
 <li >
     <a href="../iteracoes/iteracao-3/">Resumo</a>
-</li>
-
-        
-    </ul>
-  </li>
-
-                        
-                            
-  <li class="dropdown-submenu">
-    <a tabindex="-1" href="">IT4 — Lead Capture</a>
-    <ul class="dropdown-menu">
-        
-            
-<li >
-    <a href="../iteracoes/iteracao-4/">Resumo</a>
 </li>
 
         
@@ -228,7 +228,7 @@
                         </a>
                     </li>
                     <li >
-                        <a rel="prev" href="../iteracoes/iteracao-4/">
+                        <a rel="prev" href="../iteracoes/iteracao-3/">
                             <i class="fas fa-arrow-left"></i> Previous
                         </a>
                     </li>
@@ -247,124 +247,883 @@
         
         <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
-        <li class="first-level active"><a href="#backlog-do-produto">Backlog do Produto</a></li>
-            <li class="second-level"><a href="#legenda-de-status">Legenda de Status</a></li>
+        <li class="first-level active"><a href="#backlog-do-produto-fdd-feature-list">Backlog do Produto — FDD Feature List</a></li>
+            <li class="second-level"><a href="#requisitos-funcionais">Requisitos Funcionais</a></li>
                 
-            <li class="second-level"><a href="#epicos">Épicos</a></li>
+            <li class="second-level"><a href="#requisitos-nao-funcionais">Requisitos Não Funcionais</a></li>
                 
-            <li class="second-level"><a href="#user-stories">User Stories</a></li>
+            <li class="second-level"><a href="#priorizacao-valor-esforco">Priorização: Valor × Esforço</a></li>
                 
-                <li class="third-level"><a href="#ep-01-autenticacao-e-gestao-de-usuarios">EP-01 — Autenticação e Gestão de Usuários</a></li>
-                <li class="third-level"><a href="#ep-02-gestao-de-projetos">EP-02 — Gestão de Projetos</a></li>
+            <li class="second-level"><a href="#feature-sets">Feature Sets</a></li>
+                
+            <li class="second-level"><a href="#feature-list">Feature List</a></li>
+                
+                <li class="third-level"><a href="#fs-01-vitrine-publica-it2">FS-01 — Vitrine Pública (IT2)</a></li>
+                <li class="third-level"><a href="#fs-03-lead-capture-it3">FS-03 — Lead Capture (IT3)</a></li>
+                <li class="third-level"><a href="#fs-02-nucleo-operacional-it4">FS-02 — Núcleo Operacional (IT4)</a></li>
+            <li class="second-level"><a href="#cenarios-bdd">Cenários BDD</a></li>
+                
     </ul>
 </div></div>
         <div class="col-md-9" role="main">
 
-<h1 id="backlog-do-produto">Backlog do Produto<a class="headerlink" href="#backlog-do-produto" title="Permanent link">&para;</a></h1>
-<p>Épicos, user stories e tarefas priorizadas da plataforma Crianex.</p>
+<h1 id="backlog-do-produto-fdd-feature-list">Backlog do Produto — FDD Feature List<a class="headerlink" href="#backlog-do-produto-fdd-feature-list" title="Permanent link">&para;</a></h1>
+<p>Organizado por Característica de Produto (CP) seguindo a etapa 2 do FDD (<strong>Construir Lista de Funcionalidades</strong>).<br />
+Rastreabilidade: <strong>RF → CP → OE → Iteração</strong>.</p>
 <hr />
-<h2 id="legenda-de-status">Legenda de Status<a class="headerlink" href="#legenda-de-status" title="Permanent link">&para;</a></h2>
-<p><span class="badge badge--green">Concluído</span>
-<span class="badge badge--blue">Em andamento</span>
-<span class="badge badge--yellow">A fazer</span>
-<span class="badge badge--red">Bloqueado</span>
-<span class="badge badge--gray">Cancelado</span></p>
-<hr />
-<h2 id="epicos">Épicos<a class="headerlink" href="#epicos" title="Permanent link">&para;</a></h2>
+<h2 id="requisitos-funcionais">Requisitos Funcionais<a class="headerlink" href="#requisitos-funcionais" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>Rastreabilidade completa: RF → CP (fonte: <a href="../visao/solucao/#23-objetivos-específicos-e-características-do-produto">Seção 2.3 — Solução</a>) → Iteração</p>
+</blockquote>
 <table>
 <thead>
 <tr>
 <th>ID</th>
-<th>Épico</th>
+<th>Requisito Funcional</th>
+<th>CP</th>
+<th>OE</th>
+<th>IT</th>
 <th>Status</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>EP-01</td>
-<td>Exemplo 1</td>
+<td>RF01</td>
+<td>Autenticar administrador</td>
+<td>CP7</td>
+<td>OE1</td>
+<td>IT3</td>
 <td><span class="badge badge--yellow">A fazer</span></td>
 </tr>
 <tr>
-<td>EP-02</td>
-<td>Exemplo 2</td>
+<td>RF02</td>
+<td>Aplicar segundo fator de autenticação</td>
+<td>CP7</td>
+<td>OE1</td>
+<td>IT3</td>
 <td><span class="badge badge--yellow">A fazer</span></td>
 </tr>
 <tr>
-<td>EP-03</td>
-<td>Exemplo 3</td>
+<td>RF03</td>
+<td>Recuperar senha do administrador</td>
+<td>CP7</td>
+<td>OE1</td>
+<td>IT3</td>
 <td><span class="badge badge--yellow">A fazer</span></td>
 </tr>
 <tr>
-<td>EP-04</td>
-<td>Exemplo 4</td>
+<td>RF04</td>
+<td>Encerrar sessão do administrador</td>
+<td>CP7</td>
+<td>OE1</td>
+<td>IT3</td>
+<td><span class="badge badge--yellow">A fazer</span></td>
+</tr>
+<tr>
+<td>RF05</td>
+<td>Cadastrar novo administrador</td>
+<td>CP7</td>
+<td>OE1</td>
+<td>IT3</td>
+<td><span class="badge badge--yellow">A fazer</span></td>
+</tr>
+<tr>
+<td>RF06</td>
+<td>Editar dados do administrador</td>
+<td>CP7</td>
+<td>OE1</td>
+<td>IT3</td>
+<td><span class="badge badge--yellow">A fazer</span></td>
+</tr>
+<tr>
+<td>RF07</td>
+<td>Inativar administrador</td>
+<td>CP7</td>
+<td>OE1</td>
+<td>IT3</td>
+<td><span class="badge badge--yellow">A fazer</span></td>
+</tr>
+<tr>
+<td>RF08</td>
+<td>Editar dados do cliente</td>
+<td>CP1</td>
+<td>OE3</td>
+<td>IT4</td>
+<td><span class="badge badge--yellow">A fazer</span></td>
+</tr>
+<tr>
+<td>RF09</td>
+<td>Inativar cliente cadastrado</td>
+<td>CP1</td>
+<td>OE3</td>
+<td>IT4</td>
+<td><span class="badge badge--yellow">A fazer</span></td>
+</tr>
+<tr>
+<td>RF10</td>
+<td>Cadastrar lead manualmente no CRM</td>
+<td>CP1</td>
+<td>OE3</td>
+<td>IT4</td>
+<td><span class="badge badge--yellow">A fazer</span></td>
+</tr>
+<tr>
+<td>RF11</td>
+<td>Mover card entre colunas do CRM</td>
+<td>CP1</td>
+<td>OE3</td>
+<td>IT4</td>
+<td><span class="badge badge--yellow">A fazer</span></td>
+</tr>
+<tr>
+<td>RF12</td>
+<td>Mover card entre colunas do CRM (drag-and-drop)</td>
+<td>CP1</td>
+<td>OE3</td>
+<td>IT4</td>
+<td><span class="badge badge--yellow">A fazer</span></td>
+</tr>
+<tr>
+<td>RF13</td>
+<td>Adicionar colunas no CRM</td>
+<td>CP1</td>
+<td>OE3</td>
+<td>IT4</td>
+<td><span class="badge badge--yellow">A fazer</span></td>
+</tr>
+<tr>
+<td>RF14</td>
+<td>Remover colunas no CRM</td>
+<td>CP1</td>
+<td>OE3</td>
+<td>IT4</td>
+<td><span class="badge badge--yellow">A fazer</span></td>
+</tr>
+<tr>
+<td>RF15</td>
+<td>Renomear colunas no CRM</td>
+<td>CP1</td>
+<td>OE3</td>
+<td>IT4</td>
+<td><span class="badge badge--yellow">A fazer</span></td>
+</tr>
+<tr>
+<td>RF16</td>
+<td>Definir estágio da coluna no funil</td>
+<td>CP1</td>
+<td>OE3</td>
+<td>IT4</td>
+<td><span class="badge badge--yellow">A fazer</span></td>
+</tr>
+<tr>
+<td>RF17</td>
+<td>Registrar histórico de interação com cliente</td>
+<td>CP1</td>
+<td>OE3</td>
+<td>IT4</td>
+<td><span class="badge badge--yellow">A fazer</span></td>
+</tr>
+<tr>
+<td>RF18</td>
+<td>Vincular produto SaaS ao card de cliente</td>
+<td>CP1</td>
+<td>OE3</td>
+<td>IT4</td>
+<td><span class="badge badge--yellow">A fazer</span></td>
+</tr>
+<tr>
+<td>RF19</td>
+<td>Atribuir responsável interno ao card</td>
+<td>CP1</td>
+<td>OE3</td>
+<td>IT4</td>
+<td><span class="badge badge--yellow">A fazer</span></td>
+</tr>
+<tr>
+<td>RF20</td>
+<td>Consultar cards do CRM</td>
+<td>CP1</td>
+<td>OE3</td>
+<td>IT4</td>
+<td><span class="badge badge--yellow">A fazer</span></td>
+</tr>
+<tr>
+<td>RF21</td>
+<td>Cadastrar produto SaaS na vitrine</td>
+<td>CP7</td>
+<td>OE1</td>
+<td>IT3</td>
+<td><span class="badge badge--yellow">A fazer</span></td>
+</tr>
+<tr>
+<td>RF22</td>
+<td>Editar produto SaaS da vitrine</td>
+<td>CP7</td>
+<td>OE1</td>
+<td>IT3</td>
+<td><span class="badge badge--yellow">A fazer</span></td>
+</tr>
+<tr>
+<td>RF23</td>
+<td>Remover produto SaaS da vitrine</td>
+<td>CP7</td>
+<td>OE1</td>
+<td>IT3</td>
+<td><span class="badge badge--yellow">A fazer</span></td>
+</tr>
+<tr>
+<td>RF24</td>
+<td>Reordenar produtos SaaS da vitrine</td>
+<td>CP7</td>
+<td>OE1</td>
+<td>IT3</td>
+<td><span class="badge badge--yellow">A fazer</span></td>
+</tr>
+<tr>
+<td>RF25</td>
+<td>Alterar visibilidade do produto SaaS</td>
+<td>CP7</td>
+<td>OE1</td>
+<td>IT3</td>
+<td><span class="badge badge--yellow">A fazer</span></td>
+</tr>
+<tr>
+<td>RF26</td>
+<td>Consultar portfólio de produtos SaaS</td>
+<td>CP4</td>
+<td>OE2</td>
+<td>IT2</td>
+<td><span class="badge badge--yellow">A fazer</span></td>
+</tr>
+<tr>
+<td>RF27</td>
+<td>Consultar detalhes de produto SaaS</td>
+<td>CP4</td>
+<td>OE2</td>
+<td>IT2</td>
+<td><span class="badge badge--yellow">A fazer</span></td>
+</tr>
+<tr>
+<td>RF28</td>
+<td>Acessar página institucional</td>
+<td>CP5</td>
+<td>OE2</td>
+<td>IT2</td>
+<td><span class="badge badge--yellow">A fazer</span></td>
+</tr>
+<tr>
+<td>RF29</td>
+<td>Cadastrar contato com a empresa</td>
+<td>CP6</td>
+<td>OE2</td>
+<td>IT2</td>
+<td><span class="badge badge--yellow">A fazer</span></td>
+</tr>
+<tr>
+<td>RF30</td>
+<td>Cadastrar artigo de FAQ</td>
+<td>CP8</td>
+<td>OE2</td>
+<td>IT2</td>
+<td><span class="badge badge--yellow">A fazer</span></td>
+</tr>
+<tr>
+<td>RF31</td>
+<td>Editar artigo de FAQ</td>
+<td>CP8</td>
+<td>OE2</td>
+<td>IT2</td>
+<td><span class="badge badge--yellow">A fazer</span></td>
+</tr>
+<tr>
+<td>RF32</td>
+<td>Remover artigo de FAQ</td>
+<td>CP8</td>
+<td>OE2</td>
+<td>IT2</td>
+<td><span class="badge badge--yellow">A fazer</span></td>
+</tr>
+<tr>
+<td>RF33</td>
+<td>Categorizar artigo de FAQ</td>
+<td>CP8</td>
+<td>OE2</td>
+<td>IT2</td>
+<td><span class="badge badge--yellow">A fazer</span></td>
+</tr>
+<tr>
+<td>RF34</td>
+<td>Publicar artigo de FAQ</td>
+<td>CP8</td>
+<td>OE2</td>
+<td>IT2</td>
+<td><span class="badge badge--yellow">A fazer</span></td>
+</tr>
+<tr>
+<td>RF35</td>
+<td>Despublicar artigo de FAQ</td>
+<td>CP8</td>
+<td>OE2</td>
+<td>IT2</td>
+<td><span class="badge badge--yellow">A fazer</span></td>
+</tr>
+<tr>
+<td>RF36</td>
+<td>Consultar artigos de FAQ</td>
+<td>CP8</td>
+<td>OE2</td>
+<td>IT2</td>
+<td><span class="badge badge--yellow">A fazer</span></td>
+</tr>
+<tr>
+<td>RF37</td>
+<td>Avaliar artigo de FAQ</td>
+<td>CP8</td>
+<td>OE2</td>
+<td>IT2</td>
+<td><span class="badge badge--yellow">A fazer</span></td>
+</tr>
+<tr>
+<td>RF38</td>
+<td>Consultar histórico de tickets</td>
+<td>CP10</td>
+<td>OE3</td>
+<td>IT4</td>
+<td><span class="badge badge--yellow">A fazer</span></td>
+</tr>
+<tr>
+<td>RF39</td>
+<td>Ampliar ticket</td>
+<td>CP10</td>
+<td>OE3</td>
+<td>IT4</td>
+<td><span class="badge badge--yellow">A fazer</span></td>
+</tr>
+<tr>
+<td>RF40</td>
+<td>Alterar status do ticket</td>
+<td>CP10</td>
+<td>OE3</td>
+<td>IT4</td>
+<td><span class="badge badge--yellow">A fazer</span></td>
+</tr>
+<tr>
+<td>RF41</td>
+<td>Ocultar manualmente tickets</td>
+<td>CP10</td>
+<td>OE3</td>
+<td>IT4</td>
+<td><span class="badge badge--yellow">A fazer</span></td>
+</tr>
+<tr>
+<td>RF42</td>
+<td>Consultar histórico de logs</td>
+<td>CP2</td>
+<td>OE1</td>
+<td>IT3</td>
+<td><span class="badge badge--yellow">A fazer</span></td>
+</tr>
+<tr>
+<td>RF43</td>
+<td>Filtrar logs do sistema</td>
+<td>CP2</td>
+<td>OE1</td>
+<td>IT3</td>
+<td><span class="badge badge--yellow">A fazer</span></td>
+</tr>
+<tr>
+<td>RF44</td>
+<td>Auditar alterações realizadas</td>
+<td>CP2</td>
+<td>OE1</td>
+<td>IT3</td>
+<td><span class="badge badge--yellow">A fazer</span></td>
+</tr>
+<tr>
+<td>RF45</td>
+<td>Exibir indicadores operacionais de tickets</td>
+<td>CP3</td>
+<td>OE1</td>
+<td>IT2</td>
+<td><span class="badge badge--yellow">A fazer</span></td>
+</tr>
+<tr>
+<td>RF46</td>
+<td>Exibir indicadores operacionais</td>
+<td>CP3</td>
+<td>OE1</td>
+<td>IT2</td>
+<td><span class="badge badge--yellow">A fazer</span></td>
+</tr>
+<tr>
+<td>RF47</td>
+<td>Exibir indicadores financeiros</td>
+<td>CP3</td>
+<td>OE3</td>
+<td>IT2</td>
+<td><span class="badge badge--yellow">A fazer</span></td>
+</tr>
+<tr>
+<td>RF48</td>
+<td>Exportar relatório financeiro</td>
+<td>CP9</td>
+<td>OE1</td>
+<td>IT3</td>
+<td><span class="badge badge--yellow">A fazer</span></td>
+</tr>
+<tr>
+<td>RF49</td>
+<td>Listar histórico de notificações</td>
+<td>CP11</td>
+<td>OE3</td>
+<td>IT4</td>
+<td><span class="badge badge--yellow">A fazer</span></td>
+</tr>
+<tr>
+<td>RF50</td>
+<td>Alterar status da notificação</td>
+<td>CP11</td>
+<td>OE3</td>
+<td>IT4</td>
+<td><span class="badge badge--yellow">A fazer</span></td>
+</tr>
+<tr>
+<td>RF51</td>
+<td>Configurar template de notificações</td>
+<td>CP11</td>
+<td>OE3</td>
+<td>IT4</td>
 <td><span class="badge badge--yellow">A fazer</span></td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="user-stories">User Stories<a class="headerlink" href="#user-stories" title="Permanent link">&para;</a></h2>
-<h3 id="ep-01-autenticacao-e-gestao-de-usuarios">EP-01 — Autenticação e Gestão de Usuários<a class="headerlink" href="#ep-01-autenticacao-e-gestao-de-usuarios" title="Permanent link">&para;</a></h3>
+<h2 id="requisitos-nao-funcionais">Requisitos Não Funcionais<a class="headerlink" href="#requisitos-nao-funcionais" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
 <th>ID</th>
-<th>História</th>
-<th>Critérios de Aceitação</th>
+<th>Requisito Não Funcional</th>
+<th>Categoria</th>
+<th>CP / OE</th>
+<th>Critério de Aceitação</th>
 <th>Prioridade</th>
-<th>Status</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>US-01</td>
-<td>Exemplo 1</td>
-<td>Formulário com validação</td>
-<td>Alta</td>
-<td><span class="badge badge--yellow">A fazer</span></td>
-</tr>
-<tr>
-<td>US-02</td>
-<td>Exemplo 2</td>
-<td>Autenticação segura</td>
-<td>Alta</td>
-<td><span class="badge badge--yellow">A fazer</span></td>
-</tr>
-</tbody>
-</table>
-<h3 id="ep-02-gestao-de-projetos">EP-02 — Gestão de Projetos<a class="headerlink" href="#ep-02-gestao-de-projetos" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>ID</th>
-<th>História</th>
-<th>Critérios de Aceitação</th>
-<th>Prioridade</th>
-<th>Status</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>US-03</td>
-<td>Exemplo 1</td>
-<td>Descricao 1</td>
-<td>Alta</td>
-<td><span class="badge badge--yellow">A fazer</span></td>
-</tr>
-<tr>
-<td>US-04</td>
-<td>Exemplo 2</td>
-<td>Descricao 2</td>
-<td>Alta</td>
-<td><span class="badge badge--yellow">A fazer</span></td>
+<td>RNF01</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<div class="admonition tip">
-<p class="admonition-title">Como atualizar o backlog</p>
-<p>Edite este arquivo diretamente ou, para backlogs maiores, crie arquivos separados por épico e atualize a navegação no <code>mkdocs.yml</code>.</p>
-</div></div>
+<h2 id="priorizacao-valor-esforco">Priorização: Valor × Esforço<a class="headerlink" href="#priorizacao-valor-esforco" title="Permanent link">&para;</a></h2>
+<pre><code>IP = VB / PT     onde PT = (CX + ES) / 2
+
+IP ≥ 1,50 → Alta prioridade (Q1)
+IP 1,00–1,49 → Média prioridade (Q2)
+IP &lt; 1,00 → Baixa prioridade (Q3/Q4)
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Sigla</th>
+<th>Descrição</th>
+<th>Escala</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>VB</strong></td>
+<td>Valor de Negócio</td>
+<td>1–5</td>
+</tr>
+<tr>
+<td><strong>CX</strong></td>
+<td>Complexidade técnica</td>
+<td>1–5</td>
+</tr>
+<tr>
+<td><strong>ES</strong></td>
+<td>Esforço de implementação</td>
+<td>1–5</td>
+</tr>
+<tr>
+<td><strong>PT</strong></td>
+<td>Peso técnico = (CX + ES) / 2</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>IP</strong></td>
+<td>Índice de Prioridade = VB / PT</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="feature-sets">Feature Sets<a class="headerlink" href="#feature-sets" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>Mapeamento de iterações conforme <a href="../visao/cronograma/">Cronograma</a>.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>FS</th>
+<th>Feature Set</th>
+<th>OE</th>
+<th>CPs</th>
+<th>Iteração</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FS-01</td>
+<td>Vitrine Pública</td>
+<td>OE2</td>
+<td>CP4, CP5, CP7</td>
+<td>IT2</td>
+</tr>
+<tr>
+<td>FS-02</td>
+<td>Lead Capture</td>
+<td>OE3 / OE1</td>
+<td>CP1, CP9, CP10</td>
+<td>IT3</td>
+</tr>
+<tr>
+<td>FS-03</td>
+<td>Núcleo Operacional</td>
+<td>OE1 / OE2</td>
+<td>CP2, CP3, CP6, CP8</td>
+<td>IT4</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="feature-list">Feature List<a class="headerlink" href="#feature-list" title="Permanent link">&para;</a></h2>
+<h3 id="fs-01-vitrine-publica-it2">FS-01 — Vitrine Pública (IT2)<a class="headerlink" href="#fs-01-vitrine-publica-it2" title="Permanent link">&para;</a></h3>
+<h4 id="cp4-vitrine-publica-de-produtos-saas">CP4 — Vitrine pública de produtos SaaS<a class="headerlink" href="#cp4-vitrine-publica-de-produtos-saas" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Feature</th>
+<th>RFs</th>
+<th>VB</th>
+<th>CX</th>
+<th>ES</th>
+<th>PT</th>
+<th>IP</th>
+<th>Q</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="cp5-pagina-institucional-da-empresa">CP5 — Página Institucional da empresa<a class="headerlink" href="#cp5-pagina-institucional-da-empresa" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Feature</th>
+<th>RFs</th>
+<th>VB</th>
+<th>CX</th>
+<th>ES</th>
+<th>PT</th>
+<th>IP</th>
+<th>Q</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="cp6-formulario-de-contato-e-captacao-de-leads">CP6 — Formulário de contato e captação de leads<a class="headerlink" href="#cp6-formulario-de-contato-e-captacao-de-leads" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Feature</th>
+<th>RFs</th>
+<th>VB</th>
+<th>CX</th>
+<th>ES</th>
+<th>PT</th>
+<th>IP</th>
+<th>Q</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="cp8-faq-e-base-de-conhecimentos-por-produto">CP8 — FAQ e base de conhecimentos por produto<a class="headerlink" href="#cp8-faq-e-base-de-conhecimentos-por-produto" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Feature</th>
+<th>RFs</th>
+<th>VB</th>
+<th>CX</th>
+<th>ES</th>
+<th>PT</th>
+<th>IP</th>
+<th>Q</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="fs-03-lead-capture-it3">FS-03 — Lead Capture (IT3)<a class="headerlink" href="#fs-03-lead-capture-it3" title="Permanent link">&para;</a></h3>
+<h4 id="cp1-crm-interno-kanban-de-clientes">CP1 — CRM Interno Kanban de clientes<a class="headerlink" href="#cp1-crm-interno-kanban-de-clientes" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Feature</th>
+<th>RFs</th>
+<th>VB</th>
+<th>CX</th>
+<th>ES</th>
+<th>PT</th>
+<th>IP</th>
+<th>Q</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="cp10-sistema-de-tickets-de-suporte">CP10 — Sistema de Tickets de Suporte<a class="headerlink" href="#cp10-sistema-de-tickets-de-suporte" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Feature</th>
+<th>RFs</th>
+<th>VB</th>
+<th>CX</th>
+<th>ES</th>
+<th>PT</th>
+<th>IP</th>
+<th>Q</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="cp11-notificacoes-automaticas-no-sistema">CP11 — Notificações automáticas no sistema<a class="headerlink" href="#cp11-notificacoes-automaticas-no-sistema" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Feature</th>
+<th>RFs</th>
+<th>VB</th>
+<th>CX</th>
+<th>ES</th>
+<th>PT</th>
+<th>IP</th>
+<th>Q</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="fs-02-nucleo-operacional-it4">FS-02 — Núcleo Operacional (IT4)<a class="headerlink" href="#fs-02-nucleo-operacional-it4" title="Permanent link">&para;</a></h3>
+<h4 id="cp7-painel-de-gerenciamento-de-produtos-saas">CP7 — Painel de gerenciamento de produtos SaaS<a class="headerlink" href="#cp7-painel-de-gerenciamento-de-produtos-saas" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Feature</th>
+<th>RFs</th>
+<th>VB</th>
+<th>CX</th>
+<th>ES</th>
+<th>PT</th>
+<th>IP</th>
+<th>Q</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="cp2-dashboard-de-logs-e-monitoramento">CP2 — Dashboard de Logs e Monitoramento<a class="headerlink" href="#cp2-dashboard-de-logs-e-monitoramento" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Feature</th>
+<th>RFs</th>
+<th>VB</th>
+<th>CX</th>
+<th>ES</th>
+<th>PT</th>
+<th>IP</th>
+<th>Q</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="cp9-controle-de-faturamento-e-relatorios-financeiros">CP9 — Controle de faturamento e relatórios financeiros<a class="headerlink" href="#cp9-controle-de-faturamento-e-relatorios-financeiros" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Feature</th>
+<th>RFs</th>
+<th>VB</th>
+<th>CX</th>
+<th>ES</th>
+<th>PT</th>
+<th>IP</th>
+<th>Q</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="cenarios-bdd">Cenários BDD<a class="headerlink" href="#cenarios-bdd" title="Permanent link">&para;</a></h2>
+<p>Cenários descritos no formato <strong>Dado / Quando / Então</strong>.  </p></div>
         
         
     </div>
