@@ -44,5 +44,7 @@ nav:
       - "Resumo": iteracoes/iteracao-2/index.md
     - "IT3 — Núcleo Operacional":
       - "Resumo": iteracoes/iteracao-3/index.md
-  - Backlog: backlog/index.md
+  - Backlog: 
+    - "Rastreabilidade": backlog/rastreabilidade.md
+    - "Priorização": backlog/priorizacao.md
   - Arquitetura: arquitetura/index.md
