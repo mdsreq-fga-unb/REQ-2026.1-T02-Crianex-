@@ -1,6 +1,6 @@
-# IT3 — Lead Capture
+# IT3 — Núcleo Operacional
 
-**Período previsto:** ~20/05/2026 – 02/06/2026
+**Período previsto:** 
 **Status:** 🕐 Planejada
 **Meta:** 
 
@@ -10,7 +10,6 @@
 
 | CP | Característica | OE | Prioridade |
 |----|---------------|-----|------------|
-| CP1 | CRM Interno Kanban de clientes | OE1 | Alta |
 
 
 ---
@@ -32,7 +31,7 @@
 ## Evidências de Entrega
 
 !!! warning "Iteração não iniciada"
-    Esta seção será preenchida durante e ao final da IT3.
+    Esta seção será preenchida durante e ao final da IT4.
 
 ### PRs Mergeados
 
@@ -43,22 +42,21 @@
 ### Demonstração das Features
 
 <!-- Adicione gravações de demo, screenshots e protótipos validados:
-#### CP1 — CRM Interno Kanban
-#### CP2 — Dashboard de Logs
-#### CP3 — Dashboard Executivo de KPIs
+#### CP6 — Formulário de contato e captação de leads
+#### CP8 — Painel de gerenciamento de produtos SaaS
+#### CP9 — FAQ e base de conhecimentos
 -->
 
 ### Critérios de Aceitação Validados
 
 | US | Feature | Critério | Validado por | Data |
 |----|---------|----------|--------------|------|
-| US-07 | F-07 — Kanban de clientes | — | — | — |
-| US-08 | F-08 — Cadastrar/editar cliente | — | — | — |
-| — | F-09 — Drag-and-drop Kanban | — | — | — |
-| — | F-10 — Visualizar logs | — | — | — |
-| — | F-11 — Filtrar logs | — | — | — |
-| — | F-16 — KPIs executivos | — | — | — |
-| — | F-17 — Exportar relatório | — | — | — |
+| — | F-12 — CRUD produtos admin | — | — | — |
+| — | F-13 — Publicar/despublicar produto | — | — | — |
+| — | F-14 — Consultar FAQ (visitante) | — | — | — |
+| — | F-15 — Gerenciar FAQ (admin) | — | — | — |
+| — | F-20 — Formulário de contato | — | — | — |
+| — | F-21 — Notificação de novo lead | — | — | — |
 
 ### Validação pelo Cliente / Professor
 

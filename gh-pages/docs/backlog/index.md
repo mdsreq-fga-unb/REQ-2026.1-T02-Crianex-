@@ -95,7 +95,7 @@ IP < 1,00 → Baixa prioridade (Q3/Q4)
 
 ## Feature Sets
 
-> Mapeamento de iterações conforme [Seção 5 — Cronograma](../visao/cronograma.md).
+> Mapeamento de iterações conforme [Cronograma](../visao/cronograma.md).
 
 | FS | Feature Set | OE | CPs | Iteração |
 |----|-------------|-----|-----|----------|
