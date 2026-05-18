@@ -222,6 +222,36 @@ table {
   margin: 0;
 }
 
+/* ── Task list checkboxes (pymdownx.tasklist) ────────────────────────────── */
+.task-list-item { list-style: none; margin-left: -1.5em; }
+.task-list-item input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 1em;
+  height: 1em;
+  border: 2px solid #aaa;
+  border-radius: 3px;
+  margin-right: 0.5em;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+  cursor: default;
+  flex-shrink: 0;
+}
+.task-list-item input[type="checkbox"]:checked {
+  background: var(--crianex-primary);
+  border-color: var(--crianex-primary);
+}
+.task-list-item input[type="checkbox"]:checked::after {
+  content: "✓";
+  color: #fff;
+  font-size: 0.75em;
+  font-weight: 700;
+  position: absolute;
+  top: -1px;
+  left: 1px;
+}
+
 /* ── Code blocks ─────────────────────────────────────────────────────────── */
 pre {
   border-radius: var(--crianex-radius);
