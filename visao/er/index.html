@@ -1,280 +1,176 @@
 <!DOCTYPE html>
+
 <html lang="en">
-
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Plataforma de Gestão e Portfólio de Projetos SaaS">
-    <meta name="author" content="Equipe Crianex">
-    
-    <link rel="shortcut icon" href="../../img/favicon.ico">
-
-    
-    <title>4 · Eng. de Requisitos - Crianex</title>
-    
-
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/v4-shims.css">
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.min.css">
-    <link href='//rsms.me/inter/inter.css' rel='stylesheet' type='text/css'>
-    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
-    <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
-    <link href="../../css/base.min.css" rel="stylesheet">
-    <link href="../../css/cinder.min.css" rel="stylesheet">
-
-    
-        
-        <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/styles/github.min.css">
-        
-    
-    <link href="../../assets/extra.css" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Plataforma de Gestão e Portfólio de Projetos SaaS" name="description"/>
+<meta content="Equipe Crianex" name="author"/>
+<link href="../../img/favicon.ico" rel="shortcut icon"/>
+<title>4 · Eng. de Requisitos - Crianex</title>
+<link href="https://use.fontawesome.com/releases/v5.12.0/css/all.css" rel="stylesheet"/>
+<link href="https://use.fontawesome.com/releases/v5.12.0/css/v4-shims.css" rel="stylesheet"/>
+<link href="//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.min.css" rel="stylesheet"/>
+<link href="//rsms.me/inter/inter.css" rel="stylesheet" type="text/css"/>
+<link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&amp;subset=latin-ext,latin" rel="stylesheet" type="text/css"/>
+<link href="../../css/bootstrap-custom.min.css" rel="stylesheet"/>
+<link href="../../css/base.min.css" rel="stylesheet"/>
+<link href="../../css/cinder.min.css" rel="stylesheet"/>
+<link href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/styles/github.min.css" rel="stylesheet"/>
+<link href="../../assets/extra.css" rel="stylesheet"/>
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
             <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
         <![endif]-->
-
-    
-
-     
 </head>
-
 <body>
-
-    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container">
-
-        <!-- Collapsed navigation -->
-        <div class="navbar-header">
-            <!-- Expander button -->
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            
-
-            <!-- Main title -->
-
-            
-              <a class="navbar-brand" href="../..">Crianex</a>
-            
-        </div>
-
-        <!-- Expanded navigation -->
-        <div class="navbar-collapse collapse">
-                <!-- Main navigation -->
-                <ul class="nav navbar-nav">
-                
-                
-                    <li >
-                        <a href="../..">Home</a>
-                    </li>
-                
-                
-                
-                    <li class="dropdown active">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Visão <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                        
-                            
-<li >
-    <a href="../cenario/">1 · Cenário</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="../solucao/">2 · Solução</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="../estrategias/">3 · Estratégias</a>
-</li>
-
-                        
-                            
-<li class="active">
-    <a href="./">4 · Eng. de Requisitos</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="../cronograma/">5 · Cronograma</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="../equipe/">6 · Equipe e Interação</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="../10-licoes/">Lições Aprendidas</a>
-</li>
-
-                        
-                        </ul>
-                    </li>
-                
-                
-                
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Iterações <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                        
-                            
-<li >
-    <a href="../../iteracoes/">Visão Geral</a>
-</li>
-
-                        
-                            
-  <li class="dropdown-submenu">
-    <a tabindex="-1" href="">Unidade 1</a>
-    <ul class="dropdown-menu">
-        
-            
-<li >
-    <a href="../../iteracoes/unidade-1/">Resumo</a>
-</li>
-
-        
-            
-<li >
-    <a href="../../iteracoes/unidade-1/atas/2026-04-09/">Ata — 09/04/2026</a>
-</li>
-
-        
-    </ul>
-  </li>
-
-                        
-                            
-  <li class="dropdown-submenu">
-    <a tabindex="-1" href="">IT1 — Vitrine Pública</a>
-    <ul class="dropdown-menu">
-        
-            
-<li >
-    <a href="../../iteracoes/iteracao-1/">Resumo</a>
-</li>
-
-        
-    </ul>
-  </li>
-
-                        
-                            
-  <li class="dropdown-submenu">
-    <a tabindex="-1" href="">IT2 — Lead Capture</a>
-    <ul class="dropdown-menu">
-        
-            
-<li >
-    <a href="../../iteracoes/iteracao-2/">Resumo</a>
-</li>
-
-        
-    </ul>
-  </li>
-
-                        
-                            
-  <li class="dropdown-submenu">
-    <a tabindex="-1" href="">IT3 — Núcleo Operacional</a>
-    <ul class="dropdown-menu">
-        
-            
-<li >
-    <a href="../../iteracoes/iteracao-3/">Resumo</a>
-</li>
-
-        
-    </ul>
-  </li>
-
-                        
-                        </ul>
-                    </li>
-                
-                
-                
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Backlog <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                        
-                            
-<li >
-    <a href="../../backlog/rastreabilidade/">Rastreabilidade</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="../../backlog/priorizacao/">Priorização</a>
-</li>
-
-                        
-                        </ul>
-                    </li>
-                
-                
-                
-                    <li >
-                        <a href="../../arquitetura/">Arquitetura</a>
-                    </li>
-                
-                
-                </ul>
-
-            <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
-                            <i class="fas fa-search"></i> Search
-                        </a>
-                    </li>
-                    <li >
-                        <a rel="prev" href="../estrategias/">
-                            <i class="fas fa-arrow-left"></i> Previous
-                        </a>
-                    </li>
-                    <li >
-                        <a rel="next" href="../cronograma/">
-                            Next <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </li>
-            </ul>
-        </div>
-    </div>
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+<div class="container">
+<!-- Collapsed navigation -->
+<div class="navbar-header">
+<!-- Expander button -->
+<button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button">
+<span class="sr-only">Toggle navigation</span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</button>
+<!-- Main title -->
+<a class="navbar-brand" href="../..">Crianex</a>
 </div>
-
-    <div class="container">
-        
-        
-        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
-    <ul class="nav bs-sidenav">
-        <li class="first-level active"><a href="#4-engenharia-de-requisitos">4. Engenharia de Requisitos</a></li>
-            <li class="second-level"><a href="#historico-de-revisao">Histórico de Revisão</a></li>
-                
-            <li class="second-level"><a href="#41-abordagem-de-engenharia-de-requisitos">4.1 Abordagem de Engenharia de Requisitos</a></li>
-                
-                <li class="third-level"><a href="#cerimonias-tecnicas-e-artefatos-do-processo-hibrido">Cerimônias, Técnicas e Artefatos do Processo Híbrido</a></li>
-                <li class="third-level"><a href="#tabela-de-cerimonias-e-tecnicas-do-processo-hibrido-fdd-kanban">Tabela de Cerimônias e Técnicas do Processo Híbrido FDD + Kanban</a></li>
-    </ul>
+<!-- Expanded navigation -->
+<div class="navbar-collapse collapse">
+<!-- Main navigation -->
+<ul class="nav navbar-nav">
+<li>
+<a href="../..">Home</a>
+</li>
+<li class="dropdown active">
+<a class="dropdown-toggle" data-toggle="dropdown" href="#">Visão <b class="caret"></b></a>
+<ul class="dropdown-menu">
+<li>
+<a href="../cenario/">1 · Cenário</a>
+</li>
+<li>
+<a href="../solucao/">2 · Solução</a>
+</li>
+<li>
+<a href="../estrategias/">3 · Estratégias</a>
+</li>
+<li class="active">
+<a href="./">4 · Eng. de Requisitos</a>
+</li>
+<li>
+<a href="../cronograma/">5 · Cronograma</a>
+</li>
+<li>
+<a href="../equipe/">6 · Equipe e Interação</a>
+</li>
+<li>
+<a href="../10-licoes/">Lições Aprendidas</a>
+</li>
+</ul>
+</li>
+<li class="dropdown">
+<a class="dropdown-toggle" data-toggle="dropdown" href="#">Iterações <b class="caret"></b></a>
+<ul class="dropdown-menu">
+<li>
+<a href="../../iteracoes/">Visão Geral</a>
+</li>
+<li class="dropdown-submenu">
+<a href="" tabindex="-1">Unidade 1</a>
+<ul class="dropdown-menu">
+<li>
+<a href="../../iteracoes/unidade-1/">Resumo</a>
+</li>
+<li>
+<a href="../../iteracoes/unidade-1/atas/2026-04-09/">Ata — 09/04/2026</a>
+</li>
+</ul>
+</li>
+<li class="dropdown-submenu">
+<a href="" tabindex="-1">IT1 — Vitrine Pública</a>
+<ul class="dropdown-menu">
+<li>
+<a href="../../iteracoes/iteracao-1/">Resumo</a>
+</li>
+</ul>
+</li>
+<li class="dropdown-submenu">
+<a href="" tabindex="-1">IT2 — Lead Capture</a>
+<ul class="dropdown-menu">
+<li>
+<a href="../../iteracoes/iteracao-2/">Resumo</a>
+</li>
+</ul>
+</li>
+<li class="dropdown-submenu">
+<a href="" tabindex="-1">IT3 — Núcleo Operacional</a>
+<ul class="dropdown-menu">
+<li>
+<a href="../../iteracoes/iteracao-3/">Resumo</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="dropdown">
+<a class="dropdown-toggle" data-toggle="dropdown" href="#">Backlog <b class="caret"></b></a>
+<ul class="dropdown-menu">
+<li>
+<a href="../../backlog/rastreabilidade/">Rastreabilidade</a>
+</li>
+<li>
+<a href="../../backlog/priorizacao/">Priorização</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="../../arquitetura/">Arquitetura</a>
+</li>
+</ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+<a data-target="#mkdocs_search_modal" data-toggle="modal" href="#">
+<i class="fas fa-search"></i> Search
+                        </a>
+</li>
+<li>
+<a href="../estrategias/" rel="prev">
+<i class="fas fa-arrow-left"></i> Previous
+                        </a>
+</li>
+<li>
+<a href="../cronograma/" rel="next">
+                            Next <i class="fas fa-arrow-right"></i>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container">
+<div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+<ul class="nav bs-sidenav">
+<li class="first-level active"><a href="#4-engenharia-de-requisitos">4. Engenharia de Requisitos</a></li>
+<li class="second-level"><a href="#historico-de-revisao">Histórico de Revisão</a></li>
+<li class="second-level"><a href="#41-abordagem-de-engenharia-de-requisitos">4.1 Abordagem de Engenharia de Requisitos</a></li>
+<li class="second-level"><a href="#42-etapas-unicas-realizadas-uma-vez-no-inicio-do-projeto">4.2 Etapas Únicas — Realizadas uma vez no início do projeto</a></li>
+<li class="third-level"><a href="#etapa-1-develop-an-overall-model-desenvolver-modelo-global">Etapa 1 — Develop an Overall Model (Desenvolver Modelo Global)</a></li>
+<li class="third-level"><a href="#etapa-2-build-a-feature-list-construir-lista-de-funcionalidades">Etapa 2 — Build a Feature List (Construir Lista de Funcionalidades)</a></li>
+<li class="third-level"><a href="#etapa-3-plan-by-feature-planejar-por-funcionalidade">Etapa 3 — Plan by Feature (Planejar por Funcionalidade)</a></li>
+<li class="second-level"><a href="#43-etapas-iterativas-repetidas-em-cada-iteracao">4.3 Etapas Iterativas — Repetidas em cada iteração</a></li>
+<li class="third-level"><a href="#etapa-4-design-by-feature-projetar-por-funcionalidade">Etapa 4 — Design by Feature (Projetar por Funcionalidade)</a></li>
+<li class="third-level"><a href="#etapa-5-build-by-feature-construir-por-funcionalidade">Etapa 5 — Build by Feature (Construir por Funcionalidade)</a></li>
+<li class="second-level"><a href="#44-visao-consolidada-do-processo">4.4 Visão Consolidada do Processo</a></li>
+<li class="second-level"><a href="#45-atividades-de-engenharia-de-requisitos">4.5 Atividades de Engenharia de Requisitos</a></li>
+</ul>
 </div></div>
-        <div class="col-md-9" role="main">
-
-<h1 id="4-engenharia-de-requisitos">4. Engenharia de Requisitos<a class="headerlink" href="#4-engenharia-de-requisitos" title="Permanent link">&para;</a></h1>
-<h2 id="historico-de-revisao">Histórico de Revisão<a class="headerlink" href="#historico-de-revisao" title="Permanent link">&para;</a></h2>
+<div class="col-md-9" role="main">
+<h1 id="4-engenharia-de-requisitos">4. Engenharia de Requisitos<a class="headerlink" href="#4-engenharia-de-requisitos" title="Permanent link">¶</a></h1>
+<h2 id="historico-de-revisao">Histórico de Revisão<a class="headerlink" href="#historico-de-revisao" title="Permanent link">¶</a></h2>
 <table>
 <thead>
 <tr>
@@ -327,223 +223,272 @@
 <td>Ajustes de cerimônias e técnicas</td>
 <td>Lucas e Philipe</td>
 </tr>
+<tr>
+<td>1.7</td>
+<td>18/05/2026</td>
+<td>Reestruturação completa: separação entre etapas únicas e iterativas do FDD; adição da tabela de atividades de ER</td>
+<td>Lucas A. Zanetti</td>
+</tr>
 </tbody>
 </table>
-<hr />
-<h2 id="41-abordagem-de-engenharia-de-requisitos">4.1 Abordagem de Engenharia de Requisitos<a class="headerlink" href="#41-abordagem-de-engenharia-de-requisitos" title="Permanent link">&para;</a></h2>
-<p>O projeto Crianex adota um Processo Híbrido (FDD + Kanban). Nesta abordagem, o FDD (Feature-Driven Development) estrutura o planejamento orientado a valor (o que construir), enquanto o Kanban fornece o controle visual da execução (quando puxar o trabalho e quando parar) através da limitação de Work in Progress (WIP).
-A seguir, detalhamos as atividades da Engenharia de Requisitos e explicamos como cada técnica será aplicada no desenvolviemnto de requisitos:</p>
-<h3 id="cerimonias-tecnicas-e-artefatos-do-processo-hibrido">Cerimônias, Técnicas e Artefatos do Processo Híbrido<a class="headerlink" href="#cerimonias-tecnicas-e-artefatos-do-processo-hibrido" title="Permanent link">&para;</a></h3>
-<h4 id="1-domain-modeling-workshop">1. Domain Modeling Workshop<a class="headerlink" href="#1-domain-modeling-workshop" title="Permanent link">&para;</a></h4>
-<p>O <em>Domain Modeling Workshop</em> é a cerimônia em que a equipe e o <em>Domain Expert</em> constroem ou refinam o modelo de domínio que sustenta as <em>features</em> da iteração. Seu objetivo é alinhar o entendimento sobre entidades, relacionamentos e regras de negócio antes do detalhamento funcional.</p>
-<p><strong>Técnica:</strong> <em>Color Modeling</em>. Essa técnica organiza visualmente os elementos do domínio, ajudando a identificar classes, papéis, eventos e agregados relevantes para o sistema.  </p>
-<p><strong>Artefatos gerados:</strong> diagrama de domínio atualizado e glossário de termos.</p>
-<h4 id="2-feature-discovery-session">2. Feature Discovery Session<a class="headerlink" href="#2-feature-discovery-session" title="Permanent link">&para;</a></h4>
-<p>A <em>Feature Discovery Session</em> é a cerimônia dedicada à descoberta e ao refinamento de funcionalidades com o <em>Domain Expert</em>. Nela, a equipe transforma necessidades de negócio em <em>features</em> claras, compreensíveis e orientadas a valor.</p>
-<p><strong>Técnicas:</strong> <em>Feature Card Specification</em>, <em>Vertical Slicing</em> e critérios <em>INVEST</em>. O <em>Feature Card Specification</em> padroniza a escrita da <em>feature</em> em uma formulação objetiva; o <em>Vertical Slicing</em> orienta a decomposição funcional em partes menores com valor demonstrável; e o INVEST ajuda a garantir que cada fatia seja independente, negociável, valiosa, estimável, pequena e testável.  </p>
-<p><strong>Artefatos gerados:</strong> <em>Feature Cards</em> novas ou revisadas e ata da sessão.</p>
-<h4 id="3-iteration-replenishment">3. Iteration Replenishment<a class="headerlink" href="#3-iteration-replenishment" title="Permanent link">&para;</a></h4>
-<p>A <em>Iteration Replenishment</em> é a cerimônia em que as <em>features</em> candidatas são analisadas e selecionadas para a iteração corrente. O foco é montar um escopo viável, compatível com a capacidade da equipe e com o valor de negócio esperado.</p>
-<p><strong>Técnicas:</strong> matriz Valor × Esforço e <em>Priorização IP</em>. Essas técnicas apoiam a ordenação das <em>features</em> conforme valor, esforço e viabilidade de execução.<br />
-<strong>Artefatos gerados:</strong> backlog priorizado da iteração e lista de <em>features</em> comprometidas.</p>
-<h4 id="4-iteration-commitment">4. Iteration Commitment<a class="headerlink" href="#4-iteration-commitment" title="Permanent link">&para;</a></h4>
-<p>A <em>Iteration Commitment</em> é a cerimônia em que a equipe formaliza o compromisso com o escopo e com o objetivo principal da iteração. Ela garante que todos compartilhem o mesmo entendimento sobre a entrega esperada.</p>
-<p><strong>Técnica:</strong> <em>Iteration Goal Statement</em>. Essa técnica consiste em formular uma frase clara, única e demonstrável que sintetize o valor de negócio a ser entregue ao final da iteração.  </p>
-<p><strong>Artefatos gerados:</strong> <em>Iteration Goal</em> documentado e ata do compromisso.</p>
-<h4 id="5-technical-design-review">5. Technical Design Review<a class="headerlink" href="#5-technical-design-review" title="Permanent link">&para;</a></h4>
-<p>O <em>Technical Design Review</em> é a cerimônia em que a solução técnica da <em>feature</em> é analisada antes da implementação. Seu objetivo é validar a abordagem estrutural da solução e reduzir riscos antes da codificação.</p>
-<p><strong>Técnica:</strong> diagrama de sequência leve. Essa técnica representa as interações e integrações relevantes da solução, ajudando a equipe a antecipar dependências e pontos de extensão.  </p>
-<p><strong>Artefatos gerados:</strong> notas de design e especificação técnica da <em>feature</em>.</p>
-<h4 id="6-formal-client-validation">6. Formal Client Validation<a class="headerlink" href="#6-formal-client-validation" title="Permanent link">&para;</a></h4>
-<p>A <em>Formal Client Validation</em> confirma com o cliente real se o valor de negócio foi de fato entregue. </p>
-<p><strong>Técnicas:</strong> Demo orietada a valor (Não a feature) - narrativa: "o cliente consegue X". Essas técnicas ajudam a verificar completude, coerência e ligação entre objetivo estratégico.  </p>
-<p><strong>Artefatos gerados:</strong> Atas da demo; aprovação formal do Otávio; lista de feedback para o backlog. Essa etapa pode gerar um cerimônia extra chamada Backlog Reorganization a partir do feedback do cliente.</p>
-<h4 id="7-feature-build-consolidation">7. Feature Build Consolidation<a class="headerlink" href="#7-feature-build-consolidation" title="Permanent link">&para;</a></h4>
-<p>A <em>Feature Build Consolidation</em> é uma cerimômina que garante que todas as fatias de uma feature foram integradas e possíveis de rastrea-las, com as featuras end-to-end. Será realizado todo final da semana de produção.</p>
-<p><strong>Técnicas</strong>: Smoke test end-to-end, verficação de critério de aceite da feature e requirements traceability matrix.</p>
-<p><strong>Artefatos gerados</strong>: Features em ambiente de homologação; matrix de rastreabilidade atualizada. </p>
-<h4 id="8-partial-client-validation">8. Partial Client Validation<a class="headerlink" href="#8-partial-client-validation" title="Permanent link">&para;</a></h4>
-<p>O <em>Partial Client Validation</em> é uma cerimônia que valida entregas intermediárias com o cliente, idealmente assincronamente, para acelerar feedbacks.</p>
-<p><strong>Técnicas</strong>: Validação assincrona via vídeo curto ou screenshots + checklists.</p>
-<p><strong>Artefatos gerados</strong>: Comentário de validação na issue; checklist marcado; organização de feedback. </p>
-<h4 id="9-iteration-artifact-closure">9. Iteration Artifact Closure<a class="headerlink" href="#9-iteration-artifact-closure" title="Permanent link">&para;</a></h4>
-<p>O <em>Iteration Artifact Closure</em> é uma cerimônia para empacotar tudo que o cliente acadêmico (professor) precisa receber na unidade correspondente.</p>
-<p><strong>Técnicas</strong>: Checklist de empacontamento e revisão cruzada.</p>
-<p><strong>Artefatos gerados</strong>: Documento de visão e GitHub pages atualizado; Backlog congelado da iteração; Reuniões e atas entrengues; Matriz de rastreabilidade; Evidências de validação da metodologia.</p>
-<h4 id="10-midweek-sync-kanban-pull-execution">10. Midweek Sync / Kanban Pull Execution<a class="headerlink" href="#10-midweek-sync-kanban-pull-execution" title="Permanent link">&para;</a></h4>
-<p>O <em>Midweek Sync</em> é a cerimônia de alinhamento rápido da equipe, enquanto o <em>Kanban Pull Execution</em> regula o fluxo de execução das issues ao longo da iteração. Em conjunto, essas cerimônias promovem visibilidade do trabalho e controle do andamento das entregas.</p>
-<p><strong>Técnicas:</strong> <em>Kanban</em>, <em>Pull System</em> e <em>WIP limits</em>. Essas técnicas organizam o fluxo visual, limitam o trabalho simultâneo e garantem que novas atividades só sejam puxadas conforme a capacidade disponível.  </p>
+<hr/>
+<h2 id="41-abordagem-de-engenharia-de-requisitos">4.1 Abordagem de Engenharia de Requisitos<a class="headerlink" href="#41-abordagem-de-engenharia-de-requisitos" title="Permanent link">¶</a></h2>
+<p>O projeto Crianex adota um <strong>Processo Híbrido (FDD + Kanban)</strong>. O FDD (Feature-Driven Development) estrutura o planejamento orientado a valor — o que construir —, enquanto o Kanban fornece o controle visual da execução — quando puxar o trabalho e quando parar — por meio da limitação de Work in Progress (WIP).</p>
+<p>O FDD é composto por <strong>5 etapas</strong>, mas elas <strong>não são todas iterativas</strong>. A separação entre o que ocorre uma única vez e o que se repete em cada iteração é central para entender como o processo funciona no projeto Crianex:</p>
+<hr/>
+<h2 id="42-etapas-unicas-realizadas-uma-vez-no-inicio-do-projeto">4.2 Etapas Únicas — Realizadas uma vez no início do projeto<a class="headerlink" href="#42-etapas-unicas-realizadas-uma-vez-no-inicio-do-projeto" title="Permanent link">¶</a></h2>
+<p>As três primeiras etapas do FDD constroem a fundação do produto: o modelo de domínio, a lista de funcionalidades e o plano de desenvolvimento. São executadas <strong>uma única vez</strong>, antes da primeira iteração de construção, e seus artefatos servem de insumo para todas as iterações seguintes.</p>
+<h3 id="etapa-1-develop-an-overall-model-desenvolver-modelo-global">Etapa 1 — Develop an Overall Model (Desenvolver Modelo Global)<a class="headerlink" href="#etapa-1-develop-an-overall-model-desenvolver-modelo-global" title="Permanent link">¶</a></h3>
+<p>O objetivo é construir uma visão compartilhada e abrangente do domínio do problema antes de qualquer detalhe funcional ser discutido. A equipe e o Domain Expert (Otávio Maya) exploram juntos o negócio, suas entidades, relacionamentos e regras centrais.</p>
+<p><strong>Cerimônia:</strong> Domain Modeling Workshop</p>
+<p>Reunião em que a equipe e o Domain Expert constroem o modelo de domínio que sustenta as features do projeto. O resultado é um entendimento coletivo e documentado sobre as entidades do sistema — não apenas uma lista de requisitos.</p>
+<p><strong>Técnica:</strong> Color Modeling — organização visual dos elementos do domínio para identificar classes, papéis, eventos e agregados.</p>
+<p><strong>Artefatos gerados:</strong> diagrama de domínio e glossário de termos.</p>
+<hr/>
+<h3 id="etapa-2-build-a-feature-list-construir-lista-de-funcionalidades">Etapa 2 — Build a Feature List (Construir Lista de Funcionalidades)<a class="headerlink" href="#etapa-2-build-a-feature-list-construir-lista-de-funcionalidades" title="Permanent link">¶</a></h3>
+<p>Com o modelo de domínio estabelecido, a equipe decompõe o sistema em funcionalidades concretas e orientadas ao cliente. Cada feature representa uma ação de valor entregável e verificável.</p>
+<p><strong>Cerimônia:</strong> Feature Discovery Session</p>
+<p>Cerimônia dedicada à descoberta e ao refinamento de funcionalidades com o Domain Expert. A equipe transforma necessidades de negócio em features claras, compreensíveis e orientadas a valor.</p>
+<p><strong>Técnicas:</strong></p>
+<ul>
+<li><em>Feature Card Specification</em> — padroniza a escrita da feature na formulação <code>&lt;ação&gt; &lt;resultado&gt; &lt;de/para/no/com&gt; &lt;objeto&gt;</code></li>
+<li><em>Vertical Slicing</em> — orienta a decomposição em partes menores com valor demonstrável de ponta a ponta</li>
+<li><em>INVEST</em> — garante que cada fatia seja independente, negociável, valiosa, estimável, pequena e testável</li>
+</ul>
+<p><strong>Artefatos gerados:</strong> Feature Cards e ata da sessão.</p>
+<hr/>
+<h3 id="etapa-3-plan-by-feature-planejar-por-funcionalidade">Etapa 3 — Plan by Feature (Planejar por Funcionalidade)<a class="headerlink" href="#etapa-3-plan-by-feature-planejar-por-funcionalidade" title="Permanent link">¶</a></h3>
+<p>Com a lista de features construída, a equipe organiza e prioriza o trabalho no horizonte completo do projeto: quais features vão para qual iteração, quem é o Chief Programmer responsável por cada conjunto e qual a sequência de entrega orientada a valor de negócio.</p>
+<p><strong>Cerimônia:</strong> Iteration Replenishment (versão macro — planejamento do roadmap completo)</p>
+<p>A priorização é feita com base na matriz <strong>Valor × Esforço</strong> e no <strong>Índice de Prioridade (IP = VB / PT)</strong>, garantindo que as features de maior valor e menor esforço relativo entrem primeiro no fluxo de desenvolvimento.</p>
+<p><strong>Técnicas:</strong></p>
+<ul>
+<li><em>Matriz Valor × Esforço</em> — posiciona cada feature em quadrantes de prioridade</li>
+<li><em>Priorização IP</em> — ordena features por IP = VB / PT, onde PT = (CX + ES) / 2</li>
+</ul>
+<p><strong>Artefatos gerados:</strong> backlog macro priorizado, roadmap de iterações com CPs por iteração e Feature Matrix.</p>
+<hr/>
+<h2 id="43-etapas-iterativas-repetidas-em-cada-iteracao">4.3 Etapas Iterativas — Repetidas em cada iteração<a class="headerlink" href="#43-etapas-iterativas-repetidas-em-cada-iteracao" title="Permanent link">¶</a></h2>
+<p>As duas últimas etapas do FDD são executadas <strong>a cada iteração</strong>, para cada conjunto de features comprometido. É aqui que o Kanban entra como sistema de gestão de fluxo, complementando o FDD com visibilidade operacional e controle de WIP.</p>
+<h3 id="etapa-4-design-by-feature-projetar-por-funcionalidade">Etapa 4 — Design by Feature (Projetar por Funcionalidade)<a class="headerlink" href="#etapa-4-design-by-feature-projetar-por-funcionalidade" title="Permanent link">¶</a></h3>
+<p>No início de cada iteração, as features do escopo são refinadas tecnicamente antes de qualquer linha de código ser escrita. Essa etapa produz os critérios de aceite, o design técnico e o compromisso formal da equipe com o objetivo da iteração.</p>
+<h4 id="cerimonia-1-iteration-replenishment-commitment">Cerimônia 1 — Iteration Replenishment + Commitment<a class="headerlink" href="#cerimonia-1-iteration-replenishment-commitment" title="Permanent link">¶</a></h4>
+<p>A Iteration Replenishment seleciona as features candidatas para a iteração corrente com base no IP e na capacidade da equipe. O Iteration Commitment formaliza o compromisso da equipe e do cliente com o Iteration Goal — uma frase única e demonstrável que sintetiza o valor a ser entregue.</p>
+<p><strong>Técnicas:</strong></p>
+<ul>
+<li><em>Matriz Valor × Esforço</em> e <em>Priorização IP</em> — reordenação das features conforme contexto da iteração</li>
+<li><em>Iteration Goal Statement</em> — formulação do objetivo principal da iteração</li>
+</ul>
+<p><strong>Artefatos gerados:</strong> backlog priorizado da iteração, lista de features comprometidas e Iteration Goal documentado.</p>
+<hr/>
+<h4 id="cerimonia-2-technical-design-review">Cerimônia 2 — Technical Design Review<a class="headerlink" href="#cerimonia-2-technical-design-review" title="Permanent link">¶</a></h4>
+<p>Cerimônia em que a solução técnica de cada feature comprometida é analisada antes da implementação. O Chief Programmer lidera a sessão com o objetivo de validar a abordagem estrutural e reduzir riscos antes da codificação.</p>
+<p><strong>Técnicas:</strong></p>
+<ul>
+<li>Diagrama de sequência leve — representa interações e integrações relevantes da solução</li>
+<li>Análise de impacto e identificação de pontos de extensão</li>
+<li>Prototipagem quando aplicável</li>
+</ul>
+<p><strong>Artefatos gerados:</strong> notas de design e especificação técnica por feature.</p>
+<hr/>
+<h3 id="etapa-5-build-by-feature-construir-por-funcionalidade">Etapa 5 — Build by Feature (Construir por Funcionalidade)<a class="headerlink" href="#etapa-5-build-by-feature-construir-por-funcionalidade" title="Permanent link">¶</a></h3>
+<p>Com o design validado, as features entram no fluxo de execução Kanban. A construção é acompanhada por validações contínuas com o cliente e consolidações formais ao final da iteração.</p>
+<h4 id="cerimonia-3-midweek-sync-kanban-pull-execution">Cerimônia 3 — Midweek Sync / Kanban Pull Execution<a class="headerlink" href="#cerimonia-3-midweek-sync-kanban-pull-execution" title="Permanent link">¶</a></h4>
+<p>Alinhamento rápido e assíncrono da equipe, combinado com a regulação do fluxo de execução das issues pelo Kanban. Garante visibilidade do trabalho em andamento e controle de WIP.</p>
+<p><strong>Técnicas:</strong></p>
+<ul>
+<li><em>Kanban</em> e <em>Pull System</em> — novas issues só são puxadas conforme capacidade disponível</li>
+<li><em>WIP limits</em> — máx. 2 issues In Progress por Class Owner</li>
+</ul>
 <p><strong>Artefatos gerados:</strong> board atualizado, comentários de bloqueio, commits, branches e Pull Requests.</p>
-<h3 id="tabela-de-cerimonias-e-tecnicas-do-processo-hibrido-fdd-kanban">Tabela de Cerimônias e Técnicas do Processo Híbrido FDD + Kanban<a class="headerlink" href="#tabela-de-cerimonias-e-tecnicas-do-processo-hibrido-fdd-kanban" title="Permanent link">&para;</a></h3>
+<hr/>
+<h4 id="cerimonia-4-feature-build-consolidation">Cerimônia 4 — Feature Build Consolidation<a class="headerlink" href="#cerimonia-4-feature-build-consolidation" title="Permanent link">¶</a></h4>
+<p>Cerimônia realizada ao final de cada semana de produção para garantir que todas as fatias de uma feature foram integradas e são rastreáveis de ponta a ponta.</p>
+<p><strong>Técnicas:</strong></p>
+<ul>
+<li>Smoke test end-to-end</li>
+<li>Verificação de critério de aceite da feature</li>
+<li>Requirements Traceability Matrix</li>
+</ul>
+<p><strong>Artefatos gerados:</strong> features em ambiente de homologação e matriz de rastreabilidade atualizada.</p>
+<hr/>
+<h4 id="cerimonia-5-partial-client-validation">Cerimônia 5 — Partial Client Validation<a class="headerlink" href="#cerimonia-5-partial-client-validation" title="Permanent link">¶</a></h4>
+<p>Validação assíncrona de entregas intermediárias com Otávio, realizada ao final de cada semana, para acelerar o ciclo de feedback sem aguardar a reunião formal.</p>
+<p><strong>Técnicas:</strong></p>
+<ul>
+<li>Validação assíncrona via vídeo curto ou screenshots + checklists de critérios de aceite</li>
+</ul>
+<p><strong>Artefatos gerados:</strong> comentário de validação na issue, checklist marcado e organização de feedback para o backlog.</p>
+<hr/>
+<h4 id="cerimonia-6-formal-client-validation">Cerimônia 6 — Formal Client Validation<a class="headerlink" href="#cerimonia-6-formal-client-validation" title="Permanent link">¶</a></h4>
+<p>Reunião de demo ao final de cada iteração. Confirma com Otávio se o valor de negócio foi de fato entregue. A demo é orientada ao valor entregue — narrativa "o cliente consegue X" —, não a features individuais.</p>
+<p><strong>Técnicas:</strong></p>
+<ul>
+<li>Demo orientada a valor: narrativa centrada no Iteration Goal, não em funcionalidades isoladas</li>
+</ul>
+<p><strong>Artefatos gerados:</strong> ata da demo, aprovação formal de Otávio e lista de feedback para o backlog. Pode gerar uma sessão extra de <strong>Backlog Reorganization</strong> a partir do feedback capturado.</p>
+<hr/>
+<h4 id="cerimonia-7-iteration-artifact-closure">Cerimônia 7 — Iteration Artifact Closure<a class="headerlink" href="#cerimonia-7-iteration-artifact-closure" title="Permanent link">¶</a></h4>
+<p>Cerimônia de fechamento da iteração que empacota todos os artefatos que o cliente acadêmico (professor George Marsicano) precisa receber na unidade correspondente.</p>
+<p><strong>Técnicas:</strong></p>
+<ul>
+<li>Checklist de empacotamento</li>
+<li>Revisão cruzada entre membros da equipe</li>
+</ul>
+<p><strong>Artefatos gerados:</strong> Documento de Visão e GitHub Pages atualizados; backlog congelado da iteração; atas de reunião entregues; matriz de rastreabilidade; evidências de validação da metodologia.</p>
+<hr/>
+<h2 id="44-visao-consolidada-do-processo">4.4 Visão Consolidada do Processo<a class="headerlink" href="#44-visao-consolidada-do-processo" title="Permanent link">¶</a></h2>
+<div class="mermaid">flowchart TD
+    subgraph unico[" Etapas Únicas — Início do Projeto"]
+        E1["Etapa 1\nDevelop an Overall Model\n─────────────────\nDomain Modeling Workshop"]
+        E2["Etapa 2\nBuild a Feature List\n─────────────────\nFeature Discovery Session"]
+        E3["Etapa 3\nPlan by Feature\n─────────────────\nReplenishment Macro + Feature Matrix"]
+        E1 --&gt; E2 --&gt; E3
+    end
+
+    subgraph iter[" Etapas Iterativas — Por Iteração"]
+        E4A["Etapa 4 — Design by Feature\n─────────────────\nIteration Replenishment + Commitment\nTechnical Design Review"]
+        E5A["Etapa 5 — Build by Feature\n─────────────────\nKanban Pull Execution\nFeature Build Consolidation\nPartial Client Validation\nFormal Client Validation\nIteration Artifact Closure"]
+        E4A --&gt; E5A
+        E5A --&gt;|próxima iteração| E4A
+    end
+
+    E3 --&gt; E4A
+
+    style unico fill:#e3f2fd,stroke:#1565c0,color:#000
+    style iter fill:#e8f5e9,stroke:#2e7d32,color:#000
+</div>
+<hr/>
+<h2 id="45-atividades-de-engenharia-de-requisitos">4.5 Atividades de Engenharia de Requisitos<a class="headerlink" href="#45-atividades-de-engenharia-de-requisitos" title="Permanent link">¶</a></h2>
+<p>A tabela abaixo mapeia as atividades clássicas de Engenharia de Requisitos às cerimônias e tarefas do processo híbrido FDD + Kanban adotado pelo projeto.</p>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">Processo de Desenvolvimento</th>
-<th style="text-align: left;">Descrição do Processo</th>
-<th style="text-align: left;">Cerimônia</th>
-<th style="text-align: left;">Técnicas de Apoio</th>
-<th style="text-align: left;">Artefatos</th>
-<th style="text-align: left;">Critérios / Políticas</th>
+<th>Atividade de ER</th>
+<th>Etapa FDD</th>
+<th>Ocorrência</th>
+<th>Cerimônia / Tarefa</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;"><strong>1. Desenvolvimento de Domínio</strong></td>
-<td style="text-align: left;">Modelagem colaborativa para criar uma visão compartilhada do sistema e identificar o domínio do problema.</td>
-<td style="text-align: left;"><strong>Domain Modeling Workshop</strong></td>
-<td style="text-align: left;"><em>Color Modeling</em>.</td>
-<td style="text-align: left;">Diagrama de domínio; glossário de termos.</td>
-<td style="text-align: left;">—</td>
+<td><strong>Elicitação e Descoberta</strong></td>
+<td>Etapas 1 e 2</td>
+<td>Única</td>
+<td>Domain Modeling Workshop; Feature Discovery Session</td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong>2. Decomposição Funcional</strong></td>
-<td style="text-align: left;">Divisão do sistema em áreas de funcionalidade, conjuntos de <em>features</em> e <em>features</em> específicas orientadas ao cliente.</td>
-<td style="text-align: left;"><strong>Feature Discovery Session</strong></td>
-<td style="text-align: left;"><em>Feature Card Specification</em>;<em>Vertical Slicing</em>; <em>INVEST</em>.</td>
-<td style="text-align: left;"><em>Feature Cards</em>; ata da sessão.</td>
-<td style="text-align: left;">—</td>
+<td><strong>Análise e Consenso</strong></td>
+<td>Etapas 2 e 3</td>
+<td>Única + Iterativa</td>
+<td>Feature Discovery Session; Iteration Replenishment + Commitment; Technical Design Review</td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong>3. Planejamento e Priorização</strong></td>
-<td style="text-align: left;">Organização das <em>features</em> em conjuntos relacionais e priorização com base em valor, dependências e complexidade.</td>
-<td style="text-align: left;"><strong>Iteration Replenishment</strong></td>
-<td style="text-align: left;"><em>Matriz Valor × Esforço</em>; <em>Priorização IP</em>.</td>
-<td style="text-align: left;">Backlog priorizado; lista de <em>features</em> comprometidas.</td>
-<td style="text-align: left;">—</td>
+<td><strong>Declaração</strong></td>
+<td>Etapas 2, 3 e 4</td>
+<td>Única + Iterativa</td>
+<td>Feature Card Specification; escrita de critérios de aceite BDD (Dado/Quando/Então); notas de design técnico</td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong>4. Compromisso da Iteração</strong></td>
-<td style="text-align: left;">Formalização do escopo da iteração e do objetivo principal a ser entregue.</td>
-<td style="text-align: left;"><strong>Iteration Commitment</strong></td>
-<td style="text-align: left;"><em>Iteration Goal Statement</em>.</td>
-<td style="text-align: left;"><em>Iteration Goal</em> documentado; ata do compromisso.</td>
-<td style="text-align: left;"><em>Definition of Ready</em>; <em>Definition of Done</em>.</td>
+<td><strong>Representação</strong></td>
+<td>Etapas 1, 2 e 4</td>
+<td>Única + Iterativa</td>
+<td>Domain Modeling Workshop (diagrama de domínio e glossário); Feature Card Specification (formulação <code>&lt;ação&gt; &lt;resultado&gt; &lt;objeto&gt;</code>); Technical Design Review (diagramas de sequência e especificação técnica por feature)</td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong>5. Documentação e Design</strong></td>
-<td style="text-align: left;">Produção de documentação prática e objetiva, incluindo especificação funcional e decisões de design.</td>
-<td style="text-align: left;"><strong>Technical Design Review</strong></td>
-<td style="text-align: left;">Diagrama de sequência leve; Prototipagem; Análise de impacto; Identiifcação de pontos de extensão</td>
-<td style="text-align: left;">Notas de design; especificação da <em>feature</em>.</td>
-<td style="text-align: left;">—</td>
+<td><strong>Verificação e Validação</strong></td>
+<td>Etapa 5</td>
+<td>Iterativa</td>
+<td>Feature Build Consolidation (verificação técnica); Partial Client Validation (validação assíncrona); Formal Client Validation (demo orientada a valor)</td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong>6. Gestão de Fluxo</strong></td>
-<td style="text-align: left;">Controle contínuo do estado das <em>features</em> ao longo do ciclo de vida de desenvolvimento.</td>
-<td style="text-align: left;"><strong>Midweek Sync</strong>; <strong>Kanban Pull Execution</strong></td>
-<td style="text-align: left;"><em>Kanban</em>; <em>Pull System</em>; <em>WIP limits</em>.</td>
-<td style="text-align: left;">Board atualizado; comentários de bloqueio; PRs.</td>
-<td style="text-align: left;">—</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>7. Verificação e Rastreabilidade</strong></td>
-<td style="text-align: left;">Acompanhamento do progresso das <em>features</em> com base em marcos, inspeções e mecanismos de rastreabilidade.</td>
-<td style="text-align: left;"><strong>Feature Build Consolidation</strong>; <strong>Partial Client Validation</strong>; <strong>Formal Client Validation</strong>; <strong>Iteration Artifact Closure</strong>.</td>
-<td style="text-align: left;"><em>Inspeção formal de design e código</em>; <em>Rastreabilidade Bidirecional</em>; <em>Backlog Reorganization Session</em>; <em>Checklist de empacontamento e revisão cruzada</em>.</td>
-<td style="text-align: left;">Matriz de rastreabilidade; evidências de validação; Documento de visão e GitHub pages atualizado; Backlog congelado da iteração; Reuniões e atas entrengues; Matriz de rastreabilidade; Evidências de validação da metodologia.</td>
-<td style="text-align: left;">—</td>
+<td><strong>Organização e Atualização</strong></td>
+<td>Etapas 3 e 5</td>
+<td>Única + Iterativa</td>
+<td>Iteration Replenishment macro (roadmap); Iteration Artifact Closure; Backlog Reorganization; atualização da Matriz de Rastreabilidade</td>
 </tr>
 </tbody>
-</table>
-<hr /></div>
-        
-        
-    </div>
-
-    
-      <footer class="col-md-12 text-center">
-          
-          
-            <hr>
-            <p>
-            <small>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</small>
-            </p>
-          
-
-          
-          
-      </footer>
-    
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="../../js/bootstrap-3.0.3.min.js"></script>
-
-    
-    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/highlight.min.js"></script>
-        
-    <script>hljs.initHighlightingOnLoad();</script>
-    
-
-    <script>var base_url = "../.."</script>
-    
-    <script src="../../js/base.js"></script>
-    <script src="../../search/main.js"></script>
-
-    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">
-                    <span aria-hidden="true">&times;</span>
-                    <span class="sr-only">Close</span>
-                </button>
-                <h4 class="modal-title" id="searchModalLabel">Search</h4>
-            </div>
-            <div class="modal-body">
-                <p>
+</table></div>
+</div>
+<footer class="col-md-12 text-center">
+<hr/>
+<p>
+<small>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</small>
+</p>
+</footer>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="../../js/bootstrap-3.0.3.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script>var base_url = "../.."</script>
+<script src="../../js/base.js"></script>
+<script src="../../search/main.js"></script>
+<div aria-hidden="true" aria-labelledby="searchModalLabel" class="modal" id="mkdocs_search_modal" role="dialog" tabindex="-1">
+<div class="modal-dialog modal-lg">
+<div class="modal-content">
+<div class="modal-header">
+<button class="close" data-dismiss="modal" type="button">
+<span aria-hidden="true">×</span>
+<span class="sr-only">Close</span>
+</button>
+<h4 class="modal-title" id="searchModalLabel">Search</h4>
+</div>
+<div class="modal-body">
+<p>
                     From here you can search these documents. Enter
                     your search terms below.
                 </p>
-                <form>
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
-                    </div>
-                </form>
-                <div id="mkdocs-search-results"></div>
-            </div>
-            <div class="modal-footer">
-            </div>
-        </div>
-    </div>
-</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            </div>
-            <div class="modal-body">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th style="width: 20%;">Keys</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="help shortcut"><kbd>?</kbd></td>
-                    <td>Open this help</td>
-                  </tr>
-                  <tr>
-                    <td class="next shortcut"><kbd>n</kbd></td>
-                    <td>Next page</td>
-                  </tr>
-                  <tr>
-                    <td class="prev shortcut"><kbd>p</kbd></td>
-                    <td>Previous page</td>
-                  </tr>
-                  <tr>
-                    <td class="search shortcut"><kbd>s</kbd></td>
-                    <td>Search</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="modal-footer">
-            </div>
-        </div>
-    </div>
+<form>
+<div class="form-group">
+<input class="form-control" id="mkdocs-search-query" placeholder="Search..." title="Type search term here" type="text"/>
 </div>
-    </body>
-
+</form>
+<div id="mkdocs-search-results"></div>
+</div>
+<div class="modal-footer">
+</div>
+</div>
+</div>
+</div><div aria-hidden="true" aria-labelledby="keyboardModalLabel" class="modal" id="mkdocs_keyboard_modal" role="dialog" tabindex="-1">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+<button class="close" data-dismiss="modal" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+</div>
+<div class="modal-body">
+<table class="table">
+<thead>
+<tr>
+<th style="width: 20%;">Keys</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="help shortcut"><kbd>?</kbd></td>
+<td>Open this help</td>
+</tr>
+<tr>
+<td class="next shortcut"><kbd>n</kbd></td>
+<td>Next page</td>
+</tr>
+<tr>
+<td class="prev shortcut"><kbd>p</kbd></td>
+<td>Previous page</td>
+</tr>
+<tr>
+<td class="search shortcut"><kbd>s</kbd></td>
+<td>Search</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="modal-footer">
+</div>
+</div>
+</div>
+</div>
+<script type="module">import mermaid from "https://unpkg.com/mermaid@10.4.0/dist/mermaid.esm.min.mjs";
+mermaid.initialize({});</script></body>
 </html>
