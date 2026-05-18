@@ -28,7 +28,7 @@
 
 A **Crianex** é uma Software House B2B especializada no desenvolvimento de soluções digitais sob demanda para empresas. Atuando com múltiplos projetos simultâneos e uma equipe distribuída, a organização enfrenta dificuldades crescentes para gerenciar internamente o status de cada projeto e, ao mesmo tempo, apresentar seu portfólio de maneira eficaz ao mercado externo.
 
-A empresa não possui atualmente uma ferramenta centralizada que unifique a gestão operacional interna com a divulgação profissional dos seus produtos e entregas, o que gera retrabalho, falta de visibilidade e perda de oportunidades comerciais.
+A gestão operacional e a divulgação dos produtos e entregas ocorrem de forma descentralizada e sem padronização, dificultando o acompanhamento das atividades, a organização das informações e a visibilidade das soluções desenvolvidas pela empresa. Esse cenário gera retrabalho, inconsistências na comunicação, dificuldade no acesso às informações relevantes e limita a capacidade de apresentar os resultados e diferenciais da empresa de forma clara para potenciais clientes e parceiros.
 
 ### 1.2.1 Contexto Organizacional
 
