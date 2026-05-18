@@ -1,0 +1,19 @@
+{
+  "name": "gh-pages",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "generate-pdf": "node generate-pdf.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "marked": "^18.0.3",
+    "puppeteer": "^25.0.2"
+  }
+}
