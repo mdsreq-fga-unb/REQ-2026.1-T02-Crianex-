@@ -49,9 +49,9 @@
 ---
 
 ## Definition of Done
-- [ ] Implementação concluída
-- [ ] Critérios de aceite validados
+- [ ] Critérios de aceite todos validados
+- [ ] Testes passando no CI (unitários + integração onde há lógica de negócio)
+- [ ] Lint + format OK (ESLint + Prettier)
+- [ ] Sem vulnerabilidades críticas no SAST/linting de segurança
 - [ ] Code Review aprovado
-- [ ] Testes passando no CI
-- [ ] Lint + format OK
-- [ ] Merge na branch da iteração
+- [ ] Merge na feature branch pai (via PR em `main`)

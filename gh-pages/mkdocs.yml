@@ -19,6 +19,8 @@ markdown_extensions:
   - toc:
       permalink: true
       title: Nesta página
+  - pymdownx.tasklist:
+      custom_checkbox: true
 
 extra_css:
   - assets/extra.css
