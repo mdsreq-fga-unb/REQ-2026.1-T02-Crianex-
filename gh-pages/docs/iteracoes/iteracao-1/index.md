@@ -47,10 +47,10 @@ Durante esta iteração, aplicamos a **Formalização Seletiva**, criando diagra
   <p><em>Fonte: Elaborado pelos autores.</em></p>
 </div>
 
-**O que é um Diagrama Leve?**  
+#### **O que é um Diagrama Leve?**  
 Trata-se de uma representação visual simplificada do fluxo de comunicação entre as entidades do sistema (Frontend, API, Banco de Dados, etc.). Em vez de utilizar toda a notação formal e rigorosa da UML, o diagrama leve foca no essencial: ilustrar de forma clara e ágil como os dados transitam para resolver uma funcionalidade específica. Isso facilita o alinhamento técnico sem gerar sobrecarga de documentação extensa e engessada.
 
-**O que é o padrão de Feature Card?**  
+#### **O que é o padrão de Feature Card?**  
 O Feature Card é um elemento visual utilizado na fase de planejamento (geralmente no Miro ou ferramenta similar) que documenta uma funcionalidade de forma atômica. Ele consolida informações cruciais como o título da feature, regras de negócio e os critérios de aceitação (frequentemente escritos no formato BDD - *Dado/Quando/Então*). Esse modelo garante que toda a equipe tenha clareza do escopo e do comportamento esperado antes de escrever a primeira linha de código, servindo como insumo direto para a criação das *issues*.
 
 ---
@@ -194,9 +194,22 @@ Durante as reuniões com o Domain Expert, colhemos feedbacks essenciais para o a
 
 Esta evidência demonstra a participação ativa do cliente no processo de validação contínua e a transparência na comunicação para as tomadas de decisão.
 
-### Validação do Protótipo e Priorização
+### Validação da Priorização do Backlog
 
-<!-- Adicione aqui a evidência de validação do cliente sobre o protótipo de alta fidelidade e a priorização do backlog (prints, transcrição de reunião, comentários, etc.) -->
+<div align="center">
+  <p><strong>Figura 6</strong> — Feedback do Cliente (Domain Expert) sobre a Priorização do Backlog</p>
+  <img src="./images/feedback_priorizacao.png" alt="Feedback do cliente sobre a priorização" width="600">
+  <p><em>Fonte: Comunicação direta com o cliente (Domain Expert), 17/05/2026.</em></p>
+</div>
+
+| Feedback Recebido | Aprovação do Cliente | Ação Tomada |
+|-------------------|----------------------|-------------|
+| Formato de priorização muito claro — motivo de cada item priorizado está explícito | ✅ Elogio | Mantido |
+| Features (RFs agrupados) não estão ordenados por prioridade — ao contrário dos RNFs | ✅ Solicita correção | Tabela de Features reordenada por IP decrescente em [priorizacao.md](../../backlog/priorizacao.md) |
+| Ausência de flag ou coluna indicando o que entra no MVP | ✅ Solicita adição | Coluna **MVP** adicionada nas tabelas de Features e RNFs (✅ Q1 = Alta / ❌ Q2 em diante) |
+| Dificuldade de leitura de algumas tabelas no GitHub Pages | ✅ Registrado | Tabelas revisadas |
+
+### Validação do Protótipo
 
 ---
 
