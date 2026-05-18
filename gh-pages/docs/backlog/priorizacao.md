@@ -207,7 +207,7 @@ ValorRF = (Complixidade × 3) + (DependenciasArquitetural × 3) + (EsforcoValida
 | RNF08 | Criptografia de credenciais | Produto > Segurança da Informação | F09 | 33 | 25 | 1,32 | Média |
 | RNF02 | Tempo de resposta da vitrine | Produto > Eficiência | F01, F14, F18 | 29 | 22 | 1,318 | Média |
 | RNF06 | Integridade transacional | Produto > Dependabilidade | F14 | 30 | 23 | 1,304 | Média |
-| RNF04 | Indexação por motores de busca | Produto > Eficiência | F12, F15, F16 | 43 | 35 | 1,229 | Média |
+| RNF04 | Renderização server-side da vitrine pública | Produto > Eficiência | F12, F15, F16 | 43 | 35 | 1,229 | Média |
 | RNF07 | Conformidade com OWASP Top 10 | Produto > Segurança da Informação | Global | 38 | 33 | 1,152 | Média |
 | RNF14 | Escalabilidade horizontal | Produto > Eficiência | Global | 35 | 31 | 1,129 | Média |
 | RNF03 | Tempo de resposta da área administrativa | Produto > Eficiência | F01, F03, F06, F09, F13, F19, F23, F25 | 32 | 30 | 1,067 | Média |
