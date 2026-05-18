@@ -2,7 +2,9 @@
 
 **Período:** 15/04/2026 – 25/05/2026  
 **Status:** 🔄 Em andamento  
-**Meta da Iteração (Iteration Goal):** "Qualquer visitante acessa a vitrine pública da Crianex, vê o portfólio de produtos SaaS com página institucional em PT/EN, intuitivo em layout responsivo e consegue contatar com a crianex sendo para dúvidas ou para virar cliente da Crianex."  
+**Meta da Iteração (Iteration Goal):** Ao fim da IT1: (1) qualquer visitante sem autenticação navega pela vitrine pública, visualiza o catálogo de produtos SaaS publicados, consulta informações institucionais e canais de contato da Crianex; (2) um administrador autenticado cadastra, edita, publica e despublica produtos e gerencia usuários via painel seguro; e (3) visitantes consultam e avaliam artigos do FAQ categorizados — tudo em layout responsivo verificado em mobile (≥ 375 px) e desktop (≥ 1 280 px), com Formal Client Validation aprovada por Otavio.  
+
+**Observação:** A entrega da unidade 2 ocorrerá dia 19 de maio de 2026, no entanto, nossa iteração termina dia 25 de maio de 2026, por isso alguns dos objetivos definidos para a iteração ainda estarão em fase de conclusão.
 
 ---
 
