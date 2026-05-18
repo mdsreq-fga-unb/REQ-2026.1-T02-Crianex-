@@ -1,3 +1,10 @@
+---
+name: Subtask
+about: Crie uma sub-tarefa para uma feature (Sub-feature)
+title: "ST-F##.# — "
+labels: "subtask"
+assignees: ""
+---
 ## Subtask
 **Feature pai:** [F## — Título]
 

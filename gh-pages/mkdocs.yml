@@ -35,7 +35,9 @@ nav:
     - "5 · Cronograma": visao/cronograma.md
     - "6 · Equipe e Iteração": visao/equipe.md
     - "7 · DoR e DoD": visao/dor-dod.md
-    - "Lições Aprendidas": visao/10-licoes/index.md
+    - Lições Aprendidas:
+      - "10.1 · Unidade 1": visao/10-licoes/10-1.md
+      - "10.2 · Unidade 2": visao/10-licoes/10-2.md
   - Iterações:
     - "Visão Geral": iteracoes/index.md
     - "Unidade 1":
