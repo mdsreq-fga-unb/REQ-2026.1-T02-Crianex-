@@ -80,18 +80,6 @@ O produto objeto deste processo de ER é a **Crianex Hub**: plataforma administr
 
 ---
 
-
-<div style="width: 100%; max-width: 900px; margin: 1.5rem 0; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.15);">
-  <video controls style="width: 100%; display: block;">
-    <source src="assets/apresentacao_unidade1.mp4" type="video/mp4">
-    <p>Seu navegador não suporta reprodução de vídeo.
-    <a href="assets/apresentacao_unidade1.mp4">Baixar o vídeo</a>.</p>
-  </video>
-</div>
-
-
----
-
 ## Histórico de Revisão
 
 | Versão | Data | Descrição | Autor(es) |
