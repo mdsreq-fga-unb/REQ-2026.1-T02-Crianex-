@@ -232,7 +232,7 @@
         
             
 <li >
-    <a href="../../../iteracao-2/">Resumo</a>
+    <a href="../../../iteracao-2/">Resumo — Evidências</a>
 </li>
 
         
@@ -247,7 +247,7 @@
         
             
 <li >
-    <a href="../../../iteracao-3/">Resumo</a>
+    <a href="../../../iteracao-3/">Resumo — Evidências</a>
 </li>
 
         
@@ -428,9 +428,9 @@
 <h2 id="discussoes-e-decisoes">Discussões e Decisões<a class="headerlink" href="#discussoes-e-decisoes" title="Permanent link">&para;</a></h2>
 <h3 id="1-reorganizacao-das-caracteristicas-de-produto-cps">1. Reorganização das Características de Produto (CPs)<a class="headerlink" href="#1-reorganizacao-das-caracteristicas-de-produto-cps" title="Permanent link">&para;</a></h3>
 <p>Para sanar críticas anteriores do professor ("Páginas não são funcionalidades") e otimizar o escopo, o grupo tomou uma decisão estrutural importante:
-* <strong>Fusão de CPs:</strong> A antiga CP5 (Página Institucional) foi formalmente extinta e integrada como sub-funcionalidade dentro da CP4.
-* <strong>Nova Nomenclatura:</strong> A CP4 foi renomeada de "Vitrine Pública de Produtos SAS" para <strong>Plataforma Pública de Apresentação da Empresa</strong>. Essa macroestrutura agora centraliza tanto a exibição do portfólio de produtos quanto as seções institucionais de credibilidade ("Sobre Nós").
-* <strong>Separação de Contextos:</strong> Dentro da CP4, dividiu-se nitidamente as features de <strong>Exibição Pública</strong> das features de <strong>Gerenciamento Administrativo</strong> (CRUD de produtos, despublicar, reordenar por drag-and-drop). Isso foi feito para permitir que os Requisitos Não Funcionais de segurança e isolamento de rotas fossem aplicados cirurgicamente apenas nas features do painel interno.</p>
+- <strong>Fusão de CPs:</strong> A antiga CP5 (Página Institucional) foi formalmente extinta e integrada como sub-funcionalidade dentro da CP4.
+- <strong>Nova Nomenclatura:</strong> A CP4 foi renomeada de "Vitrine Pública de Produtos SAS" para <strong>Plataforma Pública de Apresentação da Empresa</strong>. Essa macroestrutura agora centraliza tanto a exibição do portfólio de produtos quanto as seções institucionais de credibilidade ("Sobre Nós").
+- <strong>Separação de Contextos:</strong> Dentro da CP4, dividiu-se nitidamente as features de <strong>Exibição Pública</strong> das features de <strong>Gerenciamento Administrativo</strong> (CRUD de produtos, despublicar, reordenar por drag-and-drop). Isso foi feito para permitir que os Requisitos Não Funcionais de segurança e isolamento de rotas fossem aplicados cirurgicamente apenas nas features do painel interno.</p>
 <h3 id="2-mapeamento-de-requisitos-nao-funcionais-rnfs">2. Mapeamento de Requisitos Não Funcionais (RNFs)<a class="headerlink" href="#2-mapeamento-de-requisitos-nao-funcionais-rnfs" title="Permanent link">&para;</a></h3>
 <p>O grupo utilizou a classificação de Sommerville (organizacional, produto e externo) para vincular os RNFs diretamente às features do Miro:</p>
 <ul>
@@ -442,19 +442,19 @@
 </ul>
 <h4 id="21-centralizacao-de-rnfs-globais">2.1 Centralização de RNFs Globais<a class="headerlink" href="#21-centralizacao-de-rnfs-globais" title="Permanent link">&para;</a></h4>
 <p>Para evitar redundâncias visuais exaustivas no Miro, definiu-se uma seção de <strong>RNFs Globais</strong> para comportar os critérios que regem o sistema como um todo:
-* Portabilidade de navegador (<em>cross-browser</em>).
-* Responsividade global da interface (Vitrine e Admin).
-* Cobertura mínima de <strong>50% de testes automatizados</strong>.
-* Definição unificada da Stack Tecnológica.</p>
+- Portabilidade de navegador (<em>cross-browser</em>).
+- Responsividade global da interface (Vitrine e Admin).
+- Cobertura mínima de <strong>50% de testes automatizados</strong>.
+- Definição unificada da Stack Tecnológica.</p>
 <h3 id="3-matriz-de-valor-x-esforco">3. Matriz de Valor x Esforço<a class="headerlink" href="#3-matriz-de-valor-x-esforco" title="Permanent link">&para;</a></h3>
 <p>A equipe refinou o quadrante de priorização com base nos feedbacks coletados do cliente (Otávio):
-* <strong>Alto Valor / Médio-Alto Esforço:</strong> Toda a estrutura do CRM interno e controle de colunas (Kanban).
-* <strong>Médio-Baixo Valor / Alto Esforço:</strong> Módulo de faturamento/relatórios financeiros e o sistema de tickets de suporte. O cliente havia sinalizado que essas ferramentas têm menor urgência no MVP, pois as interações comerciais ocorrem predominantemente via WhatsApp.
-* <strong>Alto Valor / Baixo Esforço:</strong> Features da Plataforma Pública (Vitrine e Institucional), consolidando-as como o foco de largada da iteração.</p>
+- <strong>Alto Valor / Médio-Alto Esforço:</strong> Toda a estrutura do CRM interno e controle de colunas (Kanban).
+- <strong>Médio-Baixo Valor / Alto Esforço:</strong> Módulo de faturamento/relatórios financeiros e o sistema de tickets de suporte. O cliente havia sinalizado que essas ferramentas têm menor urgência no MVP, pois as interações comerciais ocorrem predominantemente via WhatsApp.
+- <strong>Alto Valor / Baixo Esforço:</strong> Features da Plataforma Pública (Vitrine e Institucional), consolidando-as como o foco de largada da iteração.</p>
 <h3 id="4-mudanca-estrategica-no-cronograma-o-pivo-da-unidade-2">4. Mudança Estratégica no Cronograma (O Pivô da Unidade 2)<a class="headerlink" href="#4-mudanca-estrategica-no-cronograma-o-pivo-da-unidade-2" title="Permanent link">&para;</a></h3>
 <p>Diante do tempo escasso para codificação até a data limite da Unidade 2 (<strong>19/05/2026</strong>), o Development Manager Leonardo propôs uma mudança de estratégia aceita por unanimidade:
-* <strong>Foco nas Cerimônias e Processo:</strong> Como a disciplina avalia a maturidade do processo de engenharia e não apenas o software, o grupo focará em consolidar <strong>100% das evidências metodológicas até terça-feira (19/05)</strong>. Isso inclui o deploy do Git Pages atualizado, Documento de Visão preenchido, especificações de cards, protótipo de alta fidelidade no Figma e os diagramas.
-* <strong>Extensão do Prazo do Código:</strong> A entrega final do incremento de software funcional (código e issues resolvidas da Vitrine) foi estendida internamente para a <strong>sexta-feira subsequente (22/05)</strong>. Isso concederá aos desenvolvedores 4 dias adicionais e contínuos de programação limpa, evitando uma entrega instável.</p>
+- <strong>Foco nas Cerimônias e Processo:</strong> Como a disciplina avalia a maturidade do processo de engenharia e não apenas o software, o grupo focará em consolidar <strong>100% das evidências metodológicas até terça-feira (19/05)</strong>. Isso inclui o deploy do Git Pages atualizado, Documento de Visão preenchido, especificações de cards, protótipo de alta fidelidade no Figma e os diagramas.
+- <strong>Extensão do Prazo do Código:</strong> A entrega final do incremento de software funcional (código e issues resolvidas da Vitrine) foi estendida internamente para a <strong>sexta-feira subsequente (22/05)</strong>. Isso concederá aos desenvolvedores 4 dias adicionais e contínuos de programação limpa, evitando uma entrega instável.</p>
 <hr />
 <h2 id="encaminhamentos">Encaminhamentos<a class="headerlink" href="#encaminhamentos" title="Permanent link">&para;</a></h2>
 <table>
