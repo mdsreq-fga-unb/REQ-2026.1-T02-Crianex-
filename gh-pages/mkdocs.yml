@@ -33,7 +33,8 @@ nav:
     - "3 · Estratégias": visao/estrategias.md
     - "4 · Eng. de Requisitos": visao/er.md
     - "5 · Cronograma": visao/cronograma.md
-    - "6 · Equipe e Interação": visao/equipe.md
+    - "6 · Equipe e Iteração": visao/equipe.md
+    - "7 · DoR e DoD": visao/dor-dod.md
     - "Lições Aprendidas": visao/10-licoes/index.md
   - Iterações:
     - "Visão Geral": iteracoes/index.md
