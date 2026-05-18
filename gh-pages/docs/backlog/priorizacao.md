@@ -2,10 +2,10 @@
 
 ## Histórico de Revisão
 
-| Versão | Data | Descrição | Autor(es) |
-|--------|------|-----------|-----------|
-| 1.0 | 14/05/2026 | Templete do Priorização do backlog | Lucas A. Zanetti |
-| 1.1 | 17/05/2026 | Tabela de priorização com diagrama de valorXesforço | Lucas A. Zanetti |
+| Versão | Data | Descrição | Autor(es) | Revisores(es) |
+|--------|------|-----------|-----------|---------------|
+| 1.0 | 14/05/2026 | Templete do Priorização do backlog | Lucas A. Zanetti | Heitor Macedo Ricardo|
+| 1.1 | 17/05/2026 | Tabela de priorização com diagrama de valorXesforço | Lucas A. Zanetti | Heitor Macedo Ricardo|
 
 
 ---
