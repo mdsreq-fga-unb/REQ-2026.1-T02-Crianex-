@@ -24,11 +24,12 @@
 
 ## DoD — Definition of Done
 
-- [ ] Todos os testes automatizados passando (unitários + integração)
-- [ ] Funcionalidade revisada por ao menos 1 outro membro
+- [ ] Critérios de aceite todos validados (Given/When/Then cobertos)
+- [ ] Testes automatizados passando (unitários + integração onde há lógica de negócio)
 - [ ] Lint sem erros (ESLint + Prettier)
+- [ ] CI verde (build + testes + lint)
 - [ ] Migration de banco aplicada em staging sem erros (se existir)
-- [ ] Feature demonstrada/validada pelo cliente ou registrada para próxima validação
+- [ ] Validação parcial registrada pelo cliente na issue (ou agendada para próxima validação formal)
 - [ ] Documentação atualizada (README, ADR ou gh-pages) se necessário
 - [ ] Sem vulnerabilidades críticas abertas no SAST/linting de segurança
 

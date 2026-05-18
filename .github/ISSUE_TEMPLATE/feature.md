@@ -51,11 +51,11 @@ assignees: ""
 > Marque todos antes de mover para *In Progress*
 
 - [ ] US com critérios de aceitação no formato Dado/Quando/Então
-- [ ] Feature estimada (VB, CX, ES preenchidos)
-- [ ] Dependências externas identificadas
-- [ ] Mockup/wireframe revisado pelo cliente (se aplicável)
-- [ ] Branch criada a partir de `main` com nome `feature/<id>-<descricao>`
-- [ ] Ao menos um critério de segurança identificado (RLS, validação de input)
+- [ ] Feature estimada (VB, CX, ES preenchidos e IP calculado)
+- [ ] Dependências identificadas; bloqueantes resolvidos
+- [ ] Class Owner designado
+- [ ] Protótipo revisado pelo cliente (se houver interface envolvida)
+- [ ] Ao menos um critério de segurança identificado (RLS, validação de input, autenticação)
 
 ---
 
