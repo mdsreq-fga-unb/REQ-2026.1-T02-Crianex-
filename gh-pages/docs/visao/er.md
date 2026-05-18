@@ -6,100 +6,214 @@
 |--------|------|-----------|-----------|
 | 1.0 | 12/04/2026 | Criação das seções 4.1 a 4.4 | Heitor e Lucas |
 | 1.1 | 13/04/2026 | Revisão da seção 4 | Equipe Crianex |
-| 1.2 | 04/05/2026 | Ajustes da seção 4.1  | Heitor |
-| 1.3 | 04/05/2026 | Ajustes da seção 4.2  | Heitor |
+| 1.2 | 04/05/2026 | Ajustes da seção 4.1 | Heitor |
+| 1.3 | 04/05/2026 | Ajustes da seção 4.2 | Heitor |
 | 1.4 | 06/05/2026 | Revisão dos ajustes da seção 4.1 e reajustes | Philipe |
 | 1.5 | 05/05/2026 | Ajustes de clareza e consistência na seção 4 | Hugo |
 | 1.6 | 08/05/2026 | Ajustes de cerimônias e técnicas | Lucas e Philipe |
+| 1.7 | 18/05/2026 | Reestruturação completa: separação entre etapas únicas e iterativas do FDD; adição da tabela de atividades de ER | Lucas A. Zanetti |
 
 ---
 
 ## 4.1 Abordagem de Engenharia de Requisitos
 
-O projeto Crianex adota um Processo Híbrido (FDD + Kanban). Nesta abordagem, o FDD (Feature-Driven Development) estrutura o planejamento orientado a valor (o que construir), enquanto o Kanban fornece o controle visual da execução (quando puxar o trabalho e quando parar) através da limitação de Work in Progress (WIP).
-A seguir, detalhamos as atividades da Engenharia de Requisitos e explicamos como cada técnica será aplicada no desenvolviemnto de requisitos:
+O projeto Crianex adota um **Processo Híbrido (FDD + Kanban)**. O FDD (Feature-Driven Development) estrutura o planejamento orientado a valor — o que construir —, enquanto o Kanban fornece o controle visual da execução — quando puxar o trabalho e quando parar — por meio da limitação de Work in Progress (WIP).
 
-### Cerimônias, Técnicas e Artefatos do Processo Híbrido
+O FDD é composto por **5 etapas**, mas elas **não são todas iterativas**. A separação entre o que ocorre uma única vez e o que se repete em cada iteração é central para entender como o processo funciona no projeto Crianex:
 
-#### 1. Domain Modeling Workshop
-O *Domain Modeling Workshop* é a cerimônia em que a equipe e o *Domain Expert* constroem ou refinam o modelo de domínio que sustenta as *features* da iteração. Seu objetivo é alinhar o entendimento sobre entidades, relacionamentos e regras de negócio antes do detalhamento funcional.
+---
 
-**Técnica:** *Color Modeling*. Essa técnica organiza visualmente os elementos do domínio, ajudando a identificar classes, papéis, eventos e agregados relevantes para o sistema.  
+## 4.2 Etapas Únicas — Realizadas uma vez no início do projeto
 
-**Artefatos gerados:** diagrama de domínio atualizado e glossário de termos.
+As três primeiras etapas do FDD constroem a fundação do produto: o modelo de domínio, a lista de funcionalidades e o plano de desenvolvimento. São executadas **uma única vez**, antes da primeira iteração de construção, e seus artefatos servem de insumo para todas as iterações seguintes.
 
-#### 2. Feature Discovery Session
-A *Feature Discovery Session* é a cerimônia dedicada à descoberta e ao refinamento de funcionalidades com o *Domain Expert*. Nela, a equipe transforma necessidades de negócio em *features* claras, compreensíveis e orientadas a valor.
+### Etapa 1 — Develop an Overall Model (Desenvolver Modelo Global)
 
-**Técnicas:** *Feature Card Specification*, *Vertical Slicing* e critérios *INVEST*. O *Feature Card Specification* padroniza a escrita da *feature* em uma formulação objetiva; o *Vertical Slicing* orienta a decomposição funcional em partes menores com valor demonstrável; e o INVEST ajuda a garantir que cada fatia seja independente, negociável, valiosa, estimável, pequena e testável.  
+O objetivo é construir uma visão compartilhada e abrangente do domínio do problema antes de qualquer detalhe funcional ser discutido. A equipe e o Domain Expert (Otávio Maya) exploram juntos o negócio, suas entidades, relacionamentos e regras centrais.
 
-**Artefatos gerados:** *Feature Cards* novas ou revisadas e ata da sessão.
+**Cerimônia:** Domain Modeling Workshop
 
-#### 3. Iteration Replenishment
-A *Iteration Replenishment* é a cerimônia em que as *features* candidatas são analisadas e selecionadas para a iteração corrente. O foco é montar um escopo viável, compatível com a capacidade da equipe e com o valor de negócio esperado.
+Reunião em que a equipe e o Domain Expert constroem o modelo de domínio que sustenta as features do projeto. O resultado é um entendimento coletivo e documentado sobre as entidades do sistema — não apenas uma lista de requisitos.
 
-**Técnicas:** matriz Valor × Esforço e *Priorização IP*. Essas técnicas apoiam a ordenação das *features* conforme valor, esforço e viabilidade de execução.  
-**Artefatos gerados:** backlog priorizado da iteração e lista de *features* comprometidas.
+**Técnica:** Color Modeling — organização visual dos elementos do domínio para identificar classes, papéis, eventos e agregados.
 
-#### 4. Iteration Commitment
-A *Iteration Commitment* é a cerimônia em que a equipe formaliza o compromisso com o escopo e com o objetivo principal da iteração. Ela garante que todos compartilhem o mesmo entendimento sobre a entrega esperada.
+**Artefatos gerados:** diagrama de domínio e glossário de termos.
 
-**Técnica:** *Iteration Goal Statement*. Essa técnica consiste em formular uma frase clara, única e demonstrável que sintetize o valor de negócio a ser entregue ao final da iteração.  
+---
 
-**Artefatos gerados:** *Iteration Goal* documentado e ata do compromisso.
+### Etapa 2 — Build a Feature List (Construir Lista de Funcionalidades)
 
-#### 5. Technical Design Review
-O *Technical Design Review* é a cerimônia em que a solução técnica da *feature* é analisada antes da implementação. Seu objetivo é validar a abordagem estrutural da solução e reduzir riscos antes da codificação.
+Com o modelo de domínio estabelecido, a equipe decompõe o sistema em funcionalidades concretas e orientadas ao cliente. Cada feature representa uma ação de valor entregável e verificável.
 
-**Técnica:** diagrama de sequência leve. Essa técnica representa as interações e integrações relevantes da solução, ajudando a equipe a antecipar dependências e pontos de extensão.  
+**Cerimônia:** Feature Discovery Session
 
-**Artefatos gerados:** notas de design e especificação técnica da *feature*.
+Cerimônia dedicada à descoberta e ao refinamento de funcionalidades com o Domain Expert. A equipe transforma necessidades de negócio em features claras, compreensíveis e orientadas a valor.
 
-#### 6. Formal Client Validation 
-A *Formal Client Validation* confirma com o cliente real se o valor de negócio foi de fato entregue. 
+**Técnicas:**
 
-**Técnicas:** Demo orietada a valor (Não a feature) - narrativa: "o cliente consegue X". Essas técnicas ajudam a verificar completude, coerência e ligação entre objetivo estratégico.  
+- *Feature Card Specification* — padroniza a escrita da feature na formulação `<ação> <resultado> <de/para/no/com> <objeto>`
+- *Vertical Slicing* — orienta a decomposição em partes menores com valor demonstrável de ponta a ponta
+- *INVEST* — garante que cada fatia seja independente, negociável, valiosa, estimável, pequena e testável
 
-**Artefatos gerados:** Atas da demo; aprovação formal do Otávio; lista de feedback para o backlog. Essa etapa pode gerar um cerimônia extra chamada Backlog Reorganization a partir do feedback do cliente.
+**Artefatos gerados:** Feature Cards e ata da sessão.
 
+---
 
-#### 7. Feature Build Consolidation
-A *Feature Build Consolidation* é uma cerimômina que garante que todas as fatias de uma feature foram integradas e possíveis de rastrea-las, com as featuras end-to-end. Será realizado todo final da semana de produção.
+### Etapa 3 — Plan by Feature (Planejar por Funcionalidade)
 
-**Técnicas**: Smoke test end-to-end, verficação de critério de aceite da feature e requirements traceability matrix.
+Com a lista de features construída, a equipe organiza e prioriza o trabalho no horizonte completo do projeto: quais features vão para qual iteração, quem é o Chief Programmer responsável por cada conjunto e qual a sequência de entrega orientada a valor de negócio.
 
-**Artefatos gerados**: Features em ambiente de homologação; matrix de rastreabilidade atualizada. 
+**Cerimônia:** Iteration Replenishment (versão macro — planejamento do roadmap completo)
 
-#### 8. Partial Client Validation
-O *Partial Client Validation* é uma cerimônia que valida entregas intermediárias com o cliente, idealmente assincronamente, para acelerar feedbacks.
+A priorização é feita com base na matriz **Valor × Esforço** e no **Índice de Prioridade (IP = VB / PT)**, garantindo que as features de maior valor e menor esforço relativo entrem primeiro no fluxo de desenvolvimento.
 
-**Técnicas**: Validação assincrona via vídeo curto ou screenshots + checklists.
+**Técnicas:**
 
-**Artefatos gerados**: Comentário de validação na issue; checklist marcado; organização de feedback. 
-#### 9. Iteration Artifact Closure
-O *Iteration Artifact Closure* é uma cerimônia para empacotar tudo que o cliente acadêmico (professor) precisa receber na unidade correspondente.
+- *Matriz Valor × Esforço* — posiciona cada feature em quadrantes de prioridade
+- *Priorização IP* — ordena features por IP = VB / PT, onde PT = (CX + ES) / 2
 
-**Técnicas**: Checklist de empacontamento e revisão cruzada.
+**Artefatos gerados:** backlog macro priorizado, roadmap de iterações com CPs por iteração e Feature Matrix.
 
-**Artefatos gerados**: Documento de visão e GitHub pages atualizado; Backlog congelado da iteração; Reuniões e atas entrengues; Matriz de rastreabilidade; Evidências de validação da metodologia.
+---
 
-#### 10. Midweek Sync / Kanban Pull Execution
-O *Midweek Sync* é a cerimônia de alinhamento rápido da equipe, enquanto o *Kanban Pull Execution* regula o fluxo de execução das issues ao longo da iteração. Em conjunto, essas cerimônias promovem visibilidade do trabalho e controle do andamento das entregas.
+## 4.3 Etapas Iterativas — Repetidas em cada iteração
 
-**Técnicas:** *Kanban*, *Pull System* e *WIP limits*. Essas técnicas organizam o fluxo visual, limitam o trabalho simultâneo e garantem que novas atividades só sejam puxadas conforme a capacidade disponível.  
+As duas últimas etapas do FDD são executadas **a cada iteração**, para cada conjunto de features comprometido. É aqui que o Kanban entra como sistema de gestão de fluxo, complementando o FDD com visibilidade operacional e controle de WIP.
+
+### Etapa 4 — Design by Feature (Projetar por Funcionalidade)
+
+No início de cada iteração, as features do escopo são refinadas tecnicamente antes de qualquer linha de código ser escrita. Essa etapa produz os critérios de aceite, o design técnico e o compromisso formal da equipe com o objetivo da iteração.
+
+#### Cerimônia 1 — Iteration Replenishment + Commitment
+
+A Iteration Replenishment seleciona as features candidatas para a iteração corrente com base no IP e na capacidade da equipe. O Iteration Commitment formaliza o compromisso da equipe e do cliente com o Iteration Goal — uma frase única e demonstrável que sintetiza o valor a ser entregue.
+
+**Técnicas:**
+
+- *Matriz Valor × Esforço* e *Priorização IP* — reordenação das features conforme contexto da iteração
+- *Iteration Goal Statement* — formulação do objetivo principal da iteração
+
+**Artefatos gerados:** backlog priorizado da iteração, lista de features comprometidas e Iteration Goal documentado.
+
+---
+
+#### Cerimônia 2 — Technical Design Review
+
+Cerimônia em que a solução técnica de cada feature comprometida é analisada antes da implementação. O Chief Programmer lidera a sessão com o objetivo de validar a abordagem estrutural e reduzir riscos antes da codificação.
+
+**Técnicas:**
+
+- Diagrama de sequência leve — representa interações e integrações relevantes da solução
+- Análise de impacto e identificação de pontos de extensão
+- Prototipagem quando aplicável
+
+**Artefatos gerados:** notas de design e especificação técnica por feature.
+
+---
+
+### Etapa 5 — Build by Feature (Construir por Funcionalidade)
+
+Com o design validado, as features entram no fluxo de execução Kanban. A construção é acompanhada por validações contínuas com o cliente e consolidações formais ao final da iteração.
+
+#### Cerimônia 3 — Midweek Sync / Kanban Pull Execution
+
+Alinhamento rápido e assíncrono da equipe, combinado com a regulação do fluxo de execução das issues pelo Kanban. Garante visibilidade do trabalho em andamento e controle de WIP.
+
+**Técnicas:**
+
+- *Kanban* e *Pull System* — novas issues só são puxadas conforme capacidade disponível
+- *WIP limits* — máx. 2 issues In Progress por Class Owner
 
 **Artefatos gerados:** board atualizado, comentários de bloqueio, commits, branches e Pull Requests.
 
-### Tabela de Cerimônias e Técnicas do Processo Híbrido FDD + Kanban
+---
 
-| Processo de Desenvolvimento | Descrição do Processo | Cerimônia | Técnicas de Apoio | Artefatos | Critérios / Políticas |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **1. Desenvolvimento de Domínio** | Modelagem colaborativa para criar uma visão compartilhada do sistema e identificar o domínio do problema. | **Domain Modeling Workshop** | *Color Modeling*. | Diagrama de domínio; glossário de termos. | — |
-| **2. Decomposição Funcional** | Divisão do sistema em áreas de funcionalidade, conjuntos de *features* e *features* específicas orientadas ao cliente. | **Feature Discovery Session** | *Feature Card Specification*;*Vertical Slicing*; *INVEST*. | *Feature Cards*; ata da sessão. | — |
-| **3. Planejamento e Priorização** | Organização das *features* em conjuntos relacionais e priorização com base em valor, dependências e complexidade. | **Iteration Replenishment** | *Matriz Valor × Esforço*; *Priorização IP*. | Backlog priorizado; lista de *features* comprometidas. | — |
-| **4. Compromisso da Iteração** | Formalização do escopo da iteração e do objetivo principal a ser entregue. | **Iteration Commitment** | *Iteration Goal Statement*. | *Iteration Goal* documentado; ata do compromisso. | *Definition of Ready*; *Definition of Done*. |
-| **5. Documentação e Design** | Produção de documentação prática e objetiva, incluindo especificação funcional e decisões de design. | **Technical Design Review** |  Diagrama de sequência leve; Prototipagem; Análise de impacto; Identiifcação de pontos de extensão | Notas de design; especificação da *feature*. | — |
-| **6. Gestão de Fluxo** | Controle contínuo do estado das *features* ao longo do ciclo de vida de desenvolvimento. | **Midweek Sync**; **Kanban Pull Execution** | *Kanban*; *Pull System*; *WIP limits*. | Board atualizado; comentários de bloqueio; PRs. | — |
-| **7. Verificação e Rastreabilidade** | Acompanhamento do progresso das *features* com base em marcos, inspeções e mecanismos de rastreabilidade. | **Feature Build Consolidation**; **Partial Client Validation**; **Formal Client Validation**; **Iteration Artifact Closure**. | *Inspeção formal de design e código*; *Rastreabilidade Bidirecional*; *Backlog Reorganization Session*; *Checklist de empacontamento e revisão cruzada*. | Matriz de rastreabilidade; evidências de validação; Documento de visão e GitHub pages atualizado; Backlog congelado da iteração; Reuniões e atas entrengues; Matriz de rastreabilidade; Evidências de validação da metodologia. | — |
+#### Cerimônia 4 — Feature Build Consolidation
+
+Cerimônia realizada ao final de cada semana de produção para garantir que todas as fatias de uma feature foram integradas e são rastreáveis de ponta a ponta.
+
+**Técnicas:**
+
+- Smoke test end-to-end
+- Verificação de critério de aceite da feature
+- Requirements Traceability Matrix
+
+**Artefatos gerados:** features em ambiente de homologação e matriz de rastreabilidade atualizada.
 
 ---
+
+#### Cerimônia 5 — Partial Client Validation
+
+Validação assíncrona de entregas intermediárias com Otávio, realizada ao final de cada semana, para acelerar o ciclo de feedback sem aguardar a reunião formal.
+
+**Técnicas:**
+
+- Validação assíncrona via vídeo curto ou screenshots + checklists de critérios de aceite
+
+**Artefatos gerados:** comentário de validação na issue, checklist marcado e organização de feedback para o backlog.
+
+---
+
+#### Cerimônia 6 — Formal Client Validation
+
+Reunião de demo ao final de cada iteração. Confirma com Otávio se o valor de negócio foi de fato entregue. A demo é orientada ao valor entregue — narrativa "o cliente consegue X" —, não a features individuais.
+
+**Técnicas:**
+
+- Demo orientada a valor: narrativa centrada no Iteration Goal, não em funcionalidades isoladas
+
+**Artefatos gerados:** ata da demo, aprovação formal de Otávio e lista de feedback para o backlog. Pode gerar uma sessão extra de **Backlog Reorganization** a partir do feedback capturado.
+
+---
+
+#### Cerimônia 7 — Iteration Artifact Closure
+
+Cerimônia de fechamento da iteração que empacota todos os artefatos que o cliente acadêmico (professor George Marsicano) precisa receber na unidade correspondente.
+
+**Técnicas:**
+
+- Checklist de empacotamento
+- Revisão cruzada entre membros da equipe
+
+**Artefatos gerados:** Documento de Visão e GitHub Pages atualizados; backlog congelado da iteração; atas de reunião entregues; matriz de rastreabilidade; evidências de validação da metodologia.
+
+---
+
+## 4.4 Visão Consolidada do Processo
+
+```mermaid
+flowchart TD
+    subgraph unico[" Etapas Únicas — Início do Projeto"]
+        E1["Etapa 1\nDevelop an Overall Model\n─────────────────\nDomain Modeling Workshop"]
+        E2["Etapa 2\nBuild a Feature List\n─────────────────\nFeature Discovery Session"]
+        E3["Etapa 3\nPlan by Feature\n─────────────────\nReplenishment Macro + Feature Matrix"]
+        E1 --> E2 --> E3
+    end
+
+    subgraph iter[" Etapas Iterativas — Por Iteração"]
+        E4A["Etapa 4 — Design by Feature\n─────────────────\nIteration Replenishment + Commitment\nTechnical Design Review"]
+        E5A["Etapa 5 — Build by Feature\n─────────────────\nKanban Pull Execution\nFeature Build Consolidation\nPartial Client Validation\nFormal Client Validation\nIteration Artifact Closure"]
+        E4A --> E5A
+        E5A -->|próxima iteração| E4A
+    end
+
+    E3 --> E4A
+
+    style unico fill:#e3f2fd,stroke:#1565c0,color:#000
+    style iter fill:#e8f5e9,stroke:#2e7d32,color:#000
+```
+
+---
+
+## 4.5 Atividades de Engenharia de Requisitos
+
+A tabela abaixo mapeia as atividades clássicas de Engenharia de Requisitos às cerimônias e tarefas do processo híbrido FDD + Kanban adotado pelo projeto.
+
+| Atividade de ER | Etapa FDD | Ocorrência | Cerimônia / Tarefa |
+|-----------------|-----------|------------|---------------------|
+| **Elicitação e Descoberta** | Etapas 1 e 2 | Única | Domain Modeling Workshop; Feature Discovery Session |
+| **Análise e Consenso** | Etapas 2 e 3 | Única + Iterativa | Feature Discovery Session; Iteration Replenishment + Commitment; Technical Design Review |
+| **Declaração** | Etapas 2, 3 e 4 | Única + Iterativa | Feature Card Specification; escrita de critérios de aceite BDD (Dado/Quando/Então); notas de design técnico |
+| **Representação** | Etapas 1, 2 e 4 | Única + Iterativa | Domain Modeling Workshop (diagrama de domínio e glossário); Feature Card Specification (formulação `<ação> <resultado> <objeto>`); Technical Design Review (diagramas de sequência e especificação técnica por feature) |
+| **Verificação e Validação** | Etapa 5 | Iterativa | Feature Build Consolidation (verificação técnica); Partial Client Validation (validação assíncrona); Formal Client Validation (demo orientada a valor) |
+| **Organização e Atualização** | Etapas 3 e 5 | Única + Iterativa | Iteration Replenishment macro (roadmap); Iteration Artifact Closure; Backlog Reorganization; atualização da Matriz de Rastreabilidade |
