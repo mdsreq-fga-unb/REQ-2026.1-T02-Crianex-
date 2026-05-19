@@ -132,7 +132,7 @@ document.addEventListener('keydown', function(e) {
 
 ## Critérios de Aceitação Validados (BDD)
 
-Todas as issues abaixo atingiram o *Definition of Ready (DoD)* e passaram pela verificação dos requisitos funcionais (RF) e não funcionais (RNF).
+Todas as issues abaixo atingiram o *Definition of Ready (DoR)* e passaram pela verificação dos requisitos funcionais (RF) e não funcionais (RNF).
 
 ### CP4 — Plataforma Pública de Apresentação da Empresa
 
