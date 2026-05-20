@@ -59,7 +59,7 @@ nav:
   - Lista de Funcionalidades: 
     - "Rastreabilidade": backlog/rastreabilidade.md
     - "Priorização": backlog/priorizacao.md
-  # - Arquitetura: arquitetura/index.md
+  - Arquitetura: arquitetura/index.md
   - Apresentação:
     - "Unidade 1": apresentacao/unidade-1.md
     - "Unidade 2": apresentacao/unidade-2.md
