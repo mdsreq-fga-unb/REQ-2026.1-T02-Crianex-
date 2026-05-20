@@ -48,6 +48,13 @@ Cada ferramenta tem escopo exclusivo — o que vai para o Miro não vai para o D
 | **WhatsApp** | Assíncrono | Canal direto com Otavio para validações parciais e alinhamentos urgentes | — |
 | **Google Meets** | Síncrono | Reuniões formais com o cliente | — |
 
+### Links das Ferramentas
+
+| Ferramenta | Link |
+|---|---|
+| **Miro** (board principal) | [Acessar board](https://miro.com/app/board/uXjVGl991V0=/?share_link_id=878597873452)|
+| **GitHub Projects (Kanban)** | [Acessar board](https://github.com/orgs/mdsreq-fga-unb/projects/96) |
+
 ---
 
 ## 6.3 Cadência de Cerimônias
