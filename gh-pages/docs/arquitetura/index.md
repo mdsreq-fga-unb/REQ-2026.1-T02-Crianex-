@@ -314,6 +314,11 @@ packages/
     src/
       types/                  ← interfaces de domínio
       schemas/                ← validações Zod compartilhadas
+supabase/                     ← schema e migrations do banco (Supabase CLI)
+  migrations/                 ← arquivos SQL versionados (1 arquivo por issue de DB)
+    YYYYMMDDHHMMSS_<descricao>.sql
+  seed.sql                    ← dados iniciais (about_sections, faq_categories, etc.)
+  config.toml                 ← configuração do projeto Supabase CLI
 ```
 
 !!! note "Tipos compartilhados"
@@ -327,8 +332,16 @@ packages/
 
 | Fase | Ambiente | Estratégia |
 |------|----------|------------|
-| IT1 – IT3 (desenvolvimento) | Local + Supabase cloud | Docker Compose (`web` + `api`) + Supabase gerenciado |
+| Individual (dev) | Local — `supabase start` (Docker) | Supabase CLI sobe instância completa localmente; sem conta necessária |
+| Integração (equipe) | Projeto Supabase da equipe (free tier) | Migrations aplicadas via `supabase db push`; compartilhado pela equipe |
+| Produção | Projeto Supabase da Crianex (Otávio) | `supabase db push --linked` após validação em staging; acesso liberado pela Crianex |
 | Pós-venda | Cluster Kubernetes Crianex | GitHub Actions: build → push image → `kubectl apply` |
+
+!!! note "Fluxo de schema (issues de DB)"
+    Cada issue de schema gera **um arquivo de migration SQL** em `supabase/migrations/`. O dev escreve
+    a migration localmente (`supabase start` + `supabase db diff`), testa com `supabase db reset` e
+    abre PR com o arquivo versionado. O CI aplica automaticamente no projeto de integração da equipe.
+    O projeto da Crianex só recebe a migration na entrega de cada iteração.
 
 ### Pipeline CI/CD
 
