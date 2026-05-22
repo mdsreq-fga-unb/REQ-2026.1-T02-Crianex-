@@ -1,0 +1,22 @@
+{
+  "nav": {
+    "home": "Início",
+    "products": "Produtos",
+    "about": "Sobre",
+    "faq": "Perguntas Frequentes",
+    "contact": "Contato"
+  },
+  "common": {
+    "loading": "Carregando...",
+    "error": "Algo deu errado",
+    "back": "Voltar",
+    "close": "Fechar",
+    "save": "Salvar",
+    "cancel": "Cancelar"
+  },
+  "lang": {
+    "pt": "Português",
+    "en": "English",
+    "switch": "Mudar idioma"
+  }
+}

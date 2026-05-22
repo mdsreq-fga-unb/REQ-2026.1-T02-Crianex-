@@ -1,0 +1,11 @@
+-- Seed inicial — dados para desenvolvimento local
+-- Execute após: supabase db reset
+--
+-- Descomente as inserções conforme as migrations de cada issue forem aplicadas.
+-- Ordem: respeitar dependências de FK (categories antes de articles, etc.)
+
+-- ── FAQ categories (issue #94) ───────────────────────────────────────────────
+-- INSERT INTO faq_categories (name_pt, name_en, slug) VALUES
+--   ('Geral',     'General',  'geral'),
+--   ('Produtos',  'Products', 'produtos'),
+--   ('Suporte',   'Support',  'suporte');

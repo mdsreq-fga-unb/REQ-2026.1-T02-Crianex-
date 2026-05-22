@@ -1,4 +1,28 @@
+# ── Documentação ─────────────────────────────────────
 gh-pages/site/
-.claude/
 .venv/
 __pycache__/
+
+# ── Claude ───────────────────────────────────────────
+.claude/
+
+# ── Node.js ──────────────────────────────────────────
+node_modules/
+dist/
+build/
+.svelte-kit/
+
+# ── Ambiente ─────────────────────────────────────────
+.env
+.env.local
+.env.*.local
+
+# ── Supabase ─────────────────────────────────────────
+supabase/.temp/
+
+# ── Editores ─────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
