@@ -1,0 +1,22 @@
+{
+  "nav": {
+    "home": "Home",
+    "products": "Products",
+    "about": "About",
+    "faq": "FAQ",
+    "contact": "Contact"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "back": "Back",
+    "close": "Close",
+    "save": "Save",
+    "cancel": "Cancel"
+  },
+  "lang": {
+    "pt": "Português",
+    "en": "English",
+    "switch": "Switch language"
+  }
+}

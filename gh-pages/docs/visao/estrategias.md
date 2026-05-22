@@ -19,7 +19,7 @@ A abordagem ágil foi escolhida por ser orientada a valor de negócio de forma c
 
 ### Ciclo de Vida: Iterativo e Incremental
 
-O ciclo de vida iterativo e incremental organiza o desenvolvimento em ciclos curtos (sprints quinzenais), ao final dos quais uma versão parcial e funcional do produto é entregue. Cada iteração incorpora o feedback do cliente e refina os requisitos, garantindo que o produto evolua de forma alinhada às expectativas reais — sem esperar pelo final do projeto para descobrir desvios.
+O ciclo de vida iterativo e incremental organiza o desenvolvimento em iterações de 3 à 4 semanas, ao final dos quais uma versão parcial e funcional do produto é entregue. Cada iteração incorpora o feedback do cliente e refina os requisitos, garantindo que o produto evolua de forma alinhada às expectativas reais — sem esperar pelo final do projeto para descobrir desvios.
 
 ### Processo de ESW: FDD (Feature Driven Development)
 
@@ -35,47 +35,47 @@ O FDD (Feature Driven Development) é o processo de Engenharia de Software adota
 
 A lista de funcionalidades do FDD está diretamente mapeada nas **Características do Produto (CP01–CP13)** definidas na seção 2.3, garantindo rastreabilidade total entre planejamento e implementação.
 
-### Gestão de Equipe: Scrumban (Scrum + Kanban)
+### Gestão de Equipe: Kanban (WIP Limits)
 
-O Scrumban combina a estrutura de cerimônias e sprints do **Scrum** com a gestão de fluxo visual contínuo do **Kanban**, formando um modelo híbrido especialmente adequado à realidade da equipe:
+O **Kanban** é utilizado para gestão visual do fluxo de trabalho das features, com limites de Trabalho em Progresso (*Work In Progress — WIP*) que reduzem gargalos e mantêm foco no esforço técnico exigido pelo FDD:
 
 | Dimensão | Detalhe |
 |----------|---------|
 | **Duração das Iterações** | ~2 semanas por iteração (IT2 → IT3 → IT4 → Pós-venda) |
-| **Board de Acompanhamento** | GitHub Projects — colunas: Backlog → In Progress → Review → Done |
+| **Board de Acompanhamento** | GitHub Projects — colunas: Backlog → Ready → In Progress → Review → Validation → Done |
 | **Cerimônias** | Iteration Planning (início de cada iteração) · Retrospectiva (fim de cada iteração) |
-| **Sync assíncrono** | Check-in diário via texto no Discord: o que fiz / o que vou fazer / bloqueios |
-| **Backlog** | Gerenciado no GitHub Issues, refinado (grooming) a cada sprint com base no feedback recebido |
-| **Limite de WIP** | Limita o Trabalho em Progresso, reduzindo gargalos e focando o esforço técnico exigido pelo FDD |
+| **Sync assíncrono** | Check-in via texto no Discord: o que fiz / o que vou fazer / bloqueios |
+| **Backlog** | Gerenciado no GitHub Issues, refinado (grooming) a cada iteração com base no feedback recebido |
+| **Limite de WIP** | Máx. 2 issues em andamento por Class Owner; ao atingir o limite, destravar antes de iniciar nova feature |
 
 ---
 
 ## 3.2 Quadro Comparativo
 
-A tabela a seguir apresenta um comparativo entre o Scrum Tradicional e o Processo Ágil Híbrido (FDD + Scrumban) adotado no projeto Crianex, analisando características relevantes para o contexto de desenvolvimento da solução.
+A tabela a seguir apresenta um comparativo entre o Scrum Tradicional e o Processo Ágil Híbrido (FDD + Kanban) adotado no projeto Crianex, analisando características relevantes para o contexto de desenvolvimento da solução.
 
-| Características | Scrum Tradicional | Processo Ágil Híbrido (FDD + Scrumban) |
+| Características | Scrum Tradicional | Processo Ágil Híbrido (FDD + Kanban) |
 |---|---|---|
 | **Abordagem Geral** | Desenvolvimento iterativo e incremental baseado em Sprints com entregas frequentes de valor. | Desenvolvimento incremental orientado a funcionalidades (features), com fluxo contínuo de trabalho e foco em entrega de valor ao negócio. |
 | **Foco em Arquitetura** | A arquitetura evolui conforme as Sprints e necessidades do produto. | Forte foco inicial em modelagem de domínio global, permitindo evolução estruturada das funcionalidades. |
-| **Estrutura de Processos** | Baseado em eventos fixos e cadenciados, como Sprint Planning, Daily Scrum, Sprint Review e Sprint Retrospective. | Combina fluxo contínuo do Scrumban com etapas estruturadas do FDD para desenvolvimento por funcionalidades. |
+| **Estrutura de Processos** | Baseado em eventos fixos e cadenciados, como Sprint Planning, Daily Scrum, Sprint Review e Sprint Retrospective. | Combina fluxo contínuo do Kanban com etapas estruturadas do FDD para desenvolvimento por funcionalidades. |
 | **Flexibilidade de Requisitos** | Alta. Mudanças podem ser incorporadas nas próximas Sprints conforme priorização do backlog. | Altíssima. Novas funcionalidades entram continuamente no backlog e podem ser priorizadas conforme a demanda do negócio. |
 | **Colaboração com Cliente** | O cliente participa ativamente das revisões de Sprint e da priorização do Product Backlog. | O cliente acompanha continuamente a evolução das funcionalidades concluídas e priorizadas. |
-| **Complexidade do Processo** | Estrutura relativamente simples, focada em cerimônias ágeis e organização iterativa da equipe. | Combina práticas técnicas robustas do FDD com gestão visual contínua do Scrumban, exigindo maior coordenação técnica. |
+| **Complexidade do Processo** | Estrutura relativamente simples, focada em cerimônias ágeis e organização iterativa da equipe. | Combina práticas técnicas robustas do FDD com gestão visual contínua do Kanban, exigindo maior coordenação técnica. |
 | **Qualidade Técnica** | Incentiva integração contínua, revisões e testes frequentes ao longo das Sprints. | Garantida funcionalidade por funcionalidade. O FDD exige modelagem e inspeção de código antes da integração, enquanto o fluxo contínuo favorece testes constantes. |
 | **Práticas de Desenvolvimento** | Baseado em entregas incrementais, reuniões periódicas e colaboração contínua da equipe. | Inclui práticas de engenharia robustas, como modelagem orientada a domínio, inspeção de código e limitação de WIP. |
-| **Adaptação ao Projeto da Crianex** | Adequado para organização iterativa das entregas e acompanhamento contínuo das necessidades do cliente. | O Scrumban permite acomodar demandas simultâneas de múltiplos clientes, enquanto o FDD garante robustez técnica para o mercado B2B. |
+| **Adaptação ao Projeto da Crianex** | Adequado para organização iterativa das entregas e acompanhamento contínuo das necessidades do cliente. | O Kanban acomoda demandas simultâneas sem sobrecarga de cerimônias, enquanto o FDD garante robustez técnica para o mercado B2B. |
 | **Documentação** | Documentação enxuta, priorizando comunicação rápida e software funcional. | Documentação focada no modelo de domínio global e nas listas de funcionalidades, mantendo organização sem comprometer a agilidade. |
-| **Controle de Qualidade** | Realizado continuamente durante as Sprints através de revisões, testes e validações incrementais. | Embutido no processo. Cada feature passa por Design e Inspeção antes de ser considerada concluída, enquanto o quadro Scrumban evidencia gargalos rapidamente. |
-| **Escalabilidade** | Funciona bem em equipes pequenas e médias, podendo exigir adaptações em projetos maiores. | Altamente escalável. O FDD permite divisão eficiente por funcionalidades e o Scrumban se adapta ao crescimento gradual da equipe. |
-| **Suporte a Equipes de Desenvolvimento** | Promove equipes multidisciplinares e auto-organizadas com colaboração contínua. | Combina liderança técnica especializada do FDD com transparência e auto-organização proporcionadas pelo Scrumban. |
+| **Controle de Qualidade** | Realizado continuamente durante as Sprints através de revisões, testes e validações incrementais. | Embutido no processo. Cada feature passa por Design e Inspeção antes de ser considerada concluída, enquanto o board Kanban evidencia gargalos rapidamente. |
+| **Escalabilidade** | Funciona bem em equipes pequenas e médias, podendo exigir adaptações em projetos maiores. | Altamente escalável. O FDD permite divisão eficiente por funcionalidades e o Kanban se adapta ao crescimento gradual da equipe. |
+| **Suporte a Equipes de Desenvolvimento** | Promove equipes multidisciplinares e auto-organizadas com colaboração contínua. | Combina liderança técnica especializada do FDD com transparência e auto-organização proporcionadas pelo Kanban. |
 
 ---
 ## 3.3 Justificativa
 
-A escolha do **Processo Ágil Híbrido (FDD + Scrumban)** se justifica pela necessidade de combinar flexibilidade, organização do fluxo de trabalho e qualidade técnica no desenvolvimento do projeto Crianex.
+A escolha do **Processo Ágil Híbrido (FDD + Kanban)** se justifica pela necessidade de combinar flexibilidade, organização do fluxo de trabalho e qualidade técnica no desenvolvimento do projeto Crianex.
 
-Dentre as abordagens ágeis analisadas, observou-se que o Scrum Tradicional oferece uma estrutura eficiente para organização iterativa do desenvolvimento e acompanhamento contínuo das entregas. Entretanto, devido às características específicas do projeto — como múltiplas demandas simultâneas, evolução frequente de requisitos e necessidade de maior controle técnico sobre funcionalidades críticas — optou-se pela adoção de um processo híbrido baseado em FDD e Scrumban.
+Dentre as abordagens ágeis analisadas, observou-se que o Scrum Tradicional oferece uma estrutura eficiente para organização iterativa do desenvolvimento e acompanhamento contínuo das entregas. Entretanto, devido às características específicas do projeto — como múltiplas demandas simultâneas, evolução frequente de requisitos e necessidade de maior controle técnico sobre funcionalidades críticas — optou-se pela adoção de um processo híbrido baseado em FDD e Kanban.
 
 Enquanto o Scrum tradicional concentra a organização do trabalho em ciclos fixos de Sprint, o modelo híbrido adotado permite maior flexibilidade operacional por meio de fluxo contínuo, mantendo ao mesmo tempo práticas estruturadas de engenharia de software.
 
@@ -87,17 +87,17 @@ Além disso, o FDD incorpora atividades formais de modelagem, design e inspeçã
 
 Essa característica é especialmente importante para módulos críticos da plataforma, como autenticação, CRM, sistema de tickets e controle financeiro, que exigem maior confiabilidade e estabilidade.
 
-### Por que Scrumban?
+### Por que Kanban?
 
-O **Scrumban** complementa o FDD ao oferecer uma gestão de fluxo mais adaptável e visual. A utilização de quadros de acompanhamento e limitação de trabalho em progresso (*Work In Progress – WIP*) permite identificar gargalos rapidamente, equilibrar a carga de trabalho da equipe e melhorar a previsibilidade das entregas.
+O **Kanban** complementa o FDD ao oferecer uma gestão de fluxo visual e adaptável. A utilização do board de acompanhamento com limites de WIP (*Work In Progress*) permite identificar gargalos rapidamente, equilibrar a carga de trabalho da equipe e melhorar a previsibilidade das entregas.
 
-Em comparação ao Scrum tradicional, que trabalha com escopo organizado em Sprints fixas, o Scrumban permite incorporar mudanças e demandas urgentes de maneira mais dinâmica, característica relevante para o contexto da Crianex.
+Em comparação ao Scrum tradicional, que organiza o trabalho em Sprints fixas com cerimônias pesadas, o Kanban permite incorporar mudanças e demandas urgentes de maneira mais dinâmica, sem a sobrecarga de ritos obrigatórios — característica relevante para o contexto de equipe acadêmica da Crianex.
 
 Além disso, a comunicação do projeto ocorre predominantemente de forma assíncrona, mantendo encontros síncronos apenas para alinhamentos estratégicos, planejamento das iterações e retrospectivas. Essa organização melhora a gestão da disponibilidade dos integrantes e reduz impactos na produtividade da equipe.
 
-### O que a integração FDD + Scrumban promove
+### O que a integração FDD + Kanban promove
 
-A integração entre FDD e Scrumban permite reunir características importantes de diferentes abordagens ágeis, proporcionando:
+A integração entre FDD e Kanban permite reunir características importantes de diferentes abordagens ágeis, proporcionando:
 
 - Entregas contínuas e incrementais de funcionalidades;
 - Maior flexibilidade na priorização de demandas;
@@ -108,4 +108,4 @@ A integração entre FDD e Scrumban permite reunir características importantes 
 
 ### Conclusão
 
-Portanto, o Processo Ágil Híbrido (FDD + Scrumban) foi escolhido por oferecer um equilíbrio entre flexibilidade operacional e rigor técnico. Em comparação ao Scrum tradicional, a abordagem híbrida mostra-se mais adequada às necessidades do projeto Crianex, especialmente pela capacidade de lidar com múltiplas demandas simultâneas, manter fluxo contínuo de desenvolvimento e garantir maior controle de qualidade sobre as funcionalidades implementadas.
+Portanto, o Processo Ágil Híbrido (FDD + Kanban) foi escolhido por oferecer um equilíbrio entre flexibilidade operacional e rigor técnico. Em comparação ao Scrum tradicional, a abordagem híbrida mostra-se mais adequada às necessidades do projeto Crianex, especialmente pela capacidade de lidar com múltiplas demandas simultâneas, manter fluxo contínuo de desenvolvimento e garantir maior controle de qualidade sobre as funcionalidades implementadas.
