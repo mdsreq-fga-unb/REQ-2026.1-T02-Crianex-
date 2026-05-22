@@ -7,6 +7,8 @@
     "dev": "tsx watch src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit"
   },
@@ -25,6 +27,7 @@
     "@typescript-eslint/parser": "^8.33.0",
     "eslint": "^9.28.0",
     "tsx": "^4.19.4",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.3"
   }
 }
