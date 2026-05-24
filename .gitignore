@@ -14,6 +14,7 @@ build/
 
 # ── Gerado por build (não commitar artefatos) ─────────
 frontend/src/lib/paraglide/
+frontend/.vite-dev.*.log
 
 # ── Ambiente ─────────────────────────────────────────
 .env
