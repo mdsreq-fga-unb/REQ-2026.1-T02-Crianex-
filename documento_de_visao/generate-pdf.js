@@ -4,7 +4,6 @@ const puppeteer = require('puppeteer');
 const { marked } = require('marked');
 
 (async () => {
-
   // Caminho da pasta com os arquivos markdown
   const docsPath = 'doc_visao';
 
@@ -15,9 +14,7 @@ const { marked } = require('marked');
   }
 
   // Busca todos os arquivos .md da pasta
-  const files = fs
-    .readdirSync(docsPath)
-    .filter(file => file.endsWith('.md'));
+  const files = fs.readdirSync(docsPath).filter((file) => file.endsWith('.md'));
 
   // Verifica se existem arquivos markdown
   if (files.length === 0) {
@@ -29,7 +26,6 @@ const { marked } = require('marked');
 
   // Lê todos os arquivos markdown
   for (const file of files) {
-
     const filePath = path.join(docsPath, file);
 
     console.log(`Lendo: ${filePath}`);
@@ -139,7 +135,7 @@ ${content}
 
   // Inicializa navegador
   const browser = await puppeteer.launch({
-    headless: true
+    headless: true,
   });
 
   // Nova página
@@ -147,7 +143,7 @@ ${content}
 
   // Define conteúdo HTML
   await page.setContent(html, {
-    waitUntil: 'networkidle0'
+    waitUntil: 'networkidle0',
   });
 
   // Gera PDF
@@ -160,8 +156,8 @@ ${content}
       top: '30px',
       bottom: '30px',
       left: '30px',
-      right: '30px'
-    }
+      right: '30px',
+    },
   });
 
   // Fecha navegador
@@ -169,5 +165,4 @@ ${content}
 
   console.log('PDF gerado com sucesso!');
   console.log('Arquivo: documentacao-completa.pdf');
-
 })();

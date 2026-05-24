@@ -2,10 +2,10 @@
 
 ## Histórico de Revisão
 
-| Versão | Data | Descrição | Autor(es) |
-|--------|------|-----------|-----------|
-| 1.0 | 20/05/2026 | Criação da seção de referências | Equipe Crianex |
-| 1.1 | 20/05/2026 | Preenchimento das referências utilizadas no projeto | Equipe Crianex |
+| Versão | Data       | Descrição                                           | Autor(es)      |
+| ------ | ---------- | --------------------------------------------------- | -------------- |
+| 1.0    | 20/05/2026 | Criação da seção de referências                     | Equipe Crianex |
+| 1.1    | 20/05/2026 | Preenchimento das referências utilizadas no projeto | Equipe Crianex |
 
 ---
 

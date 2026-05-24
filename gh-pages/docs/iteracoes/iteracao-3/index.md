@@ -1,43 +1,42 @@
 # IT3 — Núcleo Operacional
 
-**Período previsto:** 
+**Período previsto:**
 **Status:** 🕐 Planejada
-**Meta:** 
+**Meta:**
 
 ---
 
 ## Características de Produto (CPs)
 
-| CP | Característica | OE | Prioridade |
-|----|---------------|-----|------------|
-
+| CP  | Característica | OE  | Prioridade |
+| --- | -------------- | --- | ---------- |
 
 ---
 
 ## Cerimônias e Reuniões
 
 !!! info "Iteração não iniciada"
-    As reuniões serão registradas quando a iteração for iniciada.
+As reuniões serão registradas quando a iteração for iniciada.
 
 ---
 
 ## Entregas
 
 !!! info "Planejada"
-    O detalhamento das entregas ocorrerá durante o Iteration Planning desta iteração.
+O detalhamento das entregas ocorrerá durante o Iteration Planning desta iteração.
 
 ---
 
 ## Evidências de Entrega
 
 !!! warning "Iteração não iniciada"
-    Esta seção será preenchida durante e ao final da IT4.
+Esta seção será preenchida durante e ao final da IT4.
 
 ### PRs Mergeados
 
-| # | Feature | PR | Revisor | Data de Merge |
-|---|---------|-----|---------|---------------|
-| — | — | — | — | — |
+| #   | Feature | PR  | Revisor | Data de Merge |
+| --- | ------- | --- | ------- | ------------- |
+| —   | —       | —   | —       | —             |
 
 ### Demonstração das Features
 
@@ -49,17 +48,17 @@
 
 ### Critérios de Aceitação Validados
 
-| US | Feature | Critério | Validado por | Data |
-|----|---------|----------|--------------|------|
-| — | F-12 — CRUD produtos admin | — | — | — |
-| — | F-13 — Publicar/despublicar produto | — | — | — |
-| — | F-14 — Consultar FAQ (visitante) | — | — | — |
-| — | F-15 — Gerenciar FAQ (admin) | — | — | — |
-| — | F-20 — Formulário de contato | — | — | — |
-| — | F-21 — Notificação de novo lead | — | — | — |
+| US  | Feature                             | Critério | Validado por | Data |
+| --- | ----------------------------------- | -------- | ------------ | ---- |
+| —   | F-12 — CRUD produtos admin          | —        | —            | —    |
+| —   | F-13 — Publicar/despublicar produto | —        | —            | —    |
+| —   | F-14 — Consultar FAQ (visitante)    | —        | —            | —    |
+| —   | F-15 — Gerenciar FAQ (admin)        | —        | —            | —    |
+| —   | F-20 — Formulário de contato        | —        | —            | —    |
+| —   | F-21 — Notificação de novo lead     | —        | —            | —    |
 
 ### Validação pelo Cliente / Professor
 
 | Data | Origem | Feedback | Issue Aberta | Resolvida |
-|------|--------|----------|--------------|-----------|
-| — | — | — | — | — |
+| ---- | ------ | -------- | ------------ | --------- |
+| —    | —      | —        | —            | —         |

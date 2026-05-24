@@ -1,6 +1,9 @@
 import { Router } from 'express';
+import healthRouter from '../health/health.routes';
 
 export const router = Router();
+
+router.use('/health', healthRouter);
 
 // Rotas de feature serão registradas aqui conforme as issues forem implementadas:
 //

@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import { router } from './routes/index.js';
+import { healthController } from './health/health.controller.js';
 
 const app = express();
 const PORT = Number(process.env['PORT'] ?? 3000);
@@ -15,11 +16,8 @@ app.use(
 );
 app.use(express.json());
 
+app.get('/health', healthController);
 app.use('/api', router);
-
-app.get('/health', (_req, res) => {
-  res.json({ status: 'ok', env: process.env['NODE_ENV'] });
-});
 
 app.listen(PORT, () => {
   console.log(`[backend] running on http://localhost:${PORT}`);

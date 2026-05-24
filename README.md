@@ -11,14 +11,14 @@ Produto: **Crianex Hub** — plataforma administrativa centralizada e vitrine di
 
 ## Stack
 
-| Camada | Tecnologia |
-|--------|-----------|
-| Frontend | SvelteKit + TypeScript · SSR · `adapter-node` |
-| Backend | Express.js + TypeScript |
-| Banco | PostgreSQL via Supabase (Auth + Storage + RLS) |
-| i18n | paraglide-js (`@inlang/paraglide-sveltekit`) |
-| Dev local | Docker Compose + Supabase CLI |
-| CI/CD | GitHub Actions |
+| Camada    | Tecnologia                                     |
+| --------- | ---------------------------------------------- |
+| Frontend  | SvelteKit + TypeScript · SSR · `adapter-node`  |
+| Backend   | Express.js + TypeScript                        |
+| Banco     | PostgreSQL via Supabase (Auth + Storage + RLS) |
+| i18n      | paraglide-js (`@inlang/paraglide-sveltekit`)   |
+| Dev local | Docker Compose + Supabase CLI                  |
+| CI/CD     | GitHub Actions                                 |
 
 ---
 
@@ -68,12 +68,12 @@ supabase db reset           # aplica todas as migrations + seed.sql
 docker compose up
 ```
 
-| Serviço | URL |
-|---------|-----|
-| Frontend (SvelteKit) | http://localhost:5173 |
-| Backend (Express) | http://localhost:3000 |
-| Supabase API | http://localhost:54321 |
-| Supabase Studio | http://localhost:54323 |
+| Serviço              | URL                    |
+| -------------------- | ---------------------- |
+| Frontend (SvelteKit) | http://localhost:5173  |
+| Backend (Express)    | http://localhost:3000  |
+| Supabase API         | http://localhost:54321 |
+| Supabase Studio      | http://localhost:54323 |
 
 **Opção B — npm workspaces (sem Docker):**
 
@@ -147,11 +147,11 @@ mkdocs serve    # acessa em http://127.0.0.1:8000
 
 ## Equipe
 
-| Integrante | Papel FDD |
-|------------|-----------|
-| Lucas Andrade Zanetti | PM + Chief Architect |
-| Leonardo Fachinello Bonetti | Dev Manager + Backend/Infra |
-| Hugo Freitas Silva | Chief Programmer + Backend |
-| Heitor Macedo Ricardo | Chief Programmer + Fullstack |
-| Philipe Amancio Reis Caetano | Chief Programmer + Frontend/QA |
+| Integrante                         | Papel FDD                        |
+| ---------------------------------- | -------------------------------- |
+| Lucas Andrade Zanetti              | PM + Chief Architect             |
+| Leonardo Fachinello Bonetti        | Dev Manager + Backend/Infra      |
+| Hugo Freitas Silva                 | Chief Programmer + Backend       |
+| Heitor Macedo Ricardo              | Chief Programmer + Fullstack     |
+| Philipe Amancio Reis Caetano       | Chief Programmer + Frontend/QA   |
 | Camile Barbosa Gonzaga de Oliveira | Chief Architect + DevOps/QA/Docs |

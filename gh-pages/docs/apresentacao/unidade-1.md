@@ -2,9 +2,9 @@
 
 ## Histórico de Revisão
 
-| Versão | Data | Descrição | Autor(es) |
-|--------|------|-----------|-----------|
-| 1.0 | 28/04/2026 | Criação da página com vídeo de apresentação da Unidade 1 | Todos |
+| Versão | Data       | Descrição                                                | Autor(es) |
+| ------ | ---------- | -------------------------------------------------------- | --------- |
+| 1.0    | 28/04/2026 | Criação da página com vídeo de apresentação da Unidade 1 | Todos     |
 
 ---
 

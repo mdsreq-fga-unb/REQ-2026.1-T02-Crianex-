@@ -84,6 +84,10 @@ jobs:
         run: npx svelte-kit sync
         working-directory: frontend
 
+      - name: Paraglide compile (gera src/lib/paraglide/)
+        run: npx paraglide-js compile --project ./project.inlang --outdir ./src/lib/paraglide
+        working-directory: frontend
+
       - name: TypeScript — frontend
         run: npm run typecheck
         working-directory: frontend

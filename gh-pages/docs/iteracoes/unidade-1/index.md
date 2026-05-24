@@ -1,11 +1,12 @@
 # Unidade 1 – Planejamento e Requisitos
 
-Nesta seção, agrupamos as entregas referentes à **Unidade 1** da disciplina. 
+Nesta seção, agrupamos as entregas referentes à **Unidade 1** da disciplina.
 Durante este período, a equipe esteve focada em compreender o contexto e estruturar as bases para a construção do **Crianex Hub**.
 
 ## O que foi feito?
 
 A Unidade 1 contemplou:
+
 - **Estudo do Cenário Atual**: Identificamos os problemas e dores operacionais da Crianex. (vide [1 · Cenário](../../visao/cenario.md))
 - **Definição da Solução**: Propusemos os Objetivos Específicos (OEs) e as Características do Produto (CPs) baseados nas reais necessidades da startup. (vide [2 · Solução](../../visao/solucao.md))
 - **Metodologias e Estratégias**: Definimos o uso de **FDD (Feature-Driven Development)** para engenharia e **Scrumban Enxuto** para a gestão do fluxo. (vide [3 · Estratégias](../../visao/estrategias.md))

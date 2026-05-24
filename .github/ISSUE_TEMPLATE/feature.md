@@ -1,20 +1,20 @@
 ---
-name: "Feature (FDD)"
+name: 'Feature (FDD)'
 about: Nova feature ou User Story a ser desenvolvida no ciclo FDD
-title: "[FEATURE] <ação> <resultado> <objeto>"
+title: '[FEATURE] <ação> <resultado> <objeto>'
 labels: feature
-assignees: ""
+assignees: ''
 ---
 
 ## Identificação
 
-| Campo | Valor |
-|---|---|
-| **CP** | CP<!-- número --> — <!-- nome da característica --> |
-| **Iteração** | IT<!-- número --> |
-| **Chief Programmer** | @<!-- usuário --> |
-| **Class Owner** | @<!-- usuário --> |
-| **Prioridade (IP)** | <!-- VB / ((CX + ES) / 2) = resultado --> |
+| Campo                | Valor                                               |
+| -------------------- | --------------------------------------------------- |
+| **CP**               | CP<!-- número --> — <!-- nome da característica --> |
+| **Iteração**         | IT<!-- número -->                                   |
+| **Chief Programmer** | @<!-- usuário -->                                   |
+| **Class Owner**      | @<!-- usuário -->                                   |
+| **Prioridade (IP)**  | <!-- VB / ((CX + ES) / 2) = resultado -->           |
 
 ---
 
@@ -37,18 +37,18 @@ assignees: ""
 
 ## Estimativa
 
-| Critério | Valor (1–5) |
-|---|---|
-| Valor de Negócio (VB) | |
-| Complexidade Técnica (CX) | |
-| Esforço de Implementação (ES) | |
-| **IP = VB / ((CX+ES)/2)** | |
+| Critério                      | Valor (1–5) |
+| ----------------------------- | ----------- |
+| Valor de Negócio (VB)         |             |
+| Complexidade Técnica (CX)     |             |
+| Esforço de Implementação (ES) |             |
+| **IP = VB / ((CX+ES)/2)**     |             |
 
 ---
 
 ## DoR — Definition of Ready
 
-> Marque todos antes de mover para *In Progress*
+> Marque todos antes de mover para _In Progress_
 
 - [ ] US com critérios de aceitação no formato Dado/Quando/Então
 - [ ] Feature estimada (VB, CX, ES preenchidos e IP calculado)
