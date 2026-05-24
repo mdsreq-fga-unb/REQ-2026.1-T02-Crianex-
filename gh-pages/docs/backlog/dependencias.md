@@ -12,7 +12,7 @@ Rastreabilidade visual entre as features e sub-issues do projeto. Use este mapa 
 
 Dependências entre as 10 features ativas. Cada nó é a issue pai de especificação.
 
-``` mermaid
+```mermaid
 graph LR
     classDef feat fill:#7f3fe5,color:#fff,stroke:#5a2ba8,font-weight:bold
     classDef ext  fill:#e71f84,color:#fff,stroke:#c01870
@@ -52,7 +52,7 @@ graph LR
 
 Cada bloco agrupa as sub-issues de uma feature. As setas mostram bloqueios diretos — dentro e entre features.
 
-``` mermaid
+```mermaid
 graph LR
     classDef sub fill:#f4f3f1,color:#060606,stroke:#d4d1cc,font-size:12px
     classDef ext fill:#e71f84,color:#fff,stroke:#c01870
@@ -193,9 +193,9 @@ graph LR
 
 ## Legenda
 
-| Elemento | Significado |
-|----------|-------------|
-| Bloco roxo (visão geral) | Feature pai — issue de especificação da CP |
-| Bloco claro (mapa completo) | Sub-issue de implementação |
-| Bloco rosa | Dependência externa ao backlog de issues |
-| `→` seta sólida | Bloqueio direto — destino não inicia antes da origem fechar |
+| Elemento                    | Significado                                                 |
+| --------------------------- | ----------------------------------------------------------- |
+| Bloco roxo (visão geral)    | Feature pai — issue de especificação da CP                  |
+| Bloco claro (mapa completo) | Sub-issue de implementação                                  |
+| Bloco rosa                  | Dependência externa ao backlog de issues                    |
+| `→` seta sólida             | Bloqueio direto — destino não inicia antes da origem fechar |

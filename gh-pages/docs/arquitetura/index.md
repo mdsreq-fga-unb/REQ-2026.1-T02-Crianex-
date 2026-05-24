@@ -1,10 +1,11 @@
 ## Histórico de Revisão
 
-| Versão | Data | Descrição | Autor |
-|--------|------|-----------|-------|
-| v1.0 | 20/05/2026 | Documentação inicial da arquitetura | Equipe Crianex |
+| Versão | Data       | Descrição                           | Autor          |
+| ------ | ---------- | ----------------------------------- | -------------- |
+| v1.0   | 20/05/2026 | Documentação inicial da arquitetura | Equipe Crianex |
 
 # Arquitetura do Sistema — Crianex Hub
+
 Visão técnica da plataforma Crianex Hub — diagramas, decisões de arquitetura (ADRs) e descrição dos componentes.
 
 ---
@@ -85,7 +86,7 @@ graph TD
 ```
 
 !!! note "Kubernetes — pós-venda"
-    O nó Kubernetes está presente na arquitetura, mas não é utilizado durante as iterações de desenvolvimento (IT1–IT3). O ambiente de desenvolvimento usa Docker Compose local + Supabase gerenciado na nuvem.
+O nó Kubernetes está presente na arquitetura, mas não é utilizado durante as iterações de desenvolvimento (IT1–IT3). O ambiente de desenvolvimento usa Docker Compose local + Supabase gerenciado na nuvem.
 
 ---
 
@@ -113,7 +114,7 @@ sequenceDiagram
 ```
 
 !!! note "Segurança via RLS"
-    A política RLS `WHERE publicado = true AND ativo = true` é aplicada **no banco de dados**, não na aplicação. Isso garante que dados não publicados nunca chegam ao cliente — mesmo que o Supabase Client seja chamado diretamente, sem backend intermediário validando os filtros.
+A política RLS `WHERE publicado = true AND ativo = true` é aplicada **no banco de dados**, não na aplicação. Isso garante que dados não publicados nunca chegam ao cliente — mesmo que o Supabase Client seja chamado diretamente, sem backend intermediário validando os filtros.
 
 ---
 
@@ -186,7 +187,7 @@ sequenceDiagram
 ```
 
 !!! warning "Mitigação OWASP A07 — XSS"
-    O cookie `httpOnly` impede que qualquer script client-side acesse o token de sessão. Combinado com `Secure` (HTTPS only) e `SameSite=Strict` (bloqueio CSRF), essa configuração atende ao controle A07 do OWASP Top 10 sem necessidade de lógica adicional na aplicação.
+O cookie `httpOnly` impede que qualquer script client-side acesse o token de sessão. Combinado com `Secure` (HTTPS only) e `SameSite=Strict` (bloqueio CSRF), essa configuração atende ao controle A07 do OWASP Top 10 sem necessidade de lógica adicional na aplicação.
 
 ---
 
@@ -222,7 +223,7 @@ graph LR
 ```
 
 !!! tip "Isolamento entre módulos"
-    `finance` não tem dependência de nenhum outro módulo além de `auth`. Isso facilita eventual extração futura como serviço independente, caso o volume de relatórios justifique escala separada.
+`finance` não tem dependência de nenhum outro módulo além de `auth`. Isso facilita eventual extração futura como serviço independente, caso o volume de relatórios justifique escala separada.
 
 ---
 
@@ -258,12 +259,12 @@ Adotar **Monolito Modular** com separação lógica por módulos dentro do Expre
 
 A alternativa de microsserviços foi avaliada e rejeitada pelos seguintes motivos:
 
-| Critério | Problema com Microsserviços |
-|----------|----------------------------|
-| **Latência (RNF02, RNF03)** | Comunicação inter-serviço via HTTP/gRPC adiciona latência de rede não controlável, tornando difícil garantir ≤ 2s em 95% das requisições sem camada de cache adicional. |
-| **ACID (RNF06)** | Transações distribuídas exigem o padrão Saga ou Two-Phase Commit — complexidade desproporcional ao escopo do projeto e com risco real de inconsistência eventual. |
-| **Segurança (RNF07)** | Múltiplos endpoints independentes ampliam a superfície de ataque. Cada serviço precisa de sua própria validação JWT, aumentando o risco de lacunas de autorização. |
-| **Prazo e capacidade** | Service mesh, service discovery, múltiplos Dockerfiles, comunicação assíncrona (mensageria) e observabilidade distribuída são inviáveis em 10 semanas com 6 desenvolvedores. |
+| Critério                    | Problema com Microsserviços                                                                                                                                                  |
+| --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Latência (RNF02, RNF03)** | Comunicação inter-serviço via HTTP/gRPC adiciona latência de rede não controlável, tornando difícil garantir ≤ 2s em 95% das requisições sem camada de cache adicional.      |
+| **ACID (RNF06)**            | Transações distribuídas exigem o padrão Saga ou Two-Phase Commit — complexidade desproporcional ao escopo do projeto e com risco real de inconsistência eventual.            |
+| **Segurança (RNF07)**       | Múltiplos endpoints independentes ampliam a superfície de ataque. Cada serviço precisa de sua própria validação JWT, aumentando o risco de lacunas de autorização.           |
+| **Prazo e capacidade**      | Service mesh, service discovery, múltiplos Dockerfiles, comunicação assíncrona (mensageria) e observabilidade distribuída são inviáveis em 10 semanas com 6 desenvolvedores. |
 
 ---
 
@@ -279,11 +280,11 @@ A alternativa de microsserviços foi avaliada e rejeitada pelos seguintes motivo
 
 ### Consequências Negativas e Riscos
 
-| Risco | Mitigação |
-|-------|-----------|
-| O monolito escala inteiro mesmo quando apenas um módulo está sob carga | Kubernetes com réplicas do Express (pós-venda) — aceitável no prazo atual |
+| Risco                                                                           | Mitigação                                                                                                     |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| O monolito escala inteiro mesmo quando apenas um módulo está sob carga          | Kubernetes com réplicas do Express (pós-venda) — aceitável no prazo atual                                     |
 | Acoplamento acidental entre módulos (imports diretos fora da interface pública) | Revisão de imports no code review é critério de DoD; proibido chamar repositórios de outro módulo diretamente |
-| Banco compartilhado como ponto único de falha | Supabase gerenciado tem SLA de 99.9% e backup automático — risco aceito para o escopo do projeto |
+| Banco compartilhado como ponto único de falha                                   | Supabase gerenciado tem SLA de 99.9% e backup automático — risco aceito para o escopo do projeto              |
 
 ---
 
@@ -323,7 +324,7 @@ supabase/                     ← schema e migrations do banco (Supabase CLI)
 ```
 
 !!! note "Tipos compartilhados"
-    O pacote `packages/shared` é a única fonte de verdade para os contratos de API — os tipos TypeScript gerados aqui são consumidos tanto pelo frontend quanto pelo backend, eliminando divergências de contrato em tempo de desenvolvimento.
+O pacote `packages/shared` é a única fonte de verdade para os contratos de API — os tipos TypeScript gerados aqui são consumidos tanto pelo frontend quanto pelo backend, eliminando divergências de contrato em tempo de desenvolvimento.
 
 ---
 
@@ -331,18 +332,18 @@ supabase/                     ← schema e migrations do banco (Supabase CLI)
 
 ### Ambientes
 
-| Fase | Ambiente | Estratégia |
-|------|----------|------------|
-| Individual (dev) | Local — `supabase start` (Docker) | Supabase CLI sobe instância completa localmente; sem conta necessária |
-| Integração (equipe) | Projeto Supabase da equipe (free tier) | Migrations aplicadas via `supabase db push`; compartilhado pela equipe |
-| Produção | Projeto Supabase da Crianex (Otávio) | `supabase db push --linked` após validação em staging; acesso liberado pela Crianex |
-| Pós-venda | Cluster Kubernetes Crianex | GitHub Actions: build → push image → `kubectl apply` |
+| Fase                | Ambiente                               | Estratégia                                                                          |
+| ------------------- | -------------------------------------- | ----------------------------------------------------------------------------------- |
+| Individual (dev)    | Local — `supabase start` (Docker)      | Supabase CLI sobe instância completa localmente; sem conta necessária               |
+| Integração (equipe) | Projeto Supabase da equipe (free tier) | Migrations aplicadas via `supabase db push`; compartilhado pela equipe              |
+| Produção            | Projeto Supabase da Crianex (Otávio)   | `supabase db push --linked` após validação em staging; acesso liberado pela Crianex |
+| Pós-venda           | Cluster Kubernetes Crianex             | GitHub Actions: build → push image → `kubectl apply`                                |
 
 !!! note "Fluxo de schema (issues de DB)"
-    Cada issue de schema gera **um arquivo de migration SQL** em `supabase/migrations/`. O dev escreve
-    a migration localmente (`supabase start` + `supabase db diff`), testa com `supabase db reset` e
-    abre PR com o arquivo versionado. O CI aplica automaticamente no projeto de integração da equipe.
-    O projeto da Crianex só recebe a migration na entrega de cada iteração.
+Cada issue de schema gera **um arquivo de migration SQL** em `supabase/migrations/`. O dev escreve
+a migration localmente (`supabase start` + `supabase db diff`), testa com `supabase db reset` e
+abre PR com o arquivo versionado. O CI aplica automaticamente no projeto de integração da equipe.
+O projeto da Crianex só recebe a migration na entrega de cada iteração.
 
 ### Pipeline CI/CD
 
@@ -364,18 +365,18 @@ Push → main
 Durante as iterações IT1–IT3, o pipeline para após o `build` — o deploy em Kubernetes não está ativo. O ambiente de homologação usa `docker compose up` com as imagens geradas localmente.
 
 !!! warning "Proteção da branch main"
-    Todo merge em `main` requer ao menos 1 aprovação de revisor via Pull Request. Commits diretos na `main` são bloqueados por regra de branch protection no GitHub. Essa regra está alinhada com o DoD da metodologia FDD + Scrumban Enxuto do projeto.
+Todo merge em `main` requer ao menos 1 aprovação de revisor via Pull Request. Commits diretos na `main` são bloqueados por regra de branch protection no GitHub. Essa regra está alinhada com o DoD da metodologia FDD + Scrumban Enxuto do projeto.
 
 ### ADR-001 — SvelteKit em vez de React/Next.js
 
 **Contexto:** necessidade de SSR para SEO (OE2) e bundle pequeno para vitrine pública.
 
-| Critério | SvelteKit | React / Next.js |
-|----------|-----------|-----------------|
-| Bundle size | Sem runtime virtual DOM | Runtime React incluído |
-| SSR + SEO | Nativo, simples | Configuração extra |
-| Curva de aprendizado | HTML/CSS/JS puro | JSX + hooks |
-| Bilinguismo | paraglide-js nativo SvelteKit | next-intl ou react-i18next |
+| Critério             | SvelteKit                     | React / Next.js            |
+| -------------------- | ----------------------------- | -------------------------- |
+| Bundle size          | Sem runtime virtual DOM       | Runtime React incluído     |
+| SSR + SEO            | Nativo, simples               | Configuração extra         |
+| Curva de aprendizado | HTML/CSS/JS puro              | JSX + hooks                |
+| Bilinguismo          | paraglide-js nativo SvelteKit | next-intl ou react-i18next |
 
 **Decisão:** SvelteKit com `adapter-node` para SSR em produção.
 
@@ -393,17 +394,16 @@ Supabase Auth gerencia o hash. Fator mínimo 12 (RNF08).
 
 Row Level Security no PostgreSQL garante isolamento de dados mesmo em acessos diretos do frontend via Supabase JS client — não depender apenas de validações da camada de aplicação.
 
-
 ## 10. Rastreabilidade Arquitetural → RNFs
 
-| Decisão Arquitetural | RNFs Atendidos | Justificativa |
-|----------------------|----------------|---------------|
-| SvelteKit SSR (`load()` server-side) | RNF02, RNF04, RNF05 | HTML pré-renderizado no servidor reduz TTFB; SSR nativo; metadados Open Graph e sitemap por rota |
-| Acesso direto Supabase Client (leitura pública) | RNF02 | Elimina round-trip ao Express para rotas públicas, mantendo latência abaixo de 2s |
-| Express modular — chamada local, sem rede inter-serviço | RNF03 | Latência intra-processo (< 1ms) em vez de HTTP entre serviços; resposta admin ≤ 2s garantida |
-| Supabase Auth + JWT + cookie `httpOnly` | RNF01, RNF07 | Isolamento da rota `/admin` via middleware; cookie `httpOnly` mitiga XSS (OWASP A07) |
-| RLS no PostgreSQL | RNF07 | Controle de acesso no nível do banco elimina privilege escalation mesmo em falhas de aplicação |
-| Transação única PostgreSQL via Supabase | RNF06 | ACID nativo sem saga; inserção atômica de lead + notificação sem risco de inconsistência |
-| Shadcn/ui + design tokens (Tailwind) | RNF12 | Componentes responsivos por padrão; uma codebase para mobile, tablet e desktop |
-| Monorepo TypeScript com `packages/shared` | RNF16, RNF17 | Stack obrigatória preservada; tipos compartilhados reduzem superfície de bug; cobertura unificada |
-| Kubernetes + réplicas Express (pós-venda) | RNF14 | Escala horizontal do backend sem alterações de código; orquestração via cluster gerenciado pela Crianex |
+| Decisão Arquitetural                                    | RNFs Atendidos      | Justificativa                                                                                           |
+| ------------------------------------------------------- | ------------------- | ------------------------------------------------------------------------------------------------------- |
+| SvelteKit SSR (`load()` server-side)                    | RNF02, RNF04, RNF05 | HTML pré-renderizado no servidor reduz TTFB; SSR nativo; metadados Open Graph e sitemap por rota        |
+| Acesso direto Supabase Client (leitura pública)         | RNF02               | Elimina round-trip ao Express para rotas públicas, mantendo latência abaixo de 2s                       |
+| Express modular — chamada local, sem rede inter-serviço | RNF03               | Latência intra-processo (< 1ms) em vez de HTTP entre serviços; resposta admin ≤ 2s garantida            |
+| Supabase Auth + JWT + cookie `httpOnly`                 | RNF01, RNF07        | Isolamento da rota `/admin` via middleware; cookie `httpOnly` mitiga XSS (OWASP A07)                    |
+| RLS no PostgreSQL                                       | RNF07               | Controle de acesso no nível do banco elimina privilege escalation mesmo em falhas de aplicação          |
+| Transação única PostgreSQL via Supabase                 | RNF06               | ACID nativo sem saga; inserção atômica de lead + notificação sem risco de inconsistência                |
+| Shadcn/ui + design tokens (Tailwind)                    | RNF12               | Componentes responsivos por padrão; uma codebase para mobile, tablet e desktop                          |
+| Monorepo TypeScript com `packages/shared`               | RNF16, RNF17        | Stack obrigatória preservada; tipos compartilhados reduzem superfície de bug; cobertura unificada       |
+| Kubernetes + réplicas Express (pós-venda)               | RNF14               | Escala horizontal do backend sem alterações de código; orquestração via cluster gerenciado pela Crianex |

@@ -1,5 +1,4 @@
-Bootstrap Owner
-----------------
+## Bootstrap Owner
 
 This script creates an admin `owner` user in a Supabase project using the Admin API (service role key).
 
@@ -21,6 +20,7 @@ node supabase/scripts/bootstrap-owner.js
 ```
 
 Notes:
+
 - The script is idempotent: it exits early if an `owner` already exists in `profiles`.
 - Always keep `SUPABASE_SECRET_KEY` secret. Do not commit it or expose it to the browser.
 - For production, prefer using the Supabase Dashboard or a secure automation pipeline to manage initial admin users.

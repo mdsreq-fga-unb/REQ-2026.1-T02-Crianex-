@@ -2,25 +2,25 @@
 
 ## Histórico de Revisão
 
-| Versão | Data | Descrição | Autor(es) |
-|--------|------|-----------|-----------|
-| 1.0 | 01/04/2026 | Criação das seções 1.1 a 1.8 | Lucas A. Zanetti |
-| 1.1 | 03/04/2026 | Revisão geral | Equipe Crianex |
-| 1.2 | 09/04/2026 | Ajustes pós reunião de alinhamento | Equipe Crianex |
-| 1.3 | 05/05/2026 | Detalhamento narrativo da seção 1.4 com contexto do problema e solução esperada | Lucas A. Zanetti |
+| Versão | Data       | Descrição                                                                       | Autor(es)        |
+| ------ | ---------- | ------------------------------------------------------------------------------- | ---------------- |
+| 1.0    | 01/04/2026 | Criação das seções 1.1 a 1.8                                                    | Lucas A. Zanetti |
+| 1.1    | 03/04/2026 | Revisão geral                                                                   | Equipe Crianex   |
+| 1.2    | 09/04/2026 | Ajustes pós reunião de alinhamento                                              | Equipe Crianex   |
+| 1.3    | 05/05/2026 | Detalhamento narrativo da seção 1.4 com contexto do problema e solução esperada | Lucas A. Zanetti |
 
 ---
 
 ## 1.1 Identificação do Cliente
 
-| Campo | Informação |
-|-------|-----------|
-| **Empresa** | Crianex Software House |
-| **Segmento** | Desenvolvimento de software B2B sob demanda |
-| **CTO** | Otávio Maya |
-| **CSO** | Vitor Marconi |
-| **Modelo de negócio** | Software House que desenvolve soluções digitais para clientes corporativos |
-| **Perfil operacional** | Múltiplos projetos simultâneos com equipe distribuída |
+| Campo                  | Informação                                                                 |
+| ---------------------- | -------------------------------------------------------------------------- |
+| **Empresa**            | Crianex Software House                                                     |
+| **Segmento**           | Desenvolvimento de software B2B sob demanda                                |
+| **CTO**                | Otávio Maya                                                                |
+| **CSO**                | Vitor Marconi                                                              |
+| **Modelo de negócio**  | Software House que desenvolve soluções digitais para clientes corporativos |
+| **Perfil operacional** | Múltiplos projetos simultâneos com equipe distribuída                      |
 
 ---
 
@@ -55,6 +55,7 @@ O cenário atual mostra a Crianex operando com múltiplos sistemas isolados para
 O Rich Picture abaixo representa o contexto do sistema e os fluxos de informação entre os principais atores e componentes do produto.
 
 ![Rich Picture](docs/visao/images/rich-picture.png)
+
 <figure class="crianex-figure">
   <figcaption>Figura 2 — Rich Picture: contexto do sistema e fluxos de informação. Fonte: Elaborado pelos autores (2026).</figcaption>
 </figure>
@@ -64,7 +65,7 @@ O Rich Picture abaixo representa o contexto do sistema e os fluxos de informaç�
 ## 1.4 Detalhamento do Problema
 
 | Problema Principal: | Baixo impacto competitivo no mercado de desenvolvimento de SaaS |
-|-------|-----------|
+| ------------------- | --------------------------------------------------------------- |
 
 A Crianex não dispõe de vitrine digital própria para apresentar seu portfólio de produtos SaaS ao mercado B2B. A divulgação dos produtos Avali, Pontua, Notifly e demais soluções ocorre exclusivamente por contato direto — apresentações manuais, e-mails e conversas — sem canal digital indexável por mecanismos de busca e sem formulário de captação de leads. Como consequência direta, potenciais clientes que buscam fornecedores de SaaS por meios digitais não encontram a empresa, eliminando um canal de geração de demanda sem custo por contato.
 
@@ -77,6 +78,7 @@ A combinação dos dois fatores — ausência de canal digital de divulgação e
 O diagrama abaixo sintetiza as causas raiz que levam ao problema central identificado: a baixa visibilidade e a gestão descentralizada.
 
 ![Diagrama de Ishikawa](docs/visao/images/ishikawa.png)
+
 <figure class="crianex-figure">
   <figcaption>Figura 1 — Diagrama de Ishikawa: causas da gestão descentralizada e baixa visibilidade. Fonte: Elaborado pelos autores (2026).</figcaption>
 </figure>
@@ -87,11 +89,11 @@ O diagrama abaixo sintetiza as causas raiz que levam ao problema central identif
 
 Os principais desafios técnicos e organizacionais identificados para o desenvolvimento do produto são:
 
-| # | Desafio | Descrição |
-|---|---------|-----------|
-| 1 | **Restruturação da Interface** | Necessidade de reformular o site com base na identidade visual da empresa, adotando um layout responsivo que se adapte a diferentes dispositivos (como celulares e desktops). O desafio consiste em aplicar, de forma consistente, princípios de design contemporâneo,  como layout minimalista, uso adequado de espaçamento (white space), tipografia padronizada e organização clara das informações, garantindo uma melhor experiência do usuário. Além disso, é necessário assegurar que essas mudanças consigam refletir a qualidade técnica da empresa e contribuir para o aumento de sua credibilidade. |
-| 2 | **Integração de Gestão** | Consolidar diferentes funcionalidades, como gestão de clientes (CRM), controle de tickets de atendimento, faturamento e registro de atividades e projetos, em uma única plataforma estável e integrada. Esse processo envolve a unificação de dados, a padronização de processos e a garantia de comunicação eficiente entre os módulos, de modo a evitar inconsistências e retrabalho. Além disso, é necessário assegurar que o sistema mantenha desempenho, segurança e confiabilidade, mesmo com a centralização dessas operações. |
-| 3 | **Segurança e Escalabilidade** | Implementar a solução em conformidade com as diretrizes da OWASP, e paralelamente, assegurando que a plataforma seja escalável capaz de suportar o aumento progressivo de usuários e volume de dados sem perda de desempenho. |
+| #   | Desafio                        | Descrição                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| --- | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | **Restruturação da Interface** | Necessidade de reformular o site com base na identidade visual da empresa, adotando um layout responsivo que se adapte a diferentes dispositivos (como celulares e desktops). O desafio consiste em aplicar, de forma consistente, princípios de design contemporâneo, como layout minimalista, uso adequado de espaçamento (white space), tipografia padronizada e organização clara das informações, garantindo uma melhor experiência do usuário. Além disso, é necessário assegurar que essas mudanças consigam refletir a qualidade técnica da empresa e contribuir para o aumento de sua credibilidade. |
+| 2   | **Integração de Gestão**       | Consolidar diferentes funcionalidades, como gestão de clientes (CRM), controle de tickets de atendimento, faturamento e registro de atividades e projetos, em uma única plataforma estável e integrada. Esse processo envolve a unificação de dados, a padronização de processos e a garantia de comunicação eficiente entre os módulos, de modo a evitar inconsistências e retrabalho. Além disso, é necessário assegurar que o sistema mantenha desempenho, segurança e confiabilidade, mesmo com a centralização dessas operações.                                                                         |
+| 3   | **Segurança e Escalabilidade** | Implementar a solução em conformidade com as diretrizes da OWASP, e paralelamente, assegurando que a plataforma seja escalável capaz de suportar o aumento progressivo de usuários e volume de dados sem perda de desempenho.                                                                                                                                                                                                                                                                                                                                                                                 |
 
 ---
 
@@ -100,18 +102,19 @@ Os principais desafios técnicos e organizacionais identificados para o desenvol
 O diagrama abaixo representa os principais stakeholders do projeto e sua relação com o produto.
 
 ![Diagrama de Stakeholders](docs/visao/images/stakeholders.png)
+
 <figure class="crianex-figure">
   <figcaption>Figura 3 — Mapa de Stakeholders: principais partes interessadas e seu relacionamento com o produto. Fonte: Elaborado pelos autores (2026).</figcaption>
 </figure>
 
-| Stakeholder | Papel | Interesse principal | Influência |
-|-------------|-------|---------------------|------------|
-| **Sócios da Crianex** | Patrocinadores e decisores do projeto | Validar direção estratégica, garantir retorno e crescimento do negócio. | Alta |
-| **Otávio Maya** | Representante do cliente | Validar escopo do projeto, entregas e suas ordens. | Alta |
-| **Clientes da Crianex** | Compradores/assinantes dos SaaS  | Controlar a vitrine digital, dashboards e suporte ao usuário. | Média |
-| **Usuário do Saas** | Usuários finais dos SaaS oferecidos | Acessar e solicitar serviços oferecidos | Baixa |
-| **Equipe de Desenvolvimento** | Responsáveis pela construção e entrega do produto.| Entregar uma implementação técnica e viável do produto | Alta |
-| **George Marsicano** | Representante da faculdade | Validação do projeto em relação às diretrizes da disciplina. | Alta |
+| Stakeholder                   | Papel                                              | Interesse principal                                                     | Influência |
+| ----------------------------- | -------------------------------------------------- | ----------------------------------------------------------------------- | ---------- |
+| **Sócios da Crianex**         | Patrocinadores e decisores do projeto              | Validar direção estratégica, garantir retorno e crescimento do negócio. | Alta       |
+| **Otávio Maya**               | Representante do cliente                           | Validar escopo do projeto, entregas e suas ordens.                      | Alta       |
+| **Clientes da Crianex**       | Compradores/assinantes dos SaaS                    | Controlar a vitrine digital, dashboards e suporte ao usuário.           | Média      |
+| **Usuário do Saas**           | Usuários finais dos SaaS oferecidos                | Acessar e solicitar serviços oferecidos                                 | Baixa      |
+| **Equipe de Desenvolvimento** | Responsáveis pela construção e entrega do produto. | Entregar uma implementação técnica e viável do produto                  | Alta       |
+| **George Marsicano**          | Representante da faculdade                         | Validação do projeto em relação às diretrizes da disciplina.            | Alta       |
 
 ---
 

@@ -37,7 +37,9 @@
     font-size: 0.875rem;
     font-weight: 500;
     cursor: pointer;
-    transition: color 0.15s, border-color 0.15s;
+    transition:
+      color 0.15s,
+      border-color 0.15s;
   }
 
   .lang-btn:hover {

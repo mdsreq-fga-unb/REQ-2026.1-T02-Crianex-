@@ -5,5 +5,5 @@ import { env } from '$env/dynamic/public';
 // Para operações privilegiadas use o service role no backend (Express)
 export const supabase = createClient(
   env.PUBLIC_SUPABASE_URL ?? '',
-  env.PUBLIC_SUPABASE_PUBLISHABLE_KEY ?? '',
+  env.PUBLIC_SUPABASE_PUBLISHABLE_KEY ?? ''
 );

@@ -4,12 +4,12 @@
 
 `<!-- ex: Exibir vitrine de produtos SaaS para visitantes anônimos -->`
 
-| Campo | Valor |
-|---|---|
-| **CP** | CP<!-- número --> — <!-- nome --> |
-| **Iteração** | IT<!-- número --> |
-| **Issue** | Closes #<!-- número --> |
-| **Chief Programmer** | @<!-- usuário --> |
+| Campo                | Valor                             |
+| -------------------- | --------------------------------- |
+| **CP**               | CP<!-- número --> — <!-- nome --> |
+| **Iteração**         | IT<!-- número -->                 |
+| **Issue**            | Closes #<!-- número -->           |
+| **Chief Programmer** | @<!-- usuário -->                 |
 
 ---
 
@@ -17,10 +17,8 @@
 
 <!-- Bullet points objetivos — sem narrar o óbvio do diff -->
 
-- 
-- 
-
----
+-
+- ***
 
 ## DoD — Definition of Done
 

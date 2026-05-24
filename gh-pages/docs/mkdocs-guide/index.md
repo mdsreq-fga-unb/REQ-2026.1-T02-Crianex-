@@ -54,8 +54,8 @@ touch docs/atas/2026-04-09.md
 ```yaml
 nav:
   - Atas de Reunião:
-    - atas/index.md
-    - "09/04/2026": atas/2026-04-09.md  # (1)
+      - atas/index.md
+      - '09/04/2026': atas/2026-04-09.md # (1)
 ```
 
 1. O texto entre aspas é o rótulo exibido no menu lateral.
@@ -68,41 +68,41 @@ nav:
 
 ```markdown
 !!! tip "Dica"
-    Texto da dica.
+Texto da dica.
 
 !!! warning "Atenção"
-    Texto de aviso.
+Texto de aviso.
 
 !!! danger "Perigo"
-    Texto de perigo.
+Texto de perigo.
 ```
 
 !!! tip "Dica"
-    Exemplo de admonition do tipo `tip`.
+Exemplo de admonition do tipo `tip`.
 
 ### Abas de conteúdo
 
 ```markdown
 === "Python"
-    ```python
+`python
     print("Olá, Crianex!")
-    ```
+    `
 
 === "JavaScript"
-    ```js
+`js
     console.log("Olá, Crianex!")
-    ```
+    `
 ```
 
 === "Python"
-    ```python
+`python
     print("Olá, Crianex!")
-    ```
+    `
 
 === "JavaScript"
-    ```js
+`js
     console.log("Olá, Crianex!")
-    ```
+    `
 
 ### Diagramas com Mermaid
 

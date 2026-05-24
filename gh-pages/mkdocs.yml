@@ -30,40 +30,40 @@ extra_css:
 nav:
   - Home: index.md
   - Visão:
-    - "1 · Cenário": visao/cenario.md
-    - "2 · Solução": visao/solucao.md
-    - "3 · Estratégias": visao/estrategias.md
-    - "4 · Eng. de Requisitos": visao/er.md
-    - "5 · Cronograma": visao/cronograma.md
-    - "6 · Equipe e Iteração": visao/equipe.md
-    - "7 · DoR e DoD": visao/dor-dod.md
-    - Lições Aprendidas:
-      - "10.1 · Unidade 1": visao/10-licoes/10-1.md
-      - "10.2 · Unidade 2": visao/10-licoes/10-2.md
+      - '1 · Cenário': visao/cenario.md
+      - '2 · Solução': visao/solucao.md
+      - '3 · Estratégias': visao/estrategias.md
+      - '4 · Eng. de Requisitos': visao/er.md
+      - '5 · Cronograma': visao/cronograma.md
+      - '6 · Equipe e Iteração': visao/equipe.md
+      - '7 · DoR e DoD': visao/dor-dod.md
+      - Lições Aprendidas:
+          - '10.1 · Unidade 1': visao/10-licoes/10-1.md
+          - '10.2 · Unidade 2': visao/10-licoes/10-2.md
   - Iterações:
-    - "Visão Geral": iteracoes/index.md
-    - "Unidade 1":
-      - "Resumo — Evidências": iteracoes/unidade-1/index.md
-      - "Ata — 09/04/2026": iteracoes/unidade-1/atas/2026-04-09.md
-    - "IT1 — Vitrine Pública":
-      - "Resumo": iteracoes/iteracao-1/index.md
-      - "Ata Compromisso das correções — 01/05/2026": iteracoes/iteracao-1/atas/2026-05-01.md
-      - "Ata Domain Modeling Iteration Replenishment & Commitment — 10/05/2026": iteracoes/iteracao-1/atas/2026-05-10.md
-      - "Ata Feature Discovery Session — 11/05/2026": iteracoes/iteracao-1/atas/2026-05-11.md
-      - "Ata Refinamento Requisitos — 14/05/2026": iteracoes/iteracao-1/atas/2026-05-14.md
-      - "Ata Technical Design Review — 17/05/2026": iteracoes/iteracao-1/atas/2026-05-17.md
-    - "IT2 — Lead Capture":
-      - "Resumo — Evidências": iteracoes/iteracao-2/index.md
-    - "IT3 — Núcleo Operacional":
-      - "Resumo — Evidências": iteracoes/iteracao-3/index.md
+      - 'Visão Geral': iteracoes/index.md
+      - 'Unidade 1':
+          - 'Resumo — Evidências': iteracoes/unidade-1/index.md
+          - 'Ata — 09/04/2026': iteracoes/unidade-1/atas/2026-04-09.md
+      - 'IT1 — Vitrine Pública':
+          - 'Resumo': iteracoes/iteracao-1/index.md
+          - 'Ata Compromisso das correções — 01/05/2026': iteracoes/iteracao-1/atas/2026-05-01.md
+          - 'Ata Domain Modeling Iteration Replenishment & Commitment — 10/05/2026': iteracoes/iteracao-1/atas/2026-05-10.md
+          - 'Ata Feature Discovery Session — 11/05/2026': iteracoes/iteracao-1/atas/2026-05-11.md
+          - 'Ata Refinamento Requisitos — 14/05/2026': iteracoes/iteracao-1/atas/2026-05-14.md
+          - 'Ata Technical Design Review — 17/05/2026': iteracoes/iteracao-1/atas/2026-05-17.md
+      - 'IT2 — Lead Capture':
+          - 'Resumo — Evidências': iteracoes/iteracao-2/index.md
+      - 'IT3 — Núcleo Operacional':
+          - 'Resumo — Evidências': iteracoes/iteracao-3/index.md
   - Lista de Funcionalidades:
-    - "Rastreabilidade": backlog/rastreabilidade.md
-    - "Priorização": backlog/priorizacao.md
-    - "Mapa de Dependências": backlog/dependencias.md
+      - 'Rastreabilidade': backlog/rastreabilidade.md
+      - 'Priorização': backlog/priorizacao.md
+      - 'Mapa de Dependências': backlog/dependencias.md
   - Arquitetura: arquitetura/index.md
   - Apresentação:
-    - "Unidade 1": apresentacao/unidade-1.md
-    - "Unidade 2": apresentacao/unidade-2.md
-   # - "Unidade 3": apresentacao/unidade-3.md
-   # - "Unidade 4": apresentacao/unidade-4.md
-  - "Referências": referencias.md
+      - 'Unidade 1': apresentacao/unidade-1.md
+      - 'Unidade 2': apresentacao/unidade-2.md
+    # - "Unidade 3": apresentacao/unidade-3.md
+    # - "Unidade 4": apresentacao/unidade-4.md
+  - 'Referências': referencias.md
