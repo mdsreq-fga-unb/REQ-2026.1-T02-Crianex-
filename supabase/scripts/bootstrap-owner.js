@@ -53,17 +53,15 @@ async function main() {
     process.exit(1);
   }
 
-  // Insert profile using service role (ignores RLS)
-  const { error: profileErr } = await supabase.from('profiles').insert({
-    id: userId,
-    name: 'Owner',
-    email: ownerEmail,
-    role: 'owner',
-    status: 'active',
-  });
+  // O trigger handle_new_user já inseriu o profile com role='member'.
+  // Promove para owner via update (service role ignora RLS).
+  const { error: profileErr } = await supabase
+    .from('profiles')
+    .update({ name: 'Owner', role: 'owner' })
+    .eq('id', userId);
 
   if (profileErr) {
-    console.error('Failed to insert profile:', profileErr.message ?? profileErr);
+    console.error('Failed to promote profile to owner:', profileErr.message ?? profileErr);
     process.exit(1);
   }
 

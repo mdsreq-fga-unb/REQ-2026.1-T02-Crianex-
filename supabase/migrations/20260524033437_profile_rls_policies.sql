@@ -1,5 +1,5 @@
 
---Select
+-- Select
 create policy "profiles_self_read"
 on public.profiles
 for select
@@ -20,10 +20,17 @@ using (
         where p.id = auth.uid()
         and p.role = 'owner'
     )
+)
+with check (
+    exists (
+        select 1
+        from public.profiles p
+        where p.id = auth.uid()
+        and p.role = 'owner'
+    )
 );
 
-
--- Select
+-- Insert
 create policy "owner_insert_profiles"
 on public.profiles
 for insert
@@ -37,7 +44,7 @@ with check (
     )
 );
 
--- delete
+-- Delete
 create policy "owner_delete_profiles"
 on public.profiles
 for delete
@@ -50,4 +57,3 @@ using (
         and p.role = 'owner'
     )
 );
-

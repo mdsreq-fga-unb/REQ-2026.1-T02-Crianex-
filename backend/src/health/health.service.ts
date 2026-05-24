@@ -8,10 +8,7 @@ export type HealthResponse = {
 export async function checkHealth(): Promise<HealthResponse> {
   const supabase = getSupabaseClient();
 
-  const { error } = await supabase
-    .from('profiles')
-    .select('id', { head: true, count: 'exact' })
-    .limit(1);
+  const { error } = await supabase.from('profiles').select('id').limit(1);
 
   if (error) {
     throw new Error(`Supabase connection failed: ${error.message}`);
