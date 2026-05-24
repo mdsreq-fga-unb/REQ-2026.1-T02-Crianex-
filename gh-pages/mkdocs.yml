@@ -56,7 +56,7 @@ nav:
       - "Resumo — Evidências": iteracoes/iteracao-2/index.md
     - "IT3 — Núcleo Operacional":
       - "Resumo — Evidências": iteracoes/iteracao-3/index.md
-  - Lista de Funcionalidades: 
+  - Lista de Funcionalidades:
     - "Rastreabilidade": backlog/rastreabilidade.md
     - "Priorização": backlog/priorizacao.md
     - "Mapa de Dependências": backlog/dependencias.md
