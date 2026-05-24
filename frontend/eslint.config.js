@@ -6,7 +6,7 @@ import tsPlugin from '@typescript-eslint/eslint-plugin';
 /** @type {import('eslint').Linter.Config[]} */
 export default [
   {
-    ignores: ['.svelte-kit/', 'dist/', 'node_modules/'],
+    ignores: ['.svelte-kit/', 'build/', 'dist/', 'node_modules/', 'src/lib/paraglide/'],
   },
   {
     files: ['**/*.ts'],
