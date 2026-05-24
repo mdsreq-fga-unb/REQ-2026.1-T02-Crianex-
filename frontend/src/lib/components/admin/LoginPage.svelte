@@ -81,8 +81,8 @@
         <span class="tag">Área restrita</span>
         <h1 id="login-title">Painel interno de gestão Crianex.</h1>
         <p>
-          Plataforma compartilhada por produto, comercial, suporte e engenharia para
-          auditoria de toda ação privilegiada.
+          Plataforma compartilhada por produto, comercial, suporte e engenharia para auditoria de
+          toda ação privilegiada.
         </p>
       </div>
 
@@ -174,7 +174,10 @@
 
         <div class="security-note">
           <span aria-hidden="true">▢</span>
-          <p>Tentativas de acesso são auditadas. IPs fora da faixa corporativa precisam de aprovação adicional.</p>
+          <p>
+            Tentativas de acesso são auditadas. IPs fora da faixa corporativa precisam de aprovação
+            adicional.
+          </p>
         </div>
       </div>
     </section>
