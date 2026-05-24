@@ -1,2 +1,6 @@
-// Helpers compartilhados — funções puras sem dependência de UI ou store
-export {};
+import { clsx, type ClassValue } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}

@@ -12,6 +12,9 @@ dist/
 build/
 .svelte-kit/
 
+# ── Gerado por build (não commitar artefatos) ─────────
+frontend/src/lib/paraglide/
+
 # ── Ambiente ─────────────────────────────────────────
 .env
 .env.local

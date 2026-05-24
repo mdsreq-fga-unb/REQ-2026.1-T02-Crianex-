@@ -1,0 +1,14 @@
+{
+  "nav_home": "Início",
+  "nav_products": "Produtos",
+  "nav_about": "Sobre",
+  "nav_faq": "Perguntas Frequentes",
+  "nav_contact": "Contato",
+  "common_loading": "Carregando...",
+  "common_error": "Algo deu errado",
+  "common_back": "Voltar",
+  "common_close": "Fechar",
+  "common_save": "Salvar",
+  "common_cancel": "Cancelar",
+  "lang_switch": "Mudar idioma"
+}
