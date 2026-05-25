@@ -1,6 +1,7 @@
 -- Migration: create leads table (issue #85 / CP6)
 -- LGPD: minimum data only — no phone, CPF, or raw IP stored.
 -- ip_hash stores SHA-256(ip_address) for rate-limit lookups only.
+-- Legal basis: legitimate interest (art. 7 VI Lei 13.709/2018).
 
 CREATE TABLE leads (
   id               uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -11,9 +12,14 @@ CREATE TABLE leads (
   message          text        NOT NULL,
   status           text        NOT NULL DEFAULT 'new'
                                CHECK (status IN ('new', 'read', 'archived')),
-  ip_hash          text,
+  ip_hash          text        NOT NULL,
   created_at       timestamptz NOT NULL DEFAULT now()
 );
+
+COMMENT ON TABLE leads IS
+  'Lead captures from public contact form. '
+  'LGPD basis: legitimate interest (art. 7 VI Lei 13.709/2018). '
+  'No raw IP, phone, or CPF stored.';
 
 -- Paginated admin listing (most recent first)
 CREATE INDEX leads_created_at_idx ON leads (created_at DESC);
@@ -22,8 +28,9 @@ CREATE INDEX leads_created_at_idx ON leads (created_at DESC);
 CREATE INDEX leads_ip_hash_idx ON leads (ip_hash);
 
 -- ── Grants ───────────────────────────────────────────────────────────────────
--- Anon may insert (lead form); revoke SELECT so the table is not discoverable
--- via PostgREST/GraphQL by anon or regular authenticated users.
+-- Explicit INSERT for anon (lead form); revoke SELECT to hide the table from
+-- PostgREST/GraphQL schema introspection for anon and authenticated roles.
+GRANT INSERT ON leads TO anon;
 REVOKE SELECT ON leads FROM anon, authenticated;
 
 -- ── RLS ──────────────────────────────────────────────────────────────────────
@@ -35,9 +42,9 @@ CREATE POLICY leads_insert_public
   FOR INSERT
   WITH CHECK (true);
 
--- Only authenticated users with role = 'owner' can read leads.
+-- Only users with app_metadata.role = 'owner' can read leads.
 -- (select auth.jwt()) caches the JWT once per query instead of per row.
 CREATE POLICY leads_select_owner
   ON leads
   FOR SELECT
-  USING ((select auth.jwt()) ->> 'role' = 'owner');
+  USING ((select auth.jwt()) -> 'app_metadata' ->> 'role' = 'owner');
