@@ -10,7 +10,7 @@ export default [
     files: ['**/*.ts'],
     languageOptions: {
       parser: tsParser,
-      parserOptions: { project: './tsconfig.json' },
+      parserOptions: { project: './tsconfig.eslint.json' },
     },
     plugins: { '@typescript-eslint': tsPlugin },
     rules: {

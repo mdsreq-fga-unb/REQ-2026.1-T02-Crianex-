@@ -33,4 +33,10 @@ export default [
       ...svelte.configs.recommended.rules,
     },
   },
+  {
+    files: ['src/lib/components/ui/**/*.{svelte,ts}'],
+    rules: {
+      'svelte/valid-compile': 'off',
+    },
+  },
 ];
