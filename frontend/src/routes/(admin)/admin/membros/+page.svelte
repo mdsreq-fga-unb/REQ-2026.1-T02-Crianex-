@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
   import { getInitials, filterMembers, type Member } from '$lib/utils/membros';
 
   // Dados mockados iniciais
