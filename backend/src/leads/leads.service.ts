@@ -13,26 +13,47 @@ export type ContactInput = {
 export type ValidationError = { field: string; message: string };
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const MAX_NAME = 100;
+const MAX_MESSAGE = 2000;
+const MAX_COMPANY = 150;
 
 export function hashIp(ip: string): string {
-  return createHash('sha256').update(ip).digest('hex');
+  return createHash('sha256')
+    .update(ip || 'unknown')
+    .digest('hex');
 }
 
 function sanitize(value: string): string {
   return sanitizeHtml(value, { allowedTags: [], allowedAttributes: {} }).trim();
 }
 
-export function validate(body: Record<string, unknown>): ValidationError[] {
+export function validate(input: ContactInput): ValidationError[] {
   const errors: ValidationError[] = [];
 
-  if (!body['name'] || typeof body['name'] !== 'string' || !body['name'].trim()) {
+  if (!input.name) {
     errors.push({ field: 'name', message: 'Nome é obrigatório.' });
+  } else if (input.name.length > MAX_NAME) {
+    errors.push({ field: 'name', message: `Nome deve ter no máximo ${MAX_NAME} caracteres.` });
   }
-  if (!body['email'] || typeof body['email'] !== 'string' || !EMAIL_RE.test(body['email'])) {
+
+  if (!EMAIL_RE.test(input.email)) {
     errors.push({ field: 'email', message: 'E-mail inválido.' });
   }
-  if (!body['message'] || typeof body['message'] !== 'string' || !body['message'].trim()) {
+
+  if (!input.message) {
     errors.push({ field: 'message', message: 'Mensagem é obrigatória.' });
+  } else if (input.message.length > MAX_MESSAGE) {
+    errors.push({
+      field: 'message',
+      message: `Mensagem deve ter no máximo ${MAX_MESSAGE} caracteres.`,
+    });
+  }
+
+  if (input.company && input.company.length > MAX_COMPANY) {
+    errors.push({
+      field: 'company',
+      message: `Empresa deve ter no máximo ${MAX_COMPANY} caracteres.`,
+    });
   }
 
   return errors;

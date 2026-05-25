@@ -1,13 +1,6 @@
 import type { Request, Response } from 'express';
 import { hashIp, validate, sanitizeInput, persistLead } from './leads.service.js';
-
-function extractIp(req: Request): string {
-  const forwarded = req.headers['x-forwarded-for'];
-  const raw = Array.isArray(forwarded)
-    ? (forwarded[0] ?? '')
-    : (forwarded?.split(',')[0] ?? req.ip ?? '');
-  return raw.trim();
-}
+import { extractIp } from '../lib/extract-ip.js';
 
 export async function contactController(req: Request, res: Response): Promise<Response> {
   const body = req.body as Record<string, unknown>;
@@ -16,12 +9,12 @@ export async function contactController(req: Request, res: Response): Promise<Re
     return res.status(200).json({ success: true });
   }
 
-  const errors = validate(body);
+  const input = sanitizeInput(body);
+  const errors = validate(input);
   if (errors.length > 0) {
     return res.status(422).json({ errors });
   }
 
-  const input = sanitizeInput(body);
   const ipHash = hashIp(extractIp(req));
 
   try {
