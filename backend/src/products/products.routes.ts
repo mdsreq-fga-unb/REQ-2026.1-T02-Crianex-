@@ -11,6 +11,7 @@ import {
 const productsRouter = Router();
 
 productsRouter.get('/', getProductsController);
+productsRouter.get('/admin', requireAdminAuth, getProductsController);
 productsRouter.post('/', requireAdminAuth, createProductController);
 productsRouter.post('/reorder', requireAdminAuth, reorderProductsController);
 productsRouter.patch('/reorder', requireAdminAuth, reorderProductsController);

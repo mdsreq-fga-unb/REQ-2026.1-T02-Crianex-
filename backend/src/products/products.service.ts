@@ -42,8 +42,13 @@ export async function listPublishedProducts() {
   return supabase
     .from('products')
     .select('*')
-    .eq('published', true)
     .order('display_order', { ascending: true });
+}
+
+export async function listAllProducts() {
+  const supabase = getAdminSupabase();
+
+  return supabase.from('products').select('*').order('display_order', { ascending: true });
 }
 
 export async function uploadProductImage(file: ProductUploadFile) {

@@ -5,6 +5,7 @@ import {
   deleteProductImage,
   getProductForDeletion,
   listPublishedProducts,
+  listAllProducts,
   reorderProducts,
   updateProduct,
   uploadProductImage,
@@ -15,9 +16,12 @@ type RequestWithUploadedFile = Request & { file?: ProductUploadFile };
 
 export async function getProductsController(_req: Request, res: Response) {
   try {
-    const { data, error } = await listPublishedProducts();
+    // If this controller is called through the admin route, return all products.
+    // The admin route is protected by `requireAdminAuth` middleware.
+    const { data, error } = _req.path.startsWith('/api/products/admin') ? await listAllProducts() : await listPublishedProducts();
 
     if (error) {
+      console.error("❌ ERRO DO SUPABASE NA LISTAGEM:", error);
       return res.status(400).json({ error: error.message });
     }
 

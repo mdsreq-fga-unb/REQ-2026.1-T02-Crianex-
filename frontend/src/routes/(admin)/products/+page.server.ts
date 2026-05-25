@@ -3,7 +3,7 @@ import { apiFetch } from '$lib/api/backend';
 
 export const load: PageServerLoad = async () => {
   try {
-    // Basta passar o path relativo. O seu backend.ts cuida do resto!
+    // Carrega produtos (o endpoint atual retorna todos, incluindo rascunhos)
     const produtosDoBanco = await apiFetch<any[]>('/products');
     
     return {
