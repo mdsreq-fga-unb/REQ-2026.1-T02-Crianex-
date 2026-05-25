@@ -27,6 +27,32 @@
   --font-sans: 'Space Grotesk', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
   --radius: 0.5rem;
+
+  /* Surface tokens (light) */
+  --bg: #fcfcfc;
+  --bg-elev: #ffffff;
+  --bg-soft: #f4f3f1;
+  --bg-tint: #f8f5fb;
+  --line: #e8e6e2;
+  --line-strong: #d4d1cc;
+  --text: #060606;
+  --text-muted: #6b6862;
+  --text-faint: #9a968e;
+
+  /* Accents */
+  --accent: var(--purple);
+  --accent-soft: rgba(127, 63, 229, 0.08);
+  --accent-line: rgba(127, 63, 229, 0.18);
+
+  --hot: var(--pink);
+  --hot-soft: rgba(231, 31, 132, 0.08);
+
+  --pos: var(--green);
+  --pos-soft: rgba(102, 223, 122, 0.18);
+  --pos-deep: #2b8a3e;
+
+  /* Shadows */
+  --shadow-3: 0 18px 40px -16px rgba(6, 6, 6, 0.18), 0 4px 10px rgba(6, 6, 6, 0.05);
 }
 
 /* ── Reset ───────────────────────────────────────────────────────────────── */
@@ -69,8 +95,166 @@ video {
 /* .admin-root sempre escuro, independente do OS — não usar prefers-color-scheme */
 .admin-root {
   color-scheme: dark;
-  background-color: #0f0f0f;
-  color: #e5e5e5;
+  background-color: #0a0a0c;
+  color: #f4f4f5;
   min-height: 100vh;
   width: 100%;
+
+  /* Dark mode overrides */
+  --bg: #0a0a0c;
+  --bg-elev: #131316;
+  --bg-soft: #18181d;
+  --bg-tint: #1a1622;
+  --line: #25252b;
+  --line-strong: #34343c;
+  --text: #f4f4f5;
+  --text-muted: #a5a4ad;
+  --text-faint: #6f6e78;
+  --accent-soft: rgba(127, 63, 229, 0.18);
+  --accent-line: rgba(127, 63, 229, 0.4);
+  --hot-soft: rgba(231, 31, 132, 0.18);
+  --pos-soft: rgba(102, 223, 122, 0.22);
+}
+
+/* ── Status pills ────────────────────────────────────────────────────────── */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 8px;
+  border-radius: 100px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.status-pill .dt {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+}
+.status-pill.active {
+  background: rgba(102, 223, 122, 0.18);
+  color: var(--green);
+}
+.status-pill.active .dt {
+  background: var(--green);
+}
+.status-pill.inactive {
+  background: var(--bg-soft);
+  color: var(--text-faint);
+}
+.status-pill.inactive .dt {
+  background: var(--text-faint);
+}
+
+/* ── Filter bar ──────────────────────────────────────────────────────────── */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--bg-elev);
+}
+.filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  font-size: 12px;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: border-color 0.12s;
+}
+.filter-chip:hover {
+  border-color: var(--line-strong);
+  color: var(--text);
+}
+.filter-chip.on {
+  background: var(--accent-soft);
+  color: var(--purple);
+  border-color: var(--accent-line);
+}
+.filter-chip select,
+.filter-chip input {
+  background: transparent;
+  border: 0;
+  outline: none;
+  font-family: inherit;
+  font-size: 12px;
+  color: var(--text);
+  padding: 0;
+}
+
+/* ── Data table ──────────────────────────────────────────────────────────── */
+.data-table {
+  display: flex;
+  flex-direction: column;
+}
+.data-table .dt-row {
+  display: grid;
+  gap: 12px;
+  padding: 12px 6px;
+  border-bottom: 1px solid var(--line);
+  align-items: center;
+  font-size: 13px;
+}
+.data-table .dt-row:last-child {
+  border-bottom: 0;
+}
+.data-table .dt-row.header {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--text-faint);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-bottom-color: var(--line-strong);
+}
+.data-table .dt-row.clickable {
+  cursor: pointer;
+}
+.data-table .dt-row.clickable:hover {
+  background: var(--bg-soft);
+}
+.data-table .dt-row .mono {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+.data-table .menu-btn {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  color: var(--text-muted);
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+}
+.data-table .menu-btn:hover {
+  background: var(--bg-soft);
+  color: var(--text);
+}
+
+/* ── Empty state ─────────────────────────────────────────────────────────── */
+.empty {
+  padding: 48px 32px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 14px;
+  border: 1px dashed var(--line);
+  border-radius: 10px;
+  background: var(--bg-elev);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
 }
