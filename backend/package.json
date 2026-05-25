@@ -7,8 +7,8 @@
     "dev": "tsx watch --env-file=../.env src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
-    "test": "node --env-file=../.env ../node_modules/.bin/vitest run",
-    "test:watch": "node --env-file=../.env ../node_modules/.bin/vitest",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit"
   },
