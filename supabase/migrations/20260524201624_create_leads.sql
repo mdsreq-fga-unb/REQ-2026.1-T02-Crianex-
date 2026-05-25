@@ -28,9 +28,11 @@ CREATE INDEX leads_created_at_idx ON leads (created_at DESC);
 CREATE INDEX leads_ip_hash_idx ON leads (ip_hash);
 
 -- ── Grants ───────────────────────────────────────────────────────────────────
--- Explicit INSERT for anon (lead form); revoke SELECT to hide the table from
--- PostgREST/GraphQL schema introspection for anon and authenticated roles.
+-- INSERT for anon (lead form); SELECT only for service_role (admin queries).
+-- Revoke SELECT from anon/authenticated to hide the table from PostgREST
+-- schema introspection. service_role bypasses RLS but still needs the privilege.
 GRANT INSERT ON leads TO anon;
+GRANT ALL ON leads TO service_role;
 REVOKE SELECT ON leads FROM anon, authenticated;
 
 -- ── RLS ──────────────────────────────────────────────────────────────────────
