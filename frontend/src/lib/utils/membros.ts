@@ -27,12 +27,14 @@ export function filterMembers(
   filterRole: 'Todos' | 'owner' | 'member',
   searchQuery: string
 ): Member[] {
+  const normalizedSearchQuery = searchQuery.trim().toLowerCase();
+
   return members.filter(m => {
     const matchStatus = filterStatus === 'Todos' || m.status === filterStatus;
     const matchRole = filterRole === 'Todos' || m.role === filterRole;
-    const matchSearch = searchQuery.trim() === '' || 
-      m.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-      m.email.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchSearch = normalizedSearchQuery === '' || 
+      m.name.toLowerCase().includes(normalizedSearchQuery) || 
+      m.email.toLowerCase().includes(normalizedSearchQuery);
     return matchStatus && matchRole && matchSearch;
   });
 }
