@@ -9,7 +9,7 @@ export type SupabaseConfig = {
 };
 
 export function getSupabaseConfig(): SupabaseConfig {
-  const url = process.env['SUPABASE_URL'] ?? '';
+  const url = process.env['SUPABASE_URL'] ?? process.env['PUBLIC_SUPABASE_URL'] ?? '';
   const serviceRoleKey = process.env['SUPABASE_SECRET_KEY'] ?? '';
   const anonKey = process.env['PUBLIC_SUPABASE_PUBLISHABLE_KEY'] ?? '';
 
