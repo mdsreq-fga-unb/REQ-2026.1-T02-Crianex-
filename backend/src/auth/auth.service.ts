@@ -1,5 +1,5 @@
-import type { SupabaseClient } from '@supabase/supabase-js';
-import { getSupabaseConfig } from '../config/supabase.js';
+import { createClient, type SupabaseClient } from '@supabase/supabase-js';
+import { getSupabaseClient, getSupabaseConfig } from '../config/supabase.js';
 
 export type AuthenticatedAdminUser = {
   id: string;
@@ -19,6 +19,38 @@ export type AuthSessionResponse = {
     app_metadata?: Record<string, unknown> | null;
   };
 };
+
+export type AdminAuthenticatedSession = {
+  accessToken: string;
+  refreshToken: string;
+  expiresIn: number;
+  user: AuthenticatedAdminUser;
+};
+
+export type AdminLoginResponse =
+  | (AdminAuthenticatedSession & { mfa_required: false })
+  | (AdminAuthenticatedSession & { mfa_required: true });
+
+type MfaVerificationUser = {
+  id: string;
+  email: string | null;
+  user_metadata?: Record<string, unknown> | null;
+};
+
+type MfaVerificationSession = {
+  access_token: string;
+  refresh_token: string;
+  expires_in: number;
+  user?: MfaVerificationUser | null;
+};
+
+type MfaVerificationResult = {
+  session?: MfaVerificationSession;
+  user?: MfaVerificationUser | null;
+  access_token?: string;
+  refresh_token?: string;
+  expires_in?: number;
+} & Partial<MfaVerificationSession>;
 
 type ProfileRow = {
   id: string;
@@ -60,6 +92,26 @@ export function normalizeRole(role: string | null | undefined): string {
 }
 
 const ADMIN_ROLES = new Set(['admin', 'owner']);
+
+function createAuthenticatedSupabaseClient(accessToken: string): SupabaseClient {
+  const { url, serviceRoleKey } = getSupabaseConfig();
+
+  return createClient(url, serviceRoleKey, {
+    auth: {
+      autoRefreshToken: false,
+      persistSession: false,
+    },
+    global: {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    },
+  });
+}
+
+export function isAdminRole(role: string | null | undefined): boolean {
+  return ADMIN_ROLES.has(normalizeRole(role));
+}
 
 export function parseBearerToken(authorizationHeader: string | null | undefined): string | null {
   if (!authorizationHeader) {
@@ -205,6 +257,84 @@ export async function validateAccessToken(
   }
 
   return loadAdminProfile(supabase, data.user.id, data.user.email ?? null, data.user.user_metadata);
+}
+
+export async function hasVerifiedTotpFactor(accessToken: string): Promise<boolean> {
+  const supabase = createAuthenticatedSupabaseClient(accessToken);
+  const { data, error } = await supabase.auth.mfa.listFactors();
+
+  if (error) {
+    throw createAuthError(error.message, 500);
+  }
+
+  return (data.totp ?? []).length > 0;
+}
+
+export async function getVerifiedTotpFactorId(accessToken: string): Promise<string | null> {
+  const supabase = createAuthenticatedSupabaseClient(accessToken);
+  const { data, error } = await supabase.auth.mfa.listFactors();
+
+  if (error) {
+    throw createAuthError(error.message, 500);
+  }
+
+  return data.totp?.[0]?.id ?? null;
+}
+
+export async function challengeAndVerifyTotp(
+  accessToken: string,
+  code: string
+): Promise<AdminAuthenticatedSession> {
+  const supabase = createAuthenticatedSupabaseClient(accessToken);
+  const { data: factors, error: factorsError } = await supabase.auth.mfa.listFactors();
+
+  if (factorsError) {
+    throw createAuthError(factorsError.message, 500);
+  }
+
+  const factorId = factors.totp?.[0]?.id;
+
+  if (!factorId) {
+    throw createAuthError('Nenhum fator TOTP cadastrado para este usuário', 400);
+  }
+
+  const challenge = await supabase.auth.mfa.challenge({ factorId });
+
+  if (challenge.error || !challenge.data) {
+    throw createAuthError(challenge.error?.message ?? 'Não foi possível iniciar o MFA', 400);
+  }
+
+  const verification = await supabase.auth.mfa.verify({
+    factorId,
+    challengeId: challenge.data.id,
+    code,
+  });
+
+  if (verification.error || !verification.data) {
+    throw createAuthError(verification.error?.message ?? 'Código TOTP inválido ou expirado', 400);
+  }
+
+  const verificationData = verification.data as MfaVerificationResult;
+  const session = verificationData.session ?? verificationData;
+  const verifiedUser = verificationData.user ?? session.user ?? null;
+
+  if (!session?.access_token || !session?.refresh_token) {
+    throw createAuthError('Resposta inválida do MFA', 502);
+  }
+
+  const profile = await loadAdminProfile(
+    getSupabaseClient(),
+    verifiedUser?.id ?? session.user?.id ?? '',
+    verifiedUser?.email ?? session.user?.email ?? null,
+    verifiedUser?.user_metadata ?? session.user?.user_metadata ?? null
+  );
+
+  return {
+    accessToken: session.access_token,
+    refreshToken: session.refresh_token,
+    expiresIn: session.expires_in ?? 0,
+    user: profile,
+  };
 }
 
 export async function revokeSession(supabase: SupabaseClient, accessToken: string): Promise<void> {
