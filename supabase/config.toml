@@ -32,12 +32,12 @@ enabled = true
 site_url = "http://localhost:5173"
 additional_redirect_urls = ["http://localhost:5173"]
 jwt_expiry = 900
-enable_signup = false
+enable_signup = true
 enable_anonymous_sign_ins = false
 
 [auth.email]
-enable_signup = false
-enable_confirmations = true
+enable_signup = true
+enable_confirmations = false
 
 [analytics]
 enabled = false

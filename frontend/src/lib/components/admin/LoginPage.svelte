@@ -17,7 +17,8 @@
       const { data } = await supabase.auth.getSession();
 
       if (data.session) {
-        await goto('/admin');
+        document.cookie = `access_token=${data.session.access_token}; path=/; max-age=${data.session.expires_in || 3600}; SameSite=Lax;`;
+        await goto('/admin/membros');
       }
     } catch {
       // A tela deve renderizar mesmo quando o Supabase ainda nao estiver configurado localmente.
@@ -33,7 +34,7 @@
 
     try {
       const { supabase } = await import('$lib/api/supabase');
-      const { error } = await supabase.auth.signInWithPassword({
+      const { data, error } = await supabase.auth.signInWithPassword({
         email: normalizedEmail,
         password,
       });
@@ -48,7 +49,11 @@
         return;
       }
 
-      await goto('/admin');
+      if (data.session) {
+        document.cookie = `access_token=${data.session.access_token}; path=/; max-age=${data.session.expires_in || 3600}; SameSite=Lax;`;
+      }
+
+      await goto('/admin/membros');
     } catch {
       errorMessage = 'Não foi possível conectar ao serviço de autenticação agora.';
     } finally {
