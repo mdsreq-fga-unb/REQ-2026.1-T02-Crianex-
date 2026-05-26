@@ -25,6 +25,7 @@ type ProfileRow = {
   name: string | null;
   role: string | null;
   email: string | null;
+  status: string | null;
 };
 
 type AuthServiceError = Error & {
@@ -173,12 +174,16 @@ export async function loadAdminProfile(
 ): Promise<AuthenticatedAdminUser> {
   const { data, error } = await supabase
     .from('profiles')
-    .select('id,name,role,email')
+    .select('id,name,role,email,status')
     .eq('id', userId)
     .maybeSingle<ProfileRow>();
 
   if (error) {
     throw createAuthError(error.message, 500);
+  }
+
+  if (data && data.status === 'inactive') {
+    throw createAuthError('Usuário inativo', 401);
   }
 
   const role = normalizeRole(data?.role ?? null);
