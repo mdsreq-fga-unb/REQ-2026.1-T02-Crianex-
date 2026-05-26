@@ -1,25 +1,24 @@
 <script lang="ts">
-	import { Button as ButtonPrimitive } from "bits-ui";
-	import { type Events, type Props, buttonVariants } from "./index.js";
-	import { cn } from "$lib/utils.js";
+  import { createEventDispatcher } from 'svelte';
 
-	type $$Props = Props;
-	type $$Events = Events;
+  const dispatch = createEventDispatcher();
 
-	let className: $$Props["class"] = undefined;
-	export let variant: $$Props["variant"] = "default";
-	export let size: $$Props["size"] = "default";
-	export let builders: $$Props["builders"] = [];
-	export { className as class };
+  export let className: string | undefined = undefined;
+  export let variant: string = 'default';
+  export let size: string = 'default';
+  export let builders: any[] = [];
+
+  export { className as class };
 </script>
 
-<ButtonPrimitive.Root
-	{builders}
-	class={cn(buttonVariants({ variant, size, className }))}
-	type="button"
-	{...$$restProps}
-	on:click
-	on:keydown
+<button
+  {...$$restProps}
+  class={className}
+  data-variant={variant}
+  data-size={size}
+  data-builders={builders.length}
+  on:click={(e) => dispatch('click', e)}
+  on:keydown={(e) => dispatch('keydown', e)}
 >
-	<slot />
-</ButtonPrimitive.Root>
+  <slot />
+</button>

@@ -73,6 +73,22 @@ export async function uploadProductImage(file: ProductUploadFile) {
 export async function createProduct(input: ProductInput) {
   const supabase = getAdminSupabase();
   const slug = generateSlug(input.name_pt);
+ 
+  let displayOrder = input.display_order;
+  if (displayOrder === undefined || displayOrder === null) {
+    const { data: rows, error: err } = await supabase
+      .from('products')
+      .select('display_order')
+      .order('display_order', { ascending: false })
+      .limit(1);
+
+    if (!err && rows && rows.length > 0) {
+      const max = rows[0]?.display_order ?? 0;
+      displayOrder = max + 1;
+    } else {
+      displayOrder = 1;
+    }
+  }
 
   return supabase
     .from('products')
@@ -89,7 +105,7 @@ export async function createProduct(input: ProductInput) {
         category_pt: input.category_pt,
         category_en: input.category_en,
         published: input.published,
-        display_order: input.display_order,
+        display_order: displayOrder,
         slug,
         image_url: input.image_url,
       },

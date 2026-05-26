@@ -16,8 +16,67 @@
     Trash2,
     Eye,
   } from 'lucide-svelte';
+  
   import { apiFetch } from '$lib/api/backend';
   import { invalidateAll } from '$app/navigation';
+  import ProductModal from './productModal.svelte'; // Importa o componente que criamos
+
+  // Estados de controle do Modal
+  let isModalOpen = false;
+  let isEditingMode = false;
+  let currentProductId: string | null = null;
+
+  // Molde limpo do formulário para resetar ao criar novo
+  const emptyForm = {
+    name_pt: '', name_en: '', slug: '',
+    category_pt: '', category_en: '',
+    tagline_pt: '', tagline_en: '',
+    description_pt: '', description_en: '',
+    color: '#6366f1', icon_text: '', published: false
+  };
+
+  let modalData = { ...emptyForm };
+
+  // Gatilho: Clicou em "+ Novo Produto"
+  function handleNovoProduto() {
+    isEditingMode = false;
+    currentProductId = null;
+    modalData = { ...emptyForm, slug: '' }; 
+    isModalOpen = true;
+  }
+
+  // Gatilho: Clicou em "Editar" no Dropdown da linha do produto
+  function handleEditarProduto(produto: any) {
+    isEditingMode = true;
+    currentProductId = produto.id;
+    modalData = { ...produto }; // Copia os dados atuais para o modal
+    isModalOpen = true;
+  }
+
+  // Função disparada quando o modal clica em "Salvar" ou "Criar"
+  async function handleSaveModal() {
+    try {
+      if (isEditingMode) {
+        
+        await apiFetch(`/products/${currentProductId}`, {
+          method: 'PATCH',
+          body: JSON.stringify(modalData)
+        });
+      } else {
+  
+        // Criação de produto (POST)
+        await apiFetch('/products', {
+          method: 'POST',
+          body: JSON.stringify(modalData)
+        });
+      }
+
+      isModalOpen = false; // Fecha o modal
+      await invalidateAll(); // Recarrega a tabela de produtos automaticamente!
+    } catch (err) {
+      console.error('Falha ao processar operação do produto:', err);
+    }
+  }
 
   export let data: PageData;
 
@@ -93,7 +152,7 @@
   // Lógica das Ações do Menu
   function handleEditar(id: string) {
     console.log('Editar produto id:', id);
-    // Aqui você pode redirecionar ex: goto(`/admin/produtos/${id}`)
+    
   }
 
   async function handleTogglePublicacao(id: string, currentStatus: boolean) {
@@ -148,8 +207,9 @@
         <span class="absolute top-2 right-2.5 h-1.5 w-1.5 bg-white rounded-full"></span>
       </Button>
 
-      <Button class="h-9 bg-white text-black hover:bg-zinc-200 font-medium text-xs rounded-lg px-4">
-        <Plus class="h-4 w-4 mr-1.5" /> Novo produto
+      <Button on:click={()=> handleNovoProduto()} class="h-9 bg-white text-black hover:bg-zinc-200 font-medium text-xs rounded-lg px-4 flex items-center gap-2 whitespace-nowrap">
+        <Plus class="h-4 w-4" />
+        <span>Novo produto</span>
       </Button>
     </div>
   </header>
@@ -207,12 +267,16 @@
               class="h-4 w-4 text-zinc-600 cursor-grab active:cursor-grabbing hover:text-zinc-400 transition-colors"
             />
 
-            <div
-              class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-xs font-bold text-white shadow-inner"
-              style="background-color: {produto.color || '#6366f1'}"
-            >
-              {produto.icon_text || getInitials(produto.name_pt)}
-            </div>
+            {#if produto.image_url}
+              <img src={produto.image_url} alt="capa" class="h-9 w-9 shrink-0 rounded-lg object-cover shadow-inner" />
+            {:else}
+              <div
+                class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-xs font-bold text-white shadow-inner"
+                style="background-color: {produto.color || '#6366f1'}"
+              >
+                {produto.icon_text || getInitials(produto.name_pt)}
+              </div>
+            {/if}
             <div class="min-w-0">
               <h3 class="font-medium text-zinc-200 text-sm tracking-tight">{produto.name_pt}</h3>
               <p class="text-xs text-zinc-500 truncate max-w-md mt-0.5">
@@ -254,7 +318,7 @@
                 <DropdownMenu.Item class="p-0">
                   <button
                     type="button"
-                    on:click={() => handleEditar(produto.id)}
+                    on:click={() => handleEditarProduto(produto)}
                     class="w-full flex items-center gap-2 px-3 py-2 text-xs rounded hover:bg-zinc-900 cursor-pointer focus:bg-zinc-900 focus:text-white text-left"
                   >
                     <Pencil class="h-3.5 w-3.5 text-zinc-400" />
@@ -288,6 +352,14 @@
         </div>
       {/each}
 
+      <!-- Product Modal -->
+      <ProductModal
+        bind:isOpen={isModalOpen}
+        bind:isEditing={isEditingMode}
+        bind:formData={modalData}
+        onSave={handleSaveModal}
+      />
+
       <div
         class="text-[10px] font-bold text-zinc-500 tracking-wider px-6 py-2 bg-[#161619]/40 border-b border-zinc-800/40 flex justify-between items-center mt-2"
       >
@@ -300,12 +372,16 @@
           class="flex items-center justify-between px-6 py-4 border-b border-zinc-800/30 hover:bg-zinc-900/20 transition-all duration-150 opacity-75"
         >
           <div class="flex items-center gap-4 w-7/12 pl-8">
-            <div
-              class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-xs font-bold text-white/90"
-              style="background-color: {produto.color || '#4b5563'}"
-            >
-              {produto.icon_text || getInitials(produto.name_pt)}
-            </div>
+            {#if produto.image_url}
+              <img src={produto.image_url} alt="capa" class="h-9 w-9 shrink-0 rounded-lg object-cover" />
+            {:else}
+              <div
+                class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-xs font-bold text-white/90"
+                style="background-color: {produto.color || '#4b5563'}"
+              >
+                {produto.icon_text || getInitials(produto.name_pt)}
+              </div>
+            {/if}
             <div class="min-w-0">
               <h3 class="font-medium text-zinc-300 text-sm tracking-tight">{produto.name_pt}</h3>
               <p class="text-xs text-zinc-550 truncate max-w-md mt-0.5">
@@ -347,7 +423,7 @@
                 <DropdownMenu.Item class="p-0">
                   <button
                     type="button"
-                    on:click={() => handleEditar(produto.id)}
+                    on:click={() => handleEditarProduto(produto)}
                     class="w-full flex items-center gap-2 px-3 py-2 text-xs rounded hover:bg-zinc-900 cursor-pointer focus:bg-zinc-900 focus:text-white text-left"
                   >
                     <Pencil class="h-3.5 w-3.5 text-zinc-400" />
