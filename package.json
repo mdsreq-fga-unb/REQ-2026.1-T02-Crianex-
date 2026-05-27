@@ -14,7 +14,6 @@
     "format": "prettier --write ."
   },
   "devDependencies": {
-    "lightningcss-win32-x64-msvc": "^1.32.0",
     "prettier": "^3.5.3",
     "prettier-plugin-svelte": "^3.4.0",
     "typescript": "^5.8.3"

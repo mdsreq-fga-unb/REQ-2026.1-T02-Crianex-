@@ -32,7 +32,7 @@ describe('filterMembers', () => {
       initials: 'MP',
       role: 'owner',
       status: 'active',
-      last: 'Agora'
+      last: 'Agora',
     },
     {
       id: '2',
@@ -41,7 +41,7 @@ describe('filterMembers', () => {
       initials: 'RL',
       role: 'member',
       status: 'active',
-      last: '10m'
+      last: '10m',
     },
     {
       id: '3',
@@ -50,8 +50,8 @@ describe('filterMembers', () => {
       initials: 'TA',
       role: 'member',
       status: 'inactive',
-      last: '1d'
-    }
+      last: '1d',
+    },
   ];
 
   it('should return all members when filters are set to Todos and search is empty', () => {
@@ -62,8 +62,8 @@ describe('filterMembers', () => {
   it('should filter by status correctly', () => {
     const active = filterMembers(mockMembers, 'active', 'Todos', '');
     expect(active).toHaveLength(2);
-    expect(active.map(m => m.id)).toContain('1');
-    expect(active.map(m => m.id)).toContain('2');
+    expect(active.map((m) => m.id)).toContain('1');
+    expect(active.map((m) => m.id)).toContain('2');
 
     const inactive = filterMembers(mockMembers, 'inactive', 'Todos', '');
     expect(inactive).toHaveLength(1);
@@ -77,8 +77,8 @@ describe('filterMembers', () => {
 
     const members = filterMembers(mockMembers, 'Todos', 'member', '');
     expect(members).toHaveLength(2);
-    expect(members.map(m => m.id)).toContain('2');
-    expect(members.map(m => m.id)).toContain('3');
+    expect(members.map((m) => m.id)).toContain('2');
+    expect(members.map((m) => m.id)).toContain('3');
   });
 
   it('should filter by search query (name or email) case-insensitively', () => {

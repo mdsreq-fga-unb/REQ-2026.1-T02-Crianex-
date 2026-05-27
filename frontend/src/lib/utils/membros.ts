@@ -15,7 +15,7 @@ export function getInitials(name: string): string {
   if (parts.length === 1) return first.substring(0, 2).toUpperCase();
   const last = parts[parts.length - 1];
   if (!last) return first.substring(0, 2).toUpperCase();
-  
+
   const firstChar = first[0] ?? '';
   const lastChar = last[0] ?? '';
   return (firstChar + lastChar).toUpperCase();
@@ -27,11 +27,12 @@ export function filterMembers(
   filterRole: 'Todos' | 'owner' | 'member',
   searchQuery: string
 ): Member[] {
-  return members.filter(m => {
+  return members.filter((m) => {
     const matchStatus = filterStatus === 'Todos' || m.status === filterStatus;
     const matchRole = filterRole === 'Todos' || m.role === filterRole;
-    const matchSearch = searchQuery.trim() === '' || 
-      m.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+    const matchSearch =
+      searchQuery.trim() === '' ||
+      m.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       m.email.toLowerCase().includes(searchQuery.toLowerCase());
     return matchStatus && matchRole && matchSearch;
   });

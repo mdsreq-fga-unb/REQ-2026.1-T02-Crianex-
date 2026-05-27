@@ -11,7 +11,7 @@
       initials: 'MP',
       role: 'owner',
       status: 'active',
-      last: 'Agora'
+      last: 'Agora',
     },
     {
       id: '2',
@@ -20,7 +20,7 @@
       initials: 'RL',
       role: 'member',
       status: 'active',
-      last: '12m atrás'
+      last: '12m atrás',
     },
     {
       id: '3',
@@ -29,7 +29,7 @@
       initials: 'JV',
       role: 'member',
       status: 'active',
-      last: '2h atrás'
+      last: '2h atrás',
     },
     {
       id: '4',
@@ -38,8 +38,8 @@
       initials: 'TA',
       role: 'member',
       status: 'inactive',
-      last: '5d atrás'
-    }
+      last: '5d atrás',
+    },
   ];
 
   // Svelte 5 Runes para Estado Reativo
@@ -47,7 +47,7 @@
   let filterStatus = $state<'Todos' | 'active' | 'inactive'>('Todos');
   let filterRole = $state<'Todos' | 'owner' | 'member'>('Todos');
   let searchQuery = $state<string>('');
-  
+
   // Controle de Menus de Linha e Modais
   let activeMenuId = $state<string | null>(null);
   let isModalOpen = $state<boolean>(false);
@@ -58,13 +58,13 @@
   let filteredMembers = $derived(filterMembers(members, filterStatus, filterRole, searchQuery));
 
   // KPI calculados dinamicamente
-  let totalActive = $derived(members.filter(m => m.status === 'active').length);
-  let totalInactive = $derived(members.filter(m => m.status === 'inactive').length);
-  let totalOwners = $derived(members.filter(m => m.role === 'owner').length);
+  let totalActive = $derived(members.filter((m) => m.status === 'active').length);
+  let totalInactive = $derived(members.filter((m) => m.status === 'inactive').length);
+  let totalOwners = $derived(members.filter((m) => m.role === 'owner').length);
 
   // Ações de gerenciamento de membros
   function toggleStatus(id: string) {
-    members = members.map(m => 
+    members = members.map((m) =>
       m.id === id ? { ...m, status: m.status === 'active' ? 'inactive' : 'active' } : m
     );
     activeMenuId = null;
@@ -72,7 +72,7 @@
 
   function removeMember(id: string) {
     if (confirm('Tem certeza que deseja remover este membro?')) {
-      members = members.filter(m => m.id !== id);
+      members = members.filter((m) => m.id !== id);
     }
     activeMenuId = null;
   }
@@ -83,7 +83,7 @@
       name: '',
       email: '',
       role: 'member',
-      status: 'active'
+      status: 'active',
     };
     isModalOpen = true;
   }
@@ -108,12 +108,12 @@
 
     if (isEditing && modalMember.id) {
       // Editar existente
-      members = members.map(m => 
-        m.id === modalMember.id 
-          ? { 
-              ...(modalMember as Member), 
-              initials: getInitials(modalMember.name || '') 
-            } 
+      members = members.map((m) =>
+        m.id === modalMember.id
+          ? {
+              ...(modalMember as Member),
+              initials: getInitials(modalMember.name || ''),
+            }
           : m
       );
     } else {
@@ -125,7 +125,7 @@
         initials: getInitials(modalMember.name || ''),
         role: modalMember.role || 'member',
         status: modalMember.status || 'active',
-        last: 'Nunca acessou'
+        last: 'Nunca acessou',
       };
       members = [...members, newMember];
     }
@@ -157,9 +157,7 @@
     </div>
     <div class="header-action-group">
       {#if members.length > 0}
-        <button class="btn-restore" onclick={restoreDefaultMembers}>
-          Restaurar Originais
-        </button>
+        <button class="btn-restore" onclick={restoreDefaultMembers}> Restaurar Originais </button>
       {/if}
       <button class="btn-add" onclick={openAddModal}>
         <span>+</span> Cadastrar membro
@@ -190,36 +188,43 @@
   <!-- Search and Filter Bar -->
   <section class="search-filter-section" aria-label="Filtros e Busca">
     <div class="search-box">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="search-icon"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-      <input 
-        type="text" 
-        placeholder="Buscar por nome ou e-mail..." 
-        bind:value={searchQuery}
-      />
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="search-icon"
+        ><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"
+        ></line></svg
+      >
+      <input type="text" placeholder="Buscar por nome ou e-mail..." bind:value={searchQuery} />
     </div>
 
     <div class="filter-bar">
       <!-- Filtro de Status -->
       <div class="filter-group">
         <span class="filter-label">Status:</span>
-        <button 
-          class="filter-chip" 
-          class:on={filterStatus === 'Todos'} 
-          onclick={() => filterStatus = 'Todos'}
+        <button
+          class="filter-chip"
+          class:on={filterStatus === 'Todos'}
+          onclick={() => (filterStatus = 'Todos')}
         >
           Todos
         </button>
-        <button 
-          class="filter-chip" 
-          class:on={filterStatus === 'active'} 
-          onclick={() => filterStatus = 'active'}
+        <button
+          class="filter-chip"
+          class:on={filterStatus === 'active'}
+          onclick={() => (filterStatus = 'active')}
         >
           Ativos
         </button>
-        <button 
-          class="filter-chip" 
-          class:on={filterStatus === 'inactive'} 
-          onclick={() => filterStatus = 'inactive'}
+        <button
+          class="filter-chip"
+          class:on={filterStatus === 'inactive'}
+          onclick={() => (filterStatus = 'inactive')}
         >
           Inativos
         </button>
@@ -228,24 +233,24 @@
       <!-- Filtro de Papel -->
       <div class="filter-group">
         <span class="filter-label">Papel:</span>
-        <button 
-          class="filter-chip" 
-          class:on={filterRole === 'Todos'} 
-          onclick={() => filterRole = 'Todos'}
+        <button
+          class="filter-chip"
+          class:on={filterRole === 'Todos'}
+          onclick={() => (filterRole = 'Todos')}
         >
           Todos
         </button>
-        <button 
-          class="filter-chip" 
-          class:on={filterRole === 'owner'} 
-          onclick={() => filterRole = 'owner'}
+        <button
+          class="filter-chip"
+          class:on={filterRole === 'owner'}
+          onclick={() => (filterRole = 'owner')}
         >
           Owner
         </button>
-        <button 
-          class="filter-chip" 
-          class:on={filterRole === 'member'} 
-          onclick={() => filterRole = 'member'}
+        <button
+          class="filter-chip"
+          class:on={filterRole === 'member'}
+          onclick={() => (filterRole = 'member')}
         >
           Member
         </button>
@@ -258,12 +263,22 @@
     {#if filteredMembers.length === 0}
       <!-- Empty State -->
       <div class="empty">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="empty-icon"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="empty-icon"
+          ><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"
+          ></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"
+          ></path></svg
+        >
         <p>Nenhum membro cadastrado</p>
         <div class="empty-actions">
-          <button class="btn-add" onclick={openAddModal}>
-            Adicionar membro
-          </button>
+          <button class="btn-add" onclick={openAddModal}> Adicionar membro </button>
           {#if members.length === 0}
             <button class="btn-restore" onclick={restoreDefaultMembers}>
               Restaurar Lista Padrão
@@ -288,9 +303,13 @@
           <div class="dt-row" role="row">
             <!-- Avatar -->
             <span class="avatar-cell">
-              <span 
+              <span
                 class="avatar"
-                style="background: {member.status === 'active' ? 'linear-gradient(135deg, var(--purple), var(--pink))' : 'var(--bg-soft)'}; color: {member.status === 'active' ? '#ffffff' : 'var(--text-muted)'};"
+                style="background: {member.status === 'active'
+                  ? 'linear-gradient(135deg, var(--purple), var(--pink))'
+                  : 'var(--bg-soft)'}; color: {member.status === 'active'
+                  ? '#ffffff'
+                  : 'var(--text-muted)'};"
               >
                 {member.initials}
               </span>
@@ -323,31 +342,92 @@
             <!-- Menu de Ações -->
             <span class="actions-cell">
               <div class="action-wrapper">
-                <button 
-                  class="menu-btn" 
-                  aria-label="Ações para {member.name}" 
-                  onclick={() => activeMenuId = activeMenuId === member.id ? null : member.id}
+                <button
+                  class="menu-btn"
+                  aria-label="Ações para {member.name}"
+                  onclick={() => (activeMenuId = activeMenuId === member.id ? null : member.id)}
                 >
                   ⋯
                 </button>
-                
+
                 {#if activeMenuId === member.id}
                   <div class="menu-container" role="menu">
                     <button class="menu-item" role="menuitem" onclick={() => openEditModal(member)}>
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="menu-ico"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="menu-ico"
+                        ><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"
+                        ></path><path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4 9.5-9.5z"
+                        ></path></svg
+                      >
                       Editar
                     </button>
-                    <button class="menu-item" role="menuitem" onclick={() => toggleStatus(member.id)}>
+                    <button
+                      class="menu-item"
+                      role="menuitem"
+                      onclick={() => toggleStatus(member.id)}
+                    >
                       {#if member.status === 'active'}
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="menu-ico"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="9" x2="15" y2="15"></line><line x1="15" y1="9" x2="9" y2="15"></line></svg>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          class="menu-ico"
+                          ><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line
+                            x1="9"
+                            y1="9"
+                            x2="15"
+                            y2="15"
+                          ></line><line x1="15" y1="9" x2="9" y2="15"></line></svg
+                        >
                         Inativar
                       {:else}
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="menu-ico"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          class="menu-ico"><polyline points="20 6 9 17 4 12"></polyline></svg
+                        >
                         Ativar
                       {/if}
                     </button>
-                    <button class="menu-item danger" role="menuitem" onclick={() => removeMember(member.id)}>
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="menu-ico"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                    <button
+                      class="menu-item danger"
+                      role="menuitem"
+                      onclick={() => removeMember(member.id)}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="menu-ico"
+                        ><polyline points="3 6 5 6 21 6"></polyline><path
+                          d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
+                        ></path><line x1="10" y1="11" x2="10" y2="17"></line><line
+                          x1="14"
+                          y1="11"
+                          x2="14"
+                          y2="17"
+                        ></line></svg
+                      >
                       Remover
                     </button>
                   </div>
@@ -366,28 +446,34 @@
       <div class="modal" role="dialog" aria-labelledby="modal-title">
         <header class="modal-header">
           <h3 id="modal-title">{isEditing ? 'Editar Membro' : 'Cadastrar Membro'}</h3>
-          <button class="modal-close-btn" onclick={() => isModalOpen = false}>&times;</button>
+          <button class="modal-close-btn" onclick={() => (isModalOpen = false)}>&times;</button>
         </header>
 
-        <form class="modal-body" onsubmit={(e) => { e.preventDefault(); saveMember(); }}>
+        <form
+          class="modal-body"
+          onsubmit={(e) => {
+            e.preventDefault();
+            saveMember();
+          }}
+        >
           <div class="fld">
             <label for="name">Nome Completo *</label>
-            <input 
-              type="text" 
-              id="name" 
-              placeholder="ex. Marina Pereira" 
-              bind:value={modalMember.name} 
+            <input
+              type="text"
+              id="name"
+              placeholder="ex. Marina Pereira"
+              bind:value={modalMember.name}
               required
             />
           </div>
 
           <div class="fld">
             <label for="email">E-mail Corporativo *</label>
-            <input 
-              type="email" 
-              id="email" 
-              placeholder="nome@crianex.com.br" 
-              bind:value={modalMember.email} 
+            <input
+              type="email"
+              id="email"
+              placeholder="nome@crianex.com.br"
+              bind:value={modalMember.email}
               required
             />
           </div>
@@ -411,7 +497,7 @@
           </div>
 
           <footer class="modal-footer">
-            <button type="button" class="btn-cancel" onclick={() => isModalOpen = false}>
+            <button type="button" class="btn-cancel" onclick={() => (isModalOpen = false)}>
               Cancelar
             </button>
             <button type="submit" class="btn-submit">
@@ -472,7 +558,9 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    transition: background-color 0.2s, transform 0.15s;
+    transition:
+      background-color 0.2s,
+      transform 0.15s;
   }
 
   .btn-add:hover {
@@ -489,7 +577,9 @@
     font-size: 13.5px;
     font-weight: 500;
     cursor: pointer;
-    transition: border-color 0.2s, color 0.2s;
+    transition:
+      border-color 0.2s,
+      color 0.2s;
   }
 
   .btn-restore:hover {
@@ -858,7 +948,9 @@
     font-size: 13.5px;
     font-weight: 500;
     cursor: pointer;
-    transition: border-color 0.2s, color 0.2s;
+    transition:
+      border-color 0.2s,
+      color 0.2s;
   }
 
   .btn-cancel:hover {
