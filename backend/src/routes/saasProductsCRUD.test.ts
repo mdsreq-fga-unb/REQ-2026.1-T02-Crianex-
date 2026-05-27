@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeAll, afterAll } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import request from 'supertest';
 import express from 'express';
 import { productRouter } from './saasProducts';
@@ -11,7 +11,6 @@ app.use('/admin/products', productRouter);
 describe('Suite de testes de Intergração - Endpoints CRUD', () => {
   let produtoId: string;
   let imageUrlGuardada: string;
-  const idInexistente = '00000000-0000-0000-0000-000000000000';
 
   const produotValido = {
     name_pt: 'Produto TESTE',
@@ -45,7 +44,7 @@ describe('Suite de testes de Intergração - Endpoints CRUD', () => {
     it('Dado que o arquivo possui formato inválido, o Multer deve barrar e retorna erro', async () => {
       const bufferInvalido = Buffer.from('Deu ruim :[ ,  a image está em formato inváçlido');
 
-      const res = await request(app)
+      await request(app)
         .post('/admin/products/upload')
         .attach('image', bufferInvalido, 'documento.txt')
         .expect(500);

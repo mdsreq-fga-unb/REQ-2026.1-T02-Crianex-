@@ -63,7 +63,7 @@ productRouter.post('/upload', upload.single('image'), async (req, res) => {
     } = supabase.storage.from('product-images').getPublicUrl(filePath);
 
     return res.status(200).json({ image_url: publicUrl });
-  } catch (err: any) {
+  } catch {
     return res.status(500).json({ error: 'Erro interno ao processar imagem.' });
   }
 });
