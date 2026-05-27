@@ -4,11 +4,13 @@ const BASE_URL = env.PUBLIC_API_BASE_URL ?? 'http://localhost:3000';
 
 export class ApiError extends Error {
   status: number;
+  reason?: string;
 
-  constructor(message: string, status: number) {
+  constructor(message: string, status: number, reason?: string) {
     super(message);
     this.name = 'ApiError';
     this.status = status;
+    this.reason = reason;
   }
 }
 
@@ -29,10 +31,11 @@ export async function apiFetch<T>(
   });
 
   if (!res.ok) {
-    const payload = (await res.json().catch(() => null)) as { message?: string } | null;
+    const payload = (await res.json().catch(() => null)) as { message?: string; reason?: string } | null;
     throw new ApiError(
       payload?.message ?? `[backend] ${res.status} ${res.statusText} — ${path}`,
-      res.status
+      res.status,
+      payload?.reason
     );
   }
 
