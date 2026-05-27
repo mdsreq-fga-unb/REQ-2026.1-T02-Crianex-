@@ -1,12 +1,16 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, beforeAll } from 'vitest';
 import request from 'supertest';
 import express from 'express';
-import { productRouter } from './saasProducts';
+import { productsRouter } from '../products/products.routes.js';
+
+beforeAll(() => {
+  process.env['ADMIN_AUTH_BYPASS'] = 'true';
+});
 
 const app = express();
 app.use(express.json());
 
-app.use('/admin/products', productRouter);
+app.use('/admin/products', productsRouter);
 
 describe('Suite de testes de Intergração - Endpoints CRUD', () => {
   let produtoId: string;
