@@ -160,10 +160,14 @@
       <div class="field">
         <label for="product">{t.fields.product[$lang]}</label>
         <select id="product" name="product" bind:value={form.product}>
-          <option value="" disabled>{$lang === 'pt' ? 'Selecione um produto' : 'Select a product'}</option>
+          <option value="" disabled
+            >{$lang === 'pt' ? 'Selecione um produto' : 'Select a product'}</option
+          >
           {#each products as p}
             <option value={p.slug}>
-              {$lang === 'pt' ? p.name_pt : p.name_en}{p.category_pt || p.category_en ? ` — ${$lang === 'pt' ? (p.category_pt ?? p.category_en) : (p.category_en ?? p.category_pt)}` : ''}
+              {$lang === 'pt' ? p.name_pt : p.name_en}{p.category_pt || p.category_en
+                ? ` — ${$lang === 'pt' ? (p.category_pt ?? p.category_en) : (p.category_en ?? p.category_pt)}`
+                : ''}
             </option>
           {/each}
           <option value="other">{t.productOther[$lang]}</option>
