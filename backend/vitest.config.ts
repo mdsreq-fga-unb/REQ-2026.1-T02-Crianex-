@@ -5,7 +5,7 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode ?? 'test', '..', '');
   return {
     test: {
-      include: ['src/**/*.{test,spec}.ts'],
+      include: ['src/**/*.{test,spec}.ts', 'tests/**/*.{test,spec}.ts'],
       environment: 'node',
       env,
       coverage: {

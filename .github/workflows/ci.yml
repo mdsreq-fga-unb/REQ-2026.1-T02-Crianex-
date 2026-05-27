@@ -31,11 +31,11 @@ jobs:
             node_modules
             frontend/node_modules
             backend/node_modules
-          key: ${{ runner.os }}-npm-${{ hashFiles('**/package.json') }}
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
           restore-keys: ${{ runner.os }}-npm-
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: ESLint — backend
         run: npm run lint
@@ -70,11 +70,11 @@ jobs:
             node_modules
             frontend/node_modules
             backend/node_modules
-          key: ${{ runner.os }}-npm-${{ hashFiles('**/package.json') }}
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
           restore-keys: ${{ runner.os }}-npm-
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: TypeScript — backend
         run: npm run typecheck
@@ -110,11 +110,11 @@ jobs:
             node_modules
             frontend/node_modules
             backend/node_modules
-          key: ${{ runner.os }}-npm-${{ hashFiles('**/package.json') }}
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
           restore-keys: ${{ runner.os }}-npm-
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Test — backend
         run: npm test
@@ -144,11 +144,11 @@ jobs:
             node_modules
             frontend/node_modules
             backend/node_modules
-          key: ${{ runner.os }}-npm-${{ hashFiles('**/package.json') }}
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
           restore-keys: ${{ runner.os }}-npm-
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build — backend
         run: npm run build
