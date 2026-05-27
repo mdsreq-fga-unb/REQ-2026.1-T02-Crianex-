@@ -45,8 +45,8 @@ _Figura 1 — Fluxo de validação: Partial (assíncrona, contínua por feature)
     - [ ] Estimativa registrada: VB, CX e IP calculados
     - [ ] Dependências identificadas; bloqueantes resolvidos
     - [ ] Class Owner designado e linkada à Feature parent e à CP de origem
-    - [ ] Protótipo revisado pelo cliente (se houver interface envolvida)
-    - [ ] Ao menos um critério de segurança identificado (RLS, validação de input, autenticação)
+    - [ ] Protótipo revisado pelo cliente da tela respectiva à feature
+    - [ ] Ao menos um critério de segurança ou usabilidade identificado (RLS, validação de input, autenticação, SEO, bilingue)
 
 ### Definition of Done (DoD)
 
@@ -56,7 +56,7 @@ _Figura 1 — Fluxo de validação: Partial (assíncrona, contínua por feature)
     - [ ] Testes automatizados passando — unitários + integração onde há lógica de negócio
     - [ ] Lint sem erros e formatação OK (ESLint + Prettier)
     - [ ] CI verde (build + testes + lint)
-    - [ ] PR aprovado por Chief Programmer
+    - [ ] PR aprovado por Chief Programmer ou Product Manager
     - [ ] Migration de banco aplicada em staging sem erros (se existir)
     - [ ] Sem vulnerabilidades críticas no SAST/linting de segurança
     - [ ] Validação parcial registrada pelo cliente na issue (ou agendada para próxima validação formal)
