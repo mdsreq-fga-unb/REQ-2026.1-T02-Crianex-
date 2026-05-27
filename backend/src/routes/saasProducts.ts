@@ -73,8 +73,21 @@ productRouter.post('/upload', upload.single('image'), async (req, res) => {
 });
 
 productRouter.post('/', async (req, res) => {
-  const { name_pt, name_en, tagline_pt, tagline_en, description_pt, description_en,
-          icon_text, color, category_pt, category_en, published, display_order, image_url } = req.body;
+  const {
+    name_pt,
+    name_en,
+    tagline_pt,
+    tagline_en,
+    description_pt,
+    description_en,
+    icon_text,
+    color,
+    category_pt,
+    category_en,
+    published,
+    display_order,
+    image_url,
+  } = req.body;
 
   if (!name_pt || !name_en) {
     return res.status(400).json({ error: 'Os campos name_pt e name_en são obrigatórios.' });
@@ -84,8 +97,24 @@ productRouter.post('/', async (req, res) => {
 
   const { data, error } = await supabase
     .from('products')
-    .insert([{ name_pt, name_en, tagline_pt, tagline_en, description_pt, description_en,
-               icon_text, color, category_pt, category_en, published, display_order, slug, image_url }])
+    .insert([
+      {
+        name_pt,
+        name_en,
+        tagline_pt,
+        tagline_en,
+        description_pt,
+        description_en,
+        icon_text,
+        color,
+        category_pt,
+        category_en,
+        published,
+        display_order,
+        slug,
+        image_url,
+      },
+    ])
     .select()
     .single();
 
@@ -101,10 +130,17 @@ productRouter.patch('/reorder', async (req, res) => {
 
   if (
     !Array.isArray(orders) ||
-    orders.some((o: unknown) => !o || typeof o !== 'object' ||
-      !('id' in o) || (o as Record<string, unknown>)['display_order'] == null)
+    orders.some(
+      (o: unknown) =>
+        !o ||
+        typeof o !== 'object' ||
+        !('id' in o) ||
+        (o as Record<string, unknown>)['display_order'] == null
+    )
   ) {
-    return res.status(400).json({ error: 'O array "orders" deve conter objetos com id e display_order.' });
+    return res
+      .status(400)
+      .json({ error: 'O array "orders" deve conter objetos com id e display_order.' });
   }
 
   const { error } = await supabase.rpc('reorder_products', { p_orders: orders });
