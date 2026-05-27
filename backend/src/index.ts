@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
+import morgan from 'morgan';
 import { router } from './routes/index.js';
 import { healthController } from './health/health.controller.js';
 
@@ -8,6 +9,7 @@ const app = express();
 const PORT = Number(process.env['PORT'] ?? 3000);
 
 app.use(helmet());
+app.use(morgan(':method :url :status :res[content-length]b - :response-time ms'));
 app.use(
   cors({
     origin: process.env['CORS_ORIGIN'] ?? 'http://localhost:5173',

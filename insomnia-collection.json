@@ -1,0 +1,235 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2026-05-26T00:00:00.000Z",
+  "__export_source": "crianex-hub-manual",
+  "resources": [
+    {
+      "_id": "wrk_crianex",
+      "_type": "workspace",
+      "name": "Crianex Hub API",
+      "description": "Endpoints do backend Express.js do Crianex Hub. Base URL configurável via variável de ambiente.",
+      "scope": "collection"
+    },
+
+    {
+      "_id": "env_dev",
+      "_type": "environment",
+      "name": "Development",
+      "data": {
+        "base_url": "http://localhost:3000",
+        "admin_email": "admin@crianex.com",
+        "admin_password": "sua_senha_aqui",
+        "access_token": "",
+        "refresh_token": ""
+      },
+      "color": "#4CAF50",
+      "parentId": "wrk_crianex",
+      "isPrivate": false
+    },
+
+    {
+      "_id": "env_prod",
+      "_type": "environment",
+      "name": "Production",
+      "data": {
+        "base_url": "https://api.crianex.com",
+        "admin_email": "",
+        "admin_password": "",
+        "access_token": "",
+        "refresh_token": ""
+      },
+      "color": "#F44336",
+      "parentId": "wrk_crianex",
+      "isPrivate": true
+    },
+
+    {
+      "_id": "grp_health",
+      "_type": "request_group",
+      "name": "Health",
+      "description": "Verificação de saúde do servidor e conectividade com o Supabase",
+      "parentId": "wrk_crianex"
+    },
+
+    {
+      "_id": "grp_auth",
+      "_type": "request_group",
+      "name": "Auth",
+      "description": "Autenticação de administradores via Supabase Auth. Login retorna JWT + cookies HttpOnly.",
+      "parentId": "wrk_crianex"
+    },
+
+    {
+      "_id": "grp_public",
+      "_type": "request_group",
+      "name": "Public",
+      "description": "Endpoints públicos sem autenticação (formulário de contato, vitrine). Rate-limited.",
+      "parentId": "wrk_crianex"
+    },
+
+    {
+      "_id": "req_health_check",
+      "_type": "request",
+      "name": "Health Check",
+      "description": "Verifica se o servidor está online e se a conexão com o Supabase está ativa. Não requer autenticação.",
+      "method": "GET",
+      "url": "{{ _.base_url }}/health",
+      "headers": [],
+      "body": { "mimeType": "" },
+      "parentId": "grp_health",
+      "authentication": {}
+    },
+
+    {
+      "_id": "req_auth_login",
+      "_type": "request",
+      "name": "Login",
+      "description": "Autentica um usuário com role 'admin' ou 'owner'. Retorna accessToken + refreshToken no body e também define cookies HttpOnly (access_token, refresh_token). Rate limit: 10 req/60s.",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api/auth/login",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"{{ _.admin_email }}\",\n  \"password\": \"{{ _.admin_password }}\"\n}"
+      },
+      "parentId": "grp_auth",
+      "authentication": {}
+    },
+
+    {
+      "_id": "req_auth_refresh",
+      "_type": "request",
+      "name": "Refresh Token",
+      "description": "Renova o accessToken usando o refreshToken. Pode ser enviado no body (teste manual) ou via cookie HttpOnly (fluxo normal do frontend). Rate limit: 10 req/60s.",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api/auth/refresh",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"refreshToken\": \"{{ _.refresh_token }}\"\n}"
+      },
+      "parentId": "grp_auth",
+      "authentication": {}
+    },
+
+    {
+      "_id": "req_auth_logout",
+      "_type": "request",
+      "name": "Logout",
+      "description": "Encerra a sessão do usuário. Requer Bearer token no header Authorization (ou cookie access_token). Revoga a sessão no Supabase e limpa os cookies. Retorna 204 sem body.",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api/auth/logout",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.access_token }}"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "parentId": "grp_auth",
+      "authentication": {}
+    },
+
+    {
+      "_id": "req_contact_valid",
+      "_type": "request",
+      "name": "Formulário de Contato — Payload válido",
+      "description": "Envia um lead via formulário de contato público. Não requer autenticação. Inputs são sanitizados com sanitize-html. Rate limit: 5 req/10min por IP (hash SHA-256). Campos opcionais: company, product_interest.",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api/public/contact",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"João Silva\",\n  \"email\": \"joao@empresa.com.br\",\n  \"message\": \"Tenho interesse nos produtos SaaS da Crianex para minha equipe de 50 pessoas.\",\n  \"company\": \"Empresa Ltda\",\n  \"product_interest\": \"CRM Kanban\"\n}"
+      },
+      "parentId": "grp_public",
+      "authentication": {}
+    },
+
+    {
+      "_id": "req_contact_minimal",
+      "_type": "request",
+      "name": "Formulário de Contato — Campos mínimos",
+      "description": "Envia apenas os campos obrigatórios (name, email, message). Os campos company e product_interest são opcionais.",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api/public/contact",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Maria Souza\",\n  \"email\": \"maria@exemplo.com\",\n  \"message\": \"Gostaria de mais informações sobre os planos disponíveis.\"\n}"
+      },
+      "parentId": "grp_public",
+      "authentication": {}
+    },
+
+    {
+      "_id": "req_contact_invalid",
+      "_type": "request",
+      "name": "Formulário de Contato — Validação (422)",
+      "description": "Testa a resposta de validação com campos inválidos. Espera 422 com array de erros por campo.",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api/public/contact",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"\",\n  \"email\": \"email-invalido\",\n  \"message\": \"\"\n}"
+      },
+      "parentId": "grp_public",
+      "authentication": {}
+    },
+
+    {
+      "_id": "req_contact_honeypot",
+      "_type": "request",
+      "name": "Formulário de Contato — Honeypot (bot)",
+      "description": "Simula um bot que preenche o campo oculto 'website'. O servidor aceita silenciosamente (200 OK) sem salvar nada no banco — anti-spam.",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api/public/contact",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Bot Spammer\",\n  \"email\": \"spam@bot.com\",\n  \"message\": \"Buy cheap products!!!\",\n  \"website\": \"https://spam-site.com\"\n}"
+      },
+      "parentId": "grp_public",
+      "authentication": {}
+    }
+  ]
+}
