@@ -35,12 +35,12 @@ if (
   }
 }
 
-const url = process.env.SUPABASE_URL || process.env.PUBLIC_SUPABASE_URL;
+const url = process.env.SUPABASE_URL ?? process.env.PUBLIC_SUPABASE_URL;
 const key =
-  process.env.SUPABASE_SECRET_KEY ||
-  process.env.SUPABASE_SERVICE_ROLE_KEY ||
-  process.env.SUPABASE_KEY ||
-  process.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY ||
+  process.env.SUPABASE_SECRET_KEY ??
+  process.env.SUPABASE_SERVICE_ROLE_KEY ??
+  process.env.SUPABASE_KEY ??
+  process.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY ??
   process.env.PUBLIC_SUPABASE_ANON_KEY;
 
 if (!url || !key) {
@@ -49,40 +49,35 @@ if (!url || !key) {
   );
 }
 
+type Row = Record<string, unknown>;
+type Filter = [string, unknown];
+
 const createInMemorySupabase = () => {
-  const tables = new Map();
-  const buckets = new Map();
+  const tables = new Map<string, Row[]>();
+  const buckets = new Map<string, Map<string, Buffer>>();
 
-  const getTable = (tableName) => {
-    if (!tables.has(tableName)) {
-      tables.set(tableName, []);
-    }
-
-    return tables.get(tableName);
+  const getTable = (tableName: string): Row[] => {
+    if (!tables.has(tableName)) tables.set(tableName, []);
+    return tables.get(tableName)!;
   };
 
-  const project = (row, columns = '*') => {
-    if (!row) {
-      return null;
-    }
-
-    if (columns === '*') {
-      return { ...row };
-    }
-
-    return columns.split(',').reduce((result, column) => {
-      const field = column.trim();
-
-      if (field) {
-        result[field] = row[field];
-      }
-
-      return result;
+  const project = (row: Row | null | undefined, columns = '*'): Row | null => {
+    if (!row) return null;
+    if (columns === '*') return { ...row };
+    return columns.split(',').reduce<Row>((acc, col) => {
+      const field = col.trim();
+      if (field) acc[field] = row[field];
+      return acc;
     }, {});
   };
 
-  const buildQuery = (tableName) => {
-    const state = {
+  const buildQuery = (tableName: string) => {
+    const state: {
+      operation: string;
+      payload: Row | Row[] | null;
+      columns: string;
+      filters: Filter[];
+    } = {
       operation: 'select',
       payload: null,
       columns: '*',
@@ -90,12 +85,12 @@ const createInMemorySupabase = () => {
     };
 
     const api = {
-      insert(rows) {
+      insert(rows: Row | Row[]) {
         state.operation = 'insert';
         state.payload = Array.isArray(rows) ? rows : [rows];
         return api;
       },
-      update(data) {
+      update(data: Row) {
         state.operation = 'update';
         state.payload = data;
         return api;
@@ -108,24 +103,16 @@ const createInMemorySupabase = () => {
         state.columns = columns;
         return api;
       },
-      eq(field, value) {
+      eq(field: string, value: unknown) {
         state.filters.push([field, value]);
 
         if (state.operation === 'delete') {
-          const remainingRows = [];
-
-          for (const row of getTable(tableName)) {
-            const matches = state.filters.every(
-              ([filterField, filterValue]) => row[filterField] === filterValue
-            );
-
-            if (!matches) {
-              remainingRows.push(row);
-            }
-          }
-
-          tables.set(tableName, remainingRows);
-
+          tables.set(
+            tableName,
+            getTable(tableName).filter(
+              (row) => !state.filters.every(([f, v]) => row[f] === v)
+            )
+          );
           return Promise.resolve({ data: null, error: null });
         }
 
@@ -135,38 +122,25 @@ const createInMemorySupabase = () => {
         const table = getTable(tableName);
 
         if (state.operation === 'insert') {
-          const row = {
-            ...state.payload[0],
-            id: state.payload[0].id ?? crypto.randomUUID(),
-          };
-
+          const first: Row = (state.payload as Row[])[0] ?? {};
+          const row: Row = { ...first, id: first['id'] ?? crypto.randomUUID() };
           table.push(row);
-
           return { data: project(row, state.columns), error: null };
         }
 
         if (state.operation === 'update') {
-          let updatedRow = null;
-
+          let updatedRow: Row | null = null;
           for (const row of table) {
-            const matches = state.filters.every(
-              ([filterField, filterValue]) => row[filterField] === filterValue
-            );
-
-            if (matches) {
+            if (state.filters.every(([f, v]) => row[f] === v)) {
               Object.assign(row, state.payload);
               updatedRow = row;
             }
           }
-
           return { data: project(updatedRow, state.columns), error: null };
         }
 
-        const matchedRow = table.find((row) =>
-          state.filters.every(([filterField, filterValue]) => row[filterField] === filterValue)
-        );
-
-        return { data: project(matchedRow, state.columns), error: null };
+        const found = table.find((row) => state.filters.every(([f, v]) => row[f] === v));
+        return { data: project(found, state.columns), error: null };
       },
     };
 
@@ -175,54 +149,48 @@ const createInMemorySupabase = () => {
 
   return {
     storage: {
-      from(bucketName) {
-        if (!buckets.has(bucketName)) {
-          buckets.set(bucketName, new Map());
-        }
-
-        const bucket = buckets.get(bucketName);
-
+      from(bucketName: string) {
+        if (!buckets.has(bucketName)) buckets.set(bucketName, new Map());
+        const bucket = buckets.get(bucketName)!;
         return {
-          async upload(filePath, fileBuffer) {
-            bucket.set(filePath, Buffer.from(fileBuffer));
+          async upload(filePath: string, fileBuffer: Buffer) {
+            bucket.set(filePath, fileBuffer);
             return { data: { path: filePath }, error: null };
           },
-          getPublicUrl(filePath) {
+          getPublicUrl(filePath: string) {
             return {
               data: {
                 publicUrl: `https://example.local/storage/v1/object/public/${bucketName}/${filePath}`,
               },
             };
           },
-          async remove(fileNames) {
-            for (const fileName of fileNames) {
-              bucket.delete(fileName);
-            }
-
+          async remove(fileNames: string[]) {
+            for (const name of fileNames) bucket.delete(name);
             return { data: null, error: null };
           },
         };
       },
     },
-    from(tableName) {
+    from(tableName: string) {
       return buildQuery(tableName);
     },
-    async rpc(name, params) {
-      if (name === 'reorder_products' && Array.isArray(params?.p_orders)) {
-        const table = getTable('products');
-
-        for (const order of params.p_orders) {
-          const row = table.find((item) => item.id === order.id);
-
-          if (row) {
-            row.display_order = order.display_order;
+    async rpc(name: string, params?: Record<string, unknown>) {
+      if (name === 'reorder_products' && params) {
+        const orders = params['p_orders'];
+        if (Array.isArray(orders)) {
+          const table = getTable('products');
+          for (const order of orders as Row[]) {
+            const row = table.find((item) => item['id'] === order['id']);
+            if (row) row['display_order'] = order['display_order'];
           }
         }
       }
-
       return { data: null, error: null };
     },
   };
 };
 
-export const supabase = url && key ? createClient(url, key) : createInMemorySupabase();
+export const supabase =
+  url && key
+    ? createClient(url, key)
+    : (createInMemorySupabase() as unknown as ReturnType<typeof createClient>);
