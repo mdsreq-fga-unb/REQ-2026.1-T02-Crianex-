@@ -27,7 +27,12 @@ const upload = multer({
 
 productsRouter.get('/', getProductsController);
 productsRouter.get('/admin', requireAdminAuth, getProductsController);
-productsRouter.post('/upload', requireAdminAuth, upload.single('image'), uploadProductImageController);
+productsRouter.post(
+  '/upload',
+  requireAdminAuth,
+  upload.single('image'),
+  uploadProductImageController
+);
 productsRouter.post('/', requireAdminAuth, createProductController);
 productsRouter.post('/reorder', requireAdminAuth, reorderProductsController);
 productsRouter.patch('/reorder', requireAdminAuth, reorderProductsController);
