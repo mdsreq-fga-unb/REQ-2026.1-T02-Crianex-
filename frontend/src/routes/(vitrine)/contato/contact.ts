@@ -1,5 +1,14 @@
 export type Lang = 'pt' | 'en';
 
+export type Product = {
+  id: string;
+  slug: string;
+  name_pt: string;
+  name_en: string;
+  category_pt: string | null;
+  category_en: string | null;
+};
+
 export type FormState = {
   name: string;
   email: string;
@@ -11,27 +20,6 @@ export type FormState = {
 };
 
 export type SubmitStatus = 'idle' | 'loading' | 'success' | 'error';
-
-export const PRODUCTS = [
-  { id: 'avali', name: 'Avali', cat: { pt: 'Gestão Educacional', en: 'Education Management' } },
-  {
-    id: 'pontua',
-    name: 'Pontua',
-    cat: { pt: 'Engajamento & Recompensas', en: 'Engagement & Rewards' },
-  },
-  {
-    id: 'notifly',
-    name: 'Notifly',
-    cat: { pt: 'Notificações & Mensageria', en: 'Notifications & Messaging' },
-  },
-  {
-    id: 'trilho',
-    name: 'Trilho',
-    cat: { pt: 'Onboarding & Treinamento', en: 'Onboarding & Training' },
-  },
-  { id: 'atende', name: 'Atende', cat: { pt: 'Suporte ao Cliente', en: 'Customer Support' } },
-  { id: 'ledger', name: 'Ledger', cat: { pt: 'Faturamento Recorrente', en: 'Recurring Billing' } },
-] as const;
 
 export const CHANNELS = [
   { k: 'EMAIL', v: { pt: 'comercial@crianex.com.br', en: 'comercial@crianex.com.br' } },
@@ -45,7 +33,7 @@ export function buildPayload(form: FormState): Record<string, unknown> {
     name: form.name,
     email: form.email,
     ...(form.company ? { company: form.company } : {}),
-    ...(form.product !== 'other' ? { product_interest: form.product } : {}),
+    ...(form.product && form.product !== 'other' ? { product_interest: form.product } : {}),
     message: form.message,
     website: form.website,
   };
@@ -65,7 +53,7 @@ export function defaultForm(): FormState {
     name: '',
     email: '',
     company: '',
-    product: 'avali',
+    product: '',
     message: '',
     consent: false,
     website: '',

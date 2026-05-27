@@ -1,7 +1,10 @@
 <script lang="ts">
   import { env } from '$env/dynamic/public';
   import { lang } from '$lib/stores/lang';
-  import { PRODUCTS, buildPayload, resolveStatus, defaultForm } from './contact';
+  import { buildPayload, resolveStatus, defaultForm } from './contact';
+  import type { Product } from './contact';
+
+  export let products: Product[] = [];
 
   const API_BASE = env.PUBLIC_API_BASE_URL ?? 'http://localhost:3000';
 
@@ -157,8 +160,11 @@
       <div class="field">
         <label for="product">{t.fields.product[$lang]}</label>
         <select id="product" name="product" bind:value={form.product}>
-          {#each PRODUCTS as p}
-            <option value={p.id}>{p.name} — {p.cat[$lang]}</option>
+          <option value="" disabled>{$lang === 'pt' ? 'Selecione um produto' : 'Select a product'}</option>
+          {#each products as p}
+            <option value={p.slug}>
+              {$lang === 'pt' ? p.name_pt : p.name_en}{p.category_pt || p.category_en ? ` — ${$lang === 'pt' ? (p.category_pt ?? p.category_en) : (p.category_en ?? p.category_pt)}` : ''}
+            </option>
           {/each}
           <option value="other">{t.productOther[$lang]}</option>
         </select>

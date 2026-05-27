@@ -1,23 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { PRODUCTS, CHANNELS, buildPayload, resolveStatus, defaultForm } from './contact';
-
-describe('PRODUCTS', () => {
-  it('has all 6 expected products', () => {
-    expect(PRODUCTS).toHaveLength(6);
-  });
-
-  it('contains the expected product ids', () => {
-    const ids = PRODUCTS.map((p) => p.id);
-    expect(ids).toEqual(['avali', 'pontua', 'notifly', 'trilho', 'atende', 'ledger']);
-  });
-
-  it('every product has pt and en category labels', () => {
-    for (const p of PRODUCTS) {
-      expect(p.cat.pt).toBeTruthy();
-      expect(p.cat.en).toBeTruthy();
-    }
-  });
-});
+import { CHANNELS, buildPayload, resolveStatus, defaultForm } from './contact';
 
 describe('CHANNELS', () => {
   it('has exactly 4 channels', () => {
@@ -68,11 +50,14 @@ describe('buildPayload', () => {
     expect(buildPayload(form)).not.toHaveProperty('product_interest');
   });
 
-  it('includes product_interest for any named product', () => {
-    for (const p of PRODUCTS) {
-      const form = { ...base, product: p.id };
-      expect(buildPayload(form).product_interest).toBe(p.id);
-    }
+  it('includes product_interest for a named product slug', () => {
+    const form = { ...base, product: 'avali' };
+    expect(buildPayload(form).product_interest).toBe('avali');
+  });
+
+  it('omits product_interest when product is empty string', () => {
+    const form = { ...base, product: '' };
+    expect(buildPayload(form)).not.toHaveProperty('product_interest');
   });
 });
 
@@ -109,11 +94,11 @@ describe('resolveStatus', () => {
 });
 
 describe('defaultForm', () => {
-  it('resets to clean state with avali as default product', () => {
+  it('resets to clean state with empty product', () => {
     const form = defaultForm();
     expect(form.name).toBe('');
     expect(form.email).toBe('');
-    expect(form.product).toBe('avali');
+    expect(form.product).toBe('');
     expect(form.consent).toBe(false);
     expect(form.website).toBe('');
   });

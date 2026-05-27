@@ -2,6 +2,9 @@
   import { lang } from '$lib/stores/lang';
   import ContactInfo from './ContactInfo.svelte';
   import ContactForm from './ContactForm.svelte';
+  import type { PageData } from './$types';
+
+  export let data: PageData;
 
   const titles = { pt: 'Contato — Crianex Hub', en: 'Contact — Crianex Hub' };
   const descs = {
@@ -17,7 +20,7 @@
 
 <div class="contact-layout">
   <ContactInfo />
-  <ContactForm />
+  <ContactForm products={data.products} />
 </div>
 
 <style>
