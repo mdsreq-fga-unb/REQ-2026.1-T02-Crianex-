@@ -1,3 +1,6 @@
+create schema if not exists extensions;
+create extension if not exists moddatetime with schema extensions;
+
 CREATE TABLE public.products (
     id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
 
