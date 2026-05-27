@@ -129,7 +129,8 @@ jobs:
         run: |
           set -euo pipefail
 
-          supabase start --no-telemetry
+          supabase telemetry disable
+          supabase start
 
       - name: Apply Supabase migrations
         run: |
