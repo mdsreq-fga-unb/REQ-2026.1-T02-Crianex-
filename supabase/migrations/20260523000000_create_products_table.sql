@@ -4,8 +4,8 @@ CREATE TABLE public.products (
     name_pt TEXT NOT NULL,
     name_en TEXT NOT NULL,
 
-    slug TEXT NOT NULL,
-    
+    slug TEXT NOT NULL UNIQUE,
+
     tagline_pt TEXT NOT NULL,
     tagline_en TEXT NOT NULL,
     description_pt TEXT,
@@ -36,18 +36,19 @@ CREATE TRIGGER handle_products_updated_at
 ALTER TABLE public.products ENABLE ROW LEVEL SECURITY;
 
 
--- Política para qualquer usuário poder ler os produtos
+-- Leitura pública restrita a produtos publicados (anon + authenticated)
 CREATE POLICY "Permitir leitura pública de produtos publicados"
 ON public.products
 FOR SELECT
 USING (published = true);
 
+-- Escrita exclusiva para o backend via service_role
 CREATE POLICY "Permitir modificações apenas para usuários autenticados"
 ON public.products
 FOR ALL
-TO authenticated
-USING (true)  -- passando só true pode modificar qualquer linha
-WITH CHECK (true) -- confia que o admin tá passando os dados certos
+TO service_role
+USING (true)
+WITH CHECK (true);
 
 INSERT INTO storage.buckets (id, name, public, allowed_mime_types, file_size_limit)
 VALUES (
@@ -55,17 +56,17 @@ VALUES (
     'product-images',
     true,
     ARRAY['image/jpeg', 'image/png', 'image/webp'],
-    2097152 -- limite de 2MB
+    2097152
 )
 ON CONFLICT (id) DO NOTHING;
 
 CREATE POLICY "Imagens do produto são publicas para visualização"
-ON storage.objects 
-FOR SELECT 
+ON storage.objects
+FOR SELECT
 USING (bucket_id = 'product-images');
 
 CREATE POLICY "Apenas usuários autenticados fazem upload de imagens"
-ON storage.objects 
-FOR INSERT 
-TO authenticated 
+ON storage.objects
+FOR INSERT
+TO authenticated
 WITH CHECK (bucket_id = 'product-images');
