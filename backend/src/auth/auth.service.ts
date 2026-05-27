@@ -52,6 +52,24 @@ type MfaVerificationResult = {
   expires_in?: number;
 } & Partial<MfaVerificationSession>;
 
+type MfaEnrollResult = {
+  id: string;
+  type: 'totp';
+  friendly_name?: string;
+  totp: {
+    qr_code: string;
+    secret: string;
+    uri: string;
+  };
+};
+
+type TotpFactorStatus = {
+  hasAnyFactor: boolean;
+  hasVerifiedFactor: boolean;
+  pendingFactorId: string | null;
+  verifiedFactorId: string | null;
+};
+
 type ProfileRow = {
   id: string;
   name: string | null;
@@ -61,14 +79,28 @@ type ProfileRow = {
 
 type AuthServiceError = Error & {
   status?: number;
+  reason?: 'invalid' | 'expired';
 };
 
-function createAuthError(message: string, status: number): AuthServiceError {
+function createAuthError(
+  message: string,
+  status: number,
+  reason?: 'invalid' | 'expired'
+): AuthServiceError {
   const error = new Error(message) as AuthServiceError;
 
   error.status = status;
+  if (reason) {
+    error.reason = reason;
+  }
 
   return error;
+}
+
+function isExpiredMfaError(message: string): boolean {
+  const normalizedMessage = message.toLowerCase();
+
+  return normalizedMessage.includes('expired') || normalizedMessage.includes('expir');
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {
@@ -281,9 +313,58 @@ export async function getVerifiedTotpFactorId(accessToken: string): Promise<stri
   return data.totp?.[0]?.id ?? null;
 }
 
+export async function getTotpFactorStatus(accessToken: string): Promise<TotpFactorStatus> {
+  const supabase = createAuthenticatedSupabaseClient(accessToken);
+  const { data, error } = await supabase.auth.mfa.listFactors();
+
+  if (error) {
+    throw createAuthError(error.message, 500);
+  }
+
+  const verifiedFactor = data.totp?.[0] ?? null;
+  const pendingFactor = data.all.find(
+    (factor) => factor.factor_type === 'totp' && factor.status === 'unverified'
+  ) ?? null;
+
+  return {
+    hasAnyFactor: data.all.some((factor) => factor.factor_type === 'totp'),
+    hasVerifiedFactor: Boolean(verifiedFactor),
+    pendingFactorId: pendingFactor?.id ?? null,
+    verifiedFactorId: verifiedFactor?.id ?? null,
+  };
+}
+
+export async function enrollTotpFactor(
+  accessToken: string,
+  friendlyName: string
+): Promise<MfaEnrollResult> {
+  const supabase = createAuthenticatedSupabaseClient(accessToken);
+  const { data, error } = await supabase.auth.mfa.enroll({
+    factorType: 'totp',
+    friendlyName,
+    issuer: 'Crianex',
+  });
+
+  if (error || !data || data.type !== 'totp') {
+    throw createAuthError(error?.message ?? 'Não foi possível iniciar o cadastro do TOTP', 400);
+  }
+
+  return {
+    id: data.id,
+    type: 'totp',
+    friendly_name: data.friendly_name,
+    totp: {
+      qr_code: data.totp.qr_code,
+      secret: data.totp.secret,
+      uri: data.totp.uri,
+    },
+  };
+}
+
 export async function challengeAndVerifyTotp(
   accessToken: string,
-  code: string
+  code: string,
+  factorId?: string | null
 ): Promise<AdminAuthenticatedSession> {
   const supabase = createAuthenticatedSupabaseClient(accessToken);
   const { data: factors, error: factorsError } = await supabase.auth.mfa.listFactors();
@@ -292,26 +373,28 @@ export async function challengeAndVerifyTotp(
     throw createAuthError(factorsError.message, 500);
   }
 
-  const factorId = factors.totp?.[0]?.id;
+  const resolvedFactorId = factorId ?? factors.totp?.[0]?.id;
 
-  if (!factorId) {
+  if (!resolvedFactorId) {
     throw createAuthError('Nenhum fator TOTP cadastrado para este usuário', 400);
   }
 
-  const challenge = await supabase.auth.mfa.challenge({ factorId });
+  const challenge = await supabase.auth.mfa.challenge({ factorId: resolvedFactorId });
 
   if (challenge.error || !challenge.data) {
     throw createAuthError(challenge.error?.message ?? 'Não foi possível iniciar o MFA', 400);
   }
 
   const verification = await supabase.auth.mfa.verify({
-    factorId,
+    factorId: resolvedFactorId,
     challengeId: challenge.data.id,
     code,
   });
 
   if (verification.error || !verification.data) {
-    throw createAuthError(verification.error?.message ?? 'Código TOTP inválido ou expirado', 400);
+    const message = verification.error?.message ?? 'Código TOTP inválido ou expirado';
+
+    throw createAuthError(message, 400, isExpiredMfaError(message) ? 'expired' : 'invalid');
   }
 
   const verificationData = verification.data as MfaVerificationResult;
