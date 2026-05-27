@@ -5,7 +5,7 @@ import { describe, expect, it } from 'vitest';
 
 const migrationPath = resolve(
   import.meta.dirname,
-  '../../../supabase/migrations/20260523000000_create_products_table.sql',
+  '../../../supabase/migrations/20260523000000_create_products_table.sql'
 );
 
 const migrationSql = readFileSync(migrationPath, 'utf8');
@@ -22,7 +22,7 @@ describe('products migration', () => {
 
   it('cria índice composto e trigger de updated_at', () => {
     expect(migrationSql).toContain(
-      'CREATE INDEX idx_products_published_order ON public.products (published, display_order)',
+      'CREATE INDEX idx_products_published_order ON public.products (published, display_order)'
     );
     expect(migrationSql).toContain('handle_products_updated_at');
     expect(migrationSql).toContain('extensions.moddatetime()');
@@ -38,7 +38,7 @@ describe('products migration', () => {
 
   it('configura o bucket product-images com policies de storage', () => {
     expect(migrationSql).toContain(
-      'INSERT INTO storage.buckets (id, name, public, allowed_mime_types, file_size_limit)',
+      'INSERT INTO storage.buckets (id, name, public, allowed_mime_types, file_size_limit)'
     );
     expect(migrationSql).toContain('product-images');
     expect(migrationSql).toContain('Imagens do produto são publicas para visualização');
