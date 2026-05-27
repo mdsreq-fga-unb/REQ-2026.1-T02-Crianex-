@@ -9,10 +9,7 @@ import {
   reorderProducts,
   updateProduct,
   uploadProductImage,
-  type ProductUploadFile,
 } from './products.service.js';
-
-type RequestWithUploadedFile = Request & { file?: ProductUploadFile };
 
 export async function getProductsController(_req: Request, res: Response) {
   try {
@@ -33,7 +30,7 @@ export async function getProductsController(_req: Request, res: Response) {
   }
 }
 
-export async function uploadProductImageController(req: RequestWithUploadedFile, res: Response) {
+export async function uploadProductImageController(req: Request, res: Response) {
   try {
     if (!req.file) {
       return res.status(400).json({ error: 'Nenhum arquivo enviado ou formato inválido.' });
@@ -123,7 +120,7 @@ export async function deleteProductController(req: Request, res: Response) {
     if (product.published) {
       return res
         .status(409)
-        .json({ message: 'Não é possível deletar um produto publicado. Despublique-o primeiro.' });
+        .json({ message: 'Não é possível deletar um produto publicado. Despublique-o primeiro!' });
     }
 
     if (product.image_url) {
