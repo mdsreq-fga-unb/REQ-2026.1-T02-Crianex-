@@ -47,26 +47,18 @@
   let search = '';
 
   $: filteredFaqs = faqs.filter((faq) => {
-    const matchesCategory =
-      selectedCategory === 'Todos' || faq.category === selectedCategory;
+    const matchesCategory = selectedCategory === 'Todos' || faq.category === selectedCategory;
 
-    const matchesStatus =
-      selectedStatus === 'Todos' || faq.status === selectedStatus;
+    const matchesStatus = selectedStatus === 'Todos' || faq.status === selectedStatus;
 
-    const matchesSearch = faq.title
-      .toLowerCase()
-      .includes(search.toLowerCase());
+    const matchesSearch = faq.title.toLowerCase().includes(search.toLowerCase());
 
     return matchesCategory && matchesStatus && matchesSearch;
   });
 
-  $: publishedFaqs = filteredFaqs.filter(
-    (faq) => faq.status === 'Publicado'
-  );
+  $: publishedFaqs = filteredFaqs.filter((faq) => faq.status === 'Publicado');
 
-  $: draftFaqs = filteredFaqs.filter(
-    (faq) => faq.status === 'Rascunho'
-  );
+  $: draftFaqs = filteredFaqs.filter((faq) => faq.status === 'Rascunho');
 </script>
 
 <svelte:head>
@@ -80,9 +72,7 @@
       <p>Gerencie os artigos da base de conhecimento</p>
     </div>
 
-    <button class="new-button">
-      + Novo artigo
-    </button>
+    <button class="new-button"> + Novo artigo </button>
   </div>
 
   <div class="panel">
@@ -127,20 +117,13 @@
     {#if filteredFaqs.length === 0}
       <div class="empty-state">
         <h3>Nenhum artigo criado</h3>
-        <button class="new-button">
-          Criar primeiro artigo
-        </button>
+        <button class="new-button"> Criar primeiro artigo </button>
       </div>
     {:else}
-
-      <div class="section-title">
-        ✓ Publicados
-      </div>
+      <div class="section-title">✓ Publicados</div>
 
       {#if publishedFaqs.length === 0}
-        <div class="empty-small">
-          Nenhum artigo publicado.
-        </div>
+        <div class="empty-small">Nenhum artigo publicado.</div>
       {/if}
 
       {#each publishedFaqs as faq}
@@ -183,14 +166,10 @@
         </div>
       {/each}
 
-      <div class="section-title draft">
-        ○ Rascunhos
-      </div>
+      <div class="section-title draft">○ Rascunhos</div>
 
       {#if draftFaqs.length === 0}
-        <div class="empty-small">
-          Nenhum rascunho.
-        </div>
+        <div class="empty-small">Nenhum rascunho.</div>
       {/if}
 
       {#each draftFaqs as faq}
@@ -232,7 +211,6 @@
           </div>
         </div>
       {/each}
-
     {/if}
   </div>
 </div>
