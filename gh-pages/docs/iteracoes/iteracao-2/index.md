@@ -2,43 +2,42 @@
 
 **Período previsto:** ~20/05/2026 – 02/06/2026
 **Status:** 🕐 Planejada
-**Meta:** 
+**Meta:**
 
 ---
 
 ## Características de Produto (CPs)
 
-| CP | Característica | OE | Prioridade |
-|----|---------------|-----|------------|
-| CP1 | CRM Interno Kanban de clientes | OE1 | Alta |
-
+| CP  | Característica                 | OE  | Prioridade |
+| --- | ------------------------------ | --- | ---------- |
+| CP1 | CRM Interno Kanban de clientes | OE1 | Alta       |
 
 ---
 
 ## Cerimônias e Reuniões
 
 !!! info "Iteração não iniciada"
-    As reuniões serão registradas quando a iteração for iniciada.
+As reuniões serão registradas quando a iteração for iniciada.
 
 ---
 
 ## Entregas
 
 !!! info "Planejada"
-    O detalhamento das entregas ocorrerá durante o Iteration Planning desta iteração.
+O detalhamento das entregas ocorrerá durante o Iteration Planning desta iteração.
 
 ---
 
 ## Evidências de Entrega
 
 !!! warning "Iteração não iniciada"
-    Esta seção será preenchida durante e ao final da IT3.
+Esta seção será preenchida durante e ao final da IT3.
 
 ### PRs Mergeados
 
-| # | Feature | PR | Revisor | Data de Merge |
-|---|---------|-----|---------|---------------|
-| — | — | — | — | — |
+| #   | Feature | PR  | Revisor | Data de Merge |
+| --- | ------- | --- | ------- | ------------- |
+| —   | —       | —   | —       | —             |
 
 ### Demonstração das Features
 
@@ -53,5 +52,5 @@
 ### Validação pelo Cliente / Professor
 
 | Data | Origem | Feedback | Issue Aberta | Resolvida |
-|------|--------|----------|--------------|-----------|
-| — | — | — | — | — |
+| ---- | ------ | -------- | ------------ | --------- |
+| —    | —      | —        | —            | —         |

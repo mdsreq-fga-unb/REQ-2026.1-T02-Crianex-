@@ -2,16 +2,16 @@
 
 ## Histórico de Revisão
 
-| Versão | Data | Descrição | Autor(es) |
-|--------|------|-----------|-----------|
-| 1.0 | 12/04/2026 | Criação das seções 4.1 a 4.4 | Heitor e Lucas |
-| 1.1 | 13/04/2026 | Revisão da seção 4 | Equipe Crianex |
-| 1.2 | 04/05/2026 | Ajustes da seção 4.1 | Heitor |
-| 1.3 | 04/05/2026 | Ajustes da seção 4.2 | Heitor |
-| 1.4 | 06/05/2026 | Revisão dos ajustes da seção 4.1 e reajustes | Philipe |
-| 1.5 | 05/05/2026 | Ajustes de clareza e consistência na seção 4 | Hugo |
-| 1.6 | 08/05/2026 | Ajustes de cerimônias e técnicas | Lucas e Philipe |
-| 1.7 | 18/05/2026 | Reestruturação completa: separação entre etapas únicas e iterativas do FDD; adição da tabela de atividades de ER | Lucas A. Zanetti |
+| Versão | Data       | Descrição                                                                                                        | Autor(es)        |
+| ------ | ---------- | ---------------------------------------------------------------------------------------------------------------- | ---------------- |
+| 1.0    | 12/04/2026 | Criação das seções 4.1 a 4.4                                                                                     | Heitor e Lucas   |
+| 1.1    | 13/04/2026 | Revisão da seção 4                                                                                               | Equipe Crianex   |
+| 1.2    | 04/05/2026 | Ajustes da seção 4.1                                                                                             | Heitor           |
+| 1.3    | 04/05/2026 | Ajustes da seção 4.2                                                                                             | Heitor           |
+| 1.4    | 06/05/2026 | Revisão dos ajustes da seção 4.1 e reajustes                                                                     | Philipe          |
+| 1.5    | 05/05/2026 | Ajustes de clareza e consistência na seção 4                                                                     | Hugo             |
+| 1.6    | 08/05/2026 | Ajustes de cerimônias e técnicas                                                                                 | Lucas e Philipe  |
+| 1.7    | 18/05/2026 | Reestruturação completa: separação entre etapas únicas e iterativas do FDD; adição da tabela de atividades de ER | Lucas A. Zanetti |
 
 ---
 
@@ -51,9 +51,9 @@ Cerimônia dedicada à descoberta e ao refinamento de funcionalidades com o Doma
 
 **Técnicas:**
 
-- *Feature Card Specification* — padroniza a escrita da feature na formulação `<ação> <resultado> <de/para/no/com> <objeto>`
-- *Vertical Slicing* — orienta a decomposição em partes menores com valor demonstrável de ponta a ponta
-- *INVEST* — garante que cada fatia seja independente, negociável, valiosa, estimável, pequena e testável
+- _Feature Card Specification_ — padroniza a escrita da feature na formulação `<ação> <resultado> <de/para/no/com> <objeto>`
+- _Vertical Slicing_ — orienta a decomposição em partes menores com valor demonstrável de ponta a ponta
+- _INVEST_ — garante que cada fatia seja independente, negociável, valiosa, estimável, pequena e testável
 
 **Artefatos gerados:** Feature Cards e ata da sessão.
 
@@ -69,8 +69,8 @@ A priorização é feita com base na matriz **Valor × Esforço** e no **Índice
 
 **Técnicas:**
 
-- *Matriz Valor × Esforço* — posiciona cada feature em quadrantes de prioridade
-- *Priorização IP* — ordena features por IP = VB / PT, onde PT = (CX + ES) / 2
+- _Matriz Valor × Esforço_ — posiciona cada feature em quadrantes de prioridade
+- _Priorização IP_ — ordena features por IP = VB / PT, onde PT = (CX + ES) / 2
 
 **Artefatos gerados:** backlog macro priorizado, roadmap de iterações com CPs por iteração e Feature Matrix.
 
@@ -90,8 +90,8 @@ A Iteration Replenishment seleciona as features candidatas para a iteração cor
 
 **Técnicas:**
 
-- *Matriz Valor × Esforço* e *Priorização IP* — reordenação das features conforme contexto da iteração
-- *Iteration Goal Statement* — formulação do objetivo principal da iteração
+- _Matriz Valor × Esforço_ e _Priorização IP_ — reordenação das features conforme contexto da iteração
+- _Iteration Goal Statement_ — formulação do objetivo principal da iteração
 
 **Artefatos gerados:** backlog priorizado da iteração, lista de features comprometidas e Iteration Goal documentado.
 
@@ -121,8 +121,8 @@ Alinhamento rápido e assíncrono da equipe, combinado com a regulação do flux
 
 **Técnicas:**
 
-- *Kanban* e *Pull System* — novas issues só são puxadas conforme capacidade disponível
-- *WIP limits* — máx. 2 issues In Progress por Class Owner
+- _Kanban_ e _Pull System_ — novas issues só são puxadas conforme capacidade disponível
+- _WIP limits_ — máx. 2 issues In Progress por Class Owner
 
 **Artefatos gerados:** board atualizado, comentários de bloqueio, commits, branches e Pull Requests.
 
@@ -209,11 +209,11 @@ flowchart TD
 
 A tabela abaixo mapeia as atividades clássicas de Engenharia de Requisitos às cerimônias e tarefas do processo híbrido FDD + Kanban adotado pelo projeto.
 
-| Atividade de ER | Etapa FDD | Ocorrência | Cerimônia / Tarefa |
-|-----------------|-----------|------------|---------------------|
-| **Elicitação e Descoberta** | Etapas 1 e 2 | Única | Domain Modeling Workshop; Feature Discovery Session |
-| **Análise e Consenso** | Etapas 2 e 3 | Única + Iterativa | Feature Discovery Session; Iteration Replenishment + Commitment; Technical Design Review |
-| **Declaração** | Etapas 2, 3 e 4 | Única + Iterativa | Feature Card Specification; escrita de critérios de aceite BDD (Dado/Quando/Então); notas de design técnico |
-| **Representação** | Etapas 1, 2 e 4 | Única + Iterativa | Domain Modeling Workshop (diagrama de domínio e glossário); Feature Card Specification (formulação `<ação> <resultado> <objeto>`); Technical Design Review (diagramas de sequência e especificação técnica por feature) |
-| **Verificação e Validação** | Etapa 5 | Iterativa | Feature Build Consolidation (verificação técnica); Partial Client Validation (validação assíncrona); Formal Client Validation (demo orientada a valor) |
-| **Organização e Atualização** | Etapas 3 e 5 | Única + Iterativa | Iteration Replenishment macro (roadmap); Iteration Artifact Closure; Backlog Reorganization; atualização da Matriz de Rastreabilidade |
+| Atividade de ER               | Etapa FDD       | Ocorrência        | Cerimônia / Tarefa                                                                                                                                                                                                      |
+| ----------------------------- | --------------- | ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Elicitação e Descoberta**   | Etapas 1 e 2    | Única             | Domain Modeling Workshop; Feature Discovery Session                                                                                                                                                                     |
+| **Análise e Consenso**        | Etapas 2 e 3    | Única + Iterativa | Feature Discovery Session; Iteration Replenishment + Commitment; Technical Design Review                                                                                                                                |
+| **Declaração**                | Etapas 2, 3 e 4 | Única + Iterativa | Feature Card Specification; escrita de critérios de aceite BDD (Dado/Quando/Então); notas de design técnico                                                                                                             |
+| **Representação**             | Etapas 1, 2 e 4 | Única + Iterativa | Domain Modeling Workshop (diagrama de domínio e glossário); Feature Card Specification (formulação `<ação> <resultado> <objeto>`); Technical Design Review (diagramas de sequência e especificação técnica por feature) |
+| **Verificação e Validação**   | Etapa 5         | Iterativa         | Feature Build Consolidation (verificação técnica); Partial Client Validation (validação assíncrona); Formal Client Validation (demo orientada a valor)                                                                  |
+| **Organização e Atualização** | Etapas 3 e 5    | Única + Iterativa | Iteration Replenishment macro (roadmap); Iteration Artifact Closure; Backlog Reorganization; atualização da Matriz de Rastreabilidade                                                                                   |
