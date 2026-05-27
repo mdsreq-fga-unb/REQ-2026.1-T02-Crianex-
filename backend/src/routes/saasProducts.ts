@@ -1,57 +1,61 @@
-// issue #79
 import { Router } from 'express';
 import { supabase } from '../lib/supabase.js';
-import multer from 'multer'; // middleware para lidar com upload de imgs
+import multer from 'multer';
 
 const productRouter = Router();
 
-const storage = multer.memoryStorage(); // guarda temporariamente na RAM
-
 const upload = multer({
-  storage: storage,
-  limits: {
-    fileSize: 2 * 1024 * 1024,
-  },
-  fileFilter: (req, file, cb) => {
-    //cb -> callback para o multer de verificação de passagem
+  storage: multer.memoryStorage(),
+  limits: { fileSize: 2 * 1024 * 1024 },
+  fileFilter: (_req, file, cb) => {
     const allowedMimeTypes = ['image/jpeg', 'image/png', 'image/webp'];
-
     if (allowedMimeTypes.includes(file.mimetype)) {
-      cb(null, true); // primiero parâmetro é de erro, segundo de permissão de download
+      cb(null, true);
     } else {
-      cb(new Error('Formato de arquivo inválido. Use apenas JPG,PNG ou WEBP.'));
+      cb(new Error('Formato de arquivo inválido. Use apenas JPG, PNG ou WEBP.'));
     }
   },
 });
 
-const generateSlug = (text: string): string => {
-  return text
+const generateSlug = (text: string): string =>
+  text
     .toLowerCase()
-    .normalize('NFD') // Separa ã em a + ~
-    .replace(/[\u0300-\u036f]/g, '') // Remove os acentos flutuantes
-    .replace(/[^a-z0-9 -]/g, '') // Remove caracteres especiais (símbolos, exclamações)
-    .replace(/\s+/g, '-') // Substitui espaços por hífens
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
+    .replace(/[^a-z0-9 -]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/^-+|-+$/g, '')
     .trim();
-};
+
+const PRODUCT_FIELDS = [
+  'name_pt',
+  'name_en',
+  'tagline_pt',
+  'tagline_en',
+  'description_pt',
+  'description_en',
+  'icon_text',
+  'color',
+  'category_pt',
+  'category_en',
+  'published',
+  'display_order',
+  'image_url',
+] as const;
 
 productRouter.post('/upload', upload.single('image'), async (req, res) => {
   try {
     if (!req.file) {
-      return res.status(400).json({ error: 'Nenhum arquivo enviado ou formarto inválido.' });
+      return res.status(400).json({ error: 'Nenhum arquivo enviado ou formato inválido.' });
     }
 
     const file = req.file;
-
-    const fileExt = file.mimetype.split('/')[1]; // formato ['image/png'] => separa e pega ['png']
-    const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`;
-    const filePath = `${fileName}`;
+    const fileExt = file.mimetype.split('/')[1];
+    const filePath = `${crypto.randomUUID()}.${fileExt}`;
 
     const { error: storageError } = await supabase.storage
       .from('product-images')
-      .upload(filePath, file.buffer, {
-        contentType: file.mimetype,
-        upsert: false,
-      });
+      .upload(filePath, file.buffer, { contentType: file.mimetype, upsert: false });
 
     if (storageError) {
       console.log('Erro no Supabase Storage:', storageError.message);
@@ -69,47 +73,21 @@ productRouter.post('/upload', upload.single('image'), async (req, res) => {
 });
 
 productRouter.post('/', async (req, res) => {
-  // captura os dados que o admin enviou
-  const {
-    name_pt,
-    name_en,
-    tagline_pt,
-    tagline_en,
-    description_pt,
-    description_en,
-    icon_text,
-    color,
-    category_pt,
-    category_en,
-    published,
-    display_order,
-    image_url,
-  } = req.body;
+  const { name_pt, name_en, tagline_pt, tagline_en, description_pt, description_en,
+          icon_text, color, category_pt, category_en, published, display_order, image_url } = req.body;
+
+  if (!name_pt || !name_en) {
+    return res.status(400).json({ error: 'Os campos name_pt e name_en são obrigatórios.' });
+  }
 
   const slug = generateSlug(name_pt);
 
   const { data, error } = await supabase
     .from('products')
-    .insert([
-      {
-        name_pt,
-        name_en,
-        tagline_pt,
-        tagline_en,
-        description_pt,
-        description_en,
-        icon_text,
-        color,
-        category_pt,
-        category_en,
-        published,
-        display_order,
-        slug,
-        image_url,
-      },
-    ])
-    .select() // Pede para o banco retornar o produto que acabou de ser criado (com o ID gerado pelo banco)
-    .single(); // Garante que retorne apenas um objeto, e não uma lista/array
+    .insert([{ name_pt, name_en, tagline_pt, tagline_en, description_pt, description_en,
+               icon_text, color, category_pt, category_en, published, display_order, slug, image_url }])
+    .select()
+    .single();
 
   if (error) {
     console.log('Erro ao salvar no banco:', error.message);
@@ -121,16 +99,18 @@ productRouter.post('/', async (req, res) => {
 productRouter.patch('/reorder', async (req, res) => {
   const { orders } = req.body;
 
-  if (!Array.isArray(orders)) {
-    return res.status(400).json({ error: 'O corpo da requisição deve conter um array "orders".' });
+  if (
+    !Array.isArray(orders) ||
+    orders.some((o: unknown) => !o || typeof o !== 'object' ||
+      !('id' in o) || (o as Record<string, unknown>)['display_order'] == null)
+  ) {
+    return res.status(400).json({ error: 'O array "orders" deve conter objetos com id e display_order.' });
   }
 
-  const { error } = await supabase.rpc('reorder_products', {
-    p_orders: orders,
-  });
+  const { error } = await supabase.rpc('reorder_products', { p_orders: orders });
 
   if (error) {
-    console.log('Erro na trasanção de reordenação:', error.message);
+    console.log('Erro na transação de reordenação:', error.message);
     return res.status(400).json({ error: error.message });
   }
 
@@ -139,10 +119,17 @@ productRouter.patch('/reorder', async (req, res) => {
 
 productRouter.patch('/:id', async (req, res) => {
   const { id } = req.params;
-  const alteredData = req.body;
 
-  if (alteredData.name_pt) {
-    alteredData.slug = generateSlug(alteredData.name_pt);
+  const alteredData = Object.fromEntries(
+    PRODUCT_FIELDS.filter((k) => k in req.body).map((k) => [k, req.body[k]])
+  );
+
+  if (Object.keys(alteredData).length === 0) {
+    return res.status(400).json({ error: 'Nenhum campo válido enviado.' });
+  }
+
+  if (alteredData['name_pt']) {
+    alteredData['slug'] = generateSlug(alteredData['name_pt'] as string);
   }
 
   const { data, error } = await supabase
@@ -153,7 +140,7 @@ productRouter.patch('/:id', async (req, res) => {
     .single();
 
   if (error) {
-    console.log('Erro ao atulizar no bacon:', error.message);
+    console.log('Erro ao atualizar no banco:', error.message);
     return res.status(400).json({ error: error.message });
   }
 
@@ -169,24 +156,28 @@ productRouter.delete('/:id', async (req, res) => {
     .eq('id', id)
     .single();
 
-  if (!product || fetchError) {
-    return res.status(404).json({ message: 'Produto não encontrado:' });
+  if (fetchError) {
+    const notFound = (fetchError as unknown as { code?: string }).code === 'PGRST116';
+    return notFound
+      ? res.status(404).json({ message: 'Produto não encontrado.' })
+      : res.status(500).json({ error: fetchError.message });
+  }
+  if (!product) {
+    return res.status(404).json({ message: 'Produto não encontrado.' });
   }
 
   if (product.published) {
-    return res
-      .status(409)
-      .json({ message: 'Não é possivel deletar um porduto publicado. Despublique-o primeiro!' });
+    return res.status(409).json({
+      message: 'Não é possível deletar um produto publicado. Despublique-o primeiro!',
+    });
   }
 
   if (product.image_url) {
-    const fileName = product.image_url.split('/').pop();
-
+    const fileName = (product.image_url as string).split('/').pop();
     if (fileName) {
       const { error: storageError } = await supabase.storage
         .from('product-images')
         .remove([fileName]);
-
       if (storageError) {
         console.log('Erro ao remover imagem do Storage:', storageError.message);
       }

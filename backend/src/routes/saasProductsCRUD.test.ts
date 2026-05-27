@@ -18,7 +18,7 @@ describe('Suite de testes de Intergração - Endpoints CRUD', () => {
     tagline_pt: 'não sei',
     tagline_en: 'IDK',
     description_pt: 'tbm não',
-    descripition_en: 'IDK too',
+    description_en: 'IDK too',
     icon_text: 'TE',
     color: '#7c3aed',
     category_pt: 'Alguma',
@@ -94,12 +94,12 @@ describe('Suite de testes de Intergração - Endpoints CRUD', () => {
     });
   });
 
-  describe('DELETE /admin/products:id', () => {
+  describe('DELETE /admin/products/:id', () => {
     it('Dado que o produto está publicado, deve imperdir a deleção e retornar 409', async () => {
       const res = await request(app).delete(`/admin/products/${produtoId}`).expect(409);
 
       expect(res.body.message).toBe(
-        'Não é possivel deletar um porduto publicado. Despublique-o primeiro!'
+        'Não é possível deletar um produto publicado. Despublique-o primeiro!'
       );
     });
 

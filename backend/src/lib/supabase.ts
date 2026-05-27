@@ -109,9 +109,7 @@ const createInMemorySupabase = () => {
         if (state.operation === 'delete') {
           tables.set(
             tableName,
-            getTable(tableName).filter(
-              (row) => !state.filters.every(([f, v]) => row[f] === v)
-            )
+            getTable(tableName).filter((row) => !state.filters.every(([f, v]) => row[f] === v))
           );
           return Promise.resolve({ data: null, error: null });
         }
