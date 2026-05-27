@@ -248,7 +248,7 @@ authRouter.post('/mfa/enroll/verify', validateJWT, async (request, response) => 
     const session = await challengeAndVerifyTotp(authContext.accessToken, code, factorId);
 
     setAuthCookies(response, session.accessToken, session.refreshToken, session.expiresIn);
-    response.status(200).json({
+    response.status(201).json({
       accessToken: session.accessToken,
       refreshToken: session.refreshToken,
       user: session.user,

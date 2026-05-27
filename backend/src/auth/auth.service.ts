@@ -101,7 +101,7 @@ function createAuthError(
 function isExpiredMfaError(message: string): boolean {
   const normalizedMessage = message.toLowerCase();
 
-  return normalizedMessage.includes('expired') || normalizedMessage.includes('expir');
+  return normalizedMessage.includes('expir');
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {
@@ -124,7 +124,7 @@ export function normalizeRole(role: string | null | undefined): string {
   return role?.trim() || 'member';
 }
 
-const ADMIN_ROLES = new Set(['admin', 'owner']);
+const ADMIN_ROLES = new Set(['admin', 'owner', 'member']);
 
 function createAuthenticatedSupabaseClient(accessToken: string): SupabaseClient {
   const { url, serviceRoleKey } = getSupabaseConfig();
