@@ -4,7 +4,10 @@ import { resolve } from 'node:path';
 
 const envFilePath = resolve(process.cwd(), '..', '.env');
 
-if ((!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) && existsSync(envFilePath)) {
+if (
+  (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) &&
+  existsSync(envFilePath)
+) {
   const envFile = readFileSync(envFilePath, 'utf8');
 
   for (const line of envFile.split(/\r?\n/)) {
@@ -21,7 +24,10 @@ if ((!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) && exi
     }
 
     const name = trimmedLine.slice(0, separatorIndex).trim();
-    const value = trimmedLine.slice(separatorIndex + 1).trim().replace(/^['"]|['"]$/g, '');
+    const value = trimmedLine
+      .slice(separatorIndex + 1)
+      .trim()
+      .replace(/^['"]|['"]$/g, '');
 
     if (!(name in process.env)) {
       process.env[name] = value;
@@ -30,10 +36,17 @@ if ((!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) && exi
 }
 
 const url = process.env.SUPABASE_URL || process.env.PUBLIC_SUPABASE_URL;
-const key = process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_KEY || process.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY || process.env.PUBLIC_SUPABASE_ANON_KEY;
+const key =
+  process.env.SUPABASE_SECRET_KEY ||
+  process.env.SUPABASE_SERVICE_ROLE_KEY ||
+  process.env.SUPABASE_KEY ||
+  process.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY ||
+  process.env.PUBLIC_SUPABASE_ANON_KEY;
 
 if (!url || !key) {
-  console.warn('[supabase] environment variables PUBLIC_SUPABASE_URL and SUPABASE_SECRET_KEY (or SUPABASE_SERVICE_ROLE_KEY / SUPABASE_KEY / PUBLIC_SUPABASE_PUBLISHABLE_KEY) are not set.');
+  console.warn(
+    '[supabase] environment variables PUBLIC_SUPABASE_URL and SUPABASE_SECRET_KEY (or SUPABASE_SERVICE_ROLE_KEY / SUPABASE_KEY / PUBLIC_SUPABASE_PUBLISHABLE_KEY) are not set.'
+  );
 }
 
 const createInMemorySupabase = () => {
@@ -102,7 +115,9 @@ const createInMemorySupabase = () => {
           const remainingRows = [];
 
           for (const row of getTable(tableName)) {
-            const matches = state.filters.every(([filterField, filterValue]) => row[filterField] === filterValue);
+            const matches = state.filters.every(
+              ([filterField, filterValue]) => row[filterField] === filterValue
+            );
 
             if (!matches) {
               remainingRows.push(row);
@@ -134,7 +149,9 @@ const createInMemorySupabase = () => {
           let updatedRow = null;
 
           for (const row of table) {
-            const matches = state.filters.every(([filterField, filterValue]) => row[filterField] === filterValue);
+            const matches = state.filters.every(
+              ([filterField, filterValue]) => row[filterField] === filterValue
+            );
 
             if (matches) {
               Object.assign(row, state.payload);
