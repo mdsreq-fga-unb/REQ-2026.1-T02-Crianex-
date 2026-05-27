@@ -140,7 +140,7 @@ jobs:
           echo "SUPABASE_URL=$API_URL" >> $GITHUB_ENV
 
       - name: Apply Supabase migrations
-        run: supabase db reset --confirm
+        run: supabase db reset --local --yes
 
       - name: Test — backend
         run: npm test
