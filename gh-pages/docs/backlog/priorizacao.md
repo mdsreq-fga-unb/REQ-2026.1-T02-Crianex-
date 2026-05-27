@@ -156,7 +156,7 @@ ValorRF = (Complixidade × 3) + (DependenciasArquitetural × 3) + (EsforcoValida
 | F21 | Gerenciar cards do CRM para acompanhamento de oportunidades               | CP1 | OE3 | 50    | 18    | 2,77 | Q1        | ✅  |
 | F20 | Gerenciar colunas do funil para personalização do processo comercial      | CP1 | OE3 | 40    | 14,7  | 2,72 | Q1        | ✅  |
 | F16 | Gerenciar artigos de FAQs para manuntenção da base de conhecimento        | CP6 | OE2 | 24,75 | 9,5   | 2,61 | Q1        | ✅  |
-| F14 | Exibir canais de contato ao final da Página de Vitrine                    | CP4 | OE2 | 50    | 21    | 2,38 | Q1        | ✅  |
+| F14 | Exibir canais de contato na Vitrine                                       | CP4 | OE2 | 50    | 21    | 2,38 | Q1        | ✅  |
 | F17 | Controlar publicação de artigos FAQ's para disponibilização pública       | CP6 | OE2 | 28,5  | 12    | 2,38 | Q1        | ✅  |
 | F24 | Gerenciar tickets para manutenção da operação de suporte                  | CP8 | OE3 | 32    | 14    | 2,29 | Q1        | ✅  |
 | F11 | Gerenciar usuarios da plataforma para controle operacional                | CP5 | OE2 | 35    | 15,25 | 2,29 | Q1        | ✅  |

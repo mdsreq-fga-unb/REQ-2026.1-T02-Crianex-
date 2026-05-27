@@ -10,12 +10,5 @@
   "common_close": "Fechar",
   "common_save": "Salvar",
   "common_cancel": "Cancelar",
-  "lang_switch": "Mudar idioma",
-  "contact_eyebrow": "Contato comercial",
-  "contact_h1": "Vamos conversar.",
-  "contact_submit": "Enviar mensagem",
-  "contact_success_title": "Recebemos sua mensagem!",
-  "contact_success_body": "Retornaremos em até 24 horas.",
-  "contact_send_another": "Enviar outra",
-  "contact_lgpd": "Ao enviar, você concorda com nossa Política de Privacidade."
+  "lang_switch": "Mudar idioma"
 }

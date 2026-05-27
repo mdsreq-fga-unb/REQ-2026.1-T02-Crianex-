@@ -36,7 +36,7 @@
     <a
       href="https://linkedin.com/company/crianex"
       target="_blank"
-      rel="noopener"
+      rel="noopener noreferrer"
       aria-label="LinkedIn"
       class="btn ghost sm"
     >
@@ -73,7 +73,7 @@
     font-weight: 600;
     letter-spacing: -0.035em;
     line-height: 1;
-    color: #060606;
+    color: var(--venom);
   }
 
   .eyebrow {
@@ -128,7 +128,7 @@
 
   .channel .v {
     font-size: 15px;
-    color: #060606;
+    color: var(--venom);
   }
 
   .contact-btns {
@@ -162,7 +162,7 @@
   .btn.ghost {
     background: transparent;
     border: 1px solid var(--line);
-    color: #060606;
+    color: var(--venom);
   }
 
   .btn.ghost:hover {

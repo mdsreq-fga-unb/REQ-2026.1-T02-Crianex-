@@ -1,14 +1,18 @@
 <script lang="ts">
+  import { lang } from '$lib/stores/lang';
   import ContactInfo from './ContactInfo.svelte';
   import ContactForm from './ContactForm.svelte';
+
+  const titles = { pt: 'Contato — Crianex Hub', en: 'Contact — Crianex Hub' };
+  const descs = {
+    pt: 'Entre em contato com a equipe Crianex. Respondemos em até 24 horas úteis.',
+    en: 'Get in touch with the Crianex team. We reply within 24 business hours.',
+  };
 </script>
 
 <svelte:head>
-  <title>Contato — Crianex Hub</title>
-  <meta
-    name="description"
-    content="Entre em contato com a equipe Crianex. Respondemos em até 24 horas úteis."
-  />
+  <title>{titles[$lang]}</title>
+  <meta name="description" content={descs[$lang]} />
 </svelte:head>
 
 <div class="contact-layout">
@@ -17,7 +21,7 @@
 </div>
 
 <style>
-  :root {
+  .contact-layout {
     --bg-elev: #ffffff;
     --bg: #fcfcfc;
     --line: #e8e6e2;

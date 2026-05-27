@@ -10,12 +10,5 @@
   "common_close": "Close",
   "common_save": "Save",
   "common_cancel": "Cancel",
-  "lang_switch": "Switch language",
-  "contact_eyebrow": "Sales contact",
-  "contact_h1": "Let's talk.",
-  "contact_submit": "Send message",
-  "contact_success_title": "Message received!",
-  "contact_success_body": "We'll get back to you within 24 hours.",
-  "contact_send_another": "Send another",
-  "contact_lgpd": "By submitting, you agree to our Privacy Policy."
+  "lang_switch": "Switch language"
 }

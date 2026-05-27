@@ -22,10 +22,12 @@
     productOther: { pt: 'Outro / não tenho certeza', en: 'Other / not sure' },
     hint: { pt: 'Resposta em até 24h úteis', en: 'Reply within 24h biz.' },
     submit: { pt: 'Enviar mensagem', en: 'Send message' },
-    lgpd: {
-      pt: 'Ao enviar, você concorda com nossa Política de Privacidade.',
-      en: 'By submitting, you agree to our Privacy Policy.',
+    lgpdPrefix: {
+      pt: 'Ao enviar, você concorda com nossa ',
+      en: 'By submitting, you agree to our ',
     },
+    lgpdLink: { pt: 'Política de Privacidade', en: 'Privacy Policy' },
+    lgpdSuffix: { pt: '.', en: '.' },
     successTitle: { pt: 'Recebemos sua mensagem!', en: 'Message received!' },
     successBody: {
       pt: 'Retornaremos em até 24 horas.',
@@ -177,6 +179,17 @@
         <p class="error-msg" role="alert">{errorMsg}</p>
       {/if}
 
+      <label class="consent-row">
+        <input type="checkbox" bind:checked={form.consent} required />
+        <span>
+          {t.lgpdPrefix[$lang]}<a
+            href="/privacidade"
+            target="_blank"
+            rel="noopener noreferrer"
+          >{t.lgpdLink[$lang]}</a>{t.lgpdSuffix[$lang]}
+        </span>
+      </label>
+
       <div class="form-submit">
         <span class="hint">↩ {t.hint[$lang]}</span>
         <button type="submit" class="btn" disabled={status === 'loading' || !form.consent}>
@@ -201,11 +214,6 @@
           {/if}
         </button>
       </div>
-
-      <label class="consent-row">
-        <input type="checkbox" bind:checked={form.consent} required />
-        <span>{t.lgpd[$lang]}</span>
-      </label>
     </form>
   {/if}
 </div>
@@ -242,7 +250,7 @@
     padding: 11px 14px;
     font-family: inherit;
     font-size: 14px;
-    color: #060606;
+    color: var(--venom);
     outline: none;
     transition:
       border-color 0.15s,
@@ -272,7 +280,7 @@
 
   .field select option {
     background: #ffffff;
-    color: #060606;
+    color: var(--venom);
   }
 
   .field-row {
@@ -323,7 +331,7 @@
   .btn.ghost {
     background: transparent;
     border: 1px solid var(--line);
-    color: #060606;
+    color: var(--venom);
   }
 
   .btn.ghost:hover {
@@ -358,6 +366,16 @@
     flex-shrink: 0;
     accent-color: var(--purple);
     cursor: pointer;
+  }
+
+  .consent-row a {
+    color: #60a5fa;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .consent-row a:hover {
+    color: #93c5fd;
   }
 
   .error-msg {
@@ -406,7 +424,7 @@
     font-size: 22px;
     font-weight: 500;
     letter-spacing: -0.02em;
-    color: #060606;
+    color: var(--venom);
   }
 
   .form-success p {
