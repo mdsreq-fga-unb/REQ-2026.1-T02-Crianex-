@@ -200,7 +200,8 @@
             onblur={handleEmailBlur}
             class:field-invalid={errors.email}
           />
-          {#if errorMessages.email}<span class="field-error" role="alert">{errorMessages.email}</span
+          {#if errorMessages.email}<span class="field-error" role="alert"
+              >{errorMessages.email}</span
             >{/if}
         </div>
         <div class="field">
