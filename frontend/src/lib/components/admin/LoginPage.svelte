@@ -1,6 +1,8 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
   import { onMount } from 'svelte';
+  import { ApiError } from '$lib/api/backend';
+  import { authorizeAdminSession } from '$lib/api/admin-auth';
   import { Button } from '$lib/components/ui/button';
   import { Input } from '$lib/components/ui/input';
   import { Label } from '$lib/components/ui/label';
@@ -11,18 +13,69 @@
   let errorMessage = $state('');
   let submitHovered = $state(false);
 
-  onMount(async () => {
-    try {
-      const { supabase } = await import('$lib/api/supabase');
-      const { data } = await supabase.auth.getSession();
+  async function validateSessionAndRedirect(): Promise<boolean> {
+    const { supabase } = await import('$lib/api/supabase');
+    const { data } = await supabase.auth.getSession();
 
-      if (data.session) {
-        await goto('/admin');
+    if (!data.session) {
+      return false;
+    }
+
+    try {
+      await authorizeAdminSession(data.session.access_token);
+      await goto('/admin');
+      return true;
+    } catch (error) {
+      await supabase.auth.signOut();
+
+      if (error instanceof ApiError && error.status === 403) {
+        errorMessage = 'Conta não autorizada. Solicite acesso ao administrador.';
+      } else {
+        errorMessage = 'Não foi possível validar sua sessão agora.';
       }
+
+      return false;
+    }
+  }
+
+  onMount(async () => {
+    const queryMessage = new URLSearchParams(window.location.search).get('error');
+
+    if (queryMessage) {
+      errorMessage = queryMessage;
+    }
+
+    try {
+      await validateSessionAndRedirect();
     } catch {
       // A tela deve renderizar mesmo quando o Supabase ainda nao estiver configurado localmente.
     }
   });
+
+  async function handleGoogleSignIn() {
+    errorMessage = '';
+    loading = true;
+
+    try {
+      const { supabase } = await import('$lib/api/supabase');
+      const redirectTo = `${window.location.origin}/admin/login/callback`;
+
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo,
+        },
+      });
+
+      if (error) {
+        errorMessage = 'Não foi possível iniciar o login com Google agora.';
+      }
+    } catch {
+      errorMessage = 'Não foi possível iniciar o login com Google agora.';
+    } finally {
+      loading = false;
+    }
+  }
 
   async function handleSubmit() {
     errorMessage = '';
@@ -48,7 +101,11 @@
         return;
       }
 
-      await goto('/admin');
+      const authorized = await validateSessionAndRedirect();
+
+      if (!authorized) {
+        errorMessage ||= 'Conta não autorizada. Solicite acesso ao administrador.';
+      }
     } catch {
       errorMessage = 'Não foi possível conectar ao serviço de autenticação agora.';
     } finally {
@@ -94,14 +151,14 @@
         </div>
 
         <Button
-          class="workspace-button"
+          class="google-btn workspace-button"
           variant="outline"
           type="button"
           disabled={loading}
-          style="background-color: transparent; color: #ffffff; border-color: #ffffff; box-shadow: none;"
+          onclick={handleGoogleSignIn}
         >
           <img class="google-logo" src="/assets/logo-google.png" alt="" aria-hidden="true" />
-          Entrar com Google Workspace
+          Entrar com Google
         </Button>
 
         <div class="divider" aria-hidden="true">
@@ -110,7 +167,13 @@
           <span></span>
         </div>
 
-        <form class="form-fields" onsubmit={handleSubmit}>
+        <form
+          class="form-fields"
+          onsubmit={(event) => {
+            event.preventDefault();
+            void handleSubmit();
+          }}
+        >
           <div class="field">
             <Label for="admin-email">E-mail corporativo</Label>
             <Input
@@ -370,6 +433,22 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
+  }
+
+  :global(.google-btn) {
+    background: transparent;
+    color: #fcfcfc;
+    border-color: rgba(252, 252, 252, 0.14);
+    box-shadow: none;
+    transition:
+      border-color 0.2s ease,
+      background-color 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  :global(.google-btn:hover) {
+    background: rgba(252, 252, 252, 0.04) !important;
+    border-color: #fcfcfc !important;
   }
 
   :global(.workspace-button:hover) {
