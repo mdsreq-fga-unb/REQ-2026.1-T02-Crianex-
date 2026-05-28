@@ -69,6 +69,7 @@ const createInMemorySupabase = () => {
       filters: Filter[];
       orderBy: { field: string; ascending: boolean } | null;
       committed: boolean;
+      insertedRows: Row[];
     } = {
       operation: 'select',
       payload: null,
@@ -76,6 +77,7 @@ const createInMemorySupabase = () => {
       filters: [],
       orderBy: null,
       committed: false,
+      insertedRows: [],
     };
 
     const table = getTable(tableName);
@@ -120,41 +122,38 @@ const createInMemorySupabase = () => {
           const rows = Array.isArray(state.payload) ? state.payload : [];
 
           for (const rowInput of rows) {
-            if (
-              !rowInput['ip_hash'] ||
-              !rowInput['name'] ||
-              !rowInput['email'] ||
-              !rowInput['message']
-            ) {
-              return { data: null, error: { code: '23502' } };
-            }
-
-            const status = rowInput['status'] ?? 'new';
-            if (!['new', 'read', 'archived'].includes(String(status))) {
-              return { data: null, error: { code: '23514' } };
-            }
-
             const row: Row = {
               ...rowInput,
               id: rowInput['id'] ?? crypto.randomUUID(),
-              status,
-              created_at: rowInput['created_at'] ?? new Date().toISOString(),
             };
 
+            if (tableName === 'leads') {
+              if (
+                !rowInput['ip_hash'] ||
+                !rowInput['name'] ||
+                !rowInput['email'] ||
+                !rowInput['message']
+              ) {
+                return { data: null, error: { code: '23502' } };
+              }
+
+              const status = rowInput['status'] ?? 'new';
+              if (!['new', 'read', 'archived'].includes(String(status))) {
+                return { data: null, error: { code: '23514' } };
+              }
+
+              row.status = status;
+              row.created_at = rowInput['created_at'] ?? new Date().toISOString();
+            }
+
             table.push(row);
+            state.insertedRows.push(row);
           }
 
           state.committed = true;
         }
 
-        const insertedRows = projectRows(
-          table.filter((row) => {
-            const payloadRows = Array.isArray(state.payload) ? state.payload : [];
-            return payloadRows.some((payloadRow) => payloadRow['name'] === row['name']);
-          })
-        );
-
-        return { data: insertedRows, error: null };
+        return { data: projectRows(state.insertedRows), error: null };
       }
 
       if (state.operation === 'update') {
