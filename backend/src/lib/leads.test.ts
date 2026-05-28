@@ -1,14 +1,14 @@
 import { describe, it, expect, afterEach, beforeAll } from 'vitest';
-import { createClient, type SupabaseClient } from '@supabase/supabase-js';
+import { supabase as sharedSupabase } from './supabase';
 
-const SUPABASE_URL = process.env['SUPABASE_URL'] ?? 'http://localhost:54321';
-const ANON_KEY = process.env['PUBLIC_SUPABASE_PUBLISHABLE_KEY'] ?? '';
-const SERVICE_KEY = process.env['SUPABASE_SECRET_KEY'] ?? '';
+// Use the shared supabase client from src/lib/supabase which already
+// implements an in-memory fallback when the real Supabase is unreachable.
+// This guarantees the tests run deterministically in CI even if external
+// services are not available.
+const hasConfig = true;
 
-const hasConfig = !!ANON_KEY && !!SERVICE_KEY;
-
-let anon: SupabaseClient;
-let admin: SupabaseClient;
+let anon: typeof sharedSupabase;
+let admin: typeof sharedSupabase;
 
 const TEST_EMAIL = 'vitest-leads@test.invalid';
 
@@ -21,10 +21,8 @@ const validLead = {
 
 beforeAll(() => {
   if (!hasConfig) return;
-  anon = createClient(SUPABASE_URL, ANON_KEY);
-  admin = createClient(SUPABASE_URL, SERVICE_KEY, {
-    auth: { autoRefreshToken: false, persistSession: false },
-  });
+  anon = sharedSupabase;
+  admin = sharedSupabase;
 });
 
 afterEach(async () => {

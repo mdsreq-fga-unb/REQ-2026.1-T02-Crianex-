@@ -12,7 +12,7 @@ export default [
     files: ['**/*.ts'],
     languageOptions: {
       parser: tsParser,
-      parserOptions: { project: './tsconfig.json' },
+      parserOptions: { project: ['./tsconfig.json', './.svelte-kit/tsconfig.json'] },
     },
     plugins: { '@typescript-eslint': tsPlugin },
     rules: {

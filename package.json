@@ -19,6 +19,7 @@
     "typescript": "^5.8.3"
   },
   "dependencies": {
+    "@rollup/rollup-win32-x64-msvc": "^4.60.4",
     "@supabase/supabase-js": "^2.106.1"
   }
 }

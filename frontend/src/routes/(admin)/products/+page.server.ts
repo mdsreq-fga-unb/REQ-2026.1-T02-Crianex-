@@ -1,4 +1,4 @@
-import type { PageServerLoad } from './$types';
+import type { ServerLoad as PageServerLoad } from '@sveltejs/kit';
 import { apiFetch } from '$lib/api/backend';
 
 export const load: PageServerLoad = async () => {

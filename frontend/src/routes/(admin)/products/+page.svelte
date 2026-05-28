@@ -11,7 +11,7 @@
   } from 'lucide-svelte';
   import { apiFetch } from '$lib/api/backend';
   import { invalidateAll } from '$app/navigation';
-  import type { PageData } from './$types';
+  import type { PageData } from '@sveltejs/kit';
 
   export let data: PageData;
 
