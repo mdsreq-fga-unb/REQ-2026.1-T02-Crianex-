@@ -52,7 +52,7 @@
 | F11 | Gerenciar usuarios da plataforma para controle operacional                                                              | CP5 | RF11, RF12, RF13, RF14 | —                                 |
 | F12 | Gerenciar produtos SaaS da vitrine para manutenção do portifólio                                                        | CP4 | RF21, RF22, RF23, RF24 | RNF19, RNF04, RNF05, RNF13, RNF15 |
 | F13 | Controlar publicação de produto SaaS para exibição pública                                                              | CP4 | RF25, RF26             | RNF03                             |
-| F14 | Exibir canais de contato ao final da Página de Vitrine                                                                  | CP4 | RF27                   | RNF10, RNF06, RNF02               |
+| F14 | Exibir canais de contato na Vitrine                                                                                     | CP4 | RF27                   | RNF10, RNF06, RNF02               |
 | F15 | Disponibilizar informações institucionais para apresentação da empresa                                                  | CP4 | —                      | RNF20                             |
 | F16 | Gerenciar artigos de FAQs para manuntenção da base de conhecimento                                                      | CP6 | RF28, RF29, RF30, RF31 | RNF05, RNF04, RNF01               |
 | F17 | Controlar publicação de artigos FAQ's para disponibilização pública                                                     | CP6 | RF32, RF33             | —                                 |

@@ -1,5 +1,5 @@
-import type { SupabaseClient } from '@supabase/supabase-js';
-import { getSupabaseConfig } from '../config/supabase.js';
+import { createClient, type SupabaseClient } from '@supabase/supabase-js';
+import { getSupabaseClient, getSupabaseConfig } from '../config/supabase.js';
 
 export type AuthenticatedAdminUser = {
   id: string;
@@ -20,6 +20,57 @@ export type AuthSessionResponse = {
   };
 };
 
+export type AdminAuthenticatedSession = {
+  accessToken: string;
+  refreshToken: string;
+  expiresIn: number;
+  user: AuthenticatedAdminUser;
+};
+
+export type AdminLoginResponse =
+  | (AdminAuthenticatedSession & { mfa_required: false })
+  | (AdminAuthenticatedSession & { mfa_required: true });
+
+type MfaVerificationUser = {
+  id: string;
+  email: string | null;
+  user_metadata?: Record<string, unknown> | null;
+};
+
+type MfaVerificationSession = {
+  access_token: string;
+  refresh_token: string;
+  expires_in: number;
+  user?: MfaVerificationUser | null;
+};
+
+type MfaVerificationResult = {
+  session?: MfaVerificationSession;
+  user?: MfaVerificationUser | null;
+  access_token?: string;
+  refresh_token?: string;
+  expires_in?: number;
+} & Partial<MfaVerificationSession>;
+
+type MfaEnrollResult = {
+  id: string;
+  type: 'totp';
+  // explicit union with undefined to satisfy exactOptionalPropertyTypes checks
+  friendly_name: string | undefined;
+  totp: {
+    qr_code: string;
+    secret: string;
+    uri: string;
+  };
+};
+
+type TotpFactorStatus = {
+  hasAnyFactor: boolean;
+  hasVerifiedFactor: boolean;
+  pendingFactorId: string | null;
+  verifiedFactorId: string | null;
+};
+
 type ProfileRow = {
   id: string;
   name: string | null;
@@ -30,14 +81,28 @@ type ProfileRow = {
 
 type AuthServiceError = Error & {
   status?: number;
+  reason?: 'invalid' | 'expired';
 };
 
-function createAuthError(message: string, status: number): AuthServiceError {
+function createAuthError(
+  message: string,
+  status: number,
+  reason?: 'invalid' | 'expired'
+): AuthServiceError {
   const error = new Error(message) as AuthServiceError;
 
   error.status = status;
+  if (reason) {
+    error.reason = reason;
+  }
 
   return error;
+}
+
+function isExpiredMfaError(message: string): boolean {
+  const normalizedMessage = message.toLowerCase();
+
+  return normalizedMessage.includes('expir');
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {
@@ -69,6 +134,26 @@ function normalizeStatus(status: string | null | undefined): string {
 }
 
 const ADMIN_ROLES = new Set(['owner', 'member']);
+
+function createAuthenticatedSupabaseClient(accessToken: string): SupabaseClient {
+  const { url, serviceRoleKey } = getSupabaseConfig();
+
+  return createClient(url, serviceRoleKey, {
+    auth: {
+      autoRefreshToken: false,
+      persistSession: false,
+    },
+    global: {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    },
+  });
+}
+
+export function isAdminRole(role: string | null | undefined): boolean {
+  return ADMIN_ROLES.has(normalizeRole(role));
+}
 
 export function parseBearerToken(authorizationHeader: string | null | undefined): string | null {
   if (!authorizationHeader) {
@@ -248,6 +333,135 @@ export async function validateAccessToken(
   }
 
   return loadAdminProfile(supabase, data.user.id, data.user.email ?? null, data.user.user_metadata);
+}
+
+export async function hasVerifiedTotpFactor(accessToken: string): Promise<boolean> {
+  const supabase = createAuthenticatedSupabaseClient(accessToken);
+  const { data, error } = await supabase.auth.mfa.listFactors();
+
+  if (error) {
+    throw createAuthError(error.message, 500);
+  }
+
+  return (data.totp ?? []).length > 0;
+}
+
+export async function getVerifiedTotpFactorId(accessToken: string): Promise<string | null> {
+  const supabase = createAuthenticatedSupabaseClient(accessToken);
+  const { data, error } = await supabase.auth.mfa.listFactors();
+
+  if (error) {
+    throw createAuthError(error.message, 500);
+  }
+
+  return data.totp?.[0]?.id ?? null;
+}
+
+export async function getTotpFactorStatus(accessToken: string): Promise<TotpFactorStatus> {
+  const supabase = createAuthenticatedSupabaseClient(accessToken);
+  const { data, error } = await supabase.auth.mfa.listFactors();
+
+  if (error) {
+    throw createAuthError(error.message, 500);
+  }
+
+  const verifiedFactor = data.totp?.[0] ?? null;
+  const pendingFactor =
+    data.all.find((factor) => factor.factor_type === 'totp' && factor.status === 'unverified') ??
+    null;
+
+  return {
+    hasAnyFactor: data.all.some((factor) => factor.factor_type === 'totp'),
+    hasVerifiedFactor: Boolean(verifiedFactor),
+    pendingFactorId: pendingFactor?.id ?? null,
+    verifiedFactorId: verifiedFactor?.id ?? null,
+  };
+}
+
+export async function enrollTotpFactor(
+  accessToken: string,
+  friendlyName: string
+): Promise<MfaEnrollResult> {
+  const supabase = createAuthenticatedSupabaseClient(accessToken);
+  const { data, error } = await supabase.auth.mfa.enroll({
+    factorType: 'totp',
+    friendlyName,
+    issuer: 'Crianex',
+  });
+
+  if (error || !data || data.type !== 'totp') {
+    throw createAuthError(error?.message ?? 'Não foi possível iniciar o cadastro do TOTP', 400);
+  }
+
+  return {
+    id: data.id,
+    type: 'totp',
+    friendly_name: data.friendly_name,
+    totp: {
+      qr_code: data.totp.qr_code,
+      secret: data.totp.secret,
+      uri: data.totp.uri,
+    },
+  };
+}
+
+export async function challengeAndVerifyTotp(
+  accessToken: string,
+  code: string,
+  factorId?: string | null
+): Promise<AdminAuthenticatedSession> {
+  const supabase = createAuthenticatedSupabaseClient(accessToken);
+  const { data: factors, error: factorsError } = await supabase.auth.mfa.listFactors();
+
+  if (factorsError) {
+    throw createAuthError(factorsError.message, 500);
+  }
+
+  const resolvedFactorId = factorId ?? factors.totp?.[0]?.id;
+
+  if (!resolvedFactorId) {
+    throw createAuthError('Nenhum fator TOTP cadastrado para este usuário', 400);
+  }
+
+  const challenge = await supabase.auth.mfa.challenge({ factorId: resolvedFactorId });
+
+  if (challenge.error || !challenge.data) {
+    throw createAuthError(challenge.error?.message ?? 'Não foi possível iniciar o MFA', 400);
+  }
+
+  const verification = await supabase.auth.mfa.verify({
+    factorId: resolvedFactorId,
+    challengeId: challenge.data.id,
+    code,
+  });
+
+  if (verification.error || !verification.data) {
+    const message = verification.error?.message ?? 'Código TOTP inválido ou expirado';
+
+    throw createAuthError(message, 400, isExpiredMfaError(message) ? 'expired' : 'invalid');
+  }
+
+  const verificationData = verification.data as MfaVerificationResult;
+  const session = verificationData.session ?? verificationData;
+  const verifiedUser = verificationData.user ?? session.user ?? null;
+
+  if (!session?.access_token || !session?.refresh_token) {
+    throw createAuthError('Resposta inválida do MFA', 502);
+  }
+
+  const profile = await loadAdminProfile(
+    getSupabaseClient(),
+    verifiedUser?.id ?? session.user?.id ?? '',
+    verifiedUser?.email ?? session.user?.email ?? null,
+    verifiedUser?.user_metadata ?? session.user?.user_metadata ?? null
+  );
+
+  return {
+    accessToken: session.access_token,
+    refreshToken: session.refresh_token,
+    expiresIn: session.expires_in ?? 0,
+    user: profile,
+  };
 }
 
 export async function revokeSession(supabase: SupabaseClient, accessToken: string): Promise<void> {

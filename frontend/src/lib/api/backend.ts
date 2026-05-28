@@ -1,14 +1,17 @@
 import { env } from '$env/dynamic/public';
 
 const BASE_URL = env.PUBLIC_API_BASE_URL ?? 'http://localhost:3000';
+const API_PREFIX = '/api';
 
 export class ApiError extends Error {
   status: number;
+  reason?: string;
 
-  constructor(message: string, status: number) {
+  constructor(message: string, status: number, reason?: string) {
     super(message);
     this.name = 'ApiError';
     this.status = status;
+    this.reason = reason;
   }
 }
 
@@ -17,8 +20,10 @@ export async function apiFetch<T>(
   init?: RequestInit & { token?: string }
 ): Promise<T> {
   const { token, ...fetchInit } = init ?? {};
-
-  const res = await fetch(`${BASE_URL}${path}`, {
+  const normalizedPath = path.startsWith('/') ? path : `/${path}`;
+  const res = await fetch(`${BASE_URL}${API_PREFIX}${normalizedPath}`, {
+    // evitar caching condicional que pode retornar 304
+    cache: 'no-store',
     ...fetchInit,
     credentials: 'include',
     headers: {
@@ -28,11 +33,20 @@ export async function apiFetch<T>(
     },
   });
 
+  // 304 Not Modified: tratar como sucesso sem corpo
+  if (res.status === 304) {
+    return undefined as unknown as T;
+  }
+
   if (!res.ok) {
-    const payload = (await res.json().catch(() => null)) as { message?: string } | null;
+    const payload = (await res.json().catch(() => null)) as {
+      message?: string;
+      reason?: string;
+    } | null;
     throw new ApiError(
       payload?.message ?? `[backend] ${res.status} ${res.statusText} — ${path}`,
-      res.status
+      res.status,
+      payload?.reason
     );
   }
 
