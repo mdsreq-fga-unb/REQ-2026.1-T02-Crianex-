@@ -1,7 +1,10 @@
 <script lang="ts">
   import '../../app.css';
+  import SiteFooter from '$lib/components/vitrine/SiteFooter.svelte';
+  import type { LayoutData } from './$types';
   // Header — issue pendente (componente de navegação da vitrine)
-  // Footer — issue #89
+
+  export let data: LayoutData;
 </script>
 
 <!-- Header placeholder — substituir quando issue de header for implementada -->
@@ -11,8 +14,7 @@
   <slot />
 </main>
 
-<!-- Footer placeholder — issue #89 -->
-<footer></footer>
+<SiteFooter products={data.footerProducts} />
 
 <style>
   :global(body):has(.vitrine-root) {
