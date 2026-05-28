@@ -35,7 +35,7 @@ services:
       - NODE_ENV=development
     env_file:
       - .env
-    command: sh -c "npm install && npm run dev"
+    command: sh -c "npm install && npx tsx watch src/index.ts"
 
 volumes:
   frontend_node_modules:
