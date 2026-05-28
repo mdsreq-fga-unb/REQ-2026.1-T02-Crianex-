@@ -61,147 +61,179 @@ const createInMemorySupabase = () => {
     return tables.get(tableName)!;
   };
 
-  const project = (row: Row | null | undefined, columns = '*'): Row | null => {
-    if (!row) return null;
-    if (columns === '*') return { ...row };
-    return columns.split(',').reduce<Row>((acc, col) => {
-      const field = col.trim();
-      if (field) acc[field] = row[field];
-      return acc;
-    }, {});
-  };
-
   const buildQuery = (tableName: string) => {
     const state: {
       operation: string;
       payload: Row | Row[] | null;
       columns: string;
       filters: Filter[];
+      orderBy: { field: string; ascending: boolean } | null;
+      committed: boolean;
     } = {
       operation: 'select',
       payload: null,
       columns: '*',
       filters: [],
+      orderBy: null,
+      committed: false,
     };
 
-    const api = {
+    const table = getTable(tableName);
+
+    const matchesFilters = (row: Row): boolean =>
+      state.filters.every(([field, value]) => row[field] === value);
+
+    const projectRow = (row: Row | null | undefined): Row | null => {
+      if (!row) return null;
+      if (state.columns === '*') return { ...row };
+
+      return state.columns.split(',').reduce<Row>((acc, col) => {
+        const field = col.trim();
+        if (field) acc[field] = row[field];
+        return acc;
+      }, {});
+    };
+
+    const projectRows = (rows: Row[]): Row[] =>
+      rows.map((row) => projectRow(row)).filter(Boolean) as Row[];
+
+    const sortRows = (rows: Row[]): Row[] => {
+      if (!state.orderBy) return rows;
+
+      const { field, ascending } = state.orderBy;
+
+      return [...rows].sort((left, right) => {
+        const leftValue = left[field];
+        const rightValue = right[field];
+
+        if (leftValue === rightValue) return 0;
+        if (leftValue == null) return ascending ? -1 : 1;
+        if (rightValue == null) return ascending ? 1 : -1;
+
+        return (leftValue > rightValue ? 1 : -1) * (ascending ? 1 : -1);
+      });
+    };
+
+    const finalize = async () => {
+      if (state.operation === 'insert') {
+        if (!state.committed) {
+          const rows = Array.isArray(state.payload) ? state.payload : [];
+
+          for (const rowInput of rows) {
+            if (
+              !rowInput['ip_hash'] ||
+              !rowInput['name'] ||
+              !rowInput['email'] ||
+              !rowInput['message']
+            ) {
+              return { data: null, error: { code: '23502' } };
+            }
+
+            const status = rowInput['status'] ?? 'new';
+            if (!['new', 'read', 'archived'].includes(String(status))) {
+              return { data: null, error: { code: '23514' } };
+            }
+
+            const row: Row = {
+              ...rowInput,
+              id: rowInput['id'] ?? crypto.randomUUID(),
+              status,
+              created_at: rowInput['created_at'] ?? new Date().toISOString(),
+            };
+
+            table.push(row);
+          }
+
+          state.committed = true;
+        }
+
+        const insertedRows = projectRows(
+          table.filter((row) => {
+            const payloadRows = Array.isArray(state.payload) ? state.payload : [];
+            return payloadRows.some((payloadRow) => payloadRow['name'] === row['name']);
+          })
+        );
+
+        return { data: insertedRows, error: null };
+      }
+
+      if (state.operation === 'update') {
+        if (!state.committed) {
+          const updateData = (state.payload ?? {}) as Row;
+          for (const row of table) {
+            if (matchesFilters(row)) {
+              Object.assign(row, updateData);
+            }
+          }
+          state.committed = true;
+        }
+
+        const updatedRows = projectRows(table.filter(matchesFilters));
+        return { data: updatedRows, error: null };
+      }
+
+      if (state.operation === 'delete') {
+        if (!state.committed) {
+          const remaining = table.filter((row) => !matchesFilters(row));
+          tables.set(tableName, remaining);
+          state.committed = true;
+        }
+
+        return { data: null, error: null };
+      }
+
+      const selectedRows = sortRows(projectRows(table.filter(matchesFilters)));
+      return { data: selectedRows, error: null };
+    };
+
+    const queryApi: any = {
+      then: (onFulfilled: any, onRejected: any) => finalize().then(onFulfilled, onRejected),
+      catch: (onRejected: any) => finalize().catch(onRejected),
+      select(columns = '*') {
+        state.columns = columns;
+        return queryApi;
+      },
+      order(field: string, options?: { ascending?: boolean }) {
+        state.orderBy = { field, ascending: options?.ascending ?? true };
+        return queryApi;
+      },
+      eq(field: string, value: unknown) {
+        state.filters.push([field, value]);
+        return queryApi;
+      },
+      async single() {
+        const result = await finalize();
+
+        if (!result.data) {
+          return { data: null, error: result.error };
+        }
+
+        if (Array.isArray(result.data)) {
+          return { data: result.data[0] ?? null, error: result.error };
+        }
+
+        return { data: result.data, error: result.error };
+      },
+      async maybeSingle() {
+        return queryApi.single();
+      },
       insert(rows: Row | Row[]) {
         state.operation = 'insert';
         state.payload = Array.isArray(rows) ? rows : [rows];
-
-        const table = getTable(tableName);
-
-        const inserted: Row[] = [];
-
-        for (const r of state.payload as Row[]) {
-          // Enforce NOT NULL constraints defined in the migration
-          if (!r['ip_hash'] || !r['name'] || !r['email'] || !r['message']) {
-            return Promise.resolve({ data: null, error: { code: '23502' } });
-          }
-
-          const status = r['status'] ?? 'new';
-          if (!['new', 'read', 'archived'].includes(String(status))) {
-            return Promise.resolve({ data: null, error: { code: '23514' } });
-          }
-
-          const row: Row = {
-            ...r,
-            id: r['id'] ?? crypto.randomUUID(),
-            status,
-            created_at: r['created_at'] ?? new Date().toISOString(),
-          };
-
-          table.push(row);
-          inserted.push(row);
-        }
-
-        return Promise.resolve({ data: inserted, error: null });
+        return queryApi;
       },
       update(data: Row) {
         state.operation = 'update';
         state.payload = data;
-        return api;
+        return queryApi;
       },
       delete() {
         state.operation = 'delete';
-        return api;
-      },
-      select(columns = '*') {
-        state.columns = columns;
-        return api;
-      },
-      eq(field: string, value: unknown) {
-        state.filters.push([field, value]);
-
-        if (state.operation === 'delete') {
-          tables.set(
-            tableName,
-            getTable(tableName).filter((row) => !state.filters.every(([f, v]) => row[f] === v))
-          );
-          return Promise.resolve({ data: null, error: null });
-        }
-
-        // Return a thenable/finalizer that executes the query and also
-        // exposes a `.single()` helper to mimic Supabase behavior.
-        const finalize = async () => {
-          const table = getTable(tableName);
-          const rows = table.filter((row) => state.filters.every(([f, v]) => row[f] === v));
-
-          const projectRow = (row: Row | undefined) => {
-            if (!row) return null;
-            if (state.columns === '*') return { ...row };
-            return (state.columns as string).split(',').reduce<Row>((acc, col) => {
-              const field = col.trim();
-              if (field) acc[field] = row[field];
-              return acc;
-            }, {} as Row);
-          };
-
-          if (state.operation === 'select') {
-            return { data: rows.map((r) => projectRow(r)), error: null };
-          }
-
-          return { data: null, error: null };
-        };
-
-        const thenable: any = {
-          then: (onFulfilled: any, onRejected: any) => finalize().then(onFulfilled, onRejected),
-          catch: (onRejected: any) => finalize().catch(onRejected),
-          single: async () => {
-            const res = await finalize();
-            return { data: res.data?.[0] ?? null, error: res.error };
-          },
-        };
-
-        return thenable;
-      },
-      async single() {
-        const table = getTable(tableName);
-
-        if (state.operation === 'insert') {
-          const first: Row = (state.payload as Row[])[0] ?? {};
-          const row: Row = { ...first, id: first['id'] ?? crypto.randomUUID() };
-          table.push(row);
-          return { data: project(row, state.columns), error: null };
-        }
-
-        if (state.operation === 'update') {
-          let updatedRow: Row | null = null;
-          for (const row of table) {
-            if (state.filters.every(([f, v]) => row[f] === v)) {
-              Object.assign(row, state.payload);
-              updatedRow = row;
-            }
-          }
-          return { data: project(updatedRow, state.columns), error: null };
-        }
-
-        const found = table.find((row) => state.filters.every(([f, v]) => row[f] === v));
-        return { data: project(found, state.columns), error: null };
+        return queryApi;
       },
     };
 
-    return api;
+    return queryApi;
   };
 
   return {

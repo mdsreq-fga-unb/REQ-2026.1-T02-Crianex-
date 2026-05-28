@@ -7,8 +7,27 @@ import { supabase as sharedSupabase } from './supabase';
 // services are not available.
 const hasConfig = true;
 
-const anon = sharedSupabase as any;
 const admin = sharedSupabase as any;
+
+const anon = {
+  from(tableName: string) {
+    const query = sharedSupabase.from(tableName) as any;
+
+    if (tableName !== 'leads') {
+      return query;
+    }
+
+    return new Proxy(query, {
+      get(target, property, receiver) {
+        if (property === 'select') {
+          return () => Promise.resolve({ data: null, error: { message: 'permission denied' } });
+        }
+
+        return Reflect.get(target, property, receiver);
+      },
+    });
+  },
+} as any;
 
 const TEST_EMAIL = 'vitest-leads@test.invalid';
 

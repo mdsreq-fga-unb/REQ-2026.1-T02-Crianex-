@@ -6,6 +6,10 @@ vi.mock('@supabase/supabase-js', () => ({
   createClient: vi.fn(),
 }));
 
+process.env['SUPABASE_URL'] = 'http://localhost:54321';
+process.env['SUPABASE_SECRET_KEY'] = 'service-role-key';
+process.env['PUBLIC_SUPABASE_PUBLISHABLE_KEY'] = 'anon-key';
+
 describe('challengeAndVerifyTotp error mapping', () => {
   beforeEach(() => {
     vi.resetAllMocks();
