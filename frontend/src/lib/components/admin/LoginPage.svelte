@@ -22,7 +22,26 @@
     }
 
     try {
-      await authorizeAdminSession(data.session.access_token);
+      // Sync client session to server HttpOnly cookies
+      const resp = await fetch('/api/admin/session', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({
+          accessToken: data.session.access_token,
+          refreshToken: (data.session as any).refresh_token,
+          expiresAt: (data.session as any).expires_at,
+        }),
+      });
+
+      if (!resp.ok) {
+        // clear local client session to avoid stale state
+        await supabase.auth.signOut();
+        const payload = await resp.json().catch(() => ({}));
+        errorMessage = payload?.message ?? 'Não foi possível validar sua sessão agora.';
+        return false;
+      }
+
+      await supabase.auth.signOut();
       await goto('/admin');
       return true;
     } catch (error) {
