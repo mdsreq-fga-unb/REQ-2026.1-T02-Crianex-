@@ -36,7 +36,24 @@
         throw new Error('Sessão não encontrada após o callback do Google.');
       }
 
-      await authorizeAdminSession(data.session.access_token);
+      const resp = await fetch('/api/admin/session', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({
+          accessToken: data.session.access_token,
+          refreshToken: (data.session as any).refresh_token,
+          expiresAt: (data.session as any).expires_at,
+        }),
+      });
+
+      if (!resp.ok) {
+        throw new Error('Falha ao validar sessão no servidor.');
+      }
+
+      try {
+        await supabase.auth.signOut();
+      } catch {}
+
       await goto('/admin', { replaceState: true });
     } catch (error) {
       try {
