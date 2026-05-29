@@ -47,7 +47,10 @@ export function readAdminSessionCookies(cookies: Cookies): AdminSessionCookieSta
 export function setAdminSessionCookies(cookies: Cookies, session: AdminSessionTokens): void {
   const secure = process.env.NODE_ENV === 'production';
   const maxAge = session.expiresAt
-    ? Math.max(session.expiresAt - Math.floor(Date.now() / 1000) - ACCESS_TOKEN_MAX_AGE_BUFFER_SECONDS, 60)
+    ? Math.max(
+        session.expiresAt - Math.floor(Date.now() / 1000) - ACCESS_TOKEN_MAX_AGE_BUFFER_SECONDS,
+        60
+      )
     : 60 * 60;
 
   cookies.set(ADMIN_ACCESS_TOKEN_COOKIE, session.accessToken, {
@@ -95,7 +98,10 @@ export async function refreshAdminSession(refreshToken: string): Promise<AdminSe
   });
 
   if (!response.ok) {
-    const payload = (await response.json().catch(() => null)) as { msg?: string; error_description?: string } | null;
+    const payload = (await response.json().catch(() => null)) as {
+      msg?: string;
+      error_description?: string;
+    } | null;
 
     throw new ApiError(
       payload?.msg ?? payload?.error_description ?? 'Não foi possível renovar a sessão do admin.',

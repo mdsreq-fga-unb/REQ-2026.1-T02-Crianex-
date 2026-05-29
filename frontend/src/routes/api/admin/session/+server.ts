@@ -1,14 +1,16 @@
 import { json, type RequestHandler } from '@sveltejs/kit';
-import { clearAdminSessionCookies, setAdminSessionCookies, validateAdminSession } from '$lib/server/admin-session';
+import {
+  clearAdminSessionCookies,
+  setAdminSessionCookies,
+  validateAdminSession,
+} from '$lib/server/admin-session';
 
 export const POST: RequestHandler = async ({ cookies, request }) => {
-  const payload = (await request.json().catch(() => null)) as
-    | {
-        accessToken?: string;
-        refreshToken?: string;
-        expiresAt?: number | null;
-      }
-    | null;
+  const payload = (await request.json().catch(() => null)) as {
+    accessToken?: string;
+    refreshToken?: string;
+    expiresAt?: number | null;
+  } | null;
 
   if (!payload?.accessToken || !payload?.refreshToken) {
     clearAdminSessionCookies(cookies);

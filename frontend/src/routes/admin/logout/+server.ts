@@ -1,5 +1,9 @@
 import { redirect, type Cookies, type RequestHandler } from '@sveltejs/kit';
-import { clearAdminSessionCookies, readAdminSessionCookies, revokeAdminSession } from '$lib/server/admin-session';
+import {
+  clearAdminSessionCookies,
+  readAdminSessionCookies,
+  revokeAdminSession,
+} from '$lib/server/admin-session';
 
 async function handleLogout(cookies: Cookies) {
   const session = readAdminSessionCookies(cookies);

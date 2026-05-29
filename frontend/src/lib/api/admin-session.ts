@@ -27,7 +27,10 @@ export async function syncAdminSession(session: AdminClientSession): Promise<Adm
   if (!response.ok) {
     const payload = (await response.json().catch(() => null)) as { message?: string } | null;
 
-    throw new ApiError(payload?.message ?? 'Não foi possível sincronizar sua sessão.', response.status);
+    throw new ApiError(
+      payload?.message ?? 'Não foi possível sincronizar sua sessão.',
+      response.status
+    );
   }
 
   const payload = (await response.json()) as AdminSessionResponse;
