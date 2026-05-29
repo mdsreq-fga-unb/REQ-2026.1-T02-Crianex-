@@ -34,7 +34,7 @@ CREATE INDEX idx_products_published_order ON public.products (published, display
 CREATE TRIGGER handle_products_updated_at
     BEFORE UPDATE ON public.products
     FOR EACH ROW
-    EXECUTE FUNCTION extensions.moddatetime();
+    EXECUTE FUNCTION extensions.moddatetime(updated_at);
 
 ALTER TABLE public.products ENABLE ROW LEVEL SECURITY;
 
@@ -73,3 +73,20 @@ ON storage.objects
 FOR INSERT
 TO authenticated
 WITH CHECK (bucket_id = 'product-images');
+
+-- RPC to reorder products
+CREATE OR REPLACE FUNCTION public.reorder_products(p_orders jsonb)
+RETURNS void
+LANGUAGE plpgsql
+SECURITY DEFINER
+AS $$
+DECLARE
+  r RECORD;
+BEGIN
+  FOR r IN SELECT * FROM jsonb_to_recordset(p_orders) AS x(id uuid, display_order int) LOOP
+    UPDATE public.products
+    SET display_order = r.display_order
+    WHERE id = r.id;
+  END LOOP;
+END;
+$$;

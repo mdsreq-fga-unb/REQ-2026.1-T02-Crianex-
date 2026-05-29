@@ -25,7 +25,7 @@ describe('products migration', () => {
       'CREATE INDEX idx_products_published_order ON public.products (published, display_order)'
     );
     expect(migrationSql).toContain('handle_products_updated_at');
-    expect(migrationSql).toContain('extensions.moddatetime()');
+    expect(migrationSql).toContain('extensions.moddatetime');
   });
 
   it('habilita RLS com as policies corretas', () => {
