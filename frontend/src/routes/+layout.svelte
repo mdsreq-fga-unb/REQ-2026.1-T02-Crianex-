@@ -2,7 +2,7 @@
   import { ParaglideJS } from '@inlang/paraglide-sveltekit';
   import { i18n } from '$lib/i18n';
   import { lang } from '$lib/stores/lang';
-  import type { LayoutData } from './$types';
+  import type { LayoutData } from '@sveltejs/kit';
 
   let { children, data }: { children: import('svelte').Snippet; data: LayoutData } = $props();
 

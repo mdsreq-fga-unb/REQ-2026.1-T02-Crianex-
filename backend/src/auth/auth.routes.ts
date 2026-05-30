@@ -2,15 +2,12 @@ import { Router, type Request, type Response } from 'express';
 import rateLimit from 'express-rate-limit';
 import { getSupabaseClient } from '../config/supabase.js';
 import {
-  challengeAndVerifyTotp,
-  enrollTotpFactor,
-  getTotpFactorStatus,
-  getVerifiedTotpFactorId,
   loginWithEmailAndPassword,
   loadAdminProfile,
   parseCookieHeader,
   refreshWithRefreshToken,
   revokeSession,
+  validateAccessToken,
 } from './auth.service.js';
 import { validateJWT } from '../middleware/validate-jwt.js';
 
@@ -32,6 +29,8 @@ const COOKIE_OPTIONS = {
 };
 
 const REFRESH_TOKEN_MAX_AGE_MS = 7 * 24 * 60 * 60 * 1000;
+
+const ALLOWED_PROFILE_STATUSES = new Set(['active', 'inactive']);
 
 function setAuthCookies(
   response: Response,
@@ -68,24 +67,22 @@ function getRefreshTokenFromRequest(request: Request): string | null {
   return cookies[REFRESH_TOKEN_COOKIE] ?? null;
 }
 
-function getAccessTokenFromBody(request: Request): string {
-  return typeof request.body?.['accessToken'] === 'string'
-    ? request.body['accessToken'].trim()
-    : '';
+function getAccessTokenFromRequest(request: Request): string | null {
+  const authorizationHeader = request.headers.authorization ?? null;
+
+  if (authorizationHeader) {
+    const [scheme, token] = authorizationHeader.split(' ');
+
+    if (scheme?.toLowerCase() === 'bearer' && token) {
+      return token.trim() || null;
+    }
+  }
+
+  return typeof request.body?.['accessToken'] === 'string' ? request.body['accessToken'] : null;
 }
 
-function getCodeFromBody(request: Request): string {
-  return typeof request.body?.['code'] === 'string' ? request.body['code'].trim() : '';
-}
-
-function getFactorIdFromBody(request: Request): string {
-  return typeof request.body?.['factorId'] === 'string' ? request.body['factorId'].trim() : '';
-}
-
-function getFriendlyNameFromBody(request: Request): string {
-  return typeof request.body?.['friendlyName'] === 'string'
-    ? request.body['friendlyName'].trim()
-    : '';
+function normalizeProfileStatus(status: string | null | undefined): string {
+  return status?.trim().toLowerCase() || '';
 }
 
 export const authRouter = Router();
@@ -111,31 +108,38 @@ authRouter.post('/login', async (request, response) => {
       session.user.user_metadata
     );
 
-    const factorId = await getVerifiedTotpFactorId(session.access_token);
-
-    if (factorId) {
-      response.status(200).json({
-        mfa_required: true,
-        accessToken: session.access_token,
-        refreshToken: session.refresh_token,
-        expiresIn: session.expires_in,
-        factorId,
-        user,
-      });
-      return;
-    }
-
     setAuthCookies(response, session.access_token, session.refresh_token, session.expires_in);
     response.status(200).json({
-      mfa_required: false,
       accessToken: session.access_token,
       refreshToken: session.refresh_token,
-      expiresIn: session.expires_in,
       user,
     });
   } catch (err) {
     console.error('[auth] login error:', err);
     response.status(401).json({ message: 'Credenciais inválidas' });
+  }
+});
+
+authRouter.post('/session', async (request, response) => {
+  const accessToken = getAccessTokenFromRequest(request);
+
+  if (!accessToken) {
+    response.status(401).json({ message: 'Sessão inválida' });
+    return;
+  }
+
+  try {
+    const user = await validateAccessToken(getSupabaseClient(), accessToken);
+    response.status(200).json({ user });
+  } catch (err) {
+    const status =
+      typeof err === 'object' && err !== null && 'status' in err
+        ? Number((err as { status?: number }).status ?? 401)
+        : 401;
+    const message = err instanceof Error ? err.message : 'Sessão inválida';
+
+    console.error('[auth] session validation error:', err);
+    response.status(status).json({ message });
   }
 });
 
@@ -169,99 +173,61 @@ authRouter.post('/refresh', async (request, response) => {
   }
 });
 
-authRouter.post('/mfa/verify', async (request, response) => {
-  const accessToken = getAccessTokenFromBody(request);
-  const code = getCodeFromBody(request);
+authRouter.patch('/profiles/:id/status', validateJWT, async (request, response) => {
+  const authContext = (
+    response.locals as {
+      auth: { user: { id: string; role: string } };
+    }
+  ).auth;
 
-  if (!accessToken || !code) {
-    response.status(400).json({ message: 'Código TOTP e token temporário são obrigatórios' });
+  if (authContext.user.role !== 'owner') {
+    response.status(403).json({ message: 'Acesso restrito a owners' });
+    return;
+  }
+
+  const targetProfileId =
+    typeof request.params?.['id'] === 'string' ? request.params['id'].trim() : '';
+  const status = normalizeProfileStatus(
+    typeof request.body?.['status'] === 'string' ? request.body['status'] : null
+  );
+
+  if (!targetProfileId) {
+    response.status(400).json({ message: 'Profile id é obrigatório' });
+    return;
+  }
+
+  if (!ALLOWED_PROFILE_STATUSES.has(status)) {
+    response.status(400).json({ message: 'Status inválido' });
+    return;
+  }
+
+  if (status === 'inactive' && targetProfileId === authContext.user.id) {
+    response.status(400).json({ message: 'Owner não pode desativar a própria conta' });
     return;
   }
 
   try {
-    const session = await challengeAndVerifyTotp(accessToken, code);
+    const supabase = getSupabaseClient();
+    const { data, error } = await supabase
+      .from('profiles')
+      .update({ status })
+      .eq('id', targetProfileId)
+      .select('id,name,role,email,status')
+      .maybeSingle();
 
-    setAuthCookies(response, session.accessToken, session.refreshToken, session.expiresIn);
-    response.status(200).json({
-      accessToken: session.accessToken,
-      refreshToken: session.refreshToken,
-      user: session.user,
-    });
-  } catch (err) {
-    console.error('[auth] mfa verify error:', err);
-    const reason =
-      err instanceof Error && 'reason' in err ? (err as { reason?: string }).reason : null;
+    if (error) {
+      throw error;
+    }
 
-    response.status(400).json({
-      message: reason === 'expired' ? 'Código TOTP expirado' : 'Código TOTP inválido',
-      reason: reason === 'expired' ? 'expired' : 'invalid',
-    });
-  }
-});
-
-authRouter.get('/mfa/status', validateJWT, async (_request, response) => {
-  const authContext = (response.locals as { auth: { accessToken: string } }).auth;
-
-  try {
-    const status = await getTotpFactorStatus(authContext.accessToken);
-
-    response.status(200).json(status);
-  } catch (err) {
-    console.error('[auth] mfa status error:', err);
-    response.status(500).json({ message: 'Não foi possível consultar o status do MFA' });
-  }
-});
-
-authRouter.post('/mfa/enroll', validateJWT, async (request, response) => {
-  const authContext = (response.locals as { auth: { accessToken: string; user: { name: string } } })
-    .auth;
-  const friendlyName = getFriendlyNameFromBody(request) || authContext.user.name || 'Crianex Admin';
-
-  try {
-    const status = await getTotpFactorStatus(authContext.accessToken);
-
-    if (status.hasVerifiedFactor) {
-      response.status(409).json({ message: 'Este usuário já possui um TOTP ativo' });
+    if (!data) {
+      response.status(404).json({ message: 'Profile não encontrado' });
       return;
     }
 
-    const enrollment = await enrollTotpFactor(authContext.accessToken, friendlyName);
-
-    response.status(200).json(enrollment);
+    response.status(200).json({ profile: data });
   } catch (err) {
-    console.error('[auth] mfa enroll error:', err);
-    response.status(400).json({ message: 'Não foi possível iniciar o cadastro do TOTP' });
-  }
-});
-
-authRouter.post('/mfa/enroll/verify', validateJWT, async (request, response) => {
-  const authContext = (response.locals as { auth: { accessToken: string } }).auth;
-  const code = getCodeFromBody(request);
-  const factorId = getFactorIdFromBody(request);
-
-  if (!code || !factorId) {
-    response.status(400).json({ message: 'Código TOTP e fator são obrigatórios' });
-    return;
-  }
-
-  try {
-    const session = await challengeAndVerifyTotp(authContext.accessToken, code, factorId);
-
-    setAuthCookies(response, session.accessToken, session.refreshToken, session.expiresIn);
-    response.status(201).json({
-      accessToken: session.accessToken,
-      refreshToken: session.refreshToken,
-      user: session.user,
-    });
-  } catch (err) {
-    console.error('[auth] mfa enroll verify error:', err);
-    const reason =
-      err instanceof Error && 'reason' in err ? (err as { reason?: string }).reason : null;
-
-    response.status(400).json({
-      message: reason === 'expired' ? 'Código TOTP expirado' : 'Código TOTP inválido',
-      reason: reason === 'expired' ? 'expired' : 'invalid',
-    });
+    console.error('[auth] profile status update error:', err);
+    response.status(500).json({ message: 'Falha ao atualizar o status do profile' });
   }
 });
 

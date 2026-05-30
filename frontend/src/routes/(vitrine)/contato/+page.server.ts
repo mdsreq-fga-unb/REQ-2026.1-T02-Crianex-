@@ -1,6 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
 import { env } from '$env/dynamic/public';
-import type { PageServerLoad } from './$types';
+import type { ServerLoad as PageServerLoad } from '@sveltejs/kit';
 import type { Product } from './contact';
 
 export const load: PageServerLoad = async () => {
