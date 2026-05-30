@@ -18,10 +18,12 @@ export async function getProductsController(_req: Request, res: Response) {
   try {
     // If this controller is called through the admin route, return all products.
     // The admin route is protected by `requireAdminAuth` middleware.
-    const { data, error } = _req.path.startsWith('/api/products/admin') ? await listAllProducts() : await listPublishedProducts();
+    const { data, error } = _req.path.startsWith('/api/products/admin')
+      ? await listAllProducts()
+      : await listPublishedProducts();
 
     if (error) {
-      console.error("❌ ERRO DO SUPABASE NA LISTAGEM:", error);
+      console.error('❌ ERRO DO SUPABASE NA LISTAGEM:', error);
       return res.status(400).json({ error: error.message });
     }
 
@@ -68,7 +70,9 @@ export async function reorderProductsController(req: Request, res: Response) {
     const { orders } = req.body;
 
     if (!Array.isArray(orders)) {
-      return res.status(400).json({ error: 'O corpo da requisição deve conter um array "orders".' });
+      return res
+        .status(400)
+        .json({ error: 'O corpo da requisição deve conter um array "orders".' });
     }
 
     const { error } = await reorderProducts(orders);
@@ -117,7 +121,9 @@ export async function deleteProductController(req: Request, res: Response) {
     }
 
     if (product.published) {
-      return res.status(409).json({ message: 'Não é possível deletar um produto publicado. Despublique-o primeiro.' });
+      return res
+        .status(409)
+        .json({ message: 'Não é possível deletar um produto publicado. Despublique-o primeiro.' });
     }
 
     if (product.image_url) {

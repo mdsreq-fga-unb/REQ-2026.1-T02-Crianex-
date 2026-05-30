@@ -1,6 +1,0 @@
-node_modules/
-.svelte-kit/
-dist/
-build/
-gh-pages/site/
-supabase/.temp/

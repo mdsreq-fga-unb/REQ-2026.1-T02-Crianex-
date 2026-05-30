@@ -1,0 +1,14 @@
+{
+  "nav_home": "Home",
+  "nav_products": "Products",
+  "nav_about": "About",
+  "nav_faq": "FAQ",
+  "nav_contact": "Contact",
+  "common_loading": "Loading...",
+  "common_error": "Something went wrong",
+  "common_back": "Back",
+  "common_close": "Close",
+  "common_save": "Save",
+  "common_cancel": "Cancel",
+  "lang_switch": "Switch language"
+}

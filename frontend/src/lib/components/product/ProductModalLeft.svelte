@@ -12,14 +12,14 @@
   let objectUrlToCleanup = '';
 
   const prebuiltColors = [
-    '#e71f84', /* pink */
-    '#7f3fe5', /* purple */
-    '#66df7a', /* green */
-    '#f3f4f6', /* neutral light */
-    '#9ca3af', /* neutral mid */
-    '#6b7280', /* neutral darker */
-    '#111827', /* neutral dark */
-    '#f97316', /* accent orange */
+    '#e71f84' /* pink */,
+    '#7f3fe5' /* purple */,
+    '#66df7a' /* green */,
+    '#f3f4f6' /* neutral light */,
+    '#9ca3af' /* neutral mid */,
+    '#6b7280' /* neutral darker */,
+    '#111827' /* neutral dark */,
+    '#f97316' /* accent orange */,
   ];
 
   const maxImageSizeBytes = 2 * 1024 * 1024;
@@ -61,14 +61,18 @@
       const filePath = `covers/${fileName}`;
 
       if (supabase) {
-        const { error: uploadError } = await supabase.storage.from('product-images').upload(filePath, file, {
-          cacheControl: '3600',
-          upsert: false,
-        });
+        const { error: uploadError } = await supabase.storage
+          .from('product-images')
+          .upload(filePath, file, {
+            cacheControl: '3600',
+            upsert: false,
+          });
 
         if (uploadError) throw uploadError;
 
-        const { data: { publicUrl } } = await supabase.storage.from('product-images').getPublicUrl(filePath);
+        const {
+          data: { publicUrl },
+        } = await supabase.storage.from('product-images').getPublicUrl(filePath);
         formData.image_url = publicUrl;
       } else {
         const reader = new FileReader();
@@ -118,7 +122,9 @@
 
 <div class="flex w-[35%] flex-col gap-6 bg-[#0a0a0c] p-6 border-r border-zinc-800/60">
   <div>
-    <span class="block text-[11px] font-bold text-zinc-500 uppercase tracking-widest mb-3">Imagem / Capa</span>
+    <span class="block text-[11px] font-bold text-zinc-500 uppercase tracking-widest mb-3"
+      >Imagem / Capa</span
+    >
 
     <div
       role="button"
@@ -139,7 +145,11 @@
       on:drop|preventDefault={handleDrop}
     >
       {#if previewUrl || formData.image_url}
-        <img src={previewUrl || formData.image_url} alt="capa" class="absolute inset-0 h-full w-full object-cover" />
+        <img
+          src={previewUrl || formData.image_url}
+          alt="capa"
+          class="absolute inset-0 h-full w-full object-cover"
+        />
         <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-black/30"></div>
       {/if}
 
@@ -151,26 +161,40 @@
         <Plus class="h-4 w-4" />
       </button>
 
-      <input type="file" accept="image/*" class="hidden" bind:this={fileInput} on:change={uploadImage} />
+      <input
+        type="file"
+        accept="image/*"
+        class="hidden"
+        bind:this={fileInput}
+        on:change={uploadImage}
+      />
 
       {#if !(previewUrl || formData.image_url)}
         <div class="relative z-10 flex flex-col items-center gap-2 px-6 text-center">
-          <div class="flex h-14 w-14 items-center justify-center rounded-full border border-zinc-700 bg-zinc-900/80 text-zinc-200 shadow-inner">
+          <div
+            class="flex h-14 w-14 items-center justify-center rounded-full border border-zinc-700 bg-zinc-900/80 text-zinc-200 shadow-inner"
+          >
             <Plus class="h-6 w-6" />
           </div>
           <div class="space-y-1">
-            <p class="text-sm font-semibold text-zinc-100">Arraste a imagem ou clique para enviar</p>
+            <p class="text-sm font-semibold text-zinc-100">
+              Arraste a imagem ou clique para enviar
+            </p>
             <p class="text-xs text-zinc-400">PNG, JPG ou WEBP até 2MB</p>
           </div>
         </div>
       {:else}
         <div class="absolute bottom-3 left-3 right-3 z-10 flex items-end justify-between gap-3">
           <div class="rounded-lg bg-black/40 px-3 py-2 backdrop-blur-sm">
-            <p class="text-[11px] font-semibold uppercase tracking-widest text-zinc-200">Preview de Imagem</p>
+            <p class="text-[11px] font-semibold uppercase tracking-widest text-zinc-200">
+              Preview de Imagem
+            </p>
             <p class="text-[10px] text-zinc-400">Clique ou arraste para trocar</p>
           </div>
           {#if isUploading}
-            <div class="rounded-full bg-cyan-500/15 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-cyan-200">
+            <div
+              class="rounded-full bg-cyan-500/15 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-cyan-200"
+            >
               Enviando...
             </div>
           {/if}
@@ -178,13 +202,17 @@
       {/if}
 
       {#if imageError}
-        <div class="absolute left-3 right-3 top-3 z-20 rounded-lg border border-rose-900/60 bg-rose-950/80 px-3 py-2 text-xs text-rose-200 shadow-lg">
+        <div
+          class="absolute left-3 right-3 top-3 z-20 rounded-lg border border-rose-900/60 bg-rose-950/80 px-3 py-2 text-xs text-rose-200 shadow-lg"
+        >
           {imageError}
         </div>
       {/if}
 
       {#if !previewUrl && !formData.image_url}
-        <span class="relative z-10 text-5xl font-bold text-white uppercase tracking-wider select-none">
+        <span
+          class="relative z-10 text-5xl font-bold text-white uppercase tracking-wider select-none"
+        >
           {formData.icon_text || '??'}
         </span>
       {/if}
@@ -192,16 +220,18 @@
   </div>
 
   <div>
-    <span class="block text-[11px] font-bold text-zinc-500 uppercase tracking-widest mb-3">Cor de Marca</span>
+    <span class="block text-[11px] font-bold text-zinc-500 uppercase tracking-widest mb-3"
+      >Cor de Marca</span
+    >
     <div class="grid grid-cols-6 gap-2">
       {#each prebuiltColors as itemColor}
         <button
-            type="button"
-            class="color-swatch relative"
-            class:on={formData.color === itemColor}
-            style="background-color: {itemColor}"
-            on:click={() => pickColor(itemColor)}
-          >
+          type="button"
+          class="color-swatch relative"
+          class:on={formData.color === itemColor}
+          style="background-color: {itemColor}"
+          on:click={() => pickColor(itemColor)}
+        >
           {#if formData.color === itemColor}
             <div class="absolute inset-0 flex items-center justify-center bg-black/10 rounded-lg">
               <Check class="h-4 w-4 text-white font-bold" />
@@ -218,12 +248,17 @@
         placeholder="#7c3aed"
         maxlength="7"
       />
-      <div class="h-11 w-11 shrink-0 rounded-lg border border-zinc-800" style="background-color: {formData.color}"></div>
+      <div
+        class="h-11 w-11 shrink-0 rounded-lg border border-zinc-800"
+        style="background-color: {formData.color}"
+      ></div>
     </div>
   </div>
 
   <div>
-    <span class="block text-[11px] font-bold text-zinc-500 uppercase tracking-widest mb-2">Sigla (2 Letras)</span>
+    <span class="block text-[11px] font-bold text-zinc-500 uppercase tracking-widest mb-2"
+      >Sigla (2 Letras)</span
+    >
     <input
       type="text"
       maxlength="4"
@@ -232,24 +267,28 @@
     />
   </div>
 
-<style>
-  /* Color swatch base and selected state */
-  .color-swatch {
-    height: 2rem;
-    width: 2rem;
-    border-radius: 0.5rem;
-    border: 1px solid rgba(0,0,0,0.45);
-    transition: transform 0.12s ease, box-shadow 0.12s ease;
-    display: inline-block;
-  }
-  .color-swatch.on {
-    transform: scale(1.06);
-    box-shadow: 0 6px 18px rgba(0,0,0,0.45), 0 0 0 4px rgba(127,62,229,0.06);
-  }
+  <style>
+    /* Color swatch base and selected state */
+    .color-swatch {
+      height: 2rem;
+      width: 2rem;
+      border-radius: 0.5rem;
+      border: 1px solid rgba(0, 0, 0, 0.45);
+      transition:
+        transform 0.12s ease,
+        box-shadow 0.12s ease;
+      display: inline-block;
+    }
+    .color-swatch.on {
+      transform: scale(1.06);
+      box-shadow:
+        0 6px 18px rgba(0, 0, 0, 0.45),
+        0 0 0 4px rgba(127, 62, 229, 0.06);
+    }
 
-  /* Generic field helper */
-  .fld {
-    box-sizing: border-box;
-  }
-</style>
+    /* Generic field helper */
+    .fld {
+      box-sizing: border-box;
+    }
+  </style>
 </div>

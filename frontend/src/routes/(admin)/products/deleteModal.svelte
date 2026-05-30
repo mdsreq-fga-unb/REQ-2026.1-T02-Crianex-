@@ -17,17 +17,30 @@
 <dialog bind:this={dialogElement} on:close={onClose}>
   <div class="modal-wrapper">
     <div class="header-close">
-      <button class="btn-close-top" on:click={onClose}>
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      <button class="btn-close-top" aria-label="Fechar modal" on:click={onClose}>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          ><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"
+          ></line></svg
+        >
       </button>
     </div>
 
     <div class="txt">
       <div class="primary-txt">Excluir produto?</div>
       <p class="description-txt">
-        Esta ação remove o produto da vitrine pública imediatamente e exclui suas informações localizadas (PT/EN). Não pode ser desfeita.
+        Esta ação remove o produto da vitrine pública imediatamente e exclui suas informações
+        localizadas (PT/EN). Não pode ser desfeita.
       </p>
-      
+
       <div class="item-box">
         <span class="item-label">Item:</span>
         <span class="item-content"><slot /></span>
@@ -37,7 +50,20 @@
     <div class="btn-group">
       <button class="btn-cancel" on:click={onClose}>Cancelar</button>
       <button class="btn-delete" on:click={onConfirm}>
-        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px;"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          style="margin-right: 6px;"
+          ><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"
+          ></line></svg
+        >
         Excluir definitivamente
       </button>
     </div>
@@ -45,7 +71,6 @@
 </dialog>
 
 <style>
-  
   dialog {
     border: none;
     border-radius: 16px;
@@ -78,9 +103,9 @@
   }
 
   .btn-close-top {
-    background: rgba(228, 32, 132, 0.12); 
+    background: rgba(228, 32, 132, 0.12);
     border: none;
-    color: #f43f5e; 
+    color: #f43f5e;
     width: 42px;
     height: 42px;
     border-radius: 10px;
@@ -113,7 +138,7 @@
   .description-txt {
     font-size: 13.5px;
     line-height: 1.5;
-    color: #94a3b8; 
+    color: #94a3b8;
     margin: 0;
   }
 
@@ -166,7 +191,7 @@
     background: transparent;
     color: #ffffff;
     border: 1px solid #3f3f46;
-    border-radius: 9999px; 
+    border-radius: 9999px;
     padding: 8px 20px;
     font-size: 13px;
     font-weight: 500;

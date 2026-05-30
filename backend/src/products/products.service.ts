@@ -39,10 +39,7 @@ export function generateSlug(text: string): string {
 export async function listPublishedProducts() {
   const supabase = getAdminSupabase();
 
-  return supabase
-    .from('products')
-    .select('*')
-    .order('display_order', { ascending: true });
+  return supabase.from('products').select('*').order('display_order', { ascending: true });
 }
 
 export async function listAllProducts() {
@@ -73,7 +70,7 @@ export async function uploadProductImage(file: ProductUploadFile) {
 export async function createProduct(input: ProductInput) {
   const supabase = getAdminSupabase();
   const slug = generateSlug(input.name_pt);
- 
+
   let displayOrder = input.display_order;
   if (displayOrder === undefined || displayOrder === null) {
     const { data: rows, error: err } = await supabase

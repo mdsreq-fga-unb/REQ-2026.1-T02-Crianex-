@@ -1,11 +1,13 @@
 ---
 name: Subtask
 about: Crie uma sub-tarefa para uma feature (Sub-feature)
-title: "ST-F##.# — "
-labels: "subtask"
-assignees: ""
+title: 'ST-F##.# — '
+labels: 'subtask'
+assignees: ''
 ---
+
 ## Subtask
+
 **Feature pai:** [F## — Título]
 
 **Tipos:** [Backend | Frontend | Banco | Testes | DevOps]
@@ -13,6 +15,7 @@ assignees: ""
 ---
 
 ## Descrição
+
 [Explicação clara e curta do que será implementado nesta subtask]
 
 ---
@@ -29,20 +32,24 @@ assignees: ""
 ## Detalhes Técnicos
 
 **Arquivos/módulos envolvidos:**
+
 - `caminho/do/arquivo.ts`
 - `caminho/do/componente.svelte`
 
 **Contratos/Schemas:**
+
 ```typescript
 // Ex: schema Zod, tipo TS, payload esperado
 ```
 
 **Endpoints (se aplicável):**
+
 - `MÉTODO /api/rota` — descrição
 
 ---
 
 ## Testes Esperados
+
 - [ ] Unit: [o que testar]
 - [ ] Integração: [o que testar]
 - [ ] E2E: [fluxo a cobrir]
@@ -50,12 +57,14 @@ assignees: ""
 ---
 
 ## Dependências
+
 - Depende de: [ST-F##.# — título]
 - Bloqueia: [ST-F##.# — título]
 
 ---
 
 ## Definition of Done
+
 - [ ] Critérios de aceite todos validados
 - [ ] Testes passando no CI (unitários + integração onde há lógica de negócio)
 - [ ] Lint + format OK (ESLint + Prettier)

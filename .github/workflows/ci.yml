@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches: [main, developer]
   pull_request:
-    branches: [main]
+    branches: [main, developer]
 
 permissions:
   contents: read
@@ -17,6 +17,7 @@ jobs:
   lint:
     name: Lint
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
 
@@ -31,15 +32,19 @@ jobs:
             node_modules
             frontend/node_modules
             backend/node_modules
-          key: ${{ runner.os }}-npm-${{ hashFiles('**/package.json') }}
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
           restore-keys: ${{ runner.os }}-npm-
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: ESLint — backend
         run: npm run lint
         working-directory: backend
+
+      - name: SvelteKit sync
+        run: npx svelte-kit sync
+        working-directory: frontend
 
       - name: ESLint — frontend
         run: npm run lint
@@ -52,6 +57,7 @@ jobs:
   typecheck:
     name: Typecheck
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
 
@@ -66,18 +72,22 @@ jobs:
             node_modules
             frontend/node_modules
             backend/node_modules
-          key: ${{ runner.os }}-npm-${{ hashFiles('**/package.json') }}
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
           restore-keys: ${{ runner.os }}-npm-
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: TypeScript — backend
         run: npm run typecheck
         working-directory: backend
 
-      - name: SvelteKit sync (gera .svelte-kit/types)
+      - name: SvelteKit sync
         run: npx svelte-kit sync
+        working-directory: frontend
+
+      - name: Paraglide compile
+        run: npx paraglide-js compile --project ./project.inlang --outdir ./src/lib/paraglide
         working-directory: frontend
 
       - name: TypeScript — frontend
@@ -88,6 +98,10 @@ jobs:
   test:
     name: Test
     runs-on: ubuntu-latest
+
+    env:
+      SUPABASE_URL: http://127.0.0.1:54321
+
     steps:
       - uses: actions/checkout@v4
 
@@ -102,11 +116,27 @@ jobs:
             node_modules
             frontend/node_modules
             backend/node_modules
-          key: ${{ runner.os }}-npm-${{ hashFiles('**/package.json') }}
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
           restore-keys: ${{ runner.os }}-npm-
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
+
+      - name: Install Supabase CLI
+        run: npm install -g supabase
+
+      - name: Start Supabase local
+        run: |
+          set -euo pipefail
+
+          supabase telemetry disable
+          supabase start
+
+      - name: Apply Supabase migrations
+        run: |
+          set -euo pipefail
+
+          supabase db reset --local --yes
 
       - name: Test — backend
         run: npm test
@@ -116,12 +146,16 @@ jobs:
         run: npm test
         working-directory: frontend
 
+      - name: Stop Supabase
+        if: always()
+        run: supabase stop
+
   # ── Build ───────────────────────────────────────────────────────────────────
-  # Só roda se lint + typecheck + test passarem (gate de qualidade)
   build:
     name: Build
     needs: [lint, typecheck, test]
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
 
@@ -136,11 +170,11 @@ jobs:
             node_modules
             frontend/node_modules
             backend/node_modules
-          key: ${{ runner.os }}-npm-${{ hashFiles('**/package.json') }}
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
           restore-keys: ${{ runner.os }}-npm-
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build — backend
         run: npm run build

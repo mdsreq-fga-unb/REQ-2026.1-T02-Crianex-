@@ -21,6 +21,16 @@
 </div>
 
 <style>
-  button { display:flex; gap:8px; padding:12px; border-radius:10px; border:1px solid #2a2a2a; background:#09090b }
-  button.active { border-color:rgba(16,185,129,0.3); background: rgba(16,185,129,0.04) }
+  button {
+    display: flex;
+    gap: 8px;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #2a2a2a;
+    background: #09090b;
+  }
+  button.active {
+    border-color: rgba(16, 185, 129, 0.3);
+    background: rgba(16, 185, 129, 0.04);
+  }
 </style>

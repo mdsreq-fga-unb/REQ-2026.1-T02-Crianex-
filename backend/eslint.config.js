@@ -4,13 +4,13 @@ import tsPlugin from '@typescript-eslint/eslint-plugin';
 /** @type {import('eslint').Linter.Config[]} */
 export default [
   {
-    ignores: ['dist/', 'node_modules/'],
+    ignores: ['dist/', 'node_modules/', 'vitest.config.ts'],
   },
   {
     files: ['**/*.ts'],
     languageOptions: {
       parser: tsParser,
-      parserOptions: { project: './tsconfig.json' },
+      parserOptions: { project: './tsconfig.eslint.json' },
     },
     plugins: { '@typescript-eslint': tsPlugin },
     rules: {

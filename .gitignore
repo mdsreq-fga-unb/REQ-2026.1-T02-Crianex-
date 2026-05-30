@@ -6,13 +6,16 @@ __pycache__/
 # ── Claude ───────────────────────────────────────────
 .claude/
 graphify-out/
-project.inlang/
 
 # ── Node.js ──────────────────────────────────────────
 node_modules/
 dist/
 build/
 .svelte-kit/
+
+# ── Gerado por build (não commitar artefatos) ─────────
+frontend/src/lib/paraglide/
+frontend/.vite-dev.*.log
 
 # ── Ambiente ─────────────────────────────────────────
 .env

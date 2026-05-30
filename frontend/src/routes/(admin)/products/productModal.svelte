@@ -2,7 +2,7 @@
   import { X } from 'lucide-svelte';
   import ProductModalLeft from '$lib/components/product/ProductModalLeft.svelte';
   import ProductForm from '$lib/components/product/ProductForm.svelte';
-  
+
   // Propriedades expostas para a +page.svelte controlar o modal
   export let isOpen = false;
   export let isEditing = false;
@@ -15,17 +15,13 @@
     tagline_en: '',
     description_pt: '',
     description_en: '',
-    target_pt: '',
-    target_en: '',
-    clients_pt: '',
-    clients_en: '',
-    color: '#7c3aed', // Roxo padrão do protótipo
+    color: '#7c3aed',
     icon_text: 'AV',
     published: false,
     slug: '',
-    image_url: ''
+    image_url: '',
   };
-  
+
   export let onSave: () => Promise<void>;
 
   function fechar() {
@@ -34,12 +30,14 @@
 </script>
 
 {#if isOpen}
-  <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4 backdrop-blur-sm animate-fade">
-    
-    <div class="admin-modal wide relative flex h-full max-h-[92vh] w-full max-w-6xl overflow-hidden rounded-2xl border border-zinc-800/80 bg-[#121214] text-zinc-100 shadow-2xl">
-      
-      <button 
-        type="button" 
+  <div
+    class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4 backdrop-blur-sm animate-fade"
+  >
+    <div
+      class="admin-modal wide relative flex h-full max-h-[92vh] w-full max-w-6xl overflow-hidden rounded-2xl border border-zinc-800/80 bg-[#121214] text-zinc-100 shadow-2xl"
+    >
+      <button
+        type="button"
         class="absolute right-5 top-5 text-zinc-500 hover:text-zinc-300 transition-colors z-20"
         on:click={fechar}
       >
@@ -47,53 +45,12 @@
       </button>
 
       <ProductModalLeft bind:formData />
-      <ProductForm bind:formData isEditing={isEditing} on:save={onSave} on:cancel={fechar} />
-
+      <ProductForm bind:formData {isEditing} on:save={onSave} on:cancel={fechar} />
     </div>
   </div>
 {/if}
 
 <style>
-  /* Container da caixinha de idioma toggle */
-  .lang-toggle {
-    display: flex;
-    align-items: center;
-    gap: 2px;
-    border-radius: 6px;
-    background-color: #09090b; /* Ajustado para dar contraste */
-    padding: 2px;
-    border: 1px solid rgba(39, 39, 42, 0.8);
-  }
-
-  /* Botõezinhos PT / EN internos */
-  .lang-btn {
-    border-radius: 4px;
-    padding: 2px 6px;
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    color: #71717a;
-    transition: color 0.15s, background-color 0.15s;
-    text-transform: uppercase;
-  }
-  .lang-btn.active {
-    background-color: #27272a;
-    color: #e4e4e7;
-  }
-
-  /* Barra de rolagem estilizada escura */
-  .custom-scrollbar::-webkit-scrollbar {
-    width: 4px;
-  }
-  .custom-scrollbar::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: #27272a;
-    border-radius: 9999px;
-  }
-
-  /* Animações globais de transição */
   :global(.animate-fade) {
     animation: fadeIn 0.15s ease-out forwards;
   }
@@ -102,11 +59,21 @@
   }
 
   @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
   @keyframes slideIn {
-    from { opacity: 0; transform: translateY(3px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(3px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 </style>

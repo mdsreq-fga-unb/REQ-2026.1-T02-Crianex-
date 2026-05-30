@@ -16,7 +16,7 @@
     Trash2,
     Eye,
   } from 'lucide-svelte';
-  
+
   import { apiFetch } from '$lib/api/backend';
   import { tick } from 'svelte';
   import { invalidateAll } from '$app/navigation';
@@ -31,11 +31,19 @@
 
   // Molde limpo do formulário para resetar ao criar novo
   const emptyForm = {
-    name_pt: '', name_en: '', slug: '',
-    category_pt: '', category_en: '',
-    tagline_pt: '', tagline_en: '',
-    description_pt: '', description_en: '',
-    color: '#6366f1', icon_text: '', image_url: '', published: false
+    name_pt: '',
+    name_en: '',
+    slug: '',
+    category_pt: '',
+    category_en: '',
+    tagline_pt: '',
+    tagline_en: '',
+    description_pt: '',
+    description_en: '',
+    color: '#6366f1',
+    icon_text: '',
+    image_url: '',
+    published: false,
   };
 
   let modalData = { ...emptyForm };
@@ -44,11 +52,25 @@
   let isProcessing = false;
   let processingMessage = '';
 
+  // Toast de sucesso (3s)
+  let toastMessage = '';
+  let toastVisible = false;
+  let toastTimer: ReturnType<typeof setTimeout> | null = null;
+
+  function showToast(msg: string) {
+    if (toastTimer) clearTimeout(toastTimer);
+    toastMessage = msg;
+    toastVisible = true;
+    toastTimer = setTimeout(() => {
+      toastVisible = false;
+    }, 3000);
+  }
+
   // Gatilho: Clicou em "+ Novo Produto"
   function handleNovoProduto() {
     isEditingMode = false;
     currentProductId = null;
-    modalData = { ...emptyForm, slug: '' }; 
+    modalData = { ...emptyForm, slug: '' };
     isModalOpen = true;
   }
 
@@ -82,8 +104,9 @@
         });
       }
 
-      await invalidateAll(); // Recarrega a tabela de produtos automaticamente!
+      await invalidateAll();
       isProcessing = false;
+      showToast(isEditingMode ? 'Produto atualizado com sucesso!' : 'Produto criado com sucesso!');
     } catch (err) {
       isProcessing = false;
       console.error('Falha ao processar operação do produto:', err);
@@ -179,11 +202,6 @@
   }
 
   // Lógica das Ações do Menu
-  function handleEditar(id: string) {
-    console.log('Editar produto id:', id);
-    
-  }
-
   async function handleTogglePublicacao(id: string, currentStatus: boolean) {
     console.log('Mudar status do id:', id, 'para:', !currentStatus);
     try {
@@ -206,13 +224,13 @@
   }
 
   let showDeleteModal = false;
-  let productIdToDelete : string | null = null;
+  let productIdToDelete: string | null = null;
 
   function openDeleteModal(id: string) {
     productIdToDelete = id;
     showDeleteModal = true;
   }
-  
+
   function closeDeleteModal() {
     showDeleteModal = false;
     productIdToDelete = null;
@@ -220,9 +238,9 @@
 
   // Nome do produto selecionado para exclusão (derivado do id)
   $: productToDeleteName = productIdToDelete
-    ? (listaProdutos.find((p) => p.id === productIdToDelete)?.name_pt
-        ?? listaProdutos.find((p) => p.id === productIdToDelete)?.name_en
-        ?? '')
+    ? (listaProdutos.find((p) => p.id === productIdToDelete)?.name_pt ??
+      listaProdutos.find((p) => p.id === productIdToDelete)?.name_en ??
+      '')
     : '';
 
   async function handleExcluir(id?: string) {
@@ -260,12 +278,39 @@
 </script>
 
 <div class="min-h-screen bg-[#0a0a0b] text-zinc-100 p-8 font-sans">
+  {#if toastVisible}
+    <div
+      class="fixed bottom-6 right-6 z-100 flex items-center gap-3 rounded-xl border border-zinc-700/60 bg-[#161619] px-5 py-3 text-sm font-medium text-zinc-100 shadow-2xl transition-all"
+      role="status"
+      aria-live="polite"
+    >
+      <svg
+        class="h-4 w-4 text-green-400 shrink-0"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="2.5"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+      </svg>
+      {toastMessage}
+    </div>
+  {/if}
   {#if isProcessing}
     <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-      <div class="bg-[#0b0b0c] border border-zinc-800 rounded-lg px-6 py-4 flex items-center gap-4 shadow-lg">
-        <svg class="animate-spin h-5 w-5 text-cyan-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+      <div
+        class="bg-[#0b0b0c] border border-zinc-800 rounded-lg px-6 py-4 flex items-center gap-4 shadow-lg"
+      >
+        <svg
+          class="animate-spin h-5 w-5 text-cyan-400"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"
+          ></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+          ></path>
         </svg>
         <div class="text-sm text-zinc-200">{processingMessage || 'Processando...'}</div>
       </div>
@@ -298,7 +343,10 @@
         <span class="absolute top-2 right-2.5 h-1.5 w-1.5 bg-white rounded-full"></span>
       </Button>
 
-      <Button on:click={()=> handleNovoProduto()} class="h-9 bg-white text-black hover:bg-zinc-200 font-medium text-xs rounded-lg px-4 flex items-center gap-2 whitespace-nowrap">
+      <Button
+        on:click={() => handleNovoProduto()}
+        class="h-9 bg-white text-black hover:bg-zinc-200 font-medium text-xs rounded-lg px-4 flex items-center gap-2 whitespace-nowrap"
+      >
         <Plus class="h-4 w-4" />
         <span>Novo produto</span>
       </Button>
@@ -359,7 +407,11 @@
             />
 
             {#if produto.image_url}
-              <img src={produto.image_url} alt="capa" class="h-9 w-9 shrink-0 rounded-lg object-cover shadow-inner" />
+              <img
+                src={produto.image_url}
+                alt="capa"
+                class="h-9 w-9 shrink-0 rounded-lg object-cover shadow-inner"
+              />
             {:else}
               <div
                 class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-xs font-bold text-white shadow-inner"
@@ -440,8 +492,6 @@
         onSave={handleSaveModal}
       />
 
-      
-
       <div
         class="text-[10px] font-bold text-zinc-500 tracking-wider px-6 py-2 bg-[#161619]/40 border-b border-zinc-800/40 flex justify-between items-center mt-2"
       >
@@ -455,7 +505,11 @@
         >
           <div class="flex items-center gap-4 w-7/12 pl-8">
             {#if produto.image_url}
-              <img src={produto.image_url} alt="capa" class="h-9 w-9 shrink-0 rounded-lg object-cover" />
+              <img
+                src={produto.image_url}
+                alt="capa"
+                class="h-9 w-9 shrink-0 rounded-lg object-cover"
+              />
             {:else}
               <div
                 class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-xs font-bold text-white/90"
@@ -539,8 +593,9 @@
         </div>
       {/each}
 
-
-       <DeleteModal isOpen={showDeleteModal} onClose={closeDeleteModal} onConfirm={handleExcluir}>{productToDeleteName}</DeleteModal>
+      <DeleteModal isOpen={showDeleteModal} onClose={closeDeleteModal} onConfirm={handleExcluir}
+        >{productToDeleteName}</DeleteModal
+      >
     </Card.Content>
   </Card.Root>
 </div>

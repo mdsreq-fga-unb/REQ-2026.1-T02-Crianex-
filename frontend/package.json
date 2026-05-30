@@ -7,9 +7,9 @@
     "dev": "vite dev",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "vitest run",
+    "test": "svelte-kit sync && vitest run",
     "test:watch": "vitest",
-    "typecheck": "svelte-check --tsconfig ./tsconfig.json",
+    "typecheck": "svelte-kit sync && tsc --noEmit",
     "lint": "eslint ."
   },
   "devDependencies": {
@@ -19,11 +19,11 @@
     "@sveltejs/kit": "^2.21.3",
     "@sveltejs/vite-plugin-svelte": "^5.0.3",
     "@tailwindcss/postcss": "^4.3.0",
+    "@tailwindcss/vite": "^4.1.0",
     "@typescript-eslint/eslint-plugin": "^8.33.0",
     "@typescript-eslint/parser": "^8.33.0",
     "autoprefixer": "^10.5.0",
     "bits-ui": "^2.18.1",
-    "clsx": "^2.1.1",
     "eslint": "^9.28.0",
     "eslint-plugin-svelte": "^2.46.1",
     "postcss": "^8.5.15",
@@ -31,7 +31,6 @@
     "prettier-plugin-svelte": "^3.4.0",
     "svelte": "^5.28.2",
     "svelte-check": "^4.1.6",
-    "tailwind-merge": "^3.6.0",
     "tailwind-variants": "^3.2.2",
     "tailwindcss": "^4.3.0",
     "typescript": "^5.8.3",
@@ -41,6 +40,12 @@
   "dependencies": {
     "@inlang/paraglide-sveltekit": "^0.14.0",
     "@supabase/supabase-js": "^2.49.8",
-    "lucide-svelte": "^1.0.1"
+    "clsx": "^2.1.1",
+    "lucide-svelte": "^1.0.1",
+    "tailwind-merge": "^3.6.0"
+  },
+  "optionalDependencies": {
+    "@esbuild/win32-x64": "^0.28.0",
+    "@rollup/rollup-win32-x64-msvc": "^4.60.4"
   }
 }

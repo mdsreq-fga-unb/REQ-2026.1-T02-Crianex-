@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: ["main"]
+    branches: ['main']
   workflow_dispatch:
 
 permissions:
@@ -35,4 +35,3 @@ jobs:
 
       - name: Deploy to GitHub Pages
         run: mkdocs gh-deploy --force --config-file gh-pages/mkdocs.yml
-        

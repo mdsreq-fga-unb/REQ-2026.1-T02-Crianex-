@@ -22,7 +22,7 @@ export async function requireAdminAuth(req: Request, res: Response, next: NextFu
     }
 
     return next();
-  } catch (error) {
+  } catch {
     return res.status(500).json({ error: 'Erro ao validar autenticação.' });
   }
 }
