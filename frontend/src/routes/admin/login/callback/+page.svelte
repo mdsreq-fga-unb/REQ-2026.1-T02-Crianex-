@@ -96,8 +96,7 @@
     box-sizing: border-box;
     background:
       radial-gradient(circle at 50% 0%, rgba(127, 63, 229, 0.28), transparent 50%),
-      radial-gradient(circle at 100% 100%, rgba(231, 31, 132, 0.2), transparent 45%),
-      #060606;
+      radial-gradient(circle at 100% 100%, rgba(231, 31, 132, 0.2), transparent 45%), #060606;
     font-family: 'Space Grotesk', system-ui, sans-serif;
     color: #fcfcfc;
   }
