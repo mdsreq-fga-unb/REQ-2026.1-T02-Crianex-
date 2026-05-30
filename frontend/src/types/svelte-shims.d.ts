@@ -13,12 +13,4 @@ declare module '*.svelte' {
   export type WithElementRef<T = any> = T;
 }
 
-declare module './$types' {
-  // Generic fallbacks for SvelteKit generated types used during typecheck in CI
-  export type PageServerLoad = any;
-  export type PageData = any;
-  export type LayoutServerLoad = any;
-  export type LayoutData = any;
-}
-
 export {};

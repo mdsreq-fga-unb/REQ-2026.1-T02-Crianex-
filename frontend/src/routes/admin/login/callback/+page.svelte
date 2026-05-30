@@ -20,8 +20,9 @@
       return;
     }
 
+    const { supabase } = await import('$lib/api/supabase');
+
     try {
-      const { supabase } = await import('$lib/api/supabase');
       const code = searchParams.get('code');
 
       if (code) {
@@ -38,11 +39,12 @@
         throw new Error('Sessão não encontrada após o callback do Google.');
       }
 
+      statusMessage = 'Validando permissões...';
       await authorizeAdminSession(data.session.access_token);
+      statusMessage = 'Redirecionando...';
       replaceLocation('/admin');
     } catch (error) {
       try {
-        const { supabase } = await import('$lib/api/supabase');
         await supabase.auth.signOut();
       } catch {
         // Ignora falhas ao limpar a sessão local; o próximo redirect já cairá no login.

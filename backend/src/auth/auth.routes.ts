@@ -201,6 +201,11 @@ authRouter.patch('/profiles/:id/status', validateJWT, async (request, response) 
     return;
   }
 
+  if (status === 'inactive' && targetProfileId === authContext.user.id) {
+    response.status(400).json({ message: 'Owner não pode desativar a própria conta' });
+    return;
+  }
+
   try {
     const supabase = getSupabaseClient();
     const { data, error } = await supabase

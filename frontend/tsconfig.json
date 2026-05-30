@@ -8,6 +8,5 @@
     "resolveJsonModule": true,
     "allowJs": true,
     "checkJs": false
-  },
-  "include": ["src/types/**/*.d.ts", "vite.config.ts", "vitest.config.ts"]
+  }
 }
