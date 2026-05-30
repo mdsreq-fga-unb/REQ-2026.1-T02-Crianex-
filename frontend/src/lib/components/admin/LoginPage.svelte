@@ -70,7 +70,7 @@
     const queryMessage = new URLSearchParams(window.location.search).get('error');
 
     if (queryMessage) {
-      errorMessage = queryMessage;
+      showError(queryMessage);
     }
 
     try {
