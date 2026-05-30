@@ -263,13 +263,20 @@
   </main>
 
   {#if showErrorModal}
-    <div class="modal-backdrop" role="presentation" onclick={dismissError}>
+    <div
+      class="modal-backdrop"
+      role="presentation"
+      onclick={dismissError}
+      onkeydown={(e) => e.key === 'Escape' && dismissError()}
+    >
       <div
         class="modal"
         role="alertdialog"
         aria-modal="true"
         aria-labelledby="modal-title"
+        tabindex="-1"
         onclick={(e) => e.stopPropagation()}
+        onkeydown={(e) => e.stopPropagation()}
       >
         <div class="modal-icon" aria-hidden="true">
           <svg
@@ -644,13 +651,6 @@
     border: 2px solid rgba(255, 255, 255, 0.34);
     border-top-color: #ffffff;
     animation: spin 0.8s linear infinite;
-  }
-
-  .error-message {
-    color: var(--pink);
-    font-size: 13px;
-    font-weight: 700;
-    line-height: 1.45;
   }
 
   .security-note {
