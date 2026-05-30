@@ -12,8 +12,6 @@ import {
   type ProductUploadFile,
 } from './products.service.js';
 
-type RequestWithUploadedFile = Request & { file?: ProductUploadFile };
-
 export async function getPublishedProductsController(_req: Request, res: Response) {
   try {
     const { data, error } = await listPublishedProducts();
@@ -40,13 +38,14 @@ export async function getAllProductsController(_req: Request, res: Response) {
   }
 }
 
-export async function uploadProductImageController(req: RequestWithUploadedFile, res: Response) {
+export async function uploadProductImageController(req: Request, res: Response) {
   try {
-    if (!req.file) {
+    const file = req.file as ProductUploadFile | undefined;
+    if (!file) {
       return res.status(400).json({ error: 'Nenhum arquivo enviado ou formato inválido.' });
     }
 
-    const { publicUrl, error } = await uploadProductImage(req.file);
+    const { publicUrl, error } = await uploadProductImage(file);
 
     if (error) {
       return res.status(400).json({ error: error.message });
