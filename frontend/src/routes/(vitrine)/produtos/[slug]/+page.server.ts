@@ -16,7 +16,9 @@ export const load: PageServerLoad = async (event) => {
 
   const { data, error: fetchError } = await supabase
     .from('products')
-    .select('*')
+    .select(
+      'slug, name_pt, name_en, tagline_pt, tagline_en, description_pt, description_en, image_url'
+    )
     .eq('slug', slug)
     .eq('published', true)
     .single();
@@ -25,22 +27,26 @@ export const load: PageServerLoad = async (event) => {
     throw error(404, 'Produto não encontrado');
   }
 
-  // Determine language: ?lang=en overrides, else Accept-Language header, default pt
   const langParam = url.searchParams.get('lang');
   let selectedLang: 'pt' | 'en' = 'pt';
-  if (langParam === 'en') selectedLang = 'en';
-  else {
+  if (langParam === 'en') {
+    selectedLang = 'en';
+  } else {
     const accept = request.headers.get('accept-language') ?? '';
-    if (accept.includes('en')) selectedLang = 'en';
+    const enQ = parseQValue(accept, 'en');
+    const ptQ = parseQValue(accept, 'pt');
+    if (enQ > ptQ) selectedLang = 'en';
   }
 
   const canonicalBase = `${url.origin}/produtos/${slug}`;
   const canonical = selectedLang === 'en' ? `${canonicalBase}?lang=en` : canonicalBase;
 
-  return {
-    product: data,
-    canonical,
-    selectedLang,
-    canonicalBase,
-  };
+  return { product: data, canonical, selectedLang, canonicalBase };
 };
+
+function parseQValue(acceptLanguage: string, lang: string): number {
+  const re = new RegExp(`(?:^|,)\\s*${lang}(?:-[^,;]*)?(?:;q=([\\d.]+))?`, 'i');
+  const match = acceptLanguage.match(re);
+  if (!match) return 0;
+  return match[1] !== undefined ? parseFloat(match[1]) : 1;
+}

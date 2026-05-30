@@ -1,5 +1,6 @@
 <script lang="ts">
-  export let data: any;
+  import type { PageData } from './$types';
+  export let data: PageData;
   const { product, canonical, selectedLang, canonicalBase } = data;
 
   const lang = selectedLang ?? 'pt';
@@ -21,8 +22,11 @@
   <meta name="description" content={tagline} />
 
   <meta property="og:type" content="product" />
+  <meta property="og:url" content={canonical} />
   <meta property="og:title" content={name} />
   <meta property="og:description" content={tagline} />
+  <meta property="og:locale" content={lang === 'en' ? 'en_US' : 'pt_BR'} />
+  <meta property="og:locale:alternate" content={lang === 'en' ? 'pt_BR' : 'en_US'} />
   {#if product.image_url}
     <meta property="og:image" content={product.image_url} />
   {/if}
@@ -32,7 +36,7 @@
   <link rel="alternate" hreflang="en" href={`${canonicalBase}?lang=en`} />
 </svelte:head>
 
-<section class="prodt-page p-8">
+<section class="product-page p-8">
   <h1 class="text-3xl font-bold mb-4">{name}</h1>
   <p class="text-lg text-zinc-500 mb-6">{tagline}</p>
 
