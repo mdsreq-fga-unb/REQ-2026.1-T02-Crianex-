@@ -1,11 +1,18 @@
+import { createClient } from '@supabase/supabase-js';
+import { env } from '$env/dynamic/public';
 import type { PageServerLoad } from './$types';
-import { supabase } from '$lib/api/supabase';
 import { error } from '@sveltejs/kit';
 
 export const load: PageServerLoad = async (event) => {
   const { params, url, request } = event;
   const { slug } = params;
   if (!slug) throw error(404, 'Produto não encontrado');
+
+  const supabaseUrl = env.PUBLIC_SUPABASE_URL;
+  const supabaseKey = env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+  if (!supabaseUrl || !supabaseKey) throw error(503, 'Serviço indisponível');
+
+  const supabase = createClient(supabaseUrl, supabaseKey);
 
   const { data, error: fetchError } = await supabase
     .from('products')

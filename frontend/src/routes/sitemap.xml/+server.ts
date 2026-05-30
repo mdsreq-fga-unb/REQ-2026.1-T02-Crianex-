@@ -1,10 +1,10 @@
-import { supabase } from '$lib/api/supabase';
+import { createClient } from '@supabase/supabase-js';
+import { env } from '$env/dynamic/public';
 
-export async function GET(event: any) {
+export async function GET(event: { url: URL }) {
   const origin = event.url.origin;
 
   try {
-    // static pages
     const staticUrls = [
       { loc: `${origin}/`, lastmod: new Date().toISOString() },
       { loc: `${origin}/produtos`, lastmod: new Date().toISOString() },
@@ -13,19 +13,26 @@ export async function GET(event: any) {
       { loc: `${origin}/contato`, lastmod: new Date().toISOString() },
     ];
 
-    // fetch published products
-    const { data: products, error } = await supabase
-      .from('products')
-      .select('slug, updated_at')
-      .eq('published', true)
-      .order('display_order');
+    const supabaseUrl = env.PUBLIC_SUPABASE_URL;
+    const supabaseKey = env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
 
-    if (error) throw error;
+    let productUrls: { loc: string; lastmod: string }[] = [];
 
-    const productUrls = (products ?? []).map((p: any) => ({
-      loc: `${origin}/produtos/${p.slug}`,
-      lastmod: p.updated_at ? new Date(p.updated_at).toISOString() : new Date().toISOString(),
-    }));
+    if (supabaseUrl && supabaseKey) {
+      const supabase = createClient(supabaseUrl, supabaseKey);
+      const { data: products, error } = await supabase
+        .from('products')
+        .select('slug, updated_at')
+        .eq('published', true)
+        .order('display_order');
+
+      if (!error && products) {
+        productUrls = products.map((p: { slug: string; updated_at: string | null }) => ({
+          loc: `${origin}/produtos/${p.slug}`,
+          lastmod: p.updated_at ? new Date(p.updated_at).toISOString() : new Date().toISOString(),
+        }));
+      }
+    }
 
     const allUrls = [...staticUrls, ...productUrls];
 
@@ -41,9 +48,8 @@ export async function GET(event: any) {
         'Cache-Control': 'public, max-age=3600',
       },
     });
-  } catch (err: any) {
-    console.error('[sitemap] unexpected error:', err?.message ?? err);
-    // In dev return the error details to help debugging; in production keep generic
+  } catch (err: unknown) {
+    console.error('[sitemap] unexpected error:', err instanceof Error ? err.message : err);
     const isDev = process.env.NODE_ENV !== 'production';
     const body = isDev
       ? JSON.stringify({ message: 'sitemap error', error: String(err) })

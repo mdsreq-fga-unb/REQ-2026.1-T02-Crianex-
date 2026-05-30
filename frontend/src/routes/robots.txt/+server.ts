@@ -1,4 +1,4 @@
-export async function GET(event: any) {
+export async function GET(event: { url: URL }) {
   const origin = event.url.origin;
   const txt = `User-agent: *\nAllow: /\nDisallow: /admin/\nSitemap: ${origin}/sitemap.xml\n`;
 
