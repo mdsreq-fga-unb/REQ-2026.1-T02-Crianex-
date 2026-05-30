@@ -51,18 +51,62 @@
 
   let status: SubmitStatus = 'idle';
   let errorMsg = '';
+  let rateLimitError = false;
   let form = defaultForm();
+
+  type ErrorKey = '' | 'required' | 'invalid';
+  let errors: { name: ErrorKey; email: ErrorKey; message: ErrorKey } = {
+    name: '',
+    email: '',
+    message: '',
+  };
+
+  const errorText = {
+    required: { pt: 'Campo obrigatório', en: 'Required field' },
+    invalid: { pt: 'E-mail inválido', en: 'Invalid email' },
+  };
+
+  $: errorMessages = {
+    name: errors.name ? errorText[errors.name][$lang] : '',
+    email: errors.email ? errorText[errors.email][$lang] : '',
+    message: errors.message ? errorText[errors.message][$lang] : '',
+  };
+
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  function validateForm(): boolean {
+    errors = {
+      name: form.name.trim() ? '' : 'required',
+      email: !form.email.trim() ? 'required' : EMAIL_RE.test(form.email) ? '' : 'invalid',
+      message: form.message.trim() ? '' : 'required',
+    };
+    return !errors.name && !errors.email && !errors.message;
+  }
+
+  function handleEmailBlur() {
+    const value = form.email.trim();
+    if (value && !EMAIL_RE.test(value)) errors.email = 'invalid';
+  }
+
+  function clearError(field: 'name' | 'email' | 'message') {
+    if (errors[field]) errors = { ...errors, [field]: '' };
+  }
 
   function reset() {
     form = defaultForm();
     status = 'idle';
     errorMsg = '';
+    rateLimitError = false;
+    errors = { name: '', email: '', message: '' };
   }
 
   async function handleSubmit(e: SubmitEvent) {
     e.preventDefault();
+    if (!validateForm()) return;
+
     status = 'loading';
     errorMsg = '';
+    rateLimitError = false;
 
     try {
       const res = await fetch(`${API_BASE}/api/public/contact`, {
@@ -73,7 +117,7 @@
 
       const resolved = resolveStatus(res.status);
       status = resolved.status;
-      if (resolved.errorKey === 'rate') errorMsg = t.errorRate[$lang];
+      if (resolved.errorKey === 'rate') rateLimitError = true;
       if (resolved.errorKey === 'generic') errorMsg = t.errorGeneric[$lang];
     } catch {
       status = 'error';
@@ -106,6 +150,12 @@
     </div>
   {:else}
     <form onsubmit={handleSubmit} novalidate>
+      {#if rateLimitError}
+        <div class="rate-limit-banner" role="alert">
+          {t.errorRate[$lang]}
+        </div>
+      {/if}
+
       <div style="display:none" aria-hidden="true">
         <label for="website">Website</label>
         <input
@@ -128,7 +178,11 @@
           autocomplete="name"
           placeholder={t.placeholders.name[$lang]}
           bind:value={form.name}
+          oninput={() => clearError('name')}
+          class:field-invalid={errors.name}
         />
+        {#if errorMessages.name}<span class="field-error" role="alert">{errorMessages.name}</span
+          >{/if}
       </div>
 
       <div class="field-row">
@@ -142,7 +196,13 @@
             autocomplete="email"
             placeholder={t.placeholders.email[$lang]}
             bind:value={form.email}
+            oninput={() => clearError('email')}
+            onblur={handleEmailBlur}
+            class:field-invalid={errors.email}
           />
+          {#if errorMessages.email}<span class="field-error" role="alert"
+              >{errorMessages.email}</span
+            >{/if}
         </div>
         <div class="field">
           <label for="company">{t.fields.company[$lang]}</label>
@@ -182,10 +242,15 @@
           required
           placeholder={t.placeholders.message[$lang]}
           bind:value={form.message}
+          oninput={() => clearError('message')}
+          class:field-invalid={errors.message}
         ></textarea>
+        {#if errorMessages.message}<span class="field-error" role="alert"
+            >{errorMessages.message}</span
+          >{/if}
       </div>
 
-      {#if status === 'error'}
+      {#if status === 'error' && errorMsg}
         <p class="error-msg" role="alert">{errorMsg}</p>
       {/if}
 
@@ -384,6 +449,27 @@
 
   .consent-row a:hover {
     color: #93c5fd;
+  }
+
+  .rate-limit-banner {
+    background: var(--hot-soft);
+    color: var(--pink);
+    border: 1px solid var(--pink);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+
+  .field-invalid {
+    border-color: var(--pink) !important;
+  }
+
+  .field-error {
+    font-size: 12px;
+    color: var(--pink);
+    margin-top: -2px;
   }
 
   .error-msg {
