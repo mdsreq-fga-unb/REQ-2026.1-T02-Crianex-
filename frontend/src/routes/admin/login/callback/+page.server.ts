@@ -1,4 +1,5 @@
-import { redirect, type PageServerLoad } from '@sveltejs/kit';
+import { redirect } from '@sveltejs/kit';
+import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ url }) => {
   const oauthError = url.searchParams.get('error') || url.searchParams.get('error_description');

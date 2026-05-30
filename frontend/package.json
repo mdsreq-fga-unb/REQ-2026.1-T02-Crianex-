@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "test": "svelte-kit sync && vitest run",
     "test:watch": "vitest",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "svelte-kit sync && tsc --noEmit",
     "lint": "eslint ."
   },
   "devDependencies": {
