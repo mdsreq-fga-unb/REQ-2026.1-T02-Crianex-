@@ -12,6 +12,16 @@
   let loading = $state(false);
   let errorMessage = $state('');
   let submitHovered = $state(false);
+  let showErrorModal = $state(false);
+
+  function showError(msg: string) {
+    errorMessage = msg;
+    showErrorModal = true;
+  }
+
+  function dismissError() {
+    showErrorModal = false;
+  }
 
   async function validateSessionAndRedirect(): Promise<boolean> {
     const { supabase } = await import('$lib/api/supabase');
@@ -22,16 +32,34 @@
     }
 
     try {
-      await authorizeAdminSession(data.session.access_token);
+      // Sync client session to server HttpOnly cookies
+      const resp = await fetch('/api/admin/session', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({
+          accessToken: data.session.access_token,
+          refreshToken: (data.session as any).refresh_token,
+          expiresAt: (data.session as any).expires_at,
+        }),
+      });
+
+      if (!resp.ok) {
+        await supabase.auth.signOut();
+        const payload = await resp.json().catch(() => ({}));
+        showError(payload?.message ?? 'Não foi possível validar sua sessão agora.');
+        return false;
+      }
+
+      await supabase.auth.signOut();
       await goto('/admin');
       return true;
     } catch (error) {
       await supabase.auth.signOut();
 
       if (error instanceof ApiError && error.status === 403) {
-        errorMessage = 'Conta não autorizada. Solicite acesso ao administrador.';
+        showError('Conta não autorizada. Solicite acesso ao administrador.');
       } else {
-        errorMessage = 'Não foi possível validar sua sessão agora.';
+        showError('Não foi possível validar sua sessão agora.');
       }
 
       return false;
@@ -42,7 +70,7 @@
     const queryMessage = new URLSearchParams(window.location.search).get('error');
 
     if (queryMessage) {
-      errorMessage = queryMessage;
+      showError(queryMessage);
     }
 
     try {
@@ -68,10 +96,10 @@
       });
 
       if (error) {
-        errorMessage = 'Não foi possível iniciar o login com Google agora.';
+        showError('Não foi possível iniciar o login com Google agora.');
       }
     } catch {
-      errorMessage = 'Não foi possível iniciar o login com Google agora.';
+      showError('Não foi possível iniciar o login com Google agora.');
     } finally {
       loading = false;
     }
@@ -93,9 +121,9 @@
 
       if (error) {
         if (error.status === 401 || error.status === 400) {
-          errorMessage = 'E-mail ou senha inválidos.';
+          showError('E-mail ou senha inválidos.');
         } else {
-          errorMessage = 'Não foi possível entrar no painel agora. Tente novamente.';
+          showError('Não foi possível entrar no painel agora. Tente novamente.');
         }
 
         return;
@@ -103,11 +131,11 @@
 
       const authorized = await validateSessionAndRedirect();
 
-      if (!authorized) {
-        errorMessage ||= 'Conta não autorizada. Solicite acesso ao administrador.';
+      if (!authorized && !showErrorModal) {
+        showError('Conta não autorizada. Solicite acesso ao administrador.');
       }
     } catch {
-      errorMessage = 'Não foi possível conectar ao serviço de autenticação agora.';
+      showError('Não foi possível conectar ao serviço de autenticação agora.');
     } finally {
       loading = false;
     }
@@ -221,10 +249,6 @@
               <span aria-hidden="true">→</span>
             {/if}
           </button>
-
-          {#if errorMessage}
-            <p class="error-message" role="alert">{errorMessage}</p>
-          {/if}
         </form>
 
         <div class="security-note">
@@ -237,6 +261,47 @@
       </div>
     </section>
   </main>
+
+  {#if showErrorModal}
+    <div
+      class="modal-backdrop"
+      role="presentation"
+      onclick={dismissError}
+      onkeydown={(e) => e.key === 'Escape' && dismissError()}
+    >
+      <div
+        class="modal"
+        role="alertdialog"
+        aria-modal="true"
+        aria-labelledby="modal-title"
+        tabindex="-1"
+        onclick={(e) => e.stopPropagation()}
+        onkeydown={(e) => e.stopPropagation()}
+      >
+        <div class="modal-icon" aria-hidden="true">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" y1="8" x2="12" y2="12" />
+            <line x1="12" y1="16" x2="12.01" y2="16" />
+          </svg>
+        </div>
+        <div class="modal-body">
+          <p id="modal-title" class="modal-title">Falha na autenticação</p>
+          <p class="modal-message">{errorMessage}</p>
+        </div>
+        <button class="modal-close" onclick={dismissError} aria-label="Fechar">✕</button>
+      </div>
+    </div>
+  {/if}
 </div>
 
 <style>
@@ -266,19 +331,21 @@
     background: #060606;
     color: #fcfcfc;
     font-family: 'Space Grotesk', system-ui, sans-serif;
+    height: 100dvh;
+    overflow: hidden;
   }
 
   .login-page {
-    min-height: 100vh;
+    height: 100dvh;
     display: grid;
     grid-template-columns: minmax(320px, 1fr) minmax(360px, 0.92fr);
     background: #0b0b0d;
     font-family: 'Space Grotesk', system-ui, sans-serif;
+    overflow: hidden;
   }
 
   .login-side {
     position: relative;
-    min-height: 100vh;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -390,9 +457,10 @@
   .login-form-wrap {
     display: grid;
     place-items: center;
-    padding: clamp(28px, 6vw, 64px);
+    padding: clamp(20px, 4vw, 48px) clamp(20px, 6vw, 64px);
     background: #0a0a0c;
     color: #fcfcfc;
+    overflow-y: auto;
   }
 
   .login-form {
@@ -585,13 +653,6 @@
     animation: spin 0.8s linear infinite;
   }
 
-  .error-message {
-    color: var(--pink);
-    font-size: 13px;
-    font-weight: 700;
-    line-height: 1.45;
-  }
-
   .security-note {
     display: flex;
     gap: 12px;
@@ -610,6 +671,96 @@
     line-height: 1.2;
   }
 
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.72);
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    z-index: 100;
+    backdrop-filter: blur(4px);
+    animation: fadeIn 0.15s ease;
+  }
+
+  .modal {
+    width: min(100%, 400px);
+    background: #111114;
+    border: 1px solid rgba(231, 31, 132, 0.32);
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    box-shadow:
+      0 0 0 1px rgba(231, 31, 132, 0.12),
+      0 24px 64px rgba(0, 0, 0, 0.6);
+    animation: slideUp 0.2s ease;
+    position: relative;
+  }
+
+  .modal-icon {
+    flex-shrink: 0;
+    color: var(--pink);
+    margin-top: 2px;
+  }
+
+  .modal-body {
+    flex: 1;
+    display: grid;
+    gap: 6px;
+  }
+
+  .modal-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #fcfcfc;
+  }
+
+  .modal-message {
+    font-size: 13px;
+    color: rgba(252, 252, 252, 0.7);
+    line-height: 1.5;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: none;
+    border: none;
+    color: rgba(252, 252, 252, 0.4);
+    font-size: 14px;
+    cursor: pointer;
+    padding: 4px;
+    line-height: 1;
+    transition: color 0.15s;
+  }
+
+  .modal-close:hover {
+    color: #fcfcfc;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      transform: translateY(8px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
   @keyframes spin {
     to {
       transform: rotate(360deg);
@@ -617,12 +768,20 @@
   }
 
   @media (max-width: 820px) {
+    .admin-root {
+      height: auto;
+      overflow: auto;
+    }
+
     .login-page {
+      height: auto;
+      min-height: 100dvh;
       grid-template-columns: 1fr;
+      overflow: visible;
     }
 
     .login-side {
-      min-height: 220px;
+      height: auto;
       gap: 28px;
       padding: 28px;
     }
@@ -638,8 +797,8 @@
 
     .login-form-wrap {
       place-items: start center;
-      min-height: calc(100vh - 220px);
-      padding: 32px 20px;
+      padding: 32px 20px 40px;
+      overflow-y: visible;
     }
   }
 
