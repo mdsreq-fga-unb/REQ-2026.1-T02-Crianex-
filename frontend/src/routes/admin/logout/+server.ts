@@ -5,7 +5,7 @@ import {
   revokeAdminSession,
 } from '$lib/server/admin-session';
 
-async function handleLogout(cookies: Cookies) {
+async function handleLogout(cookies: Cookies): Promise<never> {
   const session = readAdminSessionCookies(cookies);
 
   if (session?.accessToken) {
