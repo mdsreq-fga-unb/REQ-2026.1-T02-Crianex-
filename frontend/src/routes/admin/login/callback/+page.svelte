@@ -82,45 +82,56 @@
 </div>
 
 <style>
+  :global(html, body) {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+
   .callback-root {
     display: grid;
     place-items: center;
-    min-height: 100vh;
+    height: 100dvh;
     padding: 24px;
+    box-sizing: border-box;
     background:
-      radial-gradient(circle at top, rgba(127, 63, 229, 0.22), transparent 34%),
-      radial-gradient(circle at bottom right, rgba(231, 31, 132, 0.16), transparent 32%), #060606;
+      radial-gradient(circle at 50% 0%, rgba(127, 63, 229, 0.28), transparent 50%),
+      radial-gradient(circle at 100% 100%, rgba(231, 31, 132, 0.2), transparent 45%),
+      #060606;
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    color: #fcfcfc;
   }
 
   .callback-card {
     width: min(100%, 440px);
     display: grid;
-    gap: 12px;
-    padding: 28px;
+    gap: 14px;
+    padding: 32px;
     border: 1px solid rgba(252, 252, 252, 0.1);
     border-radius: 20px;
-    background: rgba(10, 10, 12, 0.86);
-    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.44);
-    color: #fcfcfc;
+    background: rgba(10, 10, 12, 0.82);
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
   }
 
   .tag {
-    font-family: var(--font-mono);
+    font-family: 'Space Mono', monospace;
     font-size: 11px;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: rgba(252, 252, 252, 0.52);
+    color: rgba(252, 252, 252, 0.48);
   }
 
   h1 {
     margin: 0;
-    font-size: clamp(28px, 4vw, 36px);
-    line-height: 1;
+    font-size: clamp(26px, 4vw, 34px);
+    line-height: 1.05;
+    font-weight: 700;
   }
 
   p {
     margin: 0;
-    color: rgba(252, 252, 252, 0.7);
+    font-size: 14px;
+    color: rgba(252, 252, 252, 0.65);
     line-height: 1.6;
   }
 </style>
