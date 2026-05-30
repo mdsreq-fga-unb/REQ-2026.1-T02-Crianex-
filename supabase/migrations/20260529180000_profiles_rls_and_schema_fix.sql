@@ -22,7 +22,7 @@ alter table public.profiles
   alter column role set data type text using role::text;
 
 alter table public.profiles
-  add constraint if not exists profiles_role_check check (role in ('owner', 'member'));
+  add constraint profiles_role_check check (role in ('owner', 'member'));
 
 alter table public.profiles alter column role set default 'member';
 
@@ -30,7 +30,7 @@ alter table public.profiles
   alter column status set data type text using status::text;
 
 alter table public.profiles
-  add constraint if not exists profiles_status_check check (status in ('active', 'inactive'));
+  add constraint profiles_status_check check (status in ('active', 'inactive'));
 
 alter table public.profiles alter column status set default 'active';
 
