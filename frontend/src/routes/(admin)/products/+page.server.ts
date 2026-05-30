@@ -22,7 +22,7 @@ type Product = {
 
 export const load: PageServerLoad = async () => {
   try {
-    const produtosDoBanco = await apiFetch<Product[]>('/products');
+    const produtosDoBanco = await apiFetch<Product[]>('/products/admin');
     return { produtos: produtosDoBanco };
   } catch (error) {
     console.error('[FRONTEND LOAD ERROR]:', error);

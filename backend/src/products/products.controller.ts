@@ -4,8 +4,8 @@ import {
   deleteProduct,
   deleteProductImage,
   getProductForDeletion,
-  listPublishedProducts,
   listAllProducts,
+  listPublishedProducts,
   reorderProducts,
   updateProduct,
   uploadProductImage,
@@ -14,19 +14,26 @@ import {
 
 type RequestWithUploadedFile = Request & { file?: ProductUploadFile };
 
-export async function getProductsController(_req: Request, res: Response) {
+export async function getPublishedProductsController(_req: Request, res: Response) {
   try {
-    // If this controller is called through the admin route, return all products.
-    // The admin route is protected by `requireAdminAuth` middleware.
-    const { data, error } = _req.path.startsWith('/api/products/admin')
-      ? await listAllProducts()
-      : await listPublishedProducts();
-
+    const { data, error } = await listPublishedProducts();
     if (error) {
       console.error('❌ ERRO DO SUPABASE NA LISTAGEM:', error);
       return res.status(400).json({ error: error.message });
     }
+    return res.status(200).json(data);
+  } catch {
+    return res.status(500).json({ error: 'Erro interno no servidor do back-end.' });
+  }
+}
 
+export async function getAllProductsController(_req: Request, res: Response) {
+  try {
+    const { data, error } = await listAllProducts();
+    if (error) {
+      console.error('❌ ERRO DO SUPABASE NA LISTAGEM:', error);
+      return res.status(400).json({ error: error.message });
+    }
     return res.status(200).json(data);
   } catch {
     return res.status(500).json({ error: 'Erro interno no servidor do back-end.' });
@@ -123,7 +130,7 @@ export async function deleteProductController(req: Request, res: Response) {
     if (product.published) {
       return res
         .status(409)
-        .json({ message: 'Não é possível deletar um produto publicado. Despublique-o primeiro.' });
+        .json({ message: 'Não é possível deletar um produto publicado. Despublique-o primeiro!' });
     }
 
     if (product.image_url) {

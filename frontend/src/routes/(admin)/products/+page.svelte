@@ -75,7 +75,7 @@
   }
 
   // Gatilho: Clicou em "Editar" no Dropdown da linha do produto
-  function handleEditarProduto(produto: any) {
+  function handleEditarProduto(produto: Produto) {
     isEditingMode = true;
     currentProductId = produto.id;
     modalData = { ...produto }; // Copia os dados atuais para o modal

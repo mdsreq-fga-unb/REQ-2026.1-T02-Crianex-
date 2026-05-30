@@ -114,7 +114,14 @@ export async function createProduct(input: ProductInput) {
 export async function reorderProducts(orders: ProductOrderItem[]) {
   const supabase = getAdminSupabase();
 
-  return supabase.rpc('reorder_products', { p_orders: orders });
+  const results = await Promise.all(
+    orders.map(({ id, display_order }) =>
+      supabase.from('products').update({ display_order }).eq('id', id)
+    )
+  );
+
+  const firstError = results.find((r) => r.error)?.error ?? null;
+  return { error: firstError };
 }
 
 export async function updateProduct(id: string, input: Partial<ProductInput>) {

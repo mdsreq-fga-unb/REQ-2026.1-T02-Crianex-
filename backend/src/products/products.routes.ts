@@ -1,17 +1,39 @@
 import { Router } from 'express';
+import multer from 'multer';
 import { requireAdminAuth } from '../middleware/requireAdminAuth.js';
 import {
   createProductController,
   deleteProductController,
-  getProductsController,
+  getAllProductsController,
+  getPublishedProductsController,
   reorderProductsController,
   updateProductController,
+  uploadProductImageController,
 } from './products.controller.js';
 
 const productsRouter = Router();
 
-productsRouter.get('/', getProductsController);
-productsRouter.get('/admin', requireAdminAuth, getProductsController);
+const upload = multer({
+  storage: multer.memoryStorage(),
+  limits: { fileSize: 2 * 1024 * 1024 },
+  fileFilter: (_req, file, cb) => {
+    const allowed = ['image/jpeg', 'image/png', 'image/webp'];
+    if (allowed.includes(file.mimetype)) {
+      cb(null, true);
+    } else {
+      cb(new Error('Formato de arquivo inválido. Use apenas JPG, PNG ou WEBP.'));
+    }
+  },
+});
+
+productsRouter.get('/', getPublishedProductsController);
+productsRouter.get('/admin', requireAdminAuth, getAllProductsController);
+productsRouter.post(
+  '/upload',
+  requireAdminAuth,
+  upload.single('image'),
+  uploadProductImageController
+);
 productsRouter.post('/', requireAdminAuth, createProductController);
 productsRouter.post('/reorder', requireAdminAuth, reorderProductsController);
 productsRouter.patch('/reorder', requireAdminAuth, reorderProductsController);
