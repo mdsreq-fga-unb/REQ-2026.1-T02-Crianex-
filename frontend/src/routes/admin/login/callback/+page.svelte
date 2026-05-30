@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { ApiError } from '$lib/api/backend';
-  import { authorizeAdminSession } from '$lib/api/admin-auth';
+  import { syncAdminSession } from '$lib/api/admin-session';
 
   let statusMessage = $state('Processando autenticação com Google...');
 
@@ -20,8 +20,9 @@
       return;
     }
 
+    const { supabase } = await import('$lib/api/supabase');
+
     try {
-      const { supabase } = await import('$lib/api/supabase');
       const code = searchParams.get('code');
 
       if (code) {
@@ -38,29 +39,19 @@
         throw new Error('Sessão não encontrada após o callback do Google.');
       }
 
-      // Sync session to server-side HttpOnly cookies
-      const resp = await fetch('/api/admin/session', {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({
-          accessToken: data.session.access_token,
-          refreshToken: (data.session as any).refresh_token,
-          expiresAt: (data.session as any).expires_at,
-        }),
-      });
-
-      if (!resp.ok) {
-        throw new Error('Falha ao validar sessão no servidor.');
-      }
+      statusMessage = 'Validando permissões...';
+      await syncAdminSession(data.session);
+      statusMessage = 'Redirecionando...';
 
       try {
         await supabase.auth.signOut();
-      } catch {}
+      } catch {
+        // best-effort: limpa sessão local antes do redirect
+      }
 
       replaceLocation('/admin');
     } catch (error) {
       try {
-        const { supabase } = await import('$lib/api/supabase');
         await supabase.auth.signOut();
       } catch {
         // Ignora falhas ao limpar a sessão local; o próximo redirect já cairá no login.
