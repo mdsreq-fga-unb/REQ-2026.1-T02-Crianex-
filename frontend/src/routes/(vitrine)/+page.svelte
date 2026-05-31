@@ -66,9 +66,7 @@
 
   // ── SEO ─────────────────────────────────────
   const canonicalUrl = (data as { origin?: string }).origin ?? '';
-  const selectedLang = ((data as { selectedLang?: string }).selectedLang ?? 'pt') as
-    | 'pt'
-    | 'en';
+  const selectedLang = ((data as { selectedLang?: string }).selectedLang ?? 'pt') as 'pt' | 'en';
   const ogImage = `${canonicalUrl}/assets/home/crianexImagemSemFundo.png`;
 
   $: pageTitle =
@@ -370,7 +368,6 @@
           </div>
         </div>
       </div>
-
     </section>
   {/if}
 
