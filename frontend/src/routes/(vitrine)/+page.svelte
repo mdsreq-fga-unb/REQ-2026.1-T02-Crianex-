@@ -63,15 +63,73 @@
   function accentColor(i: number): string {
     return ACCENT_COLORS[i % ACCENT_COLORS.length] as string;
   }
+
+  // ── SEO ─────────────────────────────────────
+  const canonicalUrl = (data as { origin?: string }).origin ?? '';
+  const selectedLang = ((data as { selectedLang?: string }).selectedLang ?? 'pt') as
+    | 'pt'
+    | 'en';
+  const ogImage = `${canonicalUrl}/assets/home/crianexImagemSemFundo.png`;
+
+  $: pageTitle =
+    $lang === 'en' ? 'Crianex Hub — B2B Software House' : 'Crianex Hub — Software house B2B';
+  $: pageDesc = t.lede[$lang];
+  $: ogLocale = $lang === 'en' ? 'en_US' : 'pt_BR';
+  $: ogLocaleAlt = $lang === 'en' ? 'pt_BR' : 'en_US';
+
+  const ldJson = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Crianex Hub',
+    url: canonicalUrl,
+    description: t.lede[selectedLang],
+    logo: ogImage,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Av. Paulista, 1842',
+      addressLocality: 'São Paulo',
+      addressRegion: 'SP',
+      addressCountry: 'BR',
+    },
+    sameAs: ['https://www.linkedin.com/company/crianex'],
+  });
+  // split closing tag so Svelte parser does not see it literally
+  const ldScript = `<script type="application/ld+json">${ldJson}<` + `/script>`;
 </script>
 
 <svelte:head>
-  <title>Crianex Hub</title>
-  <meta name="description" content={t.lede[$lang]} />
-  <meta property="og:title" content="Crianex Hub" />
-  <meta property="og:description" content={t.lede[$lang]} />
+  <title>{pageTitle}</title>
+  <meta name="description" content={pageDesc} />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Open Graph -->
   <meta property="og:type" content="website" />
-  <meta property="og:locale" content={$lang === 'en' ? 'en_US' : 'pt_BR'} />
+  <meta property="og:url" content={canonicalUrl} />
+  <meta property="og:site_name" content="Crianex Hub" />
+  <meta property="og:title" content={pageTitle} />
+  <meta property="og:description" content={pageDesc} />
+  <meta property="og:locale" content={ogLocale} />
+  <meta property="og:locale:alternate" content={ogLocaleAlt} />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:image:width" content="580" />
+  <meta property="og:image:height" content="430" />
+  <meta property="og:image:alt" content="Crianex Hub — plataformas SaaS B2B" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={pageTitle} />
+  <meta name="twitter:description" content={pageDesc} />
+  <meta name="twitter:image" content={ogImage} />
+
+  <!-- Canonical + hreflang -->
+  <link rel="canonical" href={canonicalUrl} />
+  <link rel="alternate" hreflang="pt-BR" href={canonicalUrl} />
+  <link rel="alternate" hreflang="en" href={`${canonicalUrl}?lang=en`} />
+  <link rel="alternate" hreflang="x-default" href={canonicalUrl} />
+
+  <!-- JSON-LD — conteúdo gerado por JSON.stringify, sem input do usuário -->
+  <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+  {@html ldScript}
 </svelte:head>
 
 <div class="page-fade">
