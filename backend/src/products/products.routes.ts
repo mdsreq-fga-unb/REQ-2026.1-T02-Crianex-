@@ -4,7 +4,8 @@ import { requireAdminAuth } from '../middleware/requireAdminAuth.js';
 import {
   createProductController,
   deleteProductController,
-  getProductsController,
+  getAllProductsController,
+  getPublishedProductsController,
   reorderProductsController,
   updateProductController,
   uploadProductImageController,
@@ -16,8 +17,8 @@ const upload = multer({
   storage: multer.memoryStorage(),
   limits: { fileSize: 2 * 1024 * 1024 },
   fileFilter: (_req, file, cb) => {
-    const allowedMimeTypes = ['image/jpeg', 'image/png', 'image/webp'];
-    if (allowedMimeTypes.includes(file.mimetype)) {
+    const allowed = ['image/jpeg', 'image/png', 'image/webp'];
+    if (allowed.includes(file.mimetype)) {
       cb(null, true);
     } else {
       cb(new Error('Formato de arquivo inválido. Use apenas JPG, PNG ou WEBP.'));
@@ -25,8 +26,8 @@ const upload = multer({
   },
 });
 
-productsRouter.get('/', getProductsController);
-productsRouter.get('/admin', requireAdminAuth, getProductsController);
+productsRouter.get('/', getPublishedProductsController);
+productsRouter.get('/admin', requireAdminAuth, getAllProductsController);
 productsRouter.post(
   '/upload',
   requireAdminAuth,

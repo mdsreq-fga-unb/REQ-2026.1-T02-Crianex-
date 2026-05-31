@@ -4,26 +4,34 @@ import {
   deleteProduct,
   deleteProductImage,
   getProductForDeletion,
-  listPublishedProducts,
   listAllProducts,
+  listPublishedProducts,
   reorderProducts,
   updateProduct,
   uploadProductImage,
+  type ProductUploadFile,
 } from './products.service.js';
 
-export async function getProductsController(_req: Request, res: Response) {
+export async function getPublishedProductsController(_req: Request, res: Response) {
   try {
-    // If this controller is called through the admin route, return all products.
-    // The admin route is protected by `requireAdminAuth` middleware.
-    const { data, error } = _req.path.startsWith('/api/products/admin')
-      ? await listAllProducts()
-      : await listPublishedProducts();
-
+    const { data, error } = await listPublishedProducts();
     if (error) {
       console.error('❌ ERRO DO SUPABASE NA LISTAGEM:', error);
       return res.status(400).json({ error: error.message });
     }
+    return res.status(200).json(data);
+  } catch {
+    return res.status(500).json({ error: 'Erro interno no servidor do back-end.' });
+  }
+}
 
+export async function getAllProductsController(_req: Request, res: Response) {
+  try {
+    const { data, error } = await listAllProducts();
+    if (error) {
+      console.error('❌ ERRO DO SUPABASE NA LISTAGEM:', error);
+      return res.status(400).json({ error: error.message });
+    }
     return res.status(200).json(data);
   } catch {
     return res.status(500).json({ error: 'Erro interno no servidor do back-end.' });
@@ -32,11 +40,12 @@ export async function getProductsController(_req: Request, res: Response) {
 
 export async function uploadProductImageController(req: Request, res: Response) {
   try {
-    if (!req.file) {
+    const file = req.file as ProductUploadFile | undefined;
+    if (!file) {
       return res.status(400).json({ error: 'Nenhum arquivo enviado ou formato inválido.' });
     }
 
-    const { publicUrl, error } = await uploadProductImage(req.file);
+    const { publicUrl, error } = await uploadProductImage(file);
 
     if (error) {
       return res.status(400).json({ error: error.message });

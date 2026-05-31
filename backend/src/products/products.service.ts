@@ -71,6 +71,22 @@ export async function createProduct(input: ProductInput) {
   const supabase = getAdminSupabase();
   const slug = generateSlug(input.name_pt);
 
+  let displayOrder = input.display_order;
+  if (displayOrder === undefined || displayOrder === null) {
+    const { data: rows, error: err } = await supabase
+      .from('products')
+      .select('display_order')
+      .order('display_order', { ascending: false })
+      .limit(1);
+
+    if (!err && rows && rows.length > 0) {
+      const max = rows[0]?.display_order ?? 0;
+      displayOrder = max + 1;
+    } else {
+      displayOrder = 1;
+    }
+  }
+
   return supabase
     .from('products')
     .insert([
@@ -86,7 +102,7 @@ export async function createProduct(input: ProductInput) {
         category_pt: input.category_pt,
         category_en: input.category_en,
         published: input.published,
-        display_order: input.display_order,
+        display_order: displayOrder,
         slug,
         image_url: input.image_url,
       },
@@ -98,7 +114,14 @@ export async function createProduct(input: ProductInput) {
 export async function reorderProducts(orders: ProductOrderItem[]) {
   const supabase = getAdminSupabase();
 
-  return supabase.rpc('reorder_products', { p_orders: orders });
+  const results = await Promise.all(
+    orders.map(({ id, display_order }) =>
+      supabase.from('products').update({ display_order }).eq('id', id)
+    )
+  );
+
+  const firstError = results.find((r) => r.error)?.error ?? null;
+  return { error: firstError };
 }
 
 export async function updateProduct(id: string, input: Partial<ProductInput>) {

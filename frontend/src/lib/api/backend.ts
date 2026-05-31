@@ -22,7 +22,6 @@ export async function apiFetch<T>(
   const { token, ...fetchInit } = init ?? {};
   const normalizedPath = path.startsWith('/') ? path : `/${path}`;
   const res = await fetch(`${BASE_URL}${API_PREFIX}${normalizedPath}`, {
-    // evitar caching condicional que pode retornar 304
     cache: 'no-store',
     ...fetchInit,
     credentials: 'include',
@@ -33,8 +32,11 @@ export async function apiFetch<T>(
     },
   });
 
-  // 304 Not Modified: tratar como sucesso sem corpo
   if (res.status === 304) {
+    return undefined as unknown as T;
+  }
+
+  if (res.status === 204) {
     return undefined as unknown as T;
   }
 
@@ -44,7 +46,8 @@ export async function apiFetch<T>(
       reason?: string;
     } | null;
     throw new ApiError(
-      payload?.message ?? `[backend] ${res.status} ${res.statusText} — ${path}`,
+      payload?.message ??
+        `[backend] ${res.status} ${res.statusText} — ${API_PREFIX}${normalizedPath}`,
       res.status,
       payload?.reason
     );
