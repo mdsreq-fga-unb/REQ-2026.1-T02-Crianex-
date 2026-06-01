@@ -1,0 +1,44 @@
+{
+  "eyebrow": "Sobre a Crianex",
+  "h1": "Software house B2B baseada em São Paulo desde 2019.",
+  "lede": "Começamos como consultoria. Em 2021 paramos de vender hora-homem e passamos a vender produto. Hoje operamos seis SaaS verticais sobre uma plataforma comum em Kubernetes.",
+  "missionEyebrow": "Missão, visão, valores",
+  "missionTitle": "O que mantém o time alinhado.",
+  "missionDesc": "Três princípios escolhidos não pela retórica, mas porque mudam decisões reais — de contratação a release.",
+  "values": [
+    {
+      "n": "01",
+      "title": "Engenharia primeiro",
+      "body": "Investimos em fundação técnica antes de feature. Stack escolhida para durar uma década, não um trimestre."
+    },
+    {
+      "n": "02",
+      "title": "Produto, não projeto",
+      "body": "Construímos plataformas reutilizáveis. Cada cliente herda o aprendizado de todos os anteriores."
+    },
+    {
+      "n": "03",
+      "title": "Decisão com dado",
+      "body": "Instrumentação desde o dia zero. Cada release tem hipótese mensurável e cutoff de rollback."
+    }
+  ],
+  "numbersEyebrow": "Em números",
+  "numbersTitle": "Sete anos. Seis produtos. Um time enxuto.",
+  "numbersDesc": "Crescemos pela qualidade do produto, não pelo tamanho do time. Estrutura compartilhada permite alavancagem incomum.",
+  "stats": [
+    { "value": "6", "label": "produtos SaaS em produção" },
+    { "value": "184", "label": "clientes B2B ativos" },
+    { "value": "28", "label": "engenheiros & designers" },
+    { "value": "2019", "label": "fundada em São Paulo" }
+  ],
+  "cta": {
+    "title": "Trabalhar com a gente.",
+    "body": "Tanto como cliente quanto como engenheiro. Estamos abertos para conversa nas duas frentes.",
+    "emailLabel": "comercial@crianex.com.br",
+    "linkedinLabel": "LinkedIn"
+  },
+  "seo": {
+    "title": "Sobre a Crianex | Crianex Hub",
+    "ogTitle": "Sobre a Crianex | Crianex Hub"
+  }
+}
