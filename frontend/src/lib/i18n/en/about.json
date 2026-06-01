@@ -1,11 +1,6 @@
 {
   "eyebrow": "About Crianex",
   "h1": "A B2B software house based in São Paulo since 2019.",
-  "heroNavLinks": [
-    { "label": "Mission", "href": "#missao" },
-    { "label": "Products", "href": "/products" },
-    { "label": "Contact", "href": "/contato" }
-  ],
   "heroBadge": "B2B software house since 2019",
   "heroH1": "We build platforms.\nNot projects.",
   "heroSub": "Six vertical SaaS. One lean team.",

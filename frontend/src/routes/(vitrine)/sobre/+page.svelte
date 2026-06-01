@@ -16,30 +16,7 @@
 </svelte:head>
 
 <article data-testid="about-page">
-  <!-- ── Fixed Navbar (persists on scroll) ─────────────────────────────── -->
-  <nav class="hero-nav">
-    <div class="hero-logo-pill">
-      <svg
-        width="22"
-        height="22"
-        viewBox="0 0 2000 2000"
-        fill="none"
-        aria-label="Crianex"
-      >
-        <g transform="translate(0,2000) scale(0.1,-0.1)" fill="#060606">
-          <path d="M3515 10638 c-600 -1568 -1100 -2878 -1112 -2910 l-22 -58 416 2 416 3 1088 2845 c599 1565 1099 2873 1113 2908 l24 62 -416 0 -417 0 -1090 -2852z" />
-          <path d="M14710 12518 l1 -483 874 -529 c481 -291 875 -535 875 -541 0 -7 -394 -250 -875 -541 l-874 -529 -1 -482 c0 -266 3 -483 6 -483 3 0 595 375 1315 833 l1309 832 0 370 -1 370 -1305 830 c-718 457 -1309 832 -1315 833 -5 2 -9 -181 -9 -480z" />
-          <path d="M7814 10220 c-223 -40 -421 -182 -532 -380 -63 -113 -85 -200 -90 -360 -3 -122 -1 -158 16 -231 25 -104 57 -178 111 -258 146 -214 368 -325 651 -325 283 0 505 111 651 325 90 133 129 269 129 454 0 136 -16 223 -58 323 -92 218 -267 370 -507 439 -61 17 -300 26 -371 13z" />
-          <path d="M10410 8010 l0 -370 1620 0 1620 0 0 370 0 370 -1620 0 -1620 0 0 -370z" />
-        </g>
-      </svg>
-    </div>
-    <div class="hero-links-pill">
-      {#each content.heroNavLinks as link (link.label)}
-        <a href={link.href} class="hero-nav-link">{link.label}</a>
-      {/each}
-    </div>
-  </nav>
+  <!-- ── Navbar omitido: será implementado na issue de navegação global ──── -->
 
   <!-- ── Video Hero ──────────────────────────────────────────────────────── -->
   <section class="hero-wrap">
@@ -128,9 +105,7 @@
           <a class="btn primary" href="/contato">
             {content.cta.emailLabel}
           </a>
-          <a class="btn ghost" href="mailto:contato@crianex.com">
-            contato@crianex.com
-          </a>
+          <a class="btn ghost" href="mailto:contato@crianex.com"> contato@crianex.com </a>
         </div>
       </div>
     </section>
@@ -160,80 +135,6 @@
     display: flex;
     flex-direction: column;
     min-height: 100svh;
-  }
-
-  /* Fixed pill navbar */
-  .hero-nav {
-    position: fixed;
-    top: 1.25rem;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 50;
-    display: flex;
-    align-items: center;
-    gap: 0.625rem;
-  }
-
-  @media (min-width: 640px) {
-    .hero-nav {
-      top: 1.5rem;
-      gap: 0.75rem;
-    }
-  }
-
-  .hero-logo-pill {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 2.5rem;
-    height: 2.5rem;
-    border-radius: 999px;
-    background-color: #ededed;
-    flex-shrink: 0;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
-  }
-
-  @media (min-width: 640px) {
-    .hero-logo-pill {
-      width: 2.75rem;
-      height: 2.75rem;
-    }
-  }
-
-  .hero-links-pill {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    border-radius: 0.75rem;
-    padding: 0.625rem 1rem;
-    background-color: #ededed;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
-  }
-
-  @media (min-width: 640px) {
-    .hero-links-pill {
-      gap: 2.5rem;
-      padding: 0.75rem 2rem;
-    }
-  }
-
-  .hero-nav-link {
-    font-size: 12px;
-    font-weight: 500;
-    color: #374151;
-    text-decoration: none;
-    transition: color 0.2s;
-    white-space: nowrap;
-  }
-
-  @media (min-width: 640px) {
-    .hero-nav-link {
-      font-size: 14px;
-    }
-  }
-
-  .hero-nav-link:hover {
-    color: var(--pink, #e71f84);
   }
 
   /* Bottom-left hero content */
@@ -402,11 +303,7 @@
 
   /* Fades de cor por seção */
   .mission {
-    background: linear-gradient(
-      160deg,
-      rgba(231, 31, 132, 0.04) 0%,
-      transparent 55%
-    );
+    background: linear-gradient(160deg, rgba(231, 31, 132, 0.04) 0%, transparent 55%);
     margin-left: calc(-1 * var(--pad));
     margin-right: calc(-1 * var(--pad));
     padding-left: var(--pad);
@@ -514,11 +411,7 @@
     padding: 40px;
     border-radius: var(--r-lg);
     border: 1px solid var(--line);
-    background: linear-gradient(
-      135deg,
-      rgba(127, 63, 229, 0.04) 0%,
-      #ffffff 50%
-    );
+    background: linear-gradient(135deg, rgba(127, 63, 229, 0.04) 0%, #ffffff 50%);
   }
   .cta-banner h3 {
     font-size: 24px;
