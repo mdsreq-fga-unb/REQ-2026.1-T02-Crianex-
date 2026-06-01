@@ -13,6 +13,6 @@
   });
 </script>
 
-<ParaglideJS {i18n} languageTag={$lang}>
+<ParaglideJS {i18n}>
   {@render children()}
 </ParaglideJS>
