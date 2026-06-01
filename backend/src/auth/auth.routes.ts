@@ -10,6 +10,7 @@ import {
   validateAccessToken,
 } from './auth.service.js';
 import { validateJWT } from '../middleware/validate-jwt.js';
+import { requireRole } from '../middleware/require-role.js';
 
 const authRateLimiter = rateLimit({
   windowMs: 60_000,
@@ -173,63 +174,63 @@ authRouter.post('/refresh', async (request, response) => {
   }
 });
 
-authRouter.patch('/profiles/:id/status', validateJWT, async (request, response) => {
-  const authContext = (
-    response.locals as {
-      auth: { user: { id: string; role: string } };
-    }
-  ).auth;
+authRouter.patch(
+  '/profiles/:id/status',
+  validateJWT,
+  requireRole('owner'),
+  async (request, response) => {
+    const authContext = (
+      response.locals as {
+        auth: { user: { id: string; role: string } };
+      }
+    ).auth;
 
-  if (authContext.user.role !== 'owner') {
-    response.status(403).json({ message: 'Acesso restrito a owners' });
-    return;
-  }
+    const targetProfileId =
+      typeof request.params?.['id'] === 'string' ? request.params['id'].trim() : '';
+    const status = normalizeProfileStatus(
+      typeof request.body?.['status'] === 'string' ? request.body['status'] : null
+    );
 
-  const targetProfileId =
-    typeof request.params?.['id'] === 'string' ? request.params['id'].trim() : '';
-  const status = normalizeProfileStatus(
-    typeof request.body?.['status'] === 'string' ? request.body['status'] : null
-  );
-
-  if (!targetProfileId) {
-    response.status(400).json({ message: 'Profile id é obrigatório' });
-    return;
-  }
-
-  if (!ALLOWED_PROFILE_STATUSES.has(status)) {
-    response.status(400).json({ message: 'Status inválido' });
-    return;
-  }
-
-  if (status === 'inactive' && targetProfileId === authContext.user.id) {
-    response.status(400).json({ message: 'Owner não pode desativar a própria conta' });
-    return;
-  }
-
-  try {
-    const supabase = getSupabaseClient();
-    const { data, error } = await supabase
-      .from('profiles')
-      .update({ status })
-      .eq('id', targetProfileId)
-      .select('id,name,role,email,status')
-      .maybeSingle();
-
-    if (error) {
-      throw error;
-    }
-
-    if (!data) {
-      response.status(404).json({ message: 'Profile não encontrado' });
+    if (!targetProfileId) {
+      response.status(400).json({ message: 'Profile id é obrigatório' });
       return;
     }
 
-    response.status(200).json({ profile: data });
-  } catch (err) {
-    console.error('[auth] profile status update error:', err);
-    response.status(500).json({ message: 'Falha ao atualizar o status do profile' });
+    if (!ALLOWED_PROFILE_STATUSES.has(status)) {
+      response.status(400).json({ message: 'Status inválido' });
+      return;
+    }
+
+    if (status === 'inactive' && targetProfileId === authContext.user.id) {
+      response.status(400).json({ message: 'Owner não pode desativar a própria conta' });
+      return;
+    }
+
+    try {
+      const supabase = getSupabaseClient();
+      const { data, error } = await supabase
+        .from('profiles')
+        .update({ status })
+        .eq('id', targetProfileId)
+        .select('id,name,role,email,status')
+        .maybeSingle();
+
+      if (error) {
+        throw error;
+      }
+
+      if (!data) {
+        response.status(404).json({ message: 'Profile não encontrado' });
+        return;
+      }
+
+      response.status(200).json({ profile: data });
+    } catch (err) {
+      console.error('[auth] profile status update error:', err);
+      response.status(500).json({ message: 'Falha ao atualizar o status do profile' });
+    }
   }
-});
+);
 
 authRouter.post('/logout', validateJWT, async (_request, response) => {
   const authContext = (response.locals as { auth: { accessToken: string } }).auth;

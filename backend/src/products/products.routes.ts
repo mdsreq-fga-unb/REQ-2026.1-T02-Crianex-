@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import multer from 'multer';
-import { requireAdminAuth } from '../middleware/requireAdminAuth.js';
+import { validateJWT } from '../middleware/validate-jwt.js';
+import { requireRole } from '../middleware/require-role.js';
 import {
   createProductController,
   deleteProductController,
@@ -26,18 +27,15 @@ const upload = multer({
   },
 });
 
+const ownerGuard = [validateJWT, requireRole('owner')];
+
 productsRouter.get('/', getPublishedProductsController);
-productsRouter.get('/admin', requireAdminAuth, getAllProductsController);
-productsRouter.post(
-  '/upload',
-  requireAdminAuth,
-  upload.single('image'),
-  uploadProductImageController
-);
-productsRouter.post('/', requireAdminAuth, createProductController);
-productsRouter.post('/reorder', requireAdminAuth, reorderProductsController);
-productsRouter.patch('/reorder', requireAdminAuth, reorderProductsController);
-productsRouter.patch('/:id', requireAdminAuth, updateProductController);
-productsRouter.delete('/:id', requireAdminAuth, deleteProductController);
+productsRouter.get('/admin', ...ownerGuard, getAllProductsController);
+productsRouter.post('/upload', ...ownerGuard, upload.single('image'), uploadProductImageController);
+productsRouter.post('/', ...ownerGuard, createProductController);
+productsRouter.post('/reorder', ...ownerGuard, reorderProductsController);
+productsRouter.patch('/reorder', ...ownerGuard, reorderProductsController);
+productsRouter.patch('/:id', ...ownerGuard, updateProductController);
+productsRouter.delete('/:id', ...ownerGuard, deleteProductController);
 
 export { productsRouter };
