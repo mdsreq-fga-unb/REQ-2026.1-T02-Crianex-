@@ -66,10 +66,18 @@
     ctx.scale(dpr, dpr);
 
     let t0: number | null = null;
+    let stopped = false;
 
     function frame(ts: number) {
       if (t0 === null) t0 = ts;
       const t = (ts - t0) / 1000;
+
+      // Para após 30s — globo decorativo, não precisa animar indefinidamente
+      if (t > 30) {
+        stopped = true;
+        return;
+      }
+
       const rot = t * 0.38;
 
       ctx.clearRect(0, 0, GS, GS);
@@ -119,6 +127,17 @@
     }
     raf = requestAnimationFrame(frame);
 
+    // Pausa quando aba está oculta, retoma quando visível
+    function handleVisibility() {
+      if (document.hidden) {
+        cancelAnimationFrame(raf);
+        raf = 0;
+      } else if (!stopped) {
+        raf = requestAnimationFrame(frame);
+      }
+    }
+    document.addEventListener('visibilitychange', handleVisibility);
+
     // ── Tooltip: mínimo 3.5s visível, auto-oculta em 7s, pode ser dismissado após 3.5s ──
     setTimeout(() => {
       canDismiss = true;
@@ -132,6 +151,10 @@
     window.addEventListener('touchmove', dismissTooltip, opts);
     window.addEventListener('scroll', dismissTooltip, opts);
     window.addEventListener('keydown', dismissTooltip, opts);
+
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibility);
+    };
   });
 
   onDestroy(() => {
@@ -226,10 +249,10 @@
     left: 0;
     right: 0;
     z-index: 40;
-    background: rgba(252, 252, 252, 0.86);
+    background: color-mix(in srgb, var(--vitrine-surface) 86%, transparent);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
-    border-bottom: 1px solid #e8e6e2;
+    border-bottom: 1px solid var(--vitrine-border);
   }
 
   .inner {
@@ -253,7 +276,7 @@
     align-items: center;
     gap: 10px;
     text-decoration: none;
-    color: #060606;
+    color: var(--venom);
     flex-shrink: 0;
   }
 
@@ -262,7 +285,7 @@
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    color: #060606;
+    color: var(--venom);
   }
 
   .brand-name {
@@ -270,7 +293,7 @@
     font-size: 15px;
     font-weight: 600;
     letter-spacing: -0.01em;
-    color: #060606;
+    color: var(--venom);
   }
 
   /* ── Navigation ────────────────────────────────────────────────────────────── */
@@ -284,7 +307,7 @@
     font-family: var(--font-sans, 'Space Grotesk', sans-serif);
     font-size: 14px;
     font-weight: 500;
-    color: #6b6862;
+    color: var(--vitrine-text-muted);
     text-decoration: none;
     transition: color 0.15s;
     position: relative;
@@ -292,11 +315,11 @@
   }
 
   .nav-link:hover {
-    color: #060606;
+    color: var(--venom);
   }
 
   .nav-link.active {
-    color: #060606;
+    color: var(--venom);
   }
 
   /* dot indicator after active link */
@@ -333,7 +356,7 @@
     width: 38px;
     height: 38px;
     border-radius: 50%;
-    border: 1px solid #e8e6e2;
+    border: 1px solid var(--vitrine-border);
     background: transparent;
     cursor: pointer;
     transition:
@@ -344,7 +367,7 @@
 
   .lang-globe:hover {
     border-color: #9a968e;
-    background: rgba(28, 28, 26, 0.04);
+    background: color-mix(in srgb, var(--venom) 4%, transparent);
   }
 
   /* ── Tooltip / speech bubble ───────────────────────────────────────────────── */
@@ -352,8 +375,8 @@
     position: absolute;
     top: calc(100% + 14px);
     right: -4px;
-    background: #060606;
-    color: #fcfcfc;
+    background: var(--venom);
+    color: var(--vitrine-surface);
     font-family: var(--font-sans, 'Space Grotesk', sans-serif);
     font-size: 12px;
     font-weight: 500;
@@ -373,7 +396,7 @@
     height: 0;
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
-    border-bottom: 6px solid #060606;
+    border-bottom: 6px solid var(--venom);
   }
 
   @keyframes tooltip-bob {
@@ -396,7 +419,7 @@
     width: 38px;
     height: 38px;
     border-radius: 100px;
-    border: 1px solid #e8e6e2;
+    border: 1px solid var(--vitrine-border);
     background: transparent;
     cursor: pointer;
     padding: 0;
@@ -407,7 +430,7 @@
     width: 14px;
     height: 1.5px;
     border-radius: 1px;
-    background: #060606;
+    background: var(--venom);
     transition: opacity 0.2s;
   }
 

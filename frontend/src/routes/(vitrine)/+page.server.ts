@@ -3,7 +3,7 @@ import { env } from '$env/dynamic/public';
 import type { PageServerLoad } from './$types';
 import type { HomeProduct } from './home';
 
-export const load: PageServerLoad = async ({ url, locals }) => {
+export const load: PageServerLoad = async ({ url, locals, fetch }) => {
   const supabaseUrl = env.PUBLIC_SUPABASE_URL;
   const key = env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
 
@@ -14,7 +14,10 @@ export const load: PageServerLoad = async ({ url, locals }) => {
     return { products: [] as HomeProduct[], origin, selectedLang };
   }
 
-  const supabase = createClient(supabaseUrl, key);
+  const supabase = createClient(supabaseUrl, key, {
+    global: { fetch },
+    auth: { persistSession: false },
+  });
 
   const { data } = await supabase
     .from('products')

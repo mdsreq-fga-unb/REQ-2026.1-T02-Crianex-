@@ -1,7 +1,5 @@
 <script lang="ts">
   import '../../app.css';
-  import { onMount } from 'svelte';
-  import { browser } from '$app/environment';
   import { beforeNavigate, afterNavigate } from '$app/navigation';
   import { lang } from '$lib/stores/lang';
   import SiteHeader from '$lib/components/vitrine/SiteHeader.svelte';
@@ -9,24 +7,16 @@
 
   // Loader de transição entre páginas
   let loading = false;
-  let loaderBg = '#fcfcfc';
+  let loaderBg = 'var(--vitrine-surface)';
   let showTimer: ReturnType<typeof setTimeout>;
   let hideTimer: ReturnType<typeof setTimeout>;
-
-  // Loader inicial: cobre o flash enquanto o estado do lang ainda hidrata no cliente
-  // browser ? false → loader visível até onMount; server ? true → sem loader no SSR
-  let langReady = !browser;
-
-  onMount(() => {
-    langReady = true;
-  });
 
   $: loaderMsg = $lang === 'en' ? 'Loading' : 'Carregando';
 
   // 100ms antes de mostrar → navegações prefetchadas nunca mostram o loader
   beforeNavigate(({ to }) => {
     clearTimeout(hideTimer);
-    loaderBg = (to?.url.pathname ?? '').includes('/sobre') ? '#f0f0ee' : '#fcfcfc';
+    loaderBg = (to?.url.pathname ?? '').includes('/sobre') ? '#f0f0ee' : 'var(--vitrine-surface)';
     showTimer = setTimeout(() => {
       loading = true;
     }, 100);
@@ -44,7 +34,7 @@
   // Footer — issue #89
 </script>
 
-{#if !langReady || loading}
+{#if loading}
   <PageLoader bgColor={loaderBg} message={loaderMsg} />
 {/if}
 
@@ -59,8 +49,8 @@
 
 <style>
   :global(body):has(.vitrine-root) {
-    background-color: #fcfcfc;
-    color: #060606;
+    background-color: var(--vitrine-surface);
+    color: var(--venom);
     scrollbar-width: none;
   }
   :global(body:has(.vitrine-root)::-webkit-scrollbar) {
