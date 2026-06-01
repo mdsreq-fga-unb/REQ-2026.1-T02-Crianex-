@@ -50,7 +50,6 @@
         return false;
       }
 
-      await supabase.auth.signOut();
       await goto('/admin');
       return true;
     } catch (error) {

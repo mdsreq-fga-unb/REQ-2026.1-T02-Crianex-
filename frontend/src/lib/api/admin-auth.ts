@@ -11,7 +11,7 @@ type AdminSessionResponse = {
 };
 
 export async function authorizeAdminSession(accessToken: string): Promise<AdminSessionUser> {
-  const response = await apiFetch<AdminSessionResponse>('/api/auth/session', {
+  const response = await apiFetch<AdminSessionResponse>('/auth/session', {
     method: 'POST',
     token: accessToken,
   });
