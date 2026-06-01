@@ -161,8 +161,8 @@
 >
   <div class="inner">
     <div class="stage">
-      <canvas bind:this={whirlCanvas} class="layer" style="width:{S}px;height:{S}px" />
-      <canvas bind:this={globeCanvas} class="layer" style="width:{S}px;height:{S}px" />
+      <canvas bind:this={whirlCanvas} class="layer" style="width:{S}px;height:{S}px"></canvas>
+      <canvas bind:this={globeCanvas} class="layer" style="width:{S}px;height:{S}px"></canvas>
     </div>
     <p class="msg">{message}</p>
   </div>
