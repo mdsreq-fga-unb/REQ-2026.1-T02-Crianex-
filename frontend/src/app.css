@@ -26,6 +26,11 @@
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
   --radius: 0.5rem;
 
+  /* Vitrine-specific tokens */
+  --vitrine-surface: #fcfcfc;
+  --vitrine-border: #e8e6e2;
+  --vitrine-text-muted: #6b6862;
+
   /* shadcn-svelte component vars (light mode) */
   --background: 0 0% 100%;
   --foreground: 240 10% 3.9%;

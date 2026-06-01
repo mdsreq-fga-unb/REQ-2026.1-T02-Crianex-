@@ -78,7 +78,21 @@
   function handleEditarProduto(produto: Produto) {
     isEditingMode = true;
     currentProductId = produto.id;
-    modalData = { ...produto }; // Copia os dados atuais para o modal
+    modalData = {
+      name_pt: produto.name_pt,
+      name_en: produto.name_en,
+      slug: produto.slug,
+      published: produto.published,
+      category_pt: produto.category_pt ?? '',
+      category_en: produto.category_en ?? '',
+      tagline_pt: produto.tagline_pt ?? '',
+      tagline_en: produto.tagline_en ?? '',
+      description_pt: produto.description_pt ?? '',
+      description_en: produto.description_en ?? '',
+      color: produto.color ?? '#6366f1',
+      icon_text: produto.icon_text ?? '',
+      image_url: produto.image_url ?? '',
+    };
     isModalOpen = true;
   }
 
@@ -141,6 +155,7 @@
 
     const updatedPublicados = [...publicados];
     const [itemArrastado] = updatedPublicados.splice(draggingIndex, 1);
+    if (!itemArrastado) return;
     updatedPublicados.splice(index, 0, itemArrastado);
 
     draggingIndex = index;
@@ -430,7 +445,7 @@
           </div>
 
           <div class="flex items-center gap-6 w-5/12 justify-end text-xs">
-            <span class="text-zinc-400 font-medium text-right min-w-[120px] truncate"
+            <span class="text-zinc-400 font-medium text-right min-w-30 truncate"
               >{produto.category_pt || 'Geral'}</span
             >
 
@@ -524,7 +539,7 @@
           </div>
 
           <div class="flex items-center gap-6 w-5/12 justify-end text-xs">
-            <span class="text-zinc-500 text-right min-w-[120px] truncate"
+            <span class="text-zinc-500 text-right min-w-30 truncate"
               >{produto.category_pt || 'Geral'}</span
             >
 
