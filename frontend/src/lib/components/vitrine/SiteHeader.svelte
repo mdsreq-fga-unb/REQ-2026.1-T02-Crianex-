@@ -192,7 +192,8 @@
           aria-label={tooltipText}
           title={tooltipText}
         >
-          <canvas bind:this={globeCanvas} style="width:{GS}px;height:{GS}px;display:block;"></canvas>
+          <canvas bind:this={globeCanvas} style="width:{GS}px;height:{GS}px;display:block;"
+          ></canvas>
         </button>
 
         <!-- Speech bubble tooltip — shows once, fades on first interaction -->
