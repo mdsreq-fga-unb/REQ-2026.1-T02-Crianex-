@@ -18,5 +18,9 @@
   :global(body):has(.vitrine-root) {
     background-color: #fcfcfc;
     color: #060606;
+    scrollbar-width: none;
+  }
+  :global(body:has(.vitrine-root)::-webkit-scrollbar) {
+    display: none;
   }
 </style>

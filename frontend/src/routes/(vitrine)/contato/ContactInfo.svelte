@@ -47,7 +47,7 @@
       </svg>
       {t.btnLinkedin[$lang]}
     </a>
-    <a href="mailto:comercial@crianex.com.br" aria-label="Email" class="btn ghost sm">
+    <a href="mailto:contato@crianex.com" aria-label="Email" class="btn ghost sm">
       <svg
         width="14"
         height="14"

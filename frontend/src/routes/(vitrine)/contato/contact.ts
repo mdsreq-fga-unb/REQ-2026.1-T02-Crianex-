@@ -22,7 +22,7 @@ export type FormState = {
 export type SubmitStatus = 'idle' | 'loading' | 'success' | 'error';
 
 export const CHANNELS = [
-  { k: 'EMAIL', v: { pt: 'comercial@crianex.com.br', en: 'comercial@crianex.com.br' } },
+  { k: 'EMAIL', v: { pt: 'contato@crianex.com', en: 'contato@crianex.com' } },
   { k: 'LINKEDIN', v: { pt: 'linkedin.com/company/crianex', en: 'linkedin.com/company/crianex' } },
   { k: 'WHATSAPP', v: { pt: 'Disponível em breve', en: 'Available soon' } },
   { k: 'HORÁRIO', v: { pt: 'Seg–Sex, 9h–18h (BRT)', en: 'Mon–Fri, 9am–6pm (BRT)' } },

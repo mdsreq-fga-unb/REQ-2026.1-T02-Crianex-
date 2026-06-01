@@ -40,11 +40,10 @@ describe('about i18n content', () => {
         expect(c.lede).toBeTruthy();
       });
 
-      it('has cta block with title, body and labels', () => {
+      it('has cta block with title, body and label', () => {
         expect(c.cta.title).toBeTruthy();
         expect(c.cta.body).toBeTruthy();
         expect(c.cta.emailLabel).toBeTruthy();
-        expect(c.cta.linkedinLabel).toBeTruthy();
       });
 
       it('has SEO title following "Sobre/About a Crianex | Crianex Hub" pattern', () => {

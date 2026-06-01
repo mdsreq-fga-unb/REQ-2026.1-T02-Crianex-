@@ -462,7 +462,7 @@ const CrxData = {
         en: 'We got your message. A product specialist will reply within one business day.',
       },
       channels: [
-        { k: 'email', v: 'comercial@crianex.com.br' },
+        { k: 'email', v: 'contato@crianex.com' },
         { k: 'linkedin', v: 'linkedin.com/company/crianex' },
         {
           k: 'address',

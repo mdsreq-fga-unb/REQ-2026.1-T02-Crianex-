@@ -3,11 +3,18 @@ import enAbout from '../../../lib/i18n/en/about.json';
 
 export type AboutValue = { n: string; title: string; body: string };
 export type AboutStat = { value: string; label: string };
+export type HeroNavLink = { label: string; href: string };
 
 export type AboutContent = {
   eyebrow: string;
   h1: string;
   lede: string;
+  heroNavLinks: HeroNavLink[];
+  heroBadge: string;
+  heroH1: string;
+  heroSub: string;
+  heroCta: string;
+  heroCtaEmail: string;
   missionEyebrow: string;
   missionTitle: string;
   missionDesc: string;
@@ -20,7 +27,6 @@ export type AboutContent = {
     title: string;
     body: string;
     emailLabel: string;
-    linkedinLabel: string;
   };
   seo: { title: string; ogTitle: string };
 };

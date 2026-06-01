@@ -807,7 +807,7 @@ const AboutPage = ({ lang }) => {
           </div>
           <div className="end">
             <a className="btn">
-              <Icon name="mail" size={14} /> comercial@crianex.com.br
+              <Icon name="mail" size={14} /> contato@crianex.com
             </a>
             <a className="btn ghost">
               <Icon name="linkedin" size={14} /> LinkedIn
