@@ -2,9 +2,9 @@
 
 ## Histórico de Revisão
 
-| Versão | Data       | Descrição          | Autor   |
-|--------|------------|--------------------|---------|
-| v1.0   | 31/05/2026 | Criação inicial    | Bappoz  |
+| Versão | Data       | Descrição       | Autor  |
+| ------ | ---------- | --------------- | ------ |
+| v1.0   | 31/05/2026 | Criação inicial | Bappoz |
 
 ---
 
@@ -29,9 +29,9 @@ O Crianex Hub possui duas superfícies distintas: uma vitrine pública (sem aute
 
 ### Roles disponíveis
 
-| Role     | Descrição                                         |
-|----------|---------------------------------------------------|
-| `owner`  | Acesso completo ao painel administrativo          |
+| Role     | Descrição                                              |
+| -------- | ------------------------------------------------------ |
+| `owner`  | Acesso completo ao painel administrativo               |
 | `member` | Acesso de leitura interno; sem acesso ao admin público |
 
 Roles adicionais (ex: `viewer`, `support`) podem ser introduzidos sem quebrar a implementação atual — o middleware aceita qualquer string como parâmetro.
@@ -97,20 +97,20 @@ Policies que dependem de role referenciam esta função. Queries client-side sem
 
 ## Alternativas Descartadas
 
-| Alternativa | Motivo da rejeição |
-|---|---|
-| Codificar role no `app_metadata` do JWT | Requer privilégio de service-role para escrita; cria inconsistência entre JWT e banco após troca de role |
-| Middleware único `requireAdminAuth` sem distinção de role | Não permite granularidade futura; foi o estado anterior, substituído por esta decisão |
-| ABAC completo (Attribute-Based Access Control) | Over-engineering para o escopo atual (2 roles, ~10 rotas protegidas) |
+| Alternativa                                               | Motivo da rejeição                                                                                       |
+| --------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| Codificar role no `app_metadata` do JWT                   | Requer privilégio de service-role para escrita; cria inconsistência entre JWT e banco após troca de role |
+| Middleware único `requireAdminAuth` sem distinção de role | Não permite granularidade futura; foi o estado anterior, substituído por esta decisão                    |
+| ABAC completo (Attribute-Based Access Control)            | Over-engineering para o escopo atual (2 roles, ~10 rotas protegidas)                                     |
 
 ---
 
 ## Rastreabilidade
 
-| Artefato | Referência |
-|---|---|
-| Feature | F10 — Permitir acesso ao painel administrativo |
-| Issue | #71 |
-| CP | CP8 — Painel de gerenciamento de produtos SaaS (admin) |
-| RNF | RNF07 (OWASP), RNF08 (RLS), RNF09 (autenticação) |
-| RF | RF relacionados à autenticação e CRUD admin |
+| Artefato | Referência                                             |
+| -------- | ------------------------------------------------------ |
+| Feature  | F10 — Permitir acesso ao painel administrativo         |
+| Issue    | #71                                                    |
+| CP       | CP8 — Painel de gerenciamento de produtos SaaS (admin) |
+| RNF      | RNF07 (OWASP), RNF08 (RLS), RNF09 (autenticação)       |
+| RF       | RF relacionados à autenticação e CRUD admin            |
