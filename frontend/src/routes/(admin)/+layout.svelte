@@ -20,7 +20,7 @@
   const navItems = [
     { href: '/crm', label: 'CRM', icon: Users },
     { href: '/products', label: 'Produtos', icon: Package },
-    { href: '/faq', label: 'FAQ', icon: HelpCircle },
+    { href: '/gestao-faq', label: 'FAQ', icon: HelpCircle },
     { href: '/logs', label: 'Logs', icon: FileText },
     { href: '/metricas', label: 'Métricas', icon: BarChart2 },
     { href: '/tickets', label: 'Tickets', icon: Ticket },
@@ -31,7 +31,7 @@
 
   $: activeItem = navItems.find((item) => $page.url.pathname.startsWith(item.href)) ?? null;
   $: activeTitle = activeItem?.label ?? 'Painel';
-  $: activeCrumb = `admin / ${activeItem?.label.toLowerCase() ?? 'dashboard'}`;
+  $: activeCrumb = `ADMIN · ${(activeItem?.label ?? 'Dashboard').toUpperCase()}`;
 
   $: userInitials = (data.adminUser.name ?? 'A')
     .split(' ')
