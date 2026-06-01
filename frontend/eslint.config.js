@@ -46,4 +46,11 @@ export default [
       'svelte/valid-compile': 'off',
     },
   },
+  // {@html} é usado para JSON-LD em rotas — conteúdo controlado, sem input do usuário
+  {
+    files: ['src/routes/**/*.svelte'],
+    rules: {
+      'svelte/no-at-html-tags': 'warn',
+    },
+  },
 ];
