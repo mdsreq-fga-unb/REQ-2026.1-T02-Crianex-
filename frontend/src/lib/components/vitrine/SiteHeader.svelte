@@ -192,13 +192,13 @@
           aria-label={tooltipText}
           title={tooltipText}
         >
-          <canvas bind:this={globeCanvas} style="width:{GS}px;height:{GS}px;display:block;" />
+          <canvas bind:this={globeCanvas} style="width:{GS}px;height:{GS}px;display:block;"></canvas>
         </button>
 
         <!-- Speech bubble tooltip — shows once, fades on first interaction -->
         {#if showTooltip}
           <div class="tooltip" transition:fade={{ duration: 200 }}>
-            <span class="tooltip-arrow" aria-hidden="true" />
+            <span class="tooltip-arrow" aria-hidden="true"></span>
             {tooltipText}
           </div>
         {/if}
@@ -206,16 +206,16 @@
 
       <!-- Mobile hamburger (drawer fora do escopo desta issue) -->
       <button class="menu-btn" aria-label="Abrir menu" aria-expanded="false">
-        <span class="bar" />
-        <span class="bar" />
-        <span class="bar" />
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
       </button>
     </div>
   </div>
 </header>
 
 <!-- Spacer para compensar o fixed header -->
-<div class="header-spacer" aria-hidden="true" />
+<div class="header-spacer" aria-hidden="true"></div>
 
 <style>
   /* ── Header shell ──────────────────────────────────────────────────────────── */
