@@ -1,6 +1,11 @@
 {
   "eyebrow": "About Crianex",
   "h1": "A B2B software house based in São Paulo since 2019.",
+  "heroBadge": "B2B software house since 2019",
+  "heroH1": "We build platforms.\nNot projects.",
+  "heroSub": "Six vertical SaaS. One lean team.",
+  "heroCta": "Get in touch",
+  "heroCtaEmail": "contato@crianex.com",
   "lede": "We started as a consultancy. In 2021 we stopped selling hours and started selling product. We now run six vertical SaaS on a shared Kubernetes platform.",
   "missionEyebrow": "Mission, vision, values",
   "missionTitle": "What keeps the team aligned.",
@@ -34,8 +39,7 @@
   "cta": {
     "title": "Work with us.",
     "body": "Either as a customer or an engineer. We're open to both kinds of conversation.",
-    "emailLabel": "comercial@crianex.com.br",
-    "linkedinLabel": "LinkedIn"
+    "emailLabel": "Get in touch"
   },
   "seo": {
     "title": "About Crianex | Crianex Hub",

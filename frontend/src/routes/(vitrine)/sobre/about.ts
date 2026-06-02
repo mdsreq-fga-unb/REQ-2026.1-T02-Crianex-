@@ -8,6 +8,11 @@ export type AboutContent = {
   eyebrow: string;
   h1: string;
   lede: string;
+  heroBadge: string;
+  heroH1: string;
+  heroSub: string;
+  heroCta: string;
+  heroCtaEmail: string;
   missionEyebrow: string;
   missionTitle: string;
   missionDesc: string;
@@ -20,7 +25,6 @@ export type AboutContent = {
     title: string;
     body: string;
     emailLabel: string;
-    linkedinLabel: string;
   };
   seo: { title: string; ogTitle: string };
 };
