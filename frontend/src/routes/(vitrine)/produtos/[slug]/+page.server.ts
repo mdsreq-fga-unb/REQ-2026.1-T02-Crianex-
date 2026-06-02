@@ -4,7 +4,7 @@ import type { PageServerLoad } from './$types';
 import { error } from '@sveltejs/kit';
 
 export const load: PageServerLoad = async (event) => {
-  const { params, url, request } = event;
+  const { params, url, request, fetch } = event;
   const { slug } = params;
   if (!slug) throw error(404, 'Produto não encontrado');
 
@@ -12,7 +12,10 @@ export const load: PageServerLoad = async (event) => {
   const supabaseKey = env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
   if (!supabaseUrl || !supabaseKey) throw error(503, 'Serviço indisponível');
 
-  const supabase = createClient(supabaseUrl, supabaseKey);
+  const supabase = createClient(supabaseUrl, supabaseKey, {
+    global: { fetch },
+    auth: { persistSession: false },
+  });
 
   const { data, error: fetchError } = await supabase
     .from('products')

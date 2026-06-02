@@ -20,9 +20,10 @@ type Product = {
   updated_at?: string | null;
 };
 
-export const load: PageServerLoad = async () => {
+export const load: PageServerLoad = async ({ cookies }) => {
+  const token = cookies.get('crianex_admin_access_token');
   try {
-    const produtosDoBanco = await apiFetch<Product[]>('/products/admin');
+    const produtosDoBanco = await apiFetch<Product[]>('/products/admin', { token });
     return { produtos: produtosDoBanco };
   } catch (error) {
     console.error('[FRONTEND LOAD ERROR]:', error);

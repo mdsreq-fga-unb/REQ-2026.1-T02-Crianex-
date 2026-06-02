@@ -15,93 +15,259 @@
   <meta property="og:type" content="website" />
 </svelte:head>
 
-<article class="about" data-testid="about-page">
-  <section class="about-hero">
-    <div class="eyebrow">
-      <span class="dot"></span>
-      {content.eyebrow}
-    </div>
-    <h1>{content.h1}</h1>
-    <p class="lede">{content.lede}</p>
-  </section>
+<article data-testid="about-page">
+  <!-- ── Navbar omitido: será implementado na issue de navegação global ──── -->
 
-  <section class="section mission">
-    <div class="section-head">
-      <div>
-        <div class="eyebrow">
-          <span class="dot pink"></span>
-          {content.missionEyebrow}
-        </div>
-        <h2>{content.missionTitle}</h2>
-      </div>
-      <p class="desc">{content.missionDesc}</p>
-    </div>
-    <div class="values-grid">
-      {#each content.values as v (v.n)}
-        <div class="value-card">
-          <span class="n">{v.n}</span>
-          <h4>{v.title}</h4>
-          <p>{v.body}</p>
-        </div>
-      {/each}
-    </div>
-  </section>
+  <!-- ── Video Hero ──────────────────────────────────────────────────────── -->
+  <section class="hero-wrap">
+    <video class="hero-video" autoplay muted loop playsinline>
+      <source
+        src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260508_215831_c6a8989c-d716-4d8d-8745-e972a2eec711.mp4"
+        type="video/mp4"
+      />
+    </video>
 
-  <section class="section numbers">
-    <div class="section-head">
-      <div>
-        <div class="eyebrow">
-          <span class="dot green"></span>
-          {content.numbersEyebrow}
+    <div class="hero-fg">
+      <!-- Bottom-left content -->
+      <div class="hero-content">
+        <div class="hero-inner">
+          <span class="hero-badge">
+            {content.heroBadge}
+          </span>
+          <h1 class="hero-h1">{content.heroH1}</h1>
+          <p class="hero-sub">{content.heroSub}</p>
+          <div class="hero-ctas">
+            <a href="/contato" class="hero-cta primary">
+              {content.heroCta}
+              <span class="cta-arrow">→</span>
+            </a>
+            <a href="mailto:{content.heroCtaEmail}" class="hero-cta ghost">
+              {content.heroCtaEmail}
+            </a>
+          </div>
         </div>
-        <h2>{content.numbersTitle}</h2>
       </div>
-      <p class="desc">{content.numbersDesc}</p>
-    </div>
-    <div class="stats-grid">
-      {#each content.stats as s (s.label)}
-        <div class="stat">
-          <span class="label">{s.label}</span>
-          <span class="value">{s.value}</span>
-        </div>
-      {/each}
     </div>
   </section>
 
-  <section class="section">
-    <div class="cta-banner">
-      <div>
-        <h3>{content.cta.title}</h3>
-        <p>{content.cta.body}</p>
+  <!-- ── Body Content ────────────────────────────────────────────────────── -->
+  <div class="about">
+    <section class="section mission" id="missao">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">
+            <span class="dot pink"></span>
+            {content.missionEyebrow}
+          </div>
+          <h2>{content.missionTitle}</h2>
+        </div>
+        <p class="desc">{content.missionDesc}</p>
       </div>
-      <div class="cta-actions">
-        <a class="btn primary" href="mailto:comercial@crianex.com.br">
-          {content.cta.emailLabel}
-        </a>
-        <a
-          class="btn ghost"
-          href="https://linkedin.com/company/crianex"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {content.cta.linkedinLabel}
-        </a>
+      <div class="values-grid">
+        {#each content.values as v (v.n)}
+          <div class="value-card">
+            <span class="n">{v.n}</span>
+            <h4>{v.title}</h4>
+            <p>{v.body}</p>
+          </div>
+        {/each}
       </div>
-    </div>
-  </section>
+    </section>
+
+    <section class="section numbers" id="numeros">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">
+            <span class="dot green"></span>
+            {content.numbersEyebrow}
+          </div>
+          <h2>{content.numbersTitle}</h2>
+        </div>
+        <p class="desc">{content.numbersDesc}</p>
+      </div>
+      <div class="stats-grid">
+        {#each content.stats as s (s.label)}
+          <div class="stat">
+            <span class="label">{s.label}</span>
+            <span class="value">{s.value}</span>
+          </div>
+        {/each}
+      </div>
+    </section>
+
+    <section class="section" id="contato">
+      <div class="cta-banner">
+        <div>
+          <h3>{content.cta.title}</h3>
+          <p>{content.cta.body}</p>
+        </div>
+        <div class="cta-actions">
+          <a class="btn primary" href="/contato">
+            {content.cta.emailLabel}
+          </a>
+          <a class="btn ghost" href="mailto:contato@crianex.com"> contato@crianex.com </a>
+        </div>
+      </div>
+    </section>
+  </div>
 </article>
 
 <style>
+  /* ── Hero ──────────────────────────────────────────────────────────────── */
+  .hero-wrap {
+    position: relative;
+    min-height: 100svh;
+    overflow: hidden;
+    background: #f0f0ee;
+  }
+
+  .hero-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero-fg {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    min-height: 100svh;
+  }
+
+  /* Bottom-left hero content */
+  .hero-content {
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    padding: 0 1.5rem 3.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .hero-content {
+      padding: 0 3rem 5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero-content {
+      padding: 0 7rem 6rem;
+    }
+  }
+
+  .hero-inner {
+    width: 40rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 5rem;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--pink, #e71f84);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .hero-h1 {
+    font-size: 1.875rem;
+    line-height: 1.1;
+    font-weight: 600;
+    color: #111827;
+    letter-spacing: -0.02em;
+    margin: 0;
+    white-space: pre-line;
+  }
+
+  @media (min-width: 640px) {
+    .hero-h1 {
+      font-size: 2.25rem;
+    }
+  }
+
+  .hero-sub {
+    font-size: 14px;
+    color: #6b7280;
+    font-weight: 400;
+    margin: 0;
+  }
+
+  .hero-ctas {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: 0.25rem;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 999px;
+    padding: 0.625rem 1.375rem;
+    text-decoration: none;
+    transition:
+      background-color 0.2s,
+      color 0.2s,
+      border-color 0.2s,
+      opacity 0.2s;
+    width: fit-content;
+  }
+
+  .hero-cta.primary {
+    background: #060606;
+    color: #ffffff;
+    border: 1px solid #060606;
+  }
+
+  .hero-cta.primary:hover {
+    background: var(--pink, #e71f84);
+    border-color: var(--pink, #e71f84);
+  }
+
+  .hero-cta.primary:hover .cta-arrow {
+    transform: translateX(2px);
+  }
+
+  .hero-cta.ghost {
+    background: transparent;
+    color: #6b7280;
+    border: 1px solid #d1d5db;
+    font-size: 12px;
+  }
+
+  .hero-cta.ghost:hover {
+    color: #111827;
+    border-color: #9ca3af;
+  }
+
+  .cta-arrow {
+    display: inline-block;
+    transition: transform 0.2s;
+  }
+
+  /* ── About body ─────────────────────────────────────────────────────────── */
   .about {
     --r-lg: 18px;
     --line: #e8e6e2;
     --bg-soft: #f5f3ef;
     --text-muted: #6b6862;
     --text-faint: #9a968e;
+    --pad: clamp(40px, 8vw, 160px);
 
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 80px 40px;
+    padding: 80px var(--pad);
+    padding-top: 0;
     color: #060606;
   }
 
@@ -128,30 +294,21 @@
     background: var(--green, #66df7a);
   }
 
-  .about-hero {
-    padding: 32px 0 64px;
-    border-bottom: 1px solid var(--line);
-  }
-  .about-hero h1 {
-    font-size: clamp(40px, 6vw, 72px);
-    line-height: 1.05;
-    letter-spacing: -0.02em;
-    margin: 0 0 24px;
-    max-width: 18ch;
-  }
-  .lede {
-    font-size: 18px;
-    line-height: 1.6;
-    color: var(--text-muted);
-    max-width: 60ch;
-  }
-
   .section {
     padding: 80px 0;
     border-bottom: 1px solid var(--line);
   }
   .section:last-child {
     border-bottom: none;
+  }
+
+  /* Fades de cor por seção */
+  .mission {
+    background: linear-gradient(160deg, rgba(231, 31, 132, 0.04) 0%, transparent 55%);
+    margin-left: calc(-1 * var(--pad));
+    margin-right: calc(-1 * var(--pad));
+    padding-left: var(--pad);
+    padding-right: var(--pad);
   }
   .section-head {
     display: grid;
@@ -184,11 +341,15 @@
     border-radius: var(--r-lg);
     padding: 28px;
     background: #ffffff;
+    transition: border-color 0.2s;
+  }
+  .value-card:hover {
+    border-color: var(--pink, #e71f84);
   }
   .value-card .n {
     font-family: var(--font-mono, monospace);
     font-size: 11px;
-    color: var(--text-faint);
+    color: var(--pink, #e71f84);
     letter-spacing: 0.08em;
   }
   .value-card h4 {
@@ -204,10 +365,15 @@
   }
 
   .numbers {
-    background: var(--bg-soft);
-    margin: 0 -40px;
-    padding-left: 40px;
-    padding-right: 40px;
+    background: linear-gradient(
+      to bottom,
+      rgba(102, 223, 122, 0.07) 0%,
+      rgba(245, 243, 239, 0.95) 40%
+    );
+    margin-left: calc(-1 * var(--pad));
+    margin-right: calc(-1 * var(--pad));
+    padding-left: var(--pad);
+    padding-right: var(--pad);
   }
   .stats-grid {
     display: grid;
@@ -219,7 +385,11 @@
     flex-direction: column;
     gap: 12px;
     padding: 24px 0;
-    border-top: 1px solid var(--line);
+    border-top: 2px solid var(--line);
+    transition: border-color 0.2s;
+  }
+  .stat:hover {
+    border-top-color: var(--green, #66df7a);
   }
   .stat .label {
     font-family: var(--font-mono, monospace);
@@ -242,7 +412,7 @@
     padding: 40px;
     border-radius: var(--r-lg);
     border: 1px solid var(--line);
-    background: #ffffff;
+    background: linear-gradient(135deg, rgba(127, 63, 229, 0.04) 0%, #ffffff 50%);
   }
   .cta-banner h3 {
     font-size: 24px;
@@ -281,20 +451,24 @@
     background: transparent;
   }
 
+  /* ── Wide-screen (≥ 1280px) ─────────────────────────────────────────────── */
+  @media (min-width: 1280px) {
+    .stats-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  /* ── Mobile ─────────────────────────────────────────────────────────────── */
   @media (max-width: 768px) {
     .about {
       padding: 48px 20px;
+      --pad: 20px;
     }
     .section-head,
     .values-grid,
     .stats-grid {
       grid-template-columns: 1fr;
       gap: 24px;
-    }
-    .numbers {
-      margin: 0 -20px;
-      padding-left: 20px;
-      padding-right: 20px;
     }
     .cta-banner {
       grid-template-columns: 1fr;

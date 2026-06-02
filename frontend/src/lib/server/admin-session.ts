@@ -123,20 +123,27 @@ export async function getAuthenticatedAdminSession(
 ): Promise<AuthenticatedAdminSession | null> {
   const session = readAdminSessionCookies(cookies);
 
+  console.log('[admin-session] cookies lidos:', {
+    hasAccessToken: !!session?.accessToken,
+    hasRefreshToken: !!session?.refreshToken,
+  });
+
   if (!session?.refreshToken) {
+    console.log('[admin-session] sem refreshToken — retornando null');
     return null;
   }
 
   if (session.accessToken) {
     try {
       const user = await validateAdminSession(session.accessToken);
+      console.log('[admin-session] accessToken válido, user:', user.name ?? user.id);
       return {
         accessToken: session.accessToken,
         refreshToken: session.refreshToken,
         user,
       };
-    } catch {
-      // Se o access token falhou, tenta renovar com o refresh token.
+    } catch (err) {
+      console.warn('[admin-session] accessToken inválido, tentando refresh:', err);
     }
   }
 
@@ -144,13 +151,15 @@ export async function getAuthenticatedAdminSession(
     const refreshedSession = await refreshAdminSession(session.refreshToken);
     const user = await validateAdminSession(refreshedSession.accessToken);
 
+    console.log('[admin-session] refresh bem-sucedido, user:', user.name ?? user.id);
     setAdminSessionCookies(cookies, refreshedSession);
 
     return {
       ...refreshedSession,
       user,
     };
-  } catch {
+  } catch (err) {
+    console.error('[admin-session] refresh falhou, limpando cookies:', err);
     clearAdminSessionCookies(cookies);
     return null;
   }
