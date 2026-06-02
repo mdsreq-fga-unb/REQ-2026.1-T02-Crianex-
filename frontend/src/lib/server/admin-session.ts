@@ -136,7 +136,7 @@ export async function getAuthenticatedAdminSession(
   if (session.accessToken) {
     try {
       const user = await validateAdminSession(session.accessToken);
-      console.log('[admin-session] accessToken válido, user:', user.email ?? user.id);
+      console.log('[admin-session] accessToken válido, user:', user.name ?? user.id);
       return {
         accessToken: session.accessToken,
         refreshToken: session.refreshToken,
@@ -151,7 +151,7 @@ export async function getAuthenticatedAdminSession(
     const refreshedSession = await refreshAdminSession(session.refreshToken);
     const user = await validateAdminSession(refreshedSession.accessToken);
 
-    console.log('[admin-session] refresh bem-sucedido, user:', user.email ?? user.id);
+    console.log('[admin-session] refresh bem-sucedido, user:', user.name ?? user.id);
     setAdminSessionCookies(cookies, refreshedSession);
 
     return {
