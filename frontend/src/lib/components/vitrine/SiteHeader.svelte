@@ -277,10 +277,28 @@
       </a>
     {/each}
     <div class="mobile-divider"></div>
-    <button class="mobile-lang" on:click={() => { toggleLang(); closeMobile(); }}>
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <circle cx="12" cy="12" r="10"/>
-        <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+    <button
+      class="mobile-lang"
+      on:click={() => {
+        toggleLang();
+        closeMobile();
+      }}
+    >
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <circle cx="12" cy="12" r="10" />
+        <path
+          d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+        />
       </svg>
       {$lang === 'pt' ? 'Switch to English' : 'Mudar para Português'}
     </button>
@@ -494,7 +512,9 @@
     transform: translateY(-6.5px) rotate(-45deg);
   }
   .bar {
-    transition: transform 0.22s ease, opacity 0.15s ease;
+    transition:
+      transform 0.22s ease,
+      opacity 0.15s ease;
   }
 
   /* ── Mobile drawer ─────────────────────────────────────────────────────────── */

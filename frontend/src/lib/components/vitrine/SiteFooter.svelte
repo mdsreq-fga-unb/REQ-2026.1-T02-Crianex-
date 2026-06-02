@@ -51,7 +51,11 @@
       <h5>{t.cols.products[$lang]}</h5>
       <ul>
         {#each products as p (p.slug)}
-          <li><a href="/?produto={p.slug}#products-carousel">{$lang === 'pt' ? p.name_pt : p.name_en}</a></li>
+          <li>
+            <a href="/?produto={p.slug}#products-carousel"
+              >{$lang === 'pt' ? p.name_pt : p.name_en}</a
+            >
+          </li>
         {/each}
       </ul>
     </div>

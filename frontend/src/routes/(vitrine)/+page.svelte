@@ -41,7 +41,9 @@
       const idx = products.findIndex((p) => p.slug === slug);
       if (idx >= 0) active = idx;
       setTimeout(() => {
-        document.getElementById('products-carousel')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        document
+          .getElementById('products-carousel')
+          ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }, 120);
     }
 
@@ -185,10 +187,15 @@
                 <polyline points="7 7 17 7 17 17" />
               </svg>
             </a>
-            <button class="btn ghost" onclick={() => {
-              jumpTo(0);
-              document.getElementById('products-carousel')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }}>
+            <button
+              class="btn ghost"
+              onclick={() => {
+                jumpTo(0);
+                document
+                  .getElementById('products-carousel')
+                  ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }}
+            >
               {t.ctaSecondary[$lang]}
             </button>
           </div>

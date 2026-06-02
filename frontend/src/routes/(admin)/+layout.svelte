@@ -32,7 +32,7 @@
 
   $: activeItem =
     navItems.find(
-      (item) => $page.url.pathname === item.href || $page.url.pathname.startsWith(item.href + '/'),
+      (item) => $page.url.pathname === item.href || $page.url.pathname.startsWith(item.href + '/')
     ) ?? null;
   $: activeTitle = activeItem?.label ?? 'Painel';
   $: activeCrumb = `admin / ${activeItem?.label.toLowerCase() ?? 'dashboard'}`;
