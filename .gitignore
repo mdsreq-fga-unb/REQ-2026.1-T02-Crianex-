@@ -6,6 +6,7 @@ __pycache__/
 # ── Claude ───────────────────────────────────────────
 .claude/
 graphify-out/
+CLAUDE.md
 
 # ── Node.js ──────────────────────────────────────────
 node_modules/

@@ -1,6 +1,12 @@
 import { env } from '$env/dynamic/public';
+import { browser } from '$app/environment';
 
-const BASE_URL = env.PUBLIC_API_BASE_URL ?? 'http://localhost:3000';
+// In Docker, SSR runs inside the frontend container and cannot reach localhost:3000.
+// PUBLIC_API_SSR_BASE_URL uses the Docker service name (http://backend:3000) for
+// container-to-container communication. The browser still uses PUBLIC_API_BASE_URL.
+const BASE_URL = (!browser && env.PUBLIC_API_SSR_BASE_URL)
+  ? env.PUBLIC_API_SSR_BASE_URL
+  : (env.PUBLIC_API_BASE_URL ?? 'http://localhost:3000');
 const API_PREFIX = '/api';
 
 export class ApiError extends Error {
