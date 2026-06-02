@@ -3,7 +3,7 @@
 
 @import 'tailwindcss';
 
-/* ── Design Tokens — Crianex ─────────────────────────────────────────────── */
+/* ── Design Tokens — Crianex (Tailwind theme + CSS vars) ────────────────── */
 @theme {
   --color-venom: #060606;
   --color-pink: #e71f84;
@@ -17,7 +17,7 @@
 }
 
 :root {
-  /* Crianex brand CSS vars */
+  /* CSS vars para uso direto em componentes sem Tailwind utilities */
   --venom: #060606;
   --pink: #e71f84;
   --purple: #7f3fe5;
@@ -26,104 +26,50 @@
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
   --radius: 0.5rem;
 
-  /* Vitrine-specific tokens */
-  --vitrine-surface: #fcfcfc;
-  --vitrine-border: #e8e6e2;
-  --vitrine-text-muted: #6b6862;
+  /* Surface tokens (light) */
+  --bg: #fcfcfc;
+  --bg-elev: #ffffff;
+  --bg-soft: #f4f3f1;
+  --bg-tint: #f8f5fb;
+  --line: #e8e6e2;
+  --line-strong: #d4d1cc;
+  --text: #060606;
+  --text-muted: #6b6862;
+  --text-faint: #9a968e;
 
-  /* shadcn-svelte component vars (light mode) */
-  --background: 0 0% 100%;
-  --foreground: 240 10% 3.9%;
+  /* Accents */
+  --accent: var(--purple);
+  --accent-soft: rgba(127, 63, 229, 0.08);
+  --accent-line: rgba(127, 63, 229, 0.18);
 
-  --muted: 240 4.8% 95.9%;
-  --muted-foreground: 240 3.8% 46.1%;
+  --hot: var(--pink);
+  --hot-soft: rgba(231, 31, 132, 0.08);
 
-  --popover: 0 0% 100%;
-  --popover-foreground: 240 10% 3.9%;
+  --pos: var(--green);
+  --pos-soft: rgba(102, 223, 122, 0.18);
+  --pos-deep: #2b8a3e;
 
-  --card: 0 0% 100%;
-  --card-foreground: 240 10% 3.9%;
+  /* Shadows */
+  --shadow-3: 0 18px 40px -16px rgba(6, 6, 6, 0.18), 0 4px 10px rgba(6, 6, 6, 0.05);
 
-  --border: 240 5.9% 90%;
-  --input: 240 5.9% 90%;
-
-  --primary: 240 5.9% 10%;
-  --primary-foreground: 0 0% 98%;
-
-  --secondary: 240 4.8% 95.9%;
-  --secondary-foreground: 240 5.9% 10%;
-
-  --accent: 240 4.8% 95.9%;
-  --accent-foreground: 240 5.9% 10%;
-
-  --destructive: 0 72.2% 50.6%;
-  --destructive-foreground: 0 0% 98%;
-
-  --ring: 240 10% 3.9%;
+  /* Vitrine aliases — vitrine components use these; they alias the surface tokens */
+  --vitrine-surface: var(--bg);
+  --vitrine-border: var(--line);
+  --vitrine-text-muted: var(--text-muted);
 }
 
-.dark {
-  --background: 240 10% 3.9%;
-  --foreground: 0 0% 98%;
-
-  --muted: 240 3.7% 15.9%;
-  --muted-foreground: 240 5% 64.9%;
-
-  --popover: 240 10% 3.9%;
-  --popover-foreground: 0 0% 98%;
-
-  --card: 240 10% 3.9%;
-  --card-foreground: 0 0% 98%;
-
-  --border: 240 3.7% 15.9%;
-  --input: 240 3.7% 15.9%;
-
-  --primary: 0 0% 98%;
-  --primary-foreground: 240 5.9% 10%;
-
-  --secondary: 240 3.7% 15.9%;
-  --secondary-foreground: 0 0% 98%;
-
-  --accent: 240 3.7% 15.9%;
-  --accent-foreground: 0 0% 98%;
-
-  --destructive: 0 62.8% 30.6%;
-  --destructive-foreground: 0 0% 98%;
-
-  --ring: 240 4.9% 83.9%;
-}
-
-/* É aqui que o Tailwind v4 estende o tema mapeando suas variáveis */
-@theme {
-  --color-border: hsl(var(--border));
-  --color-input: hsl(var(--input));
-  --color-ring: hsl(var(--ring));
-  --color-background: hsl(var(--background));
-  --color-foreground: hsl(var(--foreground));
-  --color-primary: hsl(var(--primary));
-  --color-primary-foreground: hsl(var(--primary-foreground));
-  --color-secondary: hsl(var(--secondary));
-  --color-secondary-foreground: hsl(var(--secondary-foreground));
-  --color-destructive: hsl(var(--destructive));
-  --color-destructive-foreground: hsl(var(--destructive-foreground));
-  --color-muted: hsl(var(--muted));
-  --color-muted-foreground: hsl(var(--muted-foreground));
-  --color-accent: hsl(var(--accent));
-  --color-accent-foreground: hsl(var(--accent-foreground));
-  --color-popover: hsl(var(--popover));
-  --color-popover-foreground: hsl(var(--popover-foreground));
-  --color-card: hsl(var(--card));
-  --color-card-foreground: hsl(var(--card-foreground));
+/* ── Reset ───────────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
-  scrollbar-width: none; /* Firefox */
-}
-
-html::-webkit-scrollbar {
-  display: none; /* Chrome/Safari/Edge */
 }
 
 body {
@@ -148,12 +94,6 @@ video {
   display: block;
 }
 
-@layer base {
-  * {
-    border-color: hsl(var(--border));
-  }
-}
-
 /* ── Admin theme ─────────────────────────────────────────────────────────── */
 /* .admin-root sempre escuro, independente do OS — não usar prefers-color-scheme */
 .admin-root {
@@ -162,8 +102,8 @@ video {
   color: #f4f4f5;
   min-height: 100vh;
   width: 100%;
-  font-family: var(--font-sans);
 
+  /* Dark mode overrides */
   --bg: #0a0a0c;
   --bg-elev: #131316;
   --bg-soft: #18181d;
@@ -174,8 +114,9 @@ video {
   --text-muted: #a5a4ad;
   --text-faint: #6f6e78;
   --accent-soft: rgba(127, 63, 229, 0.18);
-  --pos-deep: var(--green);
-  --shadow-3: 0 18px 40px -16px rgba(6, 6, 6, 0.18), 0 4px 10px rgba(6, 6, 6, 0.05);
+  --accent-line: rgba(127, 63, 229, 0.4);
+  --hot-soft: rgba(231, 31, 132, 0.18);
+  --pos-soft: rgba(102, 223, 122, 0.22);
 }
 
 /* ── Admin layout ─────────────────────────────────────────────────────────── */
@@ -337,7 +278,7 @@ video {
   filter: brightness(0.92);
 }
 
-/* ── Status pills ─────────────────────────────────────────────────────────── */
+/* ── Status pills ────────────────────────────────────────────────────────── */
 .status-pill {
   display: inline-flex;
   align-items: center;
@@ -355,10 +296,12 @@ video {
   height: 5px;
   border-radius: 50%;
 }
+.status-pill.active,
 .status-pill.paid {
   background: rgba(102, 223, 122, 0.18);
   color: var(--green);
 }
+.status-pill.active .dt,
 .status-pill.paid .dt {
   background: var(--green);
 }
@@ -368,6 +311,100 @@ video {
 }
 .status-pill.inactive .dt {
   background: var(--text-faint);
+}
+
+/* ── Filter bar ──────────────────────────────────────────────────────────── */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--bg-elev);
+}
+.filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  font-size: 12px;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: border-color 0.12s;
+}
+.filter-chip:hover {
+  border-color: var(--line-strong);
+  color: var(--text);
+}
+.filter-chip.on {
+  background: var(--accent-soft);
+  color: var(--purple);
+  border-color: var(--accent-line);
+}
+.filter-chip select,
+.filter-chip input {
+  background: transparent;
+  border: 0;
+  outline: none;
+  font-family: inherit;
+  font-size: 12px;
+  color: var(--text);
+  padding: 0;
+}
+
+/* ── Data table ──────────────────────────────────────────────────────────── */
+.data-table {
+  display: flex;
+  flex-direction: column;
+}
+.data-table .dt-row {
+  display: grid;
+  gap: 12px;
+  padding: 12px 6px;
+  border-bottom: 1px solid var(--line);
+  align-items: center;
+  font-size: 13px;
+}
+.data-table .dt-row:last-child {
+  border-bottom: 0;
+}
+.data-table .dt-row.header {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--text-faint);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-bottom-color: var(--line-strong);
+}
+.data-table .dt-row.clickable {
+  cursor: pointer;
+}
+.data-table .dt-row.clickable:hover {
+  background: var(--bg-soft);
+}
+.data-table .dt-row .mono {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+.data-table .menu-btn {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  color: var(--text-muted);
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+}
+.data-table .menu-btn:hover {
+  background: var(--bg-soft);
+  color: var(--text);
 }
 
 /* ── Section divider ──────────────────────────────────────────────────────── */
@@ -391,12 +428,20 @@ video {
   color: var(--text-muted);
 }
 
-/* ── Empty state ──────────────────────────────────────────────────────────── */
+/* ── Empty state ─────────────────────────────────────────────────────────── */
 .empty {
-  padding: 32px;
+  padding: 48px 32px;
   text-align: center;
   color: var(--text-muted);
   font-size: 14px;
+  border: 1px dashed var(--line);
+  border-radius: 10px;
+  background: var(--bg-elev);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
 }
 
 /* ── Product row ──────────────────────────────────────────────────────────── */
