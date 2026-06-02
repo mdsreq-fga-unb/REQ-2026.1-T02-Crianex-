@@ -334,13 +334,27 @@ export async function validateAccessToken(
   supabase: SupabaseClient,
   accessToken: string
 ): Promise<AuthenticatedAdminUser> {
-  const { data, error } = await supabase.auth.getUser(accessToken);
+  const { url, anonKey } = getSupabaseConfig();
 
-  if (error || !data.user) {
-    throw createAuthError('Invalid access token', 401);
+  const response = await fetch(`${url}/auth/v1/user`, {
+    headers: {
+      apikey: anonKey,
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+
+  if (!response.ok) {
+    const body = (await response.json().catch(() => null)) as { msg?: string; message?: string } | null;
+    throw createAuthError(body?.msg ?? body?.message ?? 'Invalid access token', 401);
   }
 
-  return loadAdminProfile(supabase, data.user.id, data.user.email ?? null, data.user.user_metadata);
+  const user = (await response.json()) as {
+    id: string;
+    email?: string | null;
+    user_metadata?: Record<string, unknown> | null;
+  };
+
+  return loadAdminProfile(supabase, user.id, user.email ?? null, user.user_metadata);
 }
 
 export async function hasVerifiedTotpFactor(accessToken: string): Promise<boolean> {

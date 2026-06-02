@@ -262,7 +262,11 @@ video {
   background: var(--bg);
   display: flex;
   flex-direction: column;
+  scrollbar-width: none;
 }
+.admin-main::-webkit-scrollbar { display: none; }
+.admin-sidebar { scrollbar-width: none; }
+.admin-sidebar::-webkit-scrollbar { display: none; }
 
 /* ── Sidebar toggle (hamburger) ───────────────────────────────────────────── */
 .sidebar-toggle {

@@ -1,41 +1,70 @@
 <script lang="ts">
   import '../../app.css';
   import { page } from '$app/stores';
-  import { onMount } from 'svelte';
   import {
     Users,
     Package,
-    HelpCircle,
+    CircleQuestionMark,
     FileText,
-    BarChart2,
+    ChartBar,
     Ticket,
     Bell,
     Search,
     Menu,
     X,
+    LayoutDashboard,
+    ShieldCheck,
   } from 'lucide-svelte';
   import type { LayoutData } from './$types';
+  import { topbarActions } from '$lib/stores/topbar';
 
   export let data: LayoutData;
 
-  const navItems = [
-    { href: '/crm', label: 'CRM', icon: Users },
-    { href: '/products', label: 'Produtos', icon: Package },
-    { href: '/faq', label: 'FAQ', icon: HelpCircle },
-    { href: '/logs', label: 'Logs', icon: FileText },
-    { href: '/metricas', label: 'Métricas', icon: BarChart2 },
-    { href: '/tickets', label: 'Tickets', icon: Ticket },
-    { href: '/notificacoes', label: 'Notificações', icon: Bell },
+  const NAO_IMPL = '/nao-implementado';
+
+  const navGroups = [
+    {
+      label: 'Geral',
+      items: [
+        { href: NAO_IMPL, label: 'Dashboard', icon: LayoutDashboard },
+        { href: NAO_IMPL, label: 'CRM · Leads', icon: Users },
+        { href: NAO_IMPL, label: 'Financeiro', icon: ChartBar },
+      ],
+    },
+    {
+      label: 'Vitrine',
+      items: [
+        { href: '/products', label: 'Produtos', icon: Package },
+        { href: NAO_IMPL, label: 'Gestão FAQ', icon: CircleQuestionMark },
+      ],
+    },
+    {
+      label: 'Operações',
+      items: [
+        { href: NAO_IMPL, label: 'Tickets', icon: Ticket },
+        { href: NAO_IMPL, label: 'Logs de Produtos', icon: FileText },
+        { href: NAO_IMPL, label: 'Notificações', icon: Bell },
+        { href: '/admin/membros', label: 'Membros', icon: Users },
+        { href: NAO_IMPL, label: 'Auditoria', icon: ShieldCheck },
+      ],
+    },
   ];
 
   let sidebarOpen = false;
 
-  $: activeItem =
-    navItems.find(
-      (item) => $page.url.pathname === item.href || $page.url.pathname.startsWith(item.href + '/')
-    ) ?? null;
-  $: activeTitle = activeItem?.label ?? 'Painel';
-  $: activeCrumb = `admin / ${activeItem?.label.toLowerCase() ?? 'dashboard'}`;
+  $: pathname = $page.url.pathname;
+
+  $: activeLabel = (() => {
+    if (pathname === NAO_IMPL) return 'Em Desenvolvimento';
+    for (const group of navGroups) {
+      for (const item of group.items) {
+        if (item.href !== NAO_IMPL && pathname.startsWith(item.href)) return item.label;
+      }
+    }
+    return 'Painel';
+  })();
+
+  $: activeCrumb = `admin / ${activeLabel.toLowerCase()}`;
 
   $: userInitials = (data.adminUser.name ?? 'A')
     .split(' ')
@@ -44,36 +73,13 @@
     .join('')
     .toUpperCase();
 
-  function toggleSidebar() {
-    sidebarOpen = !sidebarOpen;
+  function isActive(href: string): boolean {
+    if (href === NAO_IMPL) return false;
+    return pathname === href || pathname.startsWith(href + '/');
   }
 
-  function closeSidebar() {
-    sidebarOpen = false;
-  }
-
-  onMount(() => {
-    let subscription: { unsubscribe: () => void } | null = null;
-
-    import('$lib/api/supabase')
-      .then(({ supabase }) => {
-        const { data: authData } = supabase.auth.onAuthStateChange((_event, session) => {
-          if (session) {
-            document.cookie = `access_token=${session.access_token}; path=/; max-age=${session.expires_in || 3600}; SameSite=Lax;`;
-          } else {
-            document.cookie = 'access_token=; path=/; max-age=0; SameSite=Lax;';
-          }
-        });
-        subscription = authData.subscription;
-      })
-      .catch((err) => {
-        console.error('[admin layout] Failed to set auth listener:', err);
-      });
-
-    return () => {
-      if (subscription) subscription.unsubscribe();
-    };
-  });
+  function toggleSidebar() { sidebarOpen = !sidebarOpen; }
+  function closeSidebar() { sidebarOpen = false; }
 </script>
 
 <div class="admin-root admin-shell" class:sidebar-open={sidebarOpen}>
@@ -92,18 +98,22 @@
     </a>
 
     <nav>
-      {#each navItems as item}
-        {@const isActive = $page.url.pathname.startsWith(item.href)}
-        <a
-          href={item.href}
-          class="nav-item"
-          class:on={isActive}
-          aria-current={isActive ? 'page' : undefined}
-          on:click={closeSidebar}
-        >
-          <span class="ico"><svelte:component this={item.icon} size={16} /></span>
-          {item.label}
-        </a>
+      {#each navGroups as group}
+        <div class="nav-group">
+          <span class="sec-label">{group.label}</span>
+          {#each group.items as item}
+            <a
+              href={item.href}
+              class="nav-item"
+              class:on={isActive(item.href)}
+              aria-current={isActive(item.href) ? 'page' : undefined}
+              on:click={closeSidebar}
+            >
+              <span class="ico"><svelte:component this={item.icon} size={15} /></span>
+              {item.label}
+            </a>
+          {/each}
+        </div>
       {/each}
     </nav>
 
@@ -111,7 +121,7 @@
       <div class="avatar" aria-hidden="true">{userInitials}</div>
       <div>
         <div class="name">{data.adminUser.name ?? 'Admin'}</div>
-        <div class="role">{data.adminUser.role ?? 'admin'}</div>
+        <div class="role">{data.adminUser.role ?? 'admin'} · perfil</div>
       </div>
     </div>
   </aside>
@@ -124,14 +134,10 @@
         aria-label={sidebarOpen ? 'Fechar menu' : 'Abrir menu'}
         aria-expanded={sidebarOpen}
       >
-        {#if sidebarOpen}
-          <X size={18} />
-        {:else}
-          <Menu size={18} />
-        {/if}
+        {#if sidebarOpen}<X size={18} />{:else}<Menu size={18} />{/if}
       </button>
 
-      <h2>{activeTitle}</h2>
+      <h2>{activeLabel}</h2>
       <span class="crumbs">{activeCrumb}</span>
       <div class="grow"></div>
 
@@ -139,8 +145,52 @@
         <Search size={14} />
         <input type="text" placeholder="Buscar..." aria-label="Busca global" />
       </div>
+
+      {#each $topbarActions as action}
+        <button class="topbar-action-btn" type="button" on:click={action.onClick}>
+          {action.label}
+        </button>
+      {/each}
     </header>
 
     <slot />
   </div>
 </div>
+
+<style>
+  .nav-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    margin-bottom: 4px;
+  }
+
+  .sec-label {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    padding: 8px 10px 4px;
+  }
+
+  .topbar-action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 32px;
+    padding: 0 14px;
+    background: var(--text);
+    color: var(--bg);
+    border: none;
+    border-radius: 6px;
+    font-size: 12.5px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: opacity 0.15s;
+  }
+  .topbar-action-btn:hover { opacity: 0.85; }
+</style>

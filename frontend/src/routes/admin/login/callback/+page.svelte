@@ -44,7 +44,7 @@
       statusMessage = 'Redirecionando...';
 
       try {
-        await supabase.auth.signOut();
+        await supabase.auth.signOut({ scope: 'local' });
       } catch {
         // best-effort: limpa sessão local antes do redirect
       }
@@ -52,7 +52,7 @@
       replaceLocation('/admin');
     } catch (error) {
       try {
-        await supabase.auth.signOut();
+        await supabase.auth.signOut({ scope: 'local' });
       } catch {
         // Ignora falhas ao limpar a sessão local; o próximo redirect já cairá no login.
       }

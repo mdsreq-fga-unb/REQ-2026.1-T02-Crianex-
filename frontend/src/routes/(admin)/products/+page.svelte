@@ -1,21 +1,9 @@
 <script lang="ts">
-  import { Button } from '$lib/components/ui/button';
-  import { Input } from '$lib/components/ui/input';
-  import { Badge } from '$lib/components/ui/badge';
-  import * as Card from '$lib/components/ui/card';
-  import * as DropdownMenu from '$lib/components/ui/dropdown-menu'; // 1. Importado o Dropdown do Shadcn
+  import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
   import type { PageData } from './$types';
-  import {
-    Search,
-    Bell,
-    EllipsisVertical,
-    Plus,
-    GripVertical,
-    Pencil,
-    EyeOff,
-    Trash2,
-    Eye,
-  } from 'lucide-svelte';
+  import { EllipsisVertical, Pencil, EyeOff, Trash2, Eye } from 'lucide-svelte';
+  import { onMount, onDestroy } from 'svelte';
+  import { topbarActions } from '$lib/stores/topbar';
 
   import { apiFetch } from '$lib/api/backend';
   import { tick } from 'svelte';
@@ -65,6 +53,11 @@
       toastVisible = false;
     }, 3000);
   }
+
+  onMount(() => {
+    topbarActions.set([{ label: '+ Novo produto', onClick: handleNovoProduto }]);
+    return () => topbarActions.set([]);
+  });
 
   // Gatilho: Clicou em "+ Novo Produto"
   function handleNovoProduto() {
@@ -292,318 +285,390 @@
   }
 </script>
 
-<div class="min-h-screen bg-[#0a0a0b] text-zinc-100 p-8 font-sans">
-  {#if toastVisible}
-    <div
-      class="fixed bottom-6 right-6 z-100 flex items-center gap-3 rounded-xl border border-zinc-700/60 bg-[#161619] px-5 py-3 text-sm font-medium text-zinc-100 shadow-2xl transition-all"
-      role="status"
-      aria-live="polite"
-    >
-      <svg
-        class="h-4 w-4 text-green-400 shrink-0"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        stroke-width="2.5"
-      >
-        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+<!-- Overlays globais -->
+{#if toastVisible}
+  <div class="toast" role="status" aria-live="polite">
+    <svg class="toast-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+    </svg>
+    {toastMessage}
+  </div>
+{/if}
+{#if isProcessing}
+  <div class="processing-overlay">
+    <div class="processing-card">
+      <svg class="spinner" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" style="opacity:.25"></circle>
+        <path fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" style="opacity:.75"></path>
       </svg>
-      {toastMessage}
+      {processingMessage || 'Processando...'}
     </div>
-  {/if}
-  {#if isProcessing}
-    <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+  </div>
+{/if}
+
+<div class="admin-content">
+  <div class="panel">
+
+    <!-- Cabeçalho do painel -->
+    <div class="panel-head">
+      <h3>{listaProdutos.length} produto{listaProdutos.length !== 1 ? 's' : ''} · {publicados.length} publicado{publicados.length !== 1 ? 's' : ''}</h3>
+      <span class="grow"></span>
+      <span class="pill">vitrine.crianex.com</span>
+    </div>
+
+    {#if data.error}
+      <div class="error-bar">{data.error}</div>
+    {/if}
+
+    <!-- Seção publicados -->
+    <div class="section-label">
+      <span>▲ Publicados · arraste para reordenar a vitrine</span>
+      <span class="mono">{publicados.length}</span>
+    </div>
+
+    {#each publicados as produto, index (produto.id)}
       <div
-        class="bg-[#0b0b0c] border border-zinc-800 rounded-lg px-6 py-4 flex items-center gap-4 shadow-lg"
+        class="product-row"
+        class:dragging={draggingIndex === index}
+        role="listitem"
+        draggable="true"
+        on:dragstart={() => handleDragStart(index)}
+        on:dragover|preventDefault={() => handleDragOver(index)}
+        on:drop={handleDrop}
       >
-        <svg
-          class="animate-spin h-5 w-5 text-cyan-400"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-        >
-          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"
-          ></circle>
-          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
-          ></path>
-        </svg>
-        <div class="text-sm text-zinc-200">{processingMessage || 'Processando...'}</div>
-      </div>
-    </div>
-  {/if}
-  <header class="flex justify-between items-center mb-8">
-    <div>
-      <h1 class="text-lg font-semibold flex items-center gap-2 tracking-tight">
-        Produtos da vitrine
-        <span class="text-zinc-500 text-xs font-normal">/ vitrine / produtos</span>
-      </h1>
-    </div>
+        <!-- Ícone / imagem -->
+        {#if produto.image_url}
+          <img src={produto.image_url} alt="" class="p-icon img" />
+        {:else}
+          <span class="p-icon" style="background:{produto.color || '#6366f1'}">
+            {produto.icon_text || getInitials(produto.name_pt)}
+          </span>
+        {/if}
 
-    <div class="flex items-center gap-3">
-      <div class="relative w-80">
-        <Search class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-500" />
-        <Input
-          type="text"
-          placeholder="Buscar clientes, tickets, produtos...   ⌘K"
-          class="pl-9 h-9 bg-[#121214] border-zinc-800 text-zinc-300 placeholder:text-zinc-500 focus-visible:ring-zinc-700 text-xs rounded-lg"
-        />
-      </div>
-
-      <Button
-        variant="outline"
-        size="icon"
-        class="h-9 w-9 bg-transparent border-zinc-800 text-zinc-400 hover:text-white hover:bg-zinc-900 rounded-full relative"
-      >
-        <Bell class="h-4 w-4" />
-        <span class="absolute top-2 right-2.5 h-1.5 w-1.5 bg-white rounded-full"></span>
-      </Button>
-
-      <button
-        type="button"
-        on:click={handleNovoProduto}
-        class="h-9 bg-white text-black hover:bg-zinc-200 font-medium text-xs rounded-lg px-4 flex items-center gap-2 whitespace-nowrap cursor-pointer border-0"
-      >
-        <Plus class="h-4 w-4" />
-        <span>Novo produto</span>
-      </button>
-    </div>
-  </header>
-
-  <Card.Root class="bg-[#121214] border-zinc-800/80 text-zinc-100 rounded-xl overflow-hidden">
-    <Card.Header
-      class="flex flex-row justify-between items-center border-b border-zinc-800/60 px-6 py-4"
-    >
-      <Card.Title class="text-xs font-medium text-zinc-300">
-        {listaProdutos.length} produtos •
-        <span class="text-zinc-400">{publicados.length} publicados</span>
-      </Card.Title>
-
-      <div class="flex items-center gap-3">
-        <Badge
-          variant="secondary"
-          class="bg-[#1a1a1e] text-zinc-400 border border-zinc-800 font-mono text-[10px] tracking-wider px-2 py-0.5 rounded"
-        >
-          VITRINE.CRIANEX.COM
-        </Badge>
-        <Input
-          type="text"
-          placeholder="Buscar produto..."
-          class="h-8 w-44 bg-[#1a1a1e] border-zinc-800 text-xs text-zinc-300 placeholder:text-zinc-500"
-        />
-      </div>
-    </Card.Header>
-
-    <Card.Content class="p-0">
-      {#if data.error}
-        <div class="p-4 text-center text-sm text-red-400 bg-red-950/20 border-b border-red-900/30">
-          {data.error}
+        <!-- Nome + descrição -->
+        <div class="p-meta">
+          <span class="p-name">{produto.name_pt}</span>
+          <span class="p-desc">{produto.tagline_pt || produto.description_pt || ''}</span>
         </div>
-      {/if}
 
-      <div
-        class="text-[10px] font-bold text-zinc-500 tracking-wider px-6 py-2 bg-[#161619]/40 border-b border-zinc-800/40 flex justify-between items-center"
-      >
-        <span>A PUBLICADOS · ARRASTE PARA REORDENAR A VITRINE</span>
-        <span class="font-mono text-zinc-600">{publicados.length}</span>
+        <!-- Categoria -->
+        <span class="p-cat mono">{produto.category_pt || 'Geral'}</span>
+
+        <!-- Status -->
+        <span class="pill published">PUBLICADO</span>
+
+        <!-- Última edição -->
+        <span class="p-time mono">edit. {getTimeAgo(produto.updated_at)}</span>
+
+        <!-- Menu -->
+        <DropdownMenu.Root>
+          <DropdownMenu.Trigger class="row-menu-btn">
+            <EllipsisVertical size={15} />
+          </DropdownMenu.Trigger>
+          <DropdownMenu.Content align="end" class="w-44 bg-[#161619] border-zinc-800 text-zinc-300 rounded-lg shadow-xl p-1">
+            <DropdownMenu.Item class="p-0">
+              <button type="button" on:click={() => handleEditarProduto(produto)} class="menu-item">
+                <Pencil size={13} /> Editar produto
+              </button>
+            </DropdownMenu.Item>
+            <DropdownMenu.Item class="p-0">
+              <button type="button" on:click={() => handleTogglePublicacao(produto.id, produto.published)} class="menu-item">
+                <EyeOff size={13} /> Despublicar
+              </button>
+            </DropdownMenu.Item>
+          </DropdownMenu.Content>
+        </DropdownMenu.Root>
       </div>
+    {/each}
 
-      {#each publicados as produto, index (produto.id)}
-        <div
-          class="flex items-center justify-between px-6 py-4 border-b border-zinc-800/40 hover:bg-zinc-900/30 transition-all duration-150 select-none"
-          class:opacity-20={draggingIndex === index}
-          role="listitem"
-          draggable="true"
-          on:dragstart={() => handleDragStart(index)}
-          on:dragover|preventDefault={() => handleDragOver(index)}
-          on:drop={handleDrop}
-        >
-          <div class="flex items-center gap-4 w-7/12">
-            <GripVertical
-              class="h-4 w-4 text-zinc-600 cursor-grab active:cursor-grabbing hover:text-zinc-400 transition-colors"
-            />
+    <!-- Seção rascunhos -->
+    <div class="section-label draft">
+      <span>○ Não publicados · não aparecem na vitrine pública</span>
+      <span class="mono">{rascunhos.length}</span>
+    </div>
 
-            {#if produto.image_url}
-              <img
-                src={produto.image_url}
-                alt="capa"
-                class="h-9 w-9 shrink-0 rounded-lg object-cover shadow-inner"
-              />
-            {:else}
-              <div
-                class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-xs font-bold text-white shadow-inner"
-                style="background-color: {produto.color || '#6366f1'}"
-              >
-                {produto.icon_text || getInitials(produto.name_pt)}
-              </div>
-            {/if}
-            <div class="min-w-0">
-              <h3 class="font-medium text-zinc-200 text-sm tracking-tight">{produto.name_pt}</h3>
-              <p class="text-xs text-zinc-500 truncate max-w-md mt-0.5">
-                {produto.description_pt || 'Sem descrição em português.'}
-              </p>
-            </div>
-          </div>
+    {#each rascunhos as produto (produto.id)}
+      <div class="product-row draft">
+        {#if produto.image_url}
+          <img src={produto.image_url} alt="" class="p-icon img" />
+        {:else}
+          <span class="p-icon" style="background:{produto.color || '#4b5563'}">
+            {produto.icon_text || getInitials(produto.name_pt)}
+          </span>
+        {/if}
 
-          <div class="flex items-center gap-6 w-5/12 justify-end text-xs">
-            <span class="text-zinc-400 font-medium text-right min-w-30 truncate"
-              >{produto.category_pt || 'Geral'}</span
-            >
-
-            <span
-              class="bg-[#12221a] text-[#4ade80] px-2 py-0.5 rounded text-[10px] font-bold tracking-wider border border-[#163524] shadow-sm"
-            >
-              PUBLICADO
-            </span>
-
-            <div class="flex items-center gap-4 text-zinc-500 text-xs whitespace-nowrap">
-              <span>edit. {getTimeAgo(produto.updated_at)}</span>
-              <span class="text-zinc-600 font-mono text-[10px]">PT · EN</span>
-            </div>
-
-            <DropdownMenu.Root>
-              <DropdownMenu.Trigger
-                class="inline-flex h-8 w-8 items-center justify-center rounded-lg text-zinc-500 transition-colors hover:text-zinc-300"
-              >
-                <EllipsisVertical class="h-4 w-4" />
-              </DropdownMenu.Trigger>
-              <DropdownMenu.Content
-                align="end"
-                class="w-44 bg-[#161619] border-zinc-800 text-zinc-300 rounded-lg shadow-xl p-1"
-              >
-                <DropdownMenu.Item class="p-0">
-                  <button
-                    type="button"
-                    on:click={() => handleEditarProduto(produto)}
-                    class="w-full flex items-center gap-2 px-3 py-2 text-xs rounded hover:bg-white hover:text-black cursor-pointer focus:bg-zinc-900 focus:text-white text-left"
-                  >
-                    <Pencil class="h-3.5 w-3.5 text-zinc-400" />
-                    <span>Editar produto</span>
-                  </button>
-                </DropdownMenu.Item>
-                <DropdownMenu.Item class="p-0">
-                  <button
-                    type="button"
-                    on:click={() => handleTogglePublicacao(produto.id, produto.published)}
-                    class="w-full flex items-center gap-2 px-3 py-2 text-xs rounded hover:bg-white hover:text-black cursor-pointer focus:bg-zinc-900 focus:text-white text-left"
-                  >
-                    <EyeOff class="h-3.5 w-3.5 text-zinc-400" />
-                    <span>Despublicar</span>
-                  </button>
-                </DropdownMenu.Item>
-              </DropdownMenu.Content>
-            </DropdownMenu.Root>
-          </div>
+        <div class="p-meta">
+          <span class="p-name">{produto.name_pt}</span>
+          <span class="p-desc">{produto.tagline_pt || produto.description_pt || ''}</span>
         </div>
-      {/each}
 
-      <!-- Product Modal -->
-      <ProductModal
-        bind:isOpen={isModalOpen}
-        bind:isEditing={isEditingMode}
-        bind:formData={modalData}
-        onSave={handleSaveModal}
-      />
+        <span class="p-cat mono">{produto.category_pt || 'Geral'}</span>
+        <span class="pill draft-pill">RASCUNHO</span>
+        <span class="p-time mono">edit. {getTimeAgo(produto.updated_at)}</span>
 
-      <div
-        class="text-[10px] font-bold text-zinc-500 tracking-wider px-6 py-2 bg-[#161619]/40 border-b border-zinc-800/40 flex justify-between items-center mt-2"
-      >
-        <span>○ NÃO PUBLICADOS · NÃO APARECEM NA VITRINE PÚBLICA</span>
-        <span class="font-mono text-zinc-600">{rascunhos.length}</span>
+        <DropdownMenu.Root>
+          <DropdownMenu.Trigger class="row-menu-btn">
+            <EllipsisVertical size={15} />
+          </DropdownMenu.Trigger>
+          <DropdownMenu.Content align="end" class="w-44 bg-[#161619] border-zinc-800 text-zinc-300 rounded-lg shadow-xl p-1">
+            <DropdownMenu.Item class="p-0">
+              <button type="button" on:click={() => handleEditarProduto(produto)} class="menu-item">
+                <Pencil size={13} /> Editar produto
+              </button>
+            </DropdownMenu.Item>
+            <DropdownMenu.Item class="p-0">
+              <button type="button" on:click={() => handleTogglePublicacao(produto.id, produto.published)} class="menu-item">
+                <Eye size={13} /> Publicar
+              </button>
+            </DropdownMenu.Item>
+            <DropdownMenu.Separator class="bg-zinc-800/60 my-1" />
+            <DropdownMenu.Item class="p-0" variant="destructive">
+              <button type="button" on:click={() => openDeleteModal(produto.id)} class="menu-item danger">
+                <Trash2 size={13} /> Excluir
+              </button>
+            </DropdownMenu.Item>
+          </DropdownMenu.Content>
+        </DropdownMenu.Root>
       </div>
+    {/each}
 
-      {#each rascunhos as produto (produto.id)}
-        <div
-          class="flex items-center justify-between px-6 py-4 border-b border-zinc-800/30 hover:bg-zinc-900/20 transition-all duration-150 opacity-75"
-        >
-          <div class="flex items-center gap-4 w-7/12 pl-8">
-            {#if produto.image_url}
-              <img
-                src={produto.image_url}
-                alt="capa"
-                class="h-9 w-9 shrink-0 rounded-lg object-cover"
-              />
-            {:else}
-              <div
-                class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-xs font-bold text-white/90"
-                style="background-color: {produto.color || '#4b5563'}"
-              >
-                {produto.icon_text || getInitials(produto.name_pt)}
-              </div>
-            {/if}
-            <div class="min-w-0">
-              <h3 class="font-medium text-zinc-300 text-sm tracking-tight">{produto.name_pt}</h3>
-              <p class="text-xs text-zinc-550 truncate max-w-md mt-0.5">
-                {produto.description_pt || 'Sem descrição disponível.'}
-              </p>
-            </div>
-          </div>
-
-          <div class="flex items-center gap-6 w-5/12 justify-end text-xs">
-            <span class="text-zinc-500 text-right min-w-30 truncate"
-              >{produto.category_pt || 'Geral'}</span
-            >
-
-            <span
-              class="bg-[#27272a] text-zinc-400 px-2 py-0.5 rounded text-[10px] font-bold tracking-wider border border-zinc-700/60 shadow-sm"
-            >
-              RASCUNHO
-            </span>
-
-            <div class="flex items-center gap-4 text-zinc-500 text-xs whitespace-nowrap">
-              <span>edit. {getTimeAgo(produto.updated_at)}</span>
-              <span class="text-zinc-600 font-mono text-[10px]">PT · EN</span>
-            </div>
-
-            <DropdownMenu.Root>
-              <DropdownMenu.Trigger
-                class="inline-flex h-8 w-8 items-center justify-center rounded-lg text-zinc-500 transition-colors hover:text-zinc-300"
-              >
-                <EllipsisVertical class="h-4 w-4" />
-              </DropdownMenu.Trigger>
-              <DropdownMenu.Content
-                align="end"
-                class="w-44 bg-[#161619] border-zinc-800 text-zinc-300 rounded-lg shadow-xl p-1"
-              >
-                <DropdownMenu.Item class="p-0">
-                  <button
-                    type="button"
-                    on:click={() => handleEditarProduto(produto)}
-                    class="w-full flex items-center gap-2 px-3 py-2 text-xs rounded hover:bg-white hover:text-black cursor-pointer focus:bg-zinc-900 focus:text-white text-left"
-                  >
-                    <Pencil class="h-3.5 w-3.5 text-zinc-400" />
-                    <span>Editar produto</span>
-                  </button>
-                </DropdownMenu.Item>
-                <DropdownMenu.Item class="p-0">
-                  <button
-                    type="button"
-                    on:click={() => handleTogglePublicacao(produto.id, produto.published)}
-                    class="w-full flex items-center gap-2 px-3 py-2 text-xs rounded hover:bg-white hover:text-black cursor-pointer focus:bg-zinc-900 focus:text-white text-left"
-                  >
-                    <Eye class="h-3.5 w-3.5 text-zinc-400" />
-                    <span>Publicar</span>
-                  </button>
-                </DropdownMenu.Item>
-                <DropdownMenu.Separator class="bg-zinc-800/60 my-1" />
-                <DropdownMenu.Item class="p-0" variant="destructive">
-                  <button
-                    type="button"
-                    on:click={() => openDeleteModal(produto.id)}
-                    class="w-full flex items-center gap-2 px-3 py-2 text-xs rounded text-[#f43f5e] hover:bg-red-950/20 hover:text-[#f43f5e] cursor-pointer focus:bg-rose-950/20 focus:text-[#f43f5e] font-medium text-left"
-                  >
-                    <Trash2 class="h-3.5 w-3.5" />
-                    <span>Excluir</span>
-                  </button>
-                </DropdownMenu.Item>
-              </DropdownMenu.Content>
-            </DropdownMenu.Root>
-          </div>
-        </div>
-      {/each}
-
-      <DeleteModal isOpen={showDeleteModal} onClose={closeDeleteModal} onConfirm={handleExcluir}
-        >{productToDeleteName}</DeleteModal
-      >
-    </Card.Content>
-  </Card.Root>
+  </div>
 </div>
+
+<!-- Modais -->
+<ProductModal bind:isOpen={isModalOpen} bind:isEditing={isEditingMode} bind:formData={modalData} onSave={handleSaveModal} />
+<DeleteModal isOpen={showDeleteModal} onClose={closeDeleteModal} onConfirm={handleExcluir}>{productToDeleteName}</DeleteModal>
+
+<style>
+  /* ── Admin content wrapper ── */
+  .admin-content {
+    padding: 22px 24px;
+    flex: 1;
+  }
+
+  /* ── Panel ── */
+  .panel {
+    background: var(--bg-elev);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .panel-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .panel-head h3 {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .grow { flex: 1; }
+
+  .pill {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    padding: 3px 8px;
+    border-radius: 4px;
+    border: 1px solid var(--line);
+    color: var(--text-muted);
+  }
+
+  .pill.published {
+    background: rgba(102, 223, 122, 0.12);
+    color: var(--green);
+    border-color: rgba(102, 223, 122, 0.25);
+  }
+
+  .pill.draft-pill {
+    background: var(--bg-soft);
+    color: var(--text-faint);
+    border-color: var(--line);
+  }
+
+  /* ── Section labels ── */
+  .section-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 20px;
+    background: var(--bg-soft);
+    border-bottom: 1px solid var(--line);
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+  }
+
+  /* ── Product row ── */
+  .product-row {
+    display: grid;
+    grid-template-columns: 36px 1fr 160px 100px 110px 32px;
+    gap: 16px;
+    align-items: center;
+    padding: 13px 20px;
+    border-bottom: 1px solid var(--line);
+    cursor: default;
+    transition: background 0.1s;
+  }
+
+  .product-row:last-of-type { border-bottom: 0; }
+  .product-row:hover { background: var(--bg-soft); }
+  .product-row.draft { opacity: 0.72; }
+  .product-row.dragging { opacity: 0.2; }
+
+  /* ── Product icon ── */
+  .p-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    color: #fff;
+    flex-shrink: 0;
+  }
+  .p-icon.img { object-fit: cover; }
+
+  /* ── Product metadata ── */
+  .p-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  .p-name {
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .p-desc {
+    font-size: 11.5px;
+    color: var(--text-faint);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .p-cat {
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+
+  .p-time {
+    font-size: 11px;
+    color: var(--text-faint);
+    text-align: right;
+  }
+
+  .mono { font-family: var(--font-mono); }
+
+  /* ── Row menu button ── */
+  :global(.row-menu-btn) {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    background: transparent;
+    border: 0;
+    color: var(--text-faint);
+    cursor: pointer;
+    transition: background 0.12s, color 0.12s;
+  }
+  :global(.row-menu-btn:hover) {
+    background: var(--bg-tint);
+    color: var(--text);
+  }
+
+  /* ── Menu items ── */
+  .menu-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 12px;
+    font-size: 12px;
+    font-family: inherit;
+    background: transparent;
+    border: 0;
+    color: var(--text-muted);
+    cursor: pointer;
+    border-radius: 4px;
+    text-align: left;
+    transition: background 0.1s, color 0.1s;
+  }
+  .menu-item:hover { background: var(--bg-soft); color: var(--text); }
+  .menu-item.danger { color: #f43f5e; }
+  .menu-item.danger:hover { background: rgba(244, 63, 94, 0.1); color: #f43f5e; }
+
+  /* ── Toast ── */
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 18px;
+    background: var(--bg-elev);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    box-shadow: var(--shadow-3);
+  }
+  .toast-icon { width: 16px; height: 16px; color: var(--green); flex-shrink: 0; }
+
+  /* ── Processing overlay ── */
+  .processing-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(6, 6, 6, 0.5);
+  }
+  .processing-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 24px;
+    background: var(--bg-elev);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    font-size: 13px;
+    color: var(--text);
+  }
+
+  .error-bar {
+    padding: 10px 20px;
+    font-size: 13px;
+    color: #f87171;
+    background: rgba(248, 113, 113, 0.08);
+    border-bottom: 1px solid rgba(248, 113, 113, 0.2);
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .spinner { width: 18px; height: 18px; animation: spin 0.8s linear infinite; }
+</style>

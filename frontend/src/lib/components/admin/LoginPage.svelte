@@ -1,9 +1,10 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
-  import { onMount } from 'svelte';
   import { Button } from '$lib/components/ui/button';
   import { Input } from '$lib/components/ui/input';
   import { Label } from '$lib/components/ui/label';
+  import { ApiError } from '$lib/api/backend';
+  import { syncAdminSession } from '$lib/api/admin-session';
 
   let email = $state('');
   let password = $state('');
@@ -11,21 +12,8 @@
   let errorMessage = $state('');
   let submitHovered = $state(false);
 
-  onMount(async () => {
-    try {
-      const { supabase } = await import('$lib/api/supabase');
-      const { data } = await supabase.auth.getSession();
-
-      if (data.session) {
-        document.cookie = `access_token=${data.session.access_token}; path=/; max-age=${data.session.expires_in || 3600}; SameSite=Lax;`;
-        await goto('/admin/membros');
-      }
-    } catch {
-      // A tela deve renderizar mesmo quando o Supabase ainda nao estiver configurado localmente.
-    }
-  });
-
-  async function handleSubmit() {
+  async function handleSubmit(e: SubmitEvent) {
+    e.preventDefault();
     errorMessage = '';
 
     const normalizedEmail = email.trim().toLowerCase();
@@ -34,12 +22,15 @@
 
     try {
       const { supabase } = await import('$lib/api/supabase');
+      console.log('[login] tentando signInWithPassword para', normalizedEmail);
+
       const { data, error } = await supabase.auth.signInWithPassword({
         email: normalizedEmail,
         password,
       });
 
       if (error) {
+        console.error('[login] signInWithPassword error:', error.status, error.message, error);
         if (error.status === 401 || error.status === 400) {
           errorMessage = 'E-mail ou senha inválidos.';
         } else {
@@ -49,13 +40,25 @@
         return;
       }
 
-      if (data.session) {
-        document.cookie = `access_token=${data.session.access_token}; path=/; max-age=${data.session.expires_in || 3600}; SameSite=Lax;`;
+      console.log('[login] sessão obtida, user:', data.session?.user?.email, 'expires_in:', data.session?.expires_in);
+
+      if (!data.session) {
+        errorMessage = 'Sessão não encontrada após o login.';
+        return;
       }
 
+      console.log('[login] sincronizando sessão com o servidor...');
+      await syncAdminSession(data.session);
+
+      console.log('[login] redirecionando para /admin/membros');
       await goto('/admin/membros');
-    } catch {
-      errorMessage = 'Não foi possível conectar ao serviço de autenticação agora.';
+    } catch (err) {
+      console.error('[login] catch inesperado:', err);
+      if (err instanceof ApiError && err.status === 403) {
+        errorMessage = 'Conta não autorizada. Solicite acesso ao administrador.';
+      } else {
+        errorMessage = 'Não foi possível conectar ao serviço de autenticação agora.';
+      }
     } finally {
       loading = false;
     }
