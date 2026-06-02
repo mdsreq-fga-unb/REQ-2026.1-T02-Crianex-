@@ -4,8 +4,11 @@
   import { lang } from '$lib/stores/lang';
   import SiteHeader from '$lib/components/vitrine/SiteHeader.svelte';
   import PageLoader from '$lib/components/vitrine/PageLoader.svelte';
+  import SiteFooter from '$lib/components/vitrine/SiteFooter.svelte';
+  import type { LayoutData } from './$types';
 
-  // Loader de transição entre páginas
+  export let data: LayoutData;
+
   let loading = false;
   let loaderBg = 'var(--vitrine-surface)';
   let showTimer: ReturnType<typeof setTimeout>;
@@ -31,7 +34,6 @@
       }, 400);
     }
   });
-  // Footer — issue #89
 </script>
 
 {#if loading}
@@ -44,8 +46,7 @@
   <slot />
 </main>
 
-<!-- Footer placeholder — issue #89 -->
-<footer></footer>
+<SiteFooter products={data.footerProducts} />
 
 <style>
   :global(body):has(.vitrine-root) {
