@@ -288,7 +288,13 @@
 <!-- Overlays globais -->
 {#if toastVisible}
   <div class="toast" role="status" aria-live="polite">
-    <svg class="toast-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+    <svg
+      class="toast-icon"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      stroke-width="2.5"
+    >
       <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
     </svg>
     {toastMessage}
@@ -298,8 +304,10 @@
   <div class="processing-overlay">
     <div class="processing-card">
       <svg class="spinner" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" style="opacity:.25"></circle>
-        <path fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" style="opacity:.75"></path>
+        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" style="opacity:.25"
+        ></circle>
+        <path fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" style="opacity:.75"
+        ></path>
       </svg>
       {processingMessage || 'Processando...'}
     </div>
@@ -308,10 +316,14 @@
 
 <div class="admin-content">
   <div class="panel">
-
     <!-- Cabeçalho do painel -->
     <div class="panel-head">
-      <h3>{listaProdutos.length} produto{listaProdutos.length !== 1 ? 's' : ''} · {publicados.length} publicado{publicados.length !== 1 ? 's' : ''}</h3>
+      <h3>
+        {listaProdutos.length} produto{listaProdutos.length !== 1 ? 's' : ''} · {publicados.length} publicado{publicados.length !==
+        1
+          ? 's'
+          : ''}
+      </h3>
       <span class="grow"></span>
       <span class="pill">vitrine.crianex.com</span>
     </div>
@@ -365,14 +377,21 @@
           <DropdownMenu.Trigger class="row-menu-btn">
             <EllipsisVertical size={15} />
           </DropdownMenu.Trigger>
-          <DropdownMenu.Content align="end" class="w-44 bg-[#161619] border-zinc-800 text-zinc-300 rounded-lg shadow-xl p-1">
+          <DropdownMenu.Content
+            align="end"
+            class="w-44 bg-[#161619] border-zinc-800 text-zinc-300 rounded-lg shadow-xl p-1"
+          >
             <DropdownMenu.Item class="p-0">
               <button type="button" on:click={() => handleEditarProduto(produto)} class="menu-item">
                 <Pencil size={13} /> Editar produto
               </button>
             </DropdownMenu.Item>
             <DropdownMenu.Item class="p-0">
-              <button type="button" on:click={() => handleTogglePublicacao(produto.id, produto.published)} class="menu-item">
+              <button
+                type="button"
+                on:click={() => handleTogglePublicacao(produto.id, produto.published)}
+                class="menu-item"
+              >
                 <EyeOff size={13} /> Despublicar
               </button>
             </DropdownMenu.Item>
@@ -410,20 +429,31 @@
           <DropdownMenu.Trigger class="row-menu-btn">
             <EllipsisVertical size={15} />
           </DropdownMenu.Trigger>
-          <DropdownMenu.Content align="end" class="w-44 bg-[#161619] border-zinc-800 text-zinc-300 rounded-lg shadow-xl p-1">
+          <DropdownMenu.Content
+            align="end"
+            class="w-44 bg-[#161619] border-zinc-800 text-zinc-300 rounded-lg shadow-xl p-1"
+          >
             <DropdownMenu.Item class="p-0">
               <button type="button" on:click={() => handleEditarProduto(produto)} class="menu-item">
                 <Pencil size={13} /> Editar produto
               </button>
             </DropdownMenu.Item>
             <DropdownMenu.Item class="p-0">
-              <button type="button" on:click={() => handleTogglePublicacao(produto.id, produto.published)} class="menu-item">
+              <button
+                type="button"
+                on:click={() => handleTogglePublicacao(produto.id, produto.published)}
+                class="menu-item"
+              >
                 <Eye size={13} /> Publicar
               </button>
             </DropdownMenu.Item>
             <DropdownMenu.Separator class="bg-zinc-800/60 my-1" />
             <DropdownMenu.Item class="p-0" variant="destructive">
-              <button type="button" on:click={() => openDeleteModal(produto.id)} class="menu-item danger">
+              <button
+                type="button"
+                on:click={() => openDeleteModal(produto.id)}
+                class="menu-item danger"
+              >
                 <Trash2 size={13} /> Excluir
               </button>
             </DropdownMenu.Item>
@@ -431,13 +461,19 @@
         </DropdownMenu.Root>
       </div>
     {/each}
-
   </div>
 </div>
 
 <!-- Modais -->
-<ProductModal bind:isOpen={isModalOpen} bind:isEditing={isEditingMode} bind:formData={modalData} onSave={handleSaveModal} />
-<DeleteModal isOpen={showDeleteModal} onClose={closeDeleteModal} onConfirm={handleExcluir}>{productToDeleteName}</DeleteModal>
+<ProductModal
+  bind:isOpen={isModalOpen}
+  bind:isEditing={isEditingMode}
+  bind:formData={modalData}
+  onSave={handleSaveModal}
+/>
+<DeleteModal isOpen={showDeleteModal} onClose={closeDeleteModal} onConfirm={handleExcluir}
+  >{productToDeleteName}</DeleteModal
+>
 
 <style>
   /* ── Admin content wrapper ── */
@@ -469,7 +505,9 @@
     color: var(--text);
   }
 
-  .grow { flex: 1; }
+  .grow {
+    flex: 1;
+  }
 
   .pill {
     font-family: var(--font-mono);
@@ -521,10 +559,18 @@
     transition: background 0.1s;
   }
 
-  .product-row:last-of-type { border-bottom: 0; }
-  .product-row:hover { background: var(--bg-soft); }
-  .product-row.draft { opacity: 0.72; }
-  .product-row.dragging { opacity: 0.2; }
+  .product-row:last-of-type {
+    border-bottom: 0;
+  }
+  .product-row:hover {
+    background: var(--bg-soft);
+  }
+  .product-row.draft {
+    opacity: 0.72;
+  }
+  .product-row.dragging {
+    opacity: 0.2;
+  }
 
   /* ── Product icon ── */
   .p-icon {
@@ -539,7 +585,9 @@
     color: #fff;
     flex-shrink: 0;
   }
-  .p-icon.img { object-fit: cover; }
+  .p-icon.img {
+    object-fit: cover;
+  }
 
   /* ── Product metadata ── */
   .p-meta {
@@ -577,7 +625,9 @@
     text-align: right;
   }
 
-  .mono { font-family: var(--font-mono); }
+  .mono {
+    font-family: var(--font-mono);
+  }
 
   /* ── Row menu button ── */
   :global(.row-menu-btn) {
@@ -591,7 +641,9 @@
     border: 0;
     color: var(--text-faint);
     cursor: pointer;
-    transition: background 0.12s, color 0.12s;
+    transition:
+      background 0.12s,
+      color 0.12s;
   }
   :global(.row-menu-btn:hover) {
     background: var(--bg-tint);
@@ -613,11 +665,21 @@
     cursor: pointer;
     border-radius: 4px;
     text-align: left;
-    transition: background 0.1s, color 0.1s;
+    transition:
+      background 0.1s,
+      color 0.1s;
   }
-  .menu-item:hover { background: var(--bg-soft); color: var(--text); }
-  .menu-item.danger { color: #f43f5e; }
-  .menu-item.danger:hover { background: rgba(244, 63, 94, 0.1); color: #f43f5e; }
+  .menu-item:hover {
+    background: var(--bg-soft);
+    color: var(--text);
+  }
+  .menu-item.danger {
+    color: #f43f5e;
+  }
+  .menu-item.danger:hover {
+    background: rgba(244, 63, 94, 0.1);
+    color: #f43f5e;
+  }
 
   /* ── Toast ── */
   .toast {
@@ -637,7 +699,12 @@
     color: var(--text);
     box-shadow: var(--shadow-3);
   }
-  .toast-icon { width: 16px; height: 16px; color: var(--green); flex-shrink: 0; }
+  .toast-icon {
+    width: 16px;
+    height: 16px;
+    color: var(--green);
+    flex-shrink: 0;
+  }
 
   /* ── Processing overlay ── */
   .processing-overlay {
@@ -669,6 +736,14 @@
     border-bottom: 1px solid rgba(248, 113, 113, 0.2);
   }
 
-  @keyframes spin { to { transform: rotate(360deg); } }
-  .spinner { width: 18px; height: 18px; animation: spin 0.8s linear infinite; }
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  .spinner {
+    width: 18px;
+    height: 18px;
+    animation: spin 0.8s linear infinite;
+  }
 </style>

@@ -78,8 +78,12 @@
     return pathname === href || pathname.startsWith(href + '/');
   }
 
-  function toggleSidebar() { sidebarOpen = !sidebarOpen; }
-  function closeSidebar() { sidebarOpen = false; }
+  function toggleSidebar() {
+    sidebarOpen = !sidebarOpen;
+  }
+  function closeSidebar() {
+    sidebarOpen = false;
+  }
 </script>
 
 <div class="admin-root admin-shell" class:sidebar-open={sidebarOpen}>
@@ -192,5 +196,7 @@
     flex-shrink: 0;
     transition: opacity 0.15s;
   }
-  .topbar-action-btn:hover { opacity: 0.85; }
+  .topbar-action-btn:hover {
+    opacity: 0.85;
+  }
 </style>

@@ -40,7 +40,12 @@
         return;
       }
 
-      console.log('[login] sessão obtida, user:', data.session?.user?.email, 'expires_in:', data.session?.expires_in);
+      console.log(
+        '[login] sessão obtida, user:',
+        data.session?.user?.email,
+        'expires_in:',
+        data.session?.expires_in
+      );
 
       if (!data.session) {
         errorMessage = 'Sessão não encontrada após o login.';

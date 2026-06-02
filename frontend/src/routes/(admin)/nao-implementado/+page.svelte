@@ -6,7 +6,10 @@
   <div class="not-impl-card">
     <span class="tag">Em breve</span>
     <h1>Seção em desenvolvimento.</h1>
-    <p>Esta funcionalidade ainda não foi implementada nesta iteração. Consulte o roadmap para saber quando estará disponível.</p>
+    <p>
+      Esta funcionalidade ainda não foi implementada nesta iteração. Consulte o roadmap para saber
+      quando estará disponível.
+    </p>
     <a href="/products" class="btn-back">← Ir para Produtos</a>
   </div>
 </div>

@@ -344,7 +344,10 @@ export async function validateAccessToken(
   });
 
   if (!response.ok) {
-    const body = (await response.json().catch(() => null)) as { msg?: string; message?: string } | null;
+    const body = (await response.json().catch(() => null)) as {
+      msg?: string;
+      message?: string;
+    } | null;
     throw createAuthError(body?.msg ?? body?.message ?? 'Invalid access token', 401);
   }
 
