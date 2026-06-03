@@ -3,14 +3,15 @@
   import MemberFilters from '$lib/components/admin/MemberFilters.svelte';
   import MemberModal from '$lib/components/admin/MemberModal.svelte';
   import { apiFetch } from '$lib/api/backend';
-  import { supabase } from '$lib/api/supabase';
 
-  let { data } = $props<{ data: { members: Member[] } }>();
+  let { data } = $props<{ data: { members: Member[]; error?: string } }>();
 
   // Synchronize state with data loaded from server
   let members = $state<Member[]>([]);
+  let loadError = $state<string | undefined>(undefined);
   $effect(() => {
     members = data.members;
+    loadError = data.error;
   });
 
   // Reactive state for filters
@@ -57,12 +58,8 @@
   async function toggleStatus(member: Member) {
     const newStatus = member.status === 'active' ? 'inactive' : 'active';
     try {
-      const session = (await supabase.auth.getSession()).data.session;
-      if (!session) throw new Error('Sessão expirada. Faça login novamente.');
-
       await apiFetch(`/admin/members/${member.id}/status`, {
         method: 'PATCH',
-        token: session.access_token,
         body: JSON.stringify({ status: newStatus }),
       });
 
@@ -85,12 +82,8 @@
     if (!memberToRemove) return;
     deleting = true;
     try {
-      const session = (await supabase.auth.getSession()).data.session;
-      if (!session) throw new Error('Sessão expirada. Faça login novamente.');
-
       await apiFetch(`/admin/members/${memberToRemove.id}`, {
         method: 'DELETE',
-        token: session.access_token,
       });
 
       members = members.filter((m) => m.id !== memberToRemove!.id);
@@ -123,27 +116,19 @@
   }
 
   async function handleSaveMember(updatedMember: Partial<Member>) {
-    const session = (await supabase.auth.getSession()).data.session;
-    if (!session) throw new Error('Sessão expirada. Faça login novamente.');
-
     if (isEditing && updatedMember.id) {
-      // Edit Member
       const res = await apiFetch<Member>(`/admin/members/${updatedMember.id}`, {
         method: 'PATCH',
-        token: session.access_token,
         body: JSON.stringify({
           name: updatedMember.name,
           role: updatedMember.role,
-          avatar_url: updatedMember.avatar_url || null,
         }),
       });
       members = members.map((m) => (m.id === updatedMember.id ? res : m));
       showToast('Membro atualizado com sucesso!');
     } else {
-      // Create/Invite Member
       const res = await apiFetch<Member>('/admin/members', {
         method: 'POST',
-        token: session.access_token,
         body: JSON.stringify({
           name: updatedMember.name,
           email: updatedMember.email,
@@ -201,6 +186,13 @@
       <span class="kpi-value">{members.length}</span>
     </div>
   </section>
+
+  {#if loadError}
+    <div class="load-error" role="alert">
+      <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+      <span>Erro ao carregar membros: {loadError}</span>
+    </div>
+  {/if}
 
   <!-- Filters Component -->
   <MemberFilters bind:searchQuery bind:filterStatus bind:filterRole />
@@ -482,6 +474,18 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+  }
+
+  .load-error {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(239, 68, 68, 0.08);
+    border: 1px solid rgba(239, 68, 68, 0.25);
+    border-radius: 8px;
+    padding: 10px 14px;
+    color: #ef4444;
+    font-size: 13px;
   }
 
   /* Topbar */

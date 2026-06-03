@@ -5,6 +5,7 @@ import {
   listMembers,
   createMember,
   updateMember,
+  updateMemberStatus,
   deleteMember,
   MemberServiceError,
 } from './members.service.js';
@@ -42,8 +43,50 @@ membersRouter.post('/', ...ownerGuard, async (req, res) => {
       res.status(409).json({ message: err.message });
       return;
     }
+    const errMsg = (err instanceof Error ? err.message : String(err)).toLowerCase();
+    if (errMsg.includes('permission denied') && errMsg.includes('role or status')) {
+      res.status(500).json({
+        message:
+          'Migration pendente no banco de dados. Execute "supabase migration up" e reinicie o backend.',
+      });
+      return;
+    }
     console.error('[members] create error:', err);
     res.status(500).json({ message: 'Falha ao criar membro.' });
+  }
+});
+
+membersRouter.patch('/:id/status', ...ownerGuard, async (req, res) => {
+  const id = typeof req.params?.['id'] === 'string' ? req.params['id'].trim() : '';
+  const auth = (res.locals as { auth: ValidatedAuthContext }).auth;
+  const statusRaw = req.body?.['status'];
+
+  if (!id) {
+    res.status(400).json({ message: 'ID do membro é obrigatório.' });
+    return;
+  }
+
+  if (statusRaw !== 'active' && statusRaw !== 'inactive') {
+    res.status(400).json({ message: 'Status inválido. Use "active" ou "inactive".' });
+    return;
+  }
+
+  try {
+    const member = await updateMemberStatus(id, statusRaw, auth.user.id);
+    res.status(200).json(member);
+  } catch (err) {
+    if (err instanceof MemberServiceError) {
+      if (err.code === 'NOT_FOUND') {
+        res.status(404).json({ message: err.message });
+        return;
+      }
+      if (err.code === 'SELF_DEACTIVATE') {
+        res.status(400).json({ message: err.message });
+        return;
+      }
+    }
+    console.error('[members] status update error:', err);
+    res.status(500).json({ message: 'Falha ao atualizar status do membro.' });
   }
 });
 

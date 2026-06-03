@@ -20,7 +20,10 @@ function getAccessTokenFromRequest(request: Request): string | null {
 
   const cookies = parseCookieHeader(request.headers.cookie);
 
-  return cookies['access_token'] ?? null;
+  // Accept both cookie names:
+  // 'crianex_admin_access_token' — set by SvelteKit login flow (browser client calls)
+  // 'access_token'               — set by backend auth route (direct API access)
+  return cookies['crianex_admin_access_token'] ?? cookies['access_token'] ?? null;
 }
 
 const TEST_AUTH_BYPASS_CONTEXT: ValidatedAuthContext = {

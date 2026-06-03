@@ -11,7 +11,7 @@ export function requireRole(role: string) {
     }
 
     if (auth.user.role !== role) {
-      response.status(403).json({ error: 'Forbidden' });
+      response.status(403).json({ message: `Acesso negado — papel '${role}' necessário.` });
       return;
     }
 

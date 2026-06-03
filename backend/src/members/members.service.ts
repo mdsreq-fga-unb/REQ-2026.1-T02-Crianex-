@@ -41,23 +41,67 @@ export async function createMember(
 ): Promise<MemberRecord> {
   const supabase = getSupabaseClient();
 
-  const { data: existing } = await supabase
+  // Case 1: profile exists with a name → real duplicate
+  // Case 2: profile exists without a name → ghost from a previous failed create → recover
+  const { data: existingProfile } = await supabase
     .from('profiles')
-    .select('id')
+    .select('id, name')
     .eq('email', email)
     .maybeSingle();
 
-  if (existing) {
+  if (existingProfile?.name) {
     throw new MemberServiceError('E-mail já cadastrado na plataforma.', 'DUPLICATE_EMAIL');
   }
 
-  const { data: authData, error: authError } = await supabase.auth.admin.inviteUserByEmail(email);
+  if (existingProfile && !existingProfile.name) {
+    // Ghost profile: auth user exists, trigger created profile but update failed before.
+    // Just finish the update now.
+    const { data, error } = await supabase
+      .from('profiles')
+      .update({ name, role })
+      .eq('id', existingProfile.id)
+      .select(SELECT_FIELDS)
+      .single();
+    if (error) throw error;
+    return data as MemberRecord;
+  }
+
+  // Case 3: no profile at all → create auth user (trigger will create profile)
+  const { data: authData, error: authError } = await supabase.auth.admin.createUser({
+    email,
+    email_confirm: true,
+  });
 
   if (authError) {
     const msg = authError.message.toLowerCase();
-    if (msg.includes('already been registered') || msg.includes('already exists')) {
+    const isDuplicate =
+      msg.includes('already been registered') ||
+      msg.includes('already exists') ||
+      msg.includes('email_exists') ||
+      (authError as unknown as { status?: number }).status === 422;
+
+    if (isDuplicate) {
+      // Case 4: auth user exists but profile was deleted manually (out-of-band).
+      // Find the orphaned auth user and recreate their profile.
+      const { data: listData } = await supabase.auth.admin.listUsers({ perPage: 1000 });
+      const orphan = listData?.users?.find((u) => u.email?.toLowerCase() === email);
+
+      if (orphan) {
+        const { data, error } = await supabase
+          .from('profiles')
+          .upsert(
+            { id: orphan.id, email, name, role, status: 'active' },
+            { onConflict: 'id' }
+          )
+          .select(SELECT_FIELDS)
+          .single();
+        if (error) throw error;
+        return data as MemberRecord;
+      }
+
       throw new MemberServiceError('E-mail já cadastrado na plataforma.', 'DUPLICATE_EMAIL');
     }
+
     throw authError;
   }
 
@@ -69,6 +113,28 @@ export async function createMember(
     .single();
 
   if (error) throw error;
+  return data as MemberRecord;
+}
+
+export async function updateMemberStatus(
+  id: string,
+  status: 'active' | 'inactive',
+  requesterId: string
+): Promise<MemberRecord> {
+  if (status === 'inactive' && id === requesterId) {
+    throw new MemberServiceError('Não é possível inativar a própria conta.', 'SELF_DEACTIVATE');
+  }
+
+  const supabase = getSupabaseClient();
+  const { data, error } = await supabase
+    .from('profiles')
+    .update({ status })
+    .eq('id', id)
+    .select(SELECT_FIELDS)
+    .maybeSingle();
+
+  if (error) throw error;
+  if (!data) throw new MemberServiceError('Membro não encontrado.', 'NOT_FOUND');
   return data as MemberRecord;
 }
 
