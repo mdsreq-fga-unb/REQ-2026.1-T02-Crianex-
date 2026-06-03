@@ -101,6 +101,10 @@ jobs:
 
     env:
       SUPABASE_URL: http://127.0.0.1:54321
+      # Well-known default keys for every local Supabase instance — not secrets.
+      # Required by src/config/supabase.ts (used by admin routes / members module).
+      SUPABASE_SECRET_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImV4cCI6MTk4MzgxMjk5Nn0.EGIM96RAZx35lJzdJsyH-qQwv8Hj04zWl196z2-SBc0
+      PUBLIC_SUPABASE_PUBLISHABLE_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6ImFub24iLCJleHAiOjE5ODM4MTI5OTZ9.OVNB8YDOXV-PjHIYD7-LTLU3t0gJDYP2-IgUKxS6HkI
 
     steps:
       - uses: actions/checkout@v4
