@@ -158,6 +158,10 @@ export async function deleteMember(id: string, requesterId: string): Promise<voi
   }
 
   const supabase = getSupabaseClient();
+
+  const { data: profile } = await supabase.from('profiles').select('id').eq('id', id).maybeSingle();
+  if (!profile) throw new MemberServiceError('Membro não encontrado.', 'NOT_FOUND');
+
   const { error } = await supabase.auth.admin.deleteUser(id);
   if (error) throw error;
 }

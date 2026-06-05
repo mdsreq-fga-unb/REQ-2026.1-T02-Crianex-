@@ -35,7 +35,7 @@
   // Toast Notifications state
   let toastMessage = $state<string>('');
   let toastType = $state<'success' | 'error'>('success');
-  let toastTimer: any = null;
+  let toastTimer: ReturnType<typeof setTimeout> | null = null;
 
   function showToast(message: string, type: 'success' | 'error' = 'success') {
     toastMessage = message;
@@ -471,7 +471,7 @@
             onclick={confirmRemoveMember}
             disabled={deleting}
           >
-            {deleting ? 'Removendo...' : 'Remover'}
+            {deleting ? 'Removendo...' : 'Remover definitivamente'}
           </button>
         </footer>
       </div>

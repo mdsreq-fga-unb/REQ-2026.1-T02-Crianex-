@@ -132,9 +132,9 @@ describe('Suite de testes de integração — Members CRUD', () => {
       await request(app).delete(`/admin/members/${memberId}`).expect(204);
     });
 
-    it('Dado membro já removido, uma nova tentativa de remoção deve retornar erro', async () => {
-      const res = await request(app).delete(`/admin/members/${memberId}`);
-      expect(res.status).toBeGreaterThanOrEqual(400);
+    it('Dado membro já removido, uma nova tentativa de remoção deve retornar 404', async () => {
+      const res = await request(app).delete(`/admin/members/${memberId}`).expect(404);
+      expect(res.body).toHaveProperty('message');
     });
   });
 });

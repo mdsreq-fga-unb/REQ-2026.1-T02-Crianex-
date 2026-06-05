@@ -129,9 +129,15 @@ membersRouter.delete('/:id', ...ownerGuard, async (req, res) => {
     await deleteMember(id, auth.user.id);
     res.status(204).send();
   } catch (err) {
-    if (err instanceof MemberServiceError && err.code === 'SELF_DELETE') {
-      res.status(400).json({ message: err.message });
-      return;
+    if (err instanceof MemberServiceError) {
+      if (err.code === 'SELF_DELETE') {
+        res.status(400).json({ message: err.message });
+        return;
+      }
+      if (err.code === 'NOT_FOUND') {
+        res.status(404).json({ message: err.message });
+        return;
+      }
     }
     console.error('[members] delete error:', err);
     res.status(500).json({ message: 'Falha ao remover membro.' });

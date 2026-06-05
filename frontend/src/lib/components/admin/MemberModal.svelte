@@ -103,32 +103,9 @@
       <form onsubmit={handleSubmit}>
         <div class="admin-modal-body">
           <div class="avatar-edit-wrap">
-            <button
-              type="button"
-              class="avatar-edit"
-              disabled={loading}
-              aria-label="Alterar avatar"
-            >
+            <div class="avatar-edit" aria-label="Avatar do membro" role="img">
               <span class="avatar-initials">{initials}</span>
-              <span class="avatar-edit-overlay" aria-hidden="true">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path
-                    d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"
-                  ></path>
-                  <circle cx="12" cy="13" r="4"></circle>
-                </svg>
-              </span>
-            </button>
+            </div>
           </div>
 
           {#if errorMessage}
@@ -220,21 +197,8 @@
     border-radius: 50%;
     background: linear-gradient(135deg, var(--purple), var(--pink));
     position: relative;
-    cursor: pointer;
-    border: 0;
-    padding: 0;
     overflow: hidden;
     flex-shrink: 0;
-    transition: box-shadow 0.15s;
-  }
-
-  .avatar-edit:hover {
-    box-shadow: 0 0 0 3px var(--line-strong);
-  }
-
-  .avatar-edit:disabled {
-    cursor: not-allowed;
-    opacity: 0.7;
   }
 
   .avatar-initials {
@@ -251,24 +215,6 @@
     letter-spacing: 0.04em;
     z-index: 1;
     pointer-events: none;
-  }
-
-  .avatar-edit-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.52);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.15s;
-    z-index: 2;
-    color: #fff;
-    pointer-events: none;
-  }
-
-  .avatar-edit:hover:not(:disabled) .avatar-edit-overlay {
-    opacity: 1;
   }
 
   .error-banner {
