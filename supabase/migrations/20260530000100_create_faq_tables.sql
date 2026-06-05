@@ -39,8 +39,8 @@ create table public.faq_articles (
     category_id uuid not null references public.faq_categories(id) on delete cascade,
     published boolean default false not null,
     published_at timestamp with time zone,
-    helpful_count integer default 0 not null,
-    not_helpful_count integer default 0 not null,
+    helpful_count integer default 0 not null check (helpful_count >= 0),
+    not_helpful_count integer default 0 not null check (not_helpful_count >= 0),
     created_at timestamp with time zone default timezone('utc'::text, now()) not null,
     updated_at timestamp with time zone default timezone('utc'::text, now()) not null,
     slug text not null unique
@@ -50,11 +50,23 @@ create or replace function public.set_faq_category_slug()
 returns trigger
 language plpgsql
 as $$
+declare
+    base_slug text;
+    candidate  text;
+    counter    int := 1;
 begin
     if coalesce(new.slug, '') = '' then
-        new.slug := public.slugify(new.label_pt);
+        base_slug := public.slugify(new.label_pt);
+        candidate := base_slug;
+        while exists (
+            select 1 from public.faq_categories
+            where slug = candidate and id <> new.id
+        ) loop
+            candidate := base_slug || '-' || counter;
+            counter := counter + 1;
+        end loop;
+        new.slug := candidate;
     end if;
-
     return new;
 end;
 $$;
@@ -63,11 +75,37 @@ create or replace function public.set_faq_article_slug()
 returns trigger
 language plpgsql
 as $$
+declare
+    base_slug text;
+    candidate  text;
+    counter    int := 1;
 begin
     if coalesce(new.slug, '') = '' then
-        new.slug := public.slugify(new.title_pt);
+        base_slug := public.slugify(new.title_pt);
+        candidate := base_slug;
+        while exists (
+            select 1 from public.faq_articles
+            where slug = candidate and id <> new.id
+        ) loop
+            candidate := base_slug || '-' || counter;
+            counter := counter + 1;
+        end loop;
+        new.slug := candidate;
     end if;
+    return new;
+end;
+$$;
 
+create or replace function public.set_faq_article_published_at()
+returns trigger
+language plpgsql
+as $$
+begin
+    if new.published = true and (old is null or old.published = false) then
+        new.published_at := now();
+    elsif new.published = false then
+        new.published_at := null;
+    end if;
     return new;
 end;
 $$;
@@ -83,6 +121,12 @@ before insert or update of title_pt, slug
 on public.faq_articles
 for each row
 execute function public.set_faq_article_slug();
+
+create trigger handle_faq_articles_published_at
+before insert or update of published
+on public.faq_articles
+for each row
+execute function public.set_faq_article_published_at();
 
 create trigger handle_faq_articles_updated_at
 before update on public.faq_articles
@@ -125,5 +169,8 @@ on public.faq_categories(display_order);
 create index idx_faq_articles_category_id
 on public.faq_articles(category_id);
 
+create index idx_faq_articles_category_published
+on public.faq_articles(category_id, published);
+
 create index idx_faq_articles_published
-on public.faq_articles(published);
+on public.faq_articles(published) where published = true;
