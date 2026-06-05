@@ -4,6 +4,7 @@ import { authRouter } from '../auth/auth.routes.js';
 import leadsRouter from '../leads/leads.routes.js';
 import { productsRouter } from '../products/products.routes.js';
 import { membersRouter } from '../members/members.routes.js';
+import { faqRouter } from '../faq/faq.routes.js';
 
 export const router = Router();
 
@@ -12,3 +13,4 @@ router.use('/auth', authRouter);
 router.use('/public', leadsRouter);
 router.use('/products', productsRouter);
 router.use('/admin/members', membersRouter);
+router.use('/admin/faq', faqRouter);
