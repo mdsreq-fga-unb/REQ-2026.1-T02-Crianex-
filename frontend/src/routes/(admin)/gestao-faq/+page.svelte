@@ -3,74 +3,19 @@
   import { supabase } from '$lib/api/supabase';
   import { topbarActions } from '$lib/stores/topbar';
   import { onMount } from 'svelte';
-  import type { FaqArticle } from './+page.server';
+  import type { FaqArticle, FaqCategory } from './+page.server';
 
-  let { data } = $props<{ data: { articles: FaqArticle[]; error?: string } }>();
-
-  // ── Mocks para desenvolvimento ─────────────────────
-  const MOCK_ARTICLES: FaqArticle[] = [
-    {
-      id: 'mock-1',
-      title_pt: 'Como funciona a contratação?',
-      category: 'geral',
-      status: 'published',
-      ratings_positive: 42,
-      ratings_negative: 3,
-      published_at: '2026-05-01T10:00:00Z',
-      created_at: '2026-05-01T09:00:00Z',
-      updated_at: '2026-05-01T10:00:00Z',
-    },
-    {
-      id: 'mock-2',
-      title_pt: 'Quais são os planos disponíveis?',
-      category: 'billing',
-      status: 'published',
-      ratings_positive: 28,
-      ratings_negative: 1,
-      published_at: '2026-05-03T14:00:00Z',
-      created_at: '2026-05-03T13:00:00Z',
-      updated_at: '2026-05-03T14:00:00Z',
-    },
-    {
-      id: 'mock-3',
-      title_pt: 'Como configurar o webhook anti-fraude?',
-      category: 'notifly',
-      status: 'published',
-      ratings_positive: 61,
-      ratings_negative: 8,
-      published_at: '2026-04-20T11:00:00Z',
-      created_at: '2026-04-20T10:00:00Z',
-      updated_at: '2026-04-20T11:00:00Z',
-    },
-    {
-      id: 'mock-4',
-      title_pt: 'Posso exportar dados dos relatórios?',
-      category: 'avali',
-      status: 'draft',
-      ratings_positive: 0,
-      ratings_negative: 0,
-      published_at: null,
-      created_at: '2026-06-01T08:00:00Z',
-      updated_at: '2026-06-01T08:00:00Z',
-    },
-    {
-      id: 'mock-5',
-      title_pt: 'Como adicionar múltiplos usuários?',
-      category: 'geral',
-      status: 'published',
-      ratings_positive: 19,
-      ratings_negative: 2,
-      published_at: '2026-05-10T09:00:00Z',
-      created_at: '2026-05-10T08:00:00Z',
-      updated_at: '2026-05-10T09:00:00Z',
-    },
-  ];
+  let { data } = $props<{
+    data: { articles: FaqArticle[]; categories: FaqCategory[]; error?: string };
+  }>();
 
   // ── State ────────────────────────────────────────────────
   let articles = $state<FaqArticle[]>([]);
+  let categories = $state<FaqCategory[]>([]);
 
   $effect(() => {
-    articles = data.articles.length > 0 ? data.articles : MOCK_ARTICLES;
+    articles = data.articles;
+    categories = data.categories;
   });
 
   let searchQuery = $state('');
@@ -83,19 +28,14 @@
   let editingArticle = $state<FaqArticle | null>(null);
   let formTitle = $state('');
   let formTitleEn = $state('');
-  let formContent = $state('');
-  let formContentEn = $state('');
-  let formCategory = $state('geral');
-  let formCustomCategory = $state('');
-  let formStatus = $state<'published' | 'draft'>('draft');
+  let formBody = $state('');
+  let formBodyEn = $state('');
+  let formCategoryId = $state('');
+  let formPublished = $state(false);
   let formSaving = $state(false);
 
   let questionTab = $state<'pt' | 'en'>('pt');
   let answerTab = $state<'pt' | 'en'>('pt');
-
-  let effectiveCategory = $derived(
-    formCategory === '__new__' ? formCustomCategory.trim() : formCategory
-  );
 
   // Modal excluir
   let isConfirmOpen = $state(false);
@@ -106,8 +46,6 @@
   let toastType = $state<'success' | 'error'>('success');
   let toastTimer: ReturnType<typeof setTimeout> | null = null;
 
-  const FAQ_CATEGORIES = ['geral', 'avali', 'pontua', 'notifly', 'billing', 'security'];
-
   // ── Topbar action ────────────────────────────────────────
   onMount(() => {
     topbarActions.set([{ label: '+ Novo artigo', onClick: openCreateModal }]);
@@ -115,20 +53,22 @@
   });
 
   // ── Derived ──────────────────────────────────────────────
-  let categories = $derived([...new Set(articles.map((a) => a.category).filter(Boolean))]);
-
   let filteredArticles = $derived(
     articles
-      .filter((a) => filterCategory === 'all' || a.category === filterCategory)
+      .filter((a) => filterCategory === 'all' || a.category_id === filterCategory)
       .filter((a) => !searchQuery || a.title_pt.toLowerCase().includes(searchQuery.toLowerCase()))
   );
 
-  let publishedArticles = $derived(filteredArticles.filter((a) => a.status === 'published'));
-  let draftArticles = $derived(filteredArticles.filter((a) => a.status === 'draft'));
+  let publishedArticles = $derived(filteredArticles.filter((a) => a.published));
+  let draftArticles = $derived(filteredArticles.filter((a) => !a.published));
 
   function helpfulPct(a: FaqArticle): number | null {
-    const total = a.ratings_positive + a.ratings_negative;
-    return total === 0 ? null : Math.round((a.ratings_positive / total) * 100);
+    const total = a.helpful_count + a.not_helpful_count;
+    return total === 0 ? null : Math.round((a.helpful_count / total) * 100);
+  }
+
+  function getCategoryLabel(id: string): string {
+    return categories.find((c) => c.id === id)?.label_pt ?? '—';
   }
 
   // ── Helpers ──────────────────────────────────────────────
@@ -151,11 +91,10 @@
     editingArticle = null;
     formTitle = '';
     formTitleEn = '';
-    formContent = '';
-    formContentEn = '';
-    formCategory = FAQ_CATEGORIES[0];
-    formCustomCategory = '';
-    formStatus = 'draft';
+    formBody = '';
+    formBodyEn = '';
+    formCategoryId = categories[0]?.id ?? '';
+    formPublished = false;
     questionTab = 'pt';
     answerTab = 'pt';
     isFormOpen = true;
@@ -165,68 +104,48 @@
     editingArticle = article;
     formTitle = article.title_pt;
     formTitleEn = article.title_en ?? '';
-    formContent = article.content_pt ?? '';
-    formContentEn = article.content_en ?? '';
+    formBody = article.body_pt ?? '';
+    formBodyEn = article.body_en ?? '';
+    formCategoryId = article.category_id;
+    formPublished = article.published;
     questionTab = 'pt';
     answerTab = 'pt';
-    const cat = article.category || FAQ_CATEGORIES[0];
-    formCustomCategory = '';
-    if (FAQ_CATEGORIES.includes(cat)) {
-      formCategory = cat;
-    } else {
-      formCategory = '__new__';
-      formCustomCategory = cat;
-    }
-    formStatus = article.status;
     isFormOpen = true;
     activeMenuId = null;
   }
 
   async function saveArticle() {
-    if (!formTitle.trim() || !effectiveCategory) return;
+    if (!formTitle.trim() || !formCategoryId) return;
     formSaving = true;
     try {
       const session = (await supabase.auth.getSession()).data.session;
       if (!session) throw new Error('Sessão expirada.');
 
       if (editingArticle) {
-        await apiFetch(`/admin/faq/${editingArticle.id}`, {
+        const updated = await apiFetch<FaqArticle>(`/admin/faq/articles/${editingArticle.id}`, {
           method: 'PATCH',
           token: session.access_token,
           body: JSON.stringify({
             title_pt: formTitle,
             title_en: formTitleEn || null,
-            content_pt: formContent || null,
-            content_en: formContentEn || null,
-            category: effectiveCategory,
-            status: formStatus,
+            body_pt: formBody,
+            body_en: formBodyEn,
+            category_id: formCategoryId,
+            published: formPublished,
           }),
         });
-        articles = articles.map((a) =>
-          a.id === editingArticle!.id
-            ? {
-                ...a,
-                title_pt: formTitle,
-                title_en: formTitleEn || null,
-                content_pt: formContent || null,
-                content_en: formContentEn || null,
-                category: effectiveCategory,
-                status: formStatus,
-              }
-            : a
-        );
+        articles = articles.map((a) => (a.id === editingArticle!.id ? updated : a));
         showToast('Artigo atualizado com sucesso!');
       } else {
-        const created = await apiFetch<FaqArticle>('/admin/faq', {
+        const created = await apiFetch<FaqArticle>('/admin/faq/articles', {
           method: 'POST',
           token: session.access_token,
           body: JSON.stringify({
             title_pt: formTitle,
             title_en: formTitleEn || null,
-            content_pt: formContent || null,
-            content_en: formContentEn || null,
-            category: effectiveCategory,
-            status: formStatus,
+            body_pt: formBody,
+            body_en: formBodyEn,
+            category_id: formCategoryId,
           }),
         });
         articles = [created, ...articles];
@@ -243,21 +162,19 @@
 
   // ── Ações de linha ────────────────────────────────────────
   async function togglePublish(article: FaqArticle) {
-    const newStatus = article.status === 'published' ? 'draft' : 'published';
+    const newPublished = !article.published;
     try {
       const session = (await supabase.auth.getSession()).data.session;
       if (!session) throw new Error('Sessão expirada.');
 
-      await apiFetch(`/admin/faq/${article.id}/status`, {
+      const updated = await apiFetch<FaqArticle>(`/admin/faq/articles/${article.id}`, {
         method: 'PATCH',
         token: session.access_token,
-        body: JSON.stringify({ status: newStatus }),
+        body: JSON.stringify({ published: newPublished }),
       });
 
-      articles = articles.map((a) => (a.id === article.id ? { ...a, status: newStatus } : a));
-      showToast(
-        newStatus === 'published' ? 'Artigo publicado com sucesso!' : 'Movido para rascunho.'
-      );
+      articles = articles.map((a) => (a.id === article.id ? updated : a));
+      showToast(newPublished ? 'Artigo publicado com sucesso!' : 'Movido para rascunho.');
     } catch (err: unknown) {
       const apiError = err as { message?: string };
       showToast(apiError.message || 'Falha ao atualizar status.', 'error');
@@ -279,7 +196,7 @@
       const session = (await supabase.auth.getSession()).data.session;
       if (!session) throw new Error('Sessão expirada.');
 
-      await apiFetch(`/admin/faq/${articleToRemove.id}`, {
+      await apiFetch(`/admin/faq/articles/${articleToRemove.id}`, {
         method: 'DELETE',
         token: session.access_token,
       });
@@ -353,24 +270,16 @@
       >
         todas <span class="ct">{articles.length}</span>
       </button>
-      {#each FAQ_CATEGORIES as cat}
-        {@const ct = articles.filter((a) => a.category === cat).length}
+      {#each categories as cat}
+        {@const ct = articles.filter((a) => a.category_id === cat.id).length}
         {#if ct > 0}
           <button
-            class="filter-chip {filterCategory === cat ? 'on' : ''}"
-            onclick={() => (filterCategory = cat)}
+            class="filter-chip {filterCategory === cat.id ? 'on' : ''}"
+            onclick={() => (filterCategory = cat.id)}
           >
-            {cat} <span class="ct">{ct}</span>
+            {cat.label_pt} <span class="ct">{ct}</span>
           </button>
         {/if}
-      {/each}
-      {#each categories.filter((c) => !FAQ_CATEGORIES.includes(c)) as cat}
-        <button
-          class="filter-chip {filterCategory === cat ? 'on' : ''}"
-          onclick={() => (filterCategory = cat)}
-        >
-          {cat} <span class="ct">{articles.filter((a) => a.category === cat).length}</span>
-        </button>
       {/each}
     </div>
 
@@ -389,7 +298,7 @@
       {@const pct = helpfulPct(article)}
       <div class="faq-row">
         <span class="qmark">?</span>
-        <span class="cat-chip">{article.category || '—'}</span>
+        <span class="cat-chip">{getCategoryLabel(article.category_id)}</span>
         <div class="qtitle">{article.title_pt}</div>
         <span class="status-pill published">
           <span class="dt"></span>publicado
@@ -471,7 +380,7 @@
       {@const pct = helpfulPct(article)}
       <div class="faq-row draft">
         <span class="qmark">?</span>
-        <span class="cat-chip">{article.category || '—'}</span>
+        <span class="cat-chip">{getCategoryLabel(article.category_id)}</span>
         <div class="qtitle">{article.title_pt}</div>
         <span class="status-pill draft">
           <span class="dt"></span>rascunho
@@ -563,28 +472,25 @@
         <div class="fld-row">
           <div class="fld">
             <label for="faq-cat">Categoria</label>
-            <select id="faq-cat" bind:value={formCategory}>
-              {#each FAQ_CATEGORIES as cat}
-                <option value={cat}>{cat}</option>
+            <select id="faq-cat" bind:value={formCategoryId}>
+              {#each categories as cat}
+                <option value={cat.id}>{cat.label_pt}</option>
               {/each}
-              {#each categories.filter((c) => !FAQ_CATEGORIES.includes(c)) as cat}
-                <option value={cat}>{cat}</option>
-              {/each}
-              <option value="__new__">＋ Nova categoria…</option>
+              {#if categories.length === 0}
+                <option value="" disabled>Nenhuma categoria cadastrada</option>
+              {/if}
             </select>
-            {#if formCategory === '__new__'}
-              <input
-                id="faq-cat-custom"
-                type="text"
-                class="cat-input"
-                placeholder="ex. integrações"
-                bind:value={formCustomCategory}
-              />
-            {/if}
           </div>
           <div class="fld">
             <label for="faq-status">Status</label>
-            <select id="faq-status" bind:value={formStatus}>
+            <select
+              id="faq-status"
+              disabled={!editingArticle}
+              value={formPublished ? 'published' : 'draft'}
+              onchange={(e) => {
+                formPublished = (e.currentTarget as HTMLSelectElement).value === 'published';
+              }}
+            >
               <option value="published">Publicado</option>
               <option value="draft">Rascunho</option>
             </select>
@@ -655,14 +561,14 @@
               id="faq-content-pt"
               class="answer-area"
               placeholder="Explique em 1–3 parágrafos…"
-              bind:value={formContent}
+              bind:value={formBody}
             ></textarea>
           {:else}
             <textarea
               id="faq-content-en"
               class="answer-area"
               placeholder="Explain in 1–3 paragraphs…"
-              bind:value={formContentEn}
+              bind:value={formBodyEn}
             ></textarea>
           {/if}
         </div>
@@ -700,7 +606,7 @@
         <button
           class="btn-primary"
           onclick={saveArticle}
-          disabled={formSaving || !formTitle.trim() || !effectiveCategory}
+          disabled={formSaving || !formTitle.trim() || !formCategoryId}
         >
           {formSaving ? 'Salvando…' : editingArticle ? 'Salvar alterações' : 'Criar artigo'}
         </button>
@@ -1243,11 +1149,6 @@
   .fld input:focus,
   .fld select:focus {
     border-color: var(--purple);
-  }
-
-  .cat-input {
-    margin-top: 6px;
-    border-color: var(--purple) !important;
   }
 
   /* Bilingual tabs */
