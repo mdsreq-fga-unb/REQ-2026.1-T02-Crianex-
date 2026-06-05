@@ -544,8 +544,12 @@
     class="modal-overlay"
     role="dialog"
     aria-modal="true"
+    tabindex="-1"
     onclick={(e) => {
       if (e.target === e.currentTarget) isFormOpen = false;
+    }}
+    onkeydown={(e) => {
+      if (e.key === 'Escape') isFormOpen = false;
     }}
   >
     <div class="admin-modal wide">
@@ -570,11 +574,11 @@
             </select>
             {#if formCategory === '__new__'}
               <input
+                id="faq-cat-custom"
                 type="text"
                 class="cat-input"
                 placeholder="ex. integrações"
                 bind:value={formCustomCategory}
-                autofocus
               />
             {/if}
           </div>
@@ -590,7 +594,7 @@
         <!-- Pergunta PT/EN -->
         <div class="fld">
           <div class="fld-label-row">
-            <label>Pergunta</label>
+            <label for={questionTab === 'pt' ? 'faq-title-pt' : 'faq-title-en'}>Pergunta</label>
             <div class="lang-tabs">
               <button
                 type="button"
@@ -610,12 +614,14 @@
           </div>
           {#if questionTab === 'pt'}
             <input
+              id="faq-title-pt"
               type="text"
               placeholder="Como funciona a contratação dos produtos Crianex?"
               bind:value={formTitle}
             />
           {:else}
             <input
+              id="faq-title-en"
               type="text"
               placeholder="How does the Crianex product subscription work?"
               bind:value={formTitleEn}
@@ -626,7 +632,7 @@
         <!-- Resposta PT/EN -->
         <div class="fld">
           <div class="fld-label-row">
-            <label>Resposta</label>
+            <label for={answerTab === 'pt' ? 'faq-content-pt' : 'faq-content-en'}>Resposta</label>
             <div class="lang-tabs">
               <button
                 type="button"
@@ -646,12 +652,14 @@
           </div>
           {#if answerTab === 'pt'}
             <textarea
+              id="faq-content-pt"
               class="answer-area"
               placeholder="Explique em 1–3 parágrafos…"
               bind:value={formContent}
             ></textarea>
           {:else}
             <textarea
+              id="faq-content-en"
               class="answer-area"
               placeholder="Explain in 1–3 paragraphs…"
               bind:value={formContentEn}
