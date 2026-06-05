@@ -70,7 +70,7 @@ export async function createMember(
   if (existingProfile && !existingProfile.name) {
     const { data, error } = await supabase
       .from('profiles')
-      .update({ name, role, ...extraFields })
+      .update({ name, role, status: 'active', ...extraFields })
       .eq('id', existingProfile.id)
       .select(SELECT_FIELDS)
       .single();
@@ -116,7 +116,7 @@ export async function createMember(
 
   const { data, error } = await supabase
     .from('profiles')
-    .update({ name, role, ...extraFields })
+    .update({ name, role, status: 'active', ...extraFields })
     .eq('id', authData.user.id)
     .select(SELECT_FIELDS)
     .single();

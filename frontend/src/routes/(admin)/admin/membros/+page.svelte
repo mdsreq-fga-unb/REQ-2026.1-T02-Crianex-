@@ -1,7 +1,9 @@
 <script lang="ts">
+  import { onMount, onDestroy } from 'svelte';
   import { getInitials, filterMembers, formatLastAccess, type Member } from '$lib/utils/membros';
   import MemberModal from '$lib/components/admin/MemberModal.svelte';
   import { apiFetch } from '$lib/api/backend';
+  import { topbarActions } from '$lib/stores/topbar';
 
   let { data } = $props<{ data: { members: Member[]; error?: string } }>();
 
@@ -154,22 +156,18 @@
   }
 
   const COL = '44px 1.4fr 1.4fr 130px 100px 80px 40px';
+
+  onMount(() => {
+    topbarActions.set([{ label: '+ Cadastrar membro', onClick: openAddModal }]);
+  });
+  onDestroy(() => {
+    topbarActions.set([]);
+  });
 </script>
 
 <svelte:window onclick={handleOutsideClick} />
 
 <div class="membros-container">
-  <!-- Topbar -->
-  <header class="admin-topbar">
-    <div class="crumbs" aria-label="Navegação de contexto">
-      <span>/ operações</span>
-      <span class="active-crumb">/ membros</span>
-    </div>
-    <button class="btn-add" onclick={openAddModal}>
-      <span>+</span> Cadastrar membro
-    </button>
-  </header>
-
   <!-- KPIs -->
   <section class="kpi-grid" aria-label="Indicadores chave dos membros">
     <div class="kpi">
@@ -553,51 +551,6 @@
     padding: 10px 14px;
     color: #ef4444;
     font-size: 13px;
-  }
-
-  /* Topbar */
-  .admin-topbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 16px;
-  }
-
-  .crumbs {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: var(--text-faint);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    display: flex;
-    gap: 6px;
-  }
-
-  .active-crumb {
-    color: var(--text);
-  }
-
-  .btn-add {
-    background-color: #ffffff;
-    color: #101010;
-    border: none;
-    border-radius: 999px;
-    padding: 8px 16px;
-    font-size: 13.5px;
-    font-weight: 600;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    transition:
-      background-color 0.2s,
-      transform 0.15s;
-  }
-
-  .btn-add:hover {
-    background-color: var(--purple);
-    color: #ffffff;
   }
 
   /* KPI Grid */
