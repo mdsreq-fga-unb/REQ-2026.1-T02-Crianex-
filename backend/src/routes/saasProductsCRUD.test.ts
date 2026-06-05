@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import request from 'supertest';
 import express from 'express';
-import { productsRouter } from '../products/products.routes.js';
+import { productsAdminRouter as productsRouter } from '../products/products.routes.js';
 
 const originalBypass = process.env['ADMIN_AUTH_BYPASS'];
 

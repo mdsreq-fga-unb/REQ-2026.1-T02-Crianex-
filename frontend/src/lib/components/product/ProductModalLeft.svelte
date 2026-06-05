@@ -60,7 +60,7 @@
       fd.append('image', file);
 
       const base = env.PUBLIC_API_BASE_URL ?? 'http://localhost:3000';
-      const res = await fetch(`${base}/api/products/upload`, {
+      const res = await fetch(`${base}/api/admin/products/upload`, {
         method: 'POST',
         body: fd,
         credentials: 'include',

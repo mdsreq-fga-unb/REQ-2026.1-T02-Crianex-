@@ -2,11 +2,23 @@ import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import request from 'supertest';
 import express from 'express';
 import { faqRouter } from './faq.routes.js';
+import { getSupabaseClient } from '../config/supabase.js';
 
 const originalBypass = process.env['ADMIN_AUTH_BYPASS'];
 
-beforeAll(() => {
+beforeAll(async () => {
   process.env['ADMIN_AUTH_BYPASS'] = 'true';
+
+  // Remove dados residuais de execuções anteriores para garantir idempotência
+  const supabase = getSupabaseClient();
+  await supabase
+    .from('faq_articles')
+    .delete()
+    .in('title_pt', ['Como usar a plataforma', 'Como configurar sua conta']);
+  await supabase
+    .from('faq_categories')
+    .delete()
+    .in('label_pt', ['Dúvidas Gerais', 'Perguntas Frequentes']);
 });
 
 afterAll(() => {
@@ -34,10 +46,10 @@ describe('Suite de testes de integração — Endpoints CRUD FAQ', () => {
         .send({ label_pt: 'Dúvidas Gerais', label_en: 'General Questions', display_order: 1 })
         .expect(201);
 
-      expect(res.body).toHaveProperty('id');
+      categoriaId = res.body.id;
+      expect(categoriaId).toBeTruthy();
       expect(res.body.label_pt).toBe('Dúvidas Gerais');
       expect(res.body.slug).toBe('duvidas-gerais');
-      categoriaId = res.body.id;
     });
 
     it('Dado label_pt ausente, deve retornar 400', async () => {
@@ -80,11 +92,11 @@ describe('Suite de testes de integração — Endpoints CRUD FAQ', () => {
         })
         .expect(201);
 
-      expect(res.body).toHaveProperty('id');
+      artigoId = res.body.id;
+      expect(artigoId).toBeTruthy();
       expect(res.body.published).toBe(false);
       expect(res.body.slug).toBe('como-usar-a-plataforma');
       expect(res.body.category_id).toBe(categoriaId);
-      artigoId = res.body.id;
     });
 
     it('Dado title_pt ausente, deve retornar 400', async () => {

@@ -26,18 +26,31 @@ export type FaqCategory = {
   product_id: string | null;
   display_order: number;
   slug: string;
+  is_protected: boolean;
   created_at: string;
+};
+
+export type Product = {
+  id: string;
+  name_pt: string;
+  name_en: string;
+  slug: string;
+  published: boolean;
+  display_order: number;
+  icon_text: string | null;
+  color: string | null;
 };
 
 export const load: PageServerLoad = async ({ cookies }) => {
   const token = cookies.get('crianex_admin_access_token');
 
   try {
-    const [articles, categories] = await Promise.all([
+    const [articles, categories, products] = await Promise.all([
       apiFetch<FaqArticle[]>('/admin/faq/articles', { token }),
       apiFetch<FaqCategory[]>('/admin/faq/categories', { token }),
+      apiFetch<Product[]>('/admin/products', { token }),
     ]);
-    return { articles, categories };
+    return { articles, categories, products };
   } catch (err) {
     console.error('[gestao-faq load] Failed to fetch FAQ data:', err);
     const apiError = err as { status?: number; message?: string };
@@ -47,6 +60,7 @@ export const load: PageServerLoad = async ({ cookies }) => {
     return {
       articles: [],
       categories: [],
+      products: [],
       error: apiError.message || 'Erro ao carregar dados do servidor.',
     };
   }

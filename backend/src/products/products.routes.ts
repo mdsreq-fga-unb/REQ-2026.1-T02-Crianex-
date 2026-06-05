@@ -12,8 +12,6 @@ import {
   uploadProductImageController,
 } from './products.controller.js';
 
-const productsRouter = Router();
-
 const upload = multer({
   storage: multer.memoryStorage(),
   limits: { fileSize: 2 * 1024 * 1024 },
@@ -29,13 +27,18 @@ const upload = multer({
 
 const ownerGuard = [validateJWT, requireRole('owner')];
 
-productsRouter.get('/', getPublishedProductsController);
-productsRouter.get('/admin', ...ownerGuard, getAllProductsController);
-productsRouter.post('/upload', ...ownerGuard, upload.single('image'), uploadProductImageController);
-productsRouter.post('/', ...ownerGuard, createProductController);
-productsRouter.post('/reorder', ...ownerGuard, reorderProductsController);
-productsRouter.patch('/reorder', ...ownerGuard, reorderProductsController);
-productsRouter.patch('/:id', ...ownerGuard, updateProductController);
-productsRouter.delete('/:id', ...ownerGuard, deleteProductController);
+// Rota pública: apenas produtos publicados
+const productsPublicRouter = Router();
+productsPublicRouter.get('/', getPublishedProductsController);
 
-export { productsRouter };
+// Rotas de admin: todas as operações CRUD
+const productsAdminRouter = Router();
+productsAdminRouter.get('/', ...ownerGuard, getAllProductsController);
+productsAdminRouter.post('/upload', ...ownerGuard, upload.single('image'), uploadProductImageController);
+productsAdminRouter.post('/', ...ownerGuard, createProductController);
+productsAdminRouter.post('/reorder', ...ownerGuard, reorderProductsController);
+productsAdminRouter.patch('/reorder', ...ownerGuard, reorderProductsController);
+productsAdminRouter.patch('/:id', ...ownerGuard, updateProductController);
+productsAdminRouter.delete('/:id', ...ownerGuard, deleteProductController);
+
+export { productsPublicRouter, productsAdminRouter };

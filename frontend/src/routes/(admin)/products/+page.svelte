@@ -100,12 +100,12 @@
       processingMessage = isEditingMode ? 'Salvando alterações...' : 'Criando produto...';
 
       if (isEditingMode) {
-        await apiFetch(`/products/${currentProductId}`, {
+        await apiFetch(`/admin/products/${currentProductId}`, {
           method: 'PATCH',
           body: JSON.stringify(modalData),
         });
       } else {
-        await apiFetch('/products', {
+        await apiFetch('/admin/products', {
           method: 'POST',
           body: JSON.stringify(modalData),
         });
@@ -164,7 +164,7 @@
     }));
 
     try {
-      await apiFetch('/products/reorder', {
+      await apiFetch('/admin/products/reorder', {
         method: 'PATCH',
         body: JSON.stringify({ orders: newOrder }),
       });
@@ -216,7 +216,7 @@
       isProcessing = true;
       processingMessage = currentStatus ? 'Despublicando...' : 'Publicando...';
       console.debug('[client] about to call apiFetch for', id, '->', !currentStatus);
-      const res = await apiFetch(`/products/${id}`, {
+      const res = await apiFetch(`/admin/products/${id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ published: !currentStatus }),
@@ -269,7 +269,7 @@
     processingMessage = 'Excluindo produto...';
 
     try {
-      await apiFetch(`/products/${idToDelete}`, {
+      await apiFetch(`/admin/products/${idToDelete}`, {
         method: 'DELETE',
       });
 

@@ -3,19 +3,26 @@
   import { supabase } from '$lib/api/supabase';
   import { topbarActions } from '$lib/stores/topbar';
   import { onMount } from 'svelte';
-  import type { FaqArticle, FaqCategory } from './+page.server';
+  import type { FaqArticle, FaqCategory, Product } from './+page.server';
 
   let { data } = $props<{
-    data: { articles: FaqArticle[]; categories: FaqCategory[]; error?: string };
+    data: {
+      articles: FaqArticle[];
+      categories: FaqCategory[];
+      products: Product[];
+      error?: string;
+    };
   }>();
 
   // ── State ────────────────────────────────────────────────
   let articles = $state<FaqArticle[]>([]);
   let categories = $state<FaqCategory[]>([]);
+  let products = $state<Product[]>([]);
 
   $effect(() => {
     articles = data.articles;
     categories = data.categories;
+    products = data.products;
   });
 
   let searchQuery = $state('');
@@ -46,9 +53,22 @@
   let toastType = $state<'success' | 'error'>('success');
   let toastTimer: ReturnType<typeof setTimeout> | null = null;
 
+  // Modal gerenciar categorias
+  let isCatManagerOpen = $state(false);
+  let catFormLabelPt = $state('');
+  let catFormLabelEn = $state('');
+  let catFormProductId = $state('');
+  let catFormOrder = $state(0);
+  let catFormSaving = $state(false);
+  let catDeleteId = $state<string | null>(null);
+  let catDeleting = $state(false);
+
   // ── Topbar action ────────────────────────────────────────
   onMount(() => {
-    topbarActions.set([{ label: '+ Novo artigo', onClick: openCreateModal }]);
+    topbarActions.set([
+      { label: 'Categorias', onClick: openCatManager },
+      { label: '+ Novo artigo', onClick: openCreateModal },
+    ]);
     return () => topbarActions.set([]);
   });
 
@@ -69,6 +89,86 @@
 
   function getCategoryLabel(id: string): string {
     return categories.find((c) => c.id === id)?.label_pt ?? '—';
+  }
+
+  function getProductName(productId: string | null): string | null {
+    if (!productId) return null;
+    return products.find((p) => p.id === productId)?.name_pt ?? null;
+  }
+
+  function openCatManager() {
+    catFormLabelPt = '';
+    catFormLabelEn = '';
+    catFormProductId = '';
+    catFormOrder = 0;
+    catDeleteId = null;
+    isCatManagerOpen = true;
+  }
+
+  async function saveCategory() {
+    if (!catFormLabelPt.trim() || !catFormLabelEn.trim()) return;
+    catFormSaving = true;
+    try {
+      const session = (await supabase.auth.getSession()).data.session;
+      if (!session) throw new Error('Sessão expirada.');
+
+      const body: Record<string, unknown> = {
+        label_pt: catFormLabelPt.trim(),
+        label_en: catFormLabelEn.trim(),
+        display_order: catFormOrder,
+      };
+      if (catFormProductId) body.product_id = catFormProductId;
+
+      const created = await apiFetch<FaqCategory>('/admin/faq/categories', {
+        method: 'POST',
+        token: session.access_token,
+        body: JSON.stringify(body),
+      });
+      categories = [...categories, created].sort((a, b) => a.display_order - b.display_order);
+      catFormLabelPt = '';
+      catFormLabelEn = '';
+      catFormProductId = '';
+      catFormOrder = 0;
+      showToast('Categoria criada com sucesso!');
+    } catch (err: unknown) {
+      const apiError = err as { message?: string };
+      showToast(apiError.message || 'Erro ao criar categoria.', 'error');
+    } finally {
+      catFormSaving = false;
+    }
+  }
+
+  async function deleteCategory(catId: string) {
+    catDeleteId = catId;
+    catDeleting = true;
+    try {
+      const session = (await supabase.auth.getSession()).data.session;
+      if (!session) throw new Error('Sessão expirada.');
+
+      await apiFetch(`/admin/faq/categories/${catId}`, {
+        method: 'DELETE',
+        token: session.access_token,
+      });
+
+      const geralCat = categories.find((c) => c.slug === 'geral');
+      if (geralCat) {
+        articles = articles.map((a) =>
+          a.category_id === catId ? { ...a, category_id: geralCat.id } : a
+        );
+      }
+      categories = categories.filter((c) => c.id !== catId);
+      showToast('Categoria removida. Artigos movidos para "Geral".');
+    } catch (err: unknown) {
+      const apiError = err as { message?: string };
+      if ((err as { status?: number }).status === 409) {
+        showToast(apiError.message || 'Categoria protegida.', 'error');
+      } else {
+        showToast(apiError.message || 'Erro ao remover categoria.', 'error');
+      }
+    } finally {
+      catDeleteId = null;
+      catDeleting = false;
+    }
   }
 
   // ── Helpers ──────────────────────────────────────────────
@@ -146,6 +246,7 @@
             body_pt: formBody,
             body_en: formBodyEn,
             category_id: formCategoryId,
+            published: formPublished,
           }),
         });
         articles = [created, ...articles];
@@ -447,6 +548,132 @@
   </div>
 </div>
 
+<!-- ── Modal: gerenciar categorias ── -->
+{#if isCatManagerOpen}
+  <div
+    class="modal-overlay"
+    role="dialog"
+    aria-modal="true"
+    tabindex="-1"
+    onclick={(e) => {
+      if (e.target === e.currentTarget) isCatManagerOpen = false;
+    }}
+    onkeydown={(e) => {
+      if (e.key === 'Escape') isCatManagerOpen = false;
+    }}
+  >
+    <div class="admin-modal wide">
+      <div class="modal-head">
+        <h3>Gerenciar categorias</h3>
+        <span class="crumbs">/ faq / categorias</span>
+        <button class="x-btn" onclick={() => (isCatManagerOpen = false)} aria-label="fechar"
+          >✕</button
+        >
+      </div>
+
+      <div class="modal-body">
+        <!-- Lista de categorias existentes -->
+        <div class="cat-list">
+          {#each categories as cat}
+            {@const prod = getProductName(cat.product_id)}
+            <div class="cat-row">
+              <div class="cat-info">
+                <span class="cat-label">{cat.label_pt}</span>
+                {#if prod}
+                  <span class="cat-prod-badge">{prod}</span>
+                {/if}
+                {#if cat.is_protected}
+                  <span class="cat-protected-badge">protegida</span>
+                {/if}
+              </div>
+              <span class="cat-count"
+                >{articles.filter((a) => a.category_id === cat.id).length} artigos</span
+              >
+              <button
+                class="cat-del-btn"
+                disabled={cat.is_protected || catDeleting}
+                title={cat.is_protected ? 'Categoria protegida' : 'Remover categoria'}
+                onclick={() => deleteCategory(cat.id)}
+              >
+                {#if catDeleteId === cat.id}
+                  …
+                {:else}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    class="mi"
+                  >
+                    <polyline points="3 6 5 6 21 6"></polyline>
+                    <path
+                      d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
+                    ></path>
+                  </svg>
+                {/if}
+              </button>
+            </div>
+          {/each}
+          {#if categories.length === 0}
+            <p class="cat-empty">Nenhuma categoria cadastrada.</p>
+          {/if}
+        </div>
+
+        <div class="cat-divider">Nova categoria</div>
+
+        <!-- Formulário criar categoria -->
+        <div class="fld-row">
+          <div class="fld">
+            <label for="cat-label-pt">Nome PT</label>
+            <input
+              id="cat-label-pt"
+              type="text"
+              placeholder="Ex: Planos & Faturamento"
+              bind:value={catFormLabelPt}
+            />
+          </div>
+          <div class="fld">
+            <label for="cat-label-en">Nome EN</label>
+            <input
+              id="cat-label-en"
+              type="text"
+              placeholder="Ex: Plans & Billing"
+              bind:value={catFormLabelEn}
+            />
+          </div>
+        </div>
+        <div class="fld-row">
+          <div class="fld">
+            <label for="cat-product">Produto (opcional)</label>
+            <select id="cat-product" bind:value={catFormProductId}>
+              <option value="">Nenhum</option>
+              {#each products as p}
+                <option value={p.id}>{p.name_pt}</option>
+              {/each}
+            </select>
+          </div>
+          <div class="fld">
+            <label for="cat-order">Ordem</label>
+            <input id="cat-order" type="number" min="0" bind:value={catFormOrder} />
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-foot">
+        <button class="btn-ghost" onclick={() => (isCatManagerOpen = false)}>Fechar</button>
+        <button
+          class="btn-primary"
+          onclick={saveCategory}
+          disabled={catFormSaving || !catFormLabelPt.trim() || !catFormLabelEn.trim()}
+        >
+          {catFormSaving ? 'Salvando…' : '+ Criar categoria'}
+        </button>
+      </div>
+    </div>
+  </div>
+{/if}
+
 <!-- ── Modal: criar / editar ── -->
 {#if isFormOpen}
   <div
@@ -474,7 +701,8 @@
             <label for="faq-cat">Categoria</label>
             <select id="faq-cat" bind:value={formCategoryId}>
               {#each categories as cat}
-                <option value={cat.id}>{cat.label_pt}</option>
+                {@const prod = getProductName(cat.product_id)}
+                <option value={cat.id}>{cat.label_pt}{prod ? ` · ${prod}` : ''}</option>
               {/each}
               {#if categories.length === 0}
                 <option value="" disabled>Nenhuma categoria cadastrada</option>
@@ -485,7 +713,6 @@
             <label for="faq-status">Status</label>
             <select
               id="faq-status"
-              disabled={!editingArticle}
               value={formPublished ? 'published' : 'draft'}
               onchange={(e) => {
                 formPublished = (e.currentTarget as HTMLSelectElement).value === 'published';
@@ -1368,6 +1595,119 @@
       opacity: 1;
       transform: translateY(0);
     }
+  }
+
+  /* ── Category manager ── */
+  .cat-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    max-height: 220px;
+    overflow-y: auto;
+  }
+
+  .cat-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 1px solid var(--line);
+    background: var(--bg-soft);
+  }
+
+  .cat-info {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+  }
+
+  .cat-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .cat-prod-badge {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: rgba(127, 63, 229, 0.12);
+    color: var(--purple);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .cat-protected-badge {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: rgba(102, 223, 122, 0.1);
+    color: var(--green);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .cat-count {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--text-faint);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .cat-del-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--text-muted);
+    padding: 4px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    transition:
+      background 0.1s,
+      color 0.1s;
+    flex-shrink: 0;
+  }
+
+  .cat-del-btn:hover:not(:disabled) {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+  }
+
+  .cat-del-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  .cat-divider {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--text-faint);
+    padding: 4px 0 2px;
+    border-top: 1px solid var(--line);
+    margin-top: 4px;
+  }
+
+  .cat-empty {
+    font-size: 12.5px;
+    color: var(--text-faint);
+    font-style: italic;
+    margin: 0;
+    padding: 8px 4px;
   }
 
   /* ── Responsive ── */

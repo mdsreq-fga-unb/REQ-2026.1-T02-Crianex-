@@ -9,6 +9,7 @@ export type FaqCategory = {
   product_id: string | null;
   display_order: number;
   slug: string;
+  is_protected: boolean;
   created_at: string;
 };
 
@@ -41,6 +42,7 @@ export type FaqArticleInput = {
   body_pt?: string;
   body_en?: string;
   category_id: string;
+  published?: boolean;
 };
 
 export type FaqArticleUpdateInput = Partial<FaqArticleInput> & { published?: boolean };
@@ -48,7 +50,7 @@ export type FaqArticleUpdateInput = Partial<FaqArticleInput> & { published?: boo
 export class FaqServiceError extends Error {
   constructor(
     message: string,
-    public readonly code: 'NOT_FOUND' | 'PUBLISHED' | 'SLUG_CONFLICT'
+    public readonly code: 'NOT_FOUND' | 'PUBLISHED' | 'SLUG_CONFLICT' | 'PROTECTED'
   ) {
     super(message);
     this.name = 'FaqServiceError';
@@ -152,6 +154,36 @@ export async function updateCategory(
 
 export async function deleteCategory(id: string): Promise<void> {
   const supabase = getSupabaseClient();
+
+  const { data: category, error: fetchError } = await supabase
+    .from('faq_categories')
+    .select('is_protected')
+    .eq('id', id)
+    .maybeSingle();
+
+  if (fetchError) throw fetchError;
+  if (!category) throw new FaqServiceError('Categoria não encontrada.', 'NOT_FOUND');
+  if (category.is_protected) {
+    throw new FaqServiceError('Categoria protegida não pode ser removida.', 'PROTECTED');
+  }
+
+  // Reassigna artigos órfãos para a categoria "Geral" antes de deletar
+  const { data: geral, error: geralError } = await supabase
+    .from('faq_categories')
+    .select('id')
+    .eq('slug', 'geral')
+    .maybeSingle();
+
+  if (geralError) throw geralError;
+  if (!geral) throw new Error('Categoria "Geral" não encontrada. Execute as migrações pendentes.');
+
+  const { error: reassignError } = await supabase
+    .from('faq_articles')
+    .update({ category_id: geral.id })
+    .eq('category_id', id);
+
+  if (reassignError) throw reassignError;
+
   const { error } = await supabase.from('faq_categories').delete().eq('id', id);
   if (error) throw error;
 }
@@ -182,7 +214,7 @@ export async function createArticle(input: FaqArticleInput): Promise<FaqArticle>
         body_pt: input.body_pt ?? '',
         body_en: input.body_en ?? '',
         category_id: input.category_id,
-        published: false,
+        published: input.published ?? false,
         slug,
       },
     ])

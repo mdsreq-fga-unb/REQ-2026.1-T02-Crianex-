@@ -93,6 +93,16 @@ faqRouter.delete('/categories/:id', ...ownerGuard, async (req, res) => {
     await deleteCategory(id);
     res.status(204).send();
   } catch (err) {
+    if (err instanceof FaqServiceError) {
+      if (err.code === 'PROTECTED') {
+        res.status(409).json({ message: err.message });
+        return;
+      }
+      if (err.code === 'NOT_FOUND') {
+        res.status(404).json({ message: err.message });
+        return;
+      }
+    }
     console.error('[faq] delete category error:', err);
     res.status(500).json({ message: 'Falha ao remover categoria.' });
   }
@@ -129,10 +139,12 @@ faqRouter.post('/articles', ...ownerGuard, async (req, res) => {
       title_en?: string;
       body_pt?: string;
       body_en?: string;
+      published?: boolean;
     } = { title_pt, category_id };
     if (typeof req.body?.['title_en'] === 'string') articleInput.title_en = req.body['title_en'];
     if (typeof req.body?.['body_pt'] === 'string') articleInput.body_pt = req.body['body_pt'];
     if (typeof req.body?.['body_en'] === 'string') articleInput.body_en = req.body['body_en'];
+    if (typeof req.body?.['published'] === 'boolean') articleInput.published = req.body['published'];
     const article = await createArticle(articleInput);
     res.status(201).json(article);
   } catch (err) {
