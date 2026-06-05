@@ -101,10 +101,6 @@ jobs:
 
     env:
       SUPABASE_URL: http://127.0.0.1:54321
-      # Well-known default keys for every local Supabase instance — not secrets.
-      # Required by src/config/supabase.ts (used by admin routes / members module).
-      SUPABASE_SECRET_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImV4cCI6MTk4MzgxMjk5Nn0.EGIM96RAZx35lJzdJsyH-qQwv8Hj04zWl196z2-SBc0
-      PUBLIC_SUPABASE_PUBLISHABLE_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6ImFub24iLCJleHAiOjE5ODM4MTI5OTZ9.OVNB8YDOXV-PjHIYD7-LTLU3t0gJDYP2-IgUKxS6HkI
 
     steps:
       - uses: actions/checkout@v4
@@ -136,15 +132,28 @@ jobs:
           supabase telemetry disable
           supabase start
 
-          # Export the actual JWT keys from the running instance so that the
-          # hardcoded defaults in the job env are overridden with the real values.
-          supabase status --output env > /tmp/supabase-status.env
-          REAL_URL=$(grep '^SUPABASE_URL=' /tmp/supabase-status.env | cut -d= -f2-)
-          REAL_SERVICE_KEY=$(grep '^SUPABASE_SERVICE_ROLE_KEY=' /tmp/supabase-status.env | cut -d= -f2-)
-          REAL_ANON_KEY=$(grep '^SUPABASE_ANON_KEY=' /tmp/supabase-status.env | cut -d= -f2-)
-          echo "SUPABASE_URL=${REAL_URL}" >> "$GITHUB_ENV"
-          echo "SUPABASE_SECRET_KEY=${REAL_SERVICE_KEY}" >> "$GITHUB_ENV"
-          echo "PUBLIC_SUPABASE_PUBLISHABLE_KEY=${REAL_ANON_KEY}" >> "$GITHUB_ENV"
+          # Capture and parse supabase status to extract the actual API keys.
+          # Strips ANSI escape codes before parsing.
+          # Supports both the new sb_ key format and the legacy JWT format.
+          supabase status 2>&1 \
+            | sed $'s/\033\\[[0-9;]*[A-Za-z]//g' \
+            > /tmp/sb-status.txt || true
+
+          SECRET_KEY=$(grep -oE 'sb_secret_[A-Za-z0-9_-]+' /tmp/sb-status.txt | head -1)
+          ANON_KEY=$(grep -oE 'sb_publishable_[A-Za-z0-9_-]+' /tmp/sb-status.txt | head -1)
+
+          # Fallback for older CLI versions that emit JWT keys
+          if [ -z "$SECRET_KEY" ]; then
+            SECRET_KEY=$(grep -iE 'service.?role' /tmp/sb-status.txt \
+              | grep -oE 'eyJ[A-Za-z0-9._-]+' | head -1)
+          fi
+          if [ -z "$ANON_KEY" ]; then
+            ANON_KEY=$(grep -iE 'anon' /tmp/sb-status.txt \
+              | grep -oE 'eyJ[A-Za-z0-9._-]+' | head -1)
+          fi
+
+          [ -n "$SECRET_KEY" ] && echo "SUPABASE_SECRET_KEY=${SECRET_KEY}" >> "$GITHUB_ENV"
+          [ -n "$ANON_KEY"   ] && echo "PUBLIC_SUPABASE_PUBLISHABLE_KEY=${ANON_KEY}" >> "$GITHUB_ENV"
 
       - name: Apply Supabase migrations
         run: |
