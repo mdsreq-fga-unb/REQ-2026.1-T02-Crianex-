@@ -51,7 +51,11 @@
 
   function formatDate(dateStr: string | null): string {
     if (!dateStr) return '—';
-    return new Intl.DateTimeFormat('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' }).format(new Date(dateStr));
+    return new Intl.DateTimeFormat('pt-BR', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+    }).format(new Date(dateStr));
   }
 
   function handleOutsideClick(e: MouseEvent) {
@@ -75,7 +79,9 @@
       });
 
       articles = articles.map((a) => (a.id === article.id ? { ...a, status: newStatus } : a));
-      showToast(`Artigo ${newStatus === 'published' ? 'publicado' : 'movido para rascunho'} com sucesso!`);
+      showToast(
+        `Artigo ${newStatus === 'published' ? 'publicado' : 'movido para rascunho'} com sucesso!`
+      );
     } catch (err: unknown) {
       const apiError = err as { message?: string };
       showToast(apiError.message || 'Falha ao atualizar status do artigo.', 'error');
@@ -118,7 +124,6 @@
 <svelte:window onclick={handleOutsideClick} />
 
 <div class="faq-container">
-
   <!-- Topbar -->
   <header class="admin-topbar">
     <div class="crumbs" aria-label="Navegação de contexto">
@@ -155,7 +160,16 @@
   <!-- Server error banner -->
   {#if data.error}
     <div class="error-banner" role="alert">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="error-icon">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="error-icon"
+      >
         <circle cx="12" cy="12" r="10"></circle>
         <line x1="12" y1="8" x2="12" y2="12"></line>
         <line x1="12" y1="16" x2="12.01" y2="16"></line>
@@ -165,19 +179,23 @@
   {/if}
 
   <!-- Filters -->
-  <FaqFilters
-    bind:searchQuery
-    bind:filterCategory
-    bind:filterStatus
-    {categories}
-  />
+  <FaqFilters bind:searchQuery bind:filterCategory bind:filterStatus {categories} />
 
   <!-- Content Panel -->
   <main class="panel">
     {#if articles.length === 0 && !data.error}
       <!-- Empty state: no articles at all -->
       <div class="empty">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="empty-icon">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="empty-icon"
+        >
           <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
           <polyline points="14 2 14 8 20 8"></polyline>
           <line x1="16" y1="13" x2="8" y2="13"></line>
@@ -189,17 +207,24 @@
           <a href="/admin/gestao-faq/novo" class="btn-add">Criar primeiro artigo</a>
         </div>
       </div>
-
     {:else if filteredArticles.length === 0}
       <!-- Empty state: filters returned no results -->
       <div class="empty">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="empty-icon">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="empty-icon"
+        >
           <circle cx="11" cy="11" r="8"></circle>
           <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
         </svg>
         <p>Nenhum artigo encontrado para os filtros selecionados.</p>
       </div>
-
     {:else}
       <!-- Data Table -->
       <div class="data-table" role="table" aria-label="Tabela de artigos FAQ">
@@ -214,7 +239,6 @@
 
         {#each filteredArticles as article (article.id)}
           <div class="dt-row" role="row">
-
             <!-- Título -->
             <span class="title-cell">{article.title_pt}</span>
 
@@ -262,22 +286,53 @@
                       role="menuitem"
                       href="/admin/gestao-faq/{article.id}/editar"
                     >
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="menu-ico">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="menu-ico"
+                      >
                         <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
                         <path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
                       </svg>
                       Editar
                     </a>
-                    <button class="menu-item" role="menuitem" onclick={() => togglePublish(article)}>
+                    <button
+                      class="menu-item"
+                      role="menuitem"
+                      onclick={() => togglePublish(article)}
+                    >
                       {#if article.status === 'published'}
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="menu-ico">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          class="menu-ico"
+                        >
                           <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
                           <line x1="9" y1="9" x2="15" y2="15"></line>
                           <line x1="15" y1="9" x2="9" y2="15"></line>
                         </svg>
                         Despublicar
                       {:else}
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="menu-ico">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          class="menu-ico"
+                        >
                           <polyline points="20 6 9 17 4 12"></polyline>
                         </svg>
                         Publicar
@@ -288,9 +343,20 @@
                       role="menuitem"
                       onclick={() => startRemoveArticle(article)}
                     >
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="menu-ico">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="menu-ico"
+                      >
                         <polyline points="3 6 5 6 21 6"></polyline>
-                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                        <path
+                          d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
+                        ></path>
                         <line x1="10" y1="11" x2="10" y2="17"></line>
                         <line x1="14" y1="11" x2="14" y2="17"></line>
                       </svg>
@@ -300,7 +366,6 @@
                 {/if}
               </div>
             </span>
-
           </div>
         {/each}
       </div>
@@ -313,12 +378,18 @@
       <div class="modal confirm-modal" role="dialog" aria-labelledby="confirm-title">
         <header class="modal-header">
           <h3 id="confirm-title">Confirmar Remoção</h3>
-          <button class="modal-close-btn" onclick={() => (isConfirmOpen = false)} disabled={deleting}>
+          <button
+            class="modal-close-btn"
+            onclick={() => (isConfirmOpen = false)}
+            disabled={deleting}
+          >
             &times;
           </button>
         </header>
         <div class="modal-body">
-          <p>Tem certeza que deseja remover o artigo <strong>{articleToRemove?.title_pt}</strong>?</p>
+          <p>
+            Tem certeza que deseja remover o artigo <strong>{articleToRemove?.title_pt}</strong>?
+          </p>
           <p class="warning-text">Esta ação é permanente e não pode ser desfeita.</p>
         </div>
         <footer class="modal-footer">
@@ -335,11 +406,15 @@
 
   <!-- Toast -->
   {#if toastMessage}
-    <div class="toast-container" class:error={toastType === 'error'} role="status" aria-live="polite">
+    <div
+      class="toast-container"
+      class:error={toastType === 'error'}
+      role="status"
+      aria-live="polite"
+    >
       <span>{toastMessage}</span>
     </div>
   {/if}
-
 </div>
 
 <style>
@@ -711,8 +786,14 @@
   }
 
   @keyframes modalIn {
-    from { opacity: 0; transform: scale(0.95) translateY(10px); }
-    to   { opacity: 1; transform: scale(1) translateY(0); }
+    from {
+      opacity: 0;
+      transform: scale(0.95) translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
   }
 
   .modal-header {
@@ -737,7 +818,9 @@
     cursor: pointer;
   }
 
-  .modal-close-btn:hover { color: var(--text); }
+  .modal-close-btn:hover {
+    color: var(--text);
+  }
 
   .modal-body {
     padding: 20px;
@@ -771,7 +854,9 @@
     font-size: 13.5px;
     font-weight: 500;
     cursor: pointer;
-    transition: border-color 0.2s, color 0.2s;
+    transition:
+      border-color 0.2s,
+      color 0.2s;
   }
 
   .btn-cancel:hover:not(:disabled) {
@@ -836,8 +921,14 @@
   }
 
   @keyframes toastIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   /* Responsive */
