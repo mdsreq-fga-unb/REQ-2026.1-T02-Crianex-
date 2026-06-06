@@ -72,10 +72,37 @@ A cadência semanal — cerimônias, formatos e tabelas de atividades por semana
 
 A sequência abaixo apresenta a ordem obrigatória de atividades dentro de qualquer iteração, agrupada por fase. Nenhuma etapa pode ser invertida ou suprimida — desvios são registrados na retrospectiva e tratados na próxima iteração.
 
-![Cronograma](images/cronograma.png)
+```mermaid
+flowchart TD
+    subgraph P["Fase 1 — Planejamento"]
+        A([Iteration Replenishment · IP = VB / PT]) --> B([Iteration Commitment · Iteration Goal])
+    end
+
+    subgraph D["Fase 2 — Design & Build"]
+        C([Acceptance Criteria · Dado / Quando / Então])
+        C --> F([Technical Design Review])
+        F --> G([Kanban Pull Execution · WIP ≤ 2])
+        G --> H([Code & Design Review])
+        H --> I([Partial Client Validation])
+        I -.->|"ciclo de produção · repete por issue"| C
+    end
+
+    subgraph E2["Fase 3 — Encerramento"]
+        K([Formal Client Validation]) --> L([Auditoria de Rastreabilidade])
+        L --> M([Geração de Artefatos])
+        M --> N([Reorganizar Backlog])
+    end
+
+    B --> C
+    I -->|"todas as issues concluídas"| K
+
+    style P fill:#dbeafe,stroke:#1d4ed8,color:#1e3a5f
+    style D fill:#fce7f3,stroke:#be185d,color:#831843
+    style E2 fill:#ede9fe,stroke:#7c3aed,color:#3b0764
+```
 
 <figure class="crianex-figure">
-  <figcaption>Figura 1 — Sequence Execution: Sequencia de execução das cerimônias do FDD. Fonte: Elaborado pelos autores (2026).</figcaption>
+  <figcaption>Figura 1 — Sequence Execution: Sequência de execução das cerimônias dentro de uma iteração FDD. Fonte: Elaborado pelos autores (2026).</figcaption>
 </figure>
 
 ---
