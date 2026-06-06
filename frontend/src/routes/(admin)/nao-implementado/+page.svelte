@@ -10,7 +10,7 @@
       Esta funcionalidade ainda não foi implementada nesta iteração. Consulte o roadmap para saber
       quando estará disponível.
     </p>
-    <a href="/products" class="btn-back">← Ir para Produtos</a>
+    <a href="/admin/products" class="btn-back">← Ir para Produtos</a>
   </div>
 </div>
 
