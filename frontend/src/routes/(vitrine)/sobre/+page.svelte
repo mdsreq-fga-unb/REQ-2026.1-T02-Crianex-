@@ -54,7 +54,7 @@
   <div class="about">
     <section class="section mission" id="missao">
       <div class="section-head">
-        <div>
+        <div>section mission
           <div class="eyebrow">
             <span class="dot pink"></span>
             {content.missionEyebrow}
@@ -97,15 +97,18 @@
 
     <section class="section" id="contato">
       <div class="cta-banner">
-        <div>
+        <div class="cta-image-wrap">
+          <img src="/assets/sobre-cta.png" alt="" class="cta-image" />
+        </div>
+        <div class="cta-content">
           <h3>{content.cta.title}</h3>
           <p>{content.cta.body}</p>
-        </div>
-        <div class="cta-actions">
-          <a class="btn primary" href="/contato">
-            {content.cta.emailLabel}
-          </a>
-          <a class="btn ghost" href="mailto:contato@crianex.com"> contato@crianex.com </a>
+          <div class="cta-actions">
+            <a class="btn primary" href="/contato">
+              {content.cta.emailLabel}
+            </a>
+            <a class="btn ghost" href="mailto:contato@crianex.com">contato@crianex.com</a>
+          </div>
         </div>
       </div>
     </section>
@@ -118,7 +121,19 @@
     position: relative;
     min-height: 100svh;
     overflow: hidden;
-    background: #f0f0ee;
+    background: #f0eef0;
+  }
+
+  .hero-wrap::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 320px;
+    background: linear-gradient(to bottom, transparent 0%, rgba(241, 91, 166, 0.06) 100%);
+    z-index: 5;
+    pointer-events: none;
   }
 
   .hero-video {
@@ -260,7 +275,7 @@
   /* ── About body ─────────────────────────────────────────────────────────── */
   .about {
     --r-lg: 18px;
-    --line: #e8e6e2;
+    --line: #000000;
     --bg-soft: #f5f3ef;
     --text-muted: #6b6862;
     --text-faint: #9a968e;
@@ -304,7 +319,7 @@
 
   /* Fades de cor por seção */
   .mission {
-    background: linear-gradient(160deg, rgba(231, 31, 132, 0.04) 0%, transparent 55%);
+    background: linear-gradient(160deg, rgba(231, 43, 137, 0.06));
     margin-left: calc(-1 * var(--pad));
     margin-right: calc(-1 * var(--pad));
     padding-left: var(--pad);
@@ -367,8 +382,8 @@
   .numbers {
     background: linear-gradient(
       to bottom,
-      rgba(102, 223, 122, 0.07) 0%,
-      rgba(245, 243, 239, 0.95) 40%
+      rgba(240, 180, 224, 0.07) 0%,
+      rgba(255, 255, 255, 0.95) 40%
     );
     margin-left: calc(-1 * var(--pad));
     margin-right: calc(-1 * var(--pad));
@@ -406,29 +421,62 @@
 
   .cta-banner {
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr 1fr;
     align-items: center;
-    gap: 32px;
-    padding: 40px;
+    gap: 0;
     border-radius: var(--r-lg);
     border: 1px solid var(--line);
-    background: linear-gradient(135deg, rgba(127, 63, 229, 0.04) 0%, #ffffff 50%);
+    overflow: hidden;
+    background: #ffffff;
+    min-height: 420px;
   }
-  .cta-banner h3 {
-    font-size: 24px;
+
+  .cta-image-wrap {
+    position: relative;
+    height: 100%;
+    min-height: 420px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #fce4ef 0%, #f9d0e8 100%);
+  }
+
+  .cta-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+  }
+
+  .cta-content {
+    padding: 52px 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background: linear-gradient(135deg, rgba(231, 31, 132, 0.03) 0%, #ffffff 60%);
+    height: 100%;
+    justify-content: center;
+  }
+
+  .cta-content h3 {
+    font-size: clamp(32px, 3.5vw, 52px);
     margin: 0;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.025em;
+    line-height: 1.05;
   }
-  .cta-banner p {
+
+  .cta-content p {
     color: var(--text-muted);
-    margin: 14px 0 0;
-    font-size: 14px;
-    max-width: 44ch;
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.65;
+    max-width: 38ch;
   }
+
   .cta-actions {
     display: flex;
     gap: 12px;
     flex-wrap: wrap;
+    margin-top: 4px;
   }
   .btn {
     display: inline-flex;
@@ -472,7 +520,12 @@
     }
     .cta-banner {
       grid-template-columns: 1fr;
-      padding: 28px;
+    }
+    .cta-image-wrap {
+      min-height: 280px;
+    }
+    .cta-content {
+      padding: 32px 28px;
     }
   }
 </style>
