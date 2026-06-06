@@ -54,7 +54,8 @@
   <div class="about">
     <section class="section mission" id="missao">
       <div class="section-head">
-        <div>section mission
+        <div>
+          section mission
           <div class="eyebrow">
             <span class="dot pink"></span>
             {content.missionEyebrow}
