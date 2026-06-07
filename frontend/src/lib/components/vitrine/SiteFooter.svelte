@@ -6,8 +6,8 @@
 
   const t = {
     tagline: {
-      pt: 'Software house B2B · São Paulo',
-      en: 'B2B software house · São Paulo',
+      pt: 'Software house B2B · Brasília',
+      en: 'B2B software house · Brasília',
     },
     cols: {
       products: { pt: 'Produtos', en: 'Products' },
@@ -15,13 +15,12 @@
       resources: { pt: 'Recursos', en: 'Resources' },
     },
     copyright: { pt: '© 2026 Crianex Tecnologia Ltda.', en: '© 2026 Crianex Tecnologia Ltda.' },
-    status: { pt: 'Todos os sistemas operacionais', en: 'All systems operational' },
+    status: { pt: 'Todos os sistemas funcionando', en: 'All systems working' },
   };
 
   const companyLinks = [
     { href: '/sobre', label: { pt: 'Sobre', en: 'About' } },
     { href: '/contato', label: { pt: 'Contato', en: 'Contact' } },
-    { href: '#', label: { pt: 'Carreiras', en: 'Careers' } },
   ];
 
   const resourceLinks = [

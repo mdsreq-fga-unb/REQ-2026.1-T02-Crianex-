@@ -419,8 +419,8 @@ const CrxData = {
     about: {
       eyebrow: { pt: 'Sobre a Crianex', en: 'About Crianex' },
       h1: {
-        pt: 'Software house B2B baseada em São Paulo desde 2019.',
-        en: 'A B2B software house based in São Paulo since 2019.',
+        pt: 'Software house B2B baseada em Brasília desde 2019.',
+        en: 'A B2B software house based in Brasília since 2019.',
       },
       lede: {
         pt: 'Começamos como consultoria. Em 2021 paramos de vender hora-homem e passamos a vender produto. Hoje operamos seis SaaS verticais sobre uma plataforma comum em Kubernetes.',
@@ -432,7 +432,7 @@ const CrxData = {
         { n: '6', l: { pt: 'produtos SaaS em produção', en: 'SaaS products in production' } },
         { n: '184', l: { pt: 'clientes B2B ativos', en: 'active B2B customers' } },
         { n: '28', l: { pt: 'engenheiros & designers', en: 'engineers & designers' } },
-        { n: '2019', l: { pt: 'fundada em São Paulo', en: 'founded in São Paulo' } },
+        { n: '2019', l: { pt: 'fundada em Brasília', en: 'founded in Brasília' } },
       ],
     },
     contact: {
@@ -466,7 +466,7 @@ const CrxData = {
         { k: 'linkedin', v: 'linkedin.com/company/crianex' },
         {
           k: 'address',
-          v: { pt: 'Av. Paulista, 1842 · São Paulo', en: 'Av. Paulista, 1842 · São Paulo' },
+          v: { pt: 'Av. Paulista, 1842 · Brasília', en: 'Av. Paulista, 1842 · Brasília' },
         },
       ],
     },
@@ -483,8 +483,8 @@ const CrxData = {
     },
     footer: {
       tag: {
-        pt: 'Software house B2B · São Paulo',
-        en: 'B2B software house · São Paulo',
+        pt: 'Software house B2B · Brasília',
+        en: 'B2B software house · Brasília',
       },
       cols: {
         products: { pt: 'Produtos', en: 'Products' },
@@ -496,7 +496,6 @@ const CrxData = {
           { pt: 'Sobre', en: 'About' },
           { pt: 'Casos', en: 'Case studies' },
           { pt: 'Contato', en: 'Contact' },
-          { pt: 'Carreiras', en: 'Careers' },
         ],
         resources: [
           { pt: 'FAQ', en: 'FAQ' },

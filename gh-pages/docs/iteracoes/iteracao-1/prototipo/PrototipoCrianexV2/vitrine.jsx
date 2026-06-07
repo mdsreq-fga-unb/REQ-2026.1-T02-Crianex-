@@ -197,7 +197,7 @@ const SiteFooter = ({ lang, setPage }) => {
         <span>{f.copyright[lang]}</span>
         <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
           <span style={{ width: 6, height: 6, borderRadius: 50, background: 'var(--green)' }} />
-          {lang === 'pt' ? 'Todos os sistemas operacionais' : 'All systems operational'}
+          {lang === 'pt' ? 'Todos os sistemas funcionando' : 'All systems working'}
         </span>
       </div>
     </footer>

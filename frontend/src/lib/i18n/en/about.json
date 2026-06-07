@@ -1,6 +1,6 @@
 {
   "eyebrow": "About Crianex",
-  "h1": "A B2B software house based in São Paulo since 2019.",
+  "h1": "A B2B software house based in Brasília since 2019.",
   "heroBadge": "B2B software house since 2019",
   "heroH1": "We build platforms.\nNot projects.",
   "heroSub": "Six vertical SaaS. One lean team.",
@@ -34,7 +34,7 @@
     { "value": "6", "label": "SaaS products in production" },
     { "value": "184", "label": "active B2B customers" },
     { "value": "28", "label": "engineers & designers" },
-    { "value": "2019", "label": "founded in São Paulo" }
+    { "value": "2019", "label": "founded in Brasília" }
   ],
   "cta": {
     "title": "Work with us.",

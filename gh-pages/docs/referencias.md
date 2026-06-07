@@ -13,7 +13,7 @@
 
 MARSICANO, George. **Requisitos de Software: Comunicação é tudo!** Versão 1.1. Draft. Brasília: Universidade de Brasília, 2026.
 
-SOMMERVILLE, Ian. **Engenharia de Software**. 10. ed. São Paulo: Pearson, 2018.
+SOMMERVILLE, Ian. **Engenharia de Software**. 10. ed. Brasília: Pearson, 2018.
 
 PRESSMAN, Roger S.; MAXIM, Bruce R. **Engenharia de Software: Uma Abordagem Profissional**. 8. ed. Porto Alegre: AMGH, 2016.
 

@@ -98,7 +98,7 @@
     address: {
       '@type': 'PostalAddress',
       streetAddress: 'Av. Paulista, 1842',
-      addressLocality: 'São Paulo',
+      addressLocality: 'Brasília',
       addressRegion: 'SP',
       addressCountry: 'BR',
     },
@@ -818,7 +818,7 @@
 
   /* ── Sections ─────────────────────────────────── */
   .section {
-    padding: 80px 40px;
+    padding: 70px;
   }
   .section-head {
     display: grid;
@@ -1035,6 +1035,8 @@
     color: var(--imaculate, #fcfcfc);
     position: relative;
     overflow: hidden;
+    padding-bottom: 90px;
+    padding-top: 90px;
   }
   .diff-section .section-head h2 {
     color: var(--imaculate, #fcfcfc);
@@ -1099,7 +1101,7 @@
     align-items: center;
     position: relative;
     overflow: hidden;
-    margin-top: 40px;
+    margin-top: 70px;
   }
   .cta-banner h3 {
     font-size: 32px;
