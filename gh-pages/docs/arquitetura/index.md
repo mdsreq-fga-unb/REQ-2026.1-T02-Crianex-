@@ -1,8 +1,8 @@
 ## Histórico de Revisão
 
-| Versão | Data       | Descrição                           | Autor          |
-| ------ | ---------- | ----------------------------------- | -------------- |
-| v1.0   | 20/05/2026 | Documentação inicial da arquitetura | Equipe Crianex |
+| Versão | Data       | Descrição                                                                                                              | Autor            |
+| ------ | ---------- | ---------------------------------------------------------------------------------------------------------------------- | ---------------- |
+| v1.0   | 20/05/2026 | Documentação inicial da arquitetura                                                                                    | Equipe Crianex   |
 | v1.1   | 06/06/2026 | Correção do diagrama geral (rotas públicas, módulos reais do backend, estrutura do repositório) e fluxos de requisição | Lucas A. Zanetti |
 
 # Arquitetura do Sistema — Crianex Hub
@@ -318,7 +318,6 @@ A alternativa de microsserviços foi avaliada e rejeitada pelos seguintes motivo
 | Banco compartilhado como ponto único de falha                                   | Supabase gerenciado tem SLA de 99.9% e backup automático — risco aceito para o escopo do projeto              |
 
 ---
-
 
 ## 8. Estratégia de Deploy por Fase
 

@@ -2,8 +2,8 @@
 
 ## Histórico de Revisão
 
-| Versão | Data       | Descrição                                                                                      | Autor(es)        |
-| ------ | ---------- | ---------------------------------------------------------------------------------------------- | ---------------- |
+| Versão | Data       | Descrição                                                                                        | Autor(es)        |
+| ------ | ---------- | ------------------------------------------------------------------------------------------------ | ---------------- |
 | 1.0    | 06/06/2026 | Segmentação por iteração; remoção do mapa completo de sub-issues; adição de placeholders IT2/IT3 | Lucas A. Zanetti |
 
 ---
@@ -70,8 +70,8 @@ graph LR
 
 ## Legenda
 
-| Elemento             | Significado                                                 |
-| -------------------- | ----------------------------------------------------------- |
-| Bloco roxo           | Feature pai — issue de especificação da CP                  |
-| Bloco rosa           | Dependência externa ao backlog de issues                    |
-| `→` seta sólida      | Bloqueio direto — destino não inicia antes da origem fechar |
+| Elemento        | Significado                                                 |
+| --------------- | ----------------------------------------------------------- |
+| Bloco roxo      | Feature pai — issue de especificação da CP                  |
+| Bloco rosa      | Dependência externa ao backlog de issues                    |
+| `→` seta sólida | Bloqueio direto — destino não inicia antes da origem fechar |

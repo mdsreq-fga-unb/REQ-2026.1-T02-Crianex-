@@ -6,7 +6,7 @@
 | ------ | ---------- | ---------------------------------------------------------------- | ---------------- | --------------------- |
 | 1.0    | 14/05/2026 | Templete do backlog                                              | Lucas A. Zanetti | Heitor Macedo Ricardo |
 | 1.1    | 17/05/2026 | Coloquei todos OEs, CPs, Features, RFs, RNFs com rastreabilidade | Lucas A. Zanetti | Heitor Macedo Ricardo |
-| 1.2    | 06/06/2026 | Adição da coluna INVEST na tabela de Features                     | Lucas A. Zanetti | —                     |
+| 1.2    | 06/06/2026 | Adição da coluna INVEST na tabela de Features                    | Lucas A. Zanetti | —                     |
 
 ---
 
@@ -52,35 +52,35 @@
 
 ## Features
 
-| ID  | Nome                                                                                                                    | CP  | RFs Vinculados   | RNFs Vinculados                    |           INVEST      |
-| --- | ----------------------------------------------------------------------------------------------------------------------- | ------- | ---------------------- | --------------- | ----------- |
-| F01 | Consultar logs operacionais para auditoria de atividades                                                                | CP2 | RF01, RF02             | RNF09, RNF01, RNF02, RNF03         | I-N-V-E-S-T |
-| F02 | Auditar alterações administrativas para rastrear ações do sistema                                                       | CP2 | RF03                   | —                                  | N-V-E-S-T   |
-| F03 | Visualizar indicadores operacionais para acompanhamento estratégico                                                     | CP3 | RF04, RF05             | RNF09, RNF03, RNF01                | I-N-V-E-S-T |
-| F04 | Visualizar indicadores financeiros para análise gerencial                                                               | CP3 | RF06                   | RNF11                              | I-N-V-E-S-T |
-| F05 | Filtrar métricas executivas para análise segmentada                                                                     | CP3 | RF07                   | —                                  | N-V-E-S-T   |
-| F06 | Consultar registros financeiros para acompanhamento de faturamento                                                      | CP7 | RF16, RF17             | RNF09, RNF03, RNF01, RNF11         | I-N-V-E-S-T |
-| F07 | Filtrar dados financeiros para análise contábil                                                                         | CP7 | RF18                   | —                                  | N-V-E-S-T   |
-| F08 | Gerar relatórios financeiros para exportação de dados                                                                   | CP7 | RF19, RF20             | —                                  | N-V-E-S-T   |
-| F09 | Autenticar para acesso seguro ao sistema                                                                                | CP5 | RF08, RF09             | RNF01, RNF03, RNF08                | I-N-V-E-S-T |
-| F10 | Permitir acesso ao painel administrativo para gerenciamento da plataforma                                               | CP5 | RF10                   | RNF09                              | N-V-E-S-T   |
-| F11 | Gerenciar usuarios da plataforma para controle operacional                                                              | CP5 | RF11, RF12, RF13, RF14 | —                                  | N-V-E-S-T   |
-| F12 | Gerenciar produtos SaaS da vitrine para manutenção do portifólio                                                        | CP4 | RF21, RF22, RF23, RF24 | RNF19, RNF04, RNF05, RNF13, RNF15  | N-V-E-T     |
-| F13 | Controlar publicação de produto SaaS para exibição pública                                                              | CP4 | RF25, RF26             | RNF03                              | N-V-E-S-T   |
-| F14 | Exibir canais de contato na Vitrine                                                                                     | CP4 | RF27                   | RNF10, RNF06, RNF02                | N-V-E-S-T   |
-| F15 | Disponibilizar informações institucionais para apresentação da empresa                                                  | CP4 | —                      | RNF20                              | I-N-V-E-S-T |
-| F16 | Gerenciar artigos de FAQs para manuntenção da base de conhecimento                                                      | CP6 | RF28, RF29, RF30, RF31 | RNF05, RNF04, RNF01                | N-V-E-S-T   |
-| F17 | Controlar publicação de artigos FAQ's para disponibilização pública                                                     | CP6 | RF32, RF33             | —                                  | N-V-E-S-T   |
-| F18 | Coletar avaliação de utilidade do artigo pelo visitante para melhorar a correspondência do FAQ com as dúvidas dos leads | CP6 | RF34                   | RNF02                              | N-V-E-S-T   |
-| F19 | Gerenciar clientes e leads para organização do relacionamento comercial                                                 | CP1 | RF35, RF36, RF37       | RNF09, RNF03, RNF01, RNF11, RNF21  | I-N-V-E-S-T |
-| F20 | Gerenciar colunas do funil para personalização do processo comercial                                                    | CP1 | RF38, RF39, RF40       | RNF21                              | N-V-E-S-T   |
-| F21 | Gerenciar cards do CRM para acompanhamento de oportunidades                                                             | CP1 | RF41                   | RNF23, RNF24                       | N-V-E-S-T   |
-| F22 | Registrar interações comerciais para rastreamento do relacionamento                                                     | CP1 | RF42                   | —                                  | N-V-E-S-T   |
-| F23 | Acessar tickets para acompanhamento dos atendimentos                                                                    | CP8 | RF43                   | RNF09, RNF03, RNF01, RNF22         | I-N-V-E-S-T |
-| F24 | Gerenciar tickets para manutenção da operação de suporte                                                                | CP8 | RF44, RF45             | —                                  | N-V-E-S-T   |
-| F25 | Exibir o histórico de notificações para acompanhamento operacional                                                      | CP9 | RF46                   | RNF03, RNF09                       | I-N-V-E-S-T |
-| F26 | Controlar estado das notificações para acompanhamento de envio                                                          | CP9 | RF47                   | —                                  | N-V-E-S-T   |
-| F27 | Gerenciar notificações para o controle do sistema                                                                       | CP9 | RF15                   | —                                  | I-N-V-E-S-T |
+| ID  | Nome                                                                                                                    | CP  | RFs Vinculados         | RNFs Vinculados                   | INVEST      |
+| --- | ----------------------------------------------------------------------------------------------------------------------- | --- | ---------------------- | --------------------------------- | ----------- |
+| F01 | Consultar logs operacionais para auditoria de atividades                                                                | CP2 | RF01, RF02             | RNF09, RNF01, RNF02, RNF03        | I-N-V-E-S-T |
+| F02 | Auditar alterações administrativas para rastrear ações do sistema                                                       | CP2 | RF03                   | —                                 | N-V-E-S-T   |
+| F03 | Visualizar indicadores operacionais para acompanhamento estratégico                                                     | CP3 | RF04, RF05             | RNF09, RNF03, RNF01               | I-N-V-E-S-T |
+| F04 | Visualizar indicadores financeiros para análise gerencial                                                               | CP3 | RF06                   | RNF11                             | I-N-V-E-S-T |
+| F05 | Filtrar métricas executivas para análise segmentada                                                                     | CP3 | RF07                   | —                                 | N-V-E-S-T   |
+| F06 | Consultar registros financeiros para acompanhamento de faturamento                                                      | CP7 | RF16, RF17             | RNF09, RNF03, RNF01, RNF11        | I-N-V-E-S-T |
+| F07 | Filtrar dados financeiros para análise contábil                                                                         | CP7 | RF18                   | —                                 | N-V-E-S-T   |
+| F08 | Gerar relatórios financeiros para exportação de dados                                                                   | CP7 | RF19, RF20             | —                                 | N-V-E-S-T   |
+| F09 | Autenticar para acesso seguro ao sistema                                                                                | CP5 | RF08, RF09             | RNF01, RNF03, RNF08               | I-N-V-E-S-T |
+| F10 | Permitir acesso ao painel administrativo para gerenciamento da plataforma                                               | CP5 | RF10                   | RNF09                             | N-V-E-S-T   |
+| F11 | Gerenciar usuarios da plataforma para controle operacional                                                              | CP5 | RF11, RF12, RF13, RF14 | —                                 | N-V-E-S-T   |
+| F12 | Gerenciar produtos SaaS da vitrine para manutenção do portifólio                                                        | CP4 | RF21, RF22, RF23, RF24 | RNF19, RNF04, RNF05, RNF13, RNF15 | N-V-E-T     |
+| F13 | Controlar publicação de produto SaaS para exibição pública                                                              | CP4 | RF25, RF26             | RNF03                             | N-V-E-S-T   |
+| F14 | Exibir canais de contato na Vitrine                                                                                     | CP4 | RF27                   | RNF10, RNF06, RNF02               | N-V-E-S-T   |
+| F15 | Disponibilizar informações institucionais para apresentação da empresa                                                  | CP4 | —                      | RNF20                             | I-N-V-E-S-T |
+| F16 | Gerenciar artigos de FAQs para manuntenção da base de conhecimento                                                      | CP6 | RF28, RF29, RF30, RF31 | RNF05, RNF04, RNF01               | N-V-E-S-T   |
+| F17 | Controlar publicação de artigos FAQ's para disponibilização pública                                                     | CP6 | RF32, RF33             | —                                 | N-V-E-S-T   |
+| F18 | Coletar avaliação de utilidade do artigo pelo visitante para melhorar a correspondência do FAQ com as dúvidas dos leads | CP6 | RF34                   | RNF02                             | N-V-E-S-T   |
+| F19 | Gerenciar clientes e leads para organização do relacionamento comercial                                                 | CP1 | RF35, RF36, RF37       | RNF09, RNF03, RNF01, RNF11, RNF21 | I-N-V-E-S-T |
+| F20 | Gerenciar colunas do funil para personalização do processo comercial                                                    | CP1 | RF38, RF39, RF40       | RNF21                             | N-V-E-S-T   |
+| F21 | Gerenciar cards do CRM para acompanhamento de oportunidades                                                             | CP1 | RF41                   | RNF23, RNF24                      | N-V-E-S-T   |
+| F22 | Registrar interações comerciais para rastreamento do relacionamento                                                     | CP1 | RF42                   | —                                 | N-V-E-S-T   |
+| F23 | Acessar tickets para acompanhamento dos atendimentos                                                                    | CP8 | RF43                   | RNF09, RNF03, RNF01, RNF22        | I-N-V-E-S-T |
+| F24 | Gerenciar tickets para manutenção da operação de suporte                                                                | CP8 | RF44, RF45             | —                                 | N-V-E-S-T   |
+| F25 | Exibir o histórico de notificações para acompanhamento operacional                                                      | CP9 | RF46                   | RNF03, RNF09                      | I-N-V-E-S-T |
+| F26 | Controlar estado das notificações para acompanhamento de envio                                                          | CP9 | RF47                   | —                                 | N-V-E-S-T   |
+| F27 | Gerenciar notificações para o controle do sistema                                                                       | CP9 | RF15                   | —                                 | I-N-V-E-S-T |
 
 ---
 

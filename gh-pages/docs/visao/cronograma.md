@@ -2,16 +2,16 @@
 
 ## Histórico de Revisão
 
-| Versão | Data       | Descrição                                                                           | Autor(es)        |
-| ------ | ---------- | ----------------------------------------------------------------------------------- | ---------------- |
-| 1.0    | 11/04/2026 | Criação do cronograma de sprints                                                    | Lucas A. Zanetti |
-| 1.1    | 13/04/2026 | Revisão da seção 5                                                                  | Equipe Crianex   |
-| 1.2    | 04/05/2026 | Atualização do cronograma para Processo Híbrido (Iterações)                         | Heitor           |
-| 1.3    | 05/05/2026 | Reestruturação completa: ciclo de vida, cadência semanal e marcos de validação      | Lucas A. Zanetti |
-| 1.4    | 05/05/2026 | Seções 5.1 e 5.4 convertidas para fluxogramas Mermaid                               | Lucas A. Zanetti |
-| 1.5    | 06/05/2026 | Remoção da coluna OEs e rastreabilidade de CPs na tabela 5.2                        | Equipe Crianex   |
-| 1.6    | 06/05/2026 | Renumeração de CPs (remoção de CP10/CP12 como RNFs) e renomeação IT5 para Pós-venda | Lucas A. Zanetti |
-| 1.7    | 06/05/2026 | Adição de CP14 (Portal do Cliente) na iteração Pós-venda                            | Lucas A. Zanetti |
+| Versão | Data       | Descrição                                                                                              | Autor(es)        |
+| ------ | ---------- | ------------------------------------------------------------------------------------------------------ | ---------------- |
+| 1.0    | 11/04/2026 | Criação do cronograma de sprints                                                                       | Lucas A. Zanetti |
+| 1.1    | 13/04/2026 | Revisão da seção 5                                                                                     | Equipe Crianex   |
+| 1.2    | 04/05/2026 | Atualização do cronograma para Processo Híbrido (Iterações)                                            | Heitor           |
+| 1.3    | 05/05/2026 | Reestruturação completa: ciclo de vida, cadência semanal e marcos de validação                         | Lucas A. Zanetti |
+| 1.4    | 05/05/2026 | Seções 5.1 e 5.4 convertidas para fluxogramas Mermaid                                                  | Lucas A. Zanetti |
+| 1.5    | 06/05/2026 | Remoção da coluna OEs e rastreabilidade de CPs na tabela 5.2                                           | Equipe Crianex   |
+| 1.6    | 06/05/2026 | Renumeração de CPs (remoção de CP10/CP12 como RNFs) e renomeação IT5 para Pós-venda                    | Lucas A. Zanetti |
+| 1.7    | 06/05/2026 | Adição de CP14 (Portal do Cliente) na iteração Pós-venda                                               | Lucas A. Zanetti |
 | 1.8    | 06/06/2026 | Substituição da imagem por fluxograma Mermaid corrigido (modelo FDD sem Modelar/Descobrir/Especificar) | Lucas A. Zanetti |
 
 ---
