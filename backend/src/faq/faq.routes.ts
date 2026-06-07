@@ -1,3 +1,4 @@
+import { submitRating } from './faq.ratings.service.js';
 import { Router } from 'express';
 import { validateJWT } from '../middleware/validate-jwt.js';
 import { requireRole } from '../middleware/require-role.js';
@@ -29,6 +30,44 @@ faqRouter.get('/categories', ...ownerGuard, async (_req, res) => {
     res.status(500).json({ message: 'Falha ao listar categorias.' });
   }
 });
+
+const faqPublicRouter = Router();
+ 
+faqPublicRouter.post('/ratings', async (req, res) => {
+  const article_id =
+    typeof req.body?.['article_id'] === 'string' ? req.body['article_id'].trim() : '';
+  const rating = req.body?.['rating'];
+ 
+  if (!article_id) {
+    res.status(400).json({ message: 'article_id é obrigatório.' });
+    return;
+  }
+ 
+  if (rating !== 'y' && rating !== 'n') {
+    res.status(400).json({ message: 'rating deve ser "y" ou "n".' });
+    return;
+  }
+ 
+  const ip =
+    (req.headers['x-forwarded-for'] as string)?.split(',')[0]?.trim() ||
+    req.socket.remoteAddress ||
+    'unknown';
+  const userAgent = req.headers['user-agent'] || 'unknown';
+ 
+  try {
+    const result = await submitRating({ article_id, rating, ip, userAgent });
+    res.status(200).json(result);
+  } catch (err: unknown) {
+    const e = err as { code?: string; message?: string };
+    if (e.code === 'NOT_FOUND') {
+      res.status(404).end();
+      return;
+    }
+    console.error('[faq] submit rating error:', err);
+    res.status(500).json({ message: 'Falha ao registrar avaliação.' });
+  }
+});
+
 
 faqRouter.post('/categories', ...ownerGuard, async (req, res) => {
   const label_pt = typeof req.body?.['label_pt'] === 'string' ? req.body['label_pt'].trim() : '';
@@ -208,4 +247,4 @@ faqRouter.delete('/articles/:id', ...ownerGuard, async (req, res) => {
   }
 });
 
-export { faqRouter };
+export { faqRouter,faqPublicRouter };
