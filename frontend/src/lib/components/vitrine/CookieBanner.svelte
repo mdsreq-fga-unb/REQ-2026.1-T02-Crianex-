@@ -34,33 +34,7 @@
     data-testid="cookie-banner"
   >
     <div class="banner-left">
-      <svg
-        class="cookie-icon"
-        viewBox="0 0 64 64"
-        width="36"
-        height="36"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        aria-hidden="true"
-      >
-        <!-- Cookie principal com mordida -->
-        <path d="M44 20 C44 20 41 14 34 14 C27 14 20 20 20 28 C20 36 26 42 34 42 C42 42 48 36 48 28 C48 24 46 22 44 20 Z" />
-        <!-- Mordida -->
-        <path d="M44 20 C44 20 48 17 52 18 C53 22 51 26 48 28" stroke-dasharray="0" />
-        <!-- Chips no cookie -->
-        <circle cx="29" cy="25" r="1.8" fill="currentColor" stroke="none" />
-        <circle cx="36" cy="22" r="1.5" fill="currentColor" stroke="none" />
-        <circle cx="32" cy="32" r="1.8" fill="currentColor" stroke="none" />
-        <circle cx="40" cy="30" r="1.5" fill="currentColor" stroke="none" />
-        <circle cx="26" cy="33" r="1.3" fill="currentColor" stroke="none" />
-        <!-- Migalhas -->
-        <circle cx="51" cy="14" r="1.2" fill="currentColor" stroke="none" />
-        <circle cx="55" cy="20" r="0.9" fill="currentColor" stroke="none" />
-        <circle cx="53" cy="10" r="0.8" fill="currentColor" stroke="none" />
-      </svg>
+      <img src="/assets/cookie.png" alt="cookie" class="cookie-icon" aria-hidden="true" />
       <p class="message">{t.message}</p>
     </div>
     <div class="actions">
@@ -127,8 +101,10 @@
 
   .cookie-icon {
     flex-shrink: 0;
-    color: var(--text-muted);
-    opacity: 0.75;
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+    opacity: 0.8;
   }
 
   .message {
