@@ -10,6 +10,20 @@
 
 ---
 
+## Árvore de Rastreabilidade — Visão Visual (Miro)
+
+<iframe
+  src="https://miro.com/app/live-embed/uXjVGl991V0=/?moveToWidget=3458764671557949874&cot=14"
+  width="100%"
+  height="620"
+  frameborder="0"
+  scrolling="no"
+  allow="fullscreen; clipboard-read; clipboard-write"
+  allowfullscreen>
+</iframe>
+
+---
+
 ## Objetivos Estratégicos (OEs)
 
 | ID  | Nome                                                            | CPs Vinculadas |
