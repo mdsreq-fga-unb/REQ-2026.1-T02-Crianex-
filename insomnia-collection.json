@@ -1,7 +1,7 @@
 {
   "_type": "export",
   "__export_format": 4,
-  "__export_date": "2026-05-26T00:00:00.000Z",
+  "__export_date": "2026-06-07T00:00:00.000Z",
   "__export_source": "crianex-hub-manual",
   "resources": [
     {
@@ -21,7 +21,12 @@
         "admin_email": "admin@crianex.com",
         "admin_password": "sua_senha_aqui",
         "access_token": "",
-        "refresh_token": ""
+        "refresh_token": "",
+        "product_id": "",
+        "member_id": "",
+        "faq_category_id": "",
+        "faq_article_id": "",
+        "profile_id": ""
       },
       "color": "#4CAF50",
       "parentId": "wrk_crianex",
@@ -37,7 +42,12 @@
         "admin_email": "",
         "admin_password": "",
         "access_token": "",
-        "refresh_token": ""
+        "refresh_token": "",
+        "product_id": "",
+        "member_id": "",
+        "faq_category_id": "",
+        "faq_article_id": "",
+        "profile_id": ""
       },
       "color": "#F44336",
       "parentId": "wrk_crianex",
@@ -64,7 +74,39 @@
       "_id": "grp_public",
       "_type": "request_group",
       "name": "Public",
-      "description": "Endpoints públicos sem autenticação (formulário de contato, vitrine). Rate-limited.",
+      "description": "Endpoints públicos sem autenticação (formulário de contato, vitrine, FAQ ratings). Rate-limited.",
+      "parentId": "wrk_crianex"
+    },
+
+    {
+      "_id": "grp_products_public",
+      "_type": "request_group",
+      "name": "Products — Public",
+      "description": "Listagem pública de produtos SaaS publicados. Sem autenticação.",
+      "parentId": "wrk_crianex"
+    },
+
+    {
+      "_id": "grp_admin_products",
+      "_type": "request_group",
+      "name": "Admin — Products",
+      "description": "CRUD completo de produtos SaaS. Requer role 'owner'. Bearer token obrigatório.",
+      "parentId": "wrk_crianex"
+    },
+
+    {
+      "_id": "grp_admin_members",
+      "_type": "request_group",
+      "name": "Admin — Members",
+      "description": "Gestão de membros/administradores do sistema. Requer role 'owner'. Bearer token obrigatório.",
+      "parentId": "wrk_crianex"
+    },
+
+    {
+      "_id": "grp_admin_faq",
+      "_type": "request_group",
+      "name": "Admin — FAQ",
+      "description": "CRUD de categorias e artigos do FAQ. Requer role 'owner'. Bearer token obrigatório.",
       "parentId": "wrk_crianex"
     },
 
@@ -89,14 +131,30 @@
       "method": "POST",
       "url": "{{ _.base_url }}/api/auth/login",
       "headers": [
-        {
-          "name": "Content-Type",
-          "value": "application/json"
-        }
+        { "name": "Content-Type", "value": "application/json" }
       ],
       "body": {
         "mimeType": "application/json",
         "text": "{\n  \"email\": \"{{ _.admin_email }}\",\n  \"password\": \"{{ _.admin_password }}\"\n}"
+      },
+      "parentId": "grp_auth",
+      "authentication": {}
+    },
+
+    {
+      "_id": "req_auth_session",
+      "_type": "request",
+      "name": "Validate Session",
+      "description": "Valida o accessToken e retorna o perfil do usuário autenticado. Aceita Bearer token no header Authorization ou no body (campo accessToken). Útil para verificar se a sessão ainda é válida sem renovar.",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api/auth/session",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "Authorization", "value": "Bearer {{ _.access_token }}" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
       },
       "parentId": "grp_auth",
       "authentication": {}
@@ -110,10 +168,7 @@
       "method": "POST",
       "url": "{{ _.base_url }}/api/auth/refresh",
       "headers": [
-        {
-          "name": "Content-Type",
-          "value": "application/json"
-        }
+        { "name": "Content-Type", "value": "application/json" }
       ],
       "body": {
         "mimeType": "application/json",
@@ -131,18 +186,31 @@
       "method": "POST",
       "url": "{{ _.base_url }}/api/auth/logout",
       "headers": [
-        {
-          "name": "Content-Type",
-          "value": "application/json"
-        },
-        {
-          "name": "Authorization",
-          "value": "Bearer {{ _.access_token }}"
-        }
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "Authorization", "value": "Bearer {{ _.access_token }}" }
       ],
       "body": {
         "mimeType": "application/json",
         "text": "{}"
+      },
+      "parentId": "grp_auth",
+      "authentication": {}
+    },
+
+    {
+      "_id": "req_auth_profile_status",
+      "_type": "request",
+      "name": "Update Profile Status (owner only)",
+      "description": "Ativa ou desativa o perfil de outro administrador. Requer role 'owner'. O owner não pode desativar a própria conta. Retorna o profile atualizado com campos: id, name, role, email, status.",
+      "method": "PATCH",
+      "url": "{{ _.base_url }}/api/auth/profiles/{{ _.profile_id }}/status",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "Authorization", "value": "Bearer {{ _.access_token }}" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"status\": \"active\"\n}"
       },
       "parentId": "grp_auth",
       "authentication": {}
@@ -156,10 +224,7 @@
       "method": "POST",
       "url": "{{ _.base_url }}/api/public/contact",
       "headers": [
-        {
-          "name": "Content-Type",
-          "value": "application/json"
-        }
+        { "name": "Content-Type", "value": "application/json" }
       ],
       "body": {
         "mimeType": "application/json",
@@ -177,10 +242,7 @@
       "method": "POST",
       "url": "{{ _.base_url }}/api/public/contact",
       "headers": [
-        {
-          "name": "Content-Type",
-          "value": "application/json"
-        }
+        { "name": "Content-Type", "value": "application/json" }
       ],
       "body": {
         "mimeType": "application/json",
@@ -198,10 +260,7 @@
       "method": "POST",
       "url": "{{ _.base_url }}/api/public/contact",
       "headers": [
-        {
-          "name": "Content-Type",
-          "value": "application/json"
-        }
+        { "name": "Content-Type", "value": "application/json" }
       ],
       "body": {
         "mimeType": "application/json",
@@ -219,16 +278,400 @@
       "method": "POST",
       "url": "{{ _.base_url }}/api/public/contact",
       "headers": [
-        {
-          "name": "Content-Type",
-          "value": "application/json"
-        }
+        { "name": "Content-Type", "value": "application/json" }
       ],
       "body": {
         "mimeType": "application/json",
         "text": "{\n  \"name\": \"Bot Spammer\",\n  \"email\": \"spam@bot.com\",\n  \"message\": \"Buy cheap products!!!\",\n  \"website\": \"https://spam-site.com\"\n}"
       },
       "parentId": "grp_public",
+      "authentication": {}
+    },
+
+    {
+      "_id": "req_faq_rating_helpful",
+      "_type": "request",
+      "name": "FAQ Rating — Útil (y)",
+      "description": "Avalia um artigo do FAQ como útil. Público, sem autenticação. Deduplica por hash de IP + user-agent por artigo. Retorna contagens agregadas de ratings do artigo.",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api/public/faq/ratings",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"article_id\": \"{{ _.faq_article_id }}\",\n  \"rating\": \"y\"\n}"
+      },
+      "parentId": "grp_public",
+      "authentication": {}
+    },
+
+    {
+      "_id": "req_faq_rating_not_helpful",
+      "_type": "request",
+      "name": "FAQ Rating — Não útil (n)",
+      "description": "Avalia um artigo do FAQ como não útil. Público, sem autenticação. Deduplica por hash de IP + user-agent por artigo. Retorna 404 se o article_id não existir.",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api/public/faq/ratings",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"article_id\": \"{{ _.faq_article_id }}\",\n  \"rating\": \"n\"\n}"
+      },
+      "parentId": "grp_public",
+      "authentication": {}
+    },
+
+    {
+      "_id": "req_products_list_public",
+      "_type": "request",
+      "name": "List Published Products",
+      "description": "Retorna todos os produtos com status 'published'. Público, sem autenticação. Usado pela vitrine para exibir o portfólio de SaaS.",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/products",
+      "headers": [],
+      "body": { "mimeType": "" },
+      "parentId": "grp_products_public",
+      "authentication": {}
+    },
+
+    {
+      "_id": "req_admin_products_list",
+      "_type": "request",
+      "name": "List All Products",
+      "description": "Retorna todos os produtos (publicados e rascunhos). Requer role 'owner'.",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/admin/products",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ _.access_token }}" }
+      ],
+      "body": { "mimeType": "" },
+      "parentId": "grp_admin_products",
+      "authentication": {}
+    },
+
+    {
+      "_id": "req_admin_products_create",
+      "_type": "request",
+      "name": "Create Product",
+      "description": "Cria um novo produto SaaS. Requer role 'owner'. Campos obrigatórios: name. Campos opcionais: description, slug, status (draft|published), image_url, display_order.",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api/admin/products",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "Authorization", "value": "Bearer {{ _.access_token }}" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"CRM Kanban\",\n  \"description\": \"Gestão de clientes e pipeline de vendas em formato Kanban.\",\n  \"slug\": \"crm-kanban\",\n  \"status\": \"draft\",\n  \"display_order\": 1\n}"
+      },
+      "parentId": "grp_admin_products",
+      "authentication": {}
+    },
+
+    {
+      "_id": "req_admin_products_upload",
+      "_type": "request",
+      "name": "Upload Product Image",
+      "description": "Faz upload de uma imagem para um produto. Requer role 'owner'. Aceita JPG, PNG ou WEBP com até 2 MB. Retorna a URL pública da imagem no Supabase Storage.",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api/admin/products/upload",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ _.access_token }}" }
+      ],
+      "body": {
+        "mimeType": "multipart/form-data",
+        "params": [
+          {
+            "name": "image",
+            "fileName": "product.jpg",
+            "type": "file",
+            "disabled": false
+          }
+        ]
+      },
+      "parentId": "grp_admin_products",
+      "authentication": {}
+    },
+
+    {
+      "_id": "req_admin_products_reorder",
+      "_type": "request",
+      "name": "Reorder Products",
+      "description": "Reordena os produtos alterando o display_order. Requer role 'owner'. Envia array de objetos com id e display_order.",
+      "method": "PATCH",
+      "url": "{{ _.base_url }}/api/admin/products/reorder",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "Authorization", "value": "Bearer {{ _.access_token }}" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "[\n  { \"id\": \"uuid-produto-1\", \"display_order\": 1 },\n  { \"id\": \"uuid-produto-2\", \"display_order\": 2 },\n  { \"id\": \"uuid-produto-3\", \"display_order\": 3 }\n]"
+      },
+      "parentId": "grp_admin_products",
+      "authentication": {}
+    },
+
+    {
+      "_id": "req_admin_products_update",
+      "_type": "request",
+      "name": "Update Product",
+      "description": "Atualiza os campos de um produto existente. Requer role 'owner'. Todos os campos são opcionais (PATCH parcial). Substitua o :id na URL pelo ID real do produto.",
+      "method": "PATCH",
+      "url": "{{ _.base_url }}/api/admin/products/{{ _.product_id }}",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "Authorization", "value": "Bearer {{ _.access_token }}" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"CRM Kanban Pro\",\n  \"status\": \"published\",\n  \"description\": \"Descrição atualizada do produto.\"\n}"
+      },
+      "parentId": "grp_admin_products",
+      "authentication": {}
+    },
+
+    {
+      "_id": "req_admin_products_delete",
+      "_type": "request",
+      "name": "Delete Product",
+      "description": "Remove permanentemente um produto. Requer role 'owner'. Retorna 204 sem body em caso de sucesso. Substitua o :id na URL pelo ID real do produto.",
+      "method": "DELETE",
+      "url": "{{ _.base_url }}/api/admin/products/{{ _.product_id }}",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ _.access_token }}" }
+      ],
+      "body": { "mimeType": "" },
+      "parentId": "grp_admin_products",
+      "authentication": {}
+    },
+
+    {
+      "_id": "req_admin_members_list",
+      "_type": "request",
+      "name": "List Members",
+      "description": "Lista todos os membros/administradores cadastrados no sistema. Requer role 'owner'.",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/admin/members",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ _.access_token }}" }
+      ],
+      "body": { "mimeType": "" },
+      "parentId": "grp_admin_members",
+      "authentication": {}
+    },
+
+    {
+      "_id": "req_admin_members_create",
+      "_type": "request",
+      "name": "Create Member",
+      "description": "Cria um novo membro/administrador no Supabase Auth e na tabela profiles. Requer role 'owner'. display_role 'Owner' ou 'Administrador' atribui role='owner', demais valores resultam em role='member'.",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api/admin/members",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "Authorization", "value": "Bearer {{ _.access_token }}" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Ana Costa\",\n  \"email\": \"ana@crianex.com\",\n  \"display_role\": \"Analista\",\n  \"permissions\": {\n    \"products\": [\"read\", \"write\"],\n    \"faq\": [\"read\"]\n  }\n}"
+      },
+      "parentId": "grp_admin_members",
+      "authentication": {}
+    },
+
+    {
+      "_id": "req_admin_members_update",
+      "_type": "request",
+      "name": "Update Member",
+      "description": "Atualiza os dados de um membro (nome, role, display_role, permissions). Requer role 'owner'. Todos os campos são opcionais (PATCH parcial). Substitua o :id na URL pelo ID real do membro.",
+      "method": "PATCH",
+      "url": "{{ _.base_url }}/api/admin/members/{{ _.member_id }}",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "Authorization", "value": "Bearer {{ _.access_token }}" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Ana Costa Silva\",\n  \"display_role\": \"Analista Sênior\",\n  \"permissions\": {\n    \"products\": [\"read\", \"write\"],\n    \"faq\": [\"read\", \"write\"]\n  }\n}"
+      },
+      "parentId": "grp_admin_members",
+      "authentication": {}
+    },
+
+    {
+      "_id": "req_admin_members_status",
+      "_type": "request",
+      "name": "Update Member Status",
+      "description": "Ativa ou desativa um membro. Requer role 'owner'. O owner não pode desativar a própria conta. Valores aceitos: 'active' ou 'inactive'. Substitua o :id na URL pelo ID real do membro.",
+      "method": "PATCH",
+      "url": "{{ _.base_url }}/api/admin/members/{{ _.member_id }}/status",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "Authorization", "value": "Bearer {{ _.access_token }}" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"status\": \"inactive\"\n}"
+      },
+      "parentId": "grp_admin_members",
+      "authentication": {}
+    },
+
+    {
+      "_id": "req_admin_members_delete",
+      "_type": "request",
+      "name": "Delete Member",
+      "description": "Remove permanentemente um membro do sistema (Supabase Auth + tabela profiles). Requer role 'owner'. O owner não pode deletar a própria conta. Retorna 204 sem body.",
+      "method": "DELETE",
+      "url": "{{ _.base_url }}/api/admin/members/{{ _.member_id }}",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ _.access_token }}" }
+      ],
+      "body": { "mimeType": "" },
+      "parentId": "grp_admin_members",
+      "authentication": {}
+    },
+
+    {
+      "_id": "req_admin_faq_categories_list",
+      "_type": "request",
+      "name": "List Categories",
+      "description": "Lista todas as categorias do FAQ. Requer role 'owner'. Inclui categorias vinculadas a produtos e categorias globais (product_id null).",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/admin/faq/categories",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ _.access_token }}" }
+      ],
+      "body": { "mimeType": "" },
+      "parentId": "grp_admin_faq",
+      "authentication": {}
+    },
+
+    {
+      "_id": "req_admin_faq_categories_create",
+      "_type": "request",
+      "name": "Create Category",
+      "description": "Cria uma nova categoria do FAQ. Requer role 'owner'. Campos obrigatórios: label_pt, label_en. Opcionais: product_id (vínculo com produto), display_order.",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api/admin/faq/categories",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "Authorization", "value": "Bearer {{ _.access_token }}" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"label_pt\": \"Primeiros Passos\",\n  \"label_en\": \"Getting Started\",\n  \"product_id\": null,\n  \"display_order\": 1\n}"
+      },
+      "parentId": "grp_admin_faq",
+      "authentication": {}
+    },
+
+    {
+      "_id": "req_admin_faq_categories_update",
+      "_type": "request",
+      "name": "Update Category",
+      "description": "Atualiza uma categoria do FAQ. Requer role 'owner'. Todos os campos são opcionais (PATCH parcial). Retorna 404 se a categoria não existir.",
+      "method": "PATCH",
+      "url": "{{ _.base_url }}/api/admin/faq/categories/{{ _.faq_category_id }}",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "Authorization", "value": "Bearer {{ _.access_token }}" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"label_pt\": \"Primeiros Passos (Atualizado)\",\n  \"display_order\": 2\n}"
+      },
+      "parentId": "grp_admin_faq",
+      "authentication": {}
+    },
+
+    {
+      "_id": "req_admin_faq_categories_delete",
+      "_type": "request",
+      "name": "Delete Category",
+      "description": "Remove uma categoria do FAQ. Requer role 'owner'. Retorna 409 se houver artigos vinculados (categoria protegida). Retorna 204 em caso de sucesso.",
+      "method": "DELETE",
+      "url": "{{ _.base_url }}/api/admin/faq/categories/{{ _.faq_category_id }}",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ _.access_token }}" }
+      ],
+      "body": { "mimeType": "" },
+      "parentId": "grp_admin_faq",
+      "authentication": {}
+    },
+
+    {
+      "_id": "req_admin_faq_articles_list",
+      "_type": "request",
+      "name": "List Articles",
+      "description": "Lista artigos do FAQ. Requer role 'owner'. Parâmetro opcional: category_id para filtrar por categoria. Retorna todos os artigos (publicados e rascunhos).",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/admin/faq/articles",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ _.access_token }}" }
+      ],
+      "parameters": [
+        { "name": "category_id", "value": "{{ _.faq_category_id }}", "disabled": true }
+      ],
+      "body": { "mimeType": "" },
+      "parentId": "grp_admin_faq",
+      "authentication": {}
+    },
+
+    {
+      "_id": "req_admin_faq_articles_create",
+      "_type": "request",
+      "name": "Create Article",
+      "description": "Cria um novo artigo no FAQ. Requer role 'owner'. Campos obrigatórios: title_pt, category_id. Opcionais: title_en, body_pt, body_en, published (boolean, default false).",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api/admin/faq/articles",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "Authorization", "value": "Bearer {{ _.access_token }}" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"title_pt\": \"Como fazer login no sistema?\",\n  \"title_en\": \"How to log into the system?\",\n  \"category_id\": \"{{ _.faq_category_id }}\",\n  \"body_pt\": \"Acesse /admin/login e insira suas credenciais...\",\n  \"body_en\": \"Go to /admin/login and enter your credentials...\",\n  \"published\": false\n}"
+      },
+      "parentId": "grp_admin_faq",
+      "authentication": {}
+    },
+
+    {
+      "_id": "req_admin_faq_articles_update",
+      "_type": "request",
+      "name": "Update Article",
+      "description": "Atualiza um artigo do FAQ. Requer role 'owner'. Todos os campos são opcionais (PATCH parcial). Use published: true para publicar o artigo na vitrine. Retorna 404 se não existir.",
+      "method": "PATCH",
+      "url": "{{ _.base_url }}/api/admin/faq/articles/{{ _.faq_article_id }}",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "Authorization", "value": "Bearer {{ _.access_token }}" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"title_pt\": \"Como fazer login? (Atualizado)\",\n  \"body_pt\": \"Conteúdo revisado do artigo...\",\n  \"published\": true\n}"
+      },
+      "parentId": "grp_admin_faq",
+      "authentication": {}
+    },
+
+    {
+      "_id": "req_admin_faq_articles_delete",
+      "_type": "request",
+      "name": "Delete Article",
+      "description": "Remove um artigo do FAQ. Requer role 'owner'. Retorna 409 se o artigo estiver publicado (deve ser despublicado antes de deletar). Retorna 204 em caso de sucesso.",
+      "method": "DELETE",
+      "url": "{{ _.base_url }}/api/admin/faq/articles/{{ _.faq_article_id }}",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ _.access_token }}" }
+      ],
+      "body": { "mimeType": "" },
+      "parentId": "grp_admin_faq",
       "authentication": {}
     }
   ]
