@@ -19,7 +19,9 @@ export type RatingResult =
 
 function buildSessionHash(ip: string, userAgent: string): string {
   const dateString = new Date().toDateString();
-  return createHash('sha256').update(ip + userAgent + dateString).digest('hex');
+  return createHash('sha256')
+    .update(ip + userAgent + dateString)
+    .digest('hex');
 }
 
 async function getArticleTotals(articleId: string): Promise<RatingTotals> {
@@ -81,10 +83,12 @@ export async function submitRating(input: RatingInput): Promise<RatingResult> {
       ? (article as { helpful_count: number }).helpful_count
       : (article as { not_helpful_count: number }).not_helpful_count;
 
-  await supabase
+  const { error: updateError } = await supabase
     .from('faq_articles')
     .update({ [counterField]: currentValue + 1 })
     .eq('id', input.article_id);
+
+  if (updateError) throw updateError;
 
   const totals = await getArticleTotals(input.article_id);
   return { success: true, totals };
