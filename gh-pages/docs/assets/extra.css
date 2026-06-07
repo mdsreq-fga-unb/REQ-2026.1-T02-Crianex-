@@ -338,7 +338,9 @@ p[style*='text-align:center'] {
   border-bottom: 2px solid transparent;
   margin-bottom: -2px;
   white-space: nowrap;
-  transition: color 0.15s, border-color 0.15s;
+  transition:
+    color 0.15s,
+    border-color 0.15s;
 }
 
 .tabbed-labels > label:hover {
@@ -423,23 +425,62 @@ p[style*='text-align:center'] {
 }
 
 /* Tipos de dia */
-.cc-outro       { background: #f3f4f6; color: #9ca3af; }
-.cc-vazio       { background: #fafafa; color: #d1d5db; border: 1px solid #f0f0f0; }
-.cc-semestre    { background: #111827; color: #f9fafb; }
-.cc-feriado     { background: #fee2e2; color: #991b1b; }
-.cc-facultativo { background: #fef9c3; color: #854d0e; }
-.cc-pre         { background: #e0e7ff; color: #3730a3; }
-.cc-it1         { background: #dbeafe; color: #1e40af; }
-.cc-it2         { background: #d1fae5; color: #065f46; }
-.cc-it3         { background: #ede9fe; color: #5b21b6; }
-.cc-entrega     { background: #ea580c; color: #fff; }
-.cc-apresentacao { background: #f97316; color: #fff; }
-.cc-gravacao    { background: #7c3aed; color: #fff; }
+.cc-outro {
+  background: #f3f4f6;
+  color: #9ca3af;
+}
+.cc-vazio {
+  background: #fafafa;
+  color: #d1d5db;
+  border: 1px solid #f0f0f0;
+}
+.cc-semestre {
+  background: #111827;
+  color: #f9fafb;
+}
+.cc-feriado {
+  background: #fee2e2;
+  color: #991b1b;
+}
+.cc-facultativo {
+  background: #fef9c3;
+  color: #854d0e;
+}
+.cc-pre {
+  background: #e0e7ff;
+  color: #3730a3;
+}
+.cc-it1 {
+  background: #dbeafe;
+  color: #1e40af;
+}
+.cc-it2 {
+  background: #d1fae5;
+  color: #065f46;
+}
+.cc-it3 {
+  background: #ede9fe;
+  color: #5b21b6;
+}
+.cc-entrega {
+  background: #ea580c;
+  color: #fff;
+}
+.cc-apresentacao {
+  background: #f97316;
+  color: #fff;
+}
+.cc-gravacao {
+  background: #7c3aed;
+  color: #fff;
+}
 
 .cc-entrega .cc-event,
 .cc-apresentacao .cc-event,
 .cc-gravacao .cc-event,
-.cc-semestre .cc-event { background: rgba(255, 255, 255, 0.22); }
+.cc-semestre .cc-event {
+  background: rgba(255, 255, 255, 0.22);
+}
 
 /* Legenda */
 .calendar-legend {
@@ -464,14 +505,43 @@ p[style*='text-align:center'] {
   border: 1px solid transparent;
 }
 
-.lc-pre         { background: #e0e7ff; border-color: #a5b4fc; }
-.lc-it1         { background: #dbeafe; border-color: #93c5fd; }
-.lc-it2         { background: #d1fae5; border-color: #6ee7b7; }
-.lc-it3         { background: #ede9fe; border-color: #c4b5fd; }
-.lc-entrega     { background: #ea580c; }
-.lc-apresentacao { background: #f97316; }
-.lc-gravacao    { background: #7c3aed; }
-.lc-feriado     { background: #fee2e2; border-color: #fca5a5; }
-.lc-facultativo { background: #fef9c3; border-color: #fde68a; }
-.lc-outro       { background: #f3f4f6; border-color: #e5e7eb; }
-.lc-semestre    { background: #111827; }
+.lc-pre {
+  background: #e0e7ff;
+  border-color: #a5b4fc;
+}
+.lc-it1 {
+  background: #dbeafe;
+  border-color: #93c5fd;
+}
+.lc-it2 {
+  background: #d1fae5;
+  border-color: #6ee7b7;
+}
+.lc-it3 {
+  background: #ede9fe;
+  border-color: #c4b5fd;
+}
+.lc-entrega {
+  background: #ea580c;
+}
+.lc-apresentacao {
+  background: #f97316;
+}
+.lc-gravacao {
+  background: #7c3aed;
+}
+.lc-feriado {
+  background: #fee2e2;
+  border-color: #fca5a5;
+}
+.lc-facultativo {
+  background: #fef9c3;
+  border-color: #fde68a;
+}
+.lc-outro {
+  background: #f3f4f6;
+  border-color: #e5e7eb;
+}
+.lc-semestre {
+  background: #111827;
+}
