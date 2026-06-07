@@ -46,12 +46,14 @@ nav:
           - 'Resumo — Evidências': iteracoes/unidade-1/index.md
           - 'Ata — 09/04/2026': iteracoes/unidade-1/atas/2026-04-09.md
       - 'IT1 — Vitrine Pública':
-          - 'Resumo': iteracoes/iteracao-1/index.md
-          - 'Ata Compromisso das correções — 01/05/2026': iteracoes/iteracao-1/atas/2026-05-01.md
-          - 'Ata Domain Modeling Iteration Replenishment & Commitment — 10/05/2026': iteracoes/iteracao-1/atas/2026-05-10.md
-          - 'Ata Feature Discovery Session — 11/05/2026': iteracoes/iteracao-1/atas/2026-05-11.md
-          - 'Ata Refinamento Requisitos — 14/05/2026': iteracoes/iteracao-1/atas/2026-05-14.md
-          - 'Ata Technical Design Review — 17/05/2026': iteracoes/iteracao-1/atas/2026-05-17.md
+          - 'Resumo — Evidências': iteracoes/iteracao-1/index.md
+          - 'Features Entregues': iteracoes/iteracao-1/features-entregues.md
+          - 'Atas de Reunião':
+            - 'Ata Compromisso das correções — 01/05/2026': iteracoes/iteracao-1/atas/2026-05-01.md
+            - 'Ata Domain Modeling Iteration Replenishment & Commitment — 10/05/2026': iteracoes/iteracao-1/atas/2026-05-10.md
+            - 'Ata Feature Discovery Session — 11/05/2026': iteracoes/iteracao-1/atas/2026-05-11.md
+            - 'Ata Refinamento Requisitos — 14/05/2026': iteracoes/iteracao-1/atas/2026-05-14.md
+            - 'Ata Technical Design Review — 17/05/2026': iteracoes/iteracao-1/atas/2026-05-17.md
       - 'IT2 — Lead Capture':
           - 'Resumo — Evidências': iteracoes/iteracao-2/index.md
       - 'IT3 — Núcleo Operacional':

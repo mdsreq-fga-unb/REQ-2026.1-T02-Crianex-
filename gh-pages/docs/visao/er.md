@@ -107,6 +107,7 @@ Cerimônia em que a solução técnica de cada feature comprometida é analisada
 - Diagrama de sequência leve — representa interações e integrações relevantes da solução
 - Análise de impacto e identificação de pontos de extensão
 - Prototipagem quando aplicável
+- Diagrama de sequência formal 
 
 **Artefatos gerados:** notas de design e especificação técnica por feature.
 

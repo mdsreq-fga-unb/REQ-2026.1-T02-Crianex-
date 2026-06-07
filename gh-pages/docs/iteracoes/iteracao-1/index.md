@@ -78,6 +78,15 @@ Este diagrama detalha o fluxo arquitetural final acordado e validado, ilustrando
 
 O feature card consolidado documenta atômicamente os requisitos da funcionalidade, incluindo critérios de aceite formatados em BDD para orientar o desenvolvimento e os testes.
 
+### Evidências por Feature Entregue
+
+O registro detalhado de cada feature — critérios de aceite verificados, evidências de funcionamento (screenshots/vídeos), validação parcial e formal do cliente, e PRs vinculadas — está consolidado na página dedicada:
+
+> **[Features Entregues — IT1](./features-entregues.md)**  
+> Cobre F09 a F18, agrupadas por CP5 (Painel Admin), CP4 (Vitrine Pública) e CP6 (FAQ).
+
+---
+
 ### Rastreabilidade e Priorização do Backlog
 
 Como parte da preparação para esta iteração, o backlog foi estruturado com rastreabilidade completa entre OEs, CPs, Features, RFs e RNFs, e priorizado objetivamente pelo método Valor × Esforço (IP = VB / ES).
