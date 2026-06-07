@@ -148,36 +148,36 @@ Todas as features abaixo atingiram o _Definition of Ready (DoR)_. Os critérios 
 
 #### F09 — Autenticar administradores
 
-| # | Critério de Aceite (BDD) | RF / RNF |
-| - | ------------------------ | -------- |
-| 1 | **Dado** que o admin acessa `/admin/login` com credenciais válidas, **Quando** submete email e senha, **Então** autentica via Supabase Auth, gera sessão JWT e redireciona para `/admin/dashboard` | RF08 |
-| 2 | **Dado** que o MFA está ativo, **Quando** as credenciais base são validadas, **Então** o sistema solicita código TOTP antes de emitir a sessão | RF08 · RNF08 |
-| 3 | **Dado** que as credenciais são inválidas, **Quando** o Supabase Auth processa, **Então** retorna 401 e a interface exibe mensagem genérica sem expor detalhes internos | RF08 |
-| 4 | **Dado** que o admin aciona "Sair", **Quando** o sistema processa, **Então** invoca `signOut()`, invalida o `refresh_token`, limpa o cookie e redireciona para `/admin/login` | RF09 |
-| 5 | **Dado** que o admin encerrou sessão e tenta acessar `/admin` diretamente, **Quando** o servidor processa, **Então** redireciona para `/admin/login` sem renderizar nenhum dado do painel | RF09 · RNF01 |
-| 6 | **Dado** que a autenticação é processada pelo Supabase Auth, **Quando** a resposta chega, **Então** o tempo total até a sessão ser emitida não excede 2 segundos | RNF03 |
+| #   | Critério de Aceite (BDD)                                                                                                                                                                           | RF / RNF     |
+| --- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
+| 1   | **Dado** que o admin acessa `/admin/login` com credenciais válidas, **Quando** submete email e senha, **Então** autentica via Supabase Auth, gera sessão JWT e redireciona para `/admin/dashboard` | RF08         |
+| 2   | **Dado** que o MFA está ativo, **Quando** as credenciais base são validadas, **Então** o sistema solicita código TOTP antes de emitir a sessão                                                     | RF08 · RNF08 |
+| 3   | **Dado** que as credenciais são inválidas, **Quando** o Supabase Auth processa, **Então** retorna 401 e a interface exibe mensagem genérica sem expor detalhes internos                            | RF08         |
+| 4   | **Dado** que o admin aciona "Sair", **Quando** o sistema processa, **Então** invoca `signOut()`, invalida o `refresh_token`, limpa o cookie e redireciona para `/admin/login`                      | RF09         |
+| 5   | **Dado** que o admin encerrou sessão e tenta acessar `/admin` diretamente, **Quando** o servidor processa, **Então** redireciona para `/admin/login` sem renderizar nenhum dado do painel          | RF09 · RNF01 |
+| 6   | **Dado** que a autenticação é processada pelo Supabase Auth, **Quando** a resposta chega, **Então** o tempo total até a sessão ser emitida não excede 2 segundos                                   | RNF03        |
 
 #### F10 — Acessar painel administrativo
 
-| # | Critério de Aceite (BDD) | RF / RNF |
-| - | ------------------------ | -------- |
-| 1 | **Dado** que o owner possui JWT válido com `role = owner`, **Quando** acessa `/admin`, **Então** o sistema valida o token, aplica RLS filtrando por `auth.uid()` + `auth.role()` e renderiza o painel sem reload | RF10 · RNF09 |
-| 2 | **Dado** que o JWT expirou, **Quando** o owner acessa o painel, **Então** o sistema tenta `refreshSession()`; se bem-sucedido continua; se falhar, redireciona para `/admin/login` sem renderizar dados | RF10 |
-| 3 | **Dado** que a requisição chega sem token válido ou sem `role = owner`, **Quando** o middleware intercepta, **Então** bloqueia com 401/403 e redireciona para `/admin/login` | RF10 · RNF01 |
-| 4 | **Dado** que o painel carregou e o owner opera qualquer seção, **Quando** a requisição chega ao backend, **Então** a resposta é entregue em ≤ 2 segundos | RNF03 |
+| #   | Critério de Aceite (BDD)                                                                                                                                                                                         | RF / RNF     |
+| --- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
+| 1   | **Dado** que o owner possui JWT válido com `role = owner`, **Quando** acessa `/admin`, **Então** o sistema valida o token, aplica RLS filtrando por `auth.uid()` + `auth.role()` e renderiza o painel sem reload | RF10 · RNF09 |
+| 2   | **Dado** que o JWT expirou, **Quando** o owner acessa o painel, **Então** o sistema tenta `refreshSession()`; se bem-sucedido continua; se falhar, redireciona para `/admin/login` sem renderizar dados          | RF10         |
+| 3   | **Dado** que a requisição chega sem token válido ou sem `role = owner`, **Quando** o middleware intercepta, **Então** bloqueia com 401/403 e redireciona para `/admin/login`                                     | RF10 · RNF01 |
+| 4   | **Dado** que o painel carregou e o owner opera qualquer seção, **Quando** a requisição chega ao backend, **Então** a resposta é entregue em ≤ 2 segundos                                                         | RNF03        |
 
 #### F11 — Gerenciar membros da Crianex
 
-| # | Critério de Aceite (BDD) | RF / RNF |
-| - | ------------------------ | -------- |
-| 1 | **Dado** que o owner submete dados válidos de novo membro, **Quando** a API processa, **Então** cria via `admin.createUser()`, insere em `profiles` e exibe na lista sem reload | RF12 |
-| 2 | **Dado** que o email informado já existe, **Quando** o Supabase Auth processa, **Então** retorna erro informativo sem criar registro duplicado | RF12 |
-| 3 | **Dado** que o owner submete alterações válidas em um membro, **Quando** o RLS valida `auth.role() = owner`, **Então** persiste as alterações e retorna feedback sem reload | RF11 · RNF09 |
-| 4 | **Dado** que uma edição chega sem `role = owner`, **Quando** o RLS processa, **Então** bloqueia com 403 sem persistir nada | RF11 · RNF09 |
-| 5 | **Dado** que o owner inativa um membro ativo, **Quando** confirma, **Então** `active = false` é persistido e refletido na lista sem reload | RF13 |
-| 6 | **Dado** que o owner tenta inativar a própria conta, **Quando** a API processa, **Então** bloqueia com mensagem de erro | RF13 |
-| 7 | **Dado** que o owner remove um membro, **Quando** confirma, **Então** remove de `profiles` e invoca `admin.deleteUser()`, atualizando a lista sem reload | RF14 |
-| 8 | **Dado** que o owner tenta remover a própria conta, **Quando** a API processa, **Então** bloqueia garantindo ao menos um owner ativo na plataforma | RF14 |
+| #   | Critério de Aceite (BDD)                                                                                                                                                        | RF / RNF     |
+| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
+| 1   | **Dado** que o owner submete dados válidos de novo membro, **Quando** a API processa, **Então** cria via `admin.createUser()`, insere em `profiles` e exibe na lista sem reload | RF12         |
+| 2   | **Dado** que o email informado já existe, **Quando** o Supabase Auth processa, **Então** retorna erro informativo sem criar registro duplicado                                  | RF12         |
+| 3   | **Dado** que o owner submete alterações válidas em um membro, **Quando** o RLS valida `auth.role() = owner`, **Então** persiste as alterações e retorna feedback sem reload     | RF11 · RNF09 |
+| 4   | **Dado** que uma edição chega sem `role = owner`, **Quando** o RLS processa, **Então** bloqueia com 403 sem persistir nada                                                      | RF11 · RNF09 |
+| 5   | **Dado** que o owner inativa um membro ativo, **Quando** confirma, **Então** `active = false` é persistido e refletido na lista sem reload                                      | RF13         |
+| 6   | **Dado** que o owner tenta inativar a própria conta, **Quando** a API processa, **Então** bloqueia com mensagem de erro                                                         | RF13         |
+| 7   | **Dado** que o owner remove um membro, **Quando** confirma, **Então** remove de `profiles` e invoca `admin.deleteUser()`, atualizando a lista sem reload                        | RF14         |
+| 8   | **Dado** que o owner tenta remover a própria conta, **Quando** a API processa, **Então** bloqueia garantindo ao menos um owner ativo na plataforma                              | RF14         |
 
 ---
 
@@ -185,39 +185,39 @@ Todas as features abaixo atingiram o _Definition of Ready (DoR)_. Os critérios 
 
 #### F12 — Gerenciar produtos SaaS
 
-| # | Critério de Aceite (BDD) | RF / RNF |
-| - | ------------------------ | -------- |
-| 1 | **Dado** que o admin submete dados válidos de novo produto, **Quando** a API valida o token e processa, **Então** persiste em transação ACID e exibe na lista sem reload | RF21 · RNF06 |
-| 2 | **Dado** que o admin edita produto existente e salva, **Quando** a API processa, **Então** o banco substitui as informações e a vitrine reflete sem intervenção de desenvolvedor | RF22 |
-| 3 | **Dado** que o admin confirma remoção, **Quando** a API processa, **Então** produto excluído do catálogo e ausente na vitrine imediatamente | RF23 |
-| 4 | **Dado** que requisição de alteração chega sem autorização, **Quando** o middleware intercepta, **Então** bloqueia com 401/403 sem executar operação no banco | RF21–23 · RNF01 |
-| 5 | **Dado** que visitante acessa a vitrine, **Quando** o SvelteKit renderiza via SSR, **Então** apenas produtos com `published = true` listados em ≤ 2s sem depender de JS | RNF02 · RNF21 |
-| 6 | **Dado** que ocorre falha no banco durante inserção ou edição, **Quando** o backend detecta, **Então** executa ROLLBACK completo sem registro parcial | RNF06 |
+| #   | Critério de Aceite (BDD)                                                                                                                                                         | RF / RNF        |
+| --- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
+| 1   | **Dado** que o admin submete dados válidos de novo produto, **Quando** a API valida o token e processa, **Então** persiste em transação ACID e exibe na lista sem reload         | RF21 · RNF06    |
+| 2   | **Dado** que o admin edita produto existente e salva, **Quando** a API processa, **Então** o banco substitui as informações e a vitrine reflete sem intervenção de desenvolvedor | RF22            |
+| 3   | **Dado** que o admin confirma remoção, **Quando** a API processa, **Então** produto excluído do catálogo e ausente na vitrine imediatamente                                      | RF23            |
+| 4   | **Dado** que requisição de alteração chega sem autorização, **Quando** o middleware intercepta, **Então** bloqueia com 401/403 sem executar operação no banco                    | RF21–23 · RNF01 |
+| 5   | **Dado** que visitante acessa a vitrine, **Quando** o SvelteKit renderiza via SSR, **Então** apenas produtos com `published = true` listados em ≤ 2s sem depender de JS          | RNF02 · RNF21   |
+| 6   | **Dado** que ocorre falha no banco durante inserção ou edição, **Quando** o backend detecta, **Então** executa ROLLBACK completo sem registro parcial                            | RNF06           |
 
 #### F13 — Publicar / despublicar produto SaaS
 
-| # | Critério de Aceite (BDD) | RF / RNF |
-| - | ------------------------ | -------- |
-| 1 | **Dado** que o admin aciona o toggle para publicar, **Quando** a API processa via PATCH, **Então** `published = true` e confirmação visual chega em ≤ 2s | RF25 · RNF03 |
-| 2 | **Dado** que o admin aciona o toggle para despublicar, **Quando** a API processa, **Então** produto imediatamente ocultado da vitrine com dados preservados no banco | RF59 · RNF03 |
-| 3 | **Dado** que credenciais inválidas são usadas no toggle, **Quando** a API rejeita, **Então** o toggle reverte ao estado original com mensagem de erro | RF25 · RF59 |
+| #   | Critério de Aceite (BDD)                                                                                                                                             | RF / RNF     |
+| --- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
+| 1   | **Dado** que o admin aciona o toggle para publicar, **Quando** a API processa via PATCH, **Então** `published = true` e confirmação visual chega em ≤ 2s             | RF25 · RNF03 |
+| 2   | **Dado** que o admin aciona o toggle para despublicar, **Quando** a API processa, **Então** produto imediatamente ocultado da vitrine com dados preservados no banco | RF59 · RNF03 |
+| 3   | **Dado** que credenciais inválidas são usadas no toggle, **Quando** a API rejeita, **Então** o toggle reverte ao estado original com mensagem de erro                | RF25 · RF59  |
 
 #### F14 — Formulário de contato
 
-| # | Critério de Aceite (BDD) | RF / RNF |
-| - | ------------------------ | -------- |
-| 1 | **Dado** que o visitante preenche o formulário corretamente e clica "Enviar", **Quando** a API processa, **Então** persiste em transação ACID e exibe alerta de sucesso em ≤ 2s | RF27 · RNF02 · RNF06 |
-| 2 | **Dado** que o formulário excede o rate limit (5 req/IP/10min), **Quando** a API intercepta, **Então** retorna 429 e a interface exibe "Tente novamente mais tarde" | RNF10 |
-| 3 | **Dado** que ocorre falha inesperada no banco durante inserção, **Quando** o backend detecta, **Então** executa ROLLBACK completo sem registro parcial | RNF06 |
+| #   | Critério de Aceite (BDD)                                                                                                                                                        | RF / RNF             |
+| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------- |
+| 1   | **Dado** que o visitante preenche o formulário corretamente e clica "Enviar", **Quando** a API processa, **Então** persiste em transação ACID e exibe alerta de sucesso em ≤ 2s | RF27 · RNF02 · RNF06 |
+| 2   | **Dado** que o formulário excede o rate limit (5 req/IP/10min), **Quando** a API intercepta, **Então** retorna 429 e a interface exibe "Tente novamente mais tarde"             | RNF10                |
+| 3   | **Dado** que ocorre falha inesperada no banco durante inserção, **Quando** o backend detecta, **Então** executa ROLLBACK completo sem registro parcial                          | RNF06                |
 
 #### F15 — Página institucional
 
-| # | Critério de Aceite (BDD) | RF / RNF |
-| - | ------------------------ | -------- |
-| 1 | **Dado** que o visitante acessa `/sobre`, **Quando** o SvelteKit renderiza, **Então** carrega conteúdo dos arquivos i18n estáticos via SSR em ≤ 2s, sem chamada a API ou banco | RF28 · RNF02 · RNF04 |
-| 2 | **Dado** que o visitante clica em "EN", **Quando** o locale muda, **Então** todos os textos trocam para `en/about.json` em ≤ 1 clique sem reload | RNF13 |
-| 3 | **Dado** que a página é acessada por bot de indexação, **Quando** renderiza via SSR, **Então** o HTML inicial contém h1, textos e metadados Open Graph sem depender de JS | RNF04 · RNF21 |
-| 4 | **Dado** que visitante sem autenticação acessa `/sobre`, **Quando** o servidor processa, **Então** nenhum guard intercepta — conteúdo exibido normalmente | RNF20 |
+| #   | Critério de Aceite (BDD)                                                                                                                                                       | RF / RNF             |
+| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------- |
+| 1   | **Dado** que o visitante acessa `/sobre`, **Quando** o SvelteKit renderiza, **Então** carrega conteúdo dos arquivos i18n estáticos via SSR em ≤ 2s, sem chamada a API ou banco | RF28 · RNF02 · RNF04 |
+| 2   | **Dado** que o visitante clica em "EN", **Quando** o locale muda, **Então** todos os textos trocam para `en/about.json` em ≤ 1 clique sem reload                               | RNF13                |
+| 3   | **Dado** que a página é acessada por bot de indexação, **Quando** renderiza via SSR, **Então** o HTML inicial contém h1, textos e metadados Open Graph sem depender de JS      | RNF04 · RNF21        |
+| 4   | **Dado** que visitante sem autenticação acessa `/sobre`, **Quando** o servidor processa, **Então** nenhum guard intercepta — conteúdo exibido normalmente                      | RNF20                |
 
 ---
 
@@ -225,32 +225,32 @@ Todas as features abaixo atingiram o _Definition of Ready (DoR)_. Os critérios 
 
 #### F16 — CRUD de artigos de FAQ
 
-| # | Critério de Aceite (BDD) | RF / RNF |
-| - | ------------------------ | -------- |
-| 1 | **Dado** que o admin tem permissão e preenche dados válidos, **Quando** cadastra artigo (título, conteúdo, produto, categoria), **Então** persiste e torna o artigo disponível para publicação | RF30 · RNF01 |
-| 2 | **Dado** que o admin edita artigo e salva, **Quando** a API processa, **Então** o banco substitui as informações preservando o ID original | RF31 |
-| 3 | **Dado** que o admin confirma remoção de artigo, **Quando** a API processa, **Então** artigo excluído do banco e ausente na vitrine imediatamente | RF32 |
-| 4 | **Dado** que o admin altera a categoria, **Quando** salva, **Então** o sistema atualiza vínculos validando integridade referencial de `product_id` e `category_id` | RF33 |
-| 5 | **Dado** que agente externo forja requisição sem token, **Quando** chega ao banco, **Então** o RLS verifica `auth.uid()` e bloqueia com 403 sem executar alteração | RNF01 · RNF09 |
-| 6 | **Dado** que artigos publicados existem, **Quando** a vitrine renderiza via SSR, **Então** conteúdo indexável no HTML inicial; despublicados ausentes da resposta SSR | RNF04 · RNF05 |
+| #   | Critério de Aceite (BDD)                                                                                                                                                                       | RF / RNF      |
+| --- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| 1   | **Dado** que o admin tem permissão e preenche dados válidos, **Quando** cadastra artigo (título, conteúdo, produto, categoria), **Então** persiste e torna o artigo disponível para publicação | RF30 · RNF01  |
+| 2   | **Dado** que o admin edita artigo e salva, **Quando** a API processa, **Então** o banco substitui as informações preservando o ID original                                                     | RF31          |
+| 3   | **Dado** que o admin confirma remoção de artigo, **Quando** a API processa, **Então** artigo excluído do banco e ausente na vitrine imediatamente                                              | RF32          |
+| 4   | **Dado** que o admin altera a categoria, **Quando** salva, **Então** o sistema atualiza vínculos validando integridade referencial de `product_id` e `category_id`                             | RF33          |
+| 5   | **Dado** que agente externo forja requisição sem token, **Quando** chega ao banco, **Então** o RLS verifica `auth.uid()` e bloqueia com 403 sem executar alteração                             | RNF01 · RNF09 |
+| 6   | **Dado** que artigos publicados existem, **Quando** a vitrine renderiza via SSR, **Então** conteúdo indexável no HTML inicial; despublicados ausentes da resposta SSR                          | RNF04 · RNF05 |
 
 #### F17 — Publicar / despublicar artigo de FAQ
 
-| # | Critério de Aceite (BDD) | RF / RNF |
-| - | ------------------------ | -------- |
-| 1 | **Dado** que o admin aciona publicação, **Quando** a API processa via PATCH, **Então** `published = true` e artigo visível na próxima requisição da vitrine sem reload | RF34 · RNF01 |
-| 2 | **Dado** que o admin aciona despublicação, **Quando** a API processa, **Então** artigo removido da vitrine imediatamente, registro preservado no banco | RF35 |
-| 3 | **Dado** que agente externo forja requisição sem token, **Quando** o RLS intercepta, **Então** retorna 403 sem alterar status de publicação | RNF01 · RNF09 |
-| 4 | **Dado** que artigo está publicado e a vitrine renderiza, **Quando** o SSR processa, **Então** conteúdo e metadados SEO no HTML inicial sem depender de JS | RNF04 · RNF05 |
+| #   | Critério de Aceite (BDD)                                                                                                                                               | RF / RNF      |
+| --- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| 1   | **Dado** que o admin aciona publicação, **Quando** a API processa via PATCH, **Então** `published = true` e artigo visível na próxima requisição da vitrine sem reload | RF34 · RNF01  |
+| 2   | **Dado** que o admin aciona despublicação, **Quando** a API processa, **Então** artigo removido da vitrine imediatamente, registro preservado no banco                 | RF35          |
+| 3   | **Dado** que agente externo forja requisição sem token, **Quando** o RLS intercepta, **Então** retorna 403 sem alterar status de publicação                            | RNF01 · RNF09 |
+| 4   | **Dado** que artigo está publicado e a vitrine renderiza, **Quando** o SSR processa, **Então** conteúdo e metadados SEO no HTML inicial sem depender de JS             | RNF04 · RNF05 |
 
 #### F18 — Avaliação de artigos de FAQ
 
-| # | Critério de Aceite (BDD) | RF / RNF |
-| - | ------------------------ | -------- |
-| 1 | **Dado** que o visitante está na página de artigo publicado, **Quando** clica "Útil" ou "Não Útil", **Então** o sistema persiste anonimamente e exibe feedback visual em ≤ 2s | RF37 · RNF02 |
-| 2 | **Dado** que o visitante já avaliou o artigo na sessão atual, **Quando** tenta avaliar novamente, **Então** a interface bloqueia sem chamar a API | RF37 |
-| 3 | **Dado** que o `session_hash` já existe para o artigo no banco, **Quando** nova requisição chega, **Então** o backend retorna 409 Conflict sem registrar duplicata | RF37 |
-| 4 | **Dado** que o componente de avaliação está na página, **Quando** o SSR renderiza, **Então** não bloqueia nem degrada o HTML inicial indexável | RNF04 · RNF05 |
+| #   | Critério de Aceite (BDD)                                                                                                                                                      | RF / RNF      |
+| --- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| 1   | **Dado** que o visitante está na página de artigo publicado, **Quando** clica "Útil" ou "Não Útil", **Então** o sistema persiste anonimamente e exibe feedback visual em ≤ 2s | RF37 · RNF02  |
+| 2   | **Dado** que o visitante já avaliou o artigo na sessão atual, **Quando** tenta avaliar novamente, **Então** a interface bloqueia sem chamar a API                             | RF37          |
+| 3   | **Dado** que o `session_hash` já existe para o artigo no banco, **Quando** nova requisição chega, **Então** o backend retorna 409 Conflict sem registrar duplicata            | RF37          |
+| 4   | **Dado** que o componente de avaliação está na página, **Quando** o SSR renderiza, **Então** não bloqueia nem degrada o HTML inicial indexável                                | RNF04 · RNF05 |
 
 ---
 
