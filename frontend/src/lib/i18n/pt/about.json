@@ -36,6 +36,20 @@
     { "value": "28", "label": "engenheiros & designers" },
     { "value": "2019", "label": "fundada em Brasília" }
   ],
+  "peopleEyebrow": "Quem somos",
+  "peopleTitle": "As pessoas por trás da Crianex.",
+  "people": [
+    {
+      "n": "01",
+      "name": "Otávio Castelo",
+      "role": "CEO & Fundador — lidera a estratégia de produto e as parcerias B2B desde a fundação em 2019."
+    },
+    {
+      "n": "02",
+      "name": "Ana Melo",
+      "role": "CTO & Co-fundadora — responsável pela arquitetura da plataforma Kubernetes e pelos seis SaaS verticais."
+    }
+  ],
   "cta": {
     "title": "Trabalhar com a gente.",
     "body": "Tanto como cliente quanto como engenheiro. Estamos abertos para conversa nas duas frentes.",

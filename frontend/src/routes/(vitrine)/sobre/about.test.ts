@@ -46,6 +46,15 @@ describe('about i18n content', () => {
         expect(c.cta.emailLabel).toBeTruthy();
       });
 
+      it('has at least 1 person with n/name/role', () => {
+        expect(c.people.length).toBeGreaterThan(0);
+        for (const p of c.people) {
+          expect(p.n).toBeTruthy();
+          expect(p.name).toBeTruthy();
+          expect(p.role).toBeTruthy();
+        }
+      });
+
       it('has SEO title following "Sobre/About a Crianex | Crianex Hub" pattern', () => {
         expect(c.seo.title).toMatch(/Crianex Hub/);
         expect(c.seo.ogTitle).toMatch(/Crianex Hub/);

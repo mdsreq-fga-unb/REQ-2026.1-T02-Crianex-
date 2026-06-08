@@ -3,6 +3,7 @@ import enAbout from '../../../lib/i18n/en/about.json';
 
 export type AboutValue = { n: string; title: string; body: string };
 export type AboutStat = { value: string; label: string };
+export type AboutPerson = { n: string; name: string; role: string };
 
 export type AboutContent = {
   eyebrow: string;
@@ -21,6 +22,9 @@ export type AboutContent = {
   numbersTitle: string;
   numbersDesc: string;
   stats: AboutStat[];
+  peopleEyebrow: string;
+  peopleTitle: string;
+  people: AboutPerson[];
   cta: {
     title: string;
     body: string;
@@ -42,5 +46,8 @@ export const REQUIRED_KEYS = [
   'missionTitle',
   'values',
   'stats',
+  'peopleEyebrow',
+  'peopleTitle',
+  'people',
   'cta',
 ] as const;

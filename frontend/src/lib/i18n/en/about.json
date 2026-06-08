@@ -36,6 +36,20 @@
     { "value": "28", "label": "engineers & designers" },
     { "value": "2019", "label": "founded in Brasília" }
   ],
+  "peopleEyebrow": "Our team",
+  "peopleTitle": "The people behind Crianex.",
+  "people": [
+    {
+      "n": "01",
+      "name": "Otávio Castelo",
+      "role": "CEO & Founder — leads product strategy and B2B partnerships since the company's founding in 2019."
+    },
+    {
+      "n": "02",
+      "name": "Ana Melo",
+      "role": "CTO & Co-founder — responsible for the Kubernetes platform architecture and the six vertical SaaS products."
+    }
+  ],
   "cta": {
     "title": "Work with us.",
     "body": "Either as a customer or an engineer. We're open to both kinds of conversation.",

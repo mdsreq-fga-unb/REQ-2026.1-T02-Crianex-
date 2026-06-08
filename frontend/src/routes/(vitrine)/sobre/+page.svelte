@@ -1,10 +1,34 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import { lang } from '$lib/stores/lang';
   import type { PageData } from './$types';
 
   export let data: PageData;
 
   $: content = data.aboutContent[$lang] ?? data.aboutContent[data.initialLang];
+
+  let jsReady = false;
+
+  const DELAYS = [0, 80, 140, 220] as const;
+
+  onMount(() => {
+    jsReady = true;
+
+    const reveals = document.querySelectorAll<HTMLElement>('.reveal');
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in');
+            io.unobserve(entry.target);
+          }
+        }
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+    );
+    for (const el of reveals) io.observe(el);
+    return () => io.disconnect();
+  });
 </script>
 
 <svelte:head>
@@ -15,11 +39,9 @@
   <meta property="og:type" content="website" />
 </svelte:head>
 
-<article data-testid="about-page">
-  <!-- ── Navbar omitido: será implementado na issue de navegação global ──── -->
-
+<article data-testid="about-page" class:js-ready={jsReady}>
   <!-- ── Video Hero ──────────────────────────────────────────────────────── -->
-  <section class="hero-wrap">
+  <section class="hero-wrap about-hero">
     <video class="hero-video" autoplay muted loop playsinline>
       <source
         src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260508_215831_c6a8989c-d716-4d8d-8745-e972a2eec711.mp4"
@@ -28,15 +50,14 @@
     </video>
 
     <div class="hero-fg">
-      <!-- Bottom-left content -->
       <div class="hero-content">
         <div class="hero-inner">
-          <span class="hero-badge">
+          <span class="hero-badge reveal" style="--delay: {DELAYS[0]}ms">
             {content.heroBadge}
           </span>
-          <h1 class="hero-h1">{content.heroH1}</h1>
-          <p class="hero-sub">{content.heroSub}</p>
-          <div class="hero-ctas">
+          <h1 class="hero-h1 reveal" style="--delay: {DELAYS[1]}ms">{content.heroH1}</h1>
+          <p class="hero-sub reveal" style="--delay: {DELAYS[2]}ms">{content.heroSub}</p>
+          <div class="hero-ctas reveal" style="--delay: {DELAYS[3]}ms">
             <a href="/contato" class="hero-cta primary">
               {content.heroCta}
               <span class="cta-arrow">→</span>
@@ -52,8 +73,9 @@
 
   <!-- ── Body Content ────────────────────────────────────────────────────── -->
   <div class="about">
+    <!-- Mission -->
     <section class="section mission" id="missao">
-      <div class="section-head">
+      <div class="section-head reveal" style="--delay: {DELAYS[0]}ms">
         <div>
           section mission
           <div class="eyebrow">
@@ -65,8 +87,8 @@
         <p class="desc">{content.missionDesc}</p>
       </div>
       <div class="values-grid">
-        {#each content.values as v (v.n)}
-          <div class="value-card">
+        {#each content.values as v, i (v.n)}
+          <div class="value-card reveal" style="--delay: {DELAYS[i] ?? 0}ms">
             <span class="n">{v.n}</span>
             <h4>{v.title}</h4>
             <p>{v.body}</p>
@@ -75,8 +97,9 @@
       </div>
     </section>
 
+    <!-- Numbers -->
     <section class="section numbers" id="numeros">
-      <div class="section-head">
+      <div class="section-head reveal" style="--delay: {DELAYS[0]}ms">
         <div>
           <div class="eyebrow">
             <span class="dot green"></span>
@@ -87,8 +110,8 @@
         <p class="desc">{content.numbersDesc}</p>
       </div>
       <div class="stats-grid">
-        {#each content.stats as s (s.label)}
-          <div class="stat">
+        {#each content.stats as s, i (s.label)}
+          <div class="stat reveal" style="--delay: {DELAYS[i] ?? 0}ms">
             <span class="label">{s.label}</span>
             <span class="value">{s.value}</span>
           </div>
@@ -96,19 +119,49 @@
       </div>
     </section>
 
+    <!-- Team -->
+    <section class="section team" id="equipe">
+      <div class="section-head reveal" style="--delay: {DELAYS[0]}ms">
+        <div>
+          <div class="eyebrow">
+            <span class="dot"></span>
+            {content.peopleEyebrow}
+          </div>
+          <h2>{content.peopleTitle}</h2>
+        </div>
+      </div>
+      <div class="people-row">
+        {#each content.people as person, i (person.n)}
+          <div class="person reveal" style="--delay: {DELAYS[i] ?? 0}ms">
+            <span class="n">{person.n}</span>
+            <div class="person-body">
+              <h4>{person.name}</h4>
+              <p>{person.role}</p>
+            </div>
+          </div>
+        {/each}
+      </div>
+    </section>
+
+    <!-- CTA -->
     <section class="section" id="contato">
-      <div class="cta-banner">
+      <div class="cta-banner reveal" style="--delay: {DELAYS[0]}ms">
         <div class="cta-image-wrap">
           <img src="/assets/sobre-cta.png" alt="" class="cta-image" />
         </div>
+
         <div class="cta-content">
           <h3>{content.cta.title}</h3>
           <p>{content.cta.body}</p>
+
           <div class="cta-actions">
             <a class="btn primary" href="/contato">
               {content.cta.emailLabel}
             </a>
-            <a class="btn ghost" href="mailto:contato@crianex.com">contato@crianex.com</a>
+
+            <a class="btn ghost" href="mailto:contato@crianex.com">
+              contato@crianex.com
+            </a>
           </div>
         </div>
       </div>
@@ -117,6 +170,22 @@
 </article>
 
 <style>
+  /* ── Scroll reveal ──────────────────────────────────────────────────────── */
+  /* .in is added dynamically via classList.add — use :global() to prevent
+     Svelte from flagging it as an unused selector */
+  .js-ready .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition:
+      opacity 0.45s ease,
+      transform 0.45s ease;
+    transition-delay: var(--delay, 0ms);
+  }
+  .js-ready .reveal:global(.in) {
+    opacity: 1;
+    transform: none;
+  }
+
   /* ── Hero ──────────────────────────────────────────────────────────────── */
   .hero-wrap {
     position: relative;
@@ -153,7 +222,6 @@
     min-height: 100svh;
   }
 
-  /* Bottom-left hero content */
   .hero-content {
     flex: 1;
     display: flex;
@@ -194,19 +262,13 @@
   }
 
   .hero-h1 {
-    font-size: 1.875rem;
+    font-size: clamp(44px, 5.5vw, 80px);
     line-height: 1.1;
     font-weight: 600;
     color: #111827;
     letter-spacing: -0.02em;
     margin: 0;
     white-space: pre-line;
-  }
-
-  @media (min-width: 640px) {
-    .hero-h1 {
-      font-size: 2.25rem;
-    }
   }
 
   .hero-sub {
@@ -318,7 +380,6 @@
     border-bottom: none;
   }
 
-  /* Fades de cor por seção */
   .mission {
     background: linear-gradient(160deg, rgba(231, 43, 137, 0.06));
     margin-left: calc(-1 * var(--pad));
@@ -347,6 +408,7 @@
     margin: 0;
   }
 
+  /* ── Values grid ─────────────────────────────────────────────────────────── */
   .values-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -380,6 +442,7 @@
     margin: 0;
   }
 
+  /* ── Numbers ─────────────────────────────────────────────────────────────── */
   .numbers {
     background: linear-gradient(
       to bottom,
@@ -420,6 +483,45 @@
     line-height: 1;
   }
 
+  /* ── People row ──────────────────────────────────────────────────────────── */
+  .people-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .person {
+    padding: 36px 48px 36px 0;
+    border-right: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .person:last-child {
+    border-right: none;
+    padding-left: 48px;
+    padding-right: 0;
+  }
+  .people-row .n {
+    font-family: var(--font-mono, monospace);
+    font-size: 48px;
+    color: var(--text-faint);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    display: block;
+  }
+  .person h4 {
+    font-size: 22px;
+    margin: 8px 0 6px;
+    letter-spacing: -0.01em;
+  }
+  .person p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-muted);
+    margin: 0;
+    max-width: 40ch;
+  }
+
+  /* ── CTA ─────────────────────────────────────────────────────────────────── */
   .cta-banner {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -507,21 +609,56 @@
     }
   }
 
-  /* ── Mobile ─────────────────────────────────────────────────────────────── */
-  @media (max-width: 768px) {
+  /* ── Tablet (≤ 820px) ───────────────────────────────────────────────────── */
+  @media (max-width: 820px) {
+    .about {
+      --pad: 28px;
+    }
+    .section-head {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    .values-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    /* people-row mantém 2 colunas — sem alteração */
+    .cta-banner {
+      grid-template-columns: 1fr;
+      padding: 28px;
+    }
+  }
+
+  /* ── Mobile (≤ 390px) ───────────────────────────────────────────────────── */
+  @media (max-width: 390px) {
     .about {
       padding: 48px 20px;
       --pad: 20px;
     }
-    .section-head,
-    .values-grid,
+    .about-hero h1 {
+      font-size: 44px;
+    }
+    .values-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
     .stats-grid {
       grid-template-columns: 1fr;
-      gap: 24px;
+      gap: 20px;
     }
-    .cta-banner {
+    .people-row {
       grid-template-columns: 1fr;
     }
+    .person {
+      border-right: 0;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .person:last-child {
+      border-bottom: none;
+      padding-left: 0;
+    }
+    .people-row .n {
+      font-size: 42px;
     .cta-image-wrap {
       min-height: 280px;
     }
