@@ -57,6 +57,9 @@ export const load: PageServerLoad = async ({ cookies }) => {
     if (apiError.status === 401) {
       throw redirect(303, '/admin/login');
     }
+    if (apiError.status === 403) {
+      return { articles: [], categories: [], products: [], forbidden: true };
+    }
     return {
       articles: [],
       categories: [],

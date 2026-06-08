@@ -23,6 +23,9 @@ export const load: PageServerLoad = async ({ cookies, locals }) => {
     if (apiError.status === 401) {
       throw redirect(303, '/admin/login');
     }
+    if (apiError.status === 403) {
+      return { members: [], forbidden: true };
+    }
     return { members: [], error: apiError.message || 'Erro ao carregar membros do servidor.' };
   }
 };

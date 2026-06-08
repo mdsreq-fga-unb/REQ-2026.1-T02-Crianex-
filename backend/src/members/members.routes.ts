@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { validateJWT, type ValidatedAuthContext } from '../middleware/validate-jwt.js';
 import { requireRole } from '../middleware/require-role.js';
+import { requirePermission } from '../middleware/require-permission.js';
 import {
   listMembers,
   createMember,
@@ -12,8 +13,9 @@ import {
 
 const membersRouter = Router();
 const ownerGuard = [validateJWT, requireRole('owner')];
+const viewGuard = [validateJWT, requirePermission('members', 'v')];
 
-membersRouter.get('/', ...ownerGuard, async (_req, res) => {
+membersRouter.get('/', ...viewGuard, async (_req, res) => {
   try {
     const members = await listMembers();
     res.status(200).json(members);

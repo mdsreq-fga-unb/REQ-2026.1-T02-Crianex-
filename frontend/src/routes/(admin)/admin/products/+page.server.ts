@@ -28,6 +28,10 @@ export const load: PageServerLoad = async ({ cookies }) => {
     return { produtos: produtosDoBanco };
   } catch (error) {
     console.error('[FRONTEND LOAD ERROR]:', error);
+    const apiError = error as { status?: number };
+    if (apiError.status === 403) {
+      return { produtos: [] as Product[], forbidden: true };
+    }
     return {
       produtos: [] as Product[],
       error: 'Não foi possível carregar os produtos em tempo real.',

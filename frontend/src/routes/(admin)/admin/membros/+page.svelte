@@ -5,13 +5,15 @@
   import { apiFetch } from '$lib/api/backend';
   import { topbarActions } from '$lib/stores/topbar';
 
-  let { data } = $props<{ data: { members: Member[]; error?: string } }>();
+  let { data } = $props<{ data: { members: Member[]; error?: string; forbidden?: boolean } }>();
 
   let members = $state<Member[]>([]);
   let loadError = $state<string | undefined>(undefined);
+  let forbidden = $state(false);
   $effect(() => {
     members = data.members;
     loadError = data.error;
+    forbidden = data.forbidden ?? false;
   });
 
   let searchQuery = $state('');
@@ -188,7 +190,26 @@
     </div>
   </section>
 
-  {#if loadError}
+  {#if forbidden}
+    <div class="load-error" role="alert">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="15"
+        height="15"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line>
+      </svg>
+      <span>Acesso negado — você não tem permissão para visualizar membros.</span>
+    </div>
+  {:else if loadError}
     <div class="load-error" role="alert">
       <svg
         xmlns="http://www.w3.org/2000/svg"

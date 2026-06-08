@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { submitRating } from './faq.ratings.service.js';
 import { validateJWT } from '../middleware/validate-jwt.js';
 import { requireRole } from '../middleware/require-role.js';
+import { requirePermission } from '../middleware/require-permission.js';
 import {
   listCategories,
   createCategory,
@@ -18,10 +19,12 @@ import {
 
 const faqRouter = Router();
 const ownerGuard = [validateJWT, requireRole('owner')];
+const viewGuard = [validateJWT, requirePermission('faq', 'v')];
+const editGuard = [validateJWT, requirePermission('faq', 'e')];
 
 // --- Categories ---
 
-faqRouter.get('/categories', ...ownerGuard, async (_req, res) => {
+faqRouter.get('/categories', ...viewGuard, async (_req, res) => {
   try {
     const categories = await listCategories();
     res.status(200).json(categories);
@@ -68,7 +71,7 @@ faqPublicRouter.post('/ratings', async (req, res) => {
   }
 });
 
-faqRouter.post('/categories', ...ownerGuard, async (req, res) => {
+faqRouter.post('/categories', ...editGuard, async (req, res) => {
   const label_pt = typeof req.body?.['label_pt'] === 'string' ? req.body['label_pt'].trim() : '';
   const label_en = typeof req.body?.['label_en'] === 'string' ? req.body['label_en'].trim() : '';
 
@@ -93,7 +96,7 @@ faqRouter.post('/categories', ...ownerGuard, async (req, res) => {
   }
 });
 
-faqRouter.patch('/categories/:id', ...ownerGuard, async (req, res) => {
+faqRouter.patch('/categories/:id', ...editGuard, async (req, res) => {
   const id = typeof req.params?.['id'] === 'string' ? req.params['id'].trim() : '';
   if (!id) {
     res.status(400).json({ message: 'ID da categoria é obrigatório.' });
@@ -148,7 +151,7 @@ faqRouter.delete('/categories/:id', ...ownerGuard, async (req, res) => {
 
 // --- Articles ---
 
-faqRouter.get('/articles', ...ownerGuard, async (req, res) => {
+faqRouter.get('/articles', ...viewGuard, async (req, res) => {
   const categoryId =
     typeof req.query?.['category_id'] === 'string' ? req.query['category_id'] : undefined;
   try {
@@ -160,7 +163,7 @@ faqRouter.get('/articles', ...ownerGuard, async (req, res) => {
   }
 });
 
-faqRouter.post('/articles', ...ownerGuard, async (req, res) => {
+faqRouter.post('/articles', ...editGuard, async (req, res) => {
   const title_pt = typeof req.body?.['title_pt'] === 'string' ? req.body['title_pt'].trim() : '';
   const category_id =
     typeof req.body?.['category_id'] === 'string' ? req.body['category_id'].trim() : '';
@@ -192,7 +195,7 @@ faqRouter.post('/articles', ...ownerGuard, async (req, res) => {
   }
 });
 
-faqRouter.patch('/articles/:id', ...ownerGuard, async (req, res) => {
+faqRouter.patch('/articles/:id', ...editGuard, async (req, res) => {
   const id = typeof req.params?.['id'] === 'string' ? req.params['id'].trim() : '';
   if (!id) {
     res.status(400).json({ message: 'ID do artigo é obrigatório.' });

@@ -430,32 +430,33 @@
   <!-- ── CTA Banner ────────────────────────────── -->
   <section class="section" style="padding-top: 0;">
     <div class="cta-banner">
-      <div>
+      <div class="cta-content">
         <h3>{t.ctaBannerTitle[$lang]}</h3>
-        <p style="color: var(--text-muted); margin-top: 14px; font-size: 14px;">
-          {t.ctaBannerDesc[$lang]}
-        </p>
+        <p class="cta-desc">{t.ctaBannerDesc[$lang]}</p>
+        <div class="cta-actions">
+          <a href="/contato" class="btn">
+            {t.ctaBannerBtn[$lang]}
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="arrow"
+              aria-hidden="true"
+            >
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
+            </svg>
+          </a>
+          <a href="/sobre" class="btn ghost">{t.ctaBannerSecondary[$lang]}</a>
+        </div>
       </div>
-      <div class="end">
-        <a href="/contato" class="btn">
-          {t.ctaBannerBtn[$lang]}
-          <svg
-            width="14"
-            height="14"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="arrow"
-            aria-hidden="true"
-          >
-            <line x1="5" y1="12" x2="19" y2="12" />
-            <polyline points="12 5 19 12 12 19" />
-          </svg>
-        </a>
-        <a href="/sobre" class="btn ghost">{t.ctaBannerSecondary[$lang]}</a>
+      <div class="cta-illustration" aria-hidden="true">
+        <img src="/assets/cta-illustration.jpg" alt="" />
       </div>
     </div>
   </section>
@@ -1114,27 +1115,55 @@
     background: var(--bg-elev);
     border: 2px solid var(--line);
     border-radius: var(--r-lg);
-    padding: 48px;
+    padding: 64px 72px;
     display: grid;
-    grid-template-columns: 1.4fr 1fr;
-    gap: 32px;
+    grid-template-columns: 1fr 460px;
+    gap: 0;
     align-items: center;
     position: relative;
     overflow: hidden;
     margin-top: 70px;
+    min-height: 320px;
+  }
+  .cta-content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    z-index: 1;
   }
   .cta-banner h3 {
-    font-size: 32px;
-    letter-spacing: -0.03em;
+    font-size: 44px;
+    letter-spacing: -0.035em;
     line-height: 1.05;
     max-width: 18ch;
     margin: 0;
   }
-  .cta-banner .end {
+  .cta-desc {
+    color: var(--text-muted);
+    font-size: 15px;
+    margin: 0;
+  }
+  .cta-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .cta-illustration {
     display: flex;
     justify-content: flex-end;
-    gap: 10px;
-    flex-wrap: wrap;
+    align-items: flex-end;
+    align-self: stretch;
+    position: relative;
+    margin: -64px -72px -64px 0;
+  }
+  .cta-illustration img {
+    width: 480px;
+    height: 480px;
+    object-fit: contain;
+    object-position: bottom right;
+    mix-blend-mode: multiply;
+    display: block;
   }
 
   /* ── Responsive — tablet ───────────────────────── */
@@ -1187,10 +1216,10 @@
     }
     .cta-banner {
       grid-template-columns: 1fr;
-      padding: 32px;
+      padding: 36px 32px;
     }
-    .cta-banner .end {
-      justify-content: flex-start;
+    .cta-illustration {
+      display: none;
     }
   }
 
@@ -1353,16 +1382,15 @@
     }
     .cta-banner {
       grid-template-columns: 1fr;
-      padding: 24px 20px;
+      padding: 32px 20px;
     }
     .cta-banner h3 {
-      font-size: 22px;
+      font-size: 26px;
     }
-    .cta-banner .end {
+    .cta-actions {
       flex-direction: column;
-      justify-content: flex-start;
     }
-    .cta-banner .end a {
+    .cta-actions a {
       width: 100%;
       justify-content: center;
     }

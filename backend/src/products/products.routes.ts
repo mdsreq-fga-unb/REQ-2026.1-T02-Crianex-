@@ -2,6 +2,7 @@ import { Router } from 'express';
 import multer from 'multer';
 import { validateJWT } from '../middleware/validate-jwt.js';
 import { requireRole } from '../middleware/require-role.js';
+import { requirePermission } from '../middleware/require-permission.js';
 import {
   createProductController,
   deleteProductController,
@@ -26,6 +27,8 @@ const upload = multer({
 });
 
 const ownerGuard = [validateJWT, requireRole('owner')];
+const viewGuard = [validateJWT, requirePermission('products', 'v')];
+const editGuard = [validateJWT, requirePermission('products', 'e')];
 
 // Rota pública: apenas produtos publicados
 const productsPublicRouter = Router();
@@ -33,17 +36,17 @@ productsPublicRouter.get('/', getPublishedProductsController);
 
 // Rotas de admin: todas as operações CRUD
 const productsAdminRouter = Router();
-productsAdminRouter.get('/', ...ownerGuard, getAllProductsController);
+productsAdminRouter.get('/', ...viewGuard, getAllProductsController);
 productsAdminRouter.post(
   '/upload',
-  ...ownerGuard,
+  ...editGuard,
   upload.single('image'),
   uploadProductImageController
 );
-productsAdminRouter.post('/', ...ownerGuard, createProductController);
-productsAdminRouter.post('/reorder', ...ownerGuard, reorderProductsController);
-productsAdminRouter.patch('/reorder', ...ownerGuard, reorderProductsController);
-productsAdminRouter.patch('/:id', ...ownerGuard, updateProductController);
+productsAdminRouter.post('/', ...editGuard, createProductController);
+productsAdminRouter.post('/reorder', ...editGuard, reorderProductsController);
+productsAdminRouter.patch('/reorder', ...editGuard, reorderProductsController);
+productsAdminRouter.patch('/:id', ...editGuard, updateProductController);
 productsAdminRouter.delete('/:id', ...ownerGuard, deleteProductController);
 
 export { productsPublicRouter, productsAdminRouter };
