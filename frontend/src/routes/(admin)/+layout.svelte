@@ -17,6 +17,7 @@
   } from 'lucide-svelte';
   import type { LayoutData } from './$types';
   import { topbarActions } from '$lib/stores/topbar';
+  import ProfileModal from '$lib/components/admin/ProfileModal.svelte';
 
   export let data: LayoutData;
 
@@ -51,6 +52,20 @@
   ];
 
   let sidebarOpen = false;
+  let profileModalOpen = false;
+
+  // local reactive copy so sidebar updates after save without page reload
+  let currentProfile = {
+    id: data.adminUser.id ?? '',
+    name: data.adminUser.name ?? 'Admin',
+    email: data.adminUser.email ?? '',
+    role: data.adminUser.role ?? 'member',
+    display_role: data.adminUser.display_role ?? null,
+    status: data.adminUser.status ?? 'active',
+    phone: data.adminUser.phone ?? null,
+    bio: data.adminUser.bio ?? null,
+    avatar_url: data.adminUser.avatar_url ?? null,
+  };
 
   $: pathname = $page.url.pathname;
 
@@ -66,7 +81,7 @@
 
   $: activeCrumb = `admin / ${activeLabel.toLowerCase()}`;
 
-  $: userInitials = (data.adminUser.name ?? 'A')
+  $: userInitials = (currentProfile.name || 'A')
     .split(' ')
     .map((n: string) => n[0])
     .slice(0, 2)
@@ -83,6 +98,14 @@
   }
   function closeSidebar() {
     sidebarOpen = false;
+  }
+
+  function openProfile() {
+    profileModalOpen = true;
+  }
+
+  function handleProfileSave(updated: typeof currentProfile) {
+    currentProfile = { ...currentProfile, ...updated };
   }
 </script>
 
@@ -121,13 +144,19 @@
       {/each}
     </nav>
 
-    <div class="footer">
-      <div class="avatar" aria-hidden="true">{userInitials}</div>
-      <div>
-        <div class="name">{data.adminUser.name ?? 'Admin'}</div>
-        <div class="role">{data.adminUser.role ?? 'admin'} · perfil</div>
+    <button class="footer profile-btn" type="button" on:click={openProfile} aria-label="Abrir meu perfil">
+      <div class="avatar" aria-hidden="true">
+        {#if currentProfile.avatar_url}
+          <img src={currentProfile.avatar_url} alt="" />
+        {:else}
+          {userInitials}
+        {/if}
       </div>
-    </div>
+      <div class="footer-text">
+        <div class="name">{currentProfile.name}</div>
+        <div class="role">{currentProfile.display_role ?? currentProfile.role} · perfil</div>
+      </div>
+    </button>
   </aside>
 
   <div class="admin-main">
@@ -160,6 +189,13 @@
     <slot />
   </div>
 </div>
+
+<ProfileModal
+  isOpen={profileModalOpen}
+  profile={currentProfile}
+  onClose={() => (profileModalOpen = false)}
+  onSave={handleProfileSave}
+/>
 
 <style>
   .nav-group {
@@ -198,5 +234,36 @@
   }
   .topbar-action-btn:hover {
     opacity: 0.85;
+  }
+
+  .profile-btn {
+    all: unset;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    border-radius: 8px;
+    padding: 6px 8px;
+    margin: -6px -8px;
+    transition: background 0.15s;
+    text-align: left;
+    width: calc(100% + 16px);
+    box-sizing: border-box;
+  }
+
+  .profile-btn:hover {
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  .footer-text {
+    min-width: 0;
+    flex: 1;
+  }
+
+  .avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
   }
 </style>
