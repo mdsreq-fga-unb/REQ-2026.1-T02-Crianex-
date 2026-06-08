@@ -1,7 +1,7 @@
 # IT1 — Vitrine Pública
 
 **Período:** 15/04/2026 – 25/05/2026  
-**Status:** 🔄 Em andamento  
+**Status:** ✅ Em andamento  
 **Meta da Iteração (Iteration Goal):** Ao fim da IT1: (1) qualquer visitante sem autenticação navega pela vitrine pública, visualiza o catálogo de produtos SaaS publicados, consulta informações institucionais e canais de contato da Crianex; (2) um administrador autenticado cadastra, edita, publica e despublica produtos e gerencia usuários via painel seguro; e (3) visitantes consultam e avaliam artigos do FAQ categorizados — tudo em layout responsivo verificado em mobile (≥ 375 px) e desktop (≥ 1 280 px), com Formal Client Validation aprovada por Otavio.
 
 **Observação:** A entrega da unidade 2 ocorrerá dia 19 de maio de 2026, no entanto, nossa iteração termina dia 25 de maio de 2026, por isso alguns dos objetivos definidos para a iteração ainda estarão em fase de conclusão.
@@ -16,7 +16,7 @@ De acordo com o Documento de Visão e o planejamento no Miro, esta iteração fo
 | ------- | --------------------------------------------- | -------------- | ---------- |
 | **CP4** | Plataforma Pública de Apresentação da Emprasa | OE2            | Alta       |
 | **CP5** | Painel de Gerenciamento do Administrador      | OE2            | Alta       |
-| **CP6** | CP6 - FAQ e Base de Conhecimentos por Produto | OE2            | Média      |
+| **CP6** | FAQ e Base de Conhecimentos por Produto | OE2            | Média      |
 
 ---
 
@@ -63,7 +63,29 @@ O Feature Card é um elemento visual utilizado na fase de planejamento (geralmen
 Abaixo estão registradas as evidências das entregas realizadas durante a iteração.
 
 <div align="center">
-  <p><strong>Figura 3</strong> — Diagrama Leve Desenvolvida para a Feature F12 </p>
+  <p><strong>Figura 3</strong> — Glossario de Palavras </p>
+  <img src="./images/gloassario1.png" alt="Glossario de Palavras" width="800">
+  <p><em>Fonte: Elaborado pelos autores.</em></p>
+</div>
+
+<div align="center">
+  <p><strong>Figura 4</strong> — Glossario de Palavras </p>
+  <img src="./images/glossario2.png" alt="Glossario de Palavras" width="800">
+  <p><em>Fonte: Elaborado pelos autores.</em></p>
+</div>
+
+Esse é o glossário de palavras, artefato gerado da Domaing Modeling do FDD, onde listamos e explicamos palavras que devem ter um significado explicítico para o consenso do grupo inteiro, minimizando problemas de compreênsão futura.
+
+<div align="center">
+  <p><strong>Figura 5</strong> — Diagrama de domínio </p>
+  <img src="./images/diagrama_dominio.png" alt="Diagrama Leve Desenvolvido" width="800">
+  <p><em>Fonte: Elaborado pelos autores.</em></p>
+</div>
+
+Esse é o Diagrama de Domínio, gerado apartir da Domain Modeling do FDD com uma reunião com os nossos Stakeholders (Otávio e Vitor).
+
+<div align="center">
+  <p><strong>Figura 5</strong> — Diagrama Leve Desenvolvida para a Feature F12 </p>
   <img src="./images/diagramalevefeito.png" alt="Diagrama Leve Desenvolvido" width="800">
   <p><em>Fonte: Elaborado pelos autores.</em></p>
 </div>
@@ -71,7 +93,7 @@ Abaixo estão registradas as evidências das entregas realizadas durante a itera
 Este diagrama detalha o fluxo arquitetural final acordado e validado, ilustrando a comunicação entre os componentes da Vitrine Pública.
 
 <div align="center">
-  <p><strong>Figura 4</strong> — Feature Card Desenvolvida para a Feature F12 </p>
+  <p><strong>Figura 6</strong> — Feature Card Desenvolvida para a Feature F12 </p>
   <img src="./images/feturecardfeito.png" alt="Feature Card Desenvolvido" width="800">
   <p><em>Fonte: Elaborado pelos autores.</em></p>
 </div>
@@ -282,6 +304,15 @@ Esta evidência demonstra a participação ativa do cliente no processo de valid
 | Dificuldade de leitura de algumas tabelas no GitHub Pages                           | ✅ Registrado        | Tabelas revisadas                                                                                  |
 
 ### Validação do Protótipo
+
+<div align="center">
+  <p><strong>Figura 7</strong> — Feedback do cliente Otavio acerca protótipo </p>
+  <img src="./images/feedback_prototipo.png" alt="Feedback prototipo" width="800">
+  <p><em>Fonte: Elaborado pelos autores.</em></p>
+</div>
+
+Este é o feedback do nosso Cliente Otávio acerca do protótipo. Realizamos uma segunda versão do protótipo corrigindo o que o cliente nos requisitou. 
+
 
 ---
 

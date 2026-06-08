@@ -55,40 +55,59 @@ sequenceDiagram
 
 | Critério (BDD)                                                                              | RF / RNF     | Status |
 | ------------------------------------------------------------------------------------------- | ------------ | ------ |
-| Login com credenciais válidas → Supabase Auth gera sessão JWT → redirect `/admin/dashboard` | RF08         | ⬜     |
-| MFA ativo → código TOTP solicitado antes de emitir sessão                                   | RF08 · RNF08 | ⬜     |
-| Credenciais inválidas → 401 + mensagem genérica sem expor detalhes internos                 | RF08         | ⬜     |
-| Logout → `signOut()` + invalida `refresh_token` + limpa cookie + redirect `/admin/login`    | RF09         | ⬜     |
-| Acesso a `/admin` sem sessão → redirect `/admin/login` sem renderizar dados do painel       | RF09 · RNF01 | ⬜     |
-| Tempo de autenticação ≤ 2s                                                                  | RNF03        | ⬜     |
+| Login com credenciais válidas → Supabase Auth gera sessão JWT → redirect `/admin/dashboard` | RF08         | ✅     |
+| MFA ativo → código TOTP solicitado antes de emitir sessão                                   | RF08 · RNF08 | ✅     |
+| Credenciais inválidas → 401 + mensagem genérica sem expor detalhes internos                 | RF08         | ✅     |
+| Logout → `signOut()` + invalida `refresh_token` + limpa cookie + redirect `/admin/login`    | RF09         | ✅     |
+| Acesso a `/admin` sem sessão → redirect `/admin/login` sem renderizar dados do painel       | RF09 · RNF01 | ✅     |
+| Tempo de autenticação ≤ 2s                                                                  | RNF03        | ✅     |
 
 #### Evidências de Funcionamento
 
-> Adicione screenshots, GIFs ou links para vídeos demonstrando a feature em funcionamento.
+**Tela de Login**
 
-<!-- Exemplo:
-![Login admin](./images/f09-login.png)
-[Vídeo demonstração](link)
--->
+![Página de login com campos de e-mail e senha](./images/F09.1.png)
 
-_Evidências a serem adicionadas._
+---
+
+**Autenticação de Dois Fatores (2FA)**
+
+Após inserir as credenciais, o usuário escaneia o QR Code no aplicativo autenticador e digita o código TOTP gerado.
+
+![QR Code exibido para configuração do 2FA](./images/F09.2.png)
+
+![Tela de inserção do código 2FA](./images/F09.3.png)
+
+---
+
+**RNF01 — Redirecionamento sem exposição de dados sensíveis**
+
+Acesso direto a `/admin` sem sessão ativa redireciona imediatamente para `/admin/login`, sem renderizar nenhum dado do painel.
+
+<video controls width="100%" style="border-radius: 8px; margin: 8px 0;">
+  <source src="./images/F09.4.mp4" type="video/mp4">
+  Seu navegador não suporta vídeo HTML5. <a href="./images/F09.4.mp4">Baixar vídeo</a>
+</video>
+
+---
+
+**RNF08 — Senhas criptografadas com bcrypt via Supabase Auth**
+
+![Confirmação de hash bcrypt no painel do Supabase Auth](./images/F09.5.png)
 
 #### Validação do Cliente
 
 | Tipo               | Data | Resultado | Observação |
 | ------------------ | ---- | --------- | ---------- |
-| Partial Validation | —    | ⬜        | —          |
+| Partial Validation | —    | ✅        | —          |
 | Formal Validation  | —    | ⬜        | —          |
 
-#### PRs Vinculadas
-
-> Liste os Pull Requests que implementaram esta feature.
-
-_A preencher._
 
 #### Observações
 
-_Espaço livre para registrar decisões técnicas, desvios do escopo original ou pontos de atenção._
+- Sessão gerenciada inteiramente pelo Supabase Auth; token armazenado em cookie `httpOnly` (não `localStorage`) para mitigar XSS.
+- Erro 401 retorna mensagem genérica intencionalmente — não diferencia "e-mail inexistente" de "senha errada", prevenindo enumeração de usuários.
+- MFA via TOTP (RFC 6238): o QR Code é gerado pelo Supabase Auth SDK no cliente e não trafega pelo backend da aplicação.
 
 ---
 
@@ -171,7 +190,9 @@ _A preencher._
 
 #### Observações
 
-_A preencher._
+- RLS do Supabase opera como segunda camada de autorização; validação de `role = owner` no Express é a primeira — defesa em profundidade intencional.
+- O refresh automático de token é tratado no hook `+layout.server.ts` do SvelteKit, transparente ao usuário.
+- Redirecionamento ao expirar a sessão ocorre sem flash de conteúdo protegido: o guard corre no servidor antes de qualquer renderização.
 
 ---
 
@@ -260,7 +281,9 @@ _A preencher._
 
 #### Observações
 
-_A preencher._
+- Criação de usuário usa `supabase.auth.admin.createUser()` com service role — senha inicial gerada aleatoriamente e enviada por e-mail pelo Supabase.
+- A proteção contra auto-inativação/auto-remoção compara o `uid` do token com o `id` alvo na camada Express, evitando lockout acidental do único owner.
+- Deleção remove o registro em `profiles` e em seguida chama `admin.deleteUser()` — operação irreversível; soft-delete via `active = false` está disponível para desativação temporária.
 
 ---
 
@@ -349,7 +372,9 @@ _A preencher._
 
 #### Observações
 
-_A preencher._
+- A vitrine usa SSR via `load()` em `+page.server.ts` do SvelteKit — nenhum JS necessário no cliente para renderizar os cards de produto.
+- O campo `published` filtra em nível de query; RLS não restringe leitura pública de produtos, apenas escrita/atualização (sem autenticação para visualizar).
+- Upload de assets (imagens dos produtos) não estava no escopo desta feature — tratado como extensão futura do painel admin.
 
 ---
 
@@ -424,7 +449,9 @@ _A preencher._
 
 #### Observações
 
-_A preencher._
+- Toggle implementado com atualização otimista no cliente: estado muda imediatamente na UI e é revertido em caso de erro da API.
+- Operação é um `PATCH` de flag booleana — sem transação multi-tabela, portanto sem risco de estado parcial no banco.
+- Decisão de escopo: despublicar preserva todos os dados e mídias do produto; remoção permanente é ação separada (RF23) para evitar perda acidental.
 
 ---
 
@@ -499,7 +526,9 @@ _A preencher._
 
 #### Observações
 
-_A preencher._
+- Rate limit de 5 req/IP/10min implementado via `express-rate-limit` como middleware, antes de qualquer validação de payload — bloqueia bots antes de tocar no banco.
+- Campos opcionais (telefone, empresa) não incluídos no MVP — escopo deliberadamente mínimo para IT1.
+- Leads salvos na tabela `leads` sem vínculo com contas de usuário; integração com o CRM (CP1) está prevista para IT2.
 
 ---
 
@@ -563,7 +592,9 @@ _A preencher._
 
 #### Observações
 
-_A preencher._
+- Todo conteúdo carregado de arquivos JSON estáticos em `src/lib/i18n/` — zero chamadas a banco ou API, tempo de carregamento depende apenas do SSR.
+- Troca de idioma reativa via Svelte store; locale persiste em `localStorage` entre navegações.
+- Metadados Open Graph gerados no `+page.server.ts`; sem `<svelte:head>` dinâmico no cliente, garantindo indexabilidade independente de JS.
 
 ---
 
@@ -648,7 +679,9 @@ _A preencher._
 
 #### Observações
 
-_A preencher._
+- Artigos criados com `published = false` por padrão — publicação é ação explícita separada (F17), evitando publicação acidental.
+- Integridade referencial entre `faq_articles`, `products` e `faq_categories` garantida por FK no banco; deleção em cascata não habilitada — artigos com produto/categoria inexistente retornam erro informativo.
+- RLS bloqueia acesso direto ao Supabase sem passar pelo Express, dupla validação intencional reforçando RNF01.
 
 ---
 
@@ -723,7 +756,9 @@ _A preencher._
 
 #### Observações
 
-_A preencher._
+- Mesmo padrão de toggle otimista da F13 — consistência intencional na UX do painel admin.
+- Despublicar artigo não afeta avaliações já registradas; histórico de ratings preservado para análise futura (Dashboard CP3/IT3).
+- A vitrine recarrega artigos publicados a cada requisição SSR; não há cache CDN configurado nesta iteração.
 
 ---
 
@@ -798,4 +833,6 @@ _A preencher._
 
 #### Observações
 
-_A preencher._
+- `session_hash` gerado no cliente via hash de `sessionStorage` + `article_id` — nenhum dado pessoal trafega na requisição de avaliação.
+- Deduplicação em dois níveis: `sessionStorage` evita chamada redundante no cliente; constraint única no banco garante consistência mesmo com múltiplas abas abertas.
+- Avaliações são anônimas e não expostas na vitrine nesta iteração — análise de utilidade reservada para o Dashboard executivo (CP3/IT3).
