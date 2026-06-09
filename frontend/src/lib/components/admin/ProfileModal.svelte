@@ -1,5 +1,6 @@
 <script lang="ts">
   import { apiFetch } from '$lib/api/backend';
+  import { goto } from '$app/navigation';
 
   type ProfileData = {
     id: string;
@@ -33,6 +34,17 @@
   let errorMessage = $state('');
   let successMessage = $state('');
 
+  // password change
+  let showPasswordForm = $state(false);
+  let newPassword = $state('');
+  let confirmPassword = $state('');
+  let passwordLoading = $state(false);
+  let passwordError = $state('');
+  let passwordSuccess = $state('');
+
+  // logout
+  let loggingOut = $state(false);
+
   $effect(() => {
     if (isOpen) {
       name = profile.name ?? '';
@@ -40,6 +52,11 @@
       bio = profile.bio ?? '';
       errorMessage = '';
       successMessage = '';
+      showPasswordForm = false;
+      newPassword = '';
+      confirmPassword = '';
+      passwordError = '';
+      passwordSuccess = '';
     }
   });
 
@@ -87,8 +104,51 @@
     }
   }
 
+  async function handleChangePassword() {
+    passwordError = '';
+    passwordSuccess = '';
+
+    if (newPassword.length < 8) {
+      passwordError = 'A senha deve ter no mínimo 8 caracteres.';
+      return;
+    }
+    if (newPassword !== confirmPassword) {
+      passwordError = 'As senhas não coincidem.';
+      return;
+    }
+
+    passwordLoading = true;
+    try {
+      await apiFetch('/profile/me/password', {
+        method: 'PATCH',
+        body: JSON.stringify({ new_password: newPassword }),
+      });
+      passwordSuccess = 'Senha alterada com sucesso!';
+      newPassword = '';
+      confirmPassword = '';
+      setTimeout(() => {
+        showPasswordForm = false;
+        passwordSuccess = '';
+      }, 1500);
+    } catch (err: unknown) {
+      passwordError = err instanceof Error ? err.message : 'Falha ao alterar senha.';
+    } finally {
+      passwordLoading = false;
+    }
+  }
+
+  async function handleLogout() {
+    loggingOut = true;
+    try {
+      await fetch('/admin/logout', { method: 'POST' });
+      goto('/admin/login');
+    } catch {
+      goto('/admin/login');
+    }
+  }
+
   function handleKeydown(e: KeyboardEvent) {
-    if (e.key === 'Escape' && !loading) onClose();
+    if (e.key === 'Escape' && !loading && !passwordLoading) onClose();
   }
 </script>
 
@@ -108,7 +168,13 @@
       <header class="admin-modal-head">
         <h3 id="profile-modal-title">Meu perfil</h3>
         <span class="crumbs">/ todos podem editar</span>
-        <button class="x" type="button" onclick={onClose} disabled={loading} aria-label="Fechar">
+        <button
+          class="x"
+          type="button"
+          onclick={onClose}
+          disabled={loading || passwordLoading}
+          aria-label="Fechar"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
@@ -239,35 +305,154 @@
 
             <div class="section-divider"></div>
 
+            <!-- Senha -->
             <div class="security-row">
               <div>
                 <div class="sec-title">Senha</div>
-                <div class="sec-sub">Última alteração há 38 dias</div>
+                <div class="sec-sub">Altere sua senha de acesso ao painel</div>
               </div>
-              <button type="button" class="btn ghost sm" disabled>Alterar senha</button>
+              <button
+                type="button"
+                class="btn ghost sm"
+                onclick={() => {
+                  showPasswordForm = !showPasswordForm;
+                  passwordError = '';
+                  passwordSuccess = '';
+                  newPassword = '';
+                  confirmPassword = '';
+                }}
+              >
+                {showPasswordForm ? 'Cancelar' : 'Alterar senha'}
+              </button>
             </div>
 
-            <div class="security-row">
-              <div>
-                <div class="sec-title">Autenticação 2FA</div>
-                <div class="sec-sub">Recomendado · App autenticador</div>
+            {#if showPasswordForm}
+              <div class="password-form">
+                {#if passwordError}
+                  <div class="error-banner" role="alert">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="13"
+                      height="13"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <line x1="12" y1="8" x2="12" y2="12"></line>
+                      <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                    </svg>
+                    <span>{passwordError}</span>
+                  </div>
+                {/if}
+                {#if passwordSuccess}
+                  <div class="success-banner" role="status">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="13"
+                      height="13"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    <span>{passwordSuccess}</span>
+                  </div>
+                {/if}
+                <div class="fld-row">
+                  <div class="fld">
+                    <label for="p-newpw">Nova senha</label>
+                    <input
+                      type="password"
+                      id="p-newpw"
+                      bind:value={newPassword}
+                      disabled={passwordLoading}
+                      placeholder="mín. 8 caracteres"
+                      autocomplete="new-password"
+                    />
+                  </div>
+                  <div class="fld">
+                    <label for="p-confirmpw">Confirmar senha</label>
+                    <input
+                      type="password"
+                      id="p-confirmpw"
+                      bind:value={confirmPassword}
+                      disabled={passwordLoading}
+                      placeholder="repita a senha"
+                      autocomplete="new-password"
+                    />
+                  </div>
+                </div>
+                <div style="display:flex;justify-content:flex-end;margin-top:4px;">
+                  <button
+                    type="button"
+                    class="btn sm"
+                    disabled={passwordLoading}
+                    onclick={handleChangePassword}
+                  >
+                    {passwordLoading ? 'Salvando…' : 'Confirmar nova senha'}
+                  </button>
+                </div>
               </div>
-              <button type="button" class="toggle on" aria-label="2FA ativado" disabled></button>
-            </div>
+            {/if}
 
+            <div class="section-divider"></div>
+
+            <!-- Encerrar sessão -->
             <div class="security-row">
               <div>
-                <div class="sec-title">Notificações por e-mail</div>
-                <div class="sec-sub">Resumo diário às 9h</div>
+                <div class="sec-title">Sessão</div>
+                <div class="sec-sub">Encerrar acesso e sair do painel</div>
               </div>
-              <button type="button" class="toggle on" aria-label="Notificações ativadas" disabled
-              ></button>
+              <button
+                type="button"
+                class="btn-logout"
+                onclick={handleLogout}
+                disabled={loggingOut}
+                aria-label="Encerrar sessão"
+              >
+                {#if loggingOut}
+                  Saindo…
+                {:else}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="13"
+                    height="13"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                    <polyline points="16 17 21 12 16 7"></polyline>
+                    <line x1="21" y1="12" x2="9" y2="12"></line>
+                  </svg>
+                  Encerrar sessão
+                {/if}
+              </button>
             </div>
           </div>
         </div>
 
         <footer class="admin-modal-foot">
-          <button type="button" class="btn ghost sm" onclick={onClose} disabled={loading}>
+          <button
+            type="button"
+            class="btn ghost sm"
+            onclick={onClose}
+            disabled={loading || passwordLoading}
+          >
             Cancelar
           </button>
           <button type="submit" class="btn sm" disabled={loading}>
@@ -447,41 +632,44 @@
     color: var(--text-muted);
   }
 
-  .toggle {
-    width: 40px;
-    height: 22px;
-    border-radius: 100px;
-    border: none;
-    background: var(--line);
-    position: relative;
+  .password-form {
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 2px;
+  }
+
+  .btn-logout {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 30px;
+    padding: 0 12px;
+    background: rgba(239, 68, 68, 0.08);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    border-radius: 6px;
+    font-size: 12.5px;
+    font-weight: 500;
+    font-family: inherit;
     cursor: pointer;
     flex-shrink: 0;
-    transition: background 0.2s;
+    transition:
+      background 0.15s,
+      border-color 0.15s;
   }
 
-  .toggle::after {
-    content: '';
-    position: absolute;
-    top: 3px;
-    left: 3px;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background: white;
-    transition: transform 0.2s;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  .btn-logout:hover:not(:disabled) {
+    background: rgba(239, 68, 68, 0.14);
+    border-color: rgba(239, 68, 68, 0.4);
   }
 
-  .toggle.on {
-    background: var(--purple);
-  }
-
-  .toggle.on::after {
-    transform: translateX(18px);
-  }
-
-  .toggle:disabled {
-    opacity: 0.7;
+  .btn-logout:disabled {
+    opacity: 0.5;
     cursor: not-allowed;
   }
 </style>

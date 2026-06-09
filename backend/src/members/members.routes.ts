@@ -10,6 +10,7 @@ import {
   deleteMember,
   MemberServiceError,
 } from './members.service.js';
+import { sendWelcomeEmail } from '../lib/email.service.js';
 
 const membersRouter = Router();
 const ownerGuard = [validateJWT, requireRole('owner')];
@@ -52,7 +53,16 @@ membersRouter.post('/', ...ownerGuard, async (req, res) => {
   }
 
   try {
-    const member = await createMember(name, email, role, display_role, permissions);
+    const { generatedPassword, ...member } = await createMember(
+      name,
+      email,
+      role,
+      display_role,
+      permissions
+    );
+    sendWelcomeEmail({ to: email, name, password: generatedPassword }).catch((e) =>
+      console.error('[members] email send failed:', e)
+    );
     res.status(201).json(member);
   } catch (err) {
     if (err instanceof MemberServiceError && err.code === 'DUPLICATE_EMAIL') {

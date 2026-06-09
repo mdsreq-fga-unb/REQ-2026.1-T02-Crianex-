@@ -1,3 +1,4 @@
+import { randomBytes } from 'crypto';
 import { getSupabaseClient } from '../config/supabase.js';
 
 export type MemberRecord = {
@@ -13,6 +14,35 @@ export type MemberRecord = {
   created_at: string;
   updated_at: string;
 };
+
+export type CreateMemberResult = MemberRecord & { generatedPassword: string };
+
+function generateSecurePassword(length = 16): string {
+  const upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const lower = 'abcdefghijklmnopqrstuvwxyz';
+  const digits = '0123456789';
+  const special = '!@#$%&*';
+  const all = upper + lower + digits + special;
+
+  const pick = (charset: string, buf: Buffer): string =>
+    charset[buf[0]! % charset.length] as string;
+
+  const required = [
+    pick(upper, randomBytes(1)),
+    pick(lower, randomBytes(1)),
+    pick(digits, randomBytes(1)),
+    pick(special, randomBytes(1)),
+  ];
+  const remaining = Array.from(randomBytes(length - 4)).map((b) => all[b % all.length] as string);
+  const combined: string[] = [...required, ...remaining];
+  for (let i = combined.length - 1; i > 0; i--) {
+    const j = randomBytes(1)[0]! % (i + 1);
+    const tmp = combined[i]!;
+    combined[i] = combined[j]!;
+    combined[j] = tmp;
+  }
+  return combined.join('');
+}
 
 export class MemberServiceError extends Error {
   constructor(
@@ -50,8 +80,9 @@ export async function createMember(
   role: 'owner' | 'member',
   display_role?: string,
   permissions?: Record<string, string[]>
-): Promise<MemberRecord> {
+): Promise<CreateMemberResult> {
   const supabase = getSupabaseClient();
+  const generatedPassword = generateSecurePassword();
 
   const { data: existingProfile } = await supabase
     .from('profiles')
@@ -68,6 +99,7 @@ export async function createMember(
   if (permissions !== undefined) extraFields['permissions'] = permissions;
 
   if (existingProfile && !existingProfile.name) {
+    await supabase.auth.admin.updateUserById(existingProfile.id, { password: generatedPassword });
     const { data, error } = await supabase
       .from('profiles')
       .update({ name, role, status: 'active', ...extraFields })
@@ -75,11 +107,12 @@ export async function createMember(
       .select(SELECT_FIELDS)
       .single();
     if (error) throw error;
-    return data as MemberRecord;
+    return { ...(data as MemberRecord), generatedPassword };
   }
 
   const { data: authData, error: authError } = await supabase.auth.admin.createUser({
     email,
+    password: generatedPassword,
     email_confirm: true,
   });
 
@@ -96,6 +129,7 @@ export async function createMember(
       const orphan = listData?.users?.find((u) => u.email?.toLowerCase() === email);
 
       if (orphan) {
+        await supabase.auth.admin.updateUserById(orphan.id, { password: generatedPassword });
         const { data, error } = await supabase
           .from('profiles')
           .upsert(
@@ -105,7 +139,7 @@ export async function createMember(
           .select(SELECT_FIELDS)
           .single();
         if (error) throw error;
-        return data as MemberRecord;
+        return { ...(data as MemberRecord), generatedPassword };
       }
 
       throw new MemberServiceError('E-mail já cadastrado na plataforma.', 'DUPLICATE_EMAIL');
@@ -122,7 +156,7 @@ export async function createMember(
     .single();
 
   if (error) throw error;
-  return data as MemberRecord;
+  return { ...(data as MemberRecord), generatedPassword };
 }
 
 export async function updateMemberStatus(

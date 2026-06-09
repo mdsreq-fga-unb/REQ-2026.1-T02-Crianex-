@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { validateJWT, type ValidatedAuthContext } from '../middleware/validate-jwt.js';
 import { getMyProfile, updateMyProfile } from './profile.service.js';
+import { getSupabaseClient } from '../config/supabase.js';
 
 const profileRouter = Router();
 
@@ -41,6 +42,29 @@ profileRouter.patch('/me', validateJWT, async (req, res) => {
   } catch (err) {
     console.error('[profile] update error:', err);
     res.status(500).json({ message: 'Falha ao salvar perfil.' });
+  }
+});
+
+profileRouter.patch('/me/password', validateJWT, async (req, res) => {
+  const auth = (res.locals as { auth: ValidatedAuthContext }).auth;
+  const newPassword =
+    typeof req.body?.['new_password'] === 'string' ? req.body['new_password'] : '';
+
+  if (!newPassword || newPassword.length < 8) {
+    res.status(400).json({ message: 'A nova senha deve ter no mínimo 8 caracteres.' });
+    return;
+  }
+
+  try {
+    const supabase = getSupabaseClient();
+    const { error } = await supabase.auth.admin.updateUserById(auth.user.id, {
+      password: newPassword,
+    });
+    if (error) throw error;
+    res.json({ message: 'Senha atualizada com sucesso.' });
+  } catch (err) {
+    console.error('[profile] password update error:', err);
+    res.status(500).json({ message: 'Falha ao atualizar senha.' });
   }
 });
 

@@ -47,6 +47,47 @@
   let totalInactive = $derived(members.filter((m) => m.status === 'inactive').length);
   let totalOwners = $derived(members.filter((m) => m.role === 'owner').length);
 
+  const now = Date.now();
+  const MS_30D = 30 * 24 * 60 * 60 * 1000;
+  const MS_7D = 7 * 24 * 60 * 60 * 1000;
+
+  let recentlyJoined = $derived(
+    members.filter((m) => m.created_at && now - new Date(m.created_at).getTime() < MS_30D).length
+  );
+
+  let dormant = $derived(
+    members.filter(
+      (m) =>
+        m.status === 'active' &&
+        m.last_sign_in_at &&
+        now - new Date(m.last_sign_in_at).getTime() > MS_30D
+    ).length
+  );
+
+  let neverLoggedIn = $derived(
+    members.filter((m) => m.status === 'active' && !m.last_sign_in_at).length
+  );
+
+  let activeThisWeek = $derived(
+    members.filter(
+      (m) => m.last_sign_in_at && now - new Date(m.last_sign_in_at).getTime() < MS_7D
+    ).length
+  );
+
+  let roleBreakdown = $derived(
+    members.reduce<Record<string, number>>((acc, m) => {
+      const label = m.display_role ?? m.role ?? 'Sem papel';
+      acc[label] = (acc[label] ?? 0) + 1;
+      return acc;
+    }, {})
+  );
+
+  let roleEntries = $derived(
+    Object.entries(roleBreakdown).sort((a, b) => b[1] - a[1]).slice(0, 6)
+  );
+
+  let activeRatio = $derived(members.length ? Math.round((totalActive / members.length) * 100) : 0);
+
   async function toggleStatus(member: Member) {
     const newStatus = member.status === 'active' ? 'inactive' : 'active';
     try {
@@ -170,23 +211,99 @@
 <svelte:window onclick={handleOutsideClick} />
 
 <div class="membros-container">
-  <!-- KPIs -->
-  <section class="kpi-grid" aria-label="Indicadores chave dos membros">
-    <div class="kpi">
-      <div class="label">Membros ativos</div>
-      <div class="value">{totalActive}</div>
+  <!-- Dashboard -->
+  <section class="dashboard" aria-label="Visão geral dos membros">
+    <!-- Row 1: KPIs principais -->
+    <div class="kpi-grid">
+      <div class="kpi">
+        <div class="kpi-icon active-icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+        </div>
+        <div class="kpi-body">
+          <div class="label">Total de membros</div>
+          <div class="value">{members.length}</div>
+        </div>
+      </div>
+
+      <div class="kpi">
+        <div class="kpi-icon active-icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        </div>
+        <div class="kpi-body">
+          <div class="label">Ativos</div>
+          <div class="value green">{totalActive}</div>
+          <div class="kpi-bar-wrap" title="{activeRatio}% do total">
+            <div class="kpi-bar" style="width:{activeRatio}%;background:var(--green)"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="kpi">
+        <div class="kpi-icon inactive-icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line></svg>
+        </div>
+        <div class="kpi-body">
+          <div class="label">Inativos</div>
+          <div class="value muted">{totalInactive}</div>
+        </div>
+      </div>
+
+      <div class="kpi">
+        <div class="kpi-icon owner-icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+        </div>
+        <div class="kpi-body">
+          <div class="label">Owners</div>
+          <div class="value pink">{totalOwners}</div>
+        </div>
+      </div>
     </div>
-    <div class="kpi">
-      <div class="label">Inativos</div>
-      <div class="value inactive">{totalInactive}</div>
-    </div>
-    <div class="kpi">
-      <div class="label">Owners</div>
-      <div class="value">{totalOwners}</div>
-    </div>
-    <div class="kpi">
-      <div class="label">Convites pendentes</div>
-      <div class="value">0</div>
+
+    <!-- Row 2: Atividade + Papéis -->
+    <div class="insight-grid">
+      <!-- Atividade -->
+      <div class="insight-card">
+        <div class="insight-title">Atividade</div>
+        <div class="insight-rows">
+          <div class="insight-row">
+            <span class="ir-label">Ativos esta semana</span>
+            <span class="ir-val green">{activeThisWeek}</span>
+          </div>
+          <div class="insight-row">
+            <span class="ir-label">Cadastrados nos últimos 30 dias</span>
+            <span class="ir-val purple">{recentlyJoined}</span>
+          </div>
+          <div class="insight-row">
+            <span class="ir-label">Sem login há mais de 30 dias</span>
+            <span class="ir-val {dormant > 0 ? 'warn' : 'muted'}">{dormant}</span>
+          </div>
+          <div class="insight-row">
+            <span class="ir-label">Nunca fizeram login (ativos)</span>
+            <span class="ir-val {neverLoggedIn > 0 ? 'warn' : 'muted'}">{neverLoggedIn}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Distribuição de papéis -->
+      <div class="insight-card">
+        <div class="insight-title">Distribuição por papel</div>
+        {#if roleEntries.length === 0}
+          <div class="insight-empty">Nenhum membro cadastrado</div>
+        {:else}
+          <div class="role-bars">
+            {#each roleEntries as [role, count]}
+              {@const pct = members.length ? Math.round((count / members.length) * 100) : 0}
+              <div class="rb-row">
+                <span class="rb-label">{role}</span>
+                <div class="rb-bar-wrap">
+                  <div class="rb-bar" style="width:{pct}%"></div>
+                </div>
+                <span class="rb-count">{count}</span>
+              </div>
+            {/each}
+          </div>
+        {/if}
+      </div>
     </div>
   </section>
 
@@ -562,6 +679,189 @@
     gap: 20px;
   }
 
+  /* Dashboard */
+  .dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  /* KPI Grid */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+  }
+
+  .kpi {
+    background-color: var(--bg-elev);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .kpi-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+  }
+
+  .active-icon { background: rgba(16, 185, 129, 0.1); color: var(--green); }
+  .inactive-icon { background: var(--bg-soft); color: var(--text-muted); }
+  .owner-icon { background: rgba(231, 31, 132, 0.1); color: var(--pink); }
+
+  .kpi-body {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .kpi .label {
+    font-size: 11.5px;
+    color: var(--text-muted);
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  .kpi .value {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    line-height: 1;
+  }
+
+  .kpi .value.green { color: var(--green); }
+  .kpi .value.pink { color: var(--pink); }
+  .kpi .value.muted { color: var(--text-faint); }
+
+  .kpi-bar-wrap {
+    height: 3px;
+    background: var(--line);
+    border-radius: 2px;
+    margin-top: 6px;
+    overflow: hidden;
+  }
+
+  .kpi-bar {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 0.4s ease;
+  }
+
+  /* Insight grid */
+  .insight-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  @media (max-width: 680px) {
+    .insight-grid { grid-template-columns: 1fr; }
+  }
+
+  .insight-card {
+    background: var(--bg-elev);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 16px;
+  }
+
+  .insight-title {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-faint);
+    font-weight: 600;
+    margin-bottom: 14px;
+  }
+
+  .insight-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .insight-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .ir-label {
+    font-size: 12.5px;
+    color: var(--text-muted);
+  }
+
+  .ir-val {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .ir-val.green { color: var(--green); }
+  .ir-val.purple { color: var(--purple); }
+  .ir-val.warn { color: #f59e0b; }
+  .ir-val.muted { color: var(--text-faint); }
+
+  .role-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .rb-row {
+    display: grid;
+    grid-template-columns: 100px 1fr 28px;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .rb-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .rb-bar-wrap {
+    height: 6px;
+    background: var(--line);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .rb-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--purple), var(--pink));
+    border-radius: 3px;
+    transition: width 0.4s ease;
+    min-width: 4px;
+  }
+
+  .rb-count {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-align: right;
+  }
+
+  .insight-empty {
+    font-size: 12.5px;
+    color: var(--text-faint);
+    padding: 8px 0;
+  }
+
   .load-error {
     display: flex;
     align-items: center;
@@ -572,40 +872,6 @@
     padding: 10px 14px;
     color: #ef4444;
     font-size: 13px;
-  }
-
-  /* KPI Grid */
-  .kpi-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 12px;
-  }
-
-  .kpi {
-    background-color: var(--bg-elev);
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    padding: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-
-  .kpi .label {
-    font-size: 12.5px;
-    color: var(--text-muted);
-    font-weight: 500;
-  }
-
-  .kpi .value {
-    font-size: 22px;
-    font-weight: 700;
-    color: var(--green);
-    letter-spacing: -0.02em;
-  }
-
-  .kpi .value.inactive {
-    color: var(--text-faint);
   }
 
   /* Table */
