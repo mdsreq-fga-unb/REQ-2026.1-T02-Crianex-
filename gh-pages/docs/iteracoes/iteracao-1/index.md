@@ -16,7 +16,7 @@ De acordo com o Documento de Visão e o planejamento no Miro, esta iteração fo
 | ------- | --------------------------------------------- | -------------- | ---------- |
 | **CP4** | Plataforma Pública de Apresentação da Emprasa | OE2            | Alta       |
 | **CP5** | Painel de Gerenciamento do Administrador      | OE2            | Alta       |
-| **CP6** | FAQ e Base de Conhecimentos por Produto | OE2            | Média      |
+| **CP6** | FAQ e Base de Conhecimentos por Produto       | OE2            | Média      |
 
 ---
 
@@ -311,8 +311,7 @@ Esta evidência demonstra a participação ativa do cliente no processo de valid
   <p><em>Fonte: Elaborado pelos autores.</em></p>
 </div>
 
-Este é o feedback do nosso Cliente Otávio acerca do protótipo. Realizamos uma segunda versão do protótipo corrigindo o que o cliente nos requisitou. 
-
+Este é o feedback do nosso Cliente Otávio acerca do protótipo. Realizamos uma segunda versão do protótipo corrigindo o que o cliente nos requisitou.
 
 ---
 

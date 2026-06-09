@@ -102,7 +102,6 @@ Acesso direto a `/admin` sem sessão ativa redireciona imediatamente para `/admi
 | Partial Validation | —    | ✅        | —          |
 | Formal Validation  | —    | ⬜        | —          |
 
-
 #### Observações
 
 - Sessão gerenciada inteiramente pelo Supabase Auth; token armazenado em cookie `httpOnly` (não `localStorage`) para mitigar XSS.
