@@ -2,13 +2,16 @@ import { describe, it, expect } from 'vitest';
 import { CONSENT_KEY, cookieI18n, getConsent, setConsent } from './cookie-banner';
 
 describe('cookieI18n', () => {
-  it.each(['pt', 'en'] as const)('%s tem messagePre, linkText, accept e reject não-vazios', (locale) => {
-    const c = cookieI18n[locale];
-    expect(c.messagePre).toBeTruthy();
-    expect(c.linkText).toBeTruthy();
-    expect(c.accept).toBeTruthy();
-    expect(c.reject).toBeTruthy();
-  });
+  it.each(['pt', 'en'] as const)(
+    '%s tem messagePre, linkText, accept e reject não-vazios',
+    (locale) => {
+      const c = cookieI18n[locale];
+      expect(c.messagePre).toBeTruthy();
+      expect(c.linkText).toBeTruthy();
+      expect(c.accept).toBeTruthy();
+      expect(c.reject).toBeTruthy();
+    }
+  );
 
   it('pt e en têm textos de botão distintos', () => {
     expect(cookieI18n.pt.accept).not.toBe(cookieI18n.en.accept);

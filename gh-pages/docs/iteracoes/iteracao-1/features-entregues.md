@@ -80,21 +80,6 @@ Após inserir as credenciais, o usuário escaneia o QR Code no aplicativo autent
 
 ---
 
-**RNF01 — Redirecionamento sem exposição de dados sensíveis**
-
-Acesso direto a `/admin` sem sessão ativa redireciona imediatamente para `/admin/login`, sem renderizar nenhum dado do painel.
-
-<video controls width="100%" style="border-radius: 8px; margin: 8px 0;">
-  <source src="./images/F09.4.mp4" type="video/mp4">
-  Seu navegador não suporta vídeo HTML5. <a href="./images/F09.4.mp4">Baixar vídeo</a>
-</video>
-
----
-
-**RNF08 — Senhas criptografadas com bcrypt via Supabase Auth**
-
-![Confirmação de hash bcrypt no painel do Supabase Auth](./images/F09.5.png)
-
 #### Validação do Cliente
 
 | Tipo               | Data | Resultado | Observação |
