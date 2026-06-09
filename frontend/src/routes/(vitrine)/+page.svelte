@@ -97,9 +97,8 @@
     logo: ogImage,
     address: {
       '@type': 'PostalAddress',
-      streetAddress: 'Av. Paulista, 1842',
       addressLocality: 'Brasília',
-      addressRegion: 'SP',
+      addressRegion: 'DF',
       addressCountry: 'BR',
     },
     sameAs: ['https://www.linkedin.com/company/crianex'],
@@ -202,12 +201,12 @@
 
           <div class="hero-stats" style="margin-top: 36px;">
             <div>
-              <span class="n">6</span>
+              <span class="n">3</span>
               <span class="l">{t.statsProducts[$lang]}</span>
             </div>
             <div>
-              <span class="n">184</span>
-              <span class="l">{t.statsClients[$lang]}</span>
+              <span class="n">K8s</span>
+              <span class="l">{$lang === 'pt' ? 'Infraestrutura' : 'Infrastructure'}</span>
             </div>
             <div>
               <span class="n">99.94%</span>
@@ -250,19 +249,19 @@
     </div>
   {/if}
 
-  <!-- ── Social proof rail ─────────────────────── -->
+  <!-- ── Category rail ────────────────────────── -->
   <div class="hero-rail">
-    <span>{$lang === 'pt' ? 'Em uso por times de' : 'Used by teams at'}</span>
+    <span>{$lang === 'pt' ? 'Soluções para' : 'Solutions for'}</span>
     <span class="line"></span>
-    <span>NIVERA</span>
+    <span>EdTech</span>
     <span>·</span>
-    <span>Folha Sistemas</span>
+    <span>PBL</span>
     <span>·</span>
-    <span>Editora Versa</span>
+    <span>{$lang === 'pt' ? 'Visão Computacional' : 'Computer Vision'}</span>
     <span>·</span>
-    <span>Quantum Lab</span>
+    <span>{$lang === 'pt' ? 'Notificações Push' : 'Push Notifications'}</span>
     <span>·</span>
-    <span>Aletheia</span>
+    <span>B2B SaaS</span>
   </div>
 
   <!-- ── Products carousel ─────────────────────── -->

@@ -45,8 +45,8 @@ export const t = {
   statsUptime: { pt: 'Uptime 12 meses', en: '12-mo uptime' },
   productsEyebrow: { pt: 'Portfólio de produtos', en: 'Product portfolio' },
   productsTitle: {
-    pt: 'Seis produtos. Uma plataforma. Um time.',
-    en: 'Six products. One platform. One team.',
+    pt: 'Três produtos. Uma plataforma. Um time.',
+    en: 'Three products. One platform. One team.',
   },
   productsDesc: {
     pt: 'Cada produto resolve um problema vertical, mas todos compartilham identidade, billing, observabilidade e o mesmo cluster K8s. Adicionar o segundo produto é trivial.',

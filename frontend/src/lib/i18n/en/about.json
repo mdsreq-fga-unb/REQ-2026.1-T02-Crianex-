@@ -1,15 +1,15 @@
 {
   "eyebrow": "About Crianex",
-  "h1": "A B2B software house based in Brasília since 2019.",
-  "heroBadge": "B2B software house since 2019",
+  "h1": "A B2B software house based in Brasília.",
+  "heroBadge": "B2B software house",
   "heroH1": "We build platforms.\nNot projects.",
-  "heroSub": "Six vertical SaaS. One lean team.",
+  "heroSub": "Three vertical SaaS. One lean team.",
   "heroCta": "Get in touch",
   "heroCtaEmail": "contato@crianex.com",
-  "lede": "We started as a consultancy. In 2021 we stopped selling hours and started selling product. We now run six vertical SaaS on a shared Kubernetes platform.",
+  "lede": "We turn complex problems into elegant software. We operate three vertical SaaS — Avali, Pontua and Notifly — on a multi-tenant Kubernetes platform, with applied AI and real-time communication.",
   "missionEyebrow": "Mission, vision, values",
   "missionTitle": "What keeps the team aligned.",
-  "missionDesc": "Three principles chosen not for rhetoric, but because they change real decisions — from hiring to releases.",
+  "missionDesc": "Three principles that guide every decision — from product design to production deployments.",
   "values": [
     {
       "n": "01",
@@ -28,12 +28,12 @@
     }
   ],
   "numbersEyebrow": "By the numbers",
-  "numbersTitle": "Seven years. Six products. One lean team.",
-  "numbersDesc": "We grow through product quality, not headcount. Shared infrastructure gives us unusual leverage.",
+  "numbersTitle": "Three products. One platform. Zero compromise.",
+  "numbersDesc": "Owned Kubernetes infrastructure, multi-tenant isolation and a performance-first approach — all shared across three products.",
   "stats": [
-    { "value": "6", "label": "SaaS products in production" },
-    { "value": "184", "label": "active B2B customers" },
-    { "value": "28", "label": "engineers & designers" },
+    { "value": "3", "label": "SaaS products in production" },
+    { "value": "K8s", "label": "owned infrastructure" },
+    { "value": "99.94%", "label": "uptime last 12 months" },
     { "value": "2019", "label": "founded in Brasília" }
   ],
   "peopleEyebrow": "Our team",
@@ -42,17 +42,17 @@
     {
       "n": "01",
       "name": "Otávio Castelo",
-      "role": "CEO & Founder — leads product strategy and B2B partnerships since the company's founding in 2019."
+      "role": "CEO & Founder — leads product strategy and B2B partnerships, focused on expanding the three vertical SaaS."
     },
     {
       "n": "02",
       "name": "Ana Melo",
-      "role": "CTO & Co-founder — responsible for the Kubernetes platform architecture and the six vertical SaaS products."
+      "role": "CTO & Co-founder — responsible for the Kubernetes platform architecture and the technical evolution of Avali, Pontua and Notifly."
     }
   ],
   "cta": {
     "title": "Work with us.",
-    "body": "Either as a customer or an engineer. We're open to both kinds of conversation.",
+    "body": "Either as a customer or a partner. We're open to both kinds of conversation.",
     "emailLabel": "Get in touch"
   },
   "seo": {

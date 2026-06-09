@@ -1,15 +1,15 @@
 {
   "eyebrow": "Sobre a Crianex",
-  "h1": "Software house B2B baseada em Brasília desde 2019.",
-  "heroBadge": "Software house B2B desde 2019",
+  "h1": "Software house B2B baseada em Brasília.",
+  "heroBadge": "Software house B2B",
   "heroH1": "Construímos plataforma.\nNão projeto.",
-  "heroSub": "Seis SaaS verticais. Um time enxuto.",
+  "heroSub": "Três SaaS verticais. Um time enxuto.",
   "heroCta": "Fale com a gente",
   "heroCtaEmail": "contato@crianex.com",
-  "lede": "Começamos como consultoria. Em 2021 paramos de vender hora-homem e passamos a vender produto. Hoje operamos seis SaaS verticais sobre uma plataforma comum em Kubernetes.",
+  "lede": "Transformamos problemas complexos em software elegante. Operamos três SaaS verticais — Avali, Pontua e Notifly — sobre uma plataforma multi-tenant em Kubernetes, com IA aplicada e comunicação em tempo real.",
   "missionEyebrow": "Missão, visão, valores",
   "missionTitle": "O que mantém o time alinhado.",
-  "missionDesc": "Três princípios escolhidos não pela retórica, mas porque mudam decisões reais — de contratação a release.",
+  "missionDesc": "Três princípios que guiam cada decisão — do design de produto ao deploy em produção.",
   "values": [
     {
       "n": "01",
@@ -28,12 +28,12 @@
     }
   ],
   "numbersEyebrow": "Em números",
-  "numbersTitle": "Sete anos. Seis produtos. Um time enxuto.",
-  "numbersDesc": "Crescemos pela qualidade do produto, não pelo tamanho do time. Estrutura compartilhada permite alavancagem incomum.",
+  "numbersTitle": "Três produtos. Uma plataforma. Zero compromisso.",
+  "numbersDesc": "Infraestrutura Kubernetes própria, isolamento multi-tenant e foco em performance — tudo compartilhado entre os três produtos.",
   "stats": [
-    { "value": "6", "label": "produtos SaaS em produção" },
-    { "value": "184", "label": "clientes B2B ativos" },
-    { "value": "28", "label": "engenheiros & designers" },
+    { "value": "3", "label": "produtos SaaS em produção" },
+    { "value": "K8s", "label": "infraestrutura própria" },
+    { "value": "99.94%", "label": "uptime nos últimos 12 meses" },
     { "value": "2019", "label": "fundada em Brasília" }
   ],
   "peopleEyebrow": "Quem somos",
@@ -42,17 +42,17 @@
     {
       "n": "01",
       "name": "Otávio Castelo",
-      "role": "CEO & Fundador — lidera a estratégia de produto e as parcerias B2B desde a fundação em 2019."
+      "role": "CEO & Fundador — lidera a estratégia de produto e as parcerias B2B, com foco na expansão dos três SaaS verticais."
     },
     {
       "n": "02",
       "name": "Ana Melo",
-      "role": "CTO & Co-fundadora — responsável pela arquitetura da plataforma Kubernetes e pelos seis SaaS verticais."
+      "role": "CTO & Co-fundadora — responsável pela arquitetura da plataforma Kubernetes e pela evolução técnica dos produtos Avali, Pontua e Notifly."
     }
   ],
   "cta": {
     "title": "Trabalhar com a gente.",
-    "body": "Tanto como cliente quanto como engenheiro. Estamos abertos para conversa nas duas frentes.",
+    "body": "Tanto como cliente quanto como parceiro. Estamos abertos para conversa nas duas frentes.",
     "emailLabel": "Fale conosco"
   },
   "seo": {
