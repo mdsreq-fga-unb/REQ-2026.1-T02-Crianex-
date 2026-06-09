@@ -4,7 +4,9 @@ import enCookies from '../../i18n/en/cookies.json';
 export type CookieConsent = 'accepted' | 'rejected';
 
 export type CookieI18n = {
-  message: string;
+  messagePre: string;
+  linkText: string;
+  messagePost: string;
   accept: string;
   reject: string;
 };

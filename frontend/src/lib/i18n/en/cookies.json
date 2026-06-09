@@ -1,5 +1,7 @@
 {
-  "message": "We use cookies to improve your browsing experience. By continuing on the site, you agree to our privacy policy.",
+  "messagePre": "We use cookies to improve your experience. By continuing, you agree to our ",
+  "linkText": "Cookie Policy",
+  "messagePost": ".",
   "accept": "Accept",
   "reject": "Decline"
 }

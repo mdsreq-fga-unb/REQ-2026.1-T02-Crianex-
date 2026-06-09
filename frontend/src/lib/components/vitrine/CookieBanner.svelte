@@ -35,7 +35,9 @@
   >
     <div class="banner-left">
       <img src="/assets/cookie.png" alt="cookie" class="cookie-icon" aria-hidden="true" />
-      <p class="message">{t.message}</p>
+      <p class="message">
+        {t.messagePre}<a href="/cookies" class="policy-link">{t.linkText}</a>{t.messagePost}
+      </p>
     </div>
     <div class="actions">
       <button class="btn-accept" on:click={() => dismiss('accepted')} data-consent={CONSENT_KEY}
@@ -110,6 +112,18 @@
     line-height: 1.55;
     max-width: 72ch;
     margin: 0;
+  }
+
+  .policy-link {
+    color: var(--venom);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-thickness: 1px;
+    transition: opacity 0.15s;
+  }
+
+  .policy-link:hover {
+    opacity: 0.7;
   }
 
   .actions {
