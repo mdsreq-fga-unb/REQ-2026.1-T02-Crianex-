@@ -455,7 +455,7 @@
         </div>
       </div>
       <div class="cta-illustration" aria-hidden="true">
-        <img src="/assets/cta-illustration.jpg" alt="" />
+        <img src="/assets/cta-illustration.png" alt="" />
       </div>
     </div>
   </section>
@@ -1116,13 +1116,13 @@
     border-radius: var(--r-lg);
     padding: 64px 72px;
     display: grid;
-    grid-template-columns: 1fr 460px;
+    grid-template-columns: 1fr 760px;
     gap: 0;
     align-items: center;
     position: relative;
     overflow: hidden;
     margin-top: 70px;
-    min-height: 320px;
+    min-height: 450px;
   }
   .cta-content {
     display: flex;
@@ -1154,13 +1154,11 @@
     align-items: flex-end;
     align-self: stretch;
     position: relative;
-    margin: -64px -72px -64px 0;
   }
   .cta-illustration img {
-    width: 480px;
-    height: 480px;
-    object-fit: contain;
-    object-position: bottom right;
+    width: auto;
+    height: auto;
+    object-position: right;
     mix-blend-mode: multiply;
     display: block;
   }
