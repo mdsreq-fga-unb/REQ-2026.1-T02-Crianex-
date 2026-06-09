@@ -51,10 +51,9 @@ faqPublicRouter.post('/ratings', async (req, res) => {
     return;
   }
 
-  const ip =
-    (req.headers['x-forwarded-for'] as string)?.split(',')[0]?.trim() ||
-    req.socket.remoteAddress ||
-    'unknown';
+  // Trust-proxy-aware client IP (see app.ts) — avoids X-Forwarded-For spoofing
+  // that would let a single client bypass the one-rating-per-session dedup.
+  const ip = req.ip?.trim() || req.socket.remoteAddress || 'unknown';
   const userAgent = req.headers['user-agent'] || 'unknown';
 
   try {

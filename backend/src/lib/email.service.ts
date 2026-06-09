@@ -20,6 +20,11 @@ export type WelcomeEmailPayload = {
  * Currently a no-op stub — configure the mailer above to activate.
  */
 export async function sendWelcomeEmail({ to, name, password }: WelcomeEmailPayload): Promise<void> {
+  // Render the message body up front so the template is exercised and ready to
+  // wire to a mailer. Credentials are never logged.
+  const html = buildWelcomeHtml(name, to, password);
+  void html;
+
   // --- Uncomment and adapt when mailer is configured ---
   //
   // const transporter = nodemailer.createTransport({
@@ -33,12 +38,10 @@ export async function sendWelcomeEmail({ to, name, password }: WelcomeEmailPaylo
   //   from: process.env.EMAIL_FROM ?? 'noreply@crianex.com.br',
   //   to,
   //   subject: 'Bem-vindo ao Painel Crianex — suas credenciais de acesso',
-  //   html: buildWelcomeHtml(name, to, password),
+  //   html,
   // });
 
   console.info(`[email] Welcome email pendente para ${to} — ative o mailer para enviar.`);
-  // password is intentionally not logged for security
-  void password;
 }
 
 function buildWelcomeHtml(name: string, email: string, password: string): string {

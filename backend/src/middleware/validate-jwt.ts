@@ -36,7 +36,9 @@ export async function validateJWT(
   response: Response,
   next: NextFunction
 ): Promise<void> {
-  if (process.env['ADMIN_AUTH_BYPASS'] === 'true') {
+  // Auth bypass is a TEST-ONLY escape hatch. It is hard-disabled in production so
+  // a stray env var can never grant unauthenticated 'owner' access to the panel.
+  if (process.env['ADMIN_AUTH_BYPASS'] === 'true' && process.env['NODE_ENV'] !== 'production') {
     (response.locals as { auth?: ValidatedAuthContext }).auth = TEST_AUTH_BYPASS_CONTEXT;
     next();
     return;

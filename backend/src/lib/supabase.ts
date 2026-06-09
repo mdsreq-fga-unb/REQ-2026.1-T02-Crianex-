@@ -278,19 +278,31 @@ const createInMemorySupabase = () => {
   };
 };
 
-// Try to detect whether the configured Supabase URL is reachable. If it's not
-// reachable (network error or timeout) we fall back to an in-memory fake
-// implementation. This keeps tests stable in CI environments where the
-// database service may not be available even when keys are present.
+// In production we ALWAYS talk to the real database. The in-memory fake is a
+// test/dev convenience only — silently falling back to it in production would
+// serve and persist data to volatile memory with no RLS, causing data loss and
+// a security hole. So production fails fast if Supabase is misconfigured, and
+// never pings/falls back.
+const isProduction = process.env.NODE_ENV === 'production';
+
 let supabaseClient: ReturnType<typeof createClient> | null = null;
 
-if (url && key) {
+if (isProduction) {
+  if (!url || !key) {
+    throw new Error(
+      '[supabase] SUPABASE_URL and a secret/service key are required in production. ' +
+        'Refusing to start with the in-memory fallback.'
+    );
+  }
+  supabaseClient = createClient(url, key);
+} else if (url && key) {
+  // Non-production: detect whether the configured Supabase URL is reachable.
+  // If it's not (network error or timeout) we fall back to an in-memory fake so
+  // tests stay stable in CI environments where the DB may be unavailable.
   try {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 2000);
 
-    // perform a simple GET to the URL root; if it fails we'll fallback
-    // to the in-memory client.
     const res = await fetch(url, { method: 'GET', signal: controller.signal });
     clearTimeout(timeout);
 

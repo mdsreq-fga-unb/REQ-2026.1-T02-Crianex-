@@ -15,6 +15,12 @@ export function getAdminSupabase(): SupabaseClient {
     process.env.SERVICE_ROLE_KEY;
 
   if (!supabaseUrl || !supabaseKey) {
+    // Never serve the in-memory fake in production — it has no RLS and loses data.
+    if (process.env.NODE_ENV === 'production') {
+      throw new Error(
+        '[adminSupabase] Supabase URL and secret key are required in production.'
+      );
+    }
     return inMemorySupabase;
   }
 
