@@ -153,7 +153,12 @@
               <div class="avatar-wrap">
                 <div class="avatar-circle">
                   <span class="avatar-initials">
-                    {person.name.split(' ').slice(0, 2).map((w) => w[0] ?? '').join('').toUpperCase()}
+                    {person.name
+                      .split(' ')
+                      .slice(0, 2)
+                      .map((w) => w[0] ?? '')
+                      .join('')
+                      .toUpperCase()}
                   </span>
                 </div>
               </div>
