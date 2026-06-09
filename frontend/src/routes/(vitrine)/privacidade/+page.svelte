@@ -55,16 +55,16 @@
         n: '05',
         title: { pt: 'Seus direitos (Art. 18 LGPD)', en: 'Your rights (Art. 18 LGPD)' },
         body: {
-          pt: 'Você pode, a qualquer momento: confirmar a existência de tratamento; acessar seus dados; corrigir dados incompletos ou inexatos; solicitar a anonimização, bloqueio ou eliminação; revogar o consentimento; e obter informações sobre o uso compartilhado. Para exercer qualquer direito, envie um e-mail para privacidade@crianex.com.br com o assunto "Direitos LGPD".',
-          en: 'You may at any time: confirm the existence of processing; access your data; correct incomplete or inaccurate data; request anonymization, blocking, or deletion; revoke consent; and obtain information about shared use. To exercise any right, send an email to privacidade@crianex.com.br with the subject "LGPD Rights".',
+          pt: 'Você pode, a qualquer momento: confirmar a existência de tratamento; acessar seus dados; corrigir dados incompletos ou inexatos; solicitar a anonimização, bloqueio ou eliminação; revogar o consentimento; e obter informações sobre o uso compartilhado. Para exercer qualquer direito, envie um e-mail para contato@crianex.com com o assunto "Direitos LGPD".',
+          en: 'You may at any time: confirm the existence of processing; access your data; correct incomplete or inaccurate data; request anonymization, blocking, or deletion; revoke consent; and obtain information about shared use. To exercise any right, send an email to contato@crianex.com with the subject "LGPD Rights".',
         },
       },
       {
         n: '06',
         title: { pt: 'Encarregado de Dados (DPO)', en: 'Data Protection Officer (DPO)' },
         body: {
-          pt: 'O encarregado pelo tratamento de dados pessoais da Crianex pode ser contactado pelo e-mail privacidade@crianex.com.br. Respondemos a todas as solicitações em até 15 dias úteis, conforme exigido pela LGPD.',
-          en: 'The Crianex data protection officer can be contacted at privacidade@crianex.com.br. We respond to all requests within 15 business days, as required by LGPD.',
+          pt: 'O encarregado pelo tratamento de dados pessoais da Crianex pode ser contactado pelo e-mail contato@crianex.com . Respondemos a todas as solicitações em até 15 dias úteis, conforme exigido pela LGPD.',
+          en: 'The Crianex data protection officer can be contacted at contato@crianex.com . We respond to all requests within 15 business days, as required by LGPD.',
         },
       },
       {
@@ -156,9 +156,7 @@
             : 'Contact our data protection officer.'}
         </p>
       </div>
-      <a href="mailto:privacidade@crianex.com.br" class="btn ghost sm">
-        privacidade@crianex.com.br
-      </a>
+      <a href="mailto:contato@crianex.com" class="btn ghost sm"> contato@crianex.com </a>
     </div>
   </section>
 </div>
