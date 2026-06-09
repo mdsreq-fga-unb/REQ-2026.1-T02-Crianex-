@@ -5,19 +5,22 @@ import type { Cookies } from '@sveltejs/kit';
 
 export const ADMIN_ACCESS_TOKEN_COOKIE = 'crianex_admin_access_token';
 export const ADMIN_REFRESH_TOKEN_COOKIE = 'crianex_admin_refresh_token';
+export const ADMIN_SESSION_EXPIRES_COOKIE = 'crianex_admin_session_expires';
 
 const ACCESS_TOKEN_MAX_AGE_BUFFER_SECONDS = 60;
-const REFRESH_TOKEN_MAX_AGE_SECONDS = 60 * 60 * 24 * 30;
+const SESSION_MAX_AGE_SECONDS = 8 * 60 * 60; // 8 horas — expiração absoluta desde o login
 
 export type AdminSessionTokens = {
   accessToken: string;
   refreshToken: string;
   expiresAt?: number | null;
+  sessionExpiresAt?: number | null; // expiração absoluta da sessão (definida no login, nunca renovada)
 };
 
 export type AdminSessionCookieState = {
   accessToken?: string;
   refreshToken?: string;
+  sessionExpiresAt?: number | null;
 };
 
 export type AuthenticatedAdminSession = AdminSessionTokens & {
@@ -33,32 +36,35 @@ type RefreshSessionResponse = {
 export function readAdminSessionCookies(cookies: Cookies): AdminSessionCookieState | null {
   const accessToken = cookies.get(ADMIN_ACCESS_TOKEN_COOKIE);
   const refreshToken = cookies.get(ADMIN_REFRESH_TOKEN_COOKIE);
+  const sessionExpiresAtRaw = cookies.get(ADMIN_SESSION_EXPIRES_COOKIE);
 
   if (!accessToken && !refreshToken) {
     return null;
   }
 
-  return {
-    accessToken,
-    refreshToken,
-  };
+  const sessionExpiresAt = sessionExpiresAtRaw ? parseInt(sessionExpiresAtRaw, 10) : null;
+
+  return { accessToken, refreshToken, sessionExpiresAt };
 }
 
 export function setAdminSessionCookies(cookies: Cookies, session: AdminSessionTokens): void {
   const secure = process.env.NODE_ENV === 'production';
-  const maxAge = session.expiresAt
-    ? Math.max(
-        session.expiresAt - Math.floor(Date.now() / 1000) - ACCESS_TOKEN_MAX_AGE_BUFFER_SECONDS,
-        60
-      )
+  const now = Math.floor(Date.now() / 1000);
+
+  const accessMaxAge = session.expiresAt
+    ? Math.max(session.expiresAt - now - ACCESS_TOKEN_MAX_AGE_BUFFER_SECONDS, 60)
     : 60 * 60;
+
+  // Expiração absoluta da sessão: usa o valor existente do login ou define uma janela de 8h
+  const sessionExpiresAt = session.sessionExpiresAt ?? now + SESSION_MAX_AGE_SECONDS;
+  const refreshMaxAge = Math.max(sessionExpiresAt - now, 1);
 
   cookies.set(ADMIN_ACCESS_TOKEN_COOKIE, session.accessToken, {
     httpOnly: true,
     sameSite: 'lax',
     secure,
     path: '/',
-    maxAge,
+    maxAge: accessMaxAge,
   });
 
   cookies.set(ADMIN_REFRESH_TOKEN_COOKIE, session.refreshToken, {
@@ -66,13 +72,22 @@ export function setAdminSessionCookies(cookies: Cookies, session: AdminSessionTo
     sameSite: 'lax',
     secure,
     path: '/',
-    maxAge: REFRESH_TOKEN_MAX_AGE_SECONDS,
+    maxAge: refreshMaxAge,
+  });
+
+  cookies.set(ADMIN_SESSION_EXPIRES_COOKIE, String(sessionExpiresAt), {
+    httpOnly: true,
+    sameSite: 'lax',
+    secure,
+    path: '/',
+    maxAge: refreshMaxAge,
   });
 }
 
 export function clearAdminSessionCookies(cookies: Cookies): void {
   cookies.delete(ADMIN_ACCESS_TOKEN_COOKIE, { path: '/' });
   cookies.delete(ADMIN_REFRESH_TOKEN_COOKIE, { path: '/' });
+  cookies.delete(ADMIN_SESSION_EXPIRES_COOKIE, { path: '/' });
 }
 
 export async function validateAdminSession(accessToken: string): Promise<AdminSessionUser> {
@@ -127,6 +142,13 @@ export async function getAuthenticatedAdminSession(
     return null;
   }
 
+  const now = Math.floor(Date.now() / 1000);
+  if (session.sessionExpiresAt && session.sessionExpiresAt <= now) {
+    console.log('[admin-session] sessão expirada absolutamente, limpando cookies');
+    clearAdminSessionCookies(cookies);
+    return null;
+  }
+
   if (session.accessToken) {
     try {
       const user = await validateAdminSession(session.accessToken);
@@ -144,13 +166,14 @@ export async function getAuthenticatedAdminSession(
     const refreshedSession = await refreshAdminSession(session.refreshToken);
     const user = await validateAdminSession(refreshedSession.accessToken);
 
-    setAdminSessionCookies(cookies, refreshedSession);
-
-    return {
+    setAdminSessionCookies(cookies, {
       ...refreshedSession,
-      user,
-    };
-  } catch {
+      sessionExpiresAt: session.sessionExpiresAt,
+    });
+
+    return { ...refreshedSession, user };
+  } catch (err) {
+    console.error('[admin-session] refresh falhou, limpando cookies:', err);
     clearAdminSessionCookies(cookies);
     return null;
   }
