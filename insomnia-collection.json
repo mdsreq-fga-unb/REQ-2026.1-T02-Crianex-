@@ -229,9 +229,7 @@
       "description": "Retorna o perfil do usuário autenticado (id, name, email, role, display_role, phone, bio, status). Requer Bearer token.",
       "method": "GET",
       "url": "{{ _.base_url }}/api/profile/me",
-      "headers": [
-        { "name": "Authorization", "value": "Bearer {{ _.access_token }}" }
-      ],
+      "headers": [{ "name": "Authorization", "value": "Bearer {{ _.access_token }}" }],
       "body": { "mimeType": "" },
       "parentId": "grp_profile",
       "authentication": {}
