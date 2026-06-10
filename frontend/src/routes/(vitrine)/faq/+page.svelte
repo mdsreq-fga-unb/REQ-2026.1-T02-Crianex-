@@ -46,8 +46,8 @@
     const q = searchQuery.toLowerCase().trim();
     return articles.filter((a) => {
       const matchCat = !activeCatId || a.category_id === activeCatId;
-      const title = lang === 'pt' ? a.title_pt : (a.title_en || a.title_pt);
-      const body = lang === 'pt' ? a.body_pt : (a.body_en || a.body_pt);
+      const title = lang === 'pt' ? a.title_pt : a.title_en || a.title_pt;
+      const body = lang === 'pt' ? a.body_pt : a.body_en || a.body_pt;
       const matchQ = !q || title.toLowerCase().includes(q) || body.toLowerCase().includes(q);
       return matchCat && matchQ;
     });
@@ -164,8 +164,8 @@
       <!-- Accordion items -->
       {#each filtered() as article (article.id)}
         {@const isOpen = openId === article.id}
-        {@const title = lang === 'pt' ? article.title_pt : (article.title_en || article.title_pt)}
-        {@const body = lang === 'pt' ? article.body_pt : (article.body_en || article.body_pt)}
+        {@const title = lang === 'pt' ? article.title_pt : article.title_en || article.title_pt}
+        {@const body = lang === 'pt' ? article.body_pt : article.body_en || article.body_pt}
         {@const catLabel = (() => {
           const c = categories.find((x) => x.id === article.category_id);
           return c ? (lang === 'pt' ? c.label_pt : c.label_en) : '';
