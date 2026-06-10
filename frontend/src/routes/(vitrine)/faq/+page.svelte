@@ -5,31 +5,43 @@
   import type { PageData } from './$types';
   import type { FaqPublicArticle, FaqCategory } from './+page.server';
 
-  export let data: PageData;
+  let { data }: { data: PageData } = $props();
 
   // ── i18n ─────────────────────────────────────────
   const t = {
-    pageTitle:    { pt: 'FAQ — Crianex', en: 'FAQ — Crianex' },
-    pageDesc:     { pt: 'Perguntas frequentes sobre os produtos e serviços da Crianex.', en: 'Frequently asked questions about Crianex products and services.' },
-    eyebrow:      { pt: 'Central de Ajuda', en: 'Help Center' },
-    heading:      { pt: 'Perguntas Frequentes', en: 'Frequently Asked Questions' },
-    subheading:   { pt: 'Encontre respostas rápidas sobre nossos produtos e serviços.', en: 'Find quick answers about our products and services.' },
-    allCategories:{ pt: 'Todas', en: 'All' },
-    empty:        { pt: 'Nenhum artigo disponível nesta categoria.', en: 'No articles available in this category.' },
-    emptyAll:     { pt: 'Nenhum artigo publicado no momento.', en: 'No articles published at this time.' },
-    contact:      { pt: 'Falar com suporte', en: 'Contact support' },
+    pageTitle: { pt: 'FAQ — Crianex', en: 'FAQ — Crianex' },
+    pageDesc: {
+      pt: 'Perguntas frequentes sobre os produtos e serviços da Crianex.',
+      en: 'Frequently asked questions about Crianex products and services.',
+    },
+    eyebrow: { pt: 'Central de Ajuda', en: 'Help Center' },
+    heading: { pt: 'Perguntas Frequentes', en: 'Frequently Asked Questions' },
+    subheading: {
+      pt: 'Encontre respostas rápidas sobre nossos produtos e serviços.',
+      en: 'Find quick answers about our products and services.',
+    },
+    allCategories: { pt: 'Todas', en: 'All' },
+    empty: {
+      pt: 'Nenhum artigo disponível nesta categoria.',
+      en: 'No articles available in this category.',
+    },
+    emptyAll: {
+      pt: 'Nenhum artigo publicado no momento.',
+      en: 'No articles published at this time.',
+    },
+    contact: { pt: 'Falar com suporte', en: 'Contact support' },
   };
 
   // ── State ────────────────────────────────────────
-  $: activeCategory = $page.url.searchParams.get('categoria');
+  let activeCategory = $derived($page.url.searchParams.get('categoria'));
   let expandedId = $state<string | null>(null);
 
   // ── Derived data ─────────────────────────────────
-  $: filteredGroups = activeCategory
-    ? data.grouped.filter((g) => g.category.slug === activeCategory)
-    : data.grouped;
+  let filteredGroups = $derived(
+    activeCategory ? data.grouped.filter((g) => g.category.slug === activeCategory) : data.grouped
+  );
 
-  $: totalArticles = filteredGroups.reduce((sum, g) => sum + g.articles.length, 0);
+  let totalArticles = $derived(filteredGroups.reduce((sum, g) => sum + g.articles.length, 0));
 
   // ── Helpers ──────────────────────────────────────
   function resolveTitle(a: FaqPublicArticle): string {
@@ -62,10 +74,10 @@
   }
 
   // ── SEO ──────────────────────────────────────────
-  $: pageTitle = t.pageTitle[$lang];
-  $: pageDesc  = t.pageDesc[$lang];
-  $: ogLocale  = $lang === 'en' ? 'en_US' : 'pt_BR';
-  $: canonicalUrl = data.origin + '/faq';
+  let pageTitle = $derived(t.pageTitle[$lang]);
+  let pageDesc = $derived(t.pageDesc[$lang]);
+  let ogLocale = $derived($lang === 'en' ? 'en_US' : 'pt_BR');
+  let canonicalUrl = $derived(data.origin + '/faq');
 </script>
 
 <svelte:head>
@@ -81,7 +93,6 @@
 </svelte:head>
 
 <div class="page-fade faq-page">
-
   <!-- ── Hero ────────────────────────────────────── -->
   <section class="faq-hero">
     <div class="eyebrow">
@@ -94,15 +105,10 @@
 
   <!-- ── Body ────────────────────────────────────── -->
   <div class="faq-body">
-
     <!-- Sidebar: category filter -->
     <aside class="faq-sidebar" aria-label="Filtrar por categoria">
       <nav>
-        <button
-          class="cat-btn"
-          class:on={!activeCategory}
-          onclick={() => selectCategory(null)}
-        >
+        <button class="cat-btn" class:on={!activeCategory} onclick={() => selectCategory(null)}>
           {t.allCategories[$lang]}
           <span class="count">{data.grouped.reduce((s, g) => s + g.articles.length, 0)}</span>
         </button>
@@ -113,7 +119,9 @@
             onclick={() => selectCategory(cat.slug)}
           >
             {resolveLabel(cat)}
-            <span class="count">{data.grouped.find((g) => g.category.id === cat.id)?.articles.length ?? 0}</span>
+            <span class="count"
+              >{data.grouped.find((g) => g.category.id === cat.id)?.articles.length ?? 0}</span
+            >
           </button>
         {/each}
       </nav>
@@ -123,7 +131,17 @@
     <main class="faq-main">
       {#if totalArticles === 0}
         <div class="empty-state">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="empty-icon" aria-hidden="true">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="empty-icon"
+            aria-hidden="true"
+          >
             <circle cx="11" cy="11" r="8"></circle>
             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
           </svg>
@@ -148,7 +166,17 @@
                   >
                     <span class="q-text">{resolveTitle(article)}</span>
                     <span class="q-icon" aria-hidden="true">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        width="16"
+                        height="16"
+                      >
                         {#if isOpen}
                           <line x1="5" y1="12" x2="19" y2="12"></line>
                         {:else}
@@ -188,7 +216,6 @@
         {/each}
       {/if}
     </main>
-
   </div>
 </div>
 
@@ -198,8 +225,14 @@
   }
 
   @keyframes pageFade {
-    from { opacity: 0; transform: translateY(6px); }
-    to   { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   .faq-hero {
@@ -283,7 +316,10 @@
     color: var(--text-muted);
     cursor: pointer;
     text-align: left;
-    transition: background 0.15s, color 0.15s, border-color 0.15s;
+    transition:
+      background 0.15s,
+      color 0.15s,
+      border-color 0.15s;
   }
 
   .cat-btn:hover {
@@ -367,10 +403,17 @@
     transition: color 0.15s;
   }
 
-  .faq-question:hover { color: var(--purple); }
-  .faq-item.open .faq-question { color: var(--purple); }
+  .faq-question:hover {
+    color: var(--purple);
+  }
+  .faq-item.open .faq-question {
+    color: var(--purple);
+  }
 
-  .q-text { flex: 1; line-height: 1.4; }
+  .q-text {
+    flex: 1;
+    line-height: 1.4;
+  }
 
   .q-icon {
     flex-shrink: 0;
@@ -378,7 +421,9 @@
     transition: color 0.15s;
   }
 
-  .faq-item.open .q-icon { color: var(--purple); }
+  .faq-item.open .q-icon {
+    color: var(--purple);
+  }
 
   .faq-body-content {
     padding: 0 4px 24px;
@@ -386,8 +431,14 @@
   }
 
   @keyframes expandIn {
-    from { opacity: 0; transform: translateY(-6px); }
-    to   { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(-6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   .faq-text {
@@ -397,11 +448,24 @@
     max-width: 72ch;
   }
 
-  .faq-text :global(p) { margin: 0 0 12px; }
-  .faq-text :global(p:last-child) { margin-bottom: 0; }
-  .faq-text :global(a) { color: var(--purple); text-decoration: underline; }
-  .faq-text :global(ul), .faq-text :global(ol) { padding-left: 20px; margin: 8px 0; }
-  .faq-text :global(li) { margin-bottom: 4px; }
+  .faq-text :global(p) {
+    margin: 0 0 12px;
+  }
+  .faq-text :global(p:last-child) {
+    margin-bottom: 0;
+  }
+  .faq-text :global(a) {
+    color: var(--purple);
+    text-decoration: underline;
+  }
+  .faq-text :global(ul),
+  .faq-text :global(ol) {
+    padding-left: 20px;
+    margin: 8px 0;
+  }
+  .faq-text :global(li) {
+    margin-bottom: 4px;
+  }
 
   .faq-ratings {
     display: flex;
@@ -412,9 +476,15 @@
     border-top: 1px solid var(--line);
   }
 
-  .ratings-label { font-size: 13px; color: var(--text-muted); }
+  .ratings-label {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
 
-  .ratings-btns { display: flex; gap: 8px; }
+  .ratings-btns {
+    display: flex;
+    gap: 8px;
+  }
 
   .rating-count {
     font-size: 13px;
@@ -433,8 +503,15 @@
     text-align: center;
   }
 
-  .empty-icon { width: 48px; height: 48px; color: var(--text-faint); }
-  .empty-state p { font-size: 15px; color: var(--text-muted); }
+  .empty-icon {
+    width: 48px;
+    height: 48px;
+    color: var(--text-faint);
+  }
+  .empty-state p {
+    font-size: 15px;
+    color: var(--text-muted);
+  }
 
   .btn.ghost {
     display: inline-flex;
@@ -450,7 +527,9 @@
     cursor: pointer;
     text-decoration: none;
     font-family: inherit;
-    transition: border-color 0.15s, background 0.15s;
+    transition:
+      border-color 0.15s,
+      background 0.15s;
   }
 
   .btn.ghost:hover {
@@ -459,8 +538,12 @@
   }
 
   @media (max-width: 820px) {
-    .faq-hero { padding: 80px 28px 48px; }
-    .faq-body { grid-template-columns: 1fr; }
+    .faq-hero {
+      padding: 80px 28px 48px;
+    }
+    .faq-body {
+      grid-template-columns: 1fr;
+    }
     .faq-sidebar {
       position: static;
       border-right: none;
@@ -468,15 +551,33 @@
       padding: 20px 28px;
       max-height: none;
     }
-    .faq-sidebar nav { flex-direction: row; flex-wrap: wrap; gap: 6px; }
-    .cat-btn { width: auto; padding: 6px 12px; font-size: 13px; }
-    .faq-main { padding: 32px 28px; }
+    .faq-sidebar nav {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .cat-btn {
+      width: auto;
+      padding: 6px 12px;
+      font-size: 13px;
+    }
+    .faq-main {
+      padding: 32px 28px;
+    }
   }
 
   @media (max-width: 480px) {
-    .faq-hero { padding: 72px 20px 40px; }
-    .faq-sidebar { padding: 16px 20px; }
-    .faq-main { padding: 24px 20px; }
-    .faq-question { font-size: 14px; }
+    .faq-hero {
+      padding: 72px 20px 40px;
+    }
+    .faq-sidebar {
+      padding: 16px 20px;
+    }
+    .faq-main {
+      padding: 24px 20px;
+    }
+    .faq-question {
+      font-size: 14px;
+    }
   }
 </style>
