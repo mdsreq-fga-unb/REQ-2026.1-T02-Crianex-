@@ -36,6 +36,26 @@ faqRouter.get('/categories', ...viewGuard, async (_req, res) => {
 
 const faqPublicRouter = Router();
 
+faqPublicRouter.get('/categories', async (_req, res) => {
+  try {
+    const categories = await listCategories();
+    res.status(200).json(categories);
+  } catch (err) {
+    console.error('[faq-public] list categories error:', err);
+    res.status(500).json({ message: 'Falha ao listar categorias.' });
+  }
+});
+
+faqPublicRouter.get('/articles', async (_req, res) => {
+  try {
+    const articles = await listArticles();
+    res.status(200).json(articles.filter((a) => a.published));
+  } catch (err) {
+    console.error('[faq-public] list articles error:', err);
+    res.status(500).json({ message: 'Falha ao listar artigos.' });
+  }
+});
+
 faqPublicRouter.post('/ratings', async (req, res) => {
   const article_id =
     typeof req.body?.['article_id'] === 'string' ? req.body['article_id'].trim() : '';

@@ -82,7 +82,7 @@ describe('setAdminSessionCookies', () => {
     setAdminSessionCookies(cookies as never, { accessToken: 'a', refreshToken: 'r' });
     const after = Math.floor(Date.now() / 1000);
 
-    const stored = parseInt(cookies.store[ADMIN_SESSION_EXPIRES_COOKIE], 10);
+    const stored = parseInt(cookies.store[ADMIN_SESSION_EXPIRES_COOKIE] ?? '', 10);
     expect(stored).toBeGreaterThanOrEqual(before + 8 * 3600);
     expect(stored).toBeLessThanOrEqual(after + 8 * 3600);
   });
