@@ -11,6 +11,7 @@ import {
   createArticle,
   updateArticle,
   deleteArticle,
+  listPublishedArticles,
   FaqServiceError,
   type FaqCategoryInput,
   type FaqArticleUpdateInput,
@@ -243,6 +244,19 @@ faqRouter.delete('/articles/:id', ...ownerGuard, async (req, res) => {
     }
     console.error('[faq] delete article error:', err);
     res.status(500).json({ message: 'Falha ao remover artigo.' });
+  }
+});
+
+faqPublicRouter.get('/articles', async (req, res) => {
+  const categorySlug =
+    typeof req.query?.['categoria'] === 'string' ? req.query['categoria'] : undefined;
+
+  try {
+    const articles = await listPublishedArticles(categorySlug);
+    res.status(200).json(articles);
+  } catch (err) {
+    console.error('[faq] list public articles error:', err);
+    res.status(500).json({ message: 'Falha ao carregar artigos.' });
   }
 });
 

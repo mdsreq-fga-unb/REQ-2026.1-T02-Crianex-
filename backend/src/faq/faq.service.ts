@@ -268,3 +268,69 @@ export async function deleteArticle(id: string): Promise<void> {
   const { error } = await supabase.from('faq_articles').delete().eq('id', id);
   if (error) throw error;
 }
+
+export type FaqPublicArticle = {
+  id: string;
+  title_pt: string;
+  title_en: string;
+  body_pt: string;
+  body_en: string;
+  slug: string;
+  helpful_count: number;
+  not_helpful_count: number;
+  published_at: string | null;
+  category: {
+    id: string;
+    slug: string;
+    label_pt: string;
+    label_en: string;
+    display_order: number;
+  };
+};
+
+export async function listPublishedArticles(categorySlug?: string): Promise<FaqPublicArticle[]> {
+  const supabase = getSupabaseClient();
+
+  let query = supabase
+    .from('faq_articles')
+    .select(
+      `
+      id,
+      title_pt,
+      title_en,
+      body_pt,
+      body_en,
+      slug,
+      helpful_count,
+      not_helpful_count,
+      published_at,
+      category:faq_categories (
+        id,
+        slug,
+        label_pt,
+        label_en,
+        display_order
+      )
+    `
+    )
+    .eq('published', true)
+    .order('published_at', { ascending: false });
+
+  if (categorySlug) {
+    const { data: cat } = await supabase
+      .from('faq_categories')
+      .select('id')
+      .eq('slug', categorySlug)
+      .maybeSingle();
+
+    if (cat) {
+      query = query.eq('category_id', cat.id);
+    } else {
+      return [];
+    }
+  }
+
+  const { data, error } = await query;
+  if (error) throw error;
+  return (data ?? []) as unknown as FaqPublicArticle[];
+}
