@@ -1,7 +1,7 @@
 {
   "_type": "export",
   "__export_format": 4,
-  "__export_date": "2026-06-07T00:00:00.000Z",
+  "__export_date": "2026-06-10T00:00:00.000Z",
   "__export_source": "crianex-hub-manual",
   "resources": [
     {
@@ -25,6 +25,7 @@
         "product_id": "",
         "member_id": "",
         "faq_category_id": "",
+        "faq_category_slug": "",
         "faq_article_id": "",
         "profile_id": ""
       },
@@ -46,6 +47,7 @@
         "product_id": "",
         "member_id": "",
         "faq_category_id": "",
+        "faq_category_slug": "",
         "faq_article_id": "",
         "profile_id": ""
       },
@@ -71,10 +73,18 @@
     },
 
     {
+      "_id": "grp_profile",
+      "_type": "request_group",
+      "name": "Profile",
+      "description": "Perfil do usuário autenticado. Requer Bearer token. Permite consultar e atualizar nome, telefone, bio e senha do próprio usuário.",
+      "parentId": "wrk_crianex"
+    },
+
+    {
       "_id": "grp_public",
       "_type": "request_group",
       "name": "Public",
-      "description": "Endpoints públicos sem autenticação (formulário de contato, vitrine, FAQ ratings). Rate-limited.",
+      "description": "Endpoints públicos sem autenticação (formulário de contato, vitrine, FAQ ratings, artigos FAQ). Rate-limited.",
       "parentId": "wrk_crianex"
     },
 
@@ -90,7 +100,7 @@
       "_id": "grp_admin_products",
       "_type": "request_group",
       "name": "Admin — Products",
-      "description": "CRUD completo de produtos SaaS. Requer role 'owner'. Bearer token obrigatório.",
+      "description": "CRUD completo de produtos SaaS. GET requer permissão 'products:v'; POST/PATCH/reorder requerem 'products:e'; DELETE requer role 'owner'. Bearer token obrigatório.",
       "parentId": "wrk_crianex"
     },
 
@@ -98,7 +108,7 @@
       "_id": "grp_admin_members",
       "_type": "request_group",
       "name": "Admin — Members",
-      "description": "Gestão de membros/administradores do sistema. Requer role 'owner'. Bearer token obrigatório.",
+      "description": "Gestão de membros/administradores do sistema. GET requer permissão 'members:v'; demais operações requerem role 'owner'. Bearer token obrigatório.",
       "parentId": "wrk_crianex"
     },
 
@@ -106,7 +116,7 @@
       "_id": "grp_admin_faq",
       "_type": "request_group",
       "name": "Admin — FAQ",
-      "description": "CRUD de categorias e artigos do FAQ. Requer role 'owner'. Bearer token obrigatório.",
+      "description": "CRUD de categorias e artigos do FAQ. GET requer permissão 'faq:v'; POST/PATCH requerem 'faq:e'; DELETE requer role 'owner'. Bearer token obrigatório.",
       "parentId": "wrk_crianex"
     },
 
@@ -213,6 +223,59 @@
     },
 
     {
+      "_id": "req_profile_get_me",
+      "_type": "request",
+      "name": "Get My Profile",
+      "description": "Retorna o perfil do usuário autenticado (id, name, email, role, display_role, phone, bio, status). Requer Bearer token.",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/profile/me",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ _.access_token }}" }
+      ],
+      "body": { "mimeType": "" },
+      "parentId": "grp_profile",
+      "authentication": {}
+    },
+
+    {
+      "_id": "req_profile_update_me",
+      "_type": "request",
+      "name": "Update My Profile",
+      "description": "Atualiza nome, telefone e/ou bio do usuário autenticado. Todos os campos são opcionais (PATCH parcial). phone e bio aceitam null para limpar. Requer Bearer token.",
+      "method": "PATCH",
+      "url": "{{ _.base_url }}/api/profile/me",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "Authorization", "value": "Bearer {{ _.access_token }}" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Novo Nome\",\n  \"phone\": \"+55 11 99999-0000\",\n  \"bio\": \"Gerente de operações da Crianex.\"\n}"
+      },
+      "parentId": "grp_profile",
+      "authentication": {}
+    },
+
+    {
+      "_id": "req_profile_update_password",
+      "_type": "request",
+      "name": "Update My Password",
+      "description": "Atualiza a senha do usuário autenticado via Supabase Auth Admin API. new_password deve ter no mínimo 8 caracteres. Requer Bearer token.",
+      "method": "PATCH",
+      "url": "{{ _.base_url }}/api/profile/me/password",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "Authorization", "value": "Bearer {{ _.access_token }}" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"new_password\": \"nova_senha_segura\"\n}"
+      },
+      "parentId": "grp_profile",
+      "authentication": {}
+    },
+
+    {
       "_id": "req_contact_valid",
       "_type": "request",
       "name": "Formulário de Contato — Payload válido",
@@ -309,6 +372,22 @@
     },
 
     {
+      "_id": "req_public_faq_articles",
+      "_type": "request",
+      "name": "FAQ — List Published Articles",
+      "description": "Retorna artigos publicados do FAQ. Público, sem autenticação. Parâmetro opcional: categoria (slug da categoria) para filtrar. Sem filtro retorna todos os artigos publicados.",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/public/faq/articles",
+      "headers": [],
+      "parameters": [
+        { "name": "categoria", "value": "{{ _.faq_category_slug }}", "disabled": true }
+      ],
+      "body": { "mimeType": "" },
+      "parentId": "grp_public",
+      "authentication": {}
+    },
+
+    {
       "_id": "req_products_list_public",
       "_type": "request",
       "name": "List Published Products",
@@ -325,7 +404,7 @@
       "_id": "req_admin_products_list",
       "_type": "request",
       "name": "List All Products",
-      "description": "Retorna todos os produtos (publicados e rascunhos). Requer role 'owner'.",
+      "description": "Retorna todos os produtos (publicados e rascunhos). Requer permissão 'products:v' (role 'owner' ou member com permissão de leitura em products).",
       "method": "GET",
       "url": "{{ _.base_url }}/api/admin/products",
       "headers": [{ "name": "Authorization", "value": "Bearer {{ _.access_token }}" }],
@@ -338,7 +417,7 @@
       "_id": "req_admin_products_create",
       "_type": "request",
       "name": "Create Product",
-      "description": "Cria um novo produto SaaS. Requer role 'owner'. Campos obrigatórios: name. Campos opcionais: description, slug, status (draft|published), image_url, display_order.",
+      "description": "Cria um novo produto SaaS. Requer permissão 'products:e'. Campos obrigatórios: name. Campos opcionais: description, slug, status (draft|published), image_url, display_order.",
       "method": "POST",
       "url": "{{ _.base_url }}/api/admin/products",
       "headers": [
@@ -357,7 +436,7 @@
       "_id": "req_admin_products_upload",
       "_type": "request",
       "name": "Upload Product Image",
-      "description": "Faz upload de uma imagem para um produto. Requer role 'owner'. Aceita JPG, PNG ou WEBP com até 2 MB. Retorna a URL pública da imagem no Supabase Storage.",
+      "description": "Faz upload de uma imagem para um produto. Requer permissão 'products:e'. Aceita JPG, PNG ou WEBP com até 2 MB. Retorna a URL pública da imagem no Supabase Storage.",
       "method": "POST",
       "url": "{{ _.base_url }}/api/admin/products/upload",
       "headers": [{ "name": "Authorization", "value": "Bearer {{ _.access_token }}" }],
@@ -379,9 +458,28 @@
     {
       "_id": "req_admin_products_reorder",
       "_type": "request",
-      "name": "Reorder Products",
-      "description": "Reordena os produtos alterando o display_order. Requer role 'owner'. Envia array de objetos com id e display_order.",
+      "name": "Reorder Products (PATCH)",
+      "description": "Reordena os produtos alterando o display_order via PATCH. Requer permissão 'products:e'. Envia array de objetos com id e display_order. Também aceita POST (veja 'Reorder Products (POST)').",
       "method": "PATCH",
+      "url": "{{ _.base_url }}/api/admin/products/reorder",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "Authorization", "value": "Bearer {{ _.access_token }}" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "[\n  { \"id\": \"uuid-produto-1\", \"display_order\": 1 },\n  { \"id\": \"uuid-produto-2\", \"display_order\": 2 },\n  { \"id\": \"uuid-produto-3\", \"display_order\": 3 }\n]"
+      },
+      "parentId": "grp_admin_products",
+      "authentication": {}
+    },
+
+    {
+      "_id": "req_admin_products_reorder_post",
+      "_type": "request",
+      "name": "Reorder Products (POST)",
+      "description": "Reordena os produtos alterando o display_order via POST. Requer permissão 'products:e'. Alternativa ao PATCH /reorder — comportamento idêntico.",
+      "method": "POST",
       "url": "{{ _.base_url }}/api/admin/products/reorder",
       "headers": [
         { "name": "Content-Type", "value": "application/json" },
@@ -399,7 +497,7 @@
       "_id": "req_admin_products_update",
       "_type": "request",
       "name": "Update Product",
-      "description": "Atualiza os campos de um produto existente. Requer role 'owner'. Todos os campos são opcionais (PATCH parcial). Substitua o :id na URL pelo ID real do produto.",
+      "description": "Atualiza os campos de um produto existente. Requer permissão 'products:e'. Todos os campos são opcionais (PATCH parcial). Substitua o :id na URL pelo ID real do produto.",
       "method": "PATCH",
       "url": "{{ _.base_url }}/api/admin/products/{{ _.product_id }}",
       "headers": [
@@ -431,7 +529,7 @@
       "_id": "req_admin_members_list",
       "_type": "request",
       "name": "List Members",
-      "description": "Lista todos os membros/administradores cadastrados no sistema. Requer role 'owner'.",
+      "description": "Lista todos os membros/administradores cadastrados no sistema. Requer permissão 'members:v' (role 'owner' ou member com permissão de leitura em members).",
       "method": "GET",
       "url": "{{ _.base_url }}/api/admin/members",
       "headers": [{ "name": "Authorization", "value": "Bearer {{ _.access_token }}" }],
@@ -444,7 +542,7 @@
       "_id": "req_admin_members_create",
       "_type": "request",
       "name": "Create Member",
-      "description": "Cria um novo membro/administrador no Supabase Auth e na tabela profiles. Requer role 'owner'. display_role 'Owner' ou 'Administrador' atribui role='owner', demais valores resultam em role='member'.",
+      "description": "Cria um novo membro/administrador no Supabase Auth e na tabela profiles. Requer role 'owner'. display_role 'Owner' ou 'Administrador' atribui role='owner', demais valores resultam em role='member'. Dispara e-mail de boas-vindas com a senha gerada.",
       "method": "POST",
       "url": "{{ _.base_url }}/api/admin/members",
       "headers": [
@@ -514,7 +612,7 @@
       "_id": "req_admin_faq_categories_list",
       "_type": "request",
       "name": "List Categories",
-      "description": "Lista todas as categorias do FAQ. Requer role 'owner'. Inclui categorias vinculadas a produtos e categorias globais (product_id null).",
+      "description": "Lista todas as categorias do FAQ. Requer permissão 'faq:v'. Inclui categorias vinculadas a produtos e categorias globais (product_id null).",
       "method": "GET",
       "url": "{{ _.base_url }}/api/admin/faq/categories",
       "headers": [{ "name": "Authorization", "value": "Bearer {{ _.access_token }}" }],
@@ -527,7 +625,7 @@
       "_id": "req_admin_faq_categories_create",
       "_type": "request",
       "name": "Create Category",
-      "description": "Cria uma nova categoria do FAQ. Requer role 'owner'. Campos obrigatórios: label_pt, label_en. Opcionais: product_id (vínculo com produto), display_order.",
+      "description": "Cria uma nova categoria do FAQ. Requer permissão 'faq:e'. Campos obrigatórios: label_pt, label_en. Opcionais: product_id (vínculo com produto), display_order.",
       "method": "POST",
       "url": "{{ _.base_url }}/api/admin/faq/categories",
       "headers": [
@@ -546,7 +644,7 @@
       "_id": "req_admin_faq_categories_update",
       "_type": "request",
       "name": "Update Category",
-      "description": "Atualiza uma categoria do FAQ. Requer role 'owner'. Todos os campos são opcionais (PATCH parcial). Retorna 404 se a categoria não existir.",
+      "description": "Atualiza uma categoria do FAQ. Requer permissão 'faq:e'. Todos os campos são opcionais (PATCH parcial). Retorna 404 se a categoria não existir.",
       "method": "PATCH",
       "url": "{{ _.base_url }}/api/admin/faq/categories/{{ _.faq_category_id }}",
       "headers": [
@@ -565,7 +663,7 @@
       "_id": "req_admin_faq_categories_delete",
       "_type": "request",
       "name": "Delete Category",
-      "description": "Remove uma categoria do FAQ. Requer role 'owner'. Retorna 409 se houver artigos vinculados (categoria protegida). Retorna 204 em caso de sucesso.",
+      "description": "Remove uma categoria do FAQ. Requer role 'owner'. Retorna 409 se houver artigos vinculados (categoria protegida). Retorna 404 se não existir. Retorna 204 em caso de sucesso.",
       "method": "DELETE",
       "url": "{{ _.base_url }}/api/admin/faq/categories/{{ _.faq_category_id }}",
       "headers": [{ "name": "Authorization", "value": "Bearer {{ _.access_token }}" }],
@@ -578,7 +676,7 @@
       "_id": "req_admin_faq_articles_list",
       "_type": "request",
       "name": "List Articles",
-      "description": "Lista artigos do FAQ. Requer role 'owner'. Parâmetro opcional: category_id para filtrar por categoria. Retorna todos os artigos (publicados e rascunhos).",
+      "description": "Lista artigos do FAQ. Requer permissão 'faq:v'. Parâmetro opcional: category_id para filtrar por categoria. Retorna todos os artigos (publicados e rascunhos).",
       "method": "GET",
       "url": "{{ _.base_url }}/api/admin/faq/articles",
       "headers": [{ "name": "Authorization", "value": "Bearer {{ _.access_token }}" }],
@@ -594,7 +692,7 @@
       "_id": "req_admin_faq_articles_create",
       "_type": "request",
       "name": "Create Article",
-      "description": "Cria um novo artigo no FAQ. Requer role 'owner'. Campos obrigatórios: title_pt, category_id. Opcionais: title_en, body_pt, body_en, published (boolean, default false).",
+      "description": "Cria um novo artigo no FAQ. Requer permissão 'faq:e'. Campos obrigatórios: title_pt, category_id. Opcionais: title_en, body_pt, body_en, published (boolean, default false).",
       "method": "POST",
       "url": "{{ _.base_url }}/api/admin/faq/articles",
       "headers": [
@@ -613,7 +711,7 @@
       "_id": "req_admin_faq_articles_update",
       "_type": "request",
       "name": "Update Article",
-      "description": "Atualiza um artigo do FAQ. Requer role 'owner'. Todos os campos são opcionais (PATCH parcial). Use published: true para publicar o artigo na vitrine. Retorna 404 se não existir.",
+      "description": "Atualiza um artigo do FAQ. Requer permissão 'faq:e'. Todos os campos são opcionais (PATCH parcial). Use published: true para publicar o artigo na vitrine. Retorna 404 se não existir.",
       "method": "PATCH",
       "url": "{{ _.base_url }}/api/admin/faq/articles/{{ _.faq_article_id }}",
       "headers": [
@@ -632,7 +730,7 @@
       "_id": "req_admin_faq_articles_delete",
       "_type": "request",
       "name": "Delete Article",
-      "description": "Remove um artigo do FAQ. Requer role 'owner'. Retorna 409 se o artigo estiver publicado (deve ser despublicado antes de deletar). Retorna 204 em caso de sucesso.",
+      "description": "Remove um artigo do FAQ. Requer role 'owner'. Retorna 409 se o artigo estiver publicado (deve ser despublicado antes de deletar). Retorna 404 se não existir. Retorna 204 em caso de sucesso.",
       "method": "DELETE",
       "url": "{{ _.base_url }}/api/admin/faq/articles/{{ _.faq_article_id }}",
       "headers": [{ "name": "Authorization", "value": "Bearer {{ _.access_token }}" }],
