@@ -102,7 +102,7 @@ O feature card consolidado documenta atômicamente os requisitos da funcionalida
 
 ### Evidências por Feature Entregue
 
-O registro detalhado de cada feature — critérios de aceite verificados, evidências de funcionamento (screenshots/vídeos), validação parcial e formal do cliente, e PRs vinculadas — está consolidado na página dedicada:
+O registro detalhado de cada feature — critérios de aceite verificados, evidências de funcionamento (screenshots/vídeos), validação parcial e formal do cliente — está consolidado na página dedicada:
 
 > **[Features Entregues — IT1](./features-entregues.md)**  
 > Cobre F09 a F18, agrupadas por CP5 (Painel Admin), CP4 (Vitrine Pública) e CP6 (FAQ).
@@ -187,6 +187,7 @@ Todas as features abaixo atingiram o _Definition of Ready (DoR)_. Os critérios 
 | 2   | **Dado** que o JWT expirou, **Quando** o owner acessa o painel, **Então** o sistema tenta `refreshSession()`; se bem-sucedido continua; se falhar, redireciona para `/admin/login` sem renderizar dados          | RF10         |
 | 3   | **Dado** que a requisição chega sem token válido ou sem `role = owner`, **Quando** o middleware intercepta, **Então** bloqueia com 401/403 e redireciona para `/admin/login`                                     | RF10 · RNF01 |
 | 4   | **Dado** que o painel carregou e o owner opera qualquer seção, **Quando** a requisição chega ao backend, **Então** a resposta é entregue em ≤ 2 segundos                                                         | RNF03        |
+| 5   | **Dado** que um usuário autenticado abre o modal de perfil, **Quando** altera seus dados pessoais ou senha, **Então** o sistema persiste as alterações do próprio perfil e exibe confirmação sem sair do painel   | RF48         |
 
 #### F11 — Gerenciar membros da Crianex
 
@@ -212,17 +213,18 @@ Todas as features abaixo atingiram o _Definition of Ready (DoR)_. Os critérios 
 | 1   | **Dado** que o admin submete dados válidos de novo produto, **Quando** a API valida o token e processa, **Então** persiste em transação ACID e exibe na lista sem reload         | RF21 · RNF06    |
 | 2   | **Dado** que o admin edita produto existente e salva, **Quando** a API processa, **Então** o banco substitui as informações e a vitrine reflete sem intervenção de desenvolvedor | RF22            |
 | 3   | **Dado** que o admin confirma remoção, **Quando** a API processa, **Então** produto excluído do catálogo e ausente na vitrine imediatamente                                      | RF23            |
-| 4   | **Dado** que requisição de alteração chega sem autorização, **Quando** o middleware intercepta, **Então** bloqueia com 401/403 sem executar operação no banco                    | RF21–23 · RNF01 |
-| 5   | **Dado** que visitante acessa a vitrine, **Quando** o SvelteKit renderiza via SSR, **Então** apenas produtos com `published = true` listados em ≤ 2s sem depender de JS          | RNF02 · RNF21   |
-| 6   | **Dado** que ocorre falha no banco durante inserção ou edição, **Quando** o backend detecta, **Então** executa ROLLBACK completo sem registro parcial                            | RNF06           |
+| 4   | **Dado** que o admin arrasta produtos para uma nova ordem, **Quando** confirma a reordenação, **Então** a sequência é persistida e refletida na vitrine pública                  | RF24 · RNF19    |
+| 5   | **Dado** que requisição de alteração chega sem autorização, **Quando** o middleware intercepta, **Então** bloqueia com 401/403 sem executar operação no banco                    | RF21–24 · RNF01 |
+| 6   | **Dado** que visitante acessa a vitrine, **Quando** o SvelteKit renderiza via SSR, **Então** apenas produtos com `published = true` listados em ≤ 2s sem depender de JS          | RNF02 · RNF04   |
+| 7   | **Dado** que ocorre falha no banco durante inserção ou edição, **Quando** o backend detecta, **Então** executa ROLLBACK completo sem registro parcial                            | RNF06           |
 
 #### F13 — Publicar / despublicar produto SaaS
 
 | #   | Critério de Aceite (BDD)                                                                                                                                             | RF / RNF     |
 | --- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
 | 1   | **Dado** que o admin aciona o toggle para publicar, **Quando** a API processa via PATCH, **Então** `published = true` e confirmação visual chega em ≤ 2s             | RF25 · RNF03 |
-| 2   | **Dado** que o admin aciona o toggle para despublicar, **Quando** a API processa, **Então** produto imediatamente ocultado da vitrine com dados preservados no banco | RF59 · RNF03 |
-| 3   | **Dado** que credenciais inválidas são usadas no toggle, **Quando** a API rejeita, **Então** o toggle reverte ao estado original com mensagem de erro                | RF25 · RF59  |
+| 2   | **Dado** que o admin aciona o toggle para despublicar, **Quando** a API processa, **Então** produto imediatamente ocultado da vitrine com dados preservados no banco | RF26 · RNF03 |
+| 3   | **Dado** que credenciais inválidas são usadas no toggle, **Quando** a API rejeita, **Então** o toggle reverte ao estado original com mensagem de erro                | RF25 · RF26  |
 
 #### F14 — Formulário de contato
 
@@ -231,15 +233,20 @@ Todas as features abaixo atingiram o _Definition of Ready (DoR)_. Os critérios 
 | 1   | **Dado** que o visitante preenche o formulário corretamente e clica "Enviar", **Quando** a API processa, **Então** persiste em transação ACID e exibe alerta de sucesso em ≤ 2s | RF27 · RNF02 · RNF06 |
 | 2   | **Dado** que o formulário excede o rate limit (5 req/IP/10min), **Quando** a API intercepta, **Então** retorna 429 e a interface exibe "Tente novamente mais tarde"             | RNF10                |
 | 3   | **Dado** que ocorre falha inesperada no banco durante inserção, **Quando** o backend detecta, **Então** executa ROLLBACK completo sem registro parcial                          | RNF06                |
+| 4   | **Dado** que o visitante precisa consentir com o tratamento de dados, **Quando** marca o aceite LGPD no formulário, **Então** o envio fica habilitado e o consentimento é registrado | RF49 · RNF11         |
+| 5   | **Dado** que o visitante acessa o rodapé da vitrine, **Quando** clica nas políticas de privacidade ou cookies, **Então** as páginas de conformidade são exibidas sem autenticação | RF51 · RNF11         |
+| 6   | **Dado** que o visitante acessa a vitrine pela primeira vez, **Quando** escolhe aceitar ou recusar cookies, **Então** a preferência é persistida e respeitada nos acessos seguintes | RF55 · RNF11         |
 
 #### F15 — Página institucional
 
 | #   | Critério de Aceite (BDD)                                                                                                                                                       | RF / RNF             |
 | --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------- |
-| 1   | **Dado** que o visitante acessa `/sobre`, **Quando** o SvelteKit renderiza, **Então** carrega conteúdo dos arquivos i18n estáticos via SSR em ≤ 2s, sem chamada a API ou banco | RF28 · RNF02 · RNF04 |
+| 1   | **Dado** que o visitante acessa `/sobre`, **Quando** o SvelteKit renderiza, **Então** carrega conteúdo dos arquivos i18n estáticos via SSR em ≤ 2s, sem chamada a API ou banco | RF54 · RNF02 · RNF04 |
 | 2   | **Dado** que o visitante clica em "EN", **Quando** o locale muda, **Então** todos os textos trocam para `en/about.json` em ≤ 1 clique sem reload                               | RNF13                |
 | 3   | **Dado** que a página é acessada por bot de indexação, **Quando** renderiza via SSR, **Então** o HTML inicial contém h1, textos e metadados Open Graph sem depender de JS      | RNF04 · RNF21        |
 | 4   | **Dado** que visitante sem autenticação acessa `/sobre`, **Quando** o servidor processa, **Então** nenhum guard intercepta — conteúdo exibido normalmente                      | RNF20                |
+| 5   | **Dado** que o visitante abre um produto publicado, **Quando** acessa `/produtos/[slug]`, **Então** visualiza os detalhes completos do produto SaaS sem autenticação           | RF50 · RNF04         |
+| 6   | **Dado** que o visitante já definiu preferência de cookies, **Quando** retorna à vitrine, **Então** o sistema mantém a escolha sem solicitar novo consentimento                | RF52                |
 
 ---
 
@@ -249,10 +256,10 @@ Todas as features abaixo atingiram o _Definition of Ready (DoR)_. Os critérios 
 
 | #   | Critério de Aceite (BDD)                                                                                                                                                                       | RF / RNF      |
 | --- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| 1   | **Dado** que o admin tem permissão e preenche dados válidos, **Quando** cadastra artigo (título, conteúdo, produto, categoria), **Então** persiste e torna o artigo disponível para publicação | RF30 · RNF01  |
-| 2   | **Dado** que o admin edita artigo e salva, **Quando** a API processa, **Então** o banco substitui as informações preservando o ID original                                                     | RF31          |
-| 3   | **Dado** que o admin confirma remoção de artigo, **Quando** a API processa, **Então** artigo excluído do banco e ausente na vitrine imediatamente                                              | RF32          |
-| 4   | **Dado** que o admin altera a categoria, **Quando** salva, **Então** o sistema atualiza vínculos validando integridade referencial de `product_id` e `category_id`                             | RF33          |
+| 1   | **Dado** que o admin tem permissão e preenche dados válidos, **Quando** cadastra artigo (título, conteúdo, produto, categoria), **Então** persiste e torna o artigo disponível para publicação | RF28 · RNF01  |
+| 2   | **Dado** que o admin edita artigo e salva, **Quando** a API processa, **Então** o banco substitui as informações preservando o ID original                                                     | RF29          |
+| 3   | **Dado** que o admin confirma remoção de artigo, **Quando** a API processa, **Então** artigo excluído do banco e ausente na vitrine imediatamente                                              | RF30          |
+| 4   | **Dado** que o admin altera a categoria, **Quando** salva, **Então** o sistema atualiza vínculos validando integridade referencial de `product_id` e `category_id`                             | RF31          |
 | 5   | **Dado** que agente externo forja requisição sem token, **Quando** chega ao banco, **Então** o RLS verifica `auth.uid()` e bloqueia com 403 sem executar alteração                             | RNF01 · RNF09 |
 | 6   | **Dado** que artigos publicados existem, **Quando** a vitrine renderiza via SSR, **Então** conteúdo indexável no HTML inicial; despublicados ausentes da resposta SSR                          | RNF04 · RNF05 |
 
@@ -260,8 +267,8 @@ Todas as features abaixo atingiram o _Definition of Ready (DoR)_. Os critérios 
 
 | #   | Critério de Aceite (BDD)                                                                                                                                               | RF / RNF      |
 | --- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| 1   | **Dado** que o admin aciona publicação, **Quando** a API processa via PATCH, **Então** `published = true` e artigo visível na próxima requisição da vitrine sem reload | RF34 · RNF01  |
-| 2   | **Dado** que o admin aciona despublicação, **Quando** a API processa, **Então** artigo removido da vitrine imediatamente, registro preservado no banco                 | RF35          |
+| 1   | **Dado** que o admin aciona publicação, **Quando** a API processa via PATCH, **Então** `published = true` e artigo visível na próxima requisição da vitrine sem reload | RF32 · RNF01  |
+| 2   | **Dado** que o admin aciona despublicação, **Quando** a API processa, **Então** artigo removido da vitrine imediatamente, registro preservado no banco                 | RF33          |
 | 3   | **Dado** que agente externo forja requisição sem token, **Quando** o RLS intercepta, **Então** retorna 403 sem alterar status de publicação                            | RNF01 · RNF09 |
 | 4   | **Dado** que artigo está publicado e a vitrine renderiza, **Quando** o SSR processa, **Então** conteúdo e metadados SEO no HTML inicial sem depender de JS             | RNF04 · RNF05 |
 
@@ -269,10 +276,11 @@ Todas as features abaixo atingiram o _Definition of Ready (DoR)_. Os critérios 
 
 | #   | Critério de Aceite (BDD)                                                                                                                                                      | RF / RNF      |
 | --- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| 1   | **Dado** que o visitante está na página de artigo publicado, **Quando** clica "Útil" ou "Não Útil", **Então** o sistema persiste anonimamente e exibe feedback visual em ≤ 2s | RF37 · RNF02  |
-| 2   | **Dado** que o visitante já avaliou o artigo na sessão atual, **Quando** tenta avaliar novamente, **Então** a interface bloqueia sem chamar a API                             | RF37          |
-| 3   | **Dado** que o `session_hash` já existe para o artigo no banco, **Quando** nova requisição chega, **Então** o backend retorna 409 Conflict sem registrar duplicata            | RF37          |
+| 1   | **Dado** que o visitante está na página de artigo publicado, **Quando** clica "Útil" ou "Não Útil", **Então** o sistema persiste anonimamente e exibe feedback visual em ≤ 2s | RF34 · RNF02  |
+| 2   | **Dado** que o visitante já avaliou o artigo na sessão atual, **Quando** tenta avaliar novamente, **Então** a interface bloqueia sem chamar a API                             | RF34          |
+| 3   | **Dado** que o `session_hash` já existe para o artigo no banco, **Quando** nova requisição chega, **Então** o backend retorna 409 Conflict sem registrar duplicata            | RF34          |
 | 4   | **Dado** que o componente de avaliação está na página, **Quando** o SSR renderiza, **Então** não bloqueia nem degrada o HTML inicial indexável                                | RNF04 · RNF05 |
+| 5   | **Dado** que o visitante consulta a página de FAQ, **Quando** aplica um filtro por termo ou categoria, **Então** a lista exibe apenas artigos compatíveis com o filtro        | RF53          |
 
 ---
 
@@ -314,11 +322,3 @@ Esta evidência demonstra a participação ativa do cliente no processo de valid
 Este é o feedback do nosso Cliente Otávio acerca do protótipo. Realizamos uma segunda versão do protótipo corrigindo o que o cliente nos requisitou.
 
 ---
-
-## Cronograma da Iteração
-
-<div align="center">
-  <p><strong>Figura 6</strong> — Roadmap e Cronograma (FDD + Scrumban Enxuto)</p>
-  <img src="./images/FDD Scrumban Roadmap Flow-2026-05-18-180051.png" alt="Roadmap e Cronograma da Iteração 1" width="800">
-  <p><em>Fonte: Elaborado pelos autores.</em></p>
-</div>

@@ -18,7 +18,7 @@ Rastreabilidade visual entre as features de cada iteração. Use este mapa para:
 
 ## IT1 — Vitrine Pública (28/04 – 25/05)
 
-Dependências entre as features comprometidas na IT1. Cada nó é a issue pai de especificação da feature.
+Dependências entre as features comprometidas na IT1. Cada nó é a issue pai de especificação da feature. Vale ressaltar que essa depedência é lógica e não técnica, ou seja, não é necessário uma feature inteira completa para iniciar outras, mas algumas implementações dentro da issue devem ser implementados para liberar a proxima Feature. Esse bloqueio e dependências é especificado em cada sub-issue das features.
 
 ```mermaid
 graph LR
@@ -74,4 +74,4 @@ graph LR
 | --------------- | ----------------------------------------------------------- |
 | Bloco roxo      | Feature pai — issue de especificação da CP                  |
 | Bloco rosa      | Dependência externa ao backlog de issues                    |
-| `→` seta sólida | Bloqueio direto — destino não inicia antes da origem fechar |
+| `→` seta sólida | Bloqueio parcial ou total — destino não inicia antes que uma implementação específica da issue seja implementada |

@@ -8,6 +8,13 @@ Produto: **Crianex Hub** — plataforma administrativa centralizada e vitrine di
 - **Docs publicadas:** [mdsreq-fga-unb.github.io/REQ-2026.1-T02-Crianex-](https://mdsreq-fga-unb.github.io/REQ-2026.1-T02-Crianex-)
 
 ---
+## Links
+
+- **Miro Board:** https://miro.com/app/board/uXjVGl991V0=/?share_link_id=878597873452
+- **GitHub Projects (Kanban):** https://github.com/orgs/mdsreq-fga-unb/projects/96
+
+---
+
 
 ## Stack
 

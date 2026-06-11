@@ -168,9 +168,6 @@ _Evidências a serem adicionadas._
 | Partial Validation | —    | ⬜        | —          |
 | Formal Validation  | —    | ⬜        | —          |
 
-#### PRs Vinculadas
-
-_A preencher._
 
 #### Observações
 
@@ -259,10 +256,6 @@ _Evidências a serem adicionadas._
 | Partial Validation | —    | ⬜        | —          |
 | Formal Validation  | —    | ⬜        | —          |
 
-#### PRs Vinculadas
-
-_A preencher._
-
 #### Observações
 
 - Criação de usuário usa `supabase.auth.admin.createUser()` com service role — senha inicial gerada aleatoriamente e enviada por e-mail pelo Supabase.
@@ -350,10 +343,6 @@ _Evidências a serem adicionadas._
 | Partial Validation | —    | ⬜        | —          |
 | Formal Validation  | —    | ⬜        | —          |
 
-#### PRs Vinculadas
-
-_A preencher._
-
 #### Observações
 
 - A vitrine usa SSR via `load()` em `+page.server.ts` do SvelteKit — nenhum JS necessário no cliente para renderizar os cards de produto.
@@ -365,7 +354,7 @@ _A preencher._
 ### F13 — Publicar / despublicar produto SaaS
 
 > **Issues:** [#56](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/56)  
-> **RFs cobertos:** RF25, RF59  
+> **RFs cobertos:** RF25, RF26  
 > **RNFs cobertos:** RNF03
 
 #### Diagrama de Sequência Formal
@@ -390,7 +379,7 @@ sequenceDiagram
     V->>DB: GET products WHERE published = true
     DB-->>V: produto agora incluso na vitrine
 
-    Note over A,V: Despublicar produto (RF59)
+    Note over A,V: Despublicar produto (RF26)
     A->>SK: toggle OFF → PATCH /admin/products/:id/status
     SK->>EX: PATCH /api/products/:id/status { published: false } Authorization: Bearer
     EX->>EX: validateJWT + requireRole
@@ -413,8 +402,8 @@ sequenceDiagram
 | Critério (BDD)                                                                                 | RF / RNF     | Status |
 | ---------------------------------------------------------------------------------------------- | ------------ | ------ |
 | Admin aciona toggle para publicar → `published = true` + confirmação visual em ≤ 2s            | RF25 · RNF03 | ⬜     |
-| Admin aciona toggle para despublicar → produto ocultado da vitrine, dados preservados no banco | RF59 · RNF03 | ⬜     |
-| Credenciais inválidas no toggle → API rejeita → toggle revertido + mensagem de erro            | RF25 · RF59  | ⬜     |
+| Admin aciona toggle para despublicar → produto ocultado da vitrine, dados preservados no banco | RF26 · RNF03 | ⬜     |
+| Credenciais inválidas no toggle → API rejeita → toggle revertido + mensagem de erro            | RF25 · RF26  | ⬜     |
 
 #### Evidências de Funcionamento
 
@@ -426,10 +415,6 @@ _Evidências a serem adicionadas._
 | ------------------ | ---- | --------- | ---------- |
 | Partial Validation | —    | ⬜        | —          |
 | Formal Validation  | —    | ⬜        | —          |
-
-#### PRs Vinculadas
-
-_A preencher._
 
 #### Observações
 
@@ -504,9 +489,6 @@ _Evidências a serem adicionadas._
 | Partial Validation | —    | ⬜        | —          |
 | Formal Validation  | —    | ⬜        | —          |
 
-#### PRs Vinculadas
-
-_A preencher._
 
 #### Observações
 
@@ -554,7 +536,7 @@ sequenceDiagram
 
 | Critério (BDD)                                                                           | RF / RNF             | Status |
 | ---------------------------------------------------------------------------------------- | -------------------- | ------ |
-| Visitante acessa `/sobre` → SSR carrega i18n estático em ≤ 2s sem chamada a API ou banco | RF28 · RNF02 · RNF04 | ⬜     |
+| Visitante acessa `/sobre` → SSR carrega i18n estático em ≤ 2s sem chamada a API ou banco | RF54 · RNF02 · RNF04 | ⬜     |
 | Visitante clica "EN" → textos trocam para `en/about.json` em ≤ 1 clique sem reload       | RNF13                | ⬜     |
 | Bot de indexação → HTML inicial com h1, textos e metadados Open Graph sem depender de JS | RNF04 · RNF21        | ⬜     |
 | Visitante sem autenticação → nenhum guard intercepta → conteúdo exibido normalmente      | RNF20                | ⬜     |
@@ -570,10 +552,6 @@ _Evidências a serem adicionadas._
 | Partial Validation | —    | ⬜        | —          |
 | Formal Validation  | —    | ⬜        | —          |
 
-#### PRs Vinculadas
-
-_A preencher._
-
 #### Observações
 
 - Todo conteúdo carregado de arquivos JSON estáticos em `src/lib/i18n/` — zero chamadas a banco ou API, tempo de carregamento depende apenas do SSR.
@@ -587,7 +565,7 @@ _A preencher._
 ### F16 — CRUD de artigos de FAQ
 
 > **Issues:** [#59](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/59)  
-> **RFs cobertos:** RF30, RF31, RF32, RF33  
+> **RFs cobertos:** RF30, RF29, RF30, RF31  
 > **RNFs cobertos:** RNF01, RNF04, RNF05
 
 #### Diagrama de Sequência Formal
@@ -609,7 +587,7 @@ sequenceDiagram
     EX-->>SK: 201 { artigo criado }
     SK-->>A: lista atualizada
 
-    Note over A,AGT: Editar artigo (RF31)
+    Note over A,AGT: Editar artigo (RF29)
     A->>SK: PUT /admin/faq/:id { campos atualizados }
     SK->>EX: PUT /api/faq/:id Authorization: Bearer
     EX->>EX: validateJWT + requireRole
@@ -618,7 +596,7 @@ sequenceDiagram
     EX-->>SK: 200
     SK-->>A: artigo atualizado
 
-    Note over A,AGT: Categorizar artigo (RF33)
+    Note over A,AGT: Categorizar artigo (RF31)
     A->>SK: PATCH /admin/faq/:id/category { product_id, category_id }
     SK->>EX: PATCH /api/faq/:id/category Authorization: Bearer
     EX->>EX: validateJWT + requireRole
@@ -639,10 +617,10 @@ sequenceDiagram
 
 | Critério (BDD)                                                                                   | RF / RNF      | Status |
 | ------------------------------------------------------------------------------------------------ | ------------- | ------ |
-| Admin cadastra artigo (título, conteúdo, produto, categoria) → persistido e apto para publicação | RF30 · RNF01  | ⬜     |
-| Admin edita artigo → dados substituídos, ID original preservado                                  | RF31          | ⬜     |
-| Admin remove artigo → excluído do banco e ausente na vitrine imediatamente                       | RF32          | ⬜     |
-| Admin categoriza artigo → vínculos `product_id` + `category_id` com integridade referencial      | RF33          | ⬜     |
+| Admin cadastra artigo (título, conteúdo, produto, categoria) → persistido e apto para publicação | RF28 · RNF01  | ⬜     |
+| Admin edita artigo → dados substituídos, ID original preservado                                  | RF29          | ⬜     |
+| Admin remove artigo → excluído do banco e ausente na vitrine imediatamente                       | RF30          | ⬜     |
+| Admin categoriza artigo → vínculos `product_id` + `category_id` com integridade referencial      | RF31          | ⬜     |
 | Agente externo forja requisição sem token → RLS bloqueia com 403 sem alterar dados               | RNF01 · RNF09 | ⬜     |
 | Artigos publicados → conteúdo no SSR indexável; despublicados ausentes da resposta SSR           | RNF04 · RNF05 | ⬜     |
 
@@ -657,9 +635,7 @@ _Evidências a serem adicionadas._
 | Partial Validation | —    | ⬜        | —          |
 | Formal Validation  | —    | ⬜        | —          |
 
-#### PRs Vinculadas
 
-_A preencher._
 
 #### Observações
 
@@ -672,7 +648,7 @@ _A preencher._
 ### F17 — Publicar / despublicar artigo de FAQ
 
 > **Issues:** [#60](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/60)  
-> **RFs cobertos:** RF34, RF35  
+> **RFs cobertos:** RF34, RF33  
 > **RNFs cobertos:** RNF01, RNF04, RNF05
 
 #### Diagrama de Sequência Formal
@@ -697,7 +673,7 @@ sequenceDiagram
     V->>DB: SELECT * FROM faq_articles WHERE published = true (RLS)
     DB-->>V: artigo agora incluso (SSR indexável — RNF04/RNF05)
 
-    Note over A,AGT: Despublicar artigo (RF35)
+    Note over A,AGT: Despublicar artigo (RF33)
     A->>SK: toggle OFF → PATCH /admin/faq/:id/status
     SK->>EX: PATCH /api/faq/:id/status { published: false } Authorization: Bearer
     EX->>EX: validateJWT + requireRole
@@ -718,8 +694,8 @@ sequenceDiagram
 
 | Critério (BDD)                                                                                  | RF / RNF      | Status |
 | ----------------------------------------------------------------------------------------------- | ------------- | ------ |
-| Admin publica artigo → `published = true` → visível na próxima requisição da vitrine sem reload | RF34 · RNF01  | ⬜     |
-| Admin despublica artigo → artigo ausente da vitrine imediatamente, conteúdo preservado no banco | RF35          | ⬜     |
+| Admin publica artigo → `published = true` → visível na próxima requisição da vitrine sem reload | RF32 · RNF01  | ⬜     |
+| Admin despublica artigo → artigo ausente da vitrine imediatamente, conteúdo preservado no banco | RF33          | ⬜     |
 | Agente externo forja requisição sem token → RLS bloqueia com 403 sem alterar status             | RNF01 · RNF09 | ⬜     |
 | Artigo publicado → conteúdo e metadados SEO no HTML inicial sem depender de JS                  | RNF04 · RNF05 | ⬜     |
 
@@ -734,10 +710,6 @@ _Evidências a serem adicionadas._
 | Partial Validation | —    | ⬜        | —          |
 | Formal Validation  | —    | ⬜        | —          |
 
-#### PRs Vinculadas
-
-_A preencher._
-
 #### Observações
 
 - Mesmo padrão de toggle otimista da F13 — consistência intencional na UX do painel admin.
@@ -749,7 +721,7 @@ _A preencher._
 ### F18 — Avaliação de artigos de FAQ
 
 > **Issues:** [#62](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/62)  
-> **RFs cobertos:** RF37  
+> **RFs cobertos:** RF34  
 > **RNFs cobertos:** RNF02, RNF04, RNF05
 
 #### Diagrama de Sequência Formal
@@ -762,7 +734,7 @@ sequenceDiagram
     participant EX as Express API
     participant DB as Supabase DB
 
-    Note over V,DB: Avaliar artigo — primeira vez na sessão (RF37)
+    Note over V,DB: Avaliar artigo — primeira vez na sessão (RF34)
     V->>SK: clica "Útil" ou "Não Útil"
     SK->>SS: verifica se artigo já foi avaliado nesta sessão
     SS-->>SK: não avaliado
@@ -795,9 +767,9 @@ sequenceDiagram
 
 | Critério (BDD)                                                                                     | RF / RNF      | Status |
 | -------------------------------------------------------------------------------------------------- | ------------- | ------ |
-| Visitante clica "Útil" ou "Não Útil" → avaliação persistida anonimamente + feedback visual em ≤ 2s | RF37 · RNF02  | ⬜     |
-| Visitante já avaliou o artigo na sessão → interface bloqueia sem chamar a API                      | RF37          | ⬜     |
-| `session_hash` já existe no banco para o artigo → backend retorna 409 sem registrar duplicata      | RF37          | ⬜     |
+| Visitante clica "Útil" ou "Não Útil" → avaliação persistida anonimamente + feedback visual em ≤ 2s | RF34 · RNF02  | ⬜     |
+| Visitante já avaliou o artigo na sessão → interface bloqueia sem chamar a API                      | RF34          | ⬜     |
+| `session_hash` já existe no banco para o artigo → backend retorna 409 sem registrar duplicata      | RF34          | ⬜     |
 | Componente de avaliação presente → SSR não bloqueado nem degradado                                 | RNF04 · RNF05 | ⬜     |
 
 #### Evidências de Funcionamento
@@ -811,9 +783,6 @@ _Evidências a serem adicionadas._
 | Partial Validation | —    | ⬜        | —          |
 | Formal Validation  | —    | ⬜        | —          |
 
-#### PRs Vinculadas
-
-_A preencher._
 
 #### Observações
 
