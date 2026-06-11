@@ -1197,3 +1197,19 @@ video {
 .image-drop .remove-btn:hover {
   background: rgba(0, 0, 0, 0.75);
 }
+
+/* ── Intro overlay — cobertura antes do primeiro paint ──────────────────────
+   O script bloqueante em app.html adiciona data-intro ao <html> antes do
+   browser pintar. O pseudo-elemento cobre header/footer/main enquanto a
+   intro roda; a overlay (z-index:9999) fica por cima.
+   Removido via document.documentElement.removeAttribute("data-intro")
+   no evento "reveal" da IntroOverlay (~2050ms, antes do fade).
+*/
+html[data-intro]::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: #fcfcfc;
+  z-index: 9998;
+  pointer-events: none;
+}

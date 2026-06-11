@@ -8,6 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     %sveltekit.head%
   </head>
+  <!--
+    Script bloqueante: adiciona data-intro ANTES do primeiro paint.
+    Isso faz o pseudo-elemento ::before (z-index 9998) cobrir o conteúdo
+    enquanto a intro roda. Sem este script, o SSR renderiza o conteúdo visível.
+  -->
+  <script>try{var p=new URLSearchParams(location.search);if(location.pathname==='/'&&(p.get('intro')==='1'||!sessionStorage.getItem('crianex-intro-seen')))document.documentElement.setAttribute('data-intro','')}catch(e){}</script>
   <body data-sveltekit-preload-data="hover">
     <div style="display: contents">%sveltekit.body%</div>
   </body>

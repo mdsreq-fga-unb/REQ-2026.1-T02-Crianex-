@@ -1,16 +1,30 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import { browser } from '$app/environment';
   import { lang } from '$lib/stores/lang';
   import type { PageData } from './$types';
   import { t, differentiators, ACCENT_COLORS, resolveField } from './home';
+  import HeroGraph from '$lib/components/vitrine/HeroGraph.svelte';
+  import IntroOverlay from '$lib/components/vitrine/IntroOverlay.svelte';
 
   export let data: PageData;
 
   const products = data.products;
   const total = products.length;
 
+  // ── Intro overlay ──────────────────────────────
+  // Inicializa ANTES do primeiro render no cliente para não haver flash.
+  // No servidor (SSR) fica false (sessionStorage não existe).
+  const forceIntro =
+    browser && new URLSearchParams(window.location.search).get('intro') === '1';
+  let showIntro = browser && (forceIntro || !sessionStorage.getItem('crianex-intro-seen'));
+
   // ── Hero accent cycling ──────────────────────
   let accentIdx = 0;
+
+  // ── Kinetic headline reveal ───────────────────
+  // Se intro vai rodar, retarda o reveal até o final da animação.
+  let headlineVisible = !showIntro;
 
   // ── Carousel ────────────────────────────────
   let active = 0;
@@ -33,6 +47,14 @@
     const accentInterval = setInterval(() => {
       accentIdx = (accentIdx + 1) % ACCENT_COLORS.length;
     }, 2200);
+
+    // Se não tem intro, dispara o reveal do headline imediatamente
+    if (!showIntro) {
+      setTimeout(() => { headlineVisible = true; }, 120);
+    } else {
+      sessionStorage.setItem('crianex-intro-seen', '1');
+    }
+
     resetTimer();
 
     // Se vier do footer com ?produto=slug, ativa o slide e rola até o carrossel
@@ -48,10 +70,34 @@
     }
 
     return () => {
+      document.documentElement.removeAttribute('data-intro');
       clearInterval(accentInterval);
       clearTimeout(carouselTimer);
     };
   });
+
+  function onIntroReveal() {
+    // Remove o pseudo-elemento que cobre header/footer/main (ver app.css html[data-intro]::before)
+    document.documentElement.removeAttribute('data-intro');
+    // Mostra o conteúdo enquanto a overlay ainda está visível por cima
+    showIntro = false; // remove hidden do page-fade
+    setTimeout(() => { headlineVisible = true; }, 80);
+  }
+
+  function onIntroDone() {
+    // Overlay já sumiu (opacity 0). Marca como visto.
+    sessionStorage.setItem('crianex-intro-seen', '1');
+  }
+
+  // Divide uma frase em palavras com índice global para stagger
+  function splitWords(parts: string[]): { word: string; idx: number }[][] {
+    let globalIdx = 0;
+    return parts.map(part =>
+      part.split(' ').map(word => ({ word, idx: globalIdx++ }))
+    );
+  }
+
+  $: wordParts = splitWords(t.h1Parts[$lang]);
 
   function jumpTo(i: number) {
     active = i;
@@ -142,7 +188,11 @@
   {@html ldScript}
 </svelte:head>
 
-<div class="page-fade">
+{#if showIntro}
+  <IntroOverlay on:reveal={onIntroReveal} on:done={onIntroDone} />
+{/if}
+
+<div class="page-fade" class:hidden={showIntro}>
   <!-- ── Hero ───────────────────────────────────────── -->
   <section class="hero hero-canvas-section">
     <div class="hero-bg">
@@ -158,11 +208,32 @@
             {t.eyebrow[$lang]}
           </div>
 
-          <h1 class="display">
-            {t.h1Parts[$lang][0]}&nbsp;<span class="underline"
-              ><span class="swatch" style="background: {ACCENT_COLORS[accentIdx]};"></span>{t
-                .h1Parts[$lang][1]}</span
-            >&nbsp;{t.h1Parts[$lang][2]}
+          <h1 class="display" aria-label="{t.h1Parts[$lang].join(' ')}">
+            <!-- Linha 0: palavras normais -->
+            {#each (wordParts[0] ?? []) as { word, idx }}
+              <span
+                class="word"
+                class:visible={headlineVisible}
+                style="--d: {idx * 55}ms;"
+              >{word}</span>{' '}
+            {/each}
+            <!-- Linha 1: acento roxo -->
+            <span class="underline">
+              <span class="swatch" style="background: {ACCENT_COLORS[accentIdx]};"></span
+              >{#each (wordParts[1] ?? []) as { word, idx }}<span
+                  class="word"
+                  class:visible={headlineVisible}
+                  style="--d: {idx * 55}ms;"
+                >{word}</span>{' '}{/each}
+            </span>
+            <!-- Linha 2: palavras finais -->
+            {#each (wordParts[2] ?? []) as { word, idx }, wi}
+              <span
+                class="word"
+                class:visible={headlineVisible}
+                style="--d: {idx * 55}ms;"
+              >{word}</span>{#if wi < (wordParts[2]?.length ?? 1) - 1}{' '}{/if}
+            {/each}
           </h1>
 
           <p class="hero-lede" style="margin-top: 28px;">{t.lede[$lang]}</p>
@@ -216,15 +287,8 @@
         </div>
 
         <div class="hero-art">
-          <div class="hero-illustration">
-            <img
-              src="/assets/home/crianexImagemSemFundo.png"
-              alt="Crianex — plataformas, integrações e API"
-              width="580"
-              height="430"
-              loading="eager"
-              fetchpriority="high"
-            />
+          <div class="hero-graph-wrap">
+            <HeroGraph />
           </div>
         </div>
       </div>
@@ -541,6 +605,10 @@
   .page-fade {
     animation: pageFade 0.36s cubic-bezier(0.2, 0, 0.1, 1);
   }
+  .page-fade.hidden {
+    visibility: hidden;
+    animation: none;
+  }
   @keyframes pageFade {
     from {
       opacity: 0;
@@ -715,6 +783,27 @@
     letter-spacing: 0.08em;
   }
 
+  /* ── Kinetic word reveal ───────────────────────── */
+  .word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(12px);
+    transition:
+      opacity 0.42s ease var(--d, 0ms),
+      transform 0.42s cubic-bezier(0.2, 0, 0.1, 1) var(--d, 0ms);
+  }
+  .word.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .word {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+
   .hero-art {
     position: relative;
     width: 100%;
@@ -722,16 +811,9 @@
     align-items: center;
     justify-content: center;
   }
-  .hero-illustration {
+  .hero-graph-wrap {
     width: 100%;
-    background: transparent;
-    border: 0;
-  }
-  .hero-illustration img {
-    display: block;
-    width: 100%;
-    height: auto;
-    object-fit: contain;
+    aspect-ratio: 122 / 98;
   }
 
   /* ── Products chips strip ─────────────────────── */
@@ -1180,8 +1262,8 @@
       grid-template-columns: 1fr;
       gap: 36px;
     }
-    .hero-illustration {
-      max-width: 520px;
+    .hero-graph-wrap {
+      max-width: 480px;
       margin: 0 auto;
     }
     .section-head {
@@ -1236,7 +1318,7 @@
       grid-template-columns: 1fr;
       gap: 32px;
     }
-    .hero-art {
+    .hero-graph-wrap {
       display: none;
     }
     .display {
@@ -1268,10 +1350,6 @@
     }
     .hero-stats .l {
       font-size: 9px;
-    }
-    .hero-illustration {
-      max-width: 280px;
-      margin: 0 auto;
     }
     .section-head {
       grid-template-columns: 1fr;
