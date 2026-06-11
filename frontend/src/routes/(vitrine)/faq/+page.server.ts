@@ -1,7 +1,6 @@
 import type { PageServerLoad } from './$types';
 import { env } from '$env/dynamic/public';
 
-
 export type FaqCategory = {
   id: string;
   slug: string;
@@ -67,6 +66,5 @@ export const load: PageServerLoad = async ({ url, locals, fetch }) => {
     origin,
     selectedLang,
     apiBaseUrl,
-
   };
 };

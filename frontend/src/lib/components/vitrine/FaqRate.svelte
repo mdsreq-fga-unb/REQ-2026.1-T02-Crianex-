@@ -16,15 +16,16 @@
   const STORAGE_PREFIX = 'faq_rated_';
 
   const t = {
-    label:    { pt: 'FOI ÚTIL?', en: 'WAS THIS HELPFUL?' },
-    yes:      { pt: '✓ Sim', en: '✓ Yes' },
-    no:       { pt: '✗ Não', en: '✗ No' },
-    thanks:   { pt: 'Obrigado pelo feedback!', en: 'Thanks for your feedback!' },
+    label: { pt: 'FOI ÚTIL?', en: 'WAS THIS HELPFUL?' },
+    yes: { pt: '✓ Sim', en: '✓ Yes' },
+    no: { pt: '✗ Não', en: '✗ No' },
+    thanks: { pt: 'Obrigado pelo feedback!', en: 'Thanks for your feedback!' },
   };
 
   let rated = $state<'y' | 'n' | null>(null);
   let submitting = $state<boolean>(false);
-  let totals = $state({ helpful: helpfulCount, not_helpful: notHelpfulCount });
+  let apiTotals = $state<{ helpful: number; not_helpful: number } | null>(null);
+  let totals = $derived(apiTotals ?? { helpful: helpfulCount, not_helpful: notHelpfulCount });
 
   $effect(() => {
     if (typeof sessionStorage === 'undefined') return;
@@ -50,7 +51,7 @@
       const data = await res.json();
 
       if (data.totals) {
-        totals = data.totals;
+        apiTotals = data.totals;
       }
 
       rated = rating;
