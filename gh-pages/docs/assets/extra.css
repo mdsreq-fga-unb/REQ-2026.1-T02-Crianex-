@@ -1,5 +1,13 @@
 /* ─── Crianex – Custom Styles (Cinder Theme) ──────────────────────────────── */
 
+/* Nav dropdowns: abre por clique (não hover) */
+.navbar .dropdown:hover > .dropdown-menu {
+  display: none;
+}
+.navbar .dropdown.open > .dropdown-menu {
+  display: block;
+}
+
 /* Cinder usa navbar-fixed-top (Bootstrap); navbar de 1 linha ≈ 50px */
 body {
   padding-top: 70px !important;

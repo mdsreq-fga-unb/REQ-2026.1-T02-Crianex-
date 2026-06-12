@@ -33,6 +33,7 @@
   };
 
   // ── State ────────────────────────────────────────
+  // eslint-disable-next-line svelte/valid-compile
   let activeCategory = $state<string | null>(data.activeCategory);
   let expandedId = $state<string | null>(null);
 

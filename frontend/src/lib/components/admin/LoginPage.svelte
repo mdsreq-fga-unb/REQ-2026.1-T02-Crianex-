@@ -12,6 +12,34 @@
   let errorMessage = $state('');
   let submitHovered = $state(false);
 
+  async function handleGoogleSignIn() {
+    loading = true;
+    errorMessage = '';
+    try {
+      const { supabase } = await import('$lib/api/supabase');
+      if (!supabase) {
+        errorMessage = 'Serviço de autenticação não disponível.';
+        return;
+      }
+      const redirectTo = window.location.origin + '/admin/login/callback';
+      const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: { redirectTo },
+      });
+      if (error) {
+        errorMessage = 'Não foi possível iniciar o login com Google.';
+        return;
+      }
+      if (data.url) {
+        window.location.href = data.url;
+      }
+    } catch {
+      errorMessage = 'Não foi possível conectar ao serviço de autenticação.';
+    } finally {
+      loading = false;
+    }
+  }
+
   async function handleSubmit(e: SubmitEvent) {
     e.preventDefault();
     errorMessage = '';
@@ -55,8 +83,7 @@
       console.log('[login] sincronizando sessão com o servidor...');
       await syncAdminSession(data.session);
 
-      console.log('[login] redirecionando para /admin/membros');
-      await goto('/admin/membros');
+      await goto('/admin/painel');
     } catch (err) {
       console.error('[login] catch inesperado:', err);
       if (err instanceof ApiError && err.status === 403) {
@@ -111,6 +138,7 @@
           variant="outline"
           type="button"
           disabled={loading}
+          onclick={handleGoogleSignIn}
           style="background-color: transparent; color: #ffffff; border-color: #ffffff; box-shadow: none;"
         >
           <img class="google-logo" src="/assets/logo-google.png" alt="" aria-hidden="true" />

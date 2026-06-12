@@ -29,6 +29,9 @@ markdown_extensions:
 extra_css:
   - assets/extra.css
 
+extra_javascript:
+  - assets/nav-click.js
+
 nav:
   - Home: index.md
   - Visão:
