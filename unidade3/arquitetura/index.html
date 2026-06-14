@@ -328,7 +328,7 @@
 <p>O Crianex Hub é uma plataforma SaaS composta por duas áreas funcionais distintas: uma <strong>vitrine pública</strong> (sem autenticação) voltada ao portfólio de produtos, captação de leads e FAQ institucional; e uma <strong>área administrativa autenticada</strong> que concentra o CRM Kanban, dashboard executivo, gestão financeira, tickets de suporte e notificações.</p>
 <p>A arquitetura adotada é <strong>Monolito Modular</strong> — uma aplicação Express.js com separação lógica por módulos internos, servida por um frontend SvelteKit com SSR. Essa decisão foi guiada por quatro critérios principais:</p>
 <ol>
-<li><strong>Prazo:</strong> ~2,5 semanas de desenvolvimento ativo, 3 iterações de entrega, 6 desenvolvedores com WIP limit de 2 por Class Owner — overhead de orquestração de microsserviços é incompatível com essa cadência.</li>
+<li><strong>Prazo:</strong> ~1,5 meses de desenvolvimento ativo, 3 iterações de entrega, 6 desenvolvedores com WIP limit de 2 por Class Owner — overhead de orquestração de microsserviços é incompatível com essa cadência.</li>
 <li><strong>Latência:</strong> RNF02 e RNF03 exigem resposta ≤ 2s em 95% das requisições; a comunicação intra-processo do monolito elimina a latência de rede entre serviços.</li>
 <li><strong>Integridade ACID:</strong> RNF06 exige consistência transacional na captação de leads; transações distribuídas (padrão Saga) adicionariam complexidade sem benefício no escopo atual.</li>
 <li><strong>Superfície de segurança:</strong> RNF07 (OWASP Top 10) é mais simples de cumprir com um único ponto de entrada e RLS centralizado no banco, em vez de múltiplos endpoints independentes.</li>
