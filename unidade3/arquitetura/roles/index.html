@@ -11,7 +11,7 @@
     <link rel="shortcut icon" href="../../img/favicon.ico">
 
     
-    <title>Unidade 2 - Crianex</title>
+    <title>Roles - Crianex</title>
     
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
@@ -355,19 +355,19 @@
                 
                 
                 
-                    <li class="dropdown">
+                    <li class="dropdown active">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Arquitetura <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                         
                             
 <li >
-    <a href="../../arquitetura/">Arquitetura</a>
+    <a href="../">Arquitetura</a>
 </li>
 
                         
                             
-<li >
-    <a href="../../arquitetura/roles/">Roles</a>
+<li class="active">
+    <a href="./">Roles</a>
 </li>
 
                         
@@ -376,25 +376,25 @@
                 
                 
                 
-                    <li class="dropdown active">
+                    <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Apresentação <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                         
                             
 <li >
-    <a href="../unidade-1/">Unidade 1</a>
-</li>
-
-                        
-                            
-<li class="active">
-    <a href="./">Unidade 2</a>
+    <a href="../../apresentacao/unidade-1/">Unidade 1</a>
 </li>
 
                         
                             
 <li >
-    <a href="../unidade-3/">Unidade 3</a>
+    <a href="../../apresentacao/unidade-2/">Unidade 2</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../apresentacao/unidade-3/">Unidade 3</a>
 </li>
 
                         
@@ -417,12 +417,12 @@
                         </a>
                     </li>
                     <li >
-                        <a rel="prev" href="../unidade-1/">
+                        <a rel="prev" href="../">
                             <i class="fas fa-arrow-left"></i> Previous
                         </a>
                     </li>
                     <li >
-                        <a rel="next" href="../unidade-3/">
+                        <a rel="next" href="../../apresentacao/unidade-1/">
                             Next <i class="fas fa-arrow-right"></i>
                         </a>
                     </li>
@@ -436,14 +436,35 @@
         
         <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
-        <li class="first-level active"><a href="#apresentacao-unidade-2">Apresentação — Unidade 2</a></li>
+        <li class="first-level active"><a href="#adr-001-modelo-de-roles-e-permissoes">ADR-001 — Modelo de Roles e Permissões</a></li>
             <li class="second-level"><a href="#historico-de-revisao">Histórico de Revisão</a></li>
+                
+            <li class="second-level"><a href="#status">Status</a></li>
+                
+            <li class="second-level"><a href="#contexto">Contexto</a></li>
+                
+            <li class="second-level"><a href="#decisao">Decisão</a></li>
+                
+                <li class="third-level"><a href="#roles-disponiveis">Roles disponíveis</a></li>
+                <li class="third-level"><a href="#como-o-role-e-codificado-no-jwt">Como o role é codificado no JWT</a></li>
+                <li class="third-level"><a href="#extracao-do-token-de-acesso">Extração do token de acesso</a></li>
+                <li class="third-level"><a href="#lookup-de-perfil-e-guarda-de-status">Lookup de perfil e guarda de status</a></li>
+                <li class="third-level"><a href="#implementacao-dos-middlewares">Implementação dos middlewares</a></li>
+                <li class="third-level"><a href="#escape-hatch-de-teste">Escape hatch de teste</a></li>
+                <li class="third-level"><a href="#como-o-rls-do-supabase-referencia-o-role">Como o RLS do Supabase referencia o role</a></li>
+            <li class="second-level"><a href="#consequencias">Consequências</a></li>
+                
+                <li class="third-level"><a href="#positivas">Positivas</a></li>
+                <li class="third-level"><a href="#trade-offs">Trade-offs</a></li>
+            <li class="second-level"><a href="#alternativas-descartadas">Alternativas Descartadas</a></li>
+                
+            <li class="second-level"><a href="#rastreabilidade">Rastreabilidade</a></li>
                 
     </ul>
 </div></div>
         <div class="col-md-9" role="main">
 
-<h1 id="apresentacao-unidade-2">Apresentação — Unidade 2<a class="headerlink" href="#apresentacao-unidade-2" title="Permanent link">&para;</a></h1>
+<h1 id="adr-001-modelo-de-roles-e-permissoes">ADR-001 — Modelo de Roles e Permissões<a class="headerlink" href="#adr-001-modelo-de-roles-e-permissoes" title="Permanent link">&para;</a></h1>
 <h2 id="historico-de-revisao">Histórico de Revisão<a class="headerlink" href="#historico-de-revisao" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -451,25 +472,188 @@
 <th>Versão</th>
 <th>Data</th>
 <th>Descrição</th>
-<th>Autor(es)</th>
+<th>Autor</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>1.0</td>
-<td>18/05/2026</td>
-<td>Criação da página com vídeo de apresentação da Unidade 2</td>
-<td>Todos</td>
+<td>v1.0</td>
+<td>31/05/2026</td>
+<td>Criação inicial</td>
+<td>Lucas</td>
+</tr>
+<tr>
+<td>v1.1</td>
+<td>14/06/2026</td>
+<td>Atualização para refletir implementação real: cookie dual-name, lookup por email, <code>requirePermission</code>, bypass de teste</td>
+<td>Lucas</td>
 </tr>
 </tbody>
 </table>
-<div style="width: 100%; max-width: 900px; margin: 1.5rem 0; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.15);">
-  <iframe style="width: 100%; aspect-ratio: 16/9; display: block;" src="https://www.youtube.com/embed/jh-bx7OkcYs" title="Apresentação da Unidade 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
-
-<blockquote>
-<p><strong>Nota:</strong> As evidências, validações, diagramas, cards e tudo o que é discutido no vídeo estão completamente documentados e disponíveis aqui no nosso GitHub Pages.</p>
-</blockquote></div>
+<hr />
+<h2 id="status">Status<a class="headerlink" href="#status" title="Permanent link">&para;</a></h2>
+<p><strong>Aceito</strong></p>
+<hr />
+<h2 id="contexto">Contexto<a class="headerlink" href="#contexto" title="Permanent link">&para;</a></h2>
+<p>O Crianex Hub possui duas superfícies distintas: uma vitrine pública (sem autenticação) e uma área administrativa protegida. É necessário um modelo de controle de acesso que:</p>
+<ul>
+<li>Bloqueie toda mutação de dados administrativos para usuários não autenticados;</li>
+<li>Permita granularidade futura sem refatoração estrutural;</li>
+<li>Seja auditável e testável de forma isolada;</li>
+<li>Não vaze informações de estrutura interna em respostas de erro (requisito OWASP — RNF07).</li>
+</ul>
+<hr />
+<h2 id="decisao">Decisão<a class="headerlink" href="#decisao" title="Permanent link">&para;</a></h2>
+<h3 id="roles-disponiveis">Roles disponíveis<a class="headerlink" href="#roles-disponiveis" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>owner</code></td>
+<td>Acesso completo ao painel administrativo; bypass implícito em <code>requirePermission</code></td>
+</tr>
+<tr>
+<td><code>member</code></td>
+<td>Acesso granular definido pela coluna <code>permissions</code> em <code>public.profiles</code></td>
+</tr>
+</tbody>
+</table>
+<p>Roles adicionais (ex: <code>viewer</code>, <code>support</code>) podem ser introduzidos sem quebrar a implementação atual — o middleware <code>requireRole</code> aceita qualquer string como parâmetro. Contudo, apenas <code>owner</code> e <code>member</code> são reconhecidos como roles administrativos válidos (<code>ADMIN_ROLES</code>); qualquer outro valor resolve em 403 na fase de <code>loadAdminProfile</code>.</p>
+<h3 id="como-o-role-e-codificado-no-jwt">Como o role é codificado no JWT<a class="headerlink" href="#como-o-role-e-codificado-no-jwt" title="Permanent link">&para;</a></h3>
+<p>O role <strong>não é codificado diretamente no JWT do Supabase</strong>. O fluxo é:</p>
+<ol>
+<li>O JWT emitido pelo Supabase Auth contém apenas o <code>sub</code> (UUID do usuário) e claims padrão do OpenID Connect.</li>
+<li>O middleware <code>validateJWT</code> extrai o access token da requisição (ver seção abaixo) e valida-o via <code>GET /auth/v1/user</code> da API REST do Supabase — delegando a verificação de assinatura ao Supabase.</li>
+<li>Após validação, <code>loadAdminProfile</code> busca o campo <code>role</code> e <code>status</code> na tabela <code>public.profiles</code> usando o <code>id</code> do usuário. Se não encontrar (ou o status não for <code>active</code>), faz um segundo lookup por <code>email</code> como fallback.</li>
+<li>O role resolvido é injetado em <code>response.locals.auth.user.role</code>.</li>
+</ol>
+<p>Essa abordagem evita que o role seja forjável via payload do JWT e mantém o role como atributo do banco de dados, onde o RLS é soberano.</p>
+<h3 id="extracao-do-token-de-acesso">Extração do token de acesso<a class="headerlink" href="#extracao-do-token-de-acesso" title="Permanent link">&para;</a></h3>
+<p><code>validateJWT</code> aceita o token de duas fontes, nesta ordem de precedência:</p>
+<ol>
+<li><strong>Header <code>Authorization: Bearer &lt;token&gt;</code></strong> — fluxo padrão para chamadas de API;</li>
+<li><strong>Cookie</strong> — aceita dois nomes alternativos:</li>
+<li><code>crianex_admin_access_token</code> — cookie gravado pelo fluxo de login via SvelteKit (browser);</li>
+<li><code>access_token</code> — cookie gravado pela rota de auth direta do backend (acesso via API).</li>
+</ol>
+<h3 id="lookup-de-perfil-e-guarda-de-status">Lookup de perfil e guarda de status<a class="headerlink" href="#lookup-de-perfil-e-guarda-de-status" title="Permanent link">&para;</a></h3>
+<p><code>loadAdminProfile</code> (<a href="../../../../backend/src/auth/auth.service.ts"><code>backend/src/auth/auth.service.ts</code></a>) aplica a seguinte lógica:</p>
+<ol>
+<li>Busca o perfil por <code>id = userId</code> em <code>public.profiles</code>;</li>
+<li>Se encontrado <strong>e</strong> <code>status = 'active'</code>, valida que <code>role</code> pertence a <code>ADMIN_ROLES = {'owner', 'member'}</code> — caso contrário, retorna 403;</li>
+<li>Se não encontrado ou <code>status ≠ 'active'</code>, faz um segundo lookup por <code>email</code> (normalizado para minúsculas);</li>
+<li>Se ainda assim ausente ou inativo, retorna 403 sem expor detalhes;</li>
+<li><code>normalizeRole</code> retorna <code>'member'</code> como padrão para valores nulos ou vazios.</li>
+</ol>
+<h3 id="implementacao-dos-middlewares">Implementação dos middlewares<a class="headerlink" href="#implementacao-dos-middlewares" title="Permanent link">&para;</a></h3>
+<p><strong>Fluxo padrão (rotas de owner):</strong></p>
+<pre class="highlight"><code>validateJWT  →  requireRole('owner')  →  handler</code></pre>
+<p><strong>Fluxo com permissão granular (rotas de member):</strong></p>
+<pre class="highlight"><code>validateJWT  →  requirePermission(module, action)  →  handler</code></pre>
+<ul>
+<li><strong><code>validateJWT</code></strong> (<a href="../../../../backend/src/middleware/validate-jwt.ts"><code>backend/src/middleware/validate-jwt.ts</code></a>): valida o token (Bearer ou cookie) e popula <code>response.locals.auth</code>. Retorna <code>401 { error: "Unauthorized" }</code> sem detalhes adicionais se o token estiver ausente ou inválido. Em ambiente não-produtivo, aceita o escape hatch <code>ADMIN_AUTH_BYPASS=true</code> (ver abaixo).</li>
+<li><strong><code>requireRole(role)</code></strong> (<a href="../../../../backend/src/middleware/require-role.ts"><code>backend/src/middleware/require-role.ts</code></a>): lê <code>response.locals.auth.user.role</code> e retorna <code>403 { error: "Forbidden" }</code> se o role não coincidir. Não expõe qual role é esperado.</li>
+<li><strong><code>requirePermission(module, action)</code></strong> (<a href="../../../../backend/src/middleware/require-permission.ts"><code>backend/src/middleware/require-permission.ts</code></a>): permite acesso direto a <code>owner</code>; para <code>member</code>, consulta a coluna <code>permissions</code> (JSONB <code>Record&lt;string, string[]&gt;</code>) em <code>public.profiles</code> e verifica se <code>permissions[module]</code> contém <code>action</code>. Ações suportadas: <code>'v'</code> (view), <code>'e'</code> (edit), <code>'a'</code> (admin). Retorna <code>403 { error: "Forbidden", module, action }</code> em caso de recusa — este body expõe <code>module</code> e <code>action</code>, aceitável por ser um endpoint autenticado.</li>
+</ul>
+<h3 id="escape-hatch-de-teste">Escape hatch de teste<a class="headerlink" href="#escape-hatch-de-teste" title="Permanent link">&para;</a></h3>
+<p><code>validateJWT</code> possui um bypass de autenticação para testes de integração:</p>
+<pre class="highlight"><code>ADMIN_AUTH_BYPASS=true  +  NODE_ENV ≠ 'production'
+→ injeta { id: 'bypass', name: 'Bypass', role: 'owner' } sem chamar o Supabase</code></pre>
+<p>A combinação das duas condições é hard-disabled em produção, prevenindo que uma variável de ambiente mal configurada conceda acesso administrativo inautenticado.</p>
+<h3 id="como-o-rls-do-supabase-referencia-o-role">Como o RLS do Supabase referencia o role<a class="headerlink" href="#como-o-rls-do-supabase-referencia-o-role" title="Permanent link">&para;</a></h3>
+<p>O RLS usa a função auxiliar <code>public.is_owner(user_id uuid)</code> (definida com <code>SECURITY DEFINER</code> para evitar recursão):</p>
+<pre class="highlight"><code class="language-sql">create or replace function public.is_owner(user_id uuid)
+returns boolean
+language sql
+security definer
+set search_path = public
+stable
+as $$
+  select exists (
+    select 1 from public.profiles
+    where id = user_id and role = 'owner'
+  );
+$$;</code></pre>
+<p>Policies que dependem de role referenciam esta função. Queries client-side sem token válido retornam <strong>zero rows</strong> (comportamento RLS padrão para <code>anon</code>) — não um erro 403 — o que evita enumeração de recursos.</p>
+<hr />
+<h2 id="consequencias">Consequências<a class="headerlink" href="#consequencias" title="Permanent link">&para;</a></h2>
+<h3 id="positivas">Positivas<a class="headerlink" href="#positivas" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Role check isolado em middleware testável independentemente;</li>
+<li><code>requirePermission</code> permite acesso granular sem novo middleware por rota;</li>
+<li>Nenhum detalhe interno vaza em respostas de erro de <code>requireRole</code> (401/403 sem body descritivo);</li>
+<li>RLS atua como segunda camada de defesa mesmo que o middleware seja bypassado;</li>
+<li>Extensível: adicionar <code>requireRole('member')</code> ou <code>requirePermission('novo-modulo', 'v')</code> sem mudança estrutural;</li>
+<li>Lookup por email como fallback garante retrocompatibilidade para perfis criados antes da sincronização de UUIDs.</li>
+</ul>
+<h3 id="trade-offs">Trade-offs<a class="headerlink" href="#trade-offs" title="Permanent link">&para;</a></h3>
+<ul>
+<li>O role requer um round-trip ao banco a cada requisição autenticada;</li>
+<li><code>requirePermission</code> faz um segundo round-trip ao banco para membros (owner é short-circuited);</li>
+<li>O body de 403 de <code>requirePermission</code> expõe <code>module</code> e <code>action</code> — aceitável em endpoints autenticados, mas diverge do comportamento de <code>requireRole</code>;</li>
+<li>JWTs não carregam o role — necessário se o Supabase emitir tokens auto-suficientes no futuro.</li>
+</ul>
+<hr />
+<h2 id="alternativas-descartadas">Alternativas Descartadas<a class="headerlink" href="#alternativas-descartadas" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Alternativa</th>
+<th>Motivo da rejeição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Codificar role no <code>app_metadata</code> do JWT</td>
+<td>Requer privilégio de service-role para escrita; cria inconsistência entre JWT e banco após troca de role</td>
+</tr>
+<tr>
+<td>Middleware único <code>requireAdminAuth</code> sem distinção de role</td>
+<td>Não permite granularidade futura; foi o estado anterior, substituído por esta decisão</td>
+</tr>
+<tr>
+<td>ABAC completo (Attribute-Based Access Control)</td>
+<td>Over-engineering para o escopo atual; <code>requirePermission</code> entrega granularidade suficiente</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="rastreabilidade">Rastreabilidade<a class="headerlink" href="#rastreabilidade" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Artefato</th>
+<th>Referência</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Feature</td>
+<td>F10 — Permitir acesso ao painel administrativo</td>
+</tr>
+<tr>
+<td>Issue</td>
+<td>#71</td>
+</tr>
+<tr>
+<td>CP</td>
+<td>CP5 — Painel de gerenciamento do administrador</td>
+</tr>
+<tr>
+<td>RNF</td>
+<td>RNF07 (OWASP), RNF08 (RLS), RNF09 (autenticação)</td>
+</tr>
+<tr>
+<td>RF</td>
+<td>RF relacionados à autenticação e CRUD admin</td>
+</tr>
+</tbody>
+</table></div>
         
         
     </div>
