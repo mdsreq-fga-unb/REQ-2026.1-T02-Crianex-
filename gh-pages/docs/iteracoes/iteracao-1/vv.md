@@ -11,7 +11,7 @@ Registro formal das mudanças de processo, escopo e achados de verificação ide
 | Categoria   | ID    | Descrição resumida                                                                          | Status |
 | ----------- | ----- | ------------------------------------------------------------------------------------------- | ------ |
 | Processo    | MP.01 | Modelo FDD: 100% iterativo → fase de construção iterativa                                   | ✅     |
-| Processo    | MP.02 | Direção da priorização: bottom-up → top-down                                                | ⏳     |
+| Processo    | MP.02 | Direção da priorização: bottom-up → top-down                                                | ✅     |
 | Escopo      | ES.01 | F02 removida — absorvida por F01                                                            | ⏳     |
 | Escopo      | ES.02 | F05 removida — RF07 reproposto + novo RF para F04                                           | ⏳     |
 | Escopo      | ES.03 | F07 absorvida por F06 — RF18 migra para F06                                                 | ⏳     |
@@ -48,7 +48,7 @@ Registro formal das mudanças de processo, escopo e achados de verificação ide
 | **Para (correto)** | **Top-down:** cada Feature recebe seu próprio cálculo **IP = VB/ES** validado pelo cliente; RFs dentro da feature podem ou não ter priorização interna                    |
 | **Motivação**      | Feature é a unidade de entrega de valor — o cliente prioriza funcionalidades, não requisitos individuais. Calcular IP no nível errado distorce o planejamento de iteração |
 | **Impacto**        | Reprocessar tabela de priorização do backlog aplicando o método correto                                                                                                   |
-| **Status**         | ⏳ Recalcular antes da IT2                                                                                                                                                |
+| **Status**         | ✅ realizado IT2                                                                                                                                                |
 
 ---
 

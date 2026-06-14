@@ -4,8 +4,8 @@
 
 | Versão | Data       | Descrição                                  | Autor(es) |
 | ------ | ---------- | ------------------------------------------ | --------- |
-| 1.0    | 06/06/2026 | Criação do documento                       | Lucas Z.  |
-| 1.1    | 06/06/2026 | Adicionei os diagramas de sequência formal | Lucas Z.  |
+| 1.0    | 06/06/2026 | Criação do documento                       | Lucas     |
+| 1.1    | 06/06/2026 | Adicionei os diagramas de sequência formal | Lucas     |
 
 ---
 

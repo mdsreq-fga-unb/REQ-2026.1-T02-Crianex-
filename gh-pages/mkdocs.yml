@@ -75,10 +75,12 @@ nav:
       - 'Rastreabilidade': backlog/rastreabilidade.md
       - 'Priorização': backlog/priorizacao.md
       - 'Mapa de Dependências': backlog/dependencias.md
-  - Arquitetura: arquitetura/index.md
+  - Arquitetura:
+      - 'Arquitetura': arquitetura/index.md
+      - 'Roles': arquitetura/roles.md
   - Apresentação:
       - 'Unidade 1': apresentacao/unidade-1.md
       - 'Unidade 2': apresentacao/unidade-2.md
-    # - "Unidade 3": apresentacao/unidade-3.md
+      - 'Unidade 3': apresentacao/unidade-3.md
     # - "Unidade 4": apresentacao/unidade-4.md
   - 'Referências': referencias.md

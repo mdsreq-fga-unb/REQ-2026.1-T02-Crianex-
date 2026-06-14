@@ -13,7 +13,7 @@
 
 ---
 
-## Árvore de Rastreabilidade — Visão Visual (Miro)
+## Árvore de Rastreabilidade (Miro)
 
 <iframe
   src="https://miro.com/app/live-embed/uXjVGl991V0=/?moveToWidget=3458764671557949874&cot=14"
