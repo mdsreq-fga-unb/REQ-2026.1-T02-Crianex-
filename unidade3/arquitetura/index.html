@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Plataforma de Gestão e Portfólio de Projetos SaaS" name="description"/>
+<meta content="Equipe Crianex" name="author"/>
+<link href="../img/favicon.ico" rel="shortcut icon"/>
+<title>Arquitetura - Crianex</title>
+<link href="https://use.fontawesome.com/releases/v5.12.0/css/all.css" rel="stylesheet"/>
+<link href="https://use.fontawesome.com/releases/v5.12.0/css/v4-shims.css" rel="stylesheet"/>
+<link href="//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.min.css" rel="stylesheet"/>
+<link href="//rsms.me/inter/inter.css" rel="stylesheet" type="text/css"/>
+<link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&amp;subset=latin-ext,latin" rel="stylesheet" type="text/css"/>
+<link href="../css/bootstrap-custom.min.css" rel="stylesheet"/>
+<link href="../css/base.min.css" rel="stylesheet"/>
+<link href="../css/cinder.min.css" rel="stylesheet"/>
+<link href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/styles/github.min.css" rel="stylesheet"/>
+<link href="../assets/extra.css" rel="stylesheet"/>
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+            <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+        <![endif]-->
+</head>
+<body>
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+<div class="container">
+<!-- Collapsed navigation -->
+<div class="navbar-header">
+<!-- Expander button -->
+<button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button">
+<span class="sr-only">Toggle navigation</span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</button>
+<!-- Main title -->
+<a class="navbar-brand" href="..">Crianex</a>
+</div>
+<!-- Expanded navigation -->
+<div class="navbar-collapse collapse">
+<!-- Main navigation -->
+<ul class="nav navbar-nav">
+<li>
+<a href="..">Home</a>
+</li>
+<li class="dropdown">
+<a class="dropdown-toggle" data-toggle="dropdown" href="#">Visão <b class="caret"></b></a>
+<ul class="dropdown-menu">
+<li>
+<a href="../visao/cenario/">1 · Cenário</a>
+</li>
+<li>
+<a href="../visao/solucao/">2 · Solução</a>
+</li>
+<li>
+<a href="../visao/estrategias/">3 · Estratégias</a>
+</li>
+<li>
+<a href="../visao/er/">4 · Eng. de Requisitos</a>
+</li>
+<li>
+<a href="../visao/cronograma/">5 · Cronograma</a>
+</li>
+<li>
+<a href="../visao/equipe/">6 · Equipe e Iteração</a>
+</li>
+<li>
+<a href="../visao/dor-dod/">7 · DoR e DoD</a>
+</li>
+<li class="dropdown-submenu">
+<a href="" tabindex="-1">Lições Aprendidas</a>
+<ul class="dropdown-menu">
+<li>
+<a href="../visao/10-licoes/10-1/">10.1 · Unidade 1</a>
+</li>
+<li>
+<a href="../visao/10-licoes/10-2/">10.2 · Unidade 2</a>
+</li>
+<li>
+<a href="../visao/10-licoes/10-3/">10.3 · Unidade 3</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="dropdown">
+<a class="dropdown-toggle" data-toggle="dropdown" href="#">Iterações <b class="caret"></b></a>
+<ul class="dropdown-menu">
+<li>
+<a href="../iteracoes/">Visão Geral</a>
+</li>
+<li class="dropdown-submenu">
+<a href="" tabindex="-1">Unidade 1</a>
+<ul class="dropdown-menu">
+<li>
+<a href="../iteracoes/unidade-1/">Resumo — Evidências</a>
+</li>
+<li>
+<a href="../iteracoes/unidade-1/atas/2026-04-09/">Ata — 09/04/2026</a>
+</li>
+</ul>
+</li>
+<li class="dropdown-submenu">
+<a href="" tabindex="-1">IT1 — Vitrine Pública</a>
+<ul class="dropdown-menu">
+<li>
+<a href="../iteracoes/iteracao-1/">Resumo</a>
+</li>
+<li>
+<a href="../iteracoes/iteracao-1/features-entregues/">Features Entregues</a>
+</li>
+<li class="dropdown-submenu">
+<a href="" tabindex="-1">Evidências</a>
+<ul class="dropdown-menu">
+<li>
+<a href="../iteracoes/iteracao-1/evidencias/design-tecnico/">Design Técnico</a>
+</li>
+<li>
+<a href="../iteracoes/iteracao-1/evidencias/prototipo/">Protótipo</a>
+</li>
+</ul>
+</li>
+<li class="dropdown-submenu">
+<a href="" tabindex="-1">Validação</a>
+<ul class="dropdown-menu">
+<li>
+<a href="../iteracoes/iteracao-1/validacao/partial/">Partial Client Validation</a>
+</li>
+<li>
+<a href="../iteracoes/iteracao-1/validacao/formal/">Formal Client Validation</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="../iteracoes/iteracao-1/vv/">Resultados V&amp;V</a>
+</li>
+<li class="dropdown-submenu">
+<a href="" tabindex="-1">Atas de Reunião</a>
+<ul class="dropdown-menu">
+<li>
+<a href="../iteracoes/iteracao-1/atas/2026-05-01/">Ata Compromisso das correções — 01/05/2026</a>
+</li>
+<li>
+<a href="../iteracoes/iteracao-1/atas/2026-05-10/">Ata Domain Modeling Iteration Replenishment &amp; Commitment — 10/05/2026</a>
+</li>
+<li>
+<a href="../iteracoes/iteracao-1/atas/2026-05-11/">Ata Feature Discovery Session — 11/05/2026</a>
+</li>
+<li>
+<a href="../iteracoes/iteracao-1/atas/2026-05-14/">Ata Refinamento Requisitos — 14/05/2026</a>
+</li>
+<li>
+<a href="../iteracoes/iteracao-1/atas/2026-05-17/">Ata Technical Design Review — 17/05/2026</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="dropdown-submenu">
+<a href="" tabindex="-1">IT2 — Lead Capture</a>
+<ul class="dropdown-menu">
+<li>
+<a href="../iteracoes/iteracao-2/">Resumo — Evidências</a>
+</li>
+</ul>
+</li>
+<li class="dropdown-submenu">
+<a href="" tabindex="-1">IT3 — Núcleo Operacional</a>
+<ul class="dropdown-menu">
+<li>
+<a href="../iteracoes/iteracao-3/">Resumo — Evidências</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="dropdown">
+<a class="dropdown-toggle" data-toggle="dropdown" href="#">Lista de Funcionalidades <b class="caret"></b></a>
+<ul class="dropdown-menu">
+<li>
+<a href="../backlog/rastreabilidade/">Rastreabilidade</a>
+</li>
+<li>
+<a href="../backlog/priorizacao/">Priorização</a>
+</li>
+<li>
+<a href="../backlog/dependencias/">Mapa de Dependências</a>
+</li>
+</ul>
+</li>
+<li class="active">
+<a href="./">Arquitetura</a>
+</li>
+<li class="dropdown">
+<a class="dropdown-toggle" data-toggle="dropdown" href="#">Apresentação <b class="caret"></b></a>
+<ul class="dropdown-menu">
+<li>
+<a href="../apresentacao/unidade-1/">Unidade 1</a>
+</li>
+<li>
+<a href="../apresentacao/unidade-2/">Unidade 2</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="../referencias/">Referências</a>
+</li>
+</ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+<a data-target="#mkdocs_search_modal" data-toggle="modal" href="#">
+<i class="fas fa-search"></i> Search
+                        </a>
+</li>
+<li>
+<a href="../backlog/dependencias/" rel="prev">
+<i class="fas fa-arrow-left"></i> Previous
+                        </a>
+</li>
+<li>
+<a href="../apresentacao/unidade-1/" rel="next">
+                            Next <i class="fas fa-arrow-right"></i>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container">
+<div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+<ul class="nav bs-sidenav">
+<li class="first-level active"><a href="#historico-de-revisao">Histórico de Revisão</a></li>
+<li class="first-level"><a href="#arquitetura-do-sistema-crianex-hub">Arquitetura do Sistema — Crianex Hub</a></li>
+<li class="second-level"><a href="#1-visao-geral">1. Visão Geral</a></li>
+<li class="second-level"><a href="#2-diagrama-de-arquitetura-geral">2. Diagrama de Arquitetura Geral</a></li>
+<li class="second-level"><a href="#3-fluxo-de-requisicao-vitrine-publica">3. Fluxo de Requisição — Vitrine Pública</a></li>
+<li class="third-level"><a href="#3a-listagem-de-produtos-via-express">3a — Listagem de Produtos (via Express)</a></li>
+<li class="third-level"><a href="#3b-faq-publico-supabase-client-direto-com-rls">3b — FAQ Público (Supabase Client direto, com RLS)</a></li>
+<li class="second-level"><a href="#4-fluxo-de-requisicao-area-administrativa">4. Fluxo de Requisição — Área Administrativa</a></li>
+<li class="second-level"><a href="#5-fluxo-de-autenticacao">5. Fluxo de Autenticação</a></li>
+<li class="second-level"><a href="#6-estrutura-de-modulos-do-backend">6. Estrutura de Módulos do Backend</a></li>
+<li class="second-level"><a href="#7-adr-001-monolito-modular-vs-microsservicos">7. ADR-001 — Monolito Modular vs. Microsserviços</a></li>
+<li class="third-level"><a href="#contexto">Contexto</a></li>
+<li class="third-level"><a href="#decisao">Decisão</a></li>
+<li class="third-level"><a href="#alternativa-rejeitada-microsservicos">Alternativa Rejeitada — Microsserviços</a></li>
+<li class="third-level"><a href="#consequencias-positivas">Consequências Positivas</a></li>
+<li class="third-level"><a href="#consequencias-negativas-e-riscos">Consequências Negativas e Riscos</a></li>
+<li class="second-level"><a href="#8-estrategia-de-deploy-por-fase">8. Estratégia de Deploy por Fase</a></li>
+<li class="third-level"><a href="#ambientes">Ambientes</a></li>
+<li class="third-level"><a href="#pipeline-cicd">Pipeline CI/CD</a></li>
+<li class="third-level"><a href="#adr-001-sveltekit-em-vez-de-reactnextjs">ADR-001 — SvelteKit em vez de React/Next.js</a></li>
+<li class="third-level"><a href="#adr-002-paraglide-js-para-i18n">ADR-002 — paraglide-js para i18n</a></li>
+<li class="third-level"><a href="#adr-003-argon2id-bcrypt-para-senhas">ADR-003 — Argon2id / bcrypt para senhas</a></li>
+<li class="third-level"><a href="#adr-004-rls-como-primeira-linha-de-defesa">ADR-004 — RLS como primeira linha de defesa</a></li>
+<li class="second-level"><a href="#9-rastreabilidade-arquitetural-rnfs">9. Rastreabilidade Arquitetural → RNFs</a></li>
+</ul>
+</div></div>
+<div class="col-md-9" role="main">
+<h2 id="historico-de-revisao">Histórico de Revisão<a class="headerlink" href="#historico-de-revisao" title="Permanent link">¶</a></h2>
+<table>
+<thead>
+<tr>
+<th>Versão</th>
+<th>Data</th>
+<th>Descrição</th>
+<th>Autor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>v1.0</td>
+<td>20/05/2026</td>
+<td>Documentação inicial da arquitetura</td>
+<td>Equipe Crianex</td>
+</tr>
+<tr>
+<td>v1.1</td>
+<td>06/06/2026</td>
+<td>Correção do diagrama geral (rotas públicas, módulos reais do backend, estrutura do repositório) e fluxos de requisição</td>
+<td>Lucas A. Zanetti</td>
+</tr>
+</tbody>
+</table>
+<h1 id="arquitetura-do-sistema-crianex-hub">Arquitetura do Sistema — Crianex Hub<a class="headerlink" href="#arquitetura-do-sistema-crianex-hub" title="Permanent link">¶</a></h1>
+<p>Visão técnica da plataforma Crianex Hub — diagramas, decisões de arquitetura (ADRs) e descrição dos componentes.</p>
+<hr/>
+<h2 id="1-visao-geral">1. Visão Geral<a class="headerlink" href="#1-visao-geral" title="Permanent link">¶</a></h2>
+<p>O Crianex Hub é uma plataforma SaaS composta por duas áreas funcionais distintas: uma <strong>vitrine pública</strong> (sem autenticação) voltada ao portfólio de produtos, captação de leads e FAQ institucional; e uma <strong>área administrativa autenticada</strong> que concentra o CRM Kanban, dashboard executivo, gestão financeira, tickets de suporte e notificações.</p>
+<p>A arquitetura adotada é <strong>Monolito Modular</strong> — uma aplicação Express.js com separação lógica por módulos internos, servida por um frontend SvelteKit com SSR. Essa decisão foi guiada por quatro critérios principais:</p>
+<ol>
+<li><strong>Prazo:</strong> ~2,5 semanas de desenvolvimento ativo, 3 iterações de entrega, 6 desenvolvedores com WIP limit de 2 por Class Owner — overhead de orquestração de microsserviços é incompatível com essa cadência.</li>
+<li><strong>Latência:</strong> RNF02 e RNF03 exigem resposta ≤ 2s em 95% das requisições; a comunicação intra-processo do monolito elimina a latência de rede entre serviços.</li>
+<li><strong>Integridade ACID:</strong> RNF06 exige consistência transacional na captação de leads; transações distribuídas (padrão Saga) adicionariam complexidade sem benefício no escopo atual.</li>
+<li><strong>Superfície de segurança:</strong> RNF07 (OWASP Top 10) é mais simples de cumprir com um único ponto de entrada e RLS centralizado no banco, em vez de múltiplos endpoints independentes.</li>
+</ol>
+<p>A estrutura modular garante que, se necessário no futuro, módulos possam ser extraídos como microsserviços sem refatoração estrutural — o desacoplamento lógico já está preservado.</p>
+<hr/>
+<h2 id="2-diagrama-de-arquitetura-geral">2. Diagrama de Arquitetura Geral<a class="headerlink" href="#2-diagrama-de-arquitetura-geral" title="Permanent link">¶</a></h2>
+<div class="mermaid">%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '15px', 'fontFamily': 'arial'}}}%%
+graph LR
+    B["🌐 Browser"]
+
+    subgraph FRONTEND["Frontend — SvelteKit + TypeScript"]
+        direction TB
+        PUB["(vitrine)"]
+        LOGIN["admin/login"]
+        ADM["(admin)"]
+    end
+
+    subgraph BACKEND["Backend — Express.js + TypeScript"]
+        direction TB
+        AUTH_MOD["auth"]
+        PROD_MOD["products (público)"]
+        LEAD_MOD["leads"]
+        MW["Middleware JWT"]
+        PROD_ADM["products (admin)"]
+        MBR_MOD["members"]
+        FAQ_MOD["faq"]
+        MW --&gt; PROD_ADM &amp; MBR_MOD &amp; FAQ_MOD
+    end
+
+    subgraph DADOS["Dados — Supabase / PostgreSQL"]
+        direction TB
+        SUPA_AUTH["Supabase Auth"]
+        SUPA_STORE["Supabase Storage"]
+        PG[("PostgreSQL")]
+    end
+
+    subgraph INFRA["Infra / CI-CD"]
+        direction TB
+        GHA["GitHub Actions"]
+        K8S["Kubernetes (pós-venda)"]
+        GHA --&gt;|"build → image → deploy"| K8S
+    end
+
+    B --&gt; PUB &amp; LOGIN &amp; ADM
+
+    PUB --&gt;|"GET /api/products"| PROD_MOD
+    PUB --&gt;|"POST /api/public/contact"| LEAD_MOD
+    PUB --&gt;|"Supabase Client (RLS)"| PG
+
+    LOGIN --&gt;|"OAuth / password → JWT cookie"| SUPA_AUTH
+
+    ADM --&gt;|"POST /api/auth/*"| AUTH_MOD
+    ADM --&gt;|"Bearer JWT"| MW
+    AUTH_MOD --&gt; SUPA_AUTH
+
+    PROD_ADM --&gt;|"upload"| SUPA_STORE
+    PROD_MOD &amp; LEAD_MOD &amp; PROD_ADM &amp; MBR_MOD &amp; FAQ_MOD --&gt; PG
+
+    style FRONTEND fill:#fff3e0,stroke:#e65100
+    style BACKEND fill:#e8f5e9,stroke:#2e7d32
+    style DADOS fill:#fce4ec,stroke:#880e4f
+    style INFRA fill:#f3e5f5,stroke:#4a148c</div>
+<div class="admonition note">
+<p class="admonition-title">Kubernetes — pós-venda</p>
+</div>
+<p>O nó Kubernetes está presente na arquitetura, mas não é utilizado durante as iterações de desenvolvimento (IT1–IT3). O ambiente de desenvolvimento usa Docker Compose local + Supabase gerenciado na nuvem.</p>
+<div class="admonition note">
+<p class="admonition-title">Duas estratégias de leitura pública</p>
+</div>
+<p>Produtos e leads passam pelo Express (controle de rate limit e lógica de negócio no servidor). Os artigos FAQ públicos são lidos via Supabase Client diretamente do SvelteKit SSR — a RLS do PostgreSQL (<code>published = true</code>) garante que apenas artigos publicados são retornados, sem necessidade de endpoint Express intermediário.</p>
+<hr/>
+<h2 id="3-fluxo-de-requisicao-vitrine-publica">3. Fluxo de Requisição — Vitrine Pública<a class="headerlink" href="#3-fluxo-de-requisicao-vitrine-publica" title="Permanent link">¶</a></h2>
+<p>A vitrine pública usa <strong>duas estratégias distintas</strong> dependendo do recurso:</p>
+<ul>
+<li><strong>Produtos e leads</strong>: passam pelo Express, onde há lógica de negócio e rate limiting.</li>
+<li><strong>FAQ públicos</strong>: lidos via Supabase Client direto no SvelteKit SSR — não existe endpoint Express público para FAQ; a RLS no banco garante que apenas artigos <code>published = true</code> são retornados.</li>
+</ul>
+<h3 id="3a-listagem-de-produtos-via-express">3a — Listagem de Produtos (via Express)<a class="headerlink" href="#3a-listagem-de-produtos-via-express" title="Permanent link">¶</a></h3>
+<div class="mermaid">sequenceDiagram
+    participant Nav as Navegador
+    participant SK as SvelteKit SSR
+    participant API as Express API
+    participant PG as PostgreSQL
+
+    Nav-&gt;&gt;SK: GET /produtos
+    activate SK
+    SK-&gt;&gt;API: GET /api/products
+    activate API
+    API-&gt;&gt;PG: SELECT * FROM products WHERE published = true ORDER BY display_order
+    activate PG
+    PG--&gt;&gt;API: products[]
+    deactivate PG
+    API--&gt;&gt;SK: 200 OK — JSON
+    deactivate API
+    SK--&gt;&gt;Nav: HTML renderizado (SSR) + hydration bundle
+    deactivate SK</div>
+<h3 id="3b-faq-publico-supabase-client-direto-com-rls">3b — FAQ Público (Supabase Client direto, com RLS)<a class="headerlink" href="#3b-faq-publico-supabase-client-direto-com-rls" title="Permanent link">¶</a></h3>
+<div class="mermaid">sequenceDiagram
+    participant Nav as Navegador
+    participant SK as SvelteKit SSR
+    participant SC as Supabase Client
+    participant PG as PostgreSQL (RLS ativa)
+
+    Nav-&gt;&gt;SK: GET /faq
+    activate SK
+    SK-&gt;&gt;SC: select * from faq_articles where published = true
+    activate SC
+    SC-&gt;&gt;PG: query (política RLS: published = true)
+    activate PG
+    PG--&gt;&gt;SC: articles[] (apenas publicados)
+    deactivate PG
+    SC--&gt;&gt;SK: articles[]
+    deactivate SC
+    SK--&gt;&gt;Nav: HTML renderizado (SSR) + hydration bundle
+    deactivate SK</div>
+<div class="admonition note">
+<p class="admonition-title">RLS como segunda linha de defesa</p>
+</div>
+<p>Mesmo na leitura direta via Supabase Client, a política RLS <code>published = true</code> é aplicada no banco — dados não publicados nunca chegam ao cliente, independente de quem faz a query.</p>
+<hr/>
+<h2 id="4-fluxo-de-requisicao-area-administrativa">4. Fluxo de Requisição — Área Administrativa<a class="headerlink" href="#4-fluxo-de-requisicao-area-administrativa" title="Permanent link">¶</a></h2>
+<p>Toda rota sob <code>/admin</code> passa pelo Express, que valida o JWT antes de executar qualquer query. Isso cria um único ponto de controle de acesso (RNF01) e permite filtragem por tenant no nível da aplicação.</p>
+<div class="mermaid">sequenceDiagram
+    participant Nav as Navegador
+    participant SK as SvelteKit
+    participant API as Express API
+    participant SA as Supabase Auth
+    participant PG as PostgreSQL
+
+    Nav-&gt;&gt;SK: GET /admin/crm
+    activate SK
+    SK-&gt;&gt;API: GET /api/crm/leads\nAuthorization: Bearer &lt;JWT&gt;
+    activate API
+    API-&gt;&gt;SA: verifyToken(JWT)
+    activate SA
+    SA--&gt;&gt;API: { user_id, role }
+    deactivate SA
+    API-&gt;&gt;PG: SELECT * FROM leads WHERE status = 'new'
+    activate PG
+    PG--&gt;&gt;API: leads[]
+    deactivate PG
+    API--&gt;&gt;SK: 200 OK — JSON payload
+    deactivate API
+    SK--&gt;&gt;Nav: página /admin/crm renderizada
+    deactivate SK</div>
+<hr/>
+<h2 id="5-fluxo-de-autenticacao">5. Fluxo de Autenticação<a class="headerlink" href="#5-fluxo-de-autenticacao" title="Permanent link">¶</a></h2>
+<p>A autenticação usa Supabase Auth como provedor de identidade. O SvelteKit armazena os tokens em cookie <code>httpOnly</code>, impedindo acesso por JavaScript no cliente — mitigação direta da vulnerabilidade OWASP A07 (XSS).</p>
+<div class="mermaid">sequenceDiagram
+    participant U as Usuário
+    participant SK as SvelteKit
+    participant SA as Supabase Auth
+    participant CK as Cookie httpOnly
+    participant API as Express API
+
+    U-&gt;&gt;SK: POST /admin/login\n{ email, senha }
+    activate SK
+    SK-&gt;&gt;SA: signInWithPassword({ email, password })
+    activate SA
+    SA--&gt;&gt;SK: { access_token, refresh_token, user }
+    deactivate SA
+    SK-&gt;&gt;CK: Set-Cookie: sb-access-token (httpOnly, Secure, SameSite=Strict)
+    SK--&gt;&gt;U: 302 → /admin/dashboard
+    deactivate SK
+
+    U-&gt;&gt;SK: GET /admin/dashboard
+    activate SK
+    SK-&gt;&gt;API: GET /api/dashboard\nAuthorization: Bearer &lt;access_token&gt;
+    activate API
+    API-&gt;&gt;SA: verifyToken(access_token)
+    activate SA
+    SA--&gt;&gt;API: { user, role, tenant_id }
+    deactivate SA
+    API--&gt;&gt;SK: dados protegidos (JSON)
+    deactivate API
+    SK--&gt;&gt;U: página /admin/dashboard renderizada
+    deactivate SK</div>
+<div class="admonition warning">
+<p class="admonition-title">Mitigação OWASP A07 — XSS</p>
+</div>
+<p>O cookie <code>httpOnly</code> impede que qualquer script client-side acesse o token de sessão. Combinado com <code>Secure</code> (HTTPS only) e <code>SameSite=Strict</code> (bloqueio CSRF), essa configuração atende ao controle A07 do OWASP Top 10 sem necessidade de lógica adicional na aplicação.</p>
+<hr/>
+<h2 id="6-estrutura-de-modulos-do-backend">6. Estrutura de Módulos do Backend<a class="headerlink" href="#6-estrutura-de-modulos-do-backend" title="Permanent link">¶</a></h2>
+<p>O Express é organizado em módulos independentes, cada um com seu próprio <code>router</code>, <code>controller</code> e <code>service</code>. O middleware de JWT (<code>validateJWT</code> + <code>requireRole('owner')</code>) é aplicado nas rotas <code>/api/admin/*</code> antes de qualquer lógica de módulo ser executada. Rotas públicas (<code>/api/products</code>, <code>/api/public/contact</code>, <code>/api/health</code>) não passam pelo middleware.</p>
+<div class="mermaid">graph LR
+    Router[Express Router]
+
+    Router --&gt;|"/api/auth/*"| auth[auth\nlogin · logout · refresh · session]
+    Router --&gt;|"/api/products\n(público)"| products[products\ncatálogo SaaS público]
+    Router --&gt;|"/api/public/contact\n(público)"| leads[leads\ncaptação · rate limit]
+    Router --&gt;|"/api/health\n(público)"| health[health\nstatus]
+
+    Router --&gt;|"/api/admin/*"| MW["Middleware JWT\nvalidateJWT\nrequireRole('owner')"]
+    MW --&gt; admin_products[products admin\nCRUD · upload · publicação]
+    MW --&gt; members[members\nCRUD · ativar/inativar]
+    MW --&gt; faq[faq\ncategorias · artigos · publicação]
+
+    auth --&gt; SUPA_AUTH[(Supabase Auth)]
+    admin_products --&gt; STORE[(Supabase Storage)]
+    admin_products --&gt; DB[(PostgreSQL)]
+    products --&gt; DB
+    leads --&gt; DB
+    members --&gt; DB
+    faq --&gt; DB</div>
+<div class="admonition tip">
+<p class="admonition-title">Módulos futuros (IT2 e IT3)</p>
+</div>
+<p>CRM, tickets, financeiro e notificações serão adicionados nas iterações IT2 e IT3. A estrutura modular do Express permite adicionar novos módulos sem alterar os existentes.</p>
+<hr/>
+<h2 id="7-adr-001-monolito-modular-vs-microsservicos">7. ADR-001 — Monolito Modular vs. Microsserviços<a class="headerlink" href="#7-adr-001-monolito-modular-vs-microsservicos" title="Permanent link">¶</a></h2>
+<p><strong>Título:</strong> ADR-001 — Adoção de Monolito Modular em vez de Microsserviços</p>
+<p><strong>Status:</strong> Aceito</p>
+<p><strong>Data:</strong> 20/05/2026</p>
+<hr/>
+<h3 id="contexto">Contexto<a class="headerlink" href="#contexto" title="Permanent link">¶</a></h3>
+<p>O projeto Crianex Hub possui as seguintes restrições e requisitos não-funcionais que condicionaram a escolha arquitetural:</p>
+<ul>
+<li><strong>Prazo:</strong> ~10 semanas de desenvolvimento, 3 iterações de entrega, 6 desenvolvedores operando com WIP limit de 2 por Class Owner (metodologia FDD + Scrumban Enxuto).</li>
+<li><strong>RNF02 e RNF03:</strong> Tempo de resposta ≤ 2s em 95% das requisições, tanto na vitrine pública quanto na área administrativa.</li>
+<li><strong>RNF06:</strong> Integridade transacional ACID obrigatória na captação de leads (inserção atômica de lead + evento de notificação).</li>
+<li><strong>RNF07:</strong> Conformidade com OWASP Top 10 — minimizar superfície de ataque e pontos de falha de autenticação/autorização.</li>
+<li><strong>Infra:</strong> Kubernetes disponível apenas na fase pós-venda; durante o desenvolvimento, o ambiente é Docker Compose local.</li>
+</ul>
+<hr/>
+<h3 id="decisao">Decisão<a class="headerlink" href="#decisao" title="Permanent link">¶</a></h3>
+<p>Adotar <strong>Monolito Modular</strong> com separação lógica por módulos dentro do Express.js, compartilhando um único banco PostgreSQL via Supabase, e servido por um único frontend SvelteKit com rotas separadas por contexto (<code>(public)</code> e <code>(admin)</code>).</p>
+<hr/>
+<h3 id="alternativa-rejeitada-microsservicos">Alternativa Rejeitada — Microsserviços<a class="headerlink" href="#alternativa-rejeitada-microsservicos" title="Permanent link">¶</a></h3>
+<p>A alternativa de microsserviços foi avaliada e rejeitada pelos seguintes motivos:</p>
+<table>
+<thead>
+<tr>
+<th>Critério</th>
+<th>Problema com Microsserviços</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Latência (RNF02, RNF03)</strong></td>
+<td>Comunicação inter-serviço via HTTP/gRPC adiciona latência de rede não controlável, tornando difícil garantir ≤ 2s em 95% das requisições sem camada de cache adicional.</td>
+</tr>
+<tr>
+<td><strong>ACID (RNF06)</strong></td>
+<td>Transações distribuídas exigem o padrão Saga ou Two-Phase Commit — complexidade desproporcional ao escopo do projeto e com risco real de inconsistência eventual.</td>
+</tr>
+<tr>
+<td><strong>Segurança (RNF07)</strong></td>
+<td>Múltiplos endpoints independentes ampliam a superfície de ataque. Cada serviço precisa de sua própria validação JWT, aumentando o risco de lacunas de autorização.</td>
+</tr>
+<tr>
+<td><strong>Prazo e capacidade</strong></td>
+<td>Service mesh, service discovery, múltiplos Dockerfiles, comunicação assíncrona (mensageria) e observabilidade distribuída são inviáveis em 10 semanas com 6 desenvolvedores.</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h3 id="consequencias-positivas">Consequências Positivas<a class="headerlink" href="#consequencias-positivas" title="Permanent link">¶</a></h3>
+<ul>
+<li>Entrega incremental possível desde a IT1 sem dependência de infra complexa.</li>
+<li>Isolamento lógico por módulo sem custo de latência de rede entre serviços.</li>
+<li>Path claro de extração futura: a separação por módulos já respeita fronteiras de domínio — extrair um módulo como microsserviço no futuro requer mover código, não refatorar arquitetura.</li>
+<li>Testes mais simples: uma codebase, um banco, uma pipeline CI — cobertura de 45% (RNF17) é mais fácil de atingir e medir.</li>
+<li>Transações ACID nativas sem padrões de consistência eventual.</li>
+</ul>
+<hr/>
+<h3 id="consequencias-negativas-e-riscos">Consequências Negativas e Riscos<a class="headerlink" href="#consequencias-negativas-e-riscos" title="Permanent link">¶</a></h3>
+<table>
+<thead>
+<tr>
+<th>Risco</th>
+<th>Mitigação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>O monolito escala inteiro mesmo quando apenas um módulo está sob carga</td>
+<td>Kubernetes com réplicas do Express (pós-venda) — aceitável no prazo atual</td>
+</tr>
+<tr>
+<td>Acoplamento acidental entre módulos (imports diretos fora da interface pública)</td>
+<td>Revisão de imports no code review é critério de DoD; proibido chamar repositórios de outro módulo diretamente</td>
+</tr>
+<tr>
+<td>Banco compartilhado como ponto único de falha</td>
+<td>Supabase gerenciado tem SLA de 99.9% e backup automático — risco aceito para o escopo do projeto</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h2 id="8-estrategia-de-deploy-por-fase">8. Estratégia de Deploy por Fase<a class="headerlink" href="#8-estrategia-de-deploy-por-fase" title="Permanent link">¶</a></h2>
+<h3 id="ambientes">Ambientes<a class="headerlink" href="#ambientes" title="Permanent link">¶</a></h3>
+<table>
+<thead>
+<tr>
+<th>Fase</th>
+<th>Ambiente</th>
+<th>Estratégia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Individual (dev)</td>
+<td>Local — <code>supabase start</code> (Docker)</td>
+<td>Supabase CLI sobe instância completa localmente; sem conta necessária</td>
+</tr>
+<tr>
+<td>Integração (equipe)</td>
+<td>Projeto Supabase da equipe (free tier)</td>
+<td>Migrations aplicadas via <code>supabase db push</code>; compartilhado pela equipe</td>
+</tr>
+<tr>
+<td>Produção</td>
+<td>Projeto Supabase da Crianex (Otávio)</td>
+<td><code>supabase db push --linked</code> após validação em staging; acesso liberado pela Crianex</td>
+</tr>
+<tr>
+<td>Pós-venda</td>
+<td>Cluster Kubernetes Crianex</td>
+<td>GitHub Actions: build → push image → <code>kubectl apply</code></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Fluxo de schema (issues de DB)</p>
+</div>
+<p>Cada issue de schema gera <strong>um arquivo de migration SQL</strong> em <code>supabase/migrations/</code>. O dev escreve
+a migration localmente (<code>supabase start</code> + <code>supabase db diff</code>), testa com <code>supabase db reset</code> e
+abre PR com o arquivo versionado. O CI aplica automaticamente no projeto de integração da equipe.
+O projeto da Crianex só recebe a migration na entrega de cada iteração.</p>
+<h3 id="pipeline-cicd">Pipeline CI/CD<a class="headerlink" href="#pipeline-cicd" title="Permanent link">¶</a></h3>
+<p>O pipeline é executado pelo GitHub Actions a cada push na branch <code>main</code> (via Pull Request aprovado):</p>
+<pre class="highlight"><code>Push → main
+  │
+  ├── lint (ESLint + Prettier)
+  ├── typecheck (tsc --noEmit)
+  ├── test (Vitest — cobertura mínima 45%)
+  └── build
+        ├── Docker image: crianex/web:sha
+        └── Docker image: crianex/api:sha
+              │
+              └── [pós-venda] push → registry → kubectl apply -f k8s/</code></pre>
+<p>Durante as iterações IT1–IT3, o pipeline para após o <code>build</code> — o deploy em Kubernetes não está ativo. O ambiente de homologação usa <code>docker compose up</code> com as imagens geradas localmente.</p>
+<div class="admonition warning">
+<p class="admonition-title">Proteção da branch main</p>
+</div>
+<p>Todo merge em <code>main</code> requer ao menos 1 aprovação de revisor via Pull Request. Commits diretos na <code>main</code> são bloqueados por regra de branch protection no GitHub. Essa regra está alinhada com o DoD da metodologia FDD + Scrumban Enxuto do projeto.</p>
+<h3 id="adr-001-sveltekit-em-vez-de-reactnextjs">ADR-001 — SvelteKit em vez de React/Next.js<a class="headerlink" href="#adr-001-sveltekit-em-vez-de-reactnextjs" title="Permanent link">¶</a></h3>
+<p><strong>Contexto:</strong> necessidade de SSR para SEO (OE2) e bundle pequeno para vitrine pública.</p>
+<table>
+<thead>
+<tr>
+<th>Critério</th>
+<th>SvelteKit</th>
+<th>React / Next.js</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bundle size</td>
+<td>Sem runtime virtual DOM</td>
+<td>Runtime React incluído</td>
+</tr>
+<tr>
+<td>SSR + SEO</td>
+<td>Nativo, simples</td>
+<td>Configuração extra</td>
+</tr>
+<tr>
+<td>Curva de aprendizado</td>
+<td>HTML/CSS/JS puro</td>
+<td>JSX + hooks</td>
+</tr>
+<tr>
+<td>Bilinguismo</td>
+<td>paraglide-js nativo SvelteKit</td>
+<td>next-intl ou react-i18next</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Decisão:</strong> SvelteKit com <code>adapter-node</code> para SSR em produção.</p>
+<h3 id="adr-002-paraglide-js-para-i18n">ADR-002 — paraglide-js para i18n<a class="headerlink" href="#adr-002-paraglide-js-para-i18n" title="Permanent link">¶</a></h3>
+<p><strong>Contexto:</strong> vitrine bilíngue PT/EN com troca em 1 clique (RNF13), SSR obrigatório.</p>
+<p><strong>Decisão:</strong> <code>@inlang/paraglide-sveltekit</code> — integração nativa com SvelteKit, mensagens tree-shakeable (só o que é usado vai para o bundle), sem overhead de runtime no cliente.</p>
+<h3 id="adr-003-argon2id-bcrypt-para-senhas">ADR-003 — Argon2id / bcrypt para senhas<a class="headerlink" href="#adr-003-argon2id-bcrypt-para-senhas" title="Permanent link">¶</a></h3>
+<p>Supabase Auth gerencia o hash. Fator mínimo 12 (RNF08).</p>
+<h3 id="adr-004-rls-como-primeira-linha-de-defesa">ADR-004 — RLS como primeira linha de defesa<a class="headerlink" href="#adr-004-rls-como-primeira-linha-de-defesa" title="Permanent link">¶</a></h3>
+<p>Row Level Security no PostgreSQL garante isolamento de dados mesmo em acessos diretos do frontend via Supabase JS client — não depender apenas de validações da camada de aplicação.</p>
+<h2 id="9-rastreabilidade-arquitetural-rnfs">9. Rastreabilidade Arquitetural → RNFs<a class="headerlink" href="#9-rastreabilidade-arquitetural-rnfs" title="Permanent link">¶</a></h2>
+<table>
+<thead>
+<tr>
+<th>Decisão Arquitetural</th>
+<th>RNFs Atendidos</th>
+<th>Justificativa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SvelteKit SSR (<code>load()</code> server-side)</td>
+<td>RNF02, RNF04, RNF05</td>
+<td>HTML pré-renderizado no servidor reduz TTFB; SSR nativo; metadados Open Graph e sitemap por rota</td>
+</tr>
+<tr>
+<td>Acesso direto Supabase Client (leitura pública)</td>
+<td>RNF02</td>
+<td>Elimina round-trip ao Express para rotas públicas, mantendo latência abaixo de 2s</td>
+</tr>
+<tr>
+<td>Express modular — chamada local, sem rede inter-serviço</td>
+<td>RNF03</td>
+<td>Latência intra-processo (&lt; 1ms) em vez de HTTP entre serviços; resposta admin ≤ 2s garantida</td>
+</tr>
+<tr>
+<td>Supabase Auth + JWT + cookie <code>httpOnly</code></td>
+<td>RNF01, RNF07</td>
+<td>Isolamento da rota <code>/admin</code> via middleware; cookie <code>httpOnly</code> mitiga XSS (OWASP A07)</td>
+</tr>
+<tr>
+<td>RLS no PostgreSQL</td>
+<td>RNF07</td>
+<td>Controle de acesso no nível do banco elimina privilege escalation mesmo em falhas de aplicação</td>
+</tr>
+<tr>
+<td>Transação única PostgreSQL via Supabase</td>
+<td>RNF06</td>
+<td>ACID nativo sem saga; inserção atômica de lead + notificação sem risco de inconsistência</td>
+</tr>
+<tr>
+<td>Shadcn/ui + design tokens (Tailwind)</td>
+<td>RNF12</td>
+<td>Componentes responsivos por padrão; uma codebase para mobile, tablet e desktop</td>
+</tr>
+<tr>
+<td>Monorepo TypeScript com <code>packages/shared</code></td>
+<td>RNF16, RNF17</td>
+<td>Stack obrigatória preservada; tipos compartilhados reduzem superfície de bug; cobertura unificada</td>
+</tr>
+<tr>
+<td>Kubernetes + réplicas Express (pós-venda)</td>
+<td>RNF14</td>
+<td>Escala horizontal do backend sem alterações de código; orquestração via cluster gerenciado pela Crianex</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<footer class="col-md-12 text-center">
+<hr/>
+<p>
+<small>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</small>
+</p>
+</footer>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="../js/bootstrap-3.0.3.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script>var base_url = ".."</script>
+<script src="../js/base.js"></script>
+<script src="../assets/nav-click.js"></script>
+<script src="../search/main.js"></script>
+<div aria-hidden="true" aria-labelledby="searchModalLabel" class="modal" id="mkdocs_search_modal" role="dialog" tabindex="-1">
+<div class="modal-dialog modal-lg">
+<div class="modal-content">
+<div class="modal-header">
+<button class="close" data-dismiss="modal" type="button">
+<span aria-hidden="true">×</span>
+<span class="sr-only">Close</span>
+</button>
+<h4 class="modal-title" id="searchModalLabel">Search</h4>
+</div>
+<div class="modal-body">
+<p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+<form>
+<div class="form-group">
+<input class="form-control" id="mkdocs-search-query" placeholder="Search..." title="Type search term here" type="text"/>
+</div>
+</form>
+<div id="mkdocs-search-results"></div>
+</div>
+<div class="modal-footer">
+</div>
+</div>
+</div>
+</div><div aria-hidden="true" aria-labelledby="keyboardModalLabel" class="modal" id="mkdocs_keyboard_modal" role="dialog" tabindex="-1">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+<button class="close" data-dismiss="modal" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+</div>
+<div class="modal-body">
+<table class="table">
+<thead>
+<tr>
+<th style="width: 20%;">Keys</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="help shortcut"><kbd>?</kbd></td>
+<td>Open this help</td>
+</tr>
+<tr>
+<td class="next shortcut"><kbd>n</kbd></td>
+<td>Next page</td>
+</tr>
+<tr>
+<td class="prev shortcut"><kbd>p</kbd></td>
+<td>Previous page</td>
+</tr>
+<tr>
+<td class="search shortcut"><kbd>s</kbd></td>
+<td>Search</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="modal-footer">
+</div>
+</div>
+</div>
+</div>
+<script type="module">import mermaid from "https://unpkg.com/mermaid@10.4.0/dist/mermaid.esm.min.mjs";
+mermaid.initialize({});</script></body>
+</html>

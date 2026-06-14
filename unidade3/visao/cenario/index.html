@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Plataforma de Gestão e Portfólio de Projetos SaaS">
+    <meta name="author" content="Equipe Crianex">
+    
+    <link rel="shortcut icon" href="../../img/favicon.ico">
+
+    
+    <title>1 · Cenário - Crianex</title>
+    
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/v4-shims.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.min.css">
+    <link href='//rsms.me/inter/inter.css' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
+    <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="../../css/base.min.css" rel="stylesheet">
+    <link href="../../css/cinder.min.css" rel="stylesheet">
+
+    
+        
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/styles/github.min.css">
+        
+    
+    <link href="../../assets/extra.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+        <![endif]-->
+
+    
+
+     
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+
+            
+              <a class="navbar-brand" href="../..">Crianex</a>
+            
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="../..">Home</a>
+                    </li>
+                
+                
+                
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Visão <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li class="active">
+    <a href="./">1 · Cenário</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../solucao/">2 · Solução</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../estrategias/">3 · Estratégias</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../er/">4 · Eng. de Requisitos</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../cronograma/">5 · Cronograma</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../equipe/">6 · Equipe e Iteração</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../dor-dod/">7 · DoR e DoD</a>
+</li>
+
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Lições Aprendidas</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../10-licoes/10-1/">10.1 · Unidade 1</a>
+</li>
+
+        
+            
+<li >
+    <a href="../10-licoes/10-2/">10.2 · Unidade 2</a>
+</li>
+
+        
+            
+<li >
+    <a href="../10-licoes/10-3/">10.3 · Unidade 3</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Iterações <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../../iteracoes/">Visão Geral</a>
+</li>
+
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Unidade 1</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../iteracoes/unidade-1/">Resumo — Evidências</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../iteracoes/unidade-1/atas/2026-04-09/">Ata — 09/04/2026</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">IT1 — Vitrine Pública</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../iteracoes/iteracao-1/">Resumo</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../iteracoes/iteracao-1/features-entregues/">Features Entregues</a>
+</li>
+
+        
+            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Evidências</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../iteracoes/iteracao-1/evidencias/design-tecnico/">Design Técnico</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../iteracoes/iteracao-1/evidencias/prototipo/">Protótipo</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+        
+            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Validação</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../iteracoes/iteracao-1/validacao/partial/">Partial Client Validation</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../iteracoes/iteracao-1/validacao/formal/">Formal Client Validation</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+        
+            
+<li >
+    <a href="../../iteracoes/iteracao-1/vv/">Resultados V&V</a>
+</li>
+
+        
+            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Atas de Reunião</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../iteracoes/iteracao-1/atas/2026-05-01/">Ata Compromisso das correções — 01/05/2026</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../iteracoes/iteracao-1/atas/2026-05-10/">Ata Domain Modeling Iteration Replenishment & Commitment — 10/05/2026</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../iteracoes/iteracao-1/atas/2026-05-11/">Ata Feature Discovery Session — 11/05/2026</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../iteracoes/iteracao-1/atas/2026-05-14/">Ata Refinamento Requisitos — 14/05/2026</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../iteracoes/iteracao-1/atas/2026-05-17/">Ata Technical Design Review — 17/05/2026</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+        
+    </ul>
+  </li>
+
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">IT2 — Lead Capture</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../iteracoes/iteracao-2/">Resumo — Evidências</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">IT3 — Núcleo Operacional</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../iteracoes/iteracao-3/">Resumo — Evidências</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Lista de Funcionalidades <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../../backlog/rastreabilidade/">Rastreabilidade</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../backlog/priorizacao/">Priorização</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../backlog/dependencias/">Mapa de Dependências</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../../arquitetura/">Arquitetura</a>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Apresentação <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../../apresentacao/unidade-1/">Unidade 1</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../apresentacao/unidade-2/">Unidade 2</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../../referencias/">Referências</a>
+                    </li>
+                
+                
+                </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                            <i class="fas fa-search"></i> Search
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="prev" href="../..">
+                            <i class="fas fa-arrow-left"></i> Previous
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="next" href="../solucao/">
+                            Next <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <div class="container">
+        
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="first-level active"><a href="#1-cenario-atual-do-cliente-e-do-negocio">1. Cenário Atual do Cliente e do Negócio</a></li>
+            <li class="second-level"><a href="#historico-de-revisao">Histórico de Revisão</a></li>
+                
+            <li class="second-level"><a href="#11-identificacao-do-cliente">1.1 Identificação do Cliente</a></li>
+                
+            <li class="second-level"><a href="#12-introducao-ao-problema">1.2 Introdução ao Problema</a></li>
+                
+                <li class="third-level"><a href="#121-contexto-organizacional">1.2.1 Contexto Organizacional</a></li>
+                <li class="third-level"><a href="#122-problema-de-visibilidade-interna">1.2.2 Problema de Visibilidade Interna</a></li>
+                <li class="third-level"><a href="#123-problema-de-visibilidade-externa">1.2.3 Problema de Visibilidade Externa</a></li>
+                <li class="third-level"><a href="#124-oportunidade-identificada">1.2.4 Oportunidade Identificada</a></li>
+            <li class="second-level"><a href="#13-rich-picture">1.3 Rich Picture</a></li>
+                
+            <li class="second-level"><a href="#14-detalhamento-do-problema">1.4 Detalhamento do Problema</a></li>
+                
+                <li class="third-level"><a href="#diagrama-de-ishikawa">Diagrama de Ishikawa</a></li>
+            <li class="second-level"><a href="#15-desafios">1.5 Desafios</a></li>
+                
+            <li class="second-level"><a href="#16-mapa-de-stakeholders">1.6 Mapa de Stakeholders</a></li>
+                
+            <li class="second-level"><a href="#17-segmentacao-de-clientes">1.7 Segmentação de Clientes</a></li>
+                
+                <li class="third-level"><a href="#171-administradores-internos-socios-e-gestores-da-crianex">1.7.1 Administradores internos (sócios e gestores da Crianex)</a></li>
+                <li class="third-level"><a href="#172-clientes-empresariais-da-crianex-compradores-dos-saas">1.7.2 Clientes empresariais da Crianex (compradores dos SaaS)</a></li>
+                <li class="third-level"><a href="#173-visitantes-e-leads-da-vitrine-potenciais-clientes">1.7.3 Visitantes e leads da vitrine (potenciais clientes)</a></li>
+                <li class="third-level"><a href="#174-equipe-tecnica-da-crianex-desenvolvedores-e-mantenedores">1.7.4 Equipe técnica da Crianex (desenvolvedores e mantenedores)</a></li>
+    </ul>
+</div></div>
+        <div class="col-md-9" role="main">
+
+<h1 id="1-cenario-atual-do-cliente-e-do-negocio">1. Cenário Atual do Cliente e do Negócio<a class="headerlink" href="#1-cenario-atual-do-cliente-e-do-negocio" title="Permanent link">&para;</a></h1>
+<h2 id="historico-de-revisao">Histórico de Revisão<a class="headerlink" href="#historico-de-revisao" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Versão</th>
+<th>Data</th>
+<th>Descrição</th>
+<th>Autor(es)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.0</td>
+<td>01/04/2026</td>
+<td>Criação das seções 1.1 a 1.8</td>
+<td>Lucas A. Zanetti</td>
+</tr>
+<tr>
+<td>1.1</td>
+<td>03/04/2026</td>
+<td>Revisão geral</td>
+<td>Equipe Crianex</td>
+</tr>
+<tr>
+<td>1.2</td>
+<td>09/04/2026</td>
+<td>Ajustes pós reunião de alinhamento</td>
+<td>Equipe Crianex</td>
+</tr>
+<tr>
+<td>1.3</td>
+<td>05/05/2026</td>
+<td>Detalhamento narrativo da seção 1.4 com contexto do problema e solução esperada</td>
+<td>Lucas A. Zanetti</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="11-identificacao-do-cliente">1.1 Identificação do Cliente<a class="headerlink" href="#11-identificacao-do-cliente" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Informação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Empresa</strong></td>
+<td>Crianex Software House</td>
+</tr>
+<tr>
+<td><strong>Segmento</strong></td>
+<td>Desenvolvimento de software B2B sob demanda</td>
+</tr>
+<tr>
+<td><strong>CTO</strong></td>
+<td>Otávio Maya</td>
+</tr>
+<tr>
+<td><strong>CSO</strong></td>
+<td>Vitor Marconi</td>
+</tr>
+<tr>
+<td><strong>Modelo de negócio</strong></td>
+<td>Software House que desenvolve soluções digitais para clientes corporativos</td>
+</tr>
+<tr>
+<td><strong>Perfil operacional</strong></td>
+<td>Múltiplos projetos simultâneos com equipe distribuída</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="12-introducao-ao-problema">1.2 Introdução ao Problema<a class="headerlink" href="#12-introducao-ao-problema" title="Permanent link">&para;</a></h2>
+<p>A <strong>Crianex</strong> é uma Software House B2B especializada no desenvolvimento de soluções digitais sob demanda para empresas. Atuando com múltiplos projetos simultâneos e uma equipe distribuída, a organização enfrenta dificuldades crescentes para gerenciar internamente o status de cada projeto e, ao mesmo tempo, apresentar seu portfólio de maneira eficaz ao mercado externo.</p>
+<p>A gestão operacional e a divulgação dos produtos e entregas ocorrem de forma descentralizada e sem padronização, dificultando o acompanhamento das atividades, a organização das informações e a visibilidade das soluções desenvolvidas pela empresa. Esse cenário gera retrabalho, inconsistências na comunicação, dificuldade no acesso às informações relevantes e limita a capacidade de apresentar os resultados e diferenciais da empresa de forma clara para potenciais clientes e parceiros.</p>
+<h3 id="121-contexto-organizacional">1.2.1 Contexto Organizacional<a class="headerlink" href="#121-contexto-organizacional" title="Permanent link">&para;</a></h3>
+<p>A Crianex opera com uma estrutura enxuta onde gestores técnicos acumulam responsabilidades de acompanhamento de projetos e relacionamento com clientes. A ausência de uma plataforma centralizada força o uso paralelo de planilhas, chats e ferramentas genéricas de gestão que não se comunicam entre si.</p>
+<h3 id="122-problema-de-visibilidade-interna">1.2.2 Problema de Visibilidade Interna<a class="headerlink" href="#122-problema-de-visibilidade-interna" title="Permanent link">&para;</a></h3>
+<p>O acompanhamento do status de projetos é feito de forma descentralizada: cada gestor mantém seu próprio registro, sem uma visão consolidada para a liderança. Isso resulta em reuniões frequentes de alinhamento e dificuldade para identificar gargalos ou riscos em tempo real.</p>
+<h3 id="123-problema-de-visibilidade-externa">1.2.3 Problema de Visibilidade Externa<a class="headerlink" href="#123-problema-de-visibilidade-externa" title="Permanent link">&para;</a></h3>
+<p>A Crianex não possui uma vitrine digital estruturada para apresentar seu portfólio ao mercado. O portfólio é comunicado ad hoc, via apresentações manuais ou conversas, sem um canal digital profissional que facilite a captação de novos clientes B2B.</p>
+<h3 id="124-oportunidade-identificada">1.2.4 Oportunidade Identificada<a class="headerlink" href="#124-oportunidade-identificada" title="Permanent link">&para;</a></h3>
+<p>A unificação da gestão operacional interna com uma vitrine digital pública em uma única plataforma representa uma oportunidade de alto valor para a Crianex: reduz retrabalho interno e aumenta simultaneamente a capacidade de captação comercial.</p>
+<hr />
+<h2 id="13-rich-picture">1.3 Rich Picture<a class="headerlink" href="#13-rich-picture" title="Permanent link">&para;</a></h2>
+<p>O cenário atual mostra a Crianex operando com múltiplos sistemas isolados para gerir produtos, clientes, tickets e faturamento. Os clientes interagem com cada SaaS de forma separada, sem uma vitrine comum. A proposta visualiza a centralização onde o administrador gerencia o portfólio e o faturamento da empresa em um único ponto, além de possuir uma vitrine digital, a fim de divulgar seus softwares para expandir o alcance de seus serviços.</p>
+<p>O Rich Picture abaixo representa o contexto do sistema e os fluxos de informação entre os principais atores e componentes do produto.</p>
+<p><img alt="Rich Picture" src="../images/rich-picture.png" /></p>
+<figure class="crianex-figure">
+  <figcaption>Figura 2 — Rich Picture: contexto do sistema e fluxos de informação. Fonte: Elaborado pelos autores (2026).</figcaption>
+</figure>
+
+<hr />
+<h2 id="14-detalhamento-do-problema">1.4 Detalhamento do Problema<a class="headerlink" href="#14-detalhamento-do-problema" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Problema Principal:</th>
+<th>Baixo impacto competitivo no mercado de desenvolvimento de SaaS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>A Crianex não dispõe de vitrine digital própria para apresentar seu portfólio de produtos SaaS ao mercado B2B. A divulgação dos produtos Avali, Pontua, Notifly e demais soluções ocorre exclusivamente por contato direto — apresentações manuais, e-mails e conversas — sem canal digital indexável por mecanismos de busca e sem formulário de captação de leads. Como consequência direta, potenciais clientes que buscam fornecedores de SaaS por meios digitais não encontram a empresa, eliminando um canal de geração de demanda sem custo por contato.</p>
+<p>Internamente, o acompanhamento de projetos é feito de forma individual por cada gestor, sem integração entre as ferramentas utilizadas — planilhas, Discord, e-mail e sistemas genéricos. A liderança não tem acesso a painel consolidado de status de projetos: o único mecanismo de alinhamento disponível são reuniões periódicas convocadas para sincronizar informações que deveriam estar disponíveis em tempo real. Esse modelo impede a identificação antecipada de riscos e atrasos e aumenta o tempo gasto com coordenação em detrimento da execução.</p>
+<p>A combinação dos dois fatores — ausência de canal digital de divulgação e gestão operacional sem ferramenta centralizada — faz com que a Crianex tenha um baixo impacto competitivo no mercado de desenvolvimento SaaS, visto que a presença digital é impactada negativamente pela ausência de dados gerenciais não centralizados dos produtos da Crianex.</p>
+<h3 id="diagrama-de-ishikawa">Diagrama de Ishikawa<a class="headerlink" href="#diagrama-de-ishikawa" title="Permanent link">&para;</a></h3>
+<p>O diagrama abaixo sintetiza as causas raiz que levam ao problema central identificado: a baixa visibilidade e a gestão descentralizada.</p>
+<p><img alt="Diagrama de Ishikawa" src="../images/ishikawa.png" /></p>
+<figure class="crianex-figure">
+  <figcaption>Figura 1 — Diagrama de Ishikawa: causas da gestão descentralizada e baixa visibilidade. Fonte: Elaborado pelos autores (2026).</figcaption>
+</figure>
+
+<hr />
+<h2 id="15-desafios">1.5 Desafios<a class="headerlink" href="#15-desafios" title="Permanent link">&para;</a></h2>
+<p>Os principais desafios técnicos e organizacionais identificados para o desenvolvimento do produto são:</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Desafio</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>Restruturação da Interface</strong></td>
+<td>Necessidade de reformular o site com base na identidade visual da empresa, adotando um layout responsivo que se adapte a diferentes dispositivos (como celulares e desktops). O desafio consiste em aplicar, de forma consistente, princípios de design contemporâneo, como layout minimalista, uso adequado de espaçamento (white space), tipografia padronizada e organização clara das informações, garantindo uma melhor experiência do usuário. Além disso, é necessário assegurar que essas mudanças consigam refletir a qualidade técnica da empresa e contribuir para o aumento de sua credibilidade.</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Integração de Gestão</strong></td>
+<td>Consolidar diferentes funcionalidades, como gestão de clientes (CRM), controle de tickets de atendimento, faturamento e registro de atividades e projetos, em uma única plataforma estável e integrada. Esse processo envolve a unificação de dados, a padronização de processos e a garantia de comunicação eficiente entre os módulos, de modo a evitar inconsistências e retrabalho. Além disso, é necessário assegurar que o sistema mantenha desempenho, segurança e confiabilidade, mesmo com a centralização dessas operações.</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Segurança e Escalabilidade</strong></td>
+<td>Implementar a solução em conformidade com as diretrizes da OWASP, e paralelamente, assegurando que a plataforma seja escalável capaz de suportar o aumento progressivo de usuários e volume de dados sem perda de desempenho.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="16-mapa-de-stakeholders">1.6 Mapa de Stakeholders<a class="headerlink" href="#16-mapa-de-stakeholders" title="Permanent link">&para;</a></h2>
+<p>O diagrama abaixo representa os principais stakeholders do projeto e sua relação com o produto.</p>
+<p><img alt="Diagrama de Stakeholders" src="../images/stakeholders.png" /></p>
+<figure class="crianex-figure">
+  <figcaption>Figura 3 — Mapa de Stakeholders: principais partes interessadas e seu relacionamento com o produto. Fonte: Elaborado pelos autores (2026).</figcaption>
+</figure>
+
+<table>
+<thead>
+<tr>
+<th>Stakeholder</th>
+<th>Papel</th>
+<th>Interesse principal</th>
+<th>Influência</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Sócios da Crianex</strong></td>
+<td>Patrocinadores e decisores do projeto</td>
+<td>Validar direção estratégica, garantir retorno e crescimento do negócio.</td>
+<td>Alta</td>
+</tr>
+<tr>
+<td><strong>Otávio Maya</strong></td>
+<td>Representante do cliente</td>
+<td>Validar escopo do projeto, entregas e suas ordens.</td>
+<td>Alta</td>
+</tr>
+<tr>
+<td><strong>Clientes da Crianex</strong></td>
+<td>Compradores/assinantes dos SaaS</td>
+<td>Controlar a vitrine digital, dashboards e suporte ao usuário.</td>
+<td>Média</td>
+</tr>
+<tr>
+<td><strong>Usuário do Saas</strong></td>
+<td>Usuários finais dos SaaS oferecidos</td>
+<td>Acessar e solicitar serviços oferecidos</td>
+<td>Baixa</td>
+</tr>
+<tr>
+<td><strong>Equipe de Desenvolvimento</strong></td>
+<td>Responsáveis pela construção e entrega do produto.</td>
+<td>Entregar uma implementação técnica e viável do produto</td>
+<td>Alta</td>
+</tr>
+<tr>
+<td><strong>George Marsicano</strong></td>
+<td>Representante da faculdade</td>
+<td>Validação do projeto em relação às diretrizes da disciplina.</td>
+<td>Alta</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="17-segmentacao-de-clientes">1.7 Segmentação de Clientes<a class="headerlink" href="#17-segmentacao-de-clientes" title="Permanent link">&para;</a></h2>
+<p>A plataforma Crianex Hub atende a perfis distintos de usuários, cada um com necessidades, objetivos e formas de interação diferentes com o sistema:</p>
+<h3 id="171-administradores-internos-socios-e-gestores-da-crianex">1.7.1 Administradores internos (sócios e gestores da Crianex)<a class="headerlink" href="#171-administradores-internos-socios-e-gestores-da-crianex" title="Permanent link">&para;</a></h3>
+<p>Perfil de alta influência e poder de decisão. Utilizam o painel administrativo para acompanhar logs, dashboards financeiros, o CRM de clientes e o gerenciamento dos produtos SaaS expostos na vitrine. Seu interesse principal é ter visibilidade centralizada sobre a operação e os resultados do negócio, substituindo o uso de planilhas e sistemas isolados. Interagem com o sistema de forma recorrente e com alto grau de autonomia técnica.</p>
+<h3 id="172-clientes-empresariais-da-crianex-compradores-dos-saas">1.7.2 Clientes empresariais da Crianex (compradores dos SaaS)<a class="headerlink" href="#172-clientes-empresariais-da-crianex-compradores-dos-saas" title="Permanent link">&para;</a></h3>
+<p>Empresas que contratam ou avaliam as soluções da Crianex (Avali, Pontua, Notifly e futuros produtos). Acessam a vitrine digital para conhecer o portfólio, comparam funcionalidades entre os produtos e utilizam o formulário de contato para iniciar negociações. Após a contratação, podem abrir tickets de suporte e acompanhar o status dos chamados. Seu interesse é encontrar rapidamente a solução adequada ao seu problema de negócio e ter suporte ágil pós-contratação.</p>
+<h3 id="173-visitantes-e-leads-da-vitrine-potenciais-clientes">1.7.3 Visitantes e leads da vitrine (potenciais clientes)<a class="headerlink" href="#173-visitantes-e-leads-da-vitrine-potenciais-clientes" title="Permanent link">&para;</a></h3>
+<p>Público externo que chega à vitrine digital sem ter relação prévia com a Crianex. Podem ser atraídos por busca orgânica (SEO, razão pela qual o SvelteKit é preferível ao React) ou indicação. Não possuem acesso ao painel administrativo. Seu comportamento é exploratório: avaliam o portfólio, leem a página institucional e, se houver interesse, submetem o formulário de contato, tornando-se leads no CRM interno. Incluem tanto o mercado nacional quanto internacional, dado o suporte bilíngue da plataforma.</p>
+<h3 id="174-equipe-tecnica-da-crianex-desenvolvedores-e-mantenedores">1.7.4 Equipe técnica da Crianex (desenvolvedores e mantenedores)<a class="headerlink" href="#174-equipe-tecnica-da-crianex-desenvolvedores-e-mantenedores" title="Permanent link">&para;</a></h3>
+<p>Perfil técnico que acompanha logs de aplicação, monitora status de projetos e acessa o painel de monitoramento centralizado. Seu interesse é ter rastreabilidade rápida de erros, visibilidade do estado dos produtos em produção e acesso ao histórico de tickets vinculados a cada SaaS. É um usuário interno do sistema, mas com necessidades distintas dos gestores, com foco em diagnóstico técnico, não em decisão estratégica.</p></div>
+        
+        
+    </div>
+
+    
+      <footer class="col-md-12 text-center">
+          
+          
+            <hr>
+            <p>
+            <small>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</small>
+            </p>
+          
+
+          
+          
+      </footer>
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../../js/bootstrap-3.0.3.min.js"></script>
+
+    
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/highlight.min.js"></script>
+        
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    <script>var base_url = "../.."</script>
+    
+    <script src="../../js/base.js"></script>
+    <script src="../../assets/nav-click.js"></script>
+    <script src="../../search/main.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+    </body>
+
+</html>

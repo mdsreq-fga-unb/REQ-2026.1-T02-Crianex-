@@ -1,0 +1,1501 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Plataforma de Gestão e Portfólio de Projetos SaaS" name="description"/>
+<meta content="Equipe Crianex" name="author"/>
+<link href="../../../img/favicon.ico" rel="shortcut icon"/>
+<title>Features Entregues - Crianex</title>
+<link href="https://use.fontawesome.com/releases/v5.12.0/css/all.css" rel="stylesheet"/>
+<link href="https://use.fontawesome.com/releases/v5.12.0/css/v4-shims.css" rel="stylesheet"/>
+<link href="//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.min.css" rel="stylesheet"/>
+<link href="//rsms.me/inter/inter.css" rel="stylesheet" type="text/css"/>
+<link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&amp;subset=latin-ext,latin" rel="stylesheet" type="text/css"/>
+<link href="../../../css/bootstrap-custom.min.css" rel="stylesheet"/>
+<link href="../../../css/base.min.css" rel="stylesheet"/>
+<link href="../../../css/cinder.min.css" rel="stylesheet"/>
+<link href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/styles/github.min.css" rel="stylesheet"/>
+<link href="../../../assets/extra.css" rel="stylesheet"/>
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+            <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+        <![endif]-->
+</head>
+<body>
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+<div class="container">
+<!-- Collapsed navigation -->
+<div class="navbar-header">
+<!-- Expander button -->
+<button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button">
+<span class="sr-only">Toggle navigation</span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</button>
+<!-- Main title -->
+<a class="navbar-brand" href="../../..">Crianex</a>
+</div>
+<!-- Expanded navigation -->
+<div class="navbar-collapse collapse">
+<!-- Main navigation -->
+<ul class="nav navbar-nav">
+<li>
+<a href="../../..">Home</a>
+</li>
+<li class="dropdown">
+<a class="dropdown-toggle" data-toggle="dropdown" href="#">Visão <b class="caret"></b></a>
+<ul class="dropdown-menu">
+<li>
+<a href="../../../visao/cenario/">1 · Cenário</a>
+</li>
+<li>
+<a href="../../../visao/solucao/">2 · Solução</a>
+</li>
+<li>
+<a href="../../../visao/estrategias/">3 · Estratégias</a>
+</li>
+<li>
+<a href="../../../visao/er/">4 · Eng. de Requisitos</a>
+</li>
+<li>
+<a href="../../../visao/cronograma/">5 · Cronograma</a>
+</li>
+<li>
+<a href="../../../visao/equipe/">6 · Equipe e Iteração</a>
+</li>
+<li>
+<a href="../../../visao/dor-dod/">7 · DoR e DoD</a>
+</li>
+<li class="dropdown-submenu">
+<a href="" tabindex="-1">Lições Aprendidas</a>
+<ul class="dropdown-menu">
+<li>
+<a href="../../../visao/10-licoes/10-1/">10.1 · Unidade 1</a>
+</li>
+<li>
+<a href="../../../visao/10-licoes/10-2/">10.2 · Unidade 2</a>
+</li>
+<li>
+<a href="../../../visao/10-licoes/10-3/">10.3 · Unidade 3</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="dropdown active">
+<a class="dropdown-toggle" data-toggle="dropdown" href="#">Iterações <b class="caret"></b></a>
+<ul class="dropdown-menu">
+<li>
+<a href="../../">Visão Geral</a>
+</li>
+<li class="dropdown-submenu">
+<a href="" tabindex="-1">Unidade 1</a>
+<ul class="dropdown-menu">
+<li>
+<a href="../../unidade-1/">Resumo — Evidências</a>
+</li>
+<li>
+<a href="../../unidade-1/atas/2026-04-09/">Ata — 09/04/2026</a>
+</li>
+</ul>
+</li>
+<li class="dropdown-submenu">
+<a href="" tabindex="-1">IT1 — Vitrine Pública</a>
+<ul class="dropdown-menu">
+<li>
+<a href="../">Resumo</a>
+</li>
+<li class="active">
+<a href="./">Features Entregues</a>
+</li>
+<li class="dropdown-submenu">
+<a href="" tabindex="-1">Evidências</a>
+<ul class="dropdown-menu">
+<li>
+<a href="../evidencias/design-tecnico/">Design Técnico</a>
+</li>
+<li>
+<a href="../evidencias/prototipo/">Protótipo</a>
+</li>
+</ul>
+</li>
+<li class="dropdown-submenu">
+<a href="" tabindex="-1">Validação</a>
+<ul class="dropdown-menu">
+<li>
+<a href="../validacao/partial/">Partial Client Validation</a>
+</li>
+<li>
+<a href="../validacao/formal/">Formal Client Validation</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="../vv/">Resultados V&amp;V</a>
+</li>
+<li class="dropdown-submenu">
+<a href="" tabindex="-1">Atas de Reunião</a>
+<ul class="dropdown-menu">
+<li>
+<a href="../atas/2026-05-01/">Ata Compromisso das correções — 01/05/2026</a>
+</li>
+<li>
+<a href="../atas/2026-05-10/">Ata Domain Modeling Iteration Replenishment &amp; Commitment — 10/05/2026</a>
+</li>
+<li>
+<a href="../atas/2026-05-11/">Ata Feature Discovery Session — 11/05/2026</a>
+</li>
+<li>
+<a href="../atas/2026-05-14/">Ata Refinamento Requisitos — 14/05/2026</a>
+</li>
+<li>
+<a href="../atas/2026-05-17/">Ata Technical Design Review — 17/05/2026</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="dropdown-submenu">
+<a href="" tabindex="-1">IT2 — Lead Capture</a>
+<ul class="dropdown-menu">
+<li>
+<a href="../../iteracao-2/">Resumo — Evidências</a>
+</li>
+</ul>
+</li>
+<li class="dropdown-submenu">
+<a href="" tabindex="-1">IT3 — Núcleo Operacional</a>
+<ul class="dropdown-menu">
+<li>
+<a href="../../iteracao-3/">Resumo — Evidências</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="dropdown">
+<a class="dropdown-toggle" data-toggle="dropdown" href="#">Lista de Funcionalidades <b class="caret"></b></a>
+<ul class="dropdown-menu">
+<li>
+<a href="../../../backlog/rastreabilidade/">Rastreabilidade</a>
+</li>
+<li>
+<a href="../../../backlog/priorizacao/">Priorização</a>
+</li>
+<li>
+<a href="../../../backlog/dependencias/">Mapa de Dependências</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="../../../arquitetura/">Arquitetura</a>
+</li>
+<li class="dropdown">
+<a class="dropdown-toggle" data-toggle="dropdown" href="#">Apresentação <b class="caret"></b></a>
+<ul class="dropdown-menu">
+<li>
+<a href="../../../apresentacao/unidade-1/">Unidade 1</a>
+</li>
+<li>
+<a href="../../../apresentacao/unidade-2/">Unidade 2</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="../../../referencias/">Referências</a>
+</li>
+</ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+<a data-target="#mkdocs_search_modal" data-toggle="modal" href="#">
+<i class="fas fa-search"></i> Search
+                        </a>
+</li>
+<li>
+<a href="../" rel="prev">
+<i class="fas fa-arrow-left"></i> Previous
+                        </a>
+</li>
+<li>
+<a href="../evidencias/design-tecnico/" rel="next">
+                            Next <i class="fas fa-arrow-right"></i>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container">
+<div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+<ul class="nav bs-sidenav">
+<li class="first-level active"><a href="#it1-features-entregues">IT1 — Features Entregues</a></li>
+<li class="second-level"><a href="#historico-de-revisao">Histórico de Revisão</a></li>
+<li class="second-level"><a href="#cp5-painel-de-gerenciamento-do-administrador">CP5 — Painel de Gerenciamento do Administrador</a></li>
+<li class="third-level"><a href="#f09-autenticar-administradores">F09 — Autenticar administradores</a></li>
+<li class="third-level"><a href="#f10-acessar-painel-administrativo">F10 — Acessar painel administrativo</a></li>
+<li class="third-level"><a href="#f11-gerenciar-membros-da-crianex">F11 — Gerenciar membros da Crianex</a></li>
+<li class="second-level"><a href="#cp4-vitrine-publica-de-produtos-saas">CP4 — Vitrine Pública de Produtos SaaS</a></li>
+<li class="third-level"><a href="#f12-exibir-catalogo-de-produtos-saas">F12 — Exibir catálogo de produtos SaaS</a></li>
+<li class="third-level"><a href="#f13-publicar-despublicar-produto-saas">F13 — Publicar / despublicar produto SaaS</a></li>
+<li class="third-level"><a href="#f14-formulario-de-contato">F14 — Formulário de contato</a></li>
+<li class="third-level"><a href="#f15-pagina-institucional-sobre-a-crianex">F15 — Página institucional (Sobre a Crianex)</a></li>
+<li class="second-level"><a href="#cp6-faq-e-base-de-conhecimentos-por-produto">CP6 — FAQ e Base de Conhecimentos por Produto</a></li>
+<li class="third-level"><a href="#f16-crud-de-artigos-de-faq">F16 — CRUD de artigos de FAQ</a></li>
+<li class="third-level"><a href="#f17-publicar-despublicar-artigo-de-faq">F17 — Publicar / despublicar artigo de FAQ</a></li>
+<li class="third-level"><a href="#f18-avaliacao-de-artigos-de-faq">F18 — Avaliação de artigos de FAQ</a></li>
+</ul>
+</div></div>
+<div class="col-md-9" role="main">
+<h1 id="it1-features-entregues">IT1 — Features Entregues<a class="headerlink" href="#it1-features-entregues" title="Permanent link">¶</a></h1>
+<h2 id="historico-de-revisao">Histórico de Revisão<a class="headerlink" href="#historico-de-revisao" title="Permanent link">¶</a></h2>
+<table>
+<thead>
+<tr>
+<th>Versão</th>
+<th>Data</th>
+<th>Descrição</th>
+<th>Autor(es)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.0</td>
+<td>06/06/2026</td>
+<td>Criação do documento</td>
+<td>Lucas Z.</td>
+</tr>
+<tr>
+<td>1.1</td>
+<td>06/06/2026</td>
+<td>Adicionei os diagramas de sequência formal</td>
+<td>Lucas Z.</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<p>Registro das features entregues na IT1 — Vitrine Pública (28/04 – 25/05). Para cada feature estão reservados espaços para evidências de funcionamento, validação do cliente e rastreabilidade de PRs/issues.</p>
+<hr/>
+<h2 id="cp5-painel-de-gerenciamento-do-administrador">CP5 — Painel de Gerenciamento do Administrador<a class="headerlink" href="#cp5-painel-de-gerenciamento-do-administrador" title="Permanent link">¶</a></h2>
+<h3 id="f09-autenticar-administradores">F09 — Autenticar administradores<a class="headerlink" href="#f09-autenticar-administradores" title="Permanent link">¶</a></h3>
+<blockquote>
+<p><strong>Issues:</strong> <a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/54">#54</a><br/>
+<strong>RFs cobertos:</strong> RF08, RF09<br/>
+<strong>RNFs cobertos:</strong> RNF01, RNF03</p>
+</blockquote>
+<h4 id="diagrama-de-sequencia-formal">Diagrama de Sequência Formal<a class="headerlink" href="#diagrama-de-sequencia-formal" title="Permanent link">¶</a></h4>
+<div class="mermaid">sequenceDiagram
+    participant U as Usuário
+    participant SK as SvelteKit
+    participant SA as Supabase Auth
+    participant CK as Cookie httpOnly
+
+    Note over U,CK: Cenário 1 — Login com credenciais válidas
+    U-&gt;&gt;SK: POST /admin/login { email, senha }
+    SK-&gt;&gt;SA: signInWithPassword({ email, password })
+    SA--&gt;&gt;SK: { access_token, refresh_token, user }
+    SK-&gt;&gt;CK: Set-Cookie: sb-access-token (httpOnly, Secure, SameSite=Strict)
+    SK--&gt;&gt;U: 302 → /admin/dashboard
+
+    Note over U,CK: Cenário 2 — Credenciais inválidas
+    U-&gt;&gt;SK: POST /admin/login { email, senha errada }
+    SK-&gt;&gt;SA: signInWithPassword(...)
+    SA--&gt;&gt;SK: 401 AuthApiError
+    SK--&gt;&gt;U: mensagem genérica de erro (sem detalhes internos)
+
+    Note over U,CK: Cenário 3 — Logout
+    U-&gt;&gt;SK: POST /admin/logout
+    SK-&gt;&gt;SA: signOut()
+    SA--&gt;&gt;SK: ok
+    SK-&gt;&gt;CK: clear sb-access-token
+    SK--&gt;&gt;U: 302 → /admin/login</div>
+<h4 id="criterios-de-aceite-atendidos">Critérios de Aceite Atendidos<a class="headerlink" href="#criterios-de-aceite-atendidos" title="Permanent link">¶</a></h4>
+<table>
+<thead>
+<tr>
+<th>Critério (BDD)</th>
+<th>RF / RNF</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Login com credenciais válidas → Supabase Auth gera sessão JWT → redirect <code>/admin/dashboard</code></td>
+<td>RF08</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>MFA ativo → código TOTP solicitado antes de emitir sessão</td>
+<td>RF08 · RNF08</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Credenciais inválidas → 401 + mensagem genérica sem expor detalhes internos</td>
+<td>RF08</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Logout → <code>signOut()</code> + invalida <code>refresh_token</code> + limpa cookie + redirect <code>/admin/login</code></td>
+<td>RF09</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Acesso a <code>/admin</code> sem sessão → redirect <code>/admin/login</code> sem renderizar dados do painel</td>
+<td>RF09 · RNF01</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Tempo de autenticação ≤ 2s</td>
+<td>RNF03</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<h4 id="evidencias-de-funcionamento">Evidências de Funcionamento<a class="headerlink" href="#evidencias-de-funcionamento" title="Permanent link">¶</a></h4>
+<p><strong>Tela de Login</strong></p>
+<p><img alt="Página de login com campos de e-mail e senha" src="../images/F09.1.png"/></p>
+<hr/>
+<p><strong>Autenticação de Dois Fatores (2FA)</strong></p>
+<p>Após inserir as credenciais, o usuário escaneia o QR Code no aplicativo autenticador e digita o código TOTP gerado.</p>
+<p><img alt="QR Code exibido para configuração do 2FA" src="../images/F09.2.png"/></p>
+<p><img alt="Tela de inserção do código 2FA" src="../images/F09.3.png"/></p>
+<hr/>
+<h4 id="validacao-do-cliente">Validação do Cliente<a class="headerlink" href="#validacao-do-cliente" title="Permanent link">¶</a></h4>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Data</th>
+<th>Resultado</th>
+<th>Observação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Partial Validation</td>
+<td>—</td>
+<td>✅</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Formal Validation</td>
+<td>—</td>
+<td>⬜</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h4 id="observacoes">Observações<a class="headerlink" href="#observacoes" title="Permanent link">¶</a></h4>
+<ul>
+<li>Sessão gerenciada inteiramente pelo Supabase Auth; token armazenado em cookie <code>httpOnly</code> (não <code>localStorage</code>) para mitigar XSS.</li>
+<li>Erro 401 retorna mensagem genérica intencionalmente — não diferencia "e-mail inexistente" de "senha errada", prevenindo enumeração de usuários.</li>
+<li>MFA via TOTP (RFC 6238): o QR Code é gerado pelo Supabase Auth SDK no cliente e não trafega pelo backend da aplicação.</li>
+</ul>
+<hr/>
+<h3 id="f10-acessar-painel-administrativo">F10 — Acessar painel administrativo<a class="headerlink" href="#f10-acessar-painel-administrativo" title="Permanent link">¶</a></h3>
+<blockquote>
+<p><strong>Issues:</strong> <a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/57">#57</a><br/>
+<strong>RFs cobertos:</strong> RF10<br/>
+<strong>RNFs cobertos:</strong> RNF01, RNF03, RNF09</p>
+</blockquote>
+<h4 id="diagrama-de-sequencia-formal_1">Diagrama de Sequência Formal<a class="headerlink" href="#diagrama-de-sequencia-formal_1" title="Permanent link">¶</a></h4>
+<div class="mermaid">sequenceDiagram
+    participant U as Usuário
+    participant SK as SvelteKit
+    participant CK as Cookie httpOnly
+    participant SA as Supabase Auth
+    participant EX as Express API
+    participant DB as Supabase DB
+
+    Note over U,DB: Cenário 1 — JWT válido com role owner
+    U-&gt;&gt;SK: GET /admin/dashboard
+    SK-&gt;&gt;CK: lê sb-access-token
+    CK--&gt;&gt;SK: access_token
+    SK-&gt;&gt;EX: GET /api/dashboard Authorization: Bearer &lt;access_token&gt;
+    EX-&gt;&gt;SA: verifyToken(access_token)
+    SA--&gt;&gt;EX: { user, role }
+    EX-&gt;&gt;DB: query (RLS filtra por auth.uid() + auth.role())
+    DB--&gt;&gt;EX: dados autorizados (JSON)
+    EX--&gt;&gt;SK: 200 { dados protegidos }
+    SK--&gt;&gt;U: painel renderizado
+
+    Note over U,DB: Cenário 2 — JWT expirado
+    U-&gt;&gt;SK: GET /admin/dashboard
+    SK-&gt;&gt;CK: lê sb-access-token (expirado)
+    SK-&gt;&gt;SA: refreshSession(refresh_token)
+    alt refresh bem-sucedido
+        SA--&gt;&gt;SK: novo access_token
+        SK-&gt;&gt;CK: atualiza cookie
+        SK-&gt;&gt;EX: GET /api/dashboard (novo token)
+        EX--&gt;&gt;SK: 200 dados
+        SK--&gt;&gt;U: painel renderizado
+    else refresh falhou
+        SA--&gt;&gt;SK: erro de refresh
+        SK-&gt;&gt;CK: clear cookie
+        SK--&gt;&gt;U: 302 → /admin/login
+    end
+
+    Note over U,DB: Cenário 3 — Sem role owner
+    U-&gt;&gt;EX: GET /api/dashboard (token sem role owner)
+    EX-&gt;&gt;SA: verifyToken(access_token)
+    SA--&gt;&gt;EX: { user, role: 'member' }
+    EX--&gt;&gt;SK: 403 Forbidden
+    SK--&gt;&gt;U: 302 → /admin/login (sem renderizar dados)</div>
+<h4 id="criterios-de-aceite-atendidos_1">Critérios de Aceite Atendidos<a class="headerlink" href="#criterios-de-aceite-atendidos_1" title="Permanent link">¶</a></h4>
+<table>
+<thead>
+<tr>
+<th>Critério (BDD)</th>
+<th>RF / RNF</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>JWT válido com <code>role = owner</code> → RLS filtra por <code>auth.uid()</code> + <code>auth.role()</code> → painel renderizado sem reload</td>
+<td>RF10 · RNF09</td>
+<td>⬜</td>
+</tr>
+<tr>
+<td>JWT expirado → <code>refreshSession()</code> tentado; se falhar, redirect <code>/admin/login</code> sem renderizar dados</td>
+<td>RF10</td>
+<td>⬜</td>
+</tr>
+<tr>
+<td>Token inválido ou sem <code>role = owner</code> → 401/403 + redirect <code>/admin/login</code> sem expor estrutura</td>
+<td>RF10 · RNF01</td>
+<td>⬜</td>
+</tr>
+<tr>
+<td>Operação no painel → resposta entregue em ≤ 2s em condições normais</td>
+<td>RNF03</td>
+<td>⬜</td>
+</tr>
+</tbody>
+</table>
+<h4 id="evidencias-de-funcionamento_1">Evidências de Funcionamento<a class="headerlink" href="#evidencias-de-funcionamento_1" title="Permanent link">¶</a></h4>
+<p><em>Evidências a serem adicionadas.</em></p>
+<h4 id="validacao-do-cliente_1">Validação do Cliente<a class="headerlink" href="#validacao-do-cliente_1" title="Permanent link">¶</a></h4>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Data</th>
+<th>Resultado</th>
+<th>Observação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Partial Validation</td>
+<td>—</td>
+<td>⬜</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Formal Validation</td>
+<td>—</td>
+<td>⬜</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h4 id="observacoes_1">Observações<a class="headerlink" href="#observacoes_1" title="Permanent link">¶</a></h4>
+<ul>
+<li>RLS do Supabase opera como segunda camada de autorização; validação de <code>role = owner</code> no Express é a primeira — defesa em profundidade intencional.</li>
+<li>O refresh automático de token é tratado no hook <code>+layout.server.ts</code> do SvelteKit, transparente ao usuário.</li>
+<li>Redirecionamento ao expirar a sessão ocorre sem flash de conteúdo protegido: o guard corre no servidor antes de qualquer renderização.</li>
+</ul>
+<hr/>
+<h3 id="f11-gerenciar-membros-da-crianex">F11 — Gerenciar membros da Crianex<a class="headerlink" href="#f11-gerenciar-membros-da-crianex" title="Permanent link">¶</a></h3>
+<blockquote>
+<p><strong>Issues:</strong> <a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/58">#58</a><br/>
+<strong>RFs cobertos:</strong> RF11, RF12, RF13, RF14<br/>
+<strong>RNFs cobertos:</strong> RNF03, RNF09</p>
+</blockquote>
+<h4 id="diagrama-de-sequencia-formal_2">Diagrama de Sequência Formal<a class="headerlink" href="#diagrama-de-sequencia-formal_2" title="Permanent link">¶</a></h4>
+<div class="mermaid">sequenceDiagram
+    participant O as Owner (Admin)
+    participant SK as SvelteKit
+    participant EX as Express API
+    participant SA as Supabase Auth
+    participant DB as Supabase DB
+
+    Note over O,DB: Cadastrar novo membro
+    O-&gt;&gt;SK: POST /admin/members { nome, email, role }
+    SK-&gt;&gt;EX: POST /api/members Authorization: Bearer &lt;token&gt;
+    EX-&gt;&gt;EX: validateJWT + requireRole('owner')
+    EX-&gt;&gt;SA: admin.createUser({ email, password })
+    SA--&gt;&gt;EX: { user_id }
+    EX-&gt;&gt;DB: INSERT INTO profiles (user_id, nome, role, active=true)
+    DB--&gt;&gt;EX: { profile }
+    EX--&gt;&gt;SK: 201 { novo membro }
+    SK--&gt;&gt;O: lista atualizada sem reload
+
+    Note over O,DB: Inativar membro (RF13)
+    O-&gt;&gt;SK: PATCH /admin/members/:id { active: false }
+    SK-&gt;&gt;EX: PATCH /api/members/:id Authorization: Bearer
+    EX-&gt;&gt;EX: validateJWT + requireRole('owner')
+    EX-&gt;&gt;EX: verifica uid ≠ target (bloqueia auto-inativação)
+    EX-&gt;&gt;DB: UPDATE profiles SET active = false WHERE id = :id
+    DB--&gt;&gt;EX: ok
+    EX--&gt;&gt;SK: 200
+    SK--&gt;&gt;O: status atualizado sem reload
+
+    Note over O,DB: Remover membro (RF14)
+    O-&gt;&gt;SK: DELETE /admin/members/:id
+    SK-&gt;&gt;EX: DELETE /api/members/:id Authorization: Bearer
+    EX-&gt;&gt;EX: validateJWT + requireRole('owner')
+    EX-&gt;&gt;EX: verifica uid ≠ target (bloqueia auto-remoção)
+    EX-&gt;&gt;DB: DELETE FROM profiles WHERE id = :id
+    EX-&gt;&gt;SA: admin.deleteUser(user_id)
+    SA--&gt;&gt;EX: ok
+    EX--&gt;&gt;SK: 200
+    SK--&gt;&gt;O: lista atualizada sem reload
+
+    Note over O,DB: Tentativa sem role owner
+    O-&gt;&gt;EX: POST /api/members (token sem role owner)
+    EX-&gt;&gt;EX: requireRole falha
+    EX--&gt;&gt;SK: 403 Forbidden
+    SK--&gt;&gt;O: operação bloqueada (nenhuma alteração no banco)</div>
+<h4 id="criterios-de-aceite-atendidos_2">Critérios de Aceite Atendidos<a class="headerlink" href="#criterios-de-aceite-atendidos_2" title="Permanent link">¶</a></h4>
+<table>
+<thead>
+<tr>
+<th>Critério (BDD)</th>
+<th>RF / RNF</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Owner cadastra novo membro → <code>createUser()</code> + insert em <code>profiles</code> → lista atualizada sem reload</td>
+<td>RF12</td>
+<td>⬜</td>
+</tr>
+<tr>
+<td>Email duplicado → erro informativo sem criar registro duplicado</td>
+<td>RF12</td>
+<td>⬜</td>
+</tr>
+<tr>
+<td>Owner edita dados de membro → RLS valida <code>role = owner</code> → persiste sem reload</td>
+<td>RF11 · RNF09</td>
+<td>⬜</td>
+</tr>
+<tr>
+<td>Edição sem <code>role = owner</code> → bloqueio 403 pelo RLS sem persistir nada</td>
+<td>RF11 · RNF09</td>
+<td>⬜</td>
+</tr>
+<tr>
+<td>Owner inativa membro → <code>active = false</code> + lista atualizada sem reload</td>
+<td>RF13</td>
+<td>⬜</td>
+</tr>
+<tr>
+<td>Owner tenta inativar a própria conta → operação bloqueada com mensagem de erro</td>
+<td>RF13</td>
+<td>⬜</td>
+</tr>
+<tr>
+<td>Owner remove membro → <code>deleteUser()</code> + remoção de <code>profiles</code> → lista atualizada sem reload</td>
+<td>RF14</td>
+<td>⬜</td>
+</tr>
+<tr>
+<td>Owner tenta remover a própria conta → bloqueado (ao menos um owner ativo garantido)</td>
+<td>RF14</td>
+<td>⬜</td>
+</tr>
+</tbody>
+</table>
+<h4 id="evidencias-de-funcionamento_2">Evidências de Funcionamento<a class="headerlink" href="#evidencias-de-funcionamento_2" title="Permanent link">¶</a></h4>
+<p><em>Evidências a serem adicionadas.</em></p>
+<h4 id="validacao-do-cliente_2">Validação do Cliente<a class="headerlink" href="#validacao-do-cliente_2" title="Permanent link">¶</a></h4>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Data</th>
+<th>Resultado</th>
+<th>Observação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Partial Validation</td>
+<td>—</td>
+<td>⬜</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Formal Validation</td>
+<td>—</td>
+<td>⬜</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h4 id="observacoes_2">Observações<a class="headerlink" href="#observacoes_2" title="Permanent link">¶</a></h4>
+<ul>
+<li>Criação de usuário usa <code>supabase.auth.admin.createUser()</code> com service role — senha inicial gerada aleatoriamente e enviada por e-mail pelo Supabase.</li>
+<li>A proteção contra auto-inativação/auto-remoção compara o <code>uid</code> do token com o <code>id</code> alvo na camada Express, evitando lockout acidental do único owner.</li>
+<li>Deleção remove o registro em <code>profiles</code> e em seguida chama <code>admin.deleteUser()</code> — operação irreversível; soft-delete via <code>active = false</code> está disponível para desativação temporária.</li>
+</ul>
+<hr/>
+<h2 id="cp4-vitrine-publica-de-produtos-saas">CP4 — Vitrine Pública de Produtos SaaS<a class="headerlink" href="#cp4-vitrine-publica-de-produtos-saas" title="Permanent link">¶</a></h2>
+<h3 id="f12-exibir-catalogo-de-produtos-saas">F12 — Exibir catálogo de produtos SaaS<a class="headerlink" href="#f12-exibir-catalogo-de-produtos-saas" title="Permanent link">¶</a></h3>
+<blockquote>
+<p><strong>Issues:</strong> <a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/55">#55</a><br/>
+<strong>RFs cobertos:</strong> RF21, RF22, RF23<br/>
+<strong>RNFs cobertos:</strong> RNF02, RNF06, RNF21</p>
+</blockquote>
+<h4 id="diagrama-de-sequencia-formal_3">Diagrama de Sequência Formal<a class="headerlink" href="#diagrama-de-sequencia-formal_3" title="Permanent link">¶</a></h4>
+<div class="mermaid">sequenceDiagram
+    participant A as Admin
+    participant SK as SvelteKit
+    participant EX as Express API
+    participant DB as Supabase DB
+    participant V as Vitrine Pública
+
+    Note over A,V: Cadastrar produto (RF21)
+    A-&gt;&gt;SK: POST /admin/products { nome, descrição, diferenciais }
+    SK-&gt;&gt;EX: POST /api/products Authorization: Bearer &lt;token&gt;
+    EX-&gt;&gt;EX: validateJWT + requireRole
+    EX-&gt;&gt;DB: INSERT INTO products (nome, descricao, published=false) — ACID
+    DB--&gt;&gt;EX: { product }
+    EX--&gt;&gt;SK: 201 { produto criado }
+    SK--&gt;&gt;A: lista atualizada sem reload
+
+    Note over A,V: Editar produto (RF22)
+    A-&gt;&gt;SK: PUT /admin/products/:id { campos atualizados }
+    SK-&gt;&gt;EX: PUT /api/products/:id Authorization: Bearer
+    EX-&gt;&gt;EX: validateJWT + requireRole
+    EX-&gt;&gt;DB: UPDATE products SET ... WHERE id = :id
+    DB--&gt;&gt;EX: { produto atualizado }
+    EX--&gt;&gt;SK: 200
+    SK--&gt;&gt;A: dados atualizados na lista
+
+    Note over A,V: Remover produto (RF23)
+    A-&gt;&gt;SK: DELETE /admin/products/:id
+    SK-&gt;&gt;EX: DELETE /api/products/:id Authorization: Bearer
+    EX-&gt;&gt;EX: validateJWT + requireRole
+    EX-&gt;&gt;DB: DELETE FROM products WHERE id = :id
+    DB--&gt;&gt;EX: ok
+    EX--&gt;&gt;SK: 200
+    SK--&gt;&gt;A: produto removido da lista
+
+    Note over A,V: Visitante acessa vitrine (RNF02 ≤ 2s)
+    V-&gt;&gt;EX: GET /api/products?published=true
+    EX-&gt;&gt;DB: SELECT * FROM products WHERE published = true
+    DB--&gt;&gt;EX: lista de produtos
+    EX--&gt;&gt;V: 200 JSON (≤ 2s — RNF02)
+
+    Note over A,V: Tentativa sem autorização
+    A-&gt;&gt;EX: PUT /api/products/:id (token inválido)
+    EX-&gt;&gt;EX: validateJWT falha
+    EX--&gt;&gt;A: 401 Unauthorized</div>
+<h4 id="criterios-de-aceite-atendidos_3">Critérios de Aceite Atendidos<a class="headerlink" href="#criterios-de-aceite-atendidos_3" title="Permanent link">¶</a></h4>
+<table>
+<thead>
+<tr>
+<th>Critério (BDD)</th>
+<th>RF / RNF</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Admin cadastra produto → persistido em transação ACID → apto para publicação</td>
+<td>RF21 · RNF06</td>
+<td>⬜</td>
+</tr>
+<tr>
+<td>Admin edita produto → dados substituídos no banco sem intervenção de dev</td>
+<td>RF22</td>
+<td>⬜</td>
+</tr>
+<tr>
+<td>Admin remove produto → excluído do catálogo e ausente na vitrine imediatamente</td>
+<td>RF23</td>
+<td>⬜</td>
+</tr>
+<tr>
+<td>Requisição sem autorização → 401/403 sem executar operação no banco</td>
+<td>RF21–23 · RNF01</td>
+<td>⬜</td>
+</tr>
+<tr>
+<td>Vitrine pública renderiza via SSR → apenas <code>published = true</code> em ≤ 2s sem JS</td>
+<td>RNF02 · RNF21</td>
+<td>⬜</td>
+</tr>
+<tr>
+<td>Falha no banco → ROLLBACK completo sem registro parcial</td>
+<td>RNF06</td>
+<td>⬜</td>
+</tr>
+</tbody>
+</table>
+<h4 id="evidencias-de-funcionamento_3">Evidências de Funcionamento<a class="headerlink" href="#evidencias-de-funcionamento_3" title="Permanent link">¶</a></h4>
+<p><em>Evidências a serem adicionadas.</em></p>
+<h4 id="validacao-do-cliente_3">Validação do Cliente<a class="headerlink" href="#validacao-do-cliente_3" title="Permanent link">¶</a></h4>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Data</th>
+<th>Resultado</th>
+<th>Observação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Partial Validation</td>
+<td>—</td>
+<td>⬜</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Formal Validation</td>
+<td>—</td>
+<td>⬜</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h4 id="observacoes_3">Observações<a class="headerlink" href="#observacoes_3" title="Permanent link">¶</a></h4>
+<ul>
+<li>A vitrine usa SSR via <code>load()</code> em <code>+page.server.ts</code> do SvelteKit — nenhum JS necessário no cliente para renderizar os cards de produto.</li>
+<li>O campo <code>published</code> filtra em nível de query; RLS não restringe leitura pública de produtos, apenas escrita/atualização (sem autenticação para visualizar).</li>
+<li>Upload de assets (imagens dos produtos) não estava no escopo desta feature — tratado como extensão futura do painel admin.</li>
+</ul>
+<hr/>
+<h3 id="f13-publicar-despublicar-produto-saas">F13 — Publicar / despublicar produto SaaS<a class="headerlink" href="#f13-publicar-despublicar-produto-saas" title="Permanent link">¶</a></h3>
+<blockquote>
+<p><strong>Issues:</strong> <a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/56">#56</a><br/>
+<strong>RFs cobertos:</strong> RF25, RF26<br/>
+<strong>RNFs cobertos:</strong> RNF03</p>
+</blockquote>
+<h4 id="diagrama-de-sequencia-formal_4">Diagrama de Sequência Formal<a class="headerlink" href="#diagrama-de-sequencia-formal_4" title="Permanent link">¶</a></h4>
+<div class="mermaid">sequenceDiagram
+    participant A as Admin
+    participant SK as SvelteKit
+    participant EX as Express API
+    participant DB as Supabase DB
+    participant V as Vitrine Pública
+
+    Note over A,V: Publicar produto (RF25)
+    A-&gt;&gt;SK: toggle ON → PATCH /admin/products/:id/status
+    SK--&gt;&gt;A: loading state imediato
+    SK-&gt;&gt;EX: PATCH /api/products/:id/status { published: true } Authorization: Bearer
+    EX-&gt;&gt;EX: validateJWT + requireRole
+    EX-&gt;&gt;DB: UPDATE products SET published = true WHERE id = :id
+    DB--&gt;&gt;EX: ok
+    EX--&gt;&gt;SK: 200 { published: true }
+    SK--&gt;&gt;A: toggle confirmado (≤ 2s — RNF03)
+    V-&gt;&gt;DB: GET products WHERE published = true
+    DB--&gt;&gt;V: produto agora incluso na vitrine
+
+    Note over A,V: Despublicar produto (RF26)
+    A-&gt;&gt;SK: toggle OFF → PATCH /admin/products/:id/status
+    SK-&gt;&gt;EX: PATCH /api/products/:id/status { published: false } Authorization: Bearer
+    EX-&gt;&gt;EX: validateJWT + requireRole
+    EX-&gt;&gt;DB: UPDATE products SET published = false WHERE id = :id
+    DB--&gt;&gt;EX: ok (dados preservados no banco)
+    EX--&gt;&gt;SK: 200 { published: false }
+    SK--&gt;&gt;A: toggle desativado (≤ 2s — RNF03)
+    V-&gt;&gt;DB: GET products WHERE published = true
+    DB--&gt;&gt;V: produto ausente na vitrine
+
+    Note over A,V: Tentativa sem permissão
+    A-&gt;&gt;EX: PATCH /api/products/:id/status (token inválido)
+    EX-&gt;&gt;EX: validateJWT falha
+    EX--&gt;&gt;SK: 403 Forbidden
+    SK--&gt;&gt;A: toggle revertido ao estado original + mensagem de erro</div>
+<h4 id="criterios-de-aceite-atendidos_4">Critérios de Aceite Atendidos<a class="headerlink" href="#criterios-de-aceite-atendidos_4" title="Permanent link">¶</a></h4>
+<table>
+<thead>
+<tr>
+<th>Critério (BDD)</th>
+<th>RF / RNF</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Admin aciona toggle para publicar → <code>published = true</code> + confirmação visual em ≤ 2s</td>
+<td>RF25 · RNF03</td>
+<td>⬜</td>
+</tr>
+<tr>
+<td>Admin aciona toggle para despublicar → produto ocultado da vitrine, dados preservados no banco</td>
+<td>RF26 · RNF03</td>
+<td>⬜</td>
+</tr>
+<tr>
+<td>Credenciais inválidas no toggle → API rejeita → toggle revertido + mensagem de erro</td>
+<td>RF25 · RF26</td>
+<td>⬜</td>
+</tr>
+</tbody>
+</table>
+<h4 id="evidencias-de-funcionamento_4">Evidências de Funcionamento<a class="headerlink" href="#evidencias-de-funcionamento_4" title="Permanent link">¶</a></h4>
+<p><em>Evidências a serem adicionadas.</em></p>
+<h4 id="validacao-do-cliente_4">Validação do Cliente<a class="headerlink" href="#validacao-do-cliente_4" title="Permanent link">¶</a></h4>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Data</th>
+<th>Resultado</th>
+<th>Observação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Partial Validation</td>
+<td>—</td>
+<td>⬜</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Formal Validation</td>
+<td>—</td>
+<td>⬜</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h4 id="observacoes_4">Observações<a class="headerlink" href="#observacoes_4" title="Permanent link">¶</a></h4>
+<ul>
+<li>Toggle implementado com atualização otimista no cliente: estado muda imediatamente na UI e é revertido em caso de erro da API.</li>
+<li>Operação é um <code>PATCH</code> de flag booleana — sem transação multi-tabela, portanto sem risco de estado parcial no banco.</li>
+<li>Decisão de escopo: despublicar preserva todos os dados e mídias do produto; remoção permanente é ação separada (RF23) para evitar perda acidental.</li>
+</ul>
+<hr/>
+<h3 id="f14-formulario-de-contato">F14 — Formulário de contato<a class="headerlink" href="#f14-formulario-de-contato" title="Permanent link">¶</a></h3>
+<blockquote>
+<p><strong>Issues:</strong> <a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/61">#61</a><br/>
+<strong>RFs cobertos:</strong> RF27<br/>
+<strong>RNFs cobertos:</strong> RNF06, RNF10</p>
+</blockquote>
+<h4 id="diagrama-de-sequencia-formal_5">Diagrama de Sequência Formal<a class="headerlink" href="#diagrama-de-sequencia-formal_5" title="Permanent link">¶</a></h4>
+<div class="mermaid">sequenceDiagram
+    participant V as Visitante
+    participant SK as SvelteKit
+    participant EX as Express API
+    participant RL as Rate Limiter
+    participant DB as Supabase DB
+
+    Note over V,DB: Envio válido do formulário (RF27)
+    V-&gt;&gt;SK: clica "Enviar" { nome, email, mensagem }
+    SK-&gt;&gt;EX: POST /api/public/contact { payload }
+    EX-&gt;&gt;RL: verifica limite (5 req / IP / 10 min — RNF10)
+    RL--&gt;&gt;EX: permitido
+    EX-&gt;&gt;EX: valida campos obrigatórios
+    EX-&gt;&gt;DB: BEGIN — INSERT INTO leads (nome, email, mensagem) — COMMIT (ACID — RNF06)
+    DB--&gt;&gt;EX: ok
+    EX--&gt;&gt;SK: 200 { success: true }
+    SK--&gt;&gt;V: alerta visual de sucesso (≤ 2s — RNF02)
+
+    Note over V,DB: Rate limit excedido (spam / bot — RNF10)
+    V-&gt;&gt;SK: POST (além do limite)
+    SK-&gt;&gt;EX: POST /api/public/contact
+    EX-&gt;&gt;RL: verifica limite
+    RL--&gt;&gt;EX: bloqueado (429)
+    EX--&gt;&gt;SK: 429 Too Many Requests
+    SK--&gt;&gt;V: "Tente novamente mais tarde"
+
+    Note over V,DB: Falha no banco — rollback (RNF06)
+    V-&gt;&gt;SK: POST { payload válido }
+    SK-&gt;&gt;EX: POST /api/public/contact
+    EX-&gt;&gt;RL: permitido
+    EX-&gt;&gt;DB: BEGIN — INSERT INTO leads
+    DB--&gt;&gt;EX: erro inesperado
+    EX-&gt;&gt;DB: ROLLBACK
+    EX--&gt;&gt;SK: 500
+    SK--&gt;&gt;V: mensagem de erro (registro não salvo)</div>
+<h4 id="criterios-de-aceite-atendidos_5">Critérios de Aceite Atendidos<a class="headerlink" href="#criterios-de-aceite-atendidos_5" title="Permanent link">¶</a></h4>
+<table>
+<thead>
+<tr>
+<th>Critério (BDD)</th>
+<th>RF / RNF</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Formulário válido → persistido em transação ACID → alerta de sucesso em ≤ 2s</td>
+<td>RF27 · RNF02 · RNF06</td>
+<td>⬜</td>
+</tr>
+<tr>
+<td>Rate limit excedido (5 req/IP/10min) → 429 + "Tente novamente mais tarde"</td>
+<td>RNF10</td>
+<td>⬜</td>
+</tr>
+<tr>
+<td>Falha no banco → ROLLBACK completo sem registro parcial</td>
+<td>RNF06</td>
+<td>⬜</td>
+</tr>
+</tbody>
+</table>
+<h4 id="evidencias-de-funcionamento_5">Evidências de Funcionamento<a class="headerlink" href="#evidencias-de-funcionamento_5" title="Permanent link">¶</a></h4>
+<p><em>Evidências a serem adicionadas.</em></p>
+<h4 id="validacao-do-cliente_5">Validação do Cliente<a class="headerlink" href="#validacao-do-cliente_5" title="Permanent link">¶</a></h4>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Data</th>
+<th>Resultado</th>
+<th>Observação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Partial Validation</td>
+<td>—</td>
+<td>⬜</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Formal Validation</td>
+<td>—</td>
+<td>⬜</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h4 id="observacoes_5">Observações<a class="headerlink" href="#observacoes_5" title="Permanent link">¶</a></h4>
+<ul>
+<li>Rate limit de 5 req/IP/10min implementado via <code>express-rate-limit</code> como middleware, antes de qualquer validação de payload — bloqueia bots antes de tocar no banco.</li>
+<li>Campos opcionais (telefone, empresa) não incluídos no MVP — escopo deliberadamente mínimo para IT1.</li>
+<li>Leads salvos na tabela <code>leads</code> sem vínculo com contas de usuário; integração com o CRM (CP1) está prevista para IT2.</li>
+</ul>
+<hr/>
+<h3 id="f15-pagina-institucional-sobre-a-crianex">F15 — Página institucional (Sobre a Crianex)<a class="headerlink" href="#f15-pagina-institucional-sobre-a-crianex" title="Permanent link">¶</a></h3>
+<blockquote>
+<p><strong>Issues:</strong> <a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/63">#63</a><br/>
+<strong>RFs cobertos:</strong> RF28<br/>
+<strong>RNFs cobertos:</strong> RNF02, RNF21</p>
+</blockquote>
+<h4 id="diagrama-de-sequencia-formal_6">Diagrama de Sequência Formal<a class="headerlink" href="#diagrama-de-sequencia-formal_6" title="Permanent link">¶</a></h4>
+<div class="mermaid">sequenceDiagram
+    participant V as Visitante / Bot indexador
+    participant SK as SvelteKit (SSR)
+    participant I18N as i18n JSON (pt / en)
+
+    Note over V,I18N: Acesso à página institucional — SSR (RF28, RNF04)
+    V-&gt;&gt;SK: GET /sobre
+    SK-&gt;&gt;SK: nenhum guard intercepta (rota pública — RNF20)
+    SK-&gt;&gt;I18N: carrega src/lib/i18n/pt/about.json
+    I18N--&gt;&gt;SK: { titulo, descricao, missao, valores, ... }
+    SK--&gt;&gt;V: HTML completo com h1, OG tags e metadados SEO (≤ 2s — RNF02)
+    Note right of V: conteúdo já no HTML inicial — indexável sem JS (RNF21)
+
+    Note over V,I18N: Troca de idioma PT → EN (RNF13)
+    V-&gt;&gt;SK: clica "EN" no header
+    SK-&gt;&gt;I18N: carrega src/lib/i18n/en/about.json
+    I18N--&gt;&gt;SK: { title, description, mission, values, ... }
+    SK--&gt;&gt;V: textos substituídos reativamente (sem reload — ≤ 1 clique)
+
+    Note over V,I18N: Bot de indexação
+    V-&gt;&gt;SK: GET /sobre (User-Agent: Googlebot)
+    SK-&gt;&gt;I18N: carrega about.json (pt)
+    SK--&gt;&gt;V: HTML com metadados Open Graph preenchidos para locale PT</div>
+<h4 id="criterios-de-aceite-atendidos_6">Critérios de Aceite Atendidos<a class="headerlink" href="#criterios-de-aceite-atendidos_6" title="Permanent link">¶</a></h4>
+<table>
+<thead>
+<tr>
+<th>Critério (BDD)</th>
+<th>RF / RNF</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Visitante acessa <code>/sobre</code> → SSR carrega i18n estático em ≤ 2s sem chamada a API ou banco</td>
+<td>RF54 · RNF02 · RNF04</td>
+<td>⬜</td>
+</tr>
+<tr>
+<td>Visitante clica "EN" → textos trocam para <code>en/about.json</code> em ≤ 1 clique sem reload</td>
+<td>RNF13</td>
+<td>⬜</td>
+</tr>
+<tr>
+<td>Bot de indexação → HTML inicial com h1, textos e metadados Open Graph sem depender de JS</td>
+<td>RNF04 · RNF21</td>
+<td>⬜</td>
+</tr>
+<tr>
+<td>Visitante sem autenticação → nenhum guard intercepta → conteúdo exibido normalmente</td>
+<td>RNF20</td>
+<td>⬜</td>
+</tr>
+</tbody>
+</table>
+<h4 id="evidencias-de-funcionamento_6">Evidências de Funcionamento<a class="headerlink" href="#evidencias-de-funcionamento_6" title="Permanent link">¶</a></h4>
+<p><em>Evidências a serem adicionadas.</em></p>
+<h4 id="validacao-do-cliente_6">Validação do Cliente<a class="headerlink" href="#validacao-do-cliente_6" title="Permanent link">¶</a></h4>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Data</th>
+<th>Resultado</th>
+<th>Observação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Partial Validation</td>
+<td>—</td>
+<td>⬜</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Formal Validation</td>
+<td>—</td>
+<td>⬜</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h4 id="observacoes_6">Observações<a class="headerlink" href="#observacoes_6" title="Permanent link">¶</a></h4>
+<ul>
+<li>Todo conteúdo carregado de arquivos JSON estáticos em <code>src/lib/i18n/</code> — zero chamadas a banco ou API, tempo de carregamento depende apenas do SSR.</li>
+<li>Troca de idioma reativa via Svelte store; locale persiste em <code>localStorage</code> entre navegações.</li>
+<li>Metadados Open Graph gerados no <code>+page.server.ts</code>; sem <code>&lt;svelte:head&gt;</code> dinâmico no cliente, garantindo indexabilidade independente de JS.</li>
+</ul>
+<hr/>
+<h2 id="cp6-faq-e-base-de-conhecimentos-por-produto">CP6 — FAQ e Base de Conhecimentos por Produto<a class="headerlink" href="#cp6-faq-e-base-de-conhecimentos-por-produto" title="Permanent link">¶</a></h2>
+<h3 id="f16-crud-de-artigos-de-faq">F16 — CRUD de artigos de FAQ<a class="headerlink" href="#f16-crud-de-artigos-de-faq" title="Permanent link">¶</a></h3>
+<blockquote>
+<p><strong>Issues:</strong> <a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/59">#59</a><br/>
+<strong>RFs cobertos:</strong> RF30, RF29, RF30, RF31<br/>
+<strong>RNFs cobertos:</strong> RNF01, RNF04, RNF05</p>
+</blockquote>
+<h4 id="diagrama-de-sequencia-formal_7">Diagrama de Sequência Formal<a class="headerlink" href="#diagrama-de-sequencia-formal_7" title="Permanent link">¶</a></h4>
+<div class="mermaid">sequenceDiagram
+    participant A as Admin
+    participant SK as SvelteKit
+    participant EX as Express API
+    participant DB as Supabase DB
+    participant AGT as Agente Externo
+
+    Note over A,AGT: Cadastrar artigo (RF30)
+    A-&gt;&gt;SK: POST /admin/faq { titulo, conteudo, product_id, category_id }
+    SK-&gt;&gt;EX: POST /api/faq Authorization: Bearer &lt;token&gt;
+    EX-&gt;&gt;EX: validateJWT + requireRole (RNF01)
+    EX-&gt;&gt;DB: INSERT INTO faq_articles (titulo, conteudo, product_id, category_id, published=false)
+    DB--&gt;&gt;EX: { article }
+    EX--&gt;&gt;SK: 201 { artigo criado }
+    SK--&gt;&gt;A: lista atualizada
+
+    Note over A,AGT: Editar artigo (RF29)
+    A-&gt;&gt;SK: PUT /admin/faq/:id { campos atualizados }
+    SK-&gt;&gt;EX: PUT /api/faq/:id Authorization: Bearer
+    EX-&gt;&gt;EX: validateJWT + requireRole
+    EX-&gt;&gt;DB: UPDATE faq_articles SET ... WHERE id = :id (id original preservado)
+    DB--&gt;&gt;EX: ok
+    EX--&gt;&gt;SK: 200
+    SK--&gt;&gt;A: artigo atualizado
+
+    Note over A,AGT: Categorizar artigo (RF31)
+    A-&gt;&gt;SK: PATCH /admin/faq/:id/category { product_id, category_id }
+    SK-&gt;&gt;EX: PATCH /api/faq/:id/category Authorization: Bearer
+    EX-&gt;&gt;EX: validateJWT + requireRole
+    EX-&gt;&gt;DB: verifica existência de product_id e category_id (integridade referencial)
+    DB--&gt;&gt;EX: ok
+    EX-&gt;&gt;DB: UPDATE faq_articles SET product_id = :pid, category_id = :cid WHERE id = :id
+    DB--&gt;&gt;EX: ok
+    EX--&gt;&gt;SK: 200
+    SK--&gt;&gt;A: categorização atualizada
+
+    Note over A,AGT: Tentativa forjada — acesso direto ao Supabase (RNF01)
+    AGT-&gt;&gt;DB: INSERT / UPDATE direto sem token válido
+    DB-&gt;&gt;DB: RLS verifica auth.uid() + permissão do perfil
+    DB--&gt;&gt;AGT: 403 Forbidden (nenhuma alteração executada)</div>
+<h4 id="criterios-de-aceite-atendidos_7">Critérios de Aceite Atendidos<a class="headerlink" href="#criterios-de-aceite-atendidos_7" title="Permanent link">¶</a></h4>
+<table>
+<thead>
+<tr>
+<th>Critério (BDD)</th>
+<th>RF / RNF</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Admin cadastra artigo (título, conteúdo, produto, categoria) → persistido e apto para publicação</td>
+<td>RF28 · RNF01</td>
+<td>⬜</td>
+</tr>
+<tr>
+<td>Admin edita artigo → dados substituídos, ID original preservado</td>
+<td>RF29</td>
+<td>⬜</td>
+</tr>
+<tr>
+<td>Admin remove artigo → excluído do banco e ausente na vitrine imediatamente</td>
+<td>RF30</td>
+<td>⬜</td>
+</tr>
+<tr>
+<td>Admin categoriza artigo → vínculos <code>product_id</code> + <code>category_id</code> com integridade referencial</td>
+<td>RF31</td>
+<td>⬜</td>
+</tr>
+<tr>
+<td>Agente externo forja requisição sem token → RLS bloqueia com 403 sem alterar dados</td>
+<td>RNF01 · RNF09</td>
+<td>⬜</td>
+</tr>
+<tr>
+<td>Artigos publicados → conteúdo no SSR indexável; despublicados ausentes da resposta SSR</td>
+<td>RNF04 · RNF05</td>
+<td>⬜</td>
+</tr>
+</tbody>
+</table>
+<h4 id="evidencias-de-funcionamento_7">Evidências de Funcionamento<a class="headerlink" href="#evidencias-de-funcionamento_7" title="Permanent link">¶</a></h4>
+<p><em>Evidências a serem adicionadas.</em></p>
+<h4 id="validacao-do-cliente_7">Validação do Cliente<a class="headerlink" href="#validacao-do-cliente_7" title="Permanent link">¶</a></h4>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Data</th>
+<th>Resultado</th>
+<th>Observação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Partial Validation</td>
+<td>—</td>
+<td>⬜</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Formal Validation</td>
+<td>—</td>
+<td>⬜</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h4 id="observacoes_7">Observações<a class="headerlink" href="#observacoes_7" title="Permanent link">¶</a></h4>
+<ul>
+<li>Artigos criados com <code>published = false</code> por padrão — publicação é ação explícita separada (F17), evitando publicação acidental.</li>
+<li>Integridade referencial entre <code>faq_articles</code>, <code>products</code> e <code>faq_categories</code> garantida por FK no banco; deleção em cascata não habilitada — artigos com produto/categoria inexistente retornam erro informativo.</li>
+<li>RLS bloqueia acesso direto ao Supabase sem passar pelo Express, dupla validação intencional reforçando RNF01.</li>
+</ul>
+<hr/>
+<h3 id="f17-publicar-despublicar-artigo-de-faq">F17 — Publicar / despublicar artigo de FAQ<a class="headerlink" href="#f17-publicar-despublicar-artigo-de-faq" title="Permanent link">¶</a></h3>
+<blockquote>
+<p><strong>Issues:</strong> <a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/60">#60</a><br/>
+<strong>RFs cobertos:</strong> RF34, RF33<br/>
+<strong>RNFs cobertos:</strong> RNF01, RNF04, RNF05</p>
+</blockquote>
+<h4 id="diagrama-de-sequencia-formal_8">Diagrama de Sequência Formal<a class="headerlink" href="#diagrama-de-sequencia-formal_8" title="Permanent link">¶</a></h4>
+<div class="mermaid">sequenceDiagram
+    participant A as Admin
+    participant SK as SvelteKit
+    participant EX as Express API
+    participant DB as Supabase DB
+    participant V as Vitrine Pública (SSR)
+    participant AGT as Agente Externo
+
+    Note over A,AGT: Publicar artigo (RF34)
+    A-&gt;&gt;SK: toggle ON → PATCH /admin/faq/:id/status
+    SK-&gt;&gt;EX: PATCH /api/faq/:id/status { published: true } Authorization: Bearer
+    EX-&gt;&gt;EX: validateJWT + requireRole (RNF01)
+    EX-&gt;&gt;DB: UPDATE faq_articles SET published = true WHERE id = :id
+    DB--&gt;&gt;EX: ok
+    EX--&gt;&gt;SK: 200 { published: true }
+    SK--&gt;&gt;A: toggle confirmado sem reload
+    V-&gt;&gt;DB: SELECT * FROM faq_articles WHERE published = true (RLS)
+    DB--&gt;&gt;V: artigo agora incluso (SSR indexável — RNF04/RNF05)
+
+    Note over A,AGT: Despublicar artigo (RF33)
+    A-&gt;&gt;SK: toggle OFF → PATCH /admin/faq/:id/status
+    SK-&gt;&gt;EX: PATCH /api/faq/:id/status { published: false } Authorization: Bearer
+    EX-&gt;&gt;EX: validateJWT + requireRole
+    EX-&gt;&gt;DB: UPDATE faq_articles SET published = false WHERE id = :id
+    DB--&gt;&gt;EX: ok (registro preservado no banco)
+    EX--&gt;&gt;SK: 200 { published: false }
+    SK--&gt;&gt;A: toggle desativado sem reload
+    V-&gt;&gt;DB: SELECT * FROM faq_articles WHERE published = true
+    DB--&gt;&gt;V: artigo imediatamente ausente da vitrine
+
+    Note over A,AGT: Tentativa forjada sem token (RNF01)
+    AGT-&gt;&gt;DB: PATCH direto no Supabase sem auth
+    DB-&gt;&gt;DB: RLS verifica permissão do perfil
+    DB--&gt;&gt;AGT: 403 (status de publicação não alterado)</div>
+<h4 id="criterios-de-aceite-atendidos_8">Critérios de Aceite Atendidos<a class="headerlink" href="#criterios-de-aceite-atendidos_8" title="Permanent link">¶</a></h4>
+<table>
+<thead>
+<tr>
+<th>Critério (BDD)</th>
+<th>RF / RNF</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Admin publica artigo → <code>published = true</code> → visível na próxima requisição da vitrine sem reload</td>
+<td>RF32 · RNF01</td>
+<td>⬜</td>
+</tr>
+<tr>
+<td>Admin despublica artigo → artigo ausente da vitrine imediatamente, conteúdo preservado no banco</td>
+<td>RF33</td>
+<td>⬜</td>
+</tr>
+<tr>
+<td>Agente externo forja requisição sem token → RLS bloqueia com 403 sem alterar status</td>
+<td>RNF01 · RNF09</td>
+<td>⬜</td>
+</tr>
+<tr>
+<td>Artigo publicado → conteúdo e metadados SEO no HTML inicial sem depender de JS</td>
+<td>RNF04 · RNF05</td>
+<td>⬜</td>
+</tr>
+</tbody>
+</table>
+<h4 id="evidencias-de-funcionamento_8">Evidências de Funcionamento<a class="headerlink" href="#evidencias-de-funcionamento_8" title="Permanent link">¶</a></h4>
+<p><em>Evidências a serem adicionadas.</em></p>
+<h4 id="validacao-do-cliente_8">Validação do Cliente<a class="headerlink" href="#validacao-do-cliente_8" title="Permanent link">¶</a></h4>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Data</th>
+<th>Resultado</th>
+<th>Observação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Partial Validation</td>
+<td>—</td>
+<td>⬜</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Formal Validation</td>
+<td>—</td>
+<td>⬜</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h4 id="observacoes_8">Observações<a class="headerlink" href="#observacoes_8" title="Permanent link">¶</a></h4>
+<ul>
+<li>Mesmo padrão de toggle otimista da F13 — consistência intencional na UX do painel admin.</li>
+<li>Despublicar artigo não afeta avaliações já registradas; histórico de ratings preservado para análise futura (Dashboard CP3/IT3).</li>
+<li>A vitrine recarrega artigos publicados a cada requisição SSR; não há cache CDN configurado nesta iteração.</li>
+</ul>
+<hr/>
+<h3 id="f18-avaliacao-de-artigos-de-faq">F18 — Avaliação de artigos de FAQ<a class="headerlink" href="#f18-avaliacao-de-artigos-de-faq" title="Permanent link">¶</a></h3>
+<blockquote>
+<p><strong>Issues:</strong> <a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/62">#62</a><br/>
+<strong>RFs cobertos:</strong> RF34<br/>
+<strong>RNFs cobertos:</strong> RNF02, RNF04, RNF05</p>
+</blockquote>
+<h4 id="diagrama-de-sequencia-formal_9">Diagrama de Sequência Formal<a class="headerlink" href="#diagrama-de-sequencia-formal_9" title="Permanent link">¶</a></h4>
+<div class="mermaid">sequenceDiagram
+    participant V as Visitante
+    participant SK as SvelteKit (Vitrine)
+    participant SS as Session Storage
+    participant EX as Express API
+    participant DB as Supabase DB
+
+    Note over V,DB: Avaliar artigo — primeira vez na sessão (RF34)
+    V-&gt;&gt;SK: clica "Útil" ou "Não Útil"
+    SK-&gt;&gt;SS: verifica se artigo já foi avaliado nesta sessão
+    SS--&gt;&gt;SK: não avaliado
+    SK-&gt;&gt;EX: POST /api/public/faq/:id/rating { rating: 'useful', session_hash }
+    EX-&gt;&gt;DB: verifica dedup (article_id, session_hash)
+    DB--&gt;&gt;EX: sem duplicata
+    EX-&gt;&gt;DB: INSERT INTO faq_ratings (article_id, rating, session_hash) — anônimo
+    DB--&gt;&gt;EX: ok
+    EX--&gt;&gt;SK: 200 { success: true }
+    SK-&gt;&gt;SS: marca artigo como avaliado na sessão
+    SK--&gt;&gt;V: feedback visual de confirmação (≤ 2s — RNF02)
+    Note right of V: componente de avaliação não bloqueia SSR da página (RNF04/RNF05)
+
+    Note over V,DB: Tentativa de avaliar novamente (duplicata de sessão)
+    V-&gt;&gt;SK: clica botão de avaliação novamente
+    SK-&gt;&gt;SS: verifica sessão
+    SS--&gt;&gt;SK: já avaliado
+    SK--&gt;&gt;V: "Você já avaliou este artigo" (bloqueado no cliente, sem chamada à API)
+
+    Note over V,DB: Duplicata detectada pelo backend (session_hash)
+    V-&gt;&gt;SK: POST (nova aba / session storage limpo)
+    SK-&gt;&gt;EX: POST /api/public/faq/:id/rating { session_hash idêntico }
+    EX-&gt;&gt;DB: verifica dedup (article_id, session_hash)
+    DB--&gt;&gt;EX: duplicata encontrada
+    EX--&gt;&gt;SK: 409 Conflict
+    SK--&gt;&gt;V: aviso de avaliação já registrada</div>
+<h4 id="criterios-de-aceite-atendidos_9">Critérios de Aceite Atendidos<a class="headerlink" href="#criterios-de-aceite-atendidos_9" title="Permanent link">¶</a></h4>
+<table>
+<thead>
+<tr>
+<th>Critério (BDD)</th>
+<th>RF / RNF</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Visitante clica "Útil" ou "Não Útil" → avaliação persistida anonimamente + feedback visual em ≤ 2s</td>
+<td>RF34 · RNF02</td>
+<td>⬜</td>
+</tr>
+<tr>
+<td>Visitante já avaliou o artigo na sessão → interface bloqueia sem chamar a API</td>
+<td>RF34</td>
+<td>⬜</td>
+</tr>
+<tr>
+<td><code>session_hash</code> já existe no banco para o artigo → backend retorna 409 sem registrar duplicata</td>
+<td>RF34</td>
+<td>⬜</td>
+</tr>
+<tr>
+<td>Componente de avaliação presente → SSR não bloqueado nem degradado</td>
+<td>RNF04 · RNF05</td>
+<td>⬜</td>
+</tr>
+</tbody>
+</table>
+<h4 id="evidencias-de-funcionamento_9">Evidências de Funcionamento<a class="headerlink" href="#evidencias-de-funcionamento_9" title="Permanent link">¶</a></h4>
+<p><em>Evidências a serem adicionadas.</em></p>
+<h4 id="validacao-do-cliente_9">Validação do Cliente<a class="headerlink" href="#validacao-do-cliente_9" title="Permanent link">¶</a></h4>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Data</th>
+<th>Resultado</th>
+<th>Observação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Partial Validation</td>
+<td>—</td>
+<td>⬜</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Formal Validation</td>
+<td>—</td>
+<td>⬜</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h4 id="observacoes_9">Observações<a class="headerlink" href="#observacoes_9" title="Permanent link">¶</a></h4>
+<ul>
+<li><code>session_hash</code> gerado no cliente via hash de <code>sessionStorage</code> + <code>article_id</code> — nenhum dado pessoal trafega na requisição de avaliação.</li>
+<li>Deduplicação em dois níveis: <code>sessionStorage</code> evita chamada redundante no cliente; constraint única no banco garante consistência mesmo com múltiplas abas abertas.</li>
+<li>Avaliações são anônimas e não expostas na vitrine nesta iteração — análise de utilidade reservada para o Dashboard executivo (CP3/IT3).</li>
+</ul></div>
+</div>
+<footer class="col-md-12 text-center">
+<hr/>
+<p>
+<small>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</small>
+</p>
+</footer>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="../../../js/bootstrap-3.0.3.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script>var base_url = "../../.."</script>
+<script src="../../../js/base.js"></script>
+<script src="../../../assets/nav-click.js"></script>
+<script src="../../../search/main.js"></script>
+<div aria-hidden="true" aria-labelledby="searchModalLabel" class="modal" id="mkdocs_search_modal" role="dialog" tabindex="-1">
+<div class="modal-dialog modal-lg">
+<div class="modal-content">
+<div class="modal-header">
+<button class="close" data-dismiss="modal" type="button">
+<span aria-hidden="true">×</span>
+<span class="sr-only">Close</span>
+</button>
+<h4 class="modal-title" id="searchModalLabel">Search</h4>
+</div>
+<div class="modal-body">
+<p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+<form>
+<div class="form-group">
+<input class="form-control" id="mkdocs-search-query" placeholder="Search..." title="Type search term here" type="text"/>
+</div>
+</form>
+<div id="mkdocs-search-results"></div>
+</div>
+<div class="modal-footer">
+</div>
+</div>
+</div>
+</div><div aria-hidden="true" aria-labelledby="keyboardModalLabel" class="modal" id="mkdocs_keyboard_modal" role="dialog" tabindex="-1">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+<button class="close" data-dismiss="modal" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+</div>
+<div class="modal-body">
+<table class="table">
+<thead>
+<tr>
+<th style="width: 20%;">Keys</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="help shortcut"><kbd>?</kbd></td>
+<td>Open this help</td>
+</tr>
+<tr>
+<td class="next shortcut"><kbd>n</kbd></td>
+<td>Next page</td>
+</tr>
+<tr>
+<td class="prev shortcut"><kbd>p</kbd></td>
+<td>Previous page</td>
+</tr>
+<tr>
+<td class="search shortcut"><kbd>s</kbd></td>
+<td>Search</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="modal-footer">
+</div>
+</div>
+</div>
+</div>
+<script type="module">import mermaid from "https://unpkg.com/mermaid@10.4.0/dist/mermaid.esm.min.mjs";
+mermaid.initialize({});</script></body>
+</html>
