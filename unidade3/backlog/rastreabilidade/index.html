@@ -539,28 +539,35 @@
 <td>06/06/2026</td>
 <td>Adição da coluna INVEST na tabela de Features</td>
 <td>Lucas A. Zanetti</td>
-<td>—</td>
+<td>Hugo Freitas Silva</td>
 </tr>
 <tr>
 <td>1.3</td>
 <td>09/06/2026</td>
 <td>Marcação de status de conclusão (✅/⚠️/❌) em Features, RFs e RNFs da IT1 (CP4/CP5/CP6)</td>
 <td>Lucas A. Zanetti</td>
-<td>—</td>
+<td>Hugo Freitas Silva</td>
 </tr>
 <tr>
 <td>1.4</td>
 <td>09/06/2026</td>
 <td>Adição de RF49, RF54, RF55; seção de Regras de Negócio (RN01–RN12) com rastreabilidade</td>
 <td>Lucas A. Zanetti</td>
-<td>—</td>
+<td>Hugo Freitas Silva</td>
 </tr>
 <tr>
 <td>1.5</td>
 <td>10/06/2026</td>
 <td>RF08 marcado ✅; RF49 (Aceitar LGPD) inserido; RF49→RF50, RF50→RF51 renumerados; RF52–RF53 adicionados; refs cruzadas atualizadas</td>
 <td>Lucas A. Zanetti</td>
-<td>—</td>
+<td>Hugo Freitas Silva</td>
+</tr>
+<tr>
+<td>1.6</td>
+<td>14/06/2026</td>
+<td>Alterações referentes aos ajustes sugeridos pelo professor, acerca de relações 1:1 (um para um)</td>
+<td>Hugo Freitas Silva</td>
+<td>Lucas A. Zanetti</td>
 </tr>
 </tbody>
 </table>
@@ -620,7 +627,7 @@
 <td>CP1</td>
 <td>CRM Interno de Clientes</td>
 <td>OE3</td>
-<td>F19, F20, F21, F22</td>
+<td>F19, F20, F21</td>
 </tr>
 <tr>
 <td>CP2</td>
@@ -632,7 +639,7 @@
 <td>CP3</td>
 <td>Dashboard Executivo de Métricas</td>
 <td>OE1</td>
-<td>F03, F04, F05</td>
+<td>F03, F04</td>
 </tr>
 <tr>
 <td>CP4</td>
@@ -656,19 +663,19 @@
 <td>CP7</td>
 <td>Controle de Faturamento e Relatórios Financeiros</td>
 <td>OE1</td>
-<td>F06, F07, F08</td>
+<td>F05, F06</td>
 </tr>
 <tr>
 <td>CP8</td>
 <td>Sistema de Tickets de Suporte</td>
 <td>OE3</td>
-<td>F23, F24</td>
+<td>F22, F23</td>
 </tr>
 <tr>
 <td>CP9</td>
 <td>Sistema de notificações no sistema</td>
 <td>OE3</td>
-<td>F25, F26, F27</td>
+<td>F07, F08</td>
 </tr>
 </tbody>
 </table>
@@ -690,7 +697,7 @@
 <tr>
 <td>F01</td>
 <td>—</td>
-<td>Consultar logs operacionais para auditoria de atividades</td>
+<td>Monitorar eventos de segurança para rastreamento de acessos ao sistema</td>
 <td>CP2</td>
 <td>RF01, RF02</td>
 <td>RNF09, RNF01, RNF02, RNF03</td>
@@ -699,10 +706,10 @@
 <tr>
 <td>F02</td>
 <td>—</td>
-<td>Auditar alterações administrativas para rastrear ações do sistema</td>
+<td>Monitorar estado dos componentes para garantia de disponibilidade do sistema</td>
 <td>CP2</td>
-<td>RF03</td>
-<td>—</td>
+<td>RF03, RF54</td>
+<td>RNF01, RNF03, RNF09</td>
 <td>N-V-E-S-T</td>
 </tr>
 <tr>
@@ -710,8 +717,8 @@
 <td>—</td>
 <td>Visualizar indicadores operacionais para acompanhamento estratégico</td>
 <td>CP3</td>
-<td>RF04, RF05</td>
-<td>RNF09, RNF03, RNF01</td>
+<td>RF04, RF05, RF06</td>
+<td>RNF01, RNF03, RNF09, RNF11</td>
 <td>I-N-V-E-S-T</td>
 </tr>
 <tr>
@@ -719,44 +726,44 @@
 <td>—</td>
 <td>Visualizar indicadores financeiros para análise gerencial</td>
 <td>CP3</td>
-<td>RF06</td>
-<td>RNF11</td>
+<td>RF07, RF55</td>
+<td>RNF01, RNF03, RNF09, RNF11</td>
 <td>I-N-V-E-S-T</td>
 </tr>
 <tr>
 <td>F05</td>
 <td>—</td>
-<td>Filtrar métricas executivas para análise segmentada</td>
-<td>CP3</td>
-<td>RF07</td>
-<td>—</td>
+<td>Consultar registros financeiros para acompanhamento de faturamento</td>
+<td>CP7</td>
+<td>RF16, RF17, RF18</td>
+<td>RNF01, RNF03, RNF09, RNF11</td>
 <td>N-V-E-S-T</td>
 </tr>
 <tr>
 <td>F06</td>
 <td>—</td>
-<td>Consultar registros financeiros para acompanhamento de faturamento</td>
+<td>Gerar relatórios financeiros para exportação de dados</td>
 <td>CP7</td>
-<td>RF16, RF17</td>
-<td>RNF09, RNF03, RNF01, RNF11</td>
+<td>RF19, RF20</td>
+<td>RNF01, RNF03, RNF09, RNF11</td>
 <td>I-N-V-E-S-T</td>
 </tr>
 <tr>
 <td>F07</td>
 <td>—</td>
-<td>Filtrar dados financeiros para análise contábil</td>
-<td>CP7</td>
-<td>RF18</td>
-<td>—</td>
+<td>Acompanhar histórico e status de notificações</td>
+<td>CP9</td>
+<td>RF46, RF47</td>
+<td>RNF03, RNF09</td>
 <td>N-V-E-S-T</td>
 </tr>
 <tr>
 <td>F08</td>
 <td>—</td>
-<td>Gerar relatórios financeiros para exportação de dados</td>
-<td>CP7</td>
-<td>RF19, RF20</td>
-<td>—</td>
+<td>Gerenciar templates de notificações</td>
+<td>CP9</td>
+<td>RF15, RF56, RF57</td>
+<td>RNF03, RNF09</td>
 <td>N-V-E-S-T</td>
 </tr>
 <tr>
@@ -773,7 +780,7 @@
 <td>✅</td>
 <td>Permitir acesso ao painel administrativo para gerenciamento da plataforma</td>
 <td>CP5</td>
-<td>RF10, RF50</td>
+<td>RF10, RF48</td>
 <td>RNF09</td>
 <td>N-V-E-S-T</td>
 </tr>
@@ -783,7 +790,7 @@
 <td>Gerenciar usuarios da plataforma para controle operacional</td>
 <td>CP5</td>
 <td>RF11, RF12, RF13, RF14</td>
-<td>—</td>
+<td>RNF09</td>
 <td>N-V-E-S-T</td>
 </tr>
 <tr>
@@ -792,7 +799,7 @@
 <td>Gerenciar produtos SaaS da vitrine para manutenção do portifólio</td>
 <td>CP4</td>
 <td>RF21, RF22, RF23, RF24</td>
-<td>RNF19, RNF04, RNF05, RNF13, RNF15</td>
+<td>RNF19, RNF04, RNF05, RNF13, RNF15, RNF03</td>
 <td>N-V-E-T</td>
 </tr>
 <tr>
@@ -809,7 +816,7 @@
 <td>✅</td>
 <td>Exibir canais de contato na Vitrine</td>
 <td>CP4</td>
-<td>RF27, RF49, RF51, RF55</td>
+<td>RF27, RF49</td>
 <td>RNF10, RNF06, RNF02, RNF11</td>
 <td>N-V-E-S-T</td>
 </tr>
@@ -818,8 +825,8 @@
 <td>✅</td>
 <td>Disponibilizar informações institucionais para apresentação da empresa</td>
 <td>CP4</td>
-<td>RF52, RF54</td>
-<td>RNF20</td>
+<td>RF50, RF51</td>
+<td>RNF02, RNF 21</td>
 <td>I-N-V-E-S-T</td>
 </tr>
 <tr>
@@ -837,15 +844,15 @@
 <td>Controlar publicação de artigos FAQ's para disponibilização pública</td>
 <td>CP6</td>
 <td>RF32, RF33</td>
-<td>—</td>
+<td>RNF01</td>
 <td>N-V-E-S-T</td>
 </tr>
 <tr>
 <td>F18</td>
 <td>✅</td>
-<td>Coletar avaliação de utilidade do artigo pelo visitante para melhorar a correspondência do FAQ com as dúvidas dos leads</td>
+<td>Melhorar a correspondência entre artigos do FAQ e dúvidas dos leads</td>
 <td>CP6</td>
-<td>RF34, RF53</td>
+<td>RF34, RF52</td>
 <td>RNF02</td>
 <td>N-V-E-S-T</td>
 </tr>
@@ -854,7 +861,7 @@
 <td>—</td>
 <td>Gerenciar clientes e leads para organização do relacionamento comercial</td>
 <td>CP1</td>
-<td>RF35, RF36, RF37</td>
+<td>RF35, RF36, RF37, RF41</td>
 <td>RNF09, RNF03, RNF01, RNF11, RNF21</td>
 <td>I-N-V-E-S-T</td>
 </tr>
@@ -864,71 +871,35 @@
 <td>Gerenciar colunas do funil para personalização do processo comercial</td>
 <td>CP1</td>
 <td>RF38, RF39, RF40</td>
-<td>RNF21</td>
+<td>RNF01, RNF03, RNF09, RNF11, RNF22</td>
 <td>N-V-E-S-T</td>
 </tr>
 <tr>
 <td>F21</td>
 <td>—</td>
-<td>Gerenciar cards do CRM para acompanhamento de oportunidades</td>
+<td>Registrar interações comerciais para rastreamento do relacionamento</td>
 <td>CP1</td>
-<td>RF41</td>
-<td>RNF23, RNF24</td>
+<td>RF42, RF53, RF59</td>
+<td>—</td>
 <td>N-V-E-S-T</td>
 </tr>
 <tr>
 <td>F22</td>
 <td>—</td>
-<td>Registrar interações comerciais para rastreamento do relacionamento</td>
-<td>CP1</td>
-<td>RF42</td>
-<td>—</td>
-<td>N-V-E-S-T</td>
-</tr>
-<tr>
-<td>F23</td>
-<td>—</td>
 <td>Acessar tickets para acompanhamento dos atendimentos</td>
 <td>CP8</td>
-<td>RF43</td>
+<td>RF43, RF58</td>
 <td>RNF09, RNF03, RNF01, RNF22</td>
 <td>I-N-V-E-S-T</td>
 </tr>
 <tr>
-<td>F24</td>
+<td>F23</td>
 <td>—</td>
 <td>Gerenciar tickets para manutenção da operação de suporte</td>
 <td>CP8</td>
 <td>RF44, RF45</td>
 <td>—</td>
 <td>N-V-E-S-T</td>
-</tr>
-<tr>
-<td>F25</td>
-<td>—</td>
-<td>Exibir o histórico de notificações para acompanhamento operacional</td>
-<td>CP9</td>
-<td>RF46</td>
-<td>RNF03, RNF09</td>
-<td>I-N-V-E-S-T</td>
-</tr>
-<tr>
-<td>F26</td>
-<td>—</td>
-<td>Controlar estado das notificações para acompanhamento de envio</td>
-<td>CP9</td>
-<td>RF47</td>
-<td>—</td>
-<td>N-V-E-S-T</td>
-</tr>
-<tr>
-<td>F27</td>
-<td>—</td>
-<td>Gerenciar notificações para o controle do sistema</td>
-<td>CP9</td>
-<td>RF15</td>
-<td>—</td>
-<td>I-N-V-E-S-T</td>
 </tr>
 </tbody>
 </table>
@@ -950,7 +921,7 @@
 <tr>
 <td>RF01</td>
 <td>—</td>
-<td>Consultar histórico de logs</td>
+<td>Consultar histórico de eventos de segurança</td>
 <td>F01</td>
 <td>CP2</td>
 <td>OE1</td>
@@ -959,7 +930,7 @@
 <tr>
 <td>RF02</td>
 <td>—</td>
-<td>Filtrar logs do sistema</td>
+<td>Filtrar eventos de segurança</td>
 <td>F01</td>
 <td>CP2</td>
 <td>OE1</td>
@@ -968,7 +939,7 @@
 <tr>
 <td>RF03</td>
 <td>—</td>
-<td>Auditar alterações realizadas</td>
+<td>Consultar status de disponibilidade dos componentes do sistema</td>
 <td>F02</td>
 <td>CP2</td>
 <td>OE1</td>
@@ -995,8 +966,8 @@
 <tr>
 <td>RF06</td>
 <td>—</td>
-<td>Exibir indicadores financeiros</td>
-<td>F04</td>
+<td>Filtrar indicadores operacionais</td>
+<td>F03</td>
 <td>CP3</td>
 <td>OE1</td>
 <td>IT3</td>
@@ -1004,8 +975,8 @@
 <tr>
 <td>RF07</td>
 <td>—</td>
-<td>Filtrar métricas executivas</td>
-<td>F05</td>
+<td>Exibir indicadores financeiros</td>
+<td>F04</td>
 <td>CP3</td>
 <td>OE1</td>
 <td>IT3</td>
@@ -1076,8 +1047,8 @@
 <tr>
 <td>RF15</td>
 <td>—</td>
-<td>Configurar template de notificações</td>
-<td>F27</td>
+<td>Adicionar template de notificações</td>
+<td>F08</td>
 <td>CP9</td>
 <td>OE3</td>
 <td>IT2</td>
@@ -1086,7 +1057,7 @@
 <td>RF16</td>
 <td>—</td>
 <td>Consultar histórico financeiro</td>
-<td>F06</td>
+<td>F05</td>
 <td>CP7</td>
 <td>OE1</td>
 <td>IT3</td>
@@ -1095,7 +1066,7 @@
 <td>RF17</td>
 <td>—</td>
 <td>Consultar detalhes de registro financeiro</td>
-<td>F06</td>
+<td>F05</td>
 <td>CP7</td>
 <td>OE1</td>
 <td>IT3</td>
@@ -1104,7 +1075,7 @@
 <td>RF18</td>
 <td>—</td>
 <td>Filtrar registros financeiros</td>
-<td>F07</td>
+<td>F05</td>
 <td>CP7</td>
 <td>OE1</td>
 <td>IT3</td>
@@ -1113,7 +1084,7 @@
 <td>RF19</td>
 <td>—</td>
 <td>Exportar relatório financeiro</td>
-<td>F08</td>
+<td>F06</td>
 <td>CP7</td>
 <td>OE1</td>
 <td>IT3</td>
@@ -1122,7 +1093,7 @@
 <td>RF20</td>
 <td>—</td>
 <td>Gerar relatório financeiro</td>
-<td>F08</td>
+<td>F06</td>
 <td>CP7</td>
 <td>OE1</td>
 <td>IT3</td>
@@ -1319,8 +1290,8 @@
 <tr>
 <td>RF42</td>
 <td>—</td>
-<td>Registrar histórico de interação</td>
-<td>F22</td>
+<td>Adicionar interação comercial</td>
+<td>F21</td>
 <td>CP1</td>
 <td>OE3</td>
 <td>IT2</td>
@@ -1382,11 +1353,11 @@
 <tr>
 <td>RF49</td>
 <td>✅</td>
-<td>Aceitar as leis LGPDs</td>
+<td>Detalhar os tópicos de conformidade com a LGPD</td>
 <td>F14</td>
 <td>CP4</td>
 <td>OE2</td>
-<td>—</td>
+<td>Páginas /privacidade (política de privacidade) e /cookies (uso de cookies)</td>
 </tr>
 <tr>
 <td>RF50</td>
@@ -1400,8 +1371,8 @@
 <tr>
 <td>RF51</td>
 <td>✅</td>
-<td>Acessar página de conformidade LGPD na vitrine</td>
-<td>F14</td>
+<td>Permitir a utilização de cookies no sistema</td>
+<td>F15</td>
 <td>CP4</td>
 <td>OE2</td>
 <td>Páginas /privacidade (política de privacidade) e /cookies (uso de cookies)</td>
@@ -1409,20 +1380,74 @@
 <tr>
 <td>RF52</td>
 <td>✅</td>
-<td>Permitir a utilização de cookies no sistema</td>
-<td>F15</td>
-<td>CP4</td>
-<td>OE2</td>
-<td>—</td>
-</tr>
-<tr>
-<td>RF53</td>
-<td>✅</td>
 <td>Filtrar artigos faq</td>
 <td>F18</td>
 <td>CP6</td>
 <td>OE2</td>
 <td>—</td>
+</tr>
+<tr>
+<td>RF53</td>
+<td>—</td>
+<td>Remover interação comercial</td>
+<td>F21</td>
+<td>CP1</td>
+<td>OE3</td>
+<td>IT2</td>
+</tr>
+<tr>
+<td>RF54</td>
+<td>—</td>
+<td>Configurar limiar de alerta para evento operacional crítico</td>
+<td>F02</td>
+<td>CP2</td>
+<td>OE1</td>
+<td>IT3</td>
+</tr>
+<tr>
+<td>RF55</td>
+<td>—</td>
+<td>Filtrar indicadores financeiros</td>
+<td>F04</td>
+<td>CP3</td>
+<td>OE1</td>
+<td>IT3</td>
+</tr>
+<tr>
+<td>RF56</td>
+<td>—</td>
+<td>Editar template de notifações</td>
+<td>F08</td>
+<td>CP9</td>
+<td>OE3</td>
+<td>IT2</td>
+</tr>
+<tr>
+<td>RF57</td>
+<td>—</td>
+<td>Remover template de notifações</td>
+<td>F08</td>
+<td>CP9</td>
+<td>OE3</td>
+<td>IT2</td>
+</tr>
+<tr>
+<td>RF58</td>
+<td>—</td>
+<td>Detalhar informações do ticket</td>
+<td>F22</td>
+<td>CP8</td>
+<td>OE3</td>
+<td>IT2</td>
+</tr>
+<tr>
+<td>RF59</td>
+<td>—</td>
+<td>Editar interação comercial</td>
+<td>F21</td>
+<td>CP1</td>
+<td>OE3</td>
+<td>IT2</td>
 </tr>
 </tbody>
 </table>
@@ -1677,7 +1702,7 @@
 <td>RN01</td>
 <td>Visibilidade de produtos na vitrine</td>
 <td>Somente produtos com <code>published = true</code> são exibidos na vitrine pública. A alteração de status tem efeito imediato — não há fila de publicação ou aprovação adicional.</td>
-<td>F12, F13, F15</td>
+<td>F12, F13</td>
 <td>RF25, RF26, RF54</td>
 <td>RNF04</td>
 </tr>
@@ -1733,8 +1758,8 @@
 <td>RN08</td>
 <td>Consentimento de cookies obrigatório</td>
 <td>Ao primeiro acesso à vitrine pública, o sistema deve exibir banner de consentimento de cookies. O visitante pode aceitar ou recusar; a preferência é persistida e respeitada em acessos subsequentes.</td>
-<td>F14</td>
-<td>RF55</td>
+<td>F15</td>
+<td>RF49, RF51</td>
 <td>RNF11</td>
 </tr>
 <tr>
@@ -1742,7 +1767,7 @@
 <td>Acessibilidade permanente das políticas de conformidade</td>
 <td>Links para política de privacidade e política de cookies devem estar presentes no rodapé de todas as páginas da vitrine, acessíveis sem autenticação e em qualquer idioma ativo.</td>
 <td>F14, F15</td>
-<td>RF55</td>
+<td>RF49, RF51</td>
 <td>RNF11, RNF20</td>
 </tr>
 <tr>
