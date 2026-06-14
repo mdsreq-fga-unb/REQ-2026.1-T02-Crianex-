@@ -68,7 +68,14 @@ nav:
               - 'Ata Refinamento Requisitos — 14/05/2026': iteracoes/iteracao-1/atas/2026-05-14.md
               - 'Ata Technical Design Review — 17/05/2026': iteracoes/iteracao-1/atas/2026-05-17.md
       - 'IT2 — Lead Capture':
-          - 'Resumo — Evidências': iteracoes/iteracao-2/index.md
+          - 'Resumo': iteracoes/iteracao-2/index.md
+          - 'Features Entregues': iteracoes/iteracao-2/features-entregues.md
+          - 'Evidências':
+              - 'Design Técnico': iteracoes/iteracao-2/evidencias/design-tecnico.md
+          - 'Validação':
+              - 'Partial Client Validation': iteracoes/iteracao-2/validacao/partial.md
+              - 'Formal Client Validation': iteracoes/iteracao-2/validacao/formal.md
+          - 'Resultados V&V': iteracoes/iteracao-2/vv.md
       - 'IT3 — Núcleo Operacional':
           - 'Resumo — Evidências': iteracoes/iteracao-3/index.md
   - Lista de Funcionalidades:

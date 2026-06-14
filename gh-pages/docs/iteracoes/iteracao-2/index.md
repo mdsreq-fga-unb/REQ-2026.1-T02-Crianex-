@@ -1,56 +1,43 @@
 # IT2 — Lead Capture
 
-**Período previsto:** ~20/05/2026 – 02/06/2026
-**Status:** 🕐 Planejada
-**Meta:**
+**Período:** 26/05/2026 – 21/06/2026  
+**Status:** 🔄 Em andamento
+
+## Iteration Goal
+
+Ao fim da IT2: (1) um administrador autenticado cadastra, edita e inativa clientes e leads no CRM interno via quadro Kanban, gerencia colunas e cards do funil comercial e registra histórico de interações; e (2) o sistema exibe histórico de notificações, permite controle de estado e gerencia templates — tudo com validação formal aprovada pelo cliente.
 
 ---
 
-## Características de Produto (CPs)
+## Características de Produto (CPs) Trabalhadas
 
-| CP  | Característica                 | OE  | Prioridade |
-| --- | ------------------------------ | --- | ---------- |
-| CP1 | CRM Interno Kanban de clientes | OE1 | Alta       |
-
----
-
-## Cerimônias e Reuniões
-
-!!! info "Iteração não iniciada"
-As reuniões serão registradas quando a iteração for iniciada.
+| CP      | Característica de Produto                | OE Relacionado | Prioridade |
+| ------- | ---------------------------------------- | -------------- | ---------- |
+| **CP1** | CRM Interno de Clientes                  | OE3            | Alta       |
+| **CP9** | Sistema de Notificações no Sistema       | OE3            | Média      |
 
 ---
 
-## Entregas
+## Cerimônias e Reuniões (FDD + Kanban)
 
-!!! info "Planejada"
-O detalhamento das entregas ocorrerá durante o Iteration Planning desta iteração.
+| Data | Cerimônia | Participantes | Ata |
+| ---- | --------- | ------------- | --- |
+| —    | —         | —             | —   |
 
 ---
 
-## Evidências de Entrega
+## Evidências e Validação
 
-!!! warning "Iteração não iniciada"
-Esta seção será preenchida durante e ao final da IT3.
+| #   | Evidência                    | Descrição                                                                                    | Link                                             |
+| --- | ---------------------------- | -------------------------------------------------------------------------------------------- | ------------------------------------------------ |
+| 1   | Design Técnico               | Diagramas leves, feature cards, glossário de domínio produzidos na TDR                       | [Ver detalhes →](./evidencias/design-tecnico.md) |
+| 2   | Features Entregues (F19–F22, F25–F27) | Diagramas de sequência, critérios de aceite atendidos e screenshots por feature           | [Ver detalhes →](./features-entregues.md)        |
+| 3   | Validação Parcial do Cliente | Vídeo compilado das sessões de validação parcial com o cliente + feedbacks registrados       | [Ver detalhes →](./validacao/partial.md)         |
+| 4   | Validação Formal do Cliente  | Reunião formal de aceite com o cliente                                                        | [Ver detalhes →](./validacao/formal.md)          |
 
-### PRs Mergeados
+---
 
-| #   | Feature | PR  | Revisor | Data de Merge |
-| --- | ------- | --- | ------- | ------------- |
-| —   | —       | —   | —       | —             |
+## Rastreabilidade e Priorização
 
-### Demonstração das Features
-
-<!-- Adicione gravações de demo, screenshots e protótipos validados:
-#### CP1 — CRM Interno Kanban
-#### CP2 — Dashboard de Logs
-#### CP3 — Dashboard Executivo de KPIs
--->
-
-### Critérios de Aceitação Validados
-
-### Validação pelo Cliente / Professor
-
-| Data | Origem | Feedback | Issue Aberta | Resolvida |
-| ---- | ------ | -------- | ------------ | --------- |
-| —    | —      | —        | —            | —         |
+- [Rastreabilidade de Requisitos](../../backlog/rastreabilidade.md) — mapeamento completo OEs → CPs → Features → RFs/RNFs com vínculos bidirecionais.
+- [Priorização do Backlog](../../backlog/priorizacao.md) — método IP = VB/ES com diagramas de Valor × Esforço e tabelas de prioridade por Feature e RNF.
