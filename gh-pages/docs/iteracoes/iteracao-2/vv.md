@@ -8,9 +8,9 @@ Registro formal das mudanças de processo, escopo e achados de verificação ide
 
 ## Resumo das Mudanças
 
-| Categoria | ID | Descrição resumida | Status |
-| --------- | -- | ------------------ | ------ |
-| —         | —  | —                  | —      |
+| Categoria | ID  | Descrição resumida | Status |
+| --------- | --- | ------------------ | ------ |
+| —         | —   | —                  | —      |
 
 ---
 

@@ -48,7 +48,7 @@ Registro formal das mudanças de processo, escopo e achados de verificação ide
 | **Para (correto)** | **Top-down:** cada Feature recebe seu próprio cálculo **IP = VB/ES** validado pelo cliente; RFs dentro da feature podem ou não ter priorização interna                    |
 | **Motivação**      | Feature é a unidade de entrega de valor — o cliente prioriza funcionalidades, não requisitos individuais. Calcular IP no nível errado distorce o planejamento de iteração |
 | **Impacto**        | Reprocessar tabela de priorização do backlog aplicando o método correto                                                                                                   |
-| **Status**         | ✅ realizado IT2                                                                                                                                                |
+| **Status**         | ✅ realizado IT2                                                                                                                                                          |
 
 ---
 

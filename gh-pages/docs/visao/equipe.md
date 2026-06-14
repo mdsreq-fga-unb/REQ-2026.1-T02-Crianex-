@@ -67,11 +67,11 @@ Cada ferramenta tem escopo exclusivo — o que vai para o Miro não vai para o D
 
 Realizadas **uma única vez** antes da primeira iteração de construção. Correspondem às Etapas 1–3 do FDD e produzem os artefatos que servem de insumo para todas as iterações seguintes.
 
-| Cerimônia                         | Formato | Quando       | Participantes               | Duração est. |
+| Cerimônia | Formato | Quando | Participantes | Duração est. |
 | --------------------------------- | ------- | ------------ | --------------------------- | ------------ |lc-facultativo
-| **Domain Modeling Workshop**      | Reunião | Antes da IT1 | PM, Chief Architect, Otavio | ~3h          |
-| **Feature Discovery Session**     | Reunião | Antes da IT1 | Equipe (sem cliente)        | ~1h          |
-| **Iteration Replenishment Macro** | Reunião | Antes da IT1 | PM, CPs, Otavio             | ~1h          |
+| **Domain Modeling Workshop** | Reunião | Antes da IT1 | PM, Chief Architect, Otavio | ~3h |
+| **Feature Discovery Session** | Reunião | Antes da IT1 | Equipe (sem cliente) | ~1h |
+| **Iteration Replenishment Macro** | Reunião | Antes da IT1 | PM, CPs, Otavio | ~1h |
 
 > **Nota:** Devido correções de urgência ao modelo FDD implementado à partir do feedback do professor George, tanto _Feature Discovery Session_ como _Iteration Replenishment Macro_ foram feitas no ínicio da Iteração 1, uma vez que já haviamos iniciado.
 
@@ -81,15 +81,15 @@ Realizadas **uma única vez** antes da primeira iteração de construção. Corr
 
 Correspondem às Etapas 4–5 do FDD. O **Replenishment Micro** é a versão iterativa do planejamento: seleciona as features da iteração corrente com base no IP e na capacidade disponível, diferente do Macro que definiu o roadmap completo.
 
-| Cerimônia                                      | Formato               | Frequência                   | Participantes            | Duração est. |
-| ---------------------------------------------- | --------------------- | ---------------------------- | ------------------------ | ------------ |
-| **Iteration Replenishment Micro + Commitment** | Reunião               | Início de cada iteração      | PM, CPs, Otavio          | ~1h          |
-| **Technical Design Review**                    | Reunião               | Por feature comprometida     | PM, CPs, Class Owners    | ~1h          |
-| **Midweek Sync / Kanban Pull Execution**       | Assíncrono — Discord/Whatsapp  | Meio de cada semana de Build | Toda a equipe            | —            |
-| **Feature Build Consolidation**                | Reunião               | Fim de cada semana de Build  | Toda a equipe            | ~45min       |
-| **Partial Client Validation**                  | Assíncrono — WhatsApp | Fim de cada semana de Build  | Resp. Validação + Otavio | —            |
-| **Formal Client Validation**                   | Reunião               | Fim da iteração              | Toda a equipe + Otavio   | ~1h          |
-| **Iteration Artifact Closure**                 | Reunião               | Fim da iteração              | Toda a equipe            | ~1h    |
+| Cerimônia                                      | Formato                       | Frequência                   | Participantes            | Duração est. |
+| ---------------------------------------------- | ----------------------------- | ---------------------------- | ------------------------ | ------------ |
+| **Iteration Replenishment Micro + Commitment** | Reunião                       | Início de cada iteração      | PM, CPs, Otavio          | ~1h          |
+| **Technical Design Review**                    | Reunião                       | Por feature comprometida     | PM, CPs, Class Owners    | ~1h          |
+| **Midweek Sync / Kanban Pull Execution**       | Assíncrono — Discord/Whatsapp | Meio de cada semana de Build | Toda a equipe            | —            |
+| **Feature Build Consolidation**                | Reunião                       | Fim de cada semana de Build  | Toda a equipe            | ~45min       |
+| **Partial Client Validation**                  | Assíncrono — WhatsApp         | Fim de cada semana de Build  | Resp. Validação + Otavio | —            |
+| **Formal Client Validation**                   | Reunião                       | Fim da iteração              | Toda a equipe + Otavio   | ~1h          |
+| **Iteration Artifact Closure**                 | Reunião                       | Fim da iteração              | Toda a equipe            | ~1h          |
 
 ---
 

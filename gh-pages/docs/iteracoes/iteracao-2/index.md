@@ -11,10 +11,10 @@ Ao fim da IT2: (1) um administrador autenticado cadastra, edita e inativa client
 
 ## Características de Produto (CPs) Trabalhadas
 
-| CP      | Característica de Produto                | OE Relacionado | Prioridade |
-| ------- | ---------------------------------------- | -------------- | ---------- |
-| **CP1** | CRM Interno de Clientes                  | OE3            | Alta       |
-| **CP9** | Sistema de Notificações no Sistema       | OE3            | Média      |
+| CP      | Característica de Produto          | OE Relacionado | Prioridade |
+| ------- | ---------------------------------- | -------------- | ---------- |
+| **CP1** | CRM Interno de Clientes            | OE3            | Alta       |
+| **CP9** | Sistema de Notificações no Sistema | OE3            | Média      |
 
 ---
 
@@ -28,12 +28,12 @@ Ao fim da IT2: (1) um administrador autenticado cadastra, edita e inativa client
 
 ## Evidências e Validação
 
-| #   | Evidência                    | Descrição                                                                                    | Link                                             |
-| --- | ---------------------------- | -------------------------------------------------------------------------------------------- | ------------------------------------------------ |
-| 1   | Design Técnico               | Diagramas leves, feature cards, glossário de domínio produzidos na TDR                       | [Ver detalhes →](./evidencias/design-tecnico.md) |
-| 2   | Features Entregues (F19–F22, F25–F27) | Diagramas de sequência, critérios de aceite atendidos e screenshots por feature           | [Ver detalhes →](./features-entregues.md)        |
-| 3   | Validação Parcial do Cliente | Vídeo compilado das sessões de validação parcial com o cliente + feedbacks registrados       | [Ver detalhes →](./validacao/partial.md)         |
-| 4   | Validação Formal do Cliente  | Reunião formal de aceite com o cliente                                                        | [Ver detalhes →](./validacao/formal.md)          |
+| #   | Evidência                             | Descrição                                                                              | Link                                             |
+| --- | ------------------------------------- | -------------------------------------------------------------------------------------- | ------------------------------------------------ |
+| 1   | Design Técnico                        | Diagramas leves, feature cards, glossário de domínio produzidos na TDR                 | [Ver detalhes →](./evidencias/design-tecnico.md) |
+| 2   | Features Entregues (F19–F22, F25–F27) | Diagramas de sequência, critérios de aceite atendidos e screenshots por feature        | [Ver detalhes →](./features-entregues.md)        |
+| 3   | Validação Parcial do Cliente          | Vídeo compilado das sessões de validação parcial com o cliente + feedbacks registrados | [Ver detalhes →](./validacao/partial.md)         |
+| 4   | Validação Formal do Cliente           | Reunião formal de aceite com o cliente                                                 | [Ver detalhes →](./validacao/formal.md)          |
 
 ---
 
