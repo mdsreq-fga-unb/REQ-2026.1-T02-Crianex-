@@ -8,22 +8,23 @@ Registro formal das mudanças de processo, escopo e achados de verificação ide
 
 ## Resumo das Mudanças
 
-| Categoria   | ID    | Descrição resumida                                             | Status |
-| ----------- | ----- | -------------------------------------------------------------- | ------ |
-| Processo    | MP.01 | Modelo FDD: 100% iterativo → fase de construção iterativa      | ✅     |
-| Processo    | MP.02 | Direção da priorização: bottom-up → top-down                   | ⏳     |
-| Escopo      | ES.01 | F02 removida — absorvida por F01                               | ⏳     |
-| Escopo      | ES.02 | F05 removida — RF07 reproposto + novo RF para F04              | ⏳     |
-| Escopo      | ES.03 | F07 absorvida por F06 — RF18 migra para F06                    | ⏳     |
-| Escopo      | ES.04 | F22 — RF42 detalhado em 3 RFs                                  | ⏳     |
-| Escopo      | ES.05 | F25/F26/F27 — agrupadora dividida em 3 features atômicas       | ✅     |
-| Verificação | V.01  | MFA/2FA: decisão de não implementar por solicitação do cliente | ✅     |
-| Verificação | V.02  | Conflito de numeração RF53 após mudanças de escopo             | ⚠️     |
-| Escopo      | ES.06 | F10 — Adicionado RF48 para edição de dados do próprio perfil   | ✅     |
-| Escopo      | ES.07 | F14 — Adicionado RF49 para consentimento e detalhamento de LGPD | ✅     |
-| Escopo      | ES.08 | F15 — Adicionado RF50 para consulta de detalhes de produtos SaaS | ✅     |
-| Escopo      | ES.09 | F15 — Adicionado RF51 para consentimento e política de cookies   | ✅      |
+| Categoria   | ID    | Descrição resumida                                                                          | Status |
+| ----------- | ----- | ------------------------------------------------------------------------------------------- | ------ |
+| Processo    | MP.01 | Modelo FDD: 100% iterativo → fase de construção iterativa                                   | ✅     |
+| Processo    | MP.02 | Direção da priorização: bottom-up → top-down                                                | ⏳     |
+| Escopo      | ES.01 | F02 removida — absorvida por F01                                                            | ⏳     |
+| Escopo      | ES.02 | F05 removida — RF07 reproposto + novo RF para F04                                           | ⏳     |
+| Escopo      | ES.03 | F07 absorvida por F06 — RF18 migra para F06                                                 | ⏳     |
+| Escopo      | ES.04 | F22 — RF42 detalhado em 3 RFs                                                               | ⏳     |
+| Escopo      | ES.05 | F25/F26/F27 — agrupadora dividida em 3 features atômicas                                    | ✅     |
+| Verificação | V.01  | MFA/2FA: decisão de não implementar por solicitação do cliente                              | ✅     |
+| Verificação | V.02  | Conflito de numeração RF53 após mudanças de escopo                                          | ⚠️     |
+| Escopo      | ES.06 | F10 — Adicionado RF48 para edição de dados do próprio perfil                                | ✅     |
+| Escopo      | ES.07 | F14 — Adicionado RF49 para consentimento e detalhamento de LGPD                             | ✅     |
+| Escopo      | ES.08 | F15 — Adicionado RF50 para consulta de detalhes de produtos SaaS                            | ✅     |
+| Escopo      | ES.09 | F15 — Adicionado RF51 para consentimento e política de cookies                              | ✅     |
 | Escopo      | ES.10 | F08 — Antigo RF15 refatorado em 3 RFs atômicos (CRUD de templates) e movido de F27 para F08 | ✅     |
+
 ---
 
 ## 1. Mudanças de Processo
@@ -118,64 +119,63 @@ Registro formal das mudanças de processo, escopo e achados de verificação ide
 
 ---
 
-
 ### ES.06 — F10: Adicionado RF48 para Edição de Perfil
 
 | Campo         | Conteúdo                                                                                                                                              |
 | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Feature** | **F10** — Permitir acesso ao painel administrativo para gerenciamento da plataforma                                                                   |
-| **Novo RF** | **RF48** — Editar dados do próprio perfil                                                                                                             |
+| **Feature**   | **F10** — Permitir acesso ao painel administrativo para gerenciamento da plataforma                                                                   |
+| **Novo RF**   | **RF48** — Editar dados do próprio perfil                                                                                                             |
 | **Descrição** | O sistema deve permitir que administradores autenticados alterem as informações cadastrais do seu próprio perfil diretamente no painel administrativo |
-| **Motivo** | Desmembramento necessário da gestão de acesso (F10) para garantir a autonomia do usuário logado sobre suas informações de perfil sem intermediários   |
-| **Status** |  	✅ Já refletido na rastreabilidade      |
+| **Motivo**    | Desmembramento necessário da gestão de acesso (F10) para garantir a autonomia do usuário logado sobre suas informações de perfil sem intermediários   |
+| **Status**    | ✅ Já refletido na rastreabilidade                                                                                                                    |
 
 ---
 
 ### ES.07 — F14: Adicionado RF49 para Consentimento de LGPD
 
-| Campo         | Conteúdo                                                                                                                                                                                      |
-| ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Feature** | **F14** — Exibir canais de contato na vitrine                                                                                                                                                 |
-| **Novo RF** | **RF49** — Detalhar as leis LGPDs seguidas                                                                                                                                                    |
-| **Descrição** | O sistema deve disponibilizar os termos de privacidade e exigir o aceite explícito das diretrizes da LGPD pelo usuário antes de permitir a submissão do formulário de captação de contatos    |
-| **Motivo** | A coleta de dados de visitantes na vitrine exige base legal de consentimento e transparência sobre o tratamento das informações armazenadas     |
-| **Status** | ✅ Já refletido na rastreabilidade  |
+| Campo         | Conteúdo                                                                                                                                                                                   |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Feature**   | **F14** — Exibir canais de contato na vitrine                                                                                                                                              |
+| **Novo RF**   | **RF49** — Detalhar as leis LGPDs seguidas                                                                                                                                                 |
+| **Descrição** | O sistema deve disponibilizar os termos de privacidade e exigir o aceite explícito das diretrizes da LGPD pelo usuário antes de permitir a submissão do formulário de captação de contatos |
+| **Motivo**    | A coleta de dados de visitantes na vitrine exige base legal de consentimento e transparência sobre o tratamento das informações armazenadas                                                |
+| **Status**    | ✅ Já refletido na rastreabilidade                                                                                                                                                         |
 
 ---
 
 ### ES.08 — F15: Adicionado RF50 para Detalhes de Produtos SaaS
 
-| Campo         | Conteúdo                                                                                                                                              |
-| ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Feature** | **F15** — Disponibilizar informações institucionais para apresentação da empresa                                                                      |
-| **Novo RF** | **RF50** — Consultar detalhes dos produto SaaS                                                                                                        |
+| Campo         | Conteúdo                                                                                                                                                   |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Feature**   | **F15** — Disponibilizar informações institucionais para apresentação da empresa                                                                           |
+| **Novo RF**   | **RF50** — Consultar detalhes dos produto SaaS                                                                                                             |
 | **Descrição** | O sistema deve permitir o redirecionamento de visitantes a partir de links específicos da vitrine para páginas dedicadas ao detalhamento dos produtos SaaS |
-| **Motivo** | Necessidade de segmentação do catálogo institucional; permite que o lead aprofunde o conhecimento sobre os módulos específicos antes da captação      |
-| **Status** | ✅ Já refletido na rastreabilidade |
+| **Motivo**    | Necessidade de segmentação do catálogo institucional; permite que o lead aprofunde o conhecimento sobre os módulos específicos antes da captação           |
+| **Status**    | ✅ Já refletido na rastreabilidade                                                                                                                         |
 
 ---
 
 ### ES.09 — F15: Adicionado RF51 para Gerenciamento de Cookies
 
-| Campo         | Conteúdo                                                                                                                                              |
-| ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Feature** | **F15** — Disponibilizar informações institucionais para apresentação da empresa                                                                      |
-| **Novo RF** | **RF51** — Permitir a utilização de cookies no sistema                                                                                                |
+| Campo         | Conteúdo                                                                                                                                                |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Feature**   | **F15** — Disponibilizar informações institucionais para apresentação da empresa                                                                        |
+| **Novo RF**   | **RF51** — Permitir a utilização de cookies no sistema                                                                                                  |
 | **Descrição** | O sistema deve exibir um banner de consentimento de rastreamento de dados, permitindo ao usuário aceitar ou rejeitar políticas de cookies da plataforma |
-| **Motivo** | Conformidade obrigatória com a LGPD para navegação e auditoria na camada pública (vitrine); garante transparência no uso de dados de navegação         |
-| **Status** | ✅ Já refletido na rastreabilidade |
+| **Motivo**    | Conformidade obrigatória com a LGPD para navegação e auditoria na camada pública (vitrine); garante transparência no uso de dados de navegação          |
+| **Status**    | ✅ Já refletido na rastreabilidade                                                                                                                      |
 
 ---
 
 ### ES.10 — F08: Refatoração e Desmembramento do Gerenciamento de Templates
 
-| Campo         | Conteúdo                                                                                                                                                                                      |
-| ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Feature** | **F08** — Gerenciar templates de notificações *(Destino)* <br> **F27** — Gerenciar notificações para o controle do sistema *(Origem)* [Removida] |
+| Campo       | Conteúdo                                                                                                                                                                                                                                                                                           |
+| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Feature** | **F08** — Gerenciar templates de notificações _(Destino)_ <br> **F27** — Gerenciar notificações para o controle do sistema _(Origem)_ [Removida]                                                                                                                                                   |
 | **Mudança** | Remoção do escopo macro **RF15 — Configurar template de notificações** (vinculado a F27) para a criação de 3 requisitos atômicos em F08: <br> • **RF15** — Adicionar template de notificações <br> • **RF56** — Editar template de notificações <br> • **RF57** — Remover template de notificações |
-| **Motivo** | Correção de granularidade e alinhamento com o modelo FDD. "Configurar" mascarava um comportamento complexo de CRUD. O desmembramento isola as operações de persistência e expõe os critérios de aceite de forma independente. |
-| **Impacto** | Alteração do mapeamento de rastreabilidade do RF15 (agora aponta para F08) e abertura de novos IDs (RF56 e RF57) no backlog da IT2.                                                           |
-| **Status** | ✅ Aplicado e refletido no mapeamento visual do Miro                                          |
+| **Motivo**  | Correção de granularidade e alinhamento com o modelo FDD. "Configurar" mascarava um comportamento complexo de CRUD. O desmembramento isola as operações de persistência e expõe os critérios de aceite de forma independente.                                                                      |
+| **Impacto** | Alteração do mapeamento de rastreabilidade do RF15 (agora aponta para F08) e abertura de novos IDs (RF56 e RF57) no backlog da IT2.                                                                                                                                                                |
+| **Status**  | ✅ Aplicado e refletido no mapeamento visual do Miro                                                                                                                                                                                                                                               |
 
 ---
 
