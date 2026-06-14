@@ -40,7 +40,7 @@ jobs:
         run: pip install -r gh-pages/requirements.txt
 
       - name: Build docs
-        run: mkdocs build --config-file gh-pages/mkdocs.yml --site-dir ./site
+        run: mkdocs build --config-file gh-pages/mkdocs.yml --site-dir $GITHUB_WORKSPACE/site
 
       - name: Deploy to /${{ steps.meta.outputs.folder }}
         uses: peaceiris/actions-gh-pages@v4
