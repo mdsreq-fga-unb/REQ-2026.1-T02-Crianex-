@@ -507,27 +507,30 @@
         
         <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
-        <li class="first-level active"><a href="#priorizacao-de-requisitos-crianex-hub">Priorização de Requisitos — Crianex Hub</a></li>
+        <li class="first-level active"><a href="#priorizacao-de-features-crianex-hub">Priorização de Features — Crianex Hub</a></li>
             <li class="second-level"><a href="#historico-de-revisao">Histórico de Revisão</a></li>
                 
-            <li class="second-level"><a href="#metodo-de-priorizacao-valor-esforco">Método de Priorização: Valor × Esforço</a></li>
+            <li class="second-level"><a href="#metodo-de-priorizacao-top-down-feature-rf">Método de Priorização: Top-Down (Feature → RF)</a></li>
                 
-                <li class="third-level"><a href="#formula-dos-requisitos-funcionais">Fórmula dos Requisitos Funcionais</a></li>
-                <li class="third-level"><a href="#formula-dos-requisitos-nao-funcionais">Fórmula dos Requisitos Não Funcionais</a></li>
-            <li class="second-level"><a href="#diagramas-de-valor-esforco">Diagramas de Valor × Esforço</a></li>
+                <li class="third-level"><a href="#por-que-top-down">Por que Top-Down?</a></li>
+                <li class="third-level"><a href="#criterios-para-valor-da-feature">Critérios para VALOR da Feature</a></li>
+                <li class="third-level"><a href="#criterios-para-esforco-da-feature">Critérios para ESFORÇO da Feature</a></li>
+                <li class="third-level"><a href="#validacao-com-o-cliente">Validação com o Cliente</a></li>
+                <li class="third-level"><a href="#calculos-no-miro">Cálculos no Miro</a></li>
+            <li class="second-level"><a href="#matriz-de-features-valor-esforco">Matriz de Features (Valor × Esforço)</a></li>
                 
-            <li class="second-level"><a href="#evidencia-calculo-objetivo">Evidência — Cálculo Objetivo</a></li>
+            <li class="second-level"><a href="#tabela-de-priorizacao-de-features">Tabela de Priorização de Features</a></li>
                 
-                <li class="third-level"><a href="#exemplos">Exemplos:</a></li>
-            <li class="second-level"><a href="#priorizacao-por-feature-rfs-agrupados">Priorização por Feature (RFs agrupados)</a></li>
+            <li class="second-level"><a href="#features-por-iteracao">Features por Iteração</a></li>
                 
-            <li class="second-level"><a href="#priorizacao-de-rnfs">Priorização de RNFs</a></li>
-                
+                <li class="third-level"><a href="#it1-vitrine-publica">IT1 — Vitrine Pública</a></li>
+                <li class="third-level"><a href="#it2-lead-capture">IT2 — Lead Capture</a></li>
+                <li class="third-level"><a href="#it3-nucleo-operacional">IT3 — Núcleo Operacional</a></li>
     </ul>
 </div></div>
         <div class="col-md-9" role="main">
 
-<h1 id="priorizacao-de-requisitos-crianex-hub">Priorização de Requisitos — Crianex Hub<a class="headerlink" href="#priorizacao-de-requisitos-crianex-hub" title="Permanent link">&para;</a></h1>
+<h1 id="priorizacao-de-features-crianex-hub">Priorização de Features — Crianex Hub<a class="headerlink" href="#priorizacao-de-features-crianex-hub" title="Permanent link">&para;</a></h1>
 <h2 id="historico-de-revisao">Histórico de Revisão<a class="headerlink" href="#historico-de-revisao" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -543,28 +546,36 @@
 <tr>
 <td>1.0</td>
 <td>14/05/2026</td>
-<td>Templete do Priorização do backlog</td>
+<td>Template do Priorização do backlog</td>
 <td>Lucas A. Zanetti</td>
 <td>Heitor Macedo Ricardo</td>
 </tr>
 <tr>
 <td>1.1</td>
 <td>17/05/2026</td>
-<td>Tabela de priorização com diagrama de valorXesforço</td>
+<td>Tabela de priorização com diagrama de valor×esforço</td>
 <td>Lucas A. Zanetti</td>
 <td>Heitor Macedo Ricardo</td>
+</tr>
+<tr>
+<td>2.0</td>
+<td>15/06/2026</td>
+<td>Refatoração completa: mudança para abordagem top-down (Feature como unidade principal); nova matriz; seções por iteração</td>
+<td>Lucas A. Zanetti</td>
+<td>Hugo Freitas Silva</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="metodo-de-priorizacao-valor-esforco">Método de Priorização: Valor × Esforço<a class="headerlink" href="#metodo-de-priorizacao-valor-esforco" title="Permanent link">&para;</a></h2>
-<p>A priorização segue a fórmula objetiva abaixo, aplicada a cada Requisito:</p>
-<pre class="highlight"><code>IP = VB / ES (RF)
-IP = IS / ES (RNF)
+<h2 id="metodo-de-priorizacao-top-down-feature-rf">Método de Priorização: Top-Down (Feature → RF)<a class="headerlink" href="#metodo-de-priorizacao-top-down-feature-rf" title="Permanent link">&para;</a></h2>
+<h3 id="por-que-top-down">Por que Top-Down?<a class="headerlink" href="#por-que-top-down" title="Permanent link">&para;</a></h3>
+<p>A abordagem anterior calculava o índice de prioridade de cada Requisito Funcional individualmente e depois <strong>agregava</strong> esses valores para estimar a prioridade de uma Feature (bottom-up). Esse modelo apresentou um problema estrutural: a média dos RFs nivela diferenças internas da feature e não representa o valor de negócio real que ela entrega como unidade funcional.</p>
+<p>A abordagem correta é <strong>top-down</strong>: priorizamos as <strong>Features</strong> diretamente — elas são a unidade de entrega e de decisão de negócio. O cálculo dos RFs passa a ser utilizado apenas caso seja necessário <strong>ordenar os requisitos dentro de uma feature já priorizada</strong>, definindo a sequência de implementação interna.</p>
+<pre class="highlight"><code>IP = VB / ES  (aplicado diretamente à Feature)
 
-IP ≥ 1,50 → Alta prioridade  (Q1)
+IP ≥ 1,50  → Alta prioridade  (Q1)
 IP 1,00–1,49 → Média prioridade (Q2)
-IP &lt; 1,00  → Baixa prioridade  (Q3/Q4)</code></pre>
+IP &lt; 1,00   → Baixa prioridade  (Q3/Q4)</code></pre>
 <table>
 <thead>
 <tr>
@@ -578,24 +589,18 @@ IP &lt; 1,00  → Baixa prioridade  (Q3/Q4)</code></pre>
 <td>Valor de Negócio — impacto direto nos OEs</td>
 </tr>
 <tr>
-<td><strong>IS</strong></td>
-<td>Impacto no Sistema - incluso impacto no usuário</td>
-</tr>
-<tr>
 <td><strong>ES</strong></td>
-<td>Esforço - impacto na implementação</td>
+<td>Esforço de implementação da Feature completa</td>
 </tr>
 <tr>
 <td><strong>IP</strong></td>
-<td>Índice de Prioridade = VB / PT</td>
+<td>Índice de Prioridade = VB / ES</td>
 </tr>
 </tbody>
 </table>
-<p>A fórmula e critérios para calcular o 'VB' e o 'ES' é diferente entre a tabela de Requisitos Funcionais(RF) e os Requisitos Não Funcionais(RNF).</p>
-<p>A escala de valores e esforço para cada Requisito foi estabelecido a partir do que o cliente nos informou e priorizou, e foi validada por ele.</p>
-<h3 id="formula-dos-requisitos-funcionais">Fórmula dos Requisitos Funcionais<a class="headerlink" href="#formula-dos-requisitos-funcionais" title="Permanent link">&para;</a></h3>
-<p>Cada critério para fazer o cálculo é uma escala de 1-5 e então inseridos os pesos de cada critério.</p>
-<h4 id="criterios-para-valor">Critérios para VALOR<a class="headerlink" href="#criterios-para-valor" title="Permanent link">&para;</a></h4>
+<hr />
+<h3 id="criterios-para-valor-da-feature">Critérios para VALOR da Feature<a class="headerlink" href="#criterios-para-valor-da-feature" title="Permanent link">&para;</a></h3>
+<p>Os mesmos critérios utilizados para os RFs foram aplicados diretamente no nível da Feature. A diferença está no objeto avaliado: em vez de avaliar um requisito isolado, avalia-se <strong>o conjunto de comportamentos que a feature entrega</strong>.</p>
 <table>
 <thead>
 <tr>
@@ -608,27 +613,29 @@ IP &lt; 1,00  → Baixa prioridade  (Q3/Q4)</code></pre>
 <tr>
 <td><strong>Impacto de Negócio</strong></td>
 <td>3</td>
-<td>Mede o quanto o requisito contribui diretamente para os objetivos estratégicos e operacionais da organização, como aumento de produtividade, centralização de processos, redução de retrabalho ou geração de valor comercial.</td>
+<td>Mede o quanto a feature contribui diretamente para os objetivos estratégicos e operacionais da organização, como aumento de produtividade, centralização de processos, redução de retrabalho ou geração de valor comercial.</td>
 </tr>
 <tr>
 <td><strong>Frequência de Uso</strong></td>
 <td>3</td>
-<td>Avalia com que frequência a funcionalidade será utilizada pelos usuários no contexto diário do sistema. Funcionalidades acessadas constantemente tendem a possuir maior valor operacional.</td>
+<td>Avalia com que frequência a feature será utilizada pelos usuários no contexto diário do sistema. Features acessadas constantemente tendem a possuir maior valor operacional.</td>
 </tr>
 <tr>
 <td><strong>Valor percebido pelo Usuário</strong></td>
 <td>2</td>
-<td>Representa o quanto a funcionalidade melhora a experiência, praticidade ou eficiência percebida pelos usuários durante a utilização do sistema.</td>
+<td>Representa o quanto a feature melhora a experiência, praticidade ou eficiência percebida pelos usuários durante a utilização do sistema.</td>
 </tr>
 <tr>
 <td><strong>Impacto Estratégico</strong></td>
 <td>2</td>
-<td>Avalia o quanto o requisito contribui para diferenciais estratégicos do produto, crescimento futuro da plataforma, tomada de decisão ou posicionamento tecnológico da organização.</td>
+<td>Avalia o quanto a feature contribui para diferenciais estratégicos do produto, crescimento futuro da plataforma, tomada de decisão ou posicionamento tecnológico da organização.</td>
 </tr>
 </tbody>
 </table>
-<pre class="highlight"><code class="language-c">ValorRF = (ImpactoNegocio × 3) + (FrequenciaUso × 3) + (ValorUsuario × 2) + (ImpactoEstrategico × 2)</code></pre>
-<h4 id="criterios-para-esforco">Critérios para ESFORÇO<a class="headerlink" href="#criterios-para-esforco" title="Permanent link">&para;</a></h4>
+<pre class="highlight"><code class="language-c">VB = (ImpactoNegocio × 3) + (FrequenciaUso × 3) + (ValorUsuario × 2) + (ImpactoEstrategico × 2)</code></pre>
+<hr />
+<h3 id="criterios-para-esforco-da-feature">Critérios para ESFORÇO da Feature<a class="headerlink" href="#criterios-para-esforco-da-feature" title="Permanent link">&para;</a></h3>
+<p>Para o esforço, a <strong>complexidade técnica considera tanto os Requisitos Funcionais quanto os Requisitos Não Funcionais</strong> vinculados à feature. RNFs impõem restrições de qualidade (segurança, desempenho, conformidade) que aumentam diretamente a dificuldade de implementação. Ignorá-los subestimaria o esforço real.</p>
 <table>
 <thead>
 <tr>
@@ -641,134 +648,55 @@ IP &lt; 1,00  → Baixa prioridade  (Q3/Q4)</code></pre>
 <tr>
 <td><strong>Complexidade técnica</strong></td>
 <td>3</td>
-<td>MMede a dificuldade de implementação da funcionalidade considerando lógica de negócio, integrações, persistência de dados e desenvolvimento técnico necessário.</td>
+<td>Mede a dificuldade de implementação considerando lógica de negócio dos RFs, integrações, persistência de dados e <strong>restrições impostas pelos RNFs vinculados</strong> (segurança, desempenho, conformidade, usabilidade).</td>
 </tr>
 <tr>
 <td><strong>Dependências</strong></td>
 <td>2</td>
-<td>Avalia o quanto o requisito depende de outros módulos, serviços, funcionalidades ou componentes já existentes para funcionar corretamente.</td>
+<td>Avalia o quanto a feature depende de outros módulos, serviços ou componentes já existentes para funcionar corretamente.</td>
 </tr>
 <tr>
 <td><strong>Risco técnico</strong></td>
 <td>2</td>
-<td>Representa a probabilidade de ocorrerem problemas técnicos, falhas de implementação, inconsistências ou dificuldades durante o desenvolvimento da funcionalidade.</td>
+<td>Representa a probabilidade de ocorrerem problemas técnicos, falhas de implementação ou inconsistências durante o desenvolvimento.</td>
 </tr>
 <tr>
 <td><strong>Tempo de implementação</strong></td>
 <td>1</td>
-<td>Mede o esforço temporal estimado para desenvolver, testar e validar o requisito funcional dentro da arquitetura do sistema.</td>
+<td>Mede o esforço temporal estimado para desenvolver, testar e validar todos os RFs e atender os RNFs vinculados à feature.</td>
 </tr>
 </tbody>
 </table>
-<pre class="highlight"><code class="language-c">ValorRF = (Complixidade × 3) + (Dependencias × 2) + (Riscos × 2) + (Tempo × 1)</code></pre>
-<h3 id="formula-dos-requisitos-nao-funcionais">Fórmula dos Requisitos Não Funcionais<a class="headerlink" href="#formula-dos-requisitos-nao-funcionais" title="Permanent link">&para;</a></h3>
-<p>Cada critério para fazer o cálculo é uma escala de 1-5 e então inseridos os pesos de cada critério.</p>
-<h4 id="criterios-para-valor_1">Critérios para VALOR<a class="headerlink" href="#criterios-para-valor_1" title="Permanent link">&para;</a></h4>
-<table>
-<thead>
-<tr>
-<th>Critério</th>
-<th>Peso</th>
-<th>Descrição</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Impacto arquitetural</strong></td>
-<td>3</td>
-<td>Avalia o quanto o requisito influencia decisões estruturais da arquitetura do sistema, como escalabilidade, distribuição, autenticação, infraestrutura e organização dos componentes.</td>
-</tr>
-<tr>
-<td><strong>Impacto operacional</strong></td>
-<td>3</td>
-<td>Mede o quanto o RNF contribui para eficiência operacional, estabilidade, monitoramento, manutenção e continuidade do funcionamento da plataforma.</td>
-</tr>
-<tr>
-<td><strong>Impacto na experiência do usuário</strong></td>
-<td>2</td>
-<td>Representa o quanto o requisito melhora aspectos de usabilidade, desempenho, acessibilidade, responsividade ou qualidade percebida pelos usuários.</td>
-</tr>
-<tr>
-<td><strong>Redução de risco</strong></td>
-<td>2</td>
-<td>Avalia o quanto o RNF reduz riscos relacionados à segurança, indisponibilidade, perda de dados, falhas operacionais ou não conformidade legal.</td>
-</tr>
-</tbody>
-</table>
-<pre class="highlight"><code class="language-c">ValorRF = (ImpactoOperacional × 3) + (ImpactoArquitetural × 3) + (UserExperience × 2) + (RiskReduction × 2)</code></pre>
-<h4 id="criterios-para-esforco_1">Critérios para ESFORÇO<a class="headerlink" href="#criterios-para-esforco_1" title="Permanent link">&para;</a></h4>
-<table>
-<thead>
-<tr>
-<th>Critério</th>
-<th>Peso</th>
-<th>Descrição</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Complexidade técnica</strong></td>
-<td>3</td>
-<td>Mede a dificuldade técnica para implementação do requisito não funcional considerando infraestrutura, configuração, segurança, integração e arquitetura.</td>
-</tr>
-<tr>
-<td><strong>Dependência arquitetural</strong></td>
-<td>2</td>
-<td>Avalia o quanto o requisito depende de componentes centrais, decisões arquiteturais, infraestrutura específica ou padrões estruturais do sistema.</td>
-</tr>
-<tr>
-<td><strong>Esforço de validação e testes</strong></td>
-<td>2</td>
-<td>Representa a dificuldade de verificar, medir e validar o atendimento do requisito por meio de testes, monitoramento ou métricas técnicas.</td>
-</tr>
-<tr>
-<td><strong>Impacto transversal</strong></td>
-<td>1</td>
-<td>Mede o quanto o requisito afeta múltiplos módulos, camadas ou funcionalidades do sistema simultaneamente, exigindo adaptações distribuídas pela plataforma.</td>
-</tr>
-</tbody>
-</table>
-<pre class="highlight"><code class="language-c">ValorRF = (Complixidade × 3) + (DependenciasArquitetural × 3) + (EsforcoValidacao × 2) + (ImpactoTransversal × 2)</code></pre>
+<pre class="highlight"><code class="language-c">ES = (Complexidade × 3) + (Dependencias × 2) + (RiscoTecnico × 2) + (Tempo × 1)</code></pre>
 <hr />
-<h2 id="diagramas-de-valor-esforco">Diagramas de Valor × Esforço<a class="headerlink" href="#diagramas-de-valor-esforco" title="Permanent link">&para;</a></h2>
-<p><img alt="RF - Value Matrix" src="../../visao/images/RF_matriz.png" /></p>
+<h3 id="validacao-com-o-cliente">Validação com o Cliente<a class="headerlink" href="#validacao-com-o-cliente" title="Permanent link">&para;</a></h3>
+<p>Os critérios de valor (impacto de negócio, frequência de uso, valor percebido pelo usuário e impacto estratégico) e seus respectivos pesos foram definidos em conjunto com o cliente em sessão de priorização. O cliente avaliou cada feature e atribuiu notas de 1 a 5 por critério, validando tanto os pesos quanto os scores individuais. Os resultados foram documentados no quadro Miro abaixo.</p>
+<hr />
+<h3 id="calculos-no-miro">Cálculos no Miro<a class="headerlink" href="#calculos-no-miro" title="Permanent link">&para;</a></h3>
+<p>Os cálculos detalhados de cada Feature — critério por critério, com notas e justificativas — estão documentados no quadro abaixo:</p>
+<p><iframe
+  src="https://miro.com/app/live-embed/uXjVGl991V0=/?moveToWidget=3458764675237762549&cot=14"
+  width="100%"
+  height="620"
+  frameborder="0"
+  scrolling="no"
+  allow="fullscreen; clipboard-read; clipboard-write"
+  allowfullscreen>
+</iframe>
+</p>
+<hr />
+<h2 id="matriz-de-features-valor-esforco">Matriz de Features (Valor × Esforço)<a class="headerlink" href="#matriz-de-features-valor-esforco" title="Permanent link">&para;</a></h2>
+<p>A matriz posiciona cada feature no plano Valor × Esforço. O quadrante superior-esquerdo (alto valor, baixo esforço) delimita o <strong>MVP</strong> — as features com melhor retorno relativo sobre o investimento. As features fora do MVP possuem menor relação custo-benefício e serão reavaliadas em iterações futuras.</p>
+<p><img alt="Feature - Value Matrix" src="../../visao/images/new_matrix.png" /></p>
 <figure class="crianex-figure">
-  <figcaption>Figura 1 — RF/Value Matrix dos requisitos funcionais. Fonte: Elaborado pelos autores (2026).</figcaption>
+  <figcaption>Figura 1 — Matriz de Features: Valor × Esforço. O retângulo vermelho delimita o MVP. Fonte: Elaborado pelos autores (2026).</figcaption>
 </figure>
 
 <hr />
-<p><img alt="RNF - Value Matrix" src="../../visao/images/RNF_matriz.png" /></p>
-<figure class="crianex-figure">
-  <figcaption>Figura 2 — RNF/Value Matrix dos requisitos funcionais. Fonte: Elaborado pelos autores (2026).</figcaption>
-</figure>
-
-<hr />
-<p><img alt="Feature - Value Matrix" src="../../visao/images/Feature_matriz.png" /></p>
-<figure class="crianex-figure">
-  <figcaption>Figura 2 — Feature/Value Matrix dos requisitos funcionais agrupados em features. Fonte: Elaborado pelos autores (2026).</figcaption>
-</figure>
-
-<hr />
-<h2 id="evidencia-calculo-objetivo">Evidência — Cálculo Objetivo<a class="headerlink" href="#evidencia-calculo-objetivo" title="Permanent link">&para;</a></h2>
-<h4 id="exemplos">Exemplos:<a class="headerlink" href="#exemplos" title="Permanent link">&para;</a></h4>
+<h2 id="tabela-de-priorizacao-de-features">Tabela de Priorização de Features<a class="headerlink" href="#tabela-de-priorizacao-de-features" title="Permanent link">&para;</a></h2>
 <blockquote>
-<p>Esse padrão segue para todos os requisitos.</p>
-</blockquote>
-<p><img alt="RF-Cálculo de Valor e Esforço" src="../../visao/images/calculo_RF_matrix.png" /></p>
-<figure class="crianex-figure">
-  <figcaption>Figura 3 — Exemplo de uma evidência de cálculo da de priorização do Requisito Funcional. Fonte: Elaborado pelos autores (2026).</figcaption>
-</figure>
-
-<p><img alt="RNF-Cálculo de Valor e Esforço" src="../../visao/images/calculo_RNF_matrix.png" /></p>
-<figure class="crianex-figure">
-  <figcaption>Figura 3 — Exemplo de uma evidência de cálculo da de priorização do Requisito Não Funcional. Fonte: Elaborado pelos autores (2026).</figcaption>
-</figure>
-
-<hr />
-<h2 id="priorizacao-por-feature-rfs-agrupados">Priorização por Feature (RFs agrupados)<a class="headerlink" href="#priorizacao-por-feature-rfs-agrupados" title="Permanent link">&para;</a></h2>
-<blockquote>
-<p><code>Somatório(VB)</code> e <code>Somatório(ES)</code> = soma dos valores de todos os RFs vinculados à Feature.<br />
-<code>IP = Σ(VB) / Σ(ES)</code> — mesma fórmula dos RFs, aplicada ao nível da Feature.</p>
+<p>Os valores de VB, ES e IP são calculados no Miro e serão preenchidos manualmente nesta tabela.<br />
+<code>*</code> Feature fora do MVP incluída em uma iteração por dependência funcional com outra feature já priorizada.</p>
 </blockquote>
 <table>
 <thead>
@@ -777,8 +705,8 @@ IP &lt; 1,00  → Baixa prioridade  (Q3/Q4)</code></pre>
 <th>Feature</th>
 <th>CP</th>
 <th>OE</th>
-<th>Σ(VB)</th>
-<th>Σ(ES)</th>
+<th>VB</th>
+<th>ES</th>
 <th>IP</th>
 <th>Quadrante</th>
 <th>MVP</th>
@@ -790,88 +718,121 @@ IP &lt; 1,00  → Baixa prioridade  (Q3/Q4)</code></pre>
 <td>Autenticar para acesso seguro ao sistema</td>
 <td>CP5</td>
 <td>OE2</td>
-<td>45</td>
-<td>12,5</td>
-<td>3,60</td>
+<td>50</td>
+<td>21</td>
+<td>2,38</td>
 <td>Q1</td>
-<td>✅</td>
+<td><span class="badge badge--green">MVP</span></td>
+</tr>
+<tr>
+<td>F12</td>
+<td>Gerenciar produtos SaaS da vitrine para manutenção do portfólio</td>
+<td>CP4</td>
+<td>OE2</td>
+<td>50</td>
+<td>10</td>
+<td>5</td>
+<td>Q1</td>
+<td><span class="badge badge--green">MVP</span></td>
 </tr>
 <tr>
 <td>F13</td>
 <td>Controlar publicação de produto SaaS para exibição pública</td>
 <td>CP4</td>
 <td>OE2</td>
-<td>40,5</td>
-<td>12</td>
-<td>3,38</td>
+<td>47</td>
+<td>14</td>
+<td>3,36</td>
 <td>Q1</td>
-<td>✅</td>
+<td><span class="badge badge--green">MVP</span></td>
 </tr>
 <tr>
-<td>F12</td>
-<td>Gerenciar produtos SaaS da vitrine para manutenção do portifólio</td>
+<td>F15</td>
+<td>Disponibilizar informações institucionais para apresentação da empresa</td>
 <td>CP4</td>
 <td>OE2</td>
-<td>38,75</td>
-<td>11,75</td>
-<td>3,30</td>
+<td>50</td>
+<td>15</td>
+<td>3,33</td>
 <td>Q1</td>
-<td>✅</td>
+<td><span class="badge badge--green">MVP</span></td>
 </tr>
 <tr>
-<td>F22</td>
+<td>F21</td>
 <td>Registrar interações comerciais para rastreamento do relacionamento</td>
 <td>CP1</td>
 <td>OE3</td>
-<td>39</td>
-<td>13</td>
-<td>3,00</td>
+<td>50</td>
+<td>16</td>
+<td>3,12</td>
 <td>Q1</td>
-<td>✅</td>
+<td><span class="badge badge--green">MVP</span></td>
 </tr>
 <tr>
 <td>F19</td>
 <td>Gerenciar clientes e leads para organização do relacionamento comercial</td>
 <td>CP1</td>
 <td>OE3</td>
-<td>37</td>
-<td>12,4</td>
-<td>2,99</td>
-<td>Q1</td>
-<td>✅</td>
-</tr>
-<tr>
-<td>F21</td>
-<td>Gerenciar cards do CRM para acompanhamento de oportunidades</td>
-<td>CP1</td>
-<td>OE3</td>
 <td>50</td>
-<td>18</td>
-<td>2,77</td>
+<td>20</td>
+<td>2,5</td>
 <td>Q1</td>
-<td>✅</td>
+<td><span class="badge badge--green">MVP</span></td>
 </tr>
 <tr>
 <td>F20</td>
 <td>Gerenciar colunas do funil para personalização do processo comercial</td>
 <td>CP1</td>
 <td>OE3</td>
-<td>40</td>
-<td>14,7</td>
-<td>2,72</td>
+<td>36</td>
+<td>17</td>
+<td>2,12</td>
 <td>Q1</td>
-<td>✅</td>
+<td><span class="badge badge--green">MVP</span></td>
+</tr>
+<tr>
+<td>F11</td>
+<td>Gerenciar usuários da plataforma para controle operacional</td>
+<td>CP5</td>
+<td>OE2</td>
+<td>39</td>
+<td>18</td>
+<td>2,17</td>
+<td>Q1</td>
+<td><span class="badge badge--green">MVP</span></td>
 </tr>
 <tr>
 <td>F16</td>
-<td>Gerenciar artigos de FAQs para manuntenção da base de conhecimento</td>
+<td>Gerenciar artigos de FAQs para manutenção da base de conhecimento</td>
 <td>CP6</td>
 <td>OE2</td>
-<td>24,75</td>
-<td>9,5</td>
-<td>2,61</td>
+<td>32</td>
+<td>8</td>
+<td>4</td>
 <td>Q1</td>
-<td>✅</td>
+<td><span class="badge badge--green">MVP</span></td>
+</tr>
+<tr>
+<td>F17</td>
+<td>Controlar publicação de artigos FAQ para disponibilização pública</td>
+<td>CP6</td>
+<td>OE2</td>
+<td>30</td>
+<td>10</td>
+<td>3</td>
+<td>Q1</td>
+<td><span class="badge badge--green">MVP</span></td>
+</tr>
+<tr>
+<td>F18</td>
+<td>Melhorar a correspondência entre artigos do FAQ e dúvidas dos leads</td>
+<td>CP6</td>
+<td>OE2</td>
+<td>30</td>
+<td>10</td>
+<td>3</td>
+<td>Q1</td>
+<td><span class="badge badge--green">MVP</span></td>
 </tr>
 <tr>
 <td>F14</td>
@@ -879,43 +840,10 @@ IP &lt; 1,00  → Baixa prioridade  (Q3/Q4)</code></pre>
 <td>CP4</td>
 <td>OE2</td>
 <td>50</td>
-<td>21</td>
-<td>2,38</td>
+<td>20</td>
+<td>2,5</td>
 <td>Q1</td>
-<td>✅</td>
-</tr>
-<tr>
-<td>F17</td>
-<td>Controlar publicação de artigos FAQ's para disponibilização pública</td>
-<td>CP6</td>
-<td>OE2</td>
-<td>28,5</td>
-<td>12</td>
-<td>2,38</td>
-<td>Q1</td>
-<td>✅</td>
-</tr>
-<tr>
-<td>F24</td>
-<td>Gerenciar tickets para manutenção da operação de suporte</td>
-<td>CP8</td>
-<td>OE3</td>
-<td>32</td>
-<td>14</td>
-<td>2,29</td>
-<td>Q1</td>
-<td>✅</td>
-</tr>
-<tr>
-<td>F11</td>
-<td>Gerenciar usuarios da plataforma para controle operacional</td>
-<td>CP5</td>
-<td>OE2</td>
-<td>35</td>
-<td>15,25</td>
-<td>2,29</td>
-<td>Q1</td>
-<td>✅</td>
+<td><span class="badge badge--green">MVP</span></td>
 </tr>
 <tr>
 <td>F10</td>
@@ -923,443 +851,321 @@ IP &lt; 1,00  → Baixa prioridade  (Q3/Q4)</code></pre>
 <td>CP5</td>
 <td>OE2</td>
 <td>50</td>
-<td>22</td>
-<td>2,27</td>
+<td>21</td>
+<td>2,38</td>
 <td>Q1</td>
-<td>✅</td>
-</tr>
-<tr>
-<td>F18</td>
-<td>Coletar avaliação de utilidade do artigo pelo visitante</td>
-<td>CP6</td>
-<td>OE2</td>
-<td>27</td>
-<td>12</td>
-<td>2,25</td>
-<td>Q1</td>
-<td>✅</td>
-</tr>
-<tr>
-<td>F26</td>
-<td>Controlar estado das notificações para acompanhamento de envio</td>
-<td>CP9</td>
-<td>OE3</td>
-<td>34</td>
-<td>16</td>
-<td>2,13</td>
-<td>Q1</td>
-<td>✅</td>
-</tr>
-<tr>
-<td>F25</td>
-<td>Exibir o histórico de notificações para acompanhamento operacional</td>
-<td>CP9</td>
-<td>OE3</td>
-<td>45</td>
-<td>23</td>
-<td>1,96</td>
-<td>Q1</td>
-<td>✅</td>
-</tr>
-<tr>
-<td>F05</td>
-<td>Filtrar métricas executivas para análise segmentada</td>
-<td>CP3</td>
-<td>OE1</td>
-<td>30</td>
-<td>17</td>
-<td>1,76</td>
-<td>Q1</td>
-<td>✅</td>
-</tr>
-<tr>
-<td>F08</td>
-<td>Gerar relatórios financeiros para exportação de dados</td>
-<td>CP7</td>
-<td>OE1</td>
-<td>26</td>
-<td>16</td>
-<td>1,63</td>
-<td>Q1</td>
-<td>✅</td>
-</tr>
-<tr>
-<td>F23</td>
-<td>Acessar tickets para acompanhamento dos atendimentos</td>
-<td>CP8</td>
-<td>OE3</td>
-<td>35</td>
-<td>23</td>
-<td>1,52</td>
-<td>Q1</td>
-<td>✅</td>
+<td><span class="badge badge--green">MVP</span></td>
 </tr>
 <tr>
 <td>F07</td>
-<td>Filtrar dados financeiros para análise contábil</td>
-<td>CP7</td>
-<td>OE1</td>
-<td>23</td>
-<td>16</td>
-<td>1,44</td>
-<td>Q2</td>
-<td>❌</td>
-</tr>
-<tr>
-<td>F15</td>
-<td>Disponibilizar informações institucionais para apresentação da empresa</td>
-<td>CP4</td>
-<td>OE2</td>
-<td>36</td>
-<td>26</td>
-<td>1,38</td>
-<td>Q2</td>
-<td>❌</td>
-</tr>
-<tr>
-<td>F27</td>
-<td>Gerenciar notificações para o controle do sistema</td>
+<td>Acompanhar histórico e status de notificações</td>
 <td>CP9</td>
 <td>OE3</td>
-<td>36</td>
-<td>26</td>
-<td>1,38</td>
+<td>39</td>
+<td>22</td>
+<td>1,77</td>
+<td>Q1</td>
+<td><span class="badge badge--green">MVP</span></td>
+</tr>
+<tr>
+<td>F08</td>
+<td>Gerenciar templates de notificações</td>
+<td>CP9</td>
+<td>OE3</td>
+<td>22</td>
+<td>12</td>
+<td>1,83</td>
+<td>Q1</td>
+<td><span class="badge badge--yellow">IT2*</span></td>
+</tr>
+<tr>
+<td>F22</td>
+<td>Acessar tickets para acompanhamento dos atendimentos</td>
+<td>CP8</td>
+<td>OE3</td>
+<td>25</td>
+<td>19</td>
+<td>1,31</td>
 <td>Q2</td>
-<td>❌</td>
+<td><span class="badge badge--gray">Fora</span></td>
+</tr>
+<tr>
+<td>F23</td>
+<td>Gerenciar tickets para manutenção da operação de suporte</td>
+<td>CP8</td>
+<td>OE3</td>
+<td>20</td>
+<td>18</td>
+<td>1,11</td>
+<td>Q2</td>
+<td><span class="badge badge--gray">Fora</span></td>
+</tr>
+<tr>
+<td>F06</td>
+<td>Gerar relatórios financeiros para exportação de dados</td>
+<td>CP7</td>
+<td>OE1</td>
+<td>22</td>
+<td>22</td>
+<td>1,00</td>
+<td>Q2</td>
+<td><span class="badge badge--gray">Fora</span></td>
 </tr>
 <tr>
 <td>F03</td>
 <td>Visualizar indicadores operacionais para acompanhamento estratégico</td>
 <td>CP3</td>
 <td>OE1</td>
-<td>28</td>
-<td>22,5</td>
-<td>1,25</td>
+<td>27</td>
+<td>26</td>
+<td>1,04</td>
 <td>Q2</td>
-<td>❌</td>
+<td><span class="badge badge--gray">Fora</span></td>
 </tr>
 <tr>
 <td>F02</td>
-<td>Auditar alterações administrativas para rastrear ações do sistema</td>
+<td>Monitorar estado dos componentes para garantia de disponibilidade do sistema</td>
 <td>CP2</td>
 <td>OE1</td>
-<td>22</td>
-<td>19</td>
-<td>1,16</td>
+<td>27</td>
+<td>25</td>
+<td>1,08</td>
 <td>Q2</td>
-<td>❌</td>
+<td><span class="badge badge--gray">Fora</span></td>
+</tr>
+<tr>
+<td>F05</td>
+<td>Consultar registros financeiros para acompanhamento de faturamento</td>
+<td>CP7</td>
+<td>OE1</td>
+<td>33</td>
+<td>29</td>
+<td>1,14</td>
+<td>Q2</td>
+<td><span class="badge badge--gray">Fora</span></td>
 </tr>
 <tr>
 <td>F01</td>
-<td>Consultar logs operacionais para auditoria de atividades</td>
+<td>Monitorar eventos de segurança para rastreamento de acessos ao sistema</td>
 <td>CP2</td>
 <td>OE1</td>
-<td>20</td>
 <td>18</td>
-<td>1,11</td>
-<td>Q2</td>
-<td>❌</td>
+<td>19</td>
+<td>0,95</td>
+<td>Q3/Q4</td>
+<td><span class="badge badge--gray">Fora</span></td>
 </tr>
 <tr>
 <td>F04</td>
 <td>Visualizar indicadores financeiros para análise gerencial</td>
 <td>CP3</td>
 <td>OE1</td>
-<td>28</td>
-<td>33</td>
-<td>0,85</td>
+<td>26</td>
+<td>30</td>
+<td>0,87</td>
 <td>Q3/Q4</td>
-<td>❌</td>
-</tr>
-<tr>
-<td>F06</td>
-<td>Consultar registros financeiros para acompanhamento de faturamento</td>
-<td>CP7</td>
-<td>OE1</td>
-<td>24,5</td>
-<td>29</td>
-<td>0,84</td>
-<td>Q3/Q4</td>
-<td>❌</td>
+<td><span class="badge badge--gray">Fora</span></td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="priorizacao-de-rnfs">Priorização de RNFs<a class="headerlink" href="#priorizacao-de-rnfs" title="Permanent link">&para;</a></h2>
-<blockquote>
-<p>RNFs são priorizados separadamente, pois não geram valor de negócio direto — são restrições de qualidade.<br />
-<code>IS</code> = Impacto no Sistema · <code>ES</code> = Esforço · <code>IP = IS / ES</code></p>
-</blockquote>
+<h2 id="features-por-iteracao">Features por Iteração<a class="headerlink" href="#features-por-iteracao" title="Permanent link">&para;</a></h2>
+<h3 id="it1-vitrine-publica">IT1 — Vitrine Pública<a class="headerlink" href="#it1-vitrine-publica" title="Permanent link">&para;</a></h3>
+<p><span class="badge badge--green">Concluída</span> &nbsp; <code>28/04/2026 – 07/06/2026</code> &nbsp; CPs entregues: <strong>CP4 · CP5 · CP6</strong></p>
+<div class="it-block it-block--done">
+<p>Primeira iteração focada em estabelecer a presença pública da Crianex e a infraestrutura administrativa base. Todas as features foram implementadas e validadas com o cliente.</p>
+<h4 id="cp5-painel-de-gerenciamento-do-administrador">CP5 — Painel de Gerenciamento do Administrador<a class="headerlink" href="#cp5-painel-de-gerenciamento-do-administrador" title="Permanent link">&para;</a></h4>
 <table>
 <thead>
 <tr>
-<th>ID</th>
-<th>Nome</th>
-<th>Classificação</th>
-<th>Escopo</th>
-<th>IS</th>
-<th>ES</th>
-<th>IP</th>
-<th>Prioridade</th>
-<th>MVP</th>
+<th>Feature</th>
+<th>Descrição</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>RNF16</td>
-<td>Stack tecnológico obrigatório</td>
-<td>Organizacional &gt; Implementação</td>
-<td>Global</td>
-<td>34</td>
-<td>14</td>
-<td>2,429</td>
-<td>Alta</td>
-<td>✅</td>
-</tr>
-<tr>
-<td>RNF23</td>
-<td>Visualização resumida e expansível dos cards do CRM</td>
-<td>Produto &gt; Usabilidade</td>
-<td>F21</td>
-<td>24</td>
-<td>10</td>
-<td>2,4</td>
-<td>Alta</td>
-<td>✅</td>
-</tr>
-<tr>
-<td>RNF10</td>
-<td>Proteção contra abuso do formulário público</td>
-<td>Produto &gt; Segurança da Informação</td>
-<td>F14</td>
-<td>33</td>
-<td>16</td>
-<td>2,063</td>
-<td>Alta</td>
-<td>✅</td>
-</tr>
-<tr>
-<td>RNF05</td>
-<td>Otimização para mecanismos de busca (SEO)</td>
-<td>Produto &gt; Usabilidade</td>
-<td>F12, F16</td>
-<td>30</td>
-<td>15</td>
-<td>2</td>
-<td>Alta</td>
-<td>✅</td>
-</tr>
-<tr>
-<td>RNF20</td>
-<td>Disponibilidade das informações institucionais</td>
-<td>Produto &gt; Dependabilidade</td>
-<td>F15</td>
-<td>20</td>
-<td>10</td>
-<td>2</td>
-<td>Alta</td>
-<td>✅</td>
-</tr>
-<tr>
-<td>RNF22</td>
-<td>Resumo expansível de tickets</td>
-<td>Produto &gt; Usabilidade</td>
-<td>F23</td>
-<td>19</td>
-<td>10</td>
-<td>1,9</td>
-<td>Alta</td>
-<td>✅</td>
-</tr>
-<tr>
-<td>RNF13</td>
-<td>Bilinguismo da vitrine</td>
-<td>Produto &gt; Usabilidade</td>
-<td>F12</td>
-<td>24</td>
-<td>13</td>
-<td>1,846</td>
-<td>Alta</td>
-<td>✅</td>
-</tr>
-<tr>
-<td>RNF19</td>
-<td>Facilidade de navegação da vitrine</td>
-<td>Produto &gt; Usabilidade</td>
-<td>F12</td>
-<td>21</td>
-<td>12</td>
-<td>1,75</td>
-<td>Alta</td>
-<td>✅</td>
-</tr>
-<tr>
-<td>RNF01</td>
-<td>Isolamento de acesso administrativo</td>
-<td>Produto &gt; Segurança da Informação</td>
-<td>F01, F03, F06, F09, F16, F19, F23</td>
-<td>42</td>
-<td>25</td>
-<td>1,68</td>
-<td>Alta</td>
-<td>✅</td>
-</tr>
-<tr>
-<td>RNF09</td>
-<td>Controle de acesso por linha (RLS)</td>
-<td>Produto &gt; Segurança da Informação</td>
-<td>F01, F03, F06, F10, F19, F23, F25</td>
-<td>44</td>
-<td>26</td>
-<td>1,692</td>
-<td>Alta</td>
-<td>✅</td>
-</tr>
-<tr>
-<td>RNF15</td>
-<td>Suporte a carga concorrente</td>
-<td>Produto &gt; Eficiência</td>
-<td>F12</td>
-<td>35</td>
-<td>21</td>
-<td>1,667</td>
-<td>Alta</td>
-<td>✅</td>
-</tr>
-<tr>
-<td>RNF24</td>
-<td>Atualização intuitiva dos cards do CRM</td>
-<td>Produto &gt; Usabilidade</td>
-<td>F21</td>
-<td>21</td>
-<td>13</td>
-<td>1,615</td>
-<td>Alta</td>
-<td>✅</td>
-</tr>
-<tr>
-<td>RNF11</td>
-<td>Conformidade parcial com LGPD</td>
-<td>Externo &gt; Legal</td>
-<td>F04, F06, F19</td>
-<td>33</td>
-<td>21</td>
-<td>1,571</td>
-<td>Alta</td>
-<td>✅</td>
-</tr>
-<tr>
-<td>RNF18</td>
-<td>Portabilidade de navegador</td>
-<td>Produto &gt; Usabilidade</td>
-<td>Global</td>
-<td>28</td>
-<td>18</td>
-<td>1,556</td>
-<td>Alta</td>
-<td>✅</td>
-</tr>
-<tr>
-<td>RNF21</td>
-<td>Reorganização intuitiva do CRM</td>
-<td>Produto &gt; Usabilidade</td>
-<td>F19, F20</td>
-<td>27</td>
-<td>18</td>
-<td>1,5</td>
-<td>Alta</td>
-<td>✅</td>
-</tr>
-<tr>
-<td>RNF12</td>
-<td>Responsividade</td>
-<td>Produto &gt; Usabilidade</td>
-<td>Global</td>
-<td>27</td>
-<td>19</td>
-<td>1,421</td>
-<td>Média</td>
-<td>❌</td>
-</tr>
-<tr>
-<td>RNF17</td>
-<td>Cobertura mínima de testes</td>
-<td>Produto &gt; Dependabilidade</td>
-<td>Global</td>
-<td>27</td>
-<td>19</td>
-<td>1,421</td>
-<td>Média</td>
-<td>❌</td>
-</tr>
-<tr>
-<td>RNF08</td>
-<td>Criptografia de credenciais</td>
-<td>Produto &gt; Segurança da Informação</td>
 <td>F09</td>
-<td>33</td>
-<td>25</td>
-<td>1,32</td>
-<td>Média</td>
-<td>❌</td>
+<td>Autenticar para acesso seguro ao sistema</td>
 </tr>
 <tr>
-<td>RNF02</td>
-<td>Tempo de resposta da vitrine</td>
-<td>Produto &gt; Eficiência</td>
-<td>F01, F14, F18</td>
-<td>29</td>
-<td>22</td>
-<td>1,318</td>
-<td>Média</td>
-<td>❌</td>
+<td>F10</td>
+<td>Permitir acesso ao painel administrativo</td>
 </tr>
 <tr>
-<td>RNF04</td>
-<td>Renderização server-side da vitrine pública</td>
-<td>Produto &gt; Eficiência</td>
-<td>F12, F15, F16</td>
-<td>43</td>
-<td>35</td>
-<td>1,229</td>
-<td>Média</td>
-<td>❌</td>
-</tr>
-<tr>
-<td>RNF07</td>
-<td>Conformidade com OWASP Top 10</td>
-<td>Produto &gt; Segurança da Informação</td>
-<td>Global</td>
-<td>38</td>
-<td>33</td>
-<td>1,152</td>
-<td>Média</td>
-<td>❌</td>
-</tr>
-<tr>
-<td>RNF14</td>
-<td>Escalabilidade horizontal</td>
-<td>Produto &gt; Eficiência</td>
-<td>Global</td>
-<td>35</td>
-<td>31</td>
-<td>1,129</td>
-<td>Média</td>
-<td>❌</td>
-</tr>
-<tr>
-<td>RNF03</td>
-<td>Tempo de resposta da área administrativa</td>
-<td>Produto &gt; Eficiência</td>
-<td>F01, F03, F06, F09, F13, F19, F23, F25</td>
-<td>32</td>
-<td>30</td>
-<td>1,067</td>
-<td>Média</td>
-<td>❌</td>
+<td>F11</td>
+<td>Gerenciar usuários da plataforma</td>
 </tr>
 </tbody>
-</table></div>
+</table>
+<h4 id="cp4-plataforma-publica-de-apresentacao-da-empresa">CP4 — Plataforma Pública de Apresentação da Empresa<a class="headerlink" href="#cp4-plataforma-publica-de-apresentacao-da-empresa" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F12</td>
+<td>Gerenciar produtos SaaS da vitrine</td>
+</tr>
+<tr>
+<td>F13</td>
+<td>Controlar publicação de produtos</td>
+</tr>
+<tr>
+<td>F14</td>
+<td>Exibir canais de contato na vitrine</td>
+</tr>
+<tr>
+<td>F15</td>
+<td>Disponibilizar informações institucionais</td>
+</tr>
+</tbody>
+</table>
+<h4 id="cp6-faq-e-base-de-conhecimentos-por-produto">CP6 — FAQ e Base de Conhecimentos por Produto<a class="headerlink" href="#cp6-faq-e-base-de-conhecimentos-por-produto" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F16</td>
+<td>Gerenciar artigos de FAQ</td>
+</tr>
+<tr>
+<td>F17</td>
+<td>Controlar publicação de artigos FAQ</td>
+</tr>
+<tr>
+<td>F18</td>
+<td>Melhorar correspondência entre artigos e dúvidas dos leads</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<h3 id="it2-lead-capture">IT2 — Lead Capture<a class="headerlink" href="#it2-lead-capture" title="Permanent link">&para;</a></h3>
+<p><span class="badge badge--blue">Em andamento</span> &nbsp; <code>08/06/2026 – 28/06/2026</code> &nbsp; CPs selecionadas: <strong>CP1 · CP9</strong></p>
+<div class="it-block it-block--active">
+<p>Na reunião de Iteration Commitment da IT2, a equipe selecionou as features das CPs <strong>CP1</strong> (CRM Interno de Clientes) e <strong>CP9</strong> (Sistema de Notificações), priorizando o fluxo comercial de gestão de leads e o canal de comunicação interna.</p>
+<h4 id="cp1-crm-interno-de-clientes">CP1 — CRM Interno de Clientes<a class="headerlink" href="#cp1-crm-interno-de-clientes" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F19</td>
+<td>Gerenciar clientes e leads</td>
+</tr>
+<tr>
+<td>F20</td>
+<td>Gerenciar colunas do funil de vendas</td>
+</tr>
+<tr>
+<td>F21</td>
+<td>Registrar interações comerciais</td>
+</tr>
+</tbody>
+</table>
+<h4 id="cp9-sistema-de-notificacoes">CP9 — Sistema de Notificações<a class="headerlink" href="#cp9-sistema-de-notificacoes" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F07</td>
+<td>Acompanhar histórico e status de notificações</td>
+</tr>
+<tr>
+<td>F08</td>
+<td>Gerenciar templates de notificações <span class="badge badge--yellow">Fora do MVP</span></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>F08</strong> não atingiu o limiar do MVP na matriz de priorização, mas foi incluída na IT2 por dependência funcional com F07 — o histórico de notificações (F07) pressupõe a existência de templates configurados. Dentro da iteração, F08 será implementada por último, após F07 e todas as features de CP1 estarem concluídas.</p>
+</blockquote>
+</div>
+<hr />
+<h3 id="it3-nucleo-operacional">IT3 — Núcleo Operacional<a class="headerlink" href="#it3-nucleo-operacional" title="Permanent link">&para;</a></h3>
+<p><span class="badge badge--gray">Planejada</span> &nbsp; <code>29/06/2026 – 07/07/2026</code></p>
+<div class="it-block it-block--planned">
+<p>Na reunião de Iteration Commitment da IT3, a equipe selecionará <strong>apenas uma fração</strong> das features listadas abaixo, com base na capacidade disponível e na reavaliação de valor naquele momento. Features não selecionadas serão descartadas do escopo da iteração.</p>
+<h4 id="cp8-sistema-de-tickets-de-suporte-fora-do-mvp">CP8 — Sistema de Tickets de Suporte <span class="badge badge--gray">Fora do MVP</span><a class="headerlink" href="#cp8-sistema-de-tickets-de-suporte-fora-do-mvp" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F22</td>
+<td>Acessar tickets para acompanhamento dos atendimentos</td>
+</tr>
+<tr>
+<td>F23</td>
+<td>Gerenciar tickets para manutenção da operação de suporte</td>
+</tr>
+</tbody>
+</table>
+<h4 id="cp2-cp3-cp7-gestao-operacional-e-financeira-fora-do-mvp">CP2 · CP3 · CP7 — Gestão Operacional e Financeira <span class="badge badge--gray">Fora do MVP</span><a class="headerlink" href="#cp2-cp3-cp7-gestao-operacional-e-financeira-fora-do-mvp" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>CP</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F01</td>
+<td>CP2</td>
+<td>Monitorar eventos de segurança</td>
+</tr>
+<tr>
+<td>F02</td>
+<td>CP2</td>
+<td>Monitorar estado dos componentes do sistema</td>
+</tr>
+<tr>
+<td>F03</td>
+<td>CP3</td>
+<td>Visualizar indicadores operacionais</td>
+</tr>
+<tr>
+<td>F04</td>
+<td>CP3</td>
+<td>Visualizar indicadores financeiros</td>
+</tr>
+<tr>
+<td>F05</td>
+<td>CP7</td>
+<td>Consultar registros financeiros</td>
+</tr>
+<tr>
+<td>F06</td>
+<td>CP7</td>
+<td>Gerar relatórios financeiros</td>
+</tr>
+</tbody>
+</table>
+</div></div>
         
         
     </div>
