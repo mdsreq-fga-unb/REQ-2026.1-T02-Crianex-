@@ -1,4 +1,15 @@
+<p align="center">
+  <img 
+    src="https://capsule-render.vercel.app/api?type=waving&color=0:004d1a,50:800040,100:33001a&height=100&section=header&animation=fadeIn"
+    width="100%"
+  />
+</p>
+
 # REQ-2026.1-T02-Crianex
+
+<div align="center">
+<img width="370" height="326" alt="logo" src="https://github.com/user-attachments/assets/6eb74023-5c3c-4284-a655-d0ce62751881" />
+</div>
 
 Repositório da disciplina **Requisitos de Software** — REQ-T02, 2026.1 · UnB  
 Produto: **Crianex Hub** — plataforma administrativa centralizada e vitrine digital bilíngue para a Software House Crianex.
@@ -8,14 +19,24 @@ Produto: **Crianex Hub** — plataforma administrativa centralizada e vitrine di
 - **Docs (Unidade 2):** [/unidade2](https://mdsreq-fga-unb.github.io/REQ-2026.1-T02-Crianex-/unidade2/)
 - **Docs (Unidade 3):** [/unidade3](https://mdsreq-fga-unb.github.io/REQ-2026.1-T02-Crianex-/unidade3/)
 
----
+<p align="center">
+  <img 
+    src="https://capsule-render.vercel.app/api?type=rect&color=0:004d1a,50:800040,100:33001a&height=2&section=header"
+    width="80%"
+  />
+</p>
 
 ## Links
 
 - **Miro Board:** https://miro.com/app/board/uXjVGl991V0=/?share_link_id=878597873452
 - **GitHub Projects (Kanban):** https://github.com/orgs/mdsreq-fga-unb/projects/96
 
----
+<p align="center">
+  <img 
+    src="https://capsule-render.vercel.app/api?type=rect&color=0:004d1a,50:800040,100:33001a&height=2&section=header"
+    width="80%"
+  />
+</p>
 
 ## Stack
 
@@ -28,7 +49,12 @@ Produto: **Crianex Hub** — plataforma administrativa centralizada e vitrine di
 | Dev local | Docker Compose + Supabase CLI                  |
 | CI/CD     | GitHub Actions                                 |
 
----
+<p align="center">
+  <img 
+    src="https://capsule-render.vercel.app/api?type=rect&color=0:004d1a,50:800040,100:33001a&height=2&section=header"
+    width="80%"
+  />
+</p>
 
 ## Setup rápido
 
@@ -89,7 +115,12 @@ docker compose up
 npm run dev       # inicia frontend e backend simultaneamente
 ```
 
----
+<p align="center">
+  <img 
+    src="https://capsule-render.vercel.app/api?type=rect&color=0:004d1a,50:800040,100:33001a&height=2&section=header"
+    width="80%"
+  />
+</p>
 
 ## Estrutura do repositório
 
@@ -140,7 +171,12 @@ supabase db reset                     # aplica tudo do zero (valida idempotênci
 # abra PR com o arquivo gerado
 ```
 
----
+<p align="center">
+  <img 
+    src="https://capsule-render.vercel.app/api?type=rect&color=0:004d1a,50:800040,100:33001a&height=2&section=header"
+    width="80%"
+  />
+</p>
 
 ## Documentação local (MkDocs)
 
@@ -151,7 +187,12 @@ pip install -r requirements.txt
 mkdocs serve    # acessa em http://127.0.0.1:8000
 ```
 
----
+<p align="center">
+  <img 
+    src="https://capsule-render.vercel.app/api?type=rect&color=0:004d1a,50:800040,100:33001a&height=2&section=header"
+    width="80%"
+  />
+</p>
 
 ## Equipe
 
@@ -163,3 +204,10 @@ mkdocs serve    # acessa em http://127.0.0.1:8000
 | Heitor Macedo Ricardo              | Chief Programmer + Fullstack     |
 | Philipe Amancio Reis Caetano       | Chief Programmer + Frontend/QA   |
 | Camile Barbosa Gonzaga de Oliveira | Chief Architect + DevOps/QA/Docs |
+
+<p align="center">
+  <img 
+    src="https://capsule-render.vercel.app/api?type=waving&color=0:004d1a,50:800040,100:33001a&height=100&section=footer&animation=fadeIn"
+    width="100%"
+  />
+</p>
