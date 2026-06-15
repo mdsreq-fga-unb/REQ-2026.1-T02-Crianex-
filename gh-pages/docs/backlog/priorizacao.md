@@ -1,31 +1,3 @@
-# Priorização de Features — Crianex Hub
-
-## Histórico de Revisão
-
-| Versão | Data       | Descrição                                                                                                                | Autor(es)        | Revisores(es)         |
-| ------ | ---------- | ------------------------------------------------------------------------------------------------------------------------ | ---------------- | --------------------- |
-| 1.0    | 14/05/2026 | Template do Priorização do backlog                                                                                       | Lucas A. Zanetti | Heitor Macedo Ricardo |
-| 1.1    | 17/05/2026 | Tabela de priorização com diagrama de valor×esforço                                                                      | Lucas A. Zanetti | Heitor Macedo Ricardo |
-| 2.0    | 15/06/2026 | Refatoração completa: mudança para abordagem top-down (Feature como unidade principal); nova matriz; seções por iteração | Lucas A. Zanetti | Hugo Freitas Silva    |
-
----
-
-## Método de Priorização: Top-Down (Feature → RF)
-
-### Por que Top-Down?
-
-A abordagem anterior calculava o índice de prioridade de cada Requisito Funcional individualmente e depois **agregava** esses valores para estimar a prioridade de uma Feature (bottom-up). Esse modelo apresentou um problema estrutural: a média dos RFs nivela diferenças internas da feature e não representa o valor de negócio real que ela entrega como unidade funcional.
-
-A abordagem correta é **top-down**: priorizamos as **Features** diretamente — elas são a unidade de entrega e de decisão de negócio. O cálculo dos RFs passa a ser utilizado apenas caso seja necessário **ordenar os requisitos dentro de uma feature já priorizada**, definindo a sequência de implementação interna.
-
-```
-IP = VB / ES  (aplicado diretamente à Feature)
-
-IP ≥ 1,50  → Alta prioridade  (Q1)
-IP 1,00–1,49 → Média prioridade (Q2)
-IP < 1,00   → Baixa prioridade  (Q3/Q4)
-```
-
 | Sigla  | Descrição                                    |
 | ------ | -------------------------------------------- |
 | **VB** | Valor de Negócio — impacto direto nos OEs    |
@@ -107,31 +79,31 @@ A matriz posiciona cada feature no plano Valor × Esforço. O quadrante superior
 > Os valores de VB, ES e IP são calculados no Miro e serão preenchidos manualmente nesta tabela.  
 > `*` Feature fora do MVP incluída em uma iteração por dependência funcional com outra feature já priorizada.
 
-| ID  | Feature                                                                      | CP  | OE  | VB  | ES  | IP   | Quadrante | MVP                                            |
-| --- | ---------------------------------------------------------------------------- | --- | --- | --- | --- | ---- | --------- | ---------------------------------------------- |
-| F09 | Autenticar para acesso seguro ao sistema                                     | CP5 | OE2 | 50  | 21  | 2,38 | Q1        | <span class="badge badge--green">MVP</span>    |
-| F12 | Gerenciar produtos SaaS da vitrine para manutenção do portfólio              | CP4 | OE2 | 50  | 10  | 5    | Q1        | <span class="badge badge--green">MVP</span>    |
-| F13 | Controlar publicação de produto SaaS para exibição pública                   | CP4 | OE2 | 47  | 14  | 3,36 | Q1        | <span class="badge badge--green">MVP</span>    |
-| F15 | Disponibilizar informações institucionais para apresentação da empresa       | CP4 | OE2 | 50  | 15  | 3,33 | Q1        | <span class="badge badge--green">MVP</span>    |
-| F21 | Registrar interações comerciais para rastreamento do relacionamento          | CP1 | OE3 | 50  | 16  | 3,12 | Q1        | <span class="badge badge--green">MVP</span>    |
-| F19 | Gerenciar clientes e leads para organização do relacionamento comercial      | CP1 | OE3 | 50  | 20  | 2,5  | Q1        | <span class="badge badge--green">MVP</span>    |
-| F20 | Gerenciar colunas do funil para personalização do processo comercial         | CP1 | OE3 | 36  | 17  | 2,12 | Q1        | <span class="badge badge--green">MVP</span>    |
-| F11 | Gerenciar usuários da plataforma para controle operacional                   | CP5 | OE2 | 39  | 18  | 2,17 | Q1        | <span class="badge badge--green">MVP</span>    |
-| F16 | Gerenciar artigos de FAQs para manutenção da base de conhecimento            | CP6 | OE2 | 32  | 8   | 4    | Q1        | <span class="badge badge--green">MVP</span>    |
-| F17 | Controlar publicação de artigos FAQ para disponibilização pública            | CP6 | OE2 | 30  | 10  | 3    | Q1        | <span class="badge badge--green">MVP</span>    |
-| F18 | Melhorar a correspondência entre artigos do FAQ e dúvidas dos leads          | CP6 | OE2 | 30  | 10  | 3    | Q1        | <span class="badge badge--green">MVP</span>    |
-| F14 | Exibir canais de contato na Vitrine                                          | CP4 | OE2 | 50  | 20  | 2,5  | Q1        | <span class="badge badge--green">MVP</span>    |
-| F10 | Permitir acesso ao painel administrativo para gerenciamento da plataforma    | CP5 | OE2 | 50  | 21  | 2,38 | Q1        | <span class="badge badge--green">MVP</span>    |
-| F07 | Acompanhar histórico e status de notificações                                | CP9 | OE3 | 39  | 22  | 1,77 | Q1        | <span class="badge badge--green">MVP</span>    |
-| F08 | Gerenciar templates de notificações                                          | CP9 | OE3 | 22  | 12  | 1,83 | Q1        | <span class="badge badge--yellow">IT2\*</span> |
-| F22 | Acessar tickets para acompanhamento dos atendimentos                         | CP8 | OE3 | 25  | 19  | 1,31 | Q2        | <span class="badge badge--gray">Fora</span>    |
-| F23 | Gerenciar tickets para manutenção da operação de suporte                     | CP8 | OE3 | 20  | 18  | 1,11 | Q2        | <span class="badge badge--gray">Fora</span>    |
-| F06 | Gerar relatórios financeiros para exportação de dados                        | CP7 | OE1 | 22  | 22  | 1,00 | Q2        | <span class="badge badge--gray">Fora</span>    |
-| F03 | Visualizar indicadores operacionais para acompanhamento estratégico          | CP3 | OE1 | 27  | 26  | 1,04 | Q2        | <span class="badge badge--gray">Fora</span>    |
-| F02 | Monitorar estado dos componentes para garantia de disponibilidade do sistema | CP2 | OE1 | 27  | 25  | 1,08 | Q2        | <span class="badge badge--gray">Fora</span>    |
-| F05 | Consultar registros financeiros para acompanhamento de faturamento           | CP7 | OE1 | 33  | 29  | 1,14 | Q2        | <span class="badge badge--gray">Fora</span>    |
-| F01 | Monitorar eventos de segurança para rastreamento de acessos ao sistema       | CP2 | OE1 | 18  | 19  | 0,95 | Q3/Q4     | <span class="badge badge--gray">Fora</span>    |
-| F04 | Visualizar indicadores financeiros para análise gerencial                    | CP3 | OE1 | 26  | 30  | 0,87 | Q3/Q4     | <span class="badge badge--gray">Fora</span>    |
+| ID  | Feature                                             | CP  | OE  | VB  | ES  | IP   | Quadrante | MVP                                            |
+| --- | --------------------------------------------------- | --- | --- | --- | --- | ---- | --------- | ---------------------------------------------- |
+| F09 | Autenticar as credenciais do usuário                | CP5 | OE2 | 50  | 21  | 2,38 | Q1        | <span class="badge badge--green">MVP</span>    |
+| F12 | Cadastrar os produtos da vitrine                    | CP5 | OE2 | 50  | 10  | 5    | Q1        | <span class="badge badge--green">MVP</span>    |
+| F13 | Alterar a visibilidade do produto na vitrine        | CP4 | OE2 | 47  | 14  | 3,36 | Q1        | <span class="badge badge--green">MVP</span>    |
+| F15 | Visualizar as informações institucionais da empresa | CP4 | OE2 | 50  | 15  | 3,33 | Q1        | <span class="badge badge--green">MVP</span>    |
+| F21 | Registrar as interações do relacionamento comercial | CP1 | OE3 | 50  | 16  | 3,12 | Q1        | <span class="badge badge--green">MVP</span>    |
+| F19 | Cadastrar os clientes e leads do CRM                | CP1 | OE3 | 50  | 20  | 2,5  | Q1        | <span class="badge badge--green">MVP</span>    |
+| F20 | Configurar as colunas do funil                      | CP1 | OE3 | 36  | 17  | 2,12 | Q1        | <span class="badge badge--green">MVP</span>    |
+| F11 | Cadastrar os usuários da plataforma                 | CP5 | OE2 | 39  | 18  | 2,17 | Q1        | <span class="badge badge--green">MVP</span>    |
+| F16 | Cadastrar os artigos da FAQ                         | CP6 | OE2 | 32  | 8   | 4    | Q1        | <span class="badge badge--green">MVP</span>    |
+| F17 | Publicar os artigos da FAQ                          | CP6 | OE2 | 30  | 10  | 3    | Q1        | <span class="badge badge--green">MVP</span>    |
+| F18 | Coletar a avaliação positiva/negativa do artigo     | CP6 | OE2 | 30  | 10  | 3    | Q1        | <span class="badge badge--green">MVP</span>    |
+| F14 | Exibir os canais de contato da vitrine              | CP4 | OE2 | 50  | 20  | 2,5  | Q1        | <span class="badge badge--green">MVP</span>    |
+| F10 | Acessar o painel da plataforma                      | CP5 | OE2 | 50  | 21  | 2,38 | Q1        | <span class="badge badge--green">MVP</span>    |
+| F07 | Exibir o histórico de notificações                  | CP9 | OE3 | 39  | 22  | 1,77 | Q1        | <span class="badge badge--green">MVP</span>    |
+| F08 | Configurar os templates de notificação              | CP9 | OE3 | 22  | 12  | 1,83 | Q1        | <span class="badge badge--yellow">IT2*</span>  |
+| F22 | Consultar os tickets de atendimento                 | CP8 | OE3 | 25  | 19  | 1,31 | Q2        | <span class="badge badge--gray">Fora</span>    |
+| F23 | Atualizar o status dos tickets de suporte           | CP8 | OE3 | 20  | 18  | 1,11 | Q2        | <span class="badge badge--gray">Fora</span>    |
+| F06 | Gerar os relatórios das finanças                    | CP7 | OE1 | 22  | 22  | 1,00 | Q2        | <span class="badge badge--gray">Fora</span>    |
+| F03 | Visualizar as métricas da operação                  | CP3 | OE1 | 27  | 26  | 1,04 | Q2        | <span class="badge badge--gray">Fora</span>    |
+| F02 | Monitorar o estado dos componentes do sistema       | CP2 | OE1 | 27  | 25  | 1,08 | Q2        | <span class="badge badge--gray">Fora</span>    |
+| F05 | Consultar os registros do faturamento               | CP7 | OE1 | 33  | 29  | 1,14 | Q2        | <span class="badge badge--gray">Fora</span>    |
+| F01 | Monitorar os eventos de segurança do sistema        | CP2 | OE1 | 18  | 19  | 0,95 | Q3/Q4     | <span class="badge badge--gray">Fora</span>    |
+| F04 | Visualizar as métricas das finanças                 | CP3 | OE1 | 26  | 30  | 0,87 | Q3/Q4     | <span class="badge badge--gray">Fora</span>    |
 
 ---
 
@@ -147,28 +119,28 @@ Primeira iteração focada em estabelecer a presença pública da Crianex e a in
 
 #### CP5 — Painel de Gerenciamento do Administrador
 
-| Feature | Descrição                                |
-| ------- | ---------------------------------------- |
-| F09     | Autenticar para acesso seguro ao sistema |
-| F10     | Permitir acesso ao painel administrativo |
-| F11     | Gerenciar usuários da plataforma         |
+| Feature | Descrição                            |
+| ------- | ------------------------------------ |
+| F09     | Autenticar as credenciais do usuário |
+| F10     | Acessar o painel da plataforma       |
+| F11     | Cadastrar os usuários da plataforma  |
 
 #### CP4 — Plataforma Pública de Apresentação da Empresa
 
-| Feature | Descrição                                 |
-| ------- | ----------------------------------------- |
-| F12     | Gerenciar produtos SaaS da vitrine        |
-| F13     | Controlar publicação de produtos          |
-| F14     | Exibir canais de contato na vitrine       |
-| F15     | Disponibilizar informações institucionais |
+| Feature | Descrição                                           |
+| ------- | --------------------------------------------------- |
+| F12     | Cadastrar os produtos da vitrine                    |
+| F13     | Alterar a visibilidade do produto na vitrine        |
+| F14     | Exibir os canais de contato da vitrine              |
+| F15     | Visualizar as informações institucionais da empresa |
 
 #### CP6 — FAQ e Base de Conhecimentos por Produto
 
-| Feature | Descrição                                                  |
-| ------- | ---------------------------------------------------------- |
-| F16     | Gerenciar artigos de FAQ                                   |
-| F17     | Controlar publicação de artigos FAQ                        |
-| F18     | Melhorar correspondência entre artigos e dúvidas dos leads |
+| Feature | Descrição                                       |
+| ------- | ----------------------------------------------- |
+| F16     | Cadastrar os artigos da FAQ                     |
+| F17     | Publicar os artigos da FAQ                      |
+| F18     | Coletar a avaliação positiva/negativa do artigo |
 
 </div>
 
@@ -184,18 +156,18 @@ Na reunião de Iteration Commitment da IT2, a equipe selecionou as features das 
 
 #### CP1 — CRM Interno de Clientes
 
-| Feature | Descrição                            |
-| ------- | ------------------------------------ |
-| F19     | Gerenciar clientes e leads           |
-| F20     | Gerenciar colunas do funil de vendas |
-| F21     | Registrar interações comerciais      |
+| Feature | Descrição                                           |
+| ------- | --------------------------------------------------- |
+| F19     | Cadastrar os clientes e leads do CRM                |
+| F20     | Configurar as colunas do funil                      |
+| F21     | Registrar as interações do relacionamento comercial |
 
 #### CP9 — Sistema de Notificações
 
 | Feature | Descrição                                                                                |
 | ------- | ---------------------------------------------------------------------------------------- |
-| F07     | Acompanhar histórico e status de notificações                                            |
-| F08     | Gerenciar templates de notificações <span class="badge badge--yellow">Fora do MVP</span> |
+| F07     | Exibir o histórico de notificações                                                       |
+| F08     | Configurar os templates de notificação <span class="badge badge--yellow">Fora do MVP</span> |
 
 > **F08** não atingiu o limiar do MVP na matriz de priorização, mas foi incluída na IT2 por dependência funcional com F07 — o histórico de notificações (F07) pressupõe a existência de templates configurados. Dentro da iteração, F08 será implementada por último, após F07 e todas as features de CP1 estarem concluídas.
 
@@ -213,20 +185,20 @@ Na reunião de Iteration Commitment da IT3, a equipe selecionará **apenas uma f
 
 #### CP8 — Sistema de Tickets de Suporte <span class="badge badge--gray">Fora do MVP</span>
 
-| Feature | Descrição                                                |
-| ------- | -------------------------------------------------------- |
-| F22     | Acessar tickets para acompanhamento dos atendimentos     |
-| F23     | Gerenciar tickets para manutenção da operação de suporte |
+| Feature | Descrição                                 |
+| ------- | ----------------------------------------- |
+| F22     | Consultar os tickets de atendimento       |
+| F23     | Atualizar o status dos tickets de suporte |
 
 #### CP2 · CP3 · CP7 — Gestão Operacional e Financeira <span class="badge badge--gray">Fora do MVP</span>
 
-| Feature | CP  | Descrição                                   |
-| ------- | --- | ------------------------------------------- |
-| F01     | CP2 | Monitorar eventos de segurança              |
-| F02     | CP2 | Monitorar estado dos componentes do sistema |
-| F03     | CP3 | Visualizar indicadores operacionais         |
-| F04     | CP3 | Visualizar indicadores financeiros          |
-| F05     | CP7 | Consultar registros financeiros             |
-| F06     | CP7 | Gerar relatórios financeiros                |
+| Feature | CP  | Descrição                                     |
+| ------- | --- | --------------------------------------------- |
+| F01     | CP2 | Monitorar os eventos de segurança do sistema  |
+| F02     | CP2 | Monitorar o estado dos componentes do sistema |
+| F03     | CP3 | Visualizar as métricas da operação            |
+| F04     | CP3 | Visualizar as métricas das finanças           |
+| F05     | CP7 | Consultar os registros do faturamento         |
+| F06     | CP7 | Gerar os relatórios das finanças              |
 
 </div>
