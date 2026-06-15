@@ -64,6 +64,10 @@ sequenceDiagram
 
 #### Evidências de Funcionamento
 
+<div style="width: 100%; max-width: 900px; margin: 1.5rem 0; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.15);">
+  <iframe style="width: 100%; aspect-ratio: 16/9; display: block;" src="https://www.youtube.com/embed/5tAvVOwqgcA" title="F09 — Autenticar administradores" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
 ---
 
 #### Validação do Cliente
@@ -145,7 +149,9 @@ sequenceDiagram
 
 #### Evidências de Funcionamento
 
-_Evidências a serem adicionadas._
+<div style="width: 100%; max-width: 900px; margin: 1.5rem 0; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.15);">
+  <iframe style="width: 100%; aspect-ratio: 16/9; display: block;" src="https://www.youtube.com/embed/Uf5eaC3ATQk" title="F10 — Acessar painel administrativo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 
 #### Validação do Cliente
 
@@ -232,7 +238,9 @@ sequenceDiagram
 
 #### Evidências de Funcionamento
 
-_Evidências a serem adicionadas._
+<div style="width: 100%; max-width: 900px; margin: 1.5rem 0; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.15);">
+  <iframe style="width: 100%; aspect-ratio: 16/9; display: block;" src="https://www.youtube.com/embed/D3Vt3DOVPjo" title="F11 — Gerenciar membros da Crianex" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 
 #### Validação do Cliente
 
@@ -318,7 +326,9 @@ sequenceDiagram
 
 #### Evidências de Funcionamento
 
-_Evidências a serem adicionadas._
+<div style="width: 100%; max-width: 900px; margin: 1.5rem 0; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.15);">
+  <iframe style="width: 100%; aspect-ratio: 16/9; display: block;" src="https://www.youtube.com/embed/I6u0NBoOke8" title="F12 — Exibir catálogo de produtos SaaS" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 
 #### Validação do Cliente
 
@@ -391,7 +401,9 @@ sequenceDiagram
 
 #### Evidências de Funcionamento
 
-_Evidências a serem adicionadas._
+<div style="width: 100%; max-width: 900px; margin: 1.5rem 0; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.15);">
+  <iframe style="width: 100%; aspect-ratio: 16/9; display: block;" src="https://www.youtube.com/embed/_BQz_KwZ6AM" title="F13 — Publicar / despublicar produto SaaS" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 
 #### Validação do Cliente
 
