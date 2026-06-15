@@ -103,7 +103,9 @@
   });
 
   // </script> partido para evitar que o parser do Svelte/ESLint engasgue
-  const ldScript = `<script type="application/ld+json">${JSON.stringify(faqSchema)}<` + `/script>`;
+  let ldScript = $derived(
+    `<script type="application/ld+json">${JSON.stringify(faqSchema)}<` + `/script>`,
+  );
 </script>
 
 <svelte:head>
@@ -116,7 +118,8 @@
   <meta property="og:description" content={pageDesc} />
   <meta property="og:locale" content={ogLocale} />
   <link rel="canonical" href={canonicalUrl} />
-  {@html `<script type="application/ld+json">${JSON.stringify(faqSchema)}</script>`}
+  <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+  {@html ldScript}
 </svelte:head>
 
 <div class="page-fade faq-page">
