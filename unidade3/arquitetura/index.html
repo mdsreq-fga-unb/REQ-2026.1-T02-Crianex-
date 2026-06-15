@@ -341,7 +341,6 @@
 <ol>
 <li><strong>Prazo:</strong> ~1,5 meses de desenvolvimento ativo, 3 iterações de entrega, 6 desenvolvedores com WIP limit de 2 por Class Owner — overhead de orquestração de microsserviços é incompatível com essa cadência.</li>
 <li><strong>Latência:</strong> RNF02 e RNF03 exigem resposta ≤ 2s em 95% das requisições; a comunicação intra-processo do monolito elimina a latência de rede entre serviços.</li>
-<li><strong>Integridade ACID:</strong> RNF06 exige consistência transacional na captação de leads; transações distribuídas (padrão Saga) adicionariam complexidade sem benefício no escopo atual.</li>
 <li><strong>Superfície de segurança:</strong> RNF07 (OWASP Top 10) é mais simples de cumprir com um único ponto de entrada e RLS centralizado no banco, em vez de múltiplos endpoints independentes.</li>
 </ol>
 <p>A estrutura modular garante que, se necessário no futuro, módulos possam ser extraídos como microsserviços sem refatoração estrutural — o desacoplamento lógico já está preservado.</p>
@@ -560,7 +559,6 @@ graph LR
 <ul>
 <li><strong>Prazo:</strong> ~10 semanas de desenvolvimento, 3 iterações de entrega, 6 desenvolvedores operando com WIP limit de 2 por Class Owner (metodologia FDD + Scrumban Enxuto).</li>
 <li><strong>RNF02 e RNF03:</strong> Tempo de resposta ≤ 2s em 95% das requisições, tanto na vitrine pública quanto na área administrativa.</li>
-<li><strong>RNF06:</strong> Integridade transacional ACID obrigatória na captação de leads (inserção atômica de lead + evento de notificação).</li>
 <li><strong>RNF07:</strong> Conformidade com OWASP Top 10 — minimizar superfície de ataque e pontos de falha de autenticação/autorização.</li>
 <li><strong>Infra:</strong> Kubernetes disponível apenas na fase pós-venda; durante o desenvolvimento, o ambiente é Docker Compose local.</li>
 </ul>
@@ -581,10 +579,6 @@ graph LR
 <tr>
 <td><strong>Latência (RNF02, RNF03)</strong></td>
 <td>Comunicação inter-serviço via HTTP/gRPC adiciona latência de rede não controlável, tornando difícil garantir ≤ 2s em 95% das requisições sem camada de cache adicional.</td>
-</tr>
-<tr>
-<td><strong>ACID (RNF06)</strong></td>
-<td>Transações distribuídas exigem o padrão Saga ou Two-Phase Commit — complexidade desproporcional ao escopo do projeto e com risco real de inconsistência eventual.</td>
 </tr>
 <tr>
 <td><strong>Segurança (RNF07)</strong></td>
@@ -762,11 +756,6 @@ O projeto da Crianex só recebe a migration na entrega de cada iteração.</p>
 <td>RLS no PostgreSQL</td>
 <td>RNF07</td>
 <td>Controle de acesso no nível do banco elimina privilege escalation mesmo em falhas de aplicação</td>
-</tr>
-<tr>
-<td>Transação única PostgreSQL via Supabase</td>
-<td>RNF06</td>
-<td>ACID nativo sem saga; inserção atômica de lead + notificação sem risco de inconsistência</td>
 </tr>
 <tr>
 <td>Shadcn/ui + design tokens (Tailwind)</td>

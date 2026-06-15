@@ -289,7 +289,7 @@
 <li class="second-level"><a href="#cp4-vitrine-publica-de-produtos-saas">CP4 — Vitrine Pública de Produtos SaaS</a></li>
 <li class="third-level"><a href="#f12-exibir-catalogo-de-produtos-saas">F12 — Exibir catálogo de produtos SaaS</a></li>
 <li class="third-level"><a href="#f13-publicar-despublicar-produto-saas">F13 — Publicar / despublicar produto SaaS</a></li>
-<li class="third-level"><a href="#f14-formulario-de-contato">F14 — Formulário de contato</a></li>
+<li class="third-level"><a href="#f14-formulario-de-contato-captacao-de-leads">F14 — Formulário de contato / Captação de Leads</a></li>
 <li class="third-level"><a href="#f15-pagina-institucional-sobre-a-crianex">F15 — Página institucional (Sobre a Crianex)</a></li>
 <li class="second-level"><a href="#cp6-faq-e-base-de-conhecimentos-por-produto">CP6 — FAQ e Base de Conhecimentos por Produto</a></li>
 <li class="third-level"><a href="#f16-crud-de-artigos-de-faq">F16 — CRUD de artigos de FAQ</a></li>
@@ -403,13 +403,6 @@
 </tbody>
 </table>
 <h4 id="evidencias-de-funcionamento">Evidências de Funcionamento<a class="headerlink" href="#evidencias-de-funcionamento" title="Permanent link">¶</a></h4>
-<p><strong>Tela de Login</strong></p>
-<p><img alt="Página de login com campos de e-mail e senha" src="../images/F09.1.png"/></p>
-<hr/>
-<p><strong>Autenticação de Dois Fatores (2FA)</strong></p>
-<p>Após inserir as credenciais, o usuário escaneia o QR Code no aplicativo autenticador e digita o código TOTP gerado.</p>
-<p><img alt="QR Code exibido para configuração do 2FA" src="../images/F09.2.png"/></p>
-<p><img alt="Tela de inserção do código 2FA" src="../images/F09.3.png"/></p>
 <hr/>
 <h4 id="validacao-do-cliente">Validação do Cliente<a class="headerlink" href="#validacao-do-cliente" title="Permanent link">¶</a></h4>
 <table>
@@ -431,7 +424,7 @@
 <tr>
 <td>Formal Validation</td>
 <td>—</td>
-<td>⬜</td>
+<td>✅</td>
 <td>—</td>
 </tr>
 </tbody>
@@ -700,7 +693,7 @@
 <blockquote>
 <p><strong>Issues:</strong> <a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/55">#55</a><br/>
 <strong>RFs cobertos:</strong> RF21, RF22, RF23<br/>
-<strong>RNFs cobertos:</strong> RNF02, RNF06, RNF21</p>
+<strong>RNFs cobertos:</strong> RNF02, RNF21</p>
 </blockquote>
 <h4 id="diagrama-de-sequencia-formal_3">Diagrama de Sequência Formal<a class="headerlink" href="#diagrama-de-sequencia-formal_3" title="Permanent link">¶</a></h4>
 <div class="mermaid">sequenceDiagram
@@ -759,7 +752,7 @@
 <tbody>
 <tr>
 <td>Admin cadastra produto → persistido em transação ACID → apto para publicação</td>
-<td>RF21 · RNF06</td>
+<td>RF21</td>
 <td>⬜</td>
 </tr>
 <tr>
@@ -780,11 +773,6 @@
 <tr>
 <td>Vitrine pública renderiza via SSR → apenas <code>published = true</code> em ≤ 2s sem JS</td>
 <td>RNF02 · RNF21</td>
-<td>⬜</td>
-</tr>
-<tr>
-<td>Falha no banco → ROLLBACK completo sem registro parcial</td>
-<td>RNF06</td>
 <td>⬜</td>
 </tr>
 </tbody>
@@ -926,11 +914,11 @@
 <li>Decisão de escopo: despublicar preserva todos os dados e mídias do produto; remoção permanente é ação separada (RF23) para evitar perda acidental.</li>
 </ul>
 <hr/>
-<h3 id="f14-formulario-de-contato">F14 — Formulário de contato<a class="headerlink" href="#f14-formulario-de-contato" title="Permanent link">¶</a></h3>
+<h3 id="f14-formulario-de-contato-captacao-de-leads">F14 — Formulário de contato / Captação de Leads<a class="headerlink" href="#f14-formulario-de-contato-captacao-de-leads" title="Permanent link">¶</a></h3>
 <blockquote>
 <p><strong>Issues:</strong> <a href="https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/61">#61</a><br/>
 <strong>RFs cobertos:</strong> RF27<br/>
-<strong>RNFs cobertos:</strong> RNF06, RNF10</p>
+<strong>RNFs cobertos:</strong> RNF10</p>
 </blockquote>
 <h4 id="diagrama-de-sequencia-formal_5">Diagrama de Sequência Formal<a class="headerlink" href="#diagrama-de-sequencia-formal_5" title="Permanent link">¶</a></h4>
 <div class="mermaid">sequenceDiagram
@@ -946,7 +934,7 @@
     EX-&gt;&gt;RL: verifica limite (5 req / IP / 10 min — RNF10)
     RL--&gt;&gt;EX: permitido
     EX-&gt;&gt;EX: valida campos obrigatórios
-    EX-&gt;&gt;DB: BEGIN — INSERT INTO leads (nome, email, mensagem) — COMMIT (ACID — RNF06)
+    EX-&gt;&gt;DB: BEGIN — INSERT INTO leads (nome, email, mensagem) — COMMIT
     DB--&gt;&gt;EX: ok
     EX--&gt;&gt;SK: 200 { success: true }
     SK--&gt;&gt;V: alerta visual de sucesso (≤ 2s — RNF02)
@@ -959,7 +947,7 @@
     EX--&gt;&gt;SK: 429 Too Many Requests
     SK--&gt;&gt;V: "Tente novamente mais tarde"
 
-    Note over V,DB: Falha no banco — rollback (RNF06)
+    Note over V,DB: Falha no banco — rollback
     V-&gt;&gt;SK: POST { payload válido }
     SK-&gt;&gt;EX: POST /api/public/contact
     EX-&gt;&gt;RL: permitido
@@ -980,7 +968,7 @@
 <tbody>
 <tr>
 <td>Formulário válido → persistido em transação ACID → alerta de sucesso em ≤ 2s</td>
-<td>RF27 · RNF02 · RNF06</td>
+<td>RF27 · RNF02</td>
 <td>⬜</td>
 </tr>
 <tr>
@@ -988,15 +976,12 @@
 <td>RNF10</td>
 <td>⬜</td>
 </tr>
-<tr>
-<td>Falha no banco → ROLLBACK completo sem registro parcial</td>
-<td>RNF06</td>
-<td>⬜</td>
-</tr>
 </tbody>
 </table>
 <h4 id="evidencias-de-funcionamento_5">Evidências de Funcionamento<a class="headerlink" href="#evidencias-de-funcionamento_5" title="Permanent link">¶</a></h4>
-<p><em>Evidências a serem adicionadas.</em></p>
+<div style="width: 100%; max-width: 900px; margin: 1.5rem 0; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.15);">
+<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" src="https://www.youtube.com/embed/TPlJ5Rc_A0Y" style="width: 100%; aspect-ratio: 16/9; display: block;" title="F14 — Formulário de contato / Captação de Leads"></iframe>
+</div>
 <h4 id="validacao-do-cliente_5">Validação do Cliente<a class="headerlink" href="#validacao-do-cliente_5" title="Permanent link">¶</a></h4>
 <table>
 <thead>
@@ -1016,9 +1001,9 @@
 </tr>
 <tr>
 <td>Formal Validation</td>
-<td>—</td>
-<td>⬜</td>
-<td>—</td>
+<td>07/06/2026</td>
+<td>✅</td>
+<td>Aprovado pelo CEO — formulário demonstrado com campo de aceite da política de privacidade (LGPD); funcionalidade de envio de e-mail confirmada como pronta para ativação</td>
 </tr>
 </tbody>
 </table>
@@ -1092,7 +1077,9 @@
 </tbody>
 </table>
 <h4 id="evidencias-de-funcionamento_6">Evidências de Funcionamento<a class="headerlink" href="#evidencias-de-funcionamento_6" title="Permanent link">¶</a></h4>
-<p><em>Evidências a serem adicionadas.</em></p>
+<div style="width: 100%; max-width: 900px; margin: 1.5rem 0; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.15);">
+<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" src="https://www.youtube.com/embed/V_yoDcOjwwk" style="width: 100%; aspect-ratio: 16/9; display: block;" title="F15 — Página institucional (Sobre a Crianex)"></iframe>
+</div>
 <h4 id="validacao-do-cliente_6">Validação do Cliente<a class="headerlink" href="#validacao-do-cliente_6" title="Permanent link">¶</a></h4>
 <table>
 <thead>
@@ -1112,9 +1099,9 @@
 </tr>
 <tr>
 <td>Formal Validation</td>
-<td>—</td>
-<td>⬜</td>
-<td>—</td>
+<td>07/06/2026</td>
+<td>✅</td>
+<td>Aprovado pelo CEO — seção "Sobre" com animações e perfis da equipe elogiada; sugestão de importar imagens de capa diretamente dos sites dos produtos (ação futura)</td>
 </tr>
 </tbody>
 </table>
@@ -1216,7 +1203,9 @@
 </tbody>
 </table>
 <h4 id="evidencias-de-funcionamento_7">Evidências de Funcionamento<a class="headerlink" href="#evidencias-de-funcionamento_7" title="Permanent link">¶</a></h4>
-<p><em>Evidências a serem adicionadas.</em></p>
+<div style="width: 100%; max-width: 900px; margin: 1.5rem 0; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.15);">
+<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" src="https://www.youtube.com/embed/J9IcxHe_BSA" style="width: 100%; aspect-ratio: 16/9; display: block;" title="F16 — CRUD de artigos de FAQ"></iframe>
+</div>
 <h4 id="validacao-do-cliente_7">Validação do Cliente<a class="headerlink" href="#validacao-do-cliente_7" title="Permanent link">¶</a></h4>
 <table>
 <thead>
@@ -1236,9 +1225,9 @@
 </tr>
 <tr>
 <td>Formal Validation</td>
-<td>—</td>
-<td>⬜</td>
-<td>—</td>
+<td>07/06/2026</td>
+<td>✅</td>
+<td>Aprovado pelo CEO — gestão de categorias e artigos em PT/EN associados a produtos demonstrada e aprovada (CP6)</td>
 </tr>
 </tbody>
 </table>
@@ -1323,7 +1312,9 @@
 </tbody>
 </table>
 <h4 id="evidencias-de-funcionamento_8">Evidências de Funcionamento<a class="headerlink" href="#evidencias-de-funcionamento_8" title="Permanent link">¶</a></h4>
-<p><em>Evidências a serem adicionadas.</em></p>
+<div style="width: 100%; max-width: 900px; margin: 1.5rem 0; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.15);">
+<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" src="https://www.youtube.com/embed/mhMDfnUBIsA" style="width: 100%; aspect-ratio: 16/9; display: block;" title="F17 — Publicar/despublicar artigo de FAQ"></iframe>
+</div>
 <h4 id="validacao-do-cliente_8">Validação do Cliente<a class="headerlink" href="#validacao-do-cliente_8" title="Permanent link">¶</a></h4>
 <table>
 <thead>
@@ -1343,9 +1334,9 @@
 </tr>
 <tr>
 <td>Formal Validation</td>
-<td>—</td>
-<td>⬜</td>
-<td>—</td>
+<td>07/06/2026</td>
+<td>✅</td>
+<td>Aprovado pelo CEO — fluxo de publicação e despublicação demonstrado como parte integrante da gestão de FAQ (CP6 aprovado em bloco)</td>
 </tr>
 </tbody>
 </table>
@@ -1430,7 +1421,9 @@
 </tbody>
 </table>
 <h4 id="evidencias-de-funcionamento_9">Evidências de Funcionamento<a class="headerlink" href="#evidencias-de-funcionamento_9" title="Permanent link">¶</a></h4>
-<p><em>Evidências a serem adicionadas.</em></p>
+<div style="width: 100%; max-width: 900px; margin: 1.5rem 0; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.15);">
+<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" src="https://www.youtube.com/embed/LSAqq9nKBYY" style="width: 100%; aspect-ratio: 16/9; display: block;" title="F18 — Avaliação de artigos de FAQ"></iframe>
+</div>
 <h4 id="validacao-do-cliente_9">Validação do Cliente<a class="headerlink" href="#validacao-do-cliente_9" title="Permanent link">¶</a></h4>
 <table>
 <thead>
@@ -1450,9 +1443,9 @@
 </tr>
 <tr>
 <td>Formal Validation</td>
-<td>—</td>
-<td>⬜</td>
-<td>—</td>
+<td>07/06/2026</td>
+<td>✅</td>
+<td>Aprovado pelo CEO — FAQ categorizado por produto com avaliação de utilidade pelo usuário citado explicitamente na ata como entregue (CP6 aprovado)</td>
 </tr>
 </tbody>
 </table>
