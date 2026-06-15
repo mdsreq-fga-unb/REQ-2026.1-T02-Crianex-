@@ -553,3 +553,44 @@ p[style*='text-align:center'] {
 .lc-semestre {
   background: #111827;
 }
+
+/* ── Iteration blocks (priorizacao) ─────────────────────────────────────── */
+.it-block {
+  border-left: 4px solid #dee2e6;
+  border-radius: 0 var(--crianex-radius) var(--crianex-radius) 0;
+  background: #fafafa;
+  padding: 1.25rem 1.5rem;
+  margin: 1rem 0 2rem;
+}
+
+.it-block--done {
+  border-left-color: #198754;
+  background: #f0faf4;
+}
+
+.it-block--active {
+  border-left-color: #0d6efd;
+  background: #f0f5ff;
+}
+
+.it-block--planned {
+  border-left-color: #adb5bd;
+  background: #f8f9fa;
+}
+
+.it-block h4 {
+  margin-top: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #333;
+}
+
+.it-block table {
+  box-shadow: none;
+  border: 1px solid #e0e0e0;
+  margin-bottom: 1rem;
+}
+
+.it-block table:last-child {
+  margin-bottom: 0;
+}

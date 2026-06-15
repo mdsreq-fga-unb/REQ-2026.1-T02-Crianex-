@@ -101,6 +101,9 @@
       })
       .filter((q) => q.acceptedAnswer.text),
   });
+
+  // </script> partido para evitar que o parser do Svelte/ESLint engasgue
+  const ldScript = `<script type="application/ld+json">${JSON.stringify(faqSchema)}<` + `/script>`;
 </script>
 
 <svelte:head>

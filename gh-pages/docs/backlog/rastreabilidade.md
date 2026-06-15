@@ -7,10 +7,11 @@
 | 1.0    | 14/05/2026 | Templete do backlog                                                                                                               | Lucas A. Zanetti   | Heitor Macedo Ricardo |
 | 1.1    | 17/05/2026 | Coloquei todos OEs, CPs, Features, RFs, RNFs com rastreabilidade                                                                  | Lucas A. Zanetti   | Heitor Macedo Ricardo |
 | 1.2    | 06/06/2026 | Adição da coluna INVEST na tabela de Features                                                                                     | Lucas A. Zanetti   | Hugo Freitas Silva    |
-| 1.3    | 09/06/2026 | Marcação de status de conclusão (✅/⚠️/❌) em Features, RFs e RNFs da IT1 (CP4/CP5/CP6)                                           | Lucas A. Zanetti   | Hugo Freitas Silva    |
+| 1.3    | 09/06/2026 | Marcação de status de conclusão em Features, RFs e RNFs da IT1 (CP4/CP5/CP6)                                                     | Lucas A. Zanetti   | Hugo Freitas Silva    |
 | 1.4    | 09/06/2026 | Adição de RF49, RF54, RF55; seção de Regras de Negócio (RN01–RN12) com rastreabilidade                                            | Lucas A. Zanetti   | Hugo Freitas Silva    |
-| 1.5    | 10/06/2026 | RF08 marcado ✅; RF49 (Aceitar LGPD) inserido; RF49→RF50, RF50→RF51 renumerados; RF52–RF53 adicionados; refs cruzadas atualizadas | Lucas A. Zanetti   | Hugo Freitas Silva    |
+| 1.5    | 10/06/2026 | RF08 marcado como concluído; RF49 inserido; RF49→RF50, RF50→RF51 renumerados; RF52–RF53 adicionados; refs cruzadas atualizadas    | Lucas A. Zanetti   | Hugo Freitas Silva    |
 | 1.6    | 14/06/2026 | Alterações referentes aos ajustes sugeridos pelo professor, acerca de relações 1:1 (um para um)                                   | Hugo Freitas Silva | Lucas A. Zanetti      |
+| 1.7    | 15/06/2026 | Substituição de emojis por badges; coluna INVEST com nowrap                                                                       | Lucas A. Zanetti   | Hugo Freitas Silva    |
 
 ---
 
@@ -56,97 +57,97 @@
 
 ## Features
 
-| ID  | Status IT1 | Nome                                                                         | CP  | RFs Vinculados         | RNFs Vinculados                          | INVEST      |
-| --- | ---------- | ---------------------------------------------------------------------------- | --- | ---------------------- | ---------------------------------------- | ----------- |
-| F01 | —          | Monitorar eventos de segurança para rastreamento de acessos ao sistema       | CP2 | RF01, RF02             | RNF09, RNF01, RNF02, RNF03               | I-N-V-E-S-T |
-| F02 | —          | Monitorar estado dos componentes para garantia de disponibilidade do sistema | CP2 | RF03, RF54             | RNF01, RNF03, RNF09                      | N-V-E-S-T   |
-| F03 | —          | Visualizar indicadores operacionais para acompanhamento estratégico          | CP3 | RF04, RF05, RF06       | RNF01, RNF03, RNF09, RNF11               | I-N-V-E-S-T |
-| F04 | —          | Visualizar indicadores financeiros para análise gerencial                    | CP3 | RF07, RF55             | RNF01, RNF03, RNF09, RNF11               | I-N-V-E-S-T |
-| F05 | —          | Consultar registros financeiros para acompanhamento de faturamento           | CP7 | RF16, RF17, RF18       | RNF01, RNF03, RNF09, RNF11               | N-V-E-S-T   |
-| F06 | —          | Gerar relatórios financeiros para exportação de dados                        | CP7 | RF19, RF20             | RNF01, RNF03, RNF09, RNF11               | I-N-V-E-S-T |
-| F07 | —          | Acompanhar histórico e status de notificações                                | CP9 | RF46, RF47             | RNF03, RNF09                             | N-V-E-S-T   |
-| F08 | —          | Gerenciar templates de notificações                                          | CP9 | RF15, RF56, RF57       | RNF03, RNF09                             | N-V-E-S-T   |
-| F09 | ✅         | Autenticar para acesso seguro ao sistema                                     | CP5 | RF08, RF09             | RNF01, RNF03, RNF08                      | I-N-V-E-S-T |
-| F10 | ✅         | Permitir acesso ao painel administrativo para gerenciamento da plataforma    | CP5 | RF10, RF48             | RNF09                                    | N-V-E-S-T   |
-| F11 | ✅         | Gerenciar usuarios da plataforma para controle operacional                   | CP5 | RF11, RF12, RF13, RF14 | RNF09                                    | N-V-E-S-T   |
-| F12 | ✅         | Gerenciar produtos SaaS da vitrine para manutenção do portifólio             | CP4 | RF21, RF22, RF23, RF24 | RNF19, RNF04, RNF05, RNF13, RNF15, RNF03 | N-V-E-T     |
-| F13 | ✅         | Controlar publicação de produto SaaS para exibição pública                   | CP4 | RF25, RF26             | RNF03                                    | N-V-E-S-T   |
-| F14 | ✅         | Exibir canais de contato na Vitrine                                          | CP4 | RF27, RF49             | RNF10, RNF02, RNF11                      | N-V-E-S-T   |
-| F15 | ✅         | Disponibilizar informações institucionais para apresentação da empresa       | CP4 | RF50, RF51             | RNF02, RNF 21                            | I-N-V-E-S-T |
-| F16 | ✅         | Gerenciar artigos de FAQs para manuntenção da base de conhecimento           | CP6 | RF28, RF29, RF30, RF31 | RNF05, RNF04, RNF01                      | N-V-E-S-T   |
-| F17 | ✅         | Controlar publicação de artigos FAQ's para disponibilização pública          | CP6 | RF32, RF33             | RNF01                                    | N-V-E-S-T   |
-| F18 | ✅         | Melhorar a correspondência entre artigos do FAQ e dúvidas dos leads          | CP6 | RF34, RF52             | RNF02                                    | N-V-E-S-T   |
-| F19 | —          | Gerenciar clientes e leads para organização do relacionamento comercial      | CP1 | RF35, RF36, RF37, RF41 | RNF09, RNF03, RNF01, RNF11, RNF21        | I-N-V-E-S-T |
-| F20 | —          | Gerenciar colunas do funil para personalização do processo comercial         | CP1 | RF38, RF39, RF40       | RNF01, RNF03, RNF09, RNF11, RNF22        | N-V-E-S-T   |
-| F21 | —          | Registrar interações comerciais para rastreamento do relacionamento          | CP1 | RF42, RF53, RF59       | —                                        | N-V-E-S-T   |
-| F22 | —          | Acessar tickets para acompanhamento dos atendimentos                         | CP8 | RF43, RF58             | RNF09, RNF03, RNF01, RNF22               | I-N-V-E-S-T |
-| F23 | —          | Gerenciar tickets para manutenção da operação de suporte                     | CP8 | RF44, RF45             | —                                        | N-V-E-S-T   |
+| ID  | Status | Nome                                                                         | CP  | RFs Vinculados         | RNFs Vinculados                           | INVEST                              |
+| --- | ------ | ---------------------------------------------------------------------------- | --- | ---------------------- | ----------------------------------------- | ----------------------------------- |
+| F01 | —      | Monitorar eventos de segurança para rastreamento de acessos ao sistema       | CP2 | RF01, RF02             | RNF09, RNF01, RNF02, RNF03               | <nobr>I-N-V-E-S-T</nobr>           |
+| F02 | —      | Monitorar estado dos componentes para garantia de disponibilidade do sistema | CP2 | RF03, RF54             | RNF01, RNF03, RNF09                      | <nobr>N-V-E-S-T</nobr>             |
+| F03 | —      | Visualizar indicadores operacionais para acompanhamento estratégico          | CP3 | RF04, RF05, RF06       | RNF01, RNF03, RNF09, RNF11               | <nobr>I-N-V-E-S-T</nobr>           |
+| F04 | —      | Visualizar indicadores financeiros para análise gerencial                    | CP3 | RF07, RF55             | RNF01, RNF03, RNF09, RNF11               | <nobr>I-N-V-E-S-T</nobr>           |
+| F05 | —      | Consultar registros financeiros para acompanhamento de faturamento           | CP7 | RF16, RF17, RF18       | RNF01, RNF03, RNF09, RNF11               | <nobr>N-V-E-S-T</nobr>             |
+| F06 | —      | Gerar relatórios financeiros para exportação de dados                        | CP7 | RF19, RF20             | RNF01, RNF03, RNF09, RNF11               | <nobr>I-N-V-E-S-T</nobr>           |
+| F07 | —      | Acompanhar histórico e status de notificações                                | CP9 | RF46, RF47             | RNF03, RNF09                             | <nobr>N-V-E-S-T</nobr>             |
+| F08 | —      | Gerenciar templates de notificações                                          | CP9 | RF15, RF56, RF57       | RNF03, RNF09                             | <nobr>N-V-E-S-T</nobr>             |
+| F09 | <span class="badge badge--green">IT1</span> | Autenticar para acesso seguro ao sistema                                     | CP5 | RF08, RF09             | RNF01, RNF03, RNF08                      | <nobr>I-N-V-E-S-T</nobr>           |
+| F10 | <span class="badge badge--green">IT1</span> | Permitir acesso ao painel administrativo para gerenciamento da plataforma    | CP5 | RF10, RF48             | RNF09                                    | <nobr>N-V-E-S-T</nobr>             |
+| F11 | <span class="badge badge--green">IT1</span> | Gerenciar usuarios da plataforma para controle operacional                   | CP5 | RF11, RF12, RF13, RF14 | RNF09                                    | <nobr>N-V-E-S-T</nobr>             |
+| F12 | <span class="badge badge--green">IT1</span> | Gerenciar produtos SaaS da vitrine para manutenção do portifólio             | CP4 | RF21, RF22, RF23, RF24 | RNF19, RNF04, RNF05, RNF13, RNF15, RNF03 | <nobr>N-V-E-T</nobr>               |
+| F13 | <span class="badge badge--green">IT1</span> | Controlar publicação de produto SaaS para exibição pública                   | CP4 | RF25, RF26             | RNF03                                    | <nobr>N-V-E-S-T</nobr>             |
+| F14 | <span class="badge badge--green">IT1</span> | Exibir canais de contato na Vitrine                                          | CP4 | RF27, RF49             | RNF10, RNF02, RNF11                      | <nobr>N-V-E-S-T</nobr>             |
+| F15 | <span class="badge badge--green">IT1</span> | Disponibilizar informações institucionais para apresentação da empresa       | CP4 | RF50, RF51             | RNF02, RNF21                             | <nobr>I-N-V-E-S-T</nobr>           |
+| F16 | <span class="badge badge--green">IT1</span> | Gerenciar artigos de FAQs para manuntenção da base de conhecimento           | CP6 | RF28, RF29, RF30, RF31 | RNF05, RNF04, RNF01                      | <nobr>N-V-E-S-T</nobr>             |
+| F17 | <span class="badge badge--green">IT1</span> | Controlar publicação de artigos FAQ's para disponibilização pública          | CP6 | RF32, RF33             | RNF01                                    | <nobr>N-V-E-S-T</nobr>             |
+| F18 | <span class="badge badge--green">IT1</span> | Melhorar a correspondência entre artigos do FAQ e dúvidas dos leads          | CP6 | RF34, RF52             | RNF02                                    | <nobr>N-V-E-S-T</nobr>             |
+| F19 | —      | Gerenciar clientes e leads para organização do relacionamento comercial      | CP1 | RF35, RF36, RF37, RF41 | RNF09, RNF03, RNF01, RNF11, RNF21        | <nobr>I-N-V-E-S-T</nobr>           |
+| F20 | —      | Gerenciar colunas do funil para personalização do processo comercial         | CP1 | RF38, RF39, RF40       | RNF01, RNF03, RNF09, RNF11, RNF22        | <nobr>N-V-E-S-T</nobr>             |
+| F21 | —      | Registrar interações comerciais para rastreamento do relacionamento          | CP1 | RF42, RF53, RF59       | —                                        | <nobr>N-V-E-S-T</nobr>             |
+| F22 | —      | Acessar tickets para acompanhamento dos atendimentos                         | CP8 | RF43, RF58             | RNF09, RNF03, RNF01, RNF22               | <nobr>I-N-V-E-S-T</nobr>           |
+| F23 | —      | Gerenciar tickets para manutenção da operação de suporte                     | CP8 | RF44, RF45             | —                                        | <nobr>N-V-E-S-T</nobr>             |
 
 ---
 
 ## Requisitos Funcionais (RFs)
 
-| ID   | Status IT1 | Nome                                                           | Feature | CP  | OE  | Observação                                                                     |
-| ---- | ---------- | -------------------------------------------------------------- | ------- | --- | --- | ------------------------------------------------------------------------------ |
-| RF01 | —          | Consultar histórico de eventos de segurança                    | F01     | CP2 | OE1 | IT3                                                                            |
-| RF02 | —          | Filtrar eventos de segurança                                   | F01     | CP2 | OE1 | IT3                                                                            |
-| RF03 | —          | Consultar status de disponibilidade dos componentes do sistema | F02     | CP2 | OE1 | IT3                                                                            |
-| RF04 | —          | Exibir indicadores operacionais de tickets                     | F03     | CP3 | OE1 | IT3                                                                            |
-| RF05 | —          | Exibir indicadores operacionais sistema                        | F03     | CP3 | OE1 | IT3                                                                            |
-| RF06 | —          | Filtrar indicadores operacionais                               | F03     | CP3 | OE1 | IT3                                                                            |
-| RF07 | —          | Exibir indicadores financeiros                                 | F04     | CP3 | OE1 | IT3                                                                            |
-| RF08 | ✅         | Autenticar perfil de usuario                                   | F09     | CP5 | OE2 | Login implementado; MFA (TOTP) sem rotas ativas — optou-se por não implementar |
-| RF09 | ✅         | Encerrar sessão                                                | F09     | CP5 | OE2 | Botão de logout no ProfileModal                                                |
-| RF10 | ✅         | Acessar painel administrativo                                  | F10     | CP5 | OE2 | Rotas protegidas por hooks.server.ts + Supabase session                        |
-| RF11 | ✅         | Editar informações dos membros                                 | F11     | CP5 | OE2 | MemberModal com edição de perfil e permissões                                  |
-| RF12 | ✅         | Cadastrar novo membro                                          | F11     | CP5 | OE2 | Geração de senha segura + scaffold de e-mail de boas-vindas                    |
-| RF13 | ✅         | Inativar membro cadastrado                                     | F11     | CP5 | OE2 | toggleStatus no menu de ações da tabela de membros                             |
-| RF14 | ✅         | Remover membro cadastrado                                      | F11     | CP5 | OE2 | Modal de confirmação de remoção + API DELETE                                   |
-| RF15 | —          | Adicionar template de notificações                             | F08     | CP9 | OE3 | IT2                                                                            |
-| RF16 | —          | Consultar histórico financeiro                                 | F05     | CP7 | OE1 | IT3                                                                            |
-| RF17 | —          | Consultar detalhes de registro financeiro                      | F05     | CP7 | OE1 | IT3                                                                            |
-| RF18 | —          | Filtrar registros financeiros                                  | F05     | CP7 | OE1 | IT3                                                                            |
-| RF19 | —          | Exportar relatório financeiro                                  | F06     | CP7 | OE1 | IT3                                                                            |
-| RF20 | —          | Gerar relatório financeiro                                     | F06     | CP7 | OE1 | IT3                                                                            |
-| RF21 | ✅         | Cadastrar produto SaaS                                         | F12     | CP4 | OE2 | ProductModal + POST /admin/products                                            |
-| RF22 | ✅         | Editar produto SaaS                                            | F12     | CP4 | OE2 | ProductModal + PATCH /admin/products/:id                                       |
-| RF23 | ✅         | Remover produto SaaS                                           | F12     | CP4 | OE2 | DeleteModal + DELETE /admin/products/:id                                       |
-| RF24 | ✅         | Reordenar produtos SaaS                                        | F12     | CP4 | OE2 | Drag-and-drop + PATCH /admin/products/reorder                                  |
-| RF25 | ✅         | Publicar produto SaaS                                          | F13     | CP4 | OE2 | Toggle publicação via PATCH published=true                                     |
-| RF26 | ✅         | Despublicar produto SaaS                                       | F13     | CP4 | OE2 | Toggle publicação via PATCH published=false                                    |
-| RF27 | ✅         | Cadastrar contato com a empresa                                | F14     | CP4 | OE2 | Formulário de contato na vitrine pública                                       |
-| RF28 | ✅         | Cadastrar artigo de FAQ                                        | F16     | CP6 | OE2 | Modal de criação + POST /admin/faq/articles                                    |
-| RF29 | ✅         | Editar artigo de FAQ                                           | F16     | CP6 | OE2 | Modal de edição + PATCH /admin/faq/articles/:id                                |
-| RF30 | ✅         | Remover artigo de FAQ                                          | F16     | CP6 | OE2 | Modal de confirmação + DELETE /admin/faq/articles/:id                          |
-| RF31 | ✅         | Categorizar artigo de FAQ                                      | F16     | CP6 | OE2 | Gestão de categorias via modal dedicado                                        |
-| RF32 | ✅         | Publicar artigo de FAQ                                         | F17     | CP6 | OE2 | togglePublish via PATCH published=true                                         |
-| RF33 | ✅         | Despublicar artigo de FAQ                                      | F17     | CP6 | OE2 | togglePublish via PATCH published=false                                        |
-| RF34 | ✅         | Avaliar artigo de FAQ                                          | F18     | CP6 | OE2 | Botões útil/não útil na vitrine pública; contadores no admin                   |
-| RF35 | —          | Editar dados do cliente/lead                                   | F19     | CP1 | OE3 | IT2                                                                            |
-| RF36 | —          | Inativar cliente/lead                                          | F19     | CP1 | OE3 | IT2                                                                            |
-| RF37 | —          | Cadastrar lead no CRM                                          | F19     | CP1 | OE3 | IT2                                                                            |
-| RF38 | —          | Adicionar colunas no CRM                                       | F20     | CP1 | OE3 | IT2                                                                            |
-| RF39 | —          | Remover colunas no CRM                                         | F20     | CP1 | OE3 | IT2                                                                            |
-| RF40 | —          | Editar colunas no CRM                                          | F20     | CP1 | OE3 | IT2                                                                            |
-| RF41 | —          | Atualizar informações operacionais dos cards no CRM            | F21     | CP1 | OE3 | IT2                                                                            |
-| RF42 | —          | Adicionar interação comercial                                  | F21     | CP1 | OE3 | IT2                                                                            |
-| RF43 | —          | Consultar histórico de tickets                                 | F23     | CP8 | OE3 | IT2                                                                            |
-| RF44 | —          | Alterar status do ticket                                       | F24     | CP8 | OE3 | IT2                                                                            |
-| RF45 | —          | Ocultar tickets                                                | F24     | CP8 | OE3 | IT2                                                                            |
-| RF46 | —          | Listar histórico de notificações                               | F25     | CP9 | OE3 | IT2                                                                            |
-| RF47 | —          | Alterar status da notificação                                  | F26     | CP9 | OE3 | IT2                                                                            |
-| RF48 | ✅         | Editar próprio perfil no painel                                | F10     | CP5 | OE2 | ProfileModal + PATCH /profile/me e /profile/me/password                        |
-| RF49 | ✅         | Detalhar os tópicos de conformidade com a LGPD                 | F14     | CP4 | OE2 | Páginas /privacidade (política de privacidade) e /cookies (uso de cookies)     |
-| RF50 | ✅         | Consultar detalhes de produto SaaS na vitrine                  | F15     | CP4 | OE2 | Página /produtos/[slug] com detalhes completos do produto                      |
-| RF51 | ✅         | Permitir a utilização de cookies no sistema                    | F15     | CP4 | OE2 | Páginas /privacidade (política de privacidade) e /cookies (uso de cookies)     |
-| RF52 | ✅         | Filtrar artigos faq                                            | F18     | CP6 | OE2 | —                                                                              |
-| RF53 | —          | Remover interação comercial                                    | F21     | CP1 | OE3 | IT2                                                                            |
-| RF54 | —          | Configurar limiar de alerta para evento operacional crítico    | F02     | CP2 | OE1 | IT3                                                                            |
-| RF55 | —          | Filtrar indicadores financeiros                                | F04     | CP3 | OE1 | IT3                                                                            |
-| RF56 | —          | Editar template de notifações                                  | F08     | CP9 | OE3 | IT2                                                                            |
-| RF57 | —          | Remover template de notifações                                 | F08     | CP9 | OE3 | IT2                                                                            |
-| RF58 | —          | Detalhar informações do ticket                                 | F22     | CP8 | OE3 | IT2                                                                            |
-| RF59 | —          | Editar interação comercial                                     | F21     | CP1 | OE3 | IT2                                                                            |
+| ID   | Status | Nome                                                           | Feature | CP  | OE  | Observação                                                                     |
+| ---- | ------ | -------------------------------------------------------------- | ------- | --- | --- | ------------------------------------------------------------------------------ |
+| RF01 | —      | Consultar histórico de eventos de segurança                    | F01     | CP2 | OE1 | IT3                                                                            |
+| RF02 | —      | Filtrar eventos de segurança                                   | F01     | CP2 | OE1 | IT3                                                                            |
+| RF03 | —      | Consultar status de disponibilidade dos componentes do sistema | F02     | CP2 | OE1 | IT3                                                                            |
+| RF04 | —      | Exibir indicadores operacionais de tickets                     | F03     | CP3 | OE1 | IT3                                                                            |
+| RF05 | —      | Exibir indicadores operacionais sistema                        | F03     | CP3 | OE1 | IT3                                                                            |
+| RF06 | —      | Filtrar indicadores operacionais                               | F03     | CP3 | OE1 | IT3                                                                            |
+| RF07 | —      | Exibir indicadores financeiros                                 | F04     | CP3 | OE1 | IT3                                                                            |
+| RF08 | <span class="badge badge--green">IT1</span> | Autenticar perfil de usuario                                   | F09     | CP5 | OE2 | Login implementado; MFA (TOTP) sem rotas ativas — optou-se por não implementar |
+| RF09 | <span class="badge badge--green">IT1</span> | Encerrar sessão                                                | F09     | CP5 | OE2 | Botão de logout no ProfileModal                                                |
+| RF10 | <span class="badge badge--green">IT1</span> | Acessar painel administrativo                                  | F10     | CP5 | OE2 | Rotas protegidas por hooks.server.ts + Supabase session                        |
+| RF11 | <span class="badge badge--green">IT1</span> | Editar informações dos membros                                 | F11     | CP5 | OE2 | MemberModal com edição de perfil e permissões                                  |
+| RF12 | <span class="badge badge--green">IT1</span> | Cadastrar novo membro                                          | F11     | CP5 | OE2 | Geração de senha segura + scaffold de e-mail de boas-vindas                    |
+| RF13 | <span class="badge badge--green">IT1</span> | Inativar membro cadastrado                                     | F11     | CP5 | OE2 | toggleStatus no menu de ações da tabela de membros                             |
+| RF14 | <span class="badge badge--green">IT1</span> | Remover membro cadastrado                                      | F11     | CP5 | OE2 | Modal de confirmação de remoção + API DELETE                                   |
+| RF15 | —      | Adicionar template de notificações                             | F08     | CP9 | OE3 | IT2                                                                            |
+| RF16 | —      | Consultar histórico financeiro                                 | F05     | CP7 | OE1 | IT3                                                                            |
+| RF17 | —      | Consultar detalhes de registro financeiro                      | F05     | CP7 | OE1 | IT3                                                                            |
+| RF18 | —      | Filtrar registros financeiros                                  | F05     | CP7 | OE1 | IT3                                                                            |
+| RF19 | —      | Exportar relatório financeiro                                  | F06     | CP7 | OE1 | IT3                                                                            |
+| RF20 | —      | Gerar relatório financeiro                                     | F06     | CP7 | OE1 | IT3                                                                            |
+| RF21 | <span class="badge badge--green">IT1</span> | Cadastrar produto SaaS                                         | F12     | CP4 | OE2 | ProductModal + POST /admin/products                                            |
+| RF22 | <span class="badge badge--green">IT1</span> | Editar produto SaaS                                            | F12     | CP4 | OE2 | ProductModal + PATCH /admin/products/:id                                       |
+| RF23 | <span class="badge badge--green">IT1</span> | Remover produto SaaS                                           | F12     | CP4 | OE2 | DeleteModal + DELETE /admin/products/:id                                       |
+| RF24 | <span class="badge badge--green">IT1</span> | Reordenar produtos SaaS                                        | F12     | CP4 | OE2 | Drag-and-drop + PATCH /admin/products/reorder                                  |
+| RF25 | <span class="badge badge--green">IT1</span> | Publicar produto SaaS                                          | F13     | CP4 | OE2 | Toggle publicação via PATCH published=true                                     |
+| RF26 | <span class="badge badge--green">IT1</span> | Despublicar produto SaaS                                       | F13     | CP4 | OE2 | Toggle publicação via PATCH published=false                                    |
+| RF27 | <span class="badge badge--green">IT1</span> | Cadastrar contato com a empresa                                | F14     | CP4 | OE2 | Formulário de contato na vitrine pública                                       |
+| RF28 | <span class="badge badge--green">IT1</span> | Cadastrar artigo de FAQ                                        | F16     | CP6 | OE2 | Modal de criação + POST /admin/faq/articles                                    |
+| RF29 | <span class="badge badge--green">IT1</span> | Editar artigo de FAQ                                           | F16     | CP6 | OE2 | Modal de edição + PATCH /admin/faq/articles/:id                                |
+| RF30 | <span class="badge badge--green">IT1</span> | Remover artigo de FAQ                                          | F16     | CP6 | OE2 | Modal de confirmação + DELETE /admin/faq/articles/:id                          |
+| RF31 | <span class="badge badge--green">IT1</span> | Categorizar artigo de FAQ                                      | F16     | CP6 | OE2 | Gestão de categorias via modal dedicado                                        |
+| RF32 | <span class="badge badge--green">IT1</span> | Publicar artigo de FAQ                                         | F17     | CP6 | OE2 | togglePublish via PATCH published=true                                         |
+| RF33 | <span class="badge badge--green">IT1</span> | Despublicar artigo de FAQ                                      | F17     | CP6 | OE2 | togglePublish via PATCH published=false                                        |
+| RF34 | <span class="badge badge--green">IT1</span> | Avaliar artigo de FAQ                                          | F18     | CP6 | OE2 | Botões útil/não útil na vitrine pública; contadores no admin                   |
+| RF35 | —      | Editar dados do cliente/lead                                   | F19     | CP1 | OE3 | IT2                                                                            |
+| RF36 | —      | Inativar cliente/lead                                          | F19     | CP1 | OE3 | IT2                                                                            |
+| RF37 | —      | Cadastrar lead no CRM                                          | F19     | CP1 | OE3 | IT2                                                                            |
+| RF38 | —      | Adicionar colunas no CRM                                       | F20     | CP1 | OE3 | IT2                                                                            |
+| RF39 | —      | Remover colunas no CRM                                         | F20     | CP1 | OE3 | IT2                                                                            |
+| RF40 | —      | Editar colunas no CRM                                          | F20     | CP1 | OE3 | IT2                                                                            |
+| RF41 | —      | Atualizar informações operacionais dos cards no CRM            | F21     | CP1 | OE3 | IT2                                                                            |
+| RF42 | —      | Adicionar interação comercial                                  | F21     | CP1 | OE3 | IT2                                                                            |
+| RF43 | —      | Consultar histórico de tickets                                 | F23     | CP8 | OE3 | IT2                                                                            |
+| RF44 | —      | Alterar status do ticket                                       | F24     | CP8 | OE3 | IT2                                                                            |
+| RF45 | —      | Ocultar tickets                                                | F24     | CP8 | OE3 | IT2                                                                            |
+| RF46 | —      | Listar histórico de notificações                               | F25     | CP9 | OE3 | IT2                                                                            |
+| RF47 | —      | Alterar status da notificação                                  | F26     | CP9 | OE3 | IT2                                                                            |
+| RF48 | <span class="badge badge--green">IT1</span> | Editar próprio perfil no painel                                | F10     | CP5 | OE2 | ProfileModal + PATCH /profile/me e /profile/me/password                        |
+| RF49 | <span class="badge badge--green">IT1</span> | Detalhar os tópicos de conformidade com a LGPD                 | F14     | CP4 | OE2 | Páginas /privacidade (política de privacidade) e /cookies (uso de cookies)     |
+| RF50 | <span class="badge badge--green">IT1</span> | Consultar detalhes de produto SaaS na vitrine                  | F15     | CP4 | OE2 | Página /produtos/[slug] com detalhes completos do produto                      |
+| RF51 | <span class="badge badge--green">IT1</span> | Permitir a utilização de cookies no sistema                    | F15     | CP4 | OE2 | Páginas /privacidade (política de privacidade) e /cookies (uso de cookies)     |
+| RF52 | <span class="badge badge--green">IT1</span> | Filtrar artigos faq                                            | F18     | CP6 | OE2 | —                                                                              |
+| RF53 | —      | Remover interação comercial                                    | F21     | CP1 | OE3 | IT2                                                                            |
+| RF54 | —      | Configurar limiar de alerta para evento operacional crítico    | F02     | CP2 | OE1 | IT3                                                                            |
+| RF55 | —      | Filtrar indicadores financeiros                                | F04     | CP3 | OE1 | IT3                                                                            |
+| RF56 | —      | Editar template de notifações                                  | F08     | CP9 | OE3 | IT2                                                                            |
+| RF57 | —      | Remover template de notifações                                 | F08     | CP9 | OE3 | IT2                                                                            |
+| RF58 | —      | Detalhar informações do ticket                                 | F22     | CP8 | OE3 | IT2                                                                            |
+| RF59 | —      | Editar interação comercial                                     | F21     | CP1 | OE3 | IT2                                                                            |
 
 ---
 

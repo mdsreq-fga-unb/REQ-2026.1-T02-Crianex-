@@ -70,8 +70,8 @@ sequenceDiagram
 
 | Tipo               | Data | Resultado | Observação |
 | ------------------ | ---- | --------- | ---------- |
-| Partial Validation | —    | ✅        | —          |
-| Formal Validation  | —    | ✅        | —          |
+| Partial Validation | 23/05    | ✅        | —          |
+| Formal Validation  | 03/06    | ✅        | —          |
 
 #### Observações
 
@@ -149,10 +149,10 @@ _Evidências a serem adicionadas._
 
 #### Validação do Cliente
 
-| Tipo               | Data       | Resultado | Observação                                                                              |
-| ------------------ | ---------- | --------- | --------------------------------------------------------------------------------------- |
-| Partial Validation | 15/06/2026 | ✅        | CEO elogiou as telas enviadas, incluindo o dashboard de admin; estrutura e UX aprovadas |
-| Formal Validation  | —          | ⬜        | —                                                                                       |
+| Tipo               | Data       | Resultado | Observação                                                                                   |
+| ------------------ | ---------- | --------- | -------------------------------------------------------------------------------------------- |
+| Partial Validation | 23/05 | ✅        | CEO elogiou as telas enviadas, incluindo o dashboard de admin; estrutura e UX aprovadas      |
+| Formal Validation  | 03/06       |   ✅       | —                                                                                            |
 
 #### Observações
 
@@ -236,10 +236,10 @@ _Evidências a serem adicionadas._
 
 #### Validação do Cliente
 
-| Tipo               | Data       | Resultado | Observação                                                                             |
-| ------------------ | ---------- | --------- | -------------------------------------------------------------------------------------- |
-| Partial Validation | 15/06/2026 | ✅        | CEO revisou as telas enviadas ("demais partes"); estrutura e fluxo do painel aprovados |
-| Formal Validation  | —          | ⬜        | —                                                                                      |
+| Tipo               | Data       | Resultado | Observação                                                                                   |
+| ------------------ | ---------- | --------- | -------------------------------------------------------------------------------------------- |
+| Partial Validation | 26/05 | ✅        | CEO revisou as telas enviadas ("demais partes"); estrutura e fluxo do painel aprovados       |
+| Formal Validation  | 03/06          |  ✅       | —                                                                                            |
 
 #### Observações
 
@@ -322,10 +322,10 @@ _Evidências a serem adicionadas._
 
 #### Validação do Cliente
 
-| Tipo               | Data       | Resultado | Observação                                                                           |
-| ------------------ | ---------- | --------- | ------------------------------------------------------------------------------------ |
-| Partial Validation | 15/06/2026 | ✅        | CEO elogiou a vitrine de produtos enviada; estrutura e apresentação visual aprovadas |
-| Formal Validation  | —          | ⬜        | —                                                                                    |
+| Tipo               | Data       | Resultado | Observação                                                                                   |
+| ------------------ | ---------- | --------- | -------------------------------------------------------------------------------------------- |
+| Partial Validation | 26/05 | ✅        | CEO elogiou a vitrine de produtos enviada; estrutura e apresentação visual aprovadas         |
+| Formal Validation  | 03/06        |  ✅       | —                                                                                            |
 
 #### Observações
 
@@ -395,10 +395,10 @@ _Evidências a serem adicionadas._
 
 #### Validação do Cliente
 
-| Tipo               | Data       | Resultado | Observação                                                                     |
-| ------------------ | ---------- | --------- | ------------------------------------------------------------------------------ |
-| Partial Validation | 15/06/2026 | ✅        | CEO revisou as telas enviadas ("demais partes"); controles do painel aprovados |
-| Formal Validation  | —          | ⬜        | —                                                                              |
+| Tipo               | Data       | Resultado | Observação                                                                                   |
+| ------------------ | ---------- | --------- | -------------------------------------------------------------------------------------------- |
+| Partial Validation | 28/05 | ✅        | CEO revisou as telas enviadas ("demais partes"); controles do painel aprovados               |
+| Formal Validation  | 03/06      |  ✅        | —                                                                                            |
 
 #### Observações
 
@@ -471,8 +471,8 @@ sequenceDiagram
 
 | Tipo               | Data       | Resultado | Observação                                                                                                                                                               |
 | ------------------ | ---------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Partial Validation | —          | ⬜        | —                                                                                                                                                                        |
-| Formal Validation  | 07/06/2026 | ✅        | Aprovado pelo CEO — formulário demonstrado com campo de aceite da política de privacidade (LGPD); funcionalidade de envio de e-mail confirmada como pronta para ativação |
+| Partial Validation | 28/05      |  ✅       | —                                                                                                                                                                        |
+| Formal Validation  | 03/06 | ✅        | Aprovado pelo CEO — formulário demonstrado com campo de aceite da política de privacidade (LGPD); funcionalidade de envio de e-mail confirmada como pronta para ativação |
 
 #### Observações
 
@@ -535,8 +535,8 @@ sequenceDiagram
 
 | Tipo               | Data       | Resultado | Observação                                                                                                                                                         |
 | ------------------ | ---------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Partial Validation | —          | ⬜        | —                                                                                                                                                                  |
-| Formal Validation  | 07/06/2026 | ✅        | Aprovado pelo CEO — seção "Sobre" com animações e perfis da equipe elogiada; sugestão de importar imagens de capa diretamente dos sites dos produtos (ação futura) |
+| Partial Validation | 28/05      |  ✅        | —                                                                                                                                                                  |
+| Formal Validation  | 03/06 | ✅        | Aprovado pelo CEO — seção "Sobre" com animações e perfis da equipe elogiada; sugestão de importar imagens de capa diretamente dos sites dos produtos (ação futura) |
 
 #### Observações
 
@@ -620,8 +620,8 @@ sequenceDiagram
 
 | Tipo               | Data       | Resultado | Observação                                                                                                     |
 | ------------------ | ---------- | --------- | -------------------------------------------------------------------------------------------------------------- |
-| Partial Validation | —          | ⬜        | —                                                                                                              |
-| Formal Validation  | 07/06/2026 | ✅        | Aprovado pelo CEO — gestão de categorias e artigos em PT/EN associados a produtos demonstrada e aprovada (CP6) |
+| Partial Validation | 30/05         |  ✅       | —                                                                                                              |
+| Formal Validation  | 03/06 | ✅        | Aprovado pelo CEO — gestão de categorias e artigos em PT/EN associados a produtos demonstrada e aprovada (CP6) |
 
 #### Observações
 
@@ -695,8 +695,8 @@ sequenceDiagram
 
 | Tipo               | Data       | Resultado | Observação                                                                                                                         |
 | ------------------ | ---------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| Partial Validation | —          | ⬜        | —                                                                                                                                  |
-| Formal Validation  | 07/06/2026 | ✅        | Aprovado pelo CEO — fluxo de publicação e despublicação demonstrado como parte integrante da gestão de FAQ (CP6 aprovado em bloco) |
+| Partial Validation | 30/05      |  ✅        | —                                                                                                                                  |
+| Formal Validation  | 03/06 | ✅        | Aprovado pelo CEO — fluxo de publicação e despublicação demonstrado como parte integrante da gestão de FAQ (CP6 aprovado em bloco) |
 
 #### Observações
 
@@ -770,8 +770,8 @@ sequenceDiagram
 
 | Tipo               | Data       | Resultado | Observação                                                                                                                                         |
 | ------------------ | ---------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Partial Validation | —          | ⬜        | —                                                                                                                                                  |
-| Formal Validation  | 07/06/2026 | ✅        | Aprovado pelo CEO — FAQ categorizado por produto com avaliação de utilidade pelo usuário citado explicitamente na ata como entregue (CP6 aprovado) |
+| Partial Validation | 30/05         |  ✅        | —                                                                                                                                                  |
+| Formal Validation  | 03/06 | ✅        | Aprovado pelo CEO — FAQ categorizado por produto com avaliação de utilidade pelo usuário citado explicitamente na ata como entregue (CP6 aprovado) |
 
 #### Observações
 

@@ -1,210 +1,232 @@
-# Priorização de Requisitos — Crianex Hub
+# Priorização de Features — Crianex Hub
 
 ## Histórico de Revisão
 
-| Versão | Data       | Descrição                                           | Autor(es)        | Revisores(es)         |
-| ------ | ---------- | --------------------------------------------------- | ---------------- | --------------------- |
-| 1.0    | 14/05/2026 | Templete do Priorização do backlog                  | Lucas A. Zanetti | Heitor Macedo Ricardo |
-| 1.1    | 17/05/2026 | Tabela de priorização com diagrama de valorXesforço | Lucas A. Zanetti | Heitor Macedo Ricardo |
+| Versão | Data       | Descrição                                                                                                                           | Autor(es)        | Revisores(es)         |
+| ------ | ---------- | ----------------------------------------------------------------------------------------------------------------------------------- | ---------------- | --------------------- |
+| 1.0    | 14/05/2026 | Template do Priorização do backlog                                                                                                  | Lucas A. Zanetti | Heitor Macedo Ricardo |
+| 1.1    | 17/05/2026 | Tabela de priorização com diagrama de valor×esforço                                                                                 | Lucas A. Zanetti | Heitor Macedo Ricardo |
+| 2.0    | 15/06/2026 | Refatoração completa: mudança para abordagem top-down (Feature como unidade principal); nova matriz; seções por iteração            | Lucas A. Zanetti | Hugo Freitas Silva    |
 
 ---
 
-## Método de Priorização: Valor × Esforço
+## Método de Priorização: Top-Down (Feature → RF)
 
-A priorização segue a fórmula objetiva abaixo, aplicada a cada Requisito:
+### Por que Top-Down?
+
+A abordagem anterior calculava o índice de prioridade de cada Requisito Funcional individualmente e depois **agregava** esses valores para estimar a prioridade de uma Feature (bottom-up). Esse modelo apresentou um problema estrutural: a média dos RFs nivela diferenças internas da feature e não representa o valor de negócio real que ela entrega como unidade funcional.
+
+A abordagem correta é **top-down**: priorizamos as **Features** diretamente — elas são a unidade de entrega e de decisão de negócio. O cálculo dos RFs passa a ser utilizado apenas caso seja necessário **ordenar os requisitos dentro de uma feature já priorizada**, definindo a sequência de implementação interna.
 
 ```
-IP = VB / ES (RF)
-IP = IS / ES (RNF)
+IP = VB / ES  (aplicado diretamente à Feature)
 
-IP ≥ 1,50 → Alta prioridade  (Q1)
+IP ≥ 1,50  → Alta prioridade  (Q1)
 IP 1,00–1,49 → Média prioridade (Q2)
-IP < 1,00  → Baixa prioridade  (Q3/Q4)
+IP < 1,00   → Baixa prioridade  (Q3/Q4)
 ```
 
-| Sigla  | Descrição                                       |
-| ------ | ----------------------------------------------- |
-| **VB** | Valor de Negócio — impacto direto nos OEs       |
-| **IS** | Impacto no Sistema - incluso impacto no usuário |
-| **ES** | Esforço - impacto na implementação              |
-| **IP** | Índice de Prioridade = VB / PT                  |
+| Sigla  | Descrição                                    |
+| ------ | -------------------------------------------- |
+| **VB** | Valor de Negócio — impacto direto nos OEs    |
+| **ES** | Esforço de implementação da Feature completa |
+| **IP** | Índice de Prioridade = VB / ES               |
 
-A fórmula e critérios para calcular o 'VB' e o 'ES' é diferente entre a tabela de Requisitos Funcionais(RF) e os Requisitos Não Funcionais(RNF).
+---
 
-A escala de valores e esforço para cada Requisito foi estabelecido a partir do que o cliente nos informou e priorizou, e foi validada por ele.
+### Critérios para VALOR da Feature
 
-### Fórmula dos Requisitos Funcionais
+Os mesmos critérios utilizados para os RFs foram aplicados diretamente no nível da Feature. A diferença está no objeto avaliado: em vez de avaliar um requisito isolado, avalia-se **o conjunto de comportamentos que a feature entrega**.
 
-Cada critério para fazer o cálculo é uma escala de 1-5 e então inseridos os pesos de cada critério.
-
-#### Critérios para VALOR
-
-| Critério                         | Peso | Descrição                                                                                                                                                                                                                     |
-| -------------------------------- | ---- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Impacto de Negócio**           | 3    | Mede o quanto o requisito contribui diretamente para os objetivos estratégicos e operacionais da organização, como aumento de produtividade, centralização de processos, redução de retrabalho ou geração de valor comercial. |
-| **Frequência de Uso**            | 3    | Avalia com que frequência a funcionalidade será utilizada pelos usuários no contexto diário do sistema. Funcionalidades acessadas constantemente tendem a possuir maior valor operacional.                                    |
-| **Valor percebido pelo Usuário** | 2    | Representa o quanto a funcionalidade melhora a experiência, praticidade ou eficiência percebida pelos usuários durante a utilização do sistema.                                                                               |
-| **Impacto Estratégico**          | 2    | Avalia o quanto o requisito contribui para diferenciais estratégicos do produto, crescimento futuro da plataforma, tomada de decisão ou posicionamento tecnológico da organização.                                            |
+| Critério                         | Peso | Descrição                                                                                                                                                                                                                    |
+| -------------------------------- | ---- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Impacto de Negócio**           | 3    | Mede o quanto a feature contribui diretamente para os objetivos estratégicos e operacionais da organização, como aumento de produtividade, centralização de processos, redução de retrabalho ou geração de valor comercial. |
+| **Frequência de Uso**            | 3    | Avalia com que frequência a feature será utilizada pelos usuários no contexto diário do sistema. Features acessadas constantemente tendem a possuir maior valor operacional.                                                 |
+| **Valor percebido pelo Usuário** | 2    | Representa o quanto a feature melhora a experiência, praticidade ou eficiência percebida pelos usuários durante a utilização do sistema.                                                                                     |
+| **Impacto Estratégico**          | 2    | Avalia o quanto a feature contribui para diferenciais estratégicos do produto, crescimento futuro da plataforma, tomada de decisão ou posicionamento tecnológico da organização.                                             |
 
 ```c
-ValorRF = (ImpactoNegocio × 3) + (FrequenciaUso × 3) + (ValorUsuario × 2) + (ImpactoEstrategico × 2)
+VB = (ImpactoNegocio × 3) + (FrequenciaUso × 3) + (ValorUsuario × 2) + (ImpactoEstrategico × 2)
 ```
 
-#### Critérios para ESFORÇO
+---
 
-| Critério                   | Peso | Descrição                                                                                                                                                         |
-| -------------------------- | ---- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Complexidade técnica**   | 3    | MMede a dificuldade de implementação da funcionalidade considerando lógica de negócio, integrações, persistência de dados e desenvolvimento técnico necessário.   |
-| **Dependências**           | 2    | Avalia o quanto o requisito depende de outros módulos, serviços, funcionalidades ou componentes já existentes para funcionar corretamente.                        |
-| **Risco técnico**          | 2    | Representa a probabilidade de ocorrerem problemas técnicos, falhas de implementação, inconsistências ou dificuldades durante o desenvolvimento da funcionalidade. |
-| **Tempo de implementação** | 1    | Mede o esforço temporal estimado para desenvolver, testar e validar o requisito funcional dentro da arquitetura do sistema.                                       |
+### Critérios para ESFORÇO da Feature
+
+Para o esforço, a **complexidade técnica considera tanto os Requisitos Funcionais quanto os Requisitos Não Funcionais** vinculados à feature. RNFs impõem restrições de qualidade (segurança, desempenho, conformidade) que aumentam diretamente a dificuldade de implementação. Ignorá-los subestimaria o esforço real.
+
+| Critério                   | Peso | Descrição                                                                                                                                                                                                                     |
+| -------------------------- | ---- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Complexidade técnica**   | 3    | Mede a dificuldade de implementação considerando lógica de negócio dos RFs, integrações, persistência de dados e **restrições impostas pelos RNFs vinculados** (segurança, desempenho, conformidade, usabilidade).            |
+| **Dependências**           | 2    | Avalia o quanto a feature depende de outros módulos, serviços ou componentes já existentes para funcionar corretamente.                                                                                                       |
+| **Risco técnico**          | 2    | Representa a probabilidade de ocorrerem problemas técnicos, falhas de implementação ou inconsistências durante o desenvolvimento.                                                                                              |
+| **Tempo de implementação** | 1    | Mede o esforço temporal estimado para desenvolver, testar e validar todos os RFs e atender os RNFs vinculados à feature.                                                                                                      |
 
 ```c
-ValorRF = (Complixidade × 3) + (Dependencias × 2) + (Riscos × 2) + (Tempo × 1)
-```
-
-### Fórmula dos Requisitos Não Funcionais
-
-Cada critério para fazer o cálculo é uma escala de 1-5 e então inseridos os pesos de cada critério.
-
-#### Critérios para VALOR
-
-| Critério                              | Peso | Descrição                                                                                                                                                                             |
-| ------------------------------------- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Impacto arquitetural**              | 3    | Avalia o quanto o requisito influencia decisões estruturais da arquitetura do sistema, como escalabilidade, distribuição, autenticação, infraestrutura e organização dos componentes. |
-| **Impacto operacional**               | 3    | Mede o quanto o RNF contribui para eficiência operacional, estabilidade, monitoramento, manutenção e continuidade do funcionamento da plataforma.                                     |
-| **Impacto na experiência do usuário** | 2    | Representa o quanto o requisito melhora aspectos de usabilidade, desempenho, acessibilidade, responsividade ou qualidade percebida pelos usuários.                                    |
-| **Redução de risco**                  | 2    | Avalia o quanto o RNF reduz riscos relacionados à segurança, indisponibilidade, perda de dados, falhas operacionais ou não conformidade legal.                                        |
-
-```c
-ValorRF = (ImpactoOperacional × 3) + (ImpactoArquitetural × 3) + (UserExperience × 2) + (RiskReduction × 2)
-```
-
-#### Critérios para ESFORÇO
-
-| Critério                          | Peso | Descrição                                                                                                                                                   |
-| --------------------------------- | ---- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Complexidade técnica**          | 3    | Mede a dificuldade técnica para implementação do requisito não funcional considerando infraestrutura, configuração, segurança, integração e arquitetura.    |
-| **Dependência arquitetural**      | 2    | Avalia o quanto o requisito depende de componentes centrais, decisões arquiteturais, infraestrutura específica ou padrões estruturais do sistema.           |
-| **Esforço de validação e testes** | 2    | Representa a dificuldade de verificar, medir e validar o atendimento do requisito por meio de testes, monitoramento ou métricas técnicas.                   |
-| **Impacto transversal**           | 1    | Mede o quanto o requisito afeta múltiplos módulos, camadas ou funcionalidades do sistema simultaneamente, exigindo adaptações distribuídas pela plataforma. |
-
-```c
-ValorRF = (Complixidade × 3) + (DependenciasArquitetural × 3) + (EsforcoValidacao × 2) + (ImpactoTransversal × 2)
+ES = (Complexidade × 3) + (Dependencias × 2) + (RiscoTecnico × 2) + (Tempo × 1)
 ```
 
 ---
 
-## Diagramas de Valor × Esforço
+### Validação com o Cliente
 
-![RF - Value Matrix](../visao/images/RF_matriz.png)
+Os critérios de valor (impacto de negócio, frequência de uso, valor percebido pelo usuário e impacto estratégico) e seus respectivos pesos foram definidos em conjunto com o cliente em sessão de priorização. O cliente avaliou cada feature e atribuiu notas de 1 a 5 por critério, validando tanto os pesos quanto os scores individuais. Os resultados foram documentados no quadro Miro abaixo.
+
+---
+
+### Cálculos no Miro
+
+Os cálculos detalhados de cada Feature — critério por critério, com notas e justificativas — estão documentados no quadro abaixo:
+
+<iframe
+  src="https://miro.com/app/live-embed/uXjVGl991V0=/?moveToWidget=3458764675237762549&cot=14"
+  width="100%"
+  height="620"
+  frameborder="0"
+  scrolling="no"
+  allow="fullscreen; clipboard-read; clipboard-write"
+  allowfullscreen>
+</iframe>
+
+---
+
+## Matriz de Features (Valor × Esforço)
+
+A matriz posiciona cada feature no plano Valor × Esforço. O quadrante superior-esquerdo (alto valor, baixo esforço) delimita o **MVP** — as features com melhor retorno relativo sobre o investimento. As features fora do MVP possuem menor relação custo-benefício e serão reavaliadas em iterações futuras.
+
+![Feature - Value Matrix](../visao/images/new_matrix.png)
 
 <figure class="crianex-figure">
-  <figcaption>Figura 1 — RF/Value Matrix dos requisitos funcionais. Fonte: Elaborado pelos autores (2026).</figcaption>
+  <figcaption>Figura 1 — Matriz de Features: Valor × Esforço. O retângulo vermelho delimita o MVP. Fonte: Elaborado pelos autores (2026).</figcaption>
 </figure>
 
 ---
 
-![RNF - Value Matrix](../visao/images/RNF_matriz.png)
+## Tabela de Priorização de Features
 
-<figure class="crianex-figure">
-  <figcaption>Figura 2 — RNF/Value Matrix dos requisitos funcionais. Fonte: Elaborado pelos autores (2026).</figcaption>
-</figure>
+> Os valores de VB, ES e IP são calculados no Miro e serão preenchidos manualmente nesta tabela.  
+> `*` Feature fora do MVP incluída em uma iteração por dependência funcional com outra feature já priorizada.
 
----
-
-![Feature - Value Matrix](../visao/images/Feature_matriz.png)
-
-<figure class="crianex-figure">
-  <figcaption>Figura 2 — Feature/Value Matrix dos requisitos funcionais agrupados em features. Fonte: Elaborado pelos autores (2026).</figcaption>
-</figure>
-
----
-
-## Evidência — Cálculo Objetivo
-
-#### Exemplos:
-
-> Esse padrão segue para todos os requisitos.
-
-![RF-Cálculo de Valor e Esforço](../visao/images/calculo_RF_matrix.png)
-
-<figure class="crianex-figure">
-  <figcaption>Figura 3 — Exemplo de uma evidência de cálculo da de priorização do Requisito Funcional. Fonte: Elaborado pelos autores (2026).</figcaption>
-</figure>
-
-![RNF-Cálculo de Valor e Esforço](../visao/images/calculo_RNF_matrix.png)
-
-<figure class="crianex-figure">
-  <figcaption>Figura 3 — Exemplo de uma evidência de cálculo da de priorização do Requisito Não Funcional. Fonte: Elaborado pelos autores (2026).</figcaption>
-</figure>
+| ID  | Feature                                                                      | CP  | OE  | VB | ES | IP | Quadrante | MVP |
+| --- | ---------------------------------------------------------------------------- | --- | --- | -- | -- | -- | --------- | --- |
+| F09 | Autenticar para acesso seguro ao sistema                                     | CP5 | OE2 | 50  | 21  | 2,38  | Q1        | <span class="badge badge--green">MVP</span> |
+| F12 | Gerenciar produtos SaaS da vitrine para manutenção do portfólio              | CP4 | OE2 | 50 | 10  | 5  | Q1        | <span class="badge badge--green">MVP</span> |
+| F13 | Controlar publicação de produto SaaS para exibição pública                   | CP4 | OE2 | 47  | 14  | 3,36  | Q1        | <span class="badge badge--green">MVP</span> |
+| F15 | Disponibilizar informações institucionais para apresentação da empresa       | CP4 | OE2 | 50  | 15  | 3,33  | Q1        | <span class="badge badge--green">MVP</span> |
+| F21 | Registrar interações comerciais para rastreamento do relacionamento          | CP1 | OE3 | 50  | 16  | 3,12  | Q1        | <span class="badge badge--green">MVP</span> |
+| F19 | Gerenciar clientes e leads para organização do relacionamento comercial      | CP1 | OE3 | 50  | 20  | 2,5  | Q1        | <span class="badge badge--green">MVP</span> |
+| F20 | Gerenciar colunas do funil para personalização do processo comercial         | CP1 | OE3 | 36  | 17  | 2,12  | Q1        | <span class="badge badge--green">MVP</span> |
+| F11 | Gerenciar usuários da plataforma para controle operacional                   | CP5 | OE2 | 39  | 18  | 2,17  | Q1        | <span class="badge badge--green">MVP</span> |
+| F16 | Gerenciar artigos de FAQs para manutenção da base de conhecimento            | CP6 | OE2 | 32  | 8  | 4  | Q1        | <span class="badge badge--green">MVP</span> |
+| F17 | Controlar publicação de artigos FAQ para disponibilização pública            | CP6 | OE2 | 30  | 10  | 3  | Q1        | <span class="badge badge--green">MVP</span> |
+| F18 | Melhorar a correspondência entre artigos do FAQ e dúvidas dos leads          | CP6 | OE2 | 30  | 10  | 3  | Q1        | <span class="badge badge--green">MVP</span> |
+| F14 | Exibir canais de contato na Vitrine                                          | CP4 | OE2 | 50  | 20  | 2,5  | Q1        | <span class="badge badge--green">MVP</span> |
+| F10 | Permitir acesso ao painel administrativo para gerenciamento da plataforma    | CP5 | OE2 | 50  | 21  | 2,38  | Q1        | <span class="badge badge--green">MVP</span> |
+| F07 | Acompanhar histórico e status de notificações                                | CP9 | OE3 | 39  | 22  | 1,77  | Q1        | <span class="badge badge--green">MVP</span> |
+| F08 | Gerenciar templates de notificações                                          | CP9 | OE3 | 22  | 12  | 1,83  | Q1        | <span class="badge badge--yellow">IT2*</span> |
+| F22 | Acessar tickets para acompanhamento dos atendimentos                         | CP8 | OE3 | 25  | 19  | 1,31  | Q2        | <span class="badge badge--gray">Fora</span> |
+| F23 | Gerenciar tickets para manutenção da operação de suporte                     | CP8 | OE3 | 20  | 18  | 1,11  | Q2        | <span class="badge badge--gray">Fora</span> |
+| F06 | Gerar relatórios financeiros para exportação de dados                        | CP7 | OE1 | 22  | 22  | 1,00  | Q2        | <span class="badge badge--gray">Fora</span> |
+| F03 | Visualizar indicadores operacionais para acompanhamento estratégico          | CP3 | OE1 | 27  | 26  | 1,04  | Q2        | <span class="badge badge--gray">Fora</span> |
+| F02 | Monitorar estado dos componentes para garantia de disponibilidade do sistema | CP2 | OE1 | 27  | 25  | 1,08  | Q2        | <span class="badge badge--gray">Fora</span> |
+| F05 | Consultar registros financeiros para acompanhamento de faturamento           | CP7 | OE1 | 33  | 29  | 1,14  | Q2        | <span class="badge badge--gray">Fora</span> |
+| F01 | Monitorar eventos de segurança para rastreamento de acessos ao sistema       | CP2 | OE1 | 18  | 19  | 0,95  | Q3/Q4     | <span class="badge badge--gray">Fora</span> |
+| F04 | Visualizar indicadores financeiros para análise gerencial                    | CP3 | OE1 | 26  | 30  | 0,87  | Q3/Q4     | <span class="badge badge--gray">Fora</span> |
 
 ---
 
-## Priorização por Feature (RFs agrupados)
+## Features por Iteração
 
-> `Somatório(VB)` e `Somatório(ES)` = soma dos valores de todos os RFs vinculados à Feature.  
-> `IP = Σ(VB) / Σ(ES)` — mesma fórmula dos RFs, aplicada ao nível da Feature.
+### IT1 — Vitrine Pública
 
-| ID  | Feature                                                                   | CP  | OE  | Σ(VB) | Σ(ES) | IP   | Quadrante | MVP |
-| --- | ------------------------------------------------------------------------- | --- | --- | ----- | ----- | ---- | --------- | --- |
-| F09 | Autenticar para acesso seguro ao sistema                                  | CP5 | OE2 | 45    | 12,5  | 3,60 | Q1        | ✅  |
-| F13 | Controlar publicação de produto SaaS para exibição pública                | CP4 | OE2 | 40,5  | 12    | 3,38 | Q1        | ✅  |
-| F12 | Gerenciar produtos SaaS da vitrine para manutenção do portifólio          | CP4 | OE2 | 38,75 | 11,75 | 3,30 | Q1        | ✅  |
-| F22 | Registrar interações comerciais para rastreamento do relacionamento       | CP1 | OE3 | 39    | 13    | 3,00 | Q1        | ✅  |
-| F19 | Gerenciar clientes e leads para organização do relacionamento comercial   | CP1 | OE3 | 37    | 12,4  | 2,99 | Q1        | ✅  |
-| F21 | Gerenciar cards do CRM para acompanhamento de oportunidades               | CP1 | OE3 | 50    | 18    | 2,77 | Q1        | ✅  |
-| F20 | Gerenciar colunas do funil para personalização do processo comercial      | CP1 | OE3 | 40    | 14,7  | 2,72 | Q1        | ✅  |
-| F16 | Gerenciar artigos de FAQs para manuntenção da base de conhecimento        | CP6 | OE2 | 24,75 | 9,5   | 2,61 | Q1        | ✅  |
-| F14 | Exibir canais de contato na Vitrine                                       | CP4 | OE2 | 50    | 21    | 2,38 | Q1        | ✅  |
-| F17 | Controlar publicação de artigos FAQ's para disponibilização pública       | CP6 | OE2 | 28,5  | 12    | 2,38 | Q1        | ✅  |
-| F24 | Gerenciar tickets para manutenção da operação de suporte                  | CP8 | OE3 | 32    | 14    | 2,29 | Q1        | ✅  |
-| F11 | Gerenciar usuarios da plataforma para controle operacional                | CP5 | OE2 | 35    | 15,25 | 2,29 | Q1        | ✅  |
-| F10 | Permitir acesso ao painel administrativo para gerenciamento da plataforma | CP5 | OE2 | 50    | 22    | 2,27 | Q1        | ✅  |
-| F18 | Coletar avaliação de utilidade do artigo pelo visitante                   | CP6 | OE2 | 27    | 12    | 2,25 | Q1        | ✅  |
-| F26 | Controlar estado das notificações para acompanhamento de envio            | CP9 | OE3 | 34    | 16    | 2,13 | Q1        | ✅  |
-| F25 | Exibir o histórico de notificações para acompanhamento operacional        | CP9 | OE3 | 45    | 23    | 1,96 | Q1        | ✅  |
-| F05 | Filtrar métricas executivas para análise segmentada                       | CP3 | OE1 | 30    | 17    | 1,76 | Q1        | ✅  |
-| F08 | Gerar relatórios financeiros para exportação de dados                     | CP7 | OE1 | 26    | 16    | 1,63 | Q1        | ✅  |
-| F23 | Acessar tickets para acompanhamento dos atendimentos                      | CP8 | OE3 | 35    | 23    | 1,52 | Q1        | ✅  |
-| F07 | Filtrar dados financeiros para análise contábil                           | CP7 | OE1 | 23    | 16    | 1,44 | Q2        | ❌  |
-| F15 | Disponibilizar informações institucionais para apresentação da empresa    | CP4 | OE2 | 36    | 26    | 1,38 | Q2        | ❌  |
-| F27 | Gerenciar notificações para o controle do sistema                         | CP9 | OE3 | 36    | 26    | 1,38 | Q2        | ❌  |
-| F03 | Visualizar indicadores operacionais para acompanhamento estratégico       | CP3 | OE1 | 28    | 22,5  | 1,25 | Q2        | ❌  |
-| F02 | Auditar alterações administrativas para rastrear ações do sistema         | CP2 | OE1 | 22    | 19    | 1,16 | Q2        | ❌  |
-| F01 | Consultar logs operacionais para auditoria de atividades                  | CP2 | OE1 | 20    | 18    | 1,11 | Q2        | ❌  |
-| F04 | Visualizar indicadores financeiros para análise gerencial                 | CP3 | OE1 | 28    | 33    | 0,85 | Q3/Q4     | ❌  |
-| F06 | Consultar registros financeiros para acompanhamento de faturamento        | CP7 | OE1 | 24,5  | 29    | 0,84 | Q3/Q4     | ❌  |
+<span class="badge badge--green">Concluída</span> &nbsp; `28/04/2026 – 07/06/2026` &nbsp; CPs entregues: **CP4 · CP5 · CP6**
+
+<div class="it-block it-block--done" markdown>
+
+Primeira iteração focada em estabelecer a presença pública da Crianex e a infraestrutura administrativa base. Todas as features foram implementadas e validadas com o cliente.
+
+#### CP5 — Painel de Gerenciamento do Administrador
+
+| Feature | Descrição |
+| ------- | --------- |
+| F09     | Autenticar para acesso seguro ao sistema |
+| F10     | Permitir acesso ao painel administrativo |
+| F11     | Gerenciar usuários da plataforma |
+
+#### CP4 — Plataforma Pública de Apresentação da Empresa
+
+| Feature | Descrição |
+| ------- | --------- |
+| F12     | Gerenciar produtos SaaS da vitrine |
+| F13     | Controlar publicação de produtos |
+| F14     | Exibir canais de contato na vitrine |
+| F15     | Disponibilizar informações institucionais |
+
+#### CP6 — FAQ e Base de Conhecimentos por Produto
+
+| Feature | Descrição |
+| ------- | --------- |
+| F16     | Gerenciar artigos de FAQ |
+| F17     | Controlar publicação de artigos FAQ |
+| F18     | Melhorar correspondência entre artigos e dúvidas dos leads |
+
+</div>
 
 ---
 
-## Priorização de RNFs
+### IT2 — Lead Capture
 
-> RNFs são priorizados separadamente, pois não geram valor de negócio direto — são restrições de qualidade.  
-> `IS` = Impacto no Sistema · `ES` = Esforço · `IP = IS / ES`
+<span class="badge badge--blue">Em andamento</span> &nbsp; `08/06/2026 – 28/06/2026` &nbsp; CPs selecionadas: **CP1 · CP9**
 
-| ID    | Nome                                                | Classificação                     | Escopo                                 | IS  | ES  | IP    | Prioridade | MVP |
-| ----- | --------------------------------------------------- | --------------------------------- | -------------------------------------- | --- | --- | ----- | ---------- | --- |
-| RNF16 | Stack tecnológico obrigatório                       | Organizacional > Implementação    | Global                                 | 34  | 14  | 2,429 | Alta       | ✅  |
-| RNF23 | Visualização resumida e expansível dos cards do CRM | Produto > Usabilidade             | F21                                    | 24  | 10  | 2,4   | Alta       | ✅  |
-| RNF10 | Proteção contra abuso do formulário público         | Produto > Segurança da Informação | F14                                    | 33  | 16  | 2,063 | Alta       | ✅  |
-| RNF05 | Otimização para mecanismos de busca (SEO)           | Produto > Usabilidade             | F12, F16                               | 30  | 15  | 2     | Alta       | ✅  |
-| RNF20 | Disponibilidade das informações institucionais      | Produto > Dependabilidade         | F15                                    | 20  | 10  | 2     | Alta       | ✅  |
-| RNF22 | Resumo expansível de tickets                        | Produto > Usabilidade             | F23                                    | 19  | 10  | 1,9   | Alta       | ✅  |
-| RNF13 | Bilinguismo da vitrine                              | Produto > Usabilidade             | F12                                    | 24  | 13  | 1,846 | Alta       | ✅  |
-| RNF19 | Facilidade de navegação da vitrine                  | Produto > Usabilidade             | F12                                    | 21  | 12  | 1,75  | Alta       | ✅  |
-| RNF01 | Isolamento de acesso administrativo                 | Produto > Segurança da Informação | F01, F03, F06, F09, F16, F19, F23      | 42  | 25  | 1,68  | Alta       | ✅  |
-| RNF09 | Controle de acesso por linha (RLS)                  | Produto > Segurança da Informação | F01, F03, F06, F10, F19, F23, F25      | 44  | 26  | 1,692 | Alta       | ✅  |
-| RNF15 | Suporte a carga concorrente                         | Produto > Eficiência              | F12                                    | 35  | 21  | 1,667 | Alta       | ✅  |
-| RNF24 | Atualização intuitiva dos cards do CRM              | Produto > Usabilidade             | F21                                    | 21  | 13  | 1,615 | Alta       | ✅  |
-| RNF11 | Conformidade parcial com LGPD                       | Externo > Legal                   | F04, F06, F19                          | 33  | 21  | 1,571 | Alta       | ✅  |
-| RNF18 | Portabilidade de navegador                          | Produto > Usabilidade             | Global                                 | 28  | 18  | 1,556 | Alta       | ✅  |
-| RNF21 | Reorganização intuitiva do CRM                      | Produto > Usabilidade             | F19, F20                               | 27  | 18  | 1,5   | Alta       | ✅  |
-| RNF12 | Responsividade                                      | Produto > Usabilidade             | Global                                 | 27  | 19  | 1,421 | Média      | ❌  |
-| RNF17 | Cobertura mínima de testes                          | Produto > Dependabilidade         | Global                                 | 27  | 19  | 1,421 | Média      | ❌  |
-| RNF08 | Criptografia de credenciais                         | Produto > Segurança da Informação | F09                                    | 33  | 25  | 1,32  | Média      | ❌  |
-| RNF02 | Tempo de resposta da vitrine                        | Produto > Eficiência              | F01, F14, F18                          | 29  | 22  | 1,318 | Média      | ❌  |
-| RNF04 | Renderização server-side da vitrine pública         | Produto > Eficiência              | F12, F15, F16                          | 43  | 35  | 1,229 | Média      | ❌  |
-| RNF07 | Conformidade com OWASP Top 10                       | Produto > Segurança da Informação | Global                                 | 38  | 33  | 1,152 | Média      | ❌  |
-| RNF14 | Escalabilidade horizontal                           | Produto > Eficiência              | Global                                 | 35  | 31  | 1,129 | Média      | ❌  |
-| RNF03 | Tempo de resposta da área administrativa            | Produto > Eficiência              | F01, F03, F06, F09, F13, F19, F23, F25 | 32  | 30  | 1,067 | Média      | ❌  |
+<div class="it-block it-block--active" markdown>
+
+Na reunião de Iteration Commitment da IT2, a equipe selecionou as features das CPs **CP1** (CRM Interno de Clientes) e **CP9** (Sistema de Notificações), priorizando o fluxo comercial de gestão de leads e o canal de comunicação interna.
+
+#### CP1 — CRM Interno de Clientes
+
+| Feature | Descrição |
+| ------- | --------- |
+| F19     | Gerenciar clientes e leads |
+| F20     | Gerenciar colunas do funil de vendas |
+| F21     | Registrar interações comerciais |
+
+#### CP9 — Sistema de Notificações
+
+| Feature | Descrição |
+| ------- | --------- |
+| F07     | Acompanhar histórico e status de notificações |
+| F08     | Gerenciar templates de notificações <span class="badge badge--yellow">Fora do MVP</span> |
+
+> **F08** não atingiu o limiar do MVP na matriz de priorização, mas foi incluída na IT2 por dependência funcional com F07 — o histórico de notificações (F07) pressupõe a existência de templates configurados. Dentro da iteração, F08 será implementada por último, após F07 e todas as features de CP1 estarem concluídas.
+
+</div>
+
+---
+
+### IT3 — Núcleo Operacional
+
+<span class="badge badge--gray">Planejada</span> &nbsp; `29/06/2026 – 07/07/2026`
+
+<div class="it-block it-block--planned" markdown>
+
+Na reunião de Iteration Commitment da IT3, a equipe selecionará **apenas uma fração** das features listadas abaixo, com base na capacidade disponível e na reavaliação de valor naquele momento. Features não selecionadas serão descartadas do escopo da iteração.
+
+#### CP8 — Sistema de Tickets de Suporte <span class="badge badge--gray">Fora do MVP</span>
+
+| Feature | Descrição |
+| ------- | --------- |
+| F22     | Acessar tickets para acompanhamento dos atendimentos |
+| F23     | Gerenciar tickets para manutenção da operação de suporte |
+
+#### CP2 · CP3 · CP7 — Gestão Operacional e Financeira <span class="badge badge--gray">Fora do MVP</span>
+
+| Feature | CP  | Descrição |
+| ------- | --- | --------- |
+| F01     | CP2 | Monitorar eventos de segurança |
+| F02     | CP2 | Monitorar estado dos componentes do sistema |
+| F03     | CP3 | Visualizar indicadores operacionais |
+| F04     | CP3 | Visualizar indicadores financeiros |
+| F05     | CP7 | Consultar registros financeiros |
+| F06     | CP7 | Gerar relatórios financeiros |
+
+</div>
