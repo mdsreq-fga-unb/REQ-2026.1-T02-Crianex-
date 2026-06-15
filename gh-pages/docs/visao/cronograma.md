@@ -52,9 +52,7 @@ flowchart TD
 
 ## 5.2 Roadmap de Iterações
 
-O quadro abaixo apresenta os ciclos de trabalho planejados, organizados por **Valor de Negócio** entregue ao cliente real (Otavio Maya, CTO Crianex).
-
-> **Nota:** O planejamento é orientado ao Índice de Prioridade determinado pelo [valorXesforco](solucao.md#mapeamento-de-valor-das-características-feature-setvalue-matrix). A ordem das CPs dentro de cada iteração pode ser reordenada conforme feedback do cliente.
+O quadro abaixo apresenta os ciclos de trabalho planejados, organizados por **Valor de Negócio Macro** com uma visão mais ampla sobre o domínio e discutido com o cliente real (Otavio Maya, CTO Crianex).
 
 | Iteração | Status | Período         | Valor de Negócio                                  | CPs                                                                                                                                                   | Iteration Goal                                                                                                                                                                                                                                                                                                                                                | Validação                                                                                |
 | -------- | ------ | --------------- | ------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
