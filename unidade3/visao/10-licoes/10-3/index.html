@@ -572,7 +572,7 @@
 <tr>
 <td><strong>Nível de Priorização (IP)</strong></td>
 <td>A priorização foi calculada inicialmente de forma <em>bottom-up</em> — IPs nos RFs individuais, derivando prioridade da feature. O método correto é <em>top-down</em>: o cliente prioriza features (unidades de entrega de valor), não requisitos atomizados</td>
-<td>Calcular <code>IP = VB / ES</code> sempre no nível de Feature. RFs só recebem prioridade interna quando a feature já está comprometida em uma iteração e há risco de entrega parcial</td>
+<td>Calcular <code>IP = VB / ((CX + ES) / 2)</code> sempre no nível de Feature. RFs só recebem prioridade interna quando a feature já está comprometida em uma iteração e há risco de entrega parcial</td>
 </tr>
 <tr>
 <td><strong>Consistência de Numeração</strong></td>
@@ -624,7 +624,7 @@
 </tr>
 <tr>
 <td>5</td>
-<td>A priorização matemática objetiva (IP = VB/ES) foi apresentada e aprovada pelo professor, resolvendo o feedback anterior sobre subjetividade na priorização</td>
+<td>A priorização matemática objetiva (IP = VB / ((CX + ES) / 2)) foi apresentada e aprovada pelo professor, resolvendo o feedback anterior sobre subjetividade na priorização</td>
 </tr>
 <tr>
 <td>6</td>

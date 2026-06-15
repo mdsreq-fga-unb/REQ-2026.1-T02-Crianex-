@@ -512,7 +512,7 @@
                 
             <li class="second-level"><a href="#arvore-de-rastreabilidade-miro">Árvore de Rastreabilidade (Miro)</a></li>
                 
-            <li class="second-level"><a href="#objetivos-estrategicos-oes">Objetivos Estratégicos (OEs)</a></li>
+            <li class="second-level"><a href="#objetivos-especificos-oes">Objetivos Específicos (OEs)</a></li>
                 
             <li class="second-level"><a href="#caracteristicas-do-produto-cps">Características do Produto (CPs)</a></li>
                 
@@ -614,7 +614,7 @@
 </iframe>
 </p>
 <hr />
-<h2 id="objetivos-estrategicos-oes">Objetivos Estratégicos (OEs)<a class="headerlink" href="#objetivos-estrategicos-oes" title="Permanent link">&para;</a></h2>
+<h2 id="objetivos-especificos-oes">Objetivos Específicos (OEs)<a class="headerlink" href="#objetivos-especificos-oes" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -780,7 +780,7 @@
 </tr>
 <tr>
 <td>F07</td>
-<td>—</td>
+<td><span class="badge badge--purple">IT2</span></td>
 <td>Acompanhar histórico e status de notificações</td>
 <td>CP9</td>
 <td>RF46, RF47</td>
@@ -789,7 +789,7 @@
 </tr>
 <tr>
 <td>F08</td>
-<td>—</td>
+<td><span class="badge badge--purple">IT2</span></td>
 <td>Gerenciar templates de notificações</td>
 <td>CP9</td>
 <td>RF15, RF56, RF57</td>
@@ -888,7 +888,7 @@
 </tr>
 <tr>
 <td>F19</td>
-<td>—</td>
+<td><span class="badge badge--purple">IT2</span></td>
 <td>Gerenciar clientes e leads para organização do relacionamento comercial</td>
 <td>CP1</td>
 <td>RF35, RF36, RF37, RF41</td>
@@ -897,7 +897,7 @@
 </tr>
 <tr>
 <td>F20</td>
-<td>—</td>
+<td><span class="badge badge--purple">IT2</span></td>
 <td>Gerenciar colunas do funil para personalização do processo comercial</td>
 <td>CP1</td>
 <td>RF38, RF39, RF40</td>
@@ -906,11 +906,11 @@
 </tr>
 <tr>
 <td>F21</td>
-<td>—</td>
+<td><span class="badge badge--purple">IT2</span></td>
 <td>Registrar interações comerciais para rastreamento do relacionamento</td>
 <td>CP1</td>
 <td>RF42, RF53, RF59</td>
-<td>—</td>
+<td>RNF23, RNF24</td>
 <td><nobr>N-V-E-S-T</nobr></td>
 </tr>
 <tr>
@@ -928,7 +928,7 @@
 <td>Gerenciar tickets para manutenção da operação de suporte</td>
 <td>CP8</td>
 <td>RF44, RF45</td>
-<td>—</td>
+<td>RNF22</td>
 <td><nobr>N-V-E-S-T</nobr></td>
 </tr>
 </tbody>
@@ -1330,7 +1330,7 @@
 <td>RF43</td>
 <td>—</td>
 <td>Consultar histórico de tickets</td>
-<td>F23</td>
+<td>F22</td>
 <td>CP8</td>
 <td>OE3</td>
 <td>IT2</td>
@@ -1339,7 +1339,7 @@
 <td>RF44</td>
 <td>—</td>
 <td>Alterar status do ticket</td>
-<td>F24</td>
+<td>F23</td>
 <td>CP8</td>
 <td>OE3</td>
 <td>IT2</td>
@@ -1348,7 +1348,7 @@
 <td>RF45</td>
 <td>—</td>
 <td>Ocultar tickets</td>
-<td>F24</td>
+<td>F23</td>
 <td>CP8</td>
 <td>OE3</td>
 <td>IT2</td>
@@ -1357,7 +1357,7 @@
 <td>RF46</td>
 <td>—</td>
 <td>Listar histórico de notificações</td>
-<td>F25</td>
+<td>F07</td>
 <td>CP9</td>
 <td>OE3</td>
 <td>IT2</td>
@@ -1366,7 +1366,7 @@
 <td>RF47</td>
 <td>—</td>
 <td>Alterar status da notificação</td>
-<td>F26</td>
+<td>F07</td>
 <td>CP9</td>
 <td>OE3</td>
 <td>IT2</td>
@@ -1586,7 +1586,7 @@
 <td>Tempo de resposta da área administrativa</td>
 <td>Produto &gt; Eficiência</td>
 <td>1.Produto / 2.Eficiência / 2.Arquitetura</td>
-<td>F01, F03, F06, F09, F13, F19, F23, F25</td>
+<td>F01, F03, F06, F07, F08, F09, F13, F19, F23</td>
 <td>Operações de leitura no painel administrativo devem retornar em até 2 segundo em 95% das requisições.</td>
 </tr>
 <tr>
@@ -1618,7 +1618,7 @@
 <td>Controle de acesso por linha (RLS)</td>
 <td>Produto &gt; Segurança da Informação</td>
 <td>1.Produto / 2.Segurança / 3.Controle de acesso</td>
-<td>F01, F03, F06, F10, F19, F23, F25</td>
+<td>F01, F03, F06, F07, F08, F10, F19, F23</td>
 <td>O banco deve aplicar Row Level Security (RLS) para restringir leitura aos registros autorizados ao perfil do administrador.</td>
 </tr>
 <tr>
@@ -1682,7 +1682,7 @@
 <td>Resumo expansível de tickets</td>
 <td>Produto &gt; Usabilidade</td>
 <td>1.Produto / 2.Usabilidade / 3.Navegabilidade</td>
-<td>F23</td>
+<td>F20, F22</td>
 <td>A listagem de tickets deve exibir as informações essenciais de cada chamado — status, prioridade, responsável e última atualização — diretamente no resumo do ticket, permitindo expansão da visualização para consulta detalhada sem recarregamento da página.</td>
 </tr>
 <tr>
