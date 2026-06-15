@@ -1,6 +1,6 @@
 # IT1 — Vitrine Pública
 
-**Período:** 15/04/2026 – 25/05/2026  
+**Período:** 28/04/2026 – 07/06/2026  
 **Status:** ✅ Concluída
 
 ## Iteration Goal
@@ -19,7 +19,7 @@ A entrega da unidade 2 ocorreu dia 19 de maio de 2026. Nossa iteração encerrou
 | ------- | --------------------------------------------- | -------------- | ---------- |
 | **CP4** | Plataforma Pública de Apresentação da Empresa | OE2            | Alta       |
 | **CP5** | Painel de Gerenciamento do Administrador      | OE2            | Alta       |
-| **CP6** | FAQ e Base de Conhecimentos por Produto       | OE2            | Média      |
+| **CP6** | FAQ e Base de Conhecimentos por Produto       | OE2            | Alta       |
 
 ---
 
@@ -27,9 +27,13 @@ A entrega da unidade 2 ocorreu dia 19 de maio de 2026. Nossa iteração encerrou
 
 | Data       | Cerimônia                                                  | Participantes                                   | Ata                             |
 | ---------- | ---------------------------------------------------------- | ----------------------------------------------- | ------------------------------- |
-| 10/05/2026 | **Domain Modeling & Iteration Replenishment & Commitment** | Lucas, Heitor, Hugo, Otávio (Cliente)           | [Ver ata](./atas/2026-05-10.md) |
-| 11/05/2026 | **Feature Discovery & Slicing**                            | Lucas, Heitor, Hugo, Philipe, Leonardo          | [Ver ata](./atas/2026-05-11.md) |
+| 29/04/2026 | **Domain Modeling & Iteration Replenishment & Commitment** | Lucas, Heitor, Hugo, Otávio (Cliente)           | [Ver ata](./atas/2026-05-10.md) |
+| 09/05/2026 | **Feature Discovery & Slicing**                            | Lucas, Heitor, Hugo, Philipe, Leonardo          | [Ver ata](./atas/2026-05-11.md) |
+| 14/05/2026 | **Midweek Sync**                                           | Lucas, Heitor, Philipe, Hugo, Leonardo, Camille | Assíncrono                      |
 | 17/05/2026 | **Technical Design Review**                                | Lucas, Heitor, Philipe, Hugo, Leonardo, Camille | [Ver ata](./atas/2026-05-17.md) |
+| 25/05/2026 | **Feature Build Consolidation**                            | Lucas, Philipe, Heitor, Hugo                    | Optado por fazer assíncrono     |
+| 26/05/2026 | **Midweek Sync**                                           | Lucas, Heitor, Philipe, Hugo, Leonardo, Camille | Assíncrono                      |
+| 06/06/2026 | **Artifact Closure — Unidade 3**                           | Lucas, Philipe, Heitor, Hugo, Camile            | [Ver ata](./atas/2026-06-14.md) |
 
 ---
 

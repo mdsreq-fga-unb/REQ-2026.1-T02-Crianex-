@@ -14,15 +14,15 @@ Ao fim da IT2: (1) um administrador autenticado cadastra, edita e inativa client
 | CP      | Característica de Produto          | OE Relacionado | Prioridade |
 | ------- | ---------------------------------- | -------------- | ---------- |
 | **CP1** | CRM Interno de Clientes            | OE3            | Alta       |
-| **CP9** | Sistema de Notificações no Sistema | OE3            | Média      |
+| **CP9** | Sistema de Notificações no Sistema | OE3            | Alta       |
 
 ---
 
 ## Cerimônias e Reuniões (FDD + Kanban)
 
-| Data | Cerimônia | Participantes | Ata |
-| ---- | --------- | ------------- | --- |
-| —    | —         | —             | —   |
+| Data       | Cerimônia                                        | Participantes                        | Ata                               |
+| ---------- | ------------------------------------------------ | ------------------------------------ | --------------------------------- |
+| 09/06/2026 | **Iteration 2 Replenishment Micro e Commitment** | Lucas, Heitor, Hugo, Philipe, Camile | [Ver ata →](./atas/2026-06-15.md) |
 
 ---
 
