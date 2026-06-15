@@ -489,10 +489,22 @@
                 
             <li class="second-level"><a href="#1-mudancas-de-processo">1. Mudanças de Processo</a></li>
                 
+                <li class="third-level"><a href="#mp01-secao-de-regras-de-negocio-formalizada">MP.01 — Seção de Regras de Negócio Formalizada</a></li>
+                <li class="third-level"><a href="#mp02-coluna-invest-adicionada-a-tabela-de-features">MP.02 — Coluna INVEST Adicionada à Tabela de Features</a></li>
             <li class="second-level"><a href="#2-mudancas-de-escopo">2. Mudanças de Escopo</a></li>
                 
+                <li class="third-level"><a href="#es01-rf48-adicionado-editar-proprio-perfil-no-painel">ES.01 — RF48 Adicionado: Editar Próprio Perfil no Painel</a></li>
+                <li class="third-level"><a href="#es02-rf49-adicionado-aceitar-conformidade-lgpd">ES.02 — RF49 Adicionado: Aceitar Conformidade LGPD</a></li>
+                <li class="third-level"><a href="#es03-rf50-adicionado-consultar-detalhes-de-produto-saas-na-vitrine">ES.03 — RF50 Adicionado: Consultar Detalhes de Produto SaaS na Vitrine</a></li>
+                <li class="third-level"><a href="#es04-rf51-adicionado-acessar-pagina-de-conformidade-lgpd-na-vitrine">ES.04 — RF51 Adicionado: Acessar Página de Conformidade LGPD na Vitrine</a></li>
+                <li class="third-level"><a href="#es05-rf52-adicionado-permitir-utilizacao-de-cookies">ES.05 — RF52 Adicionado: Permitir Utilização de Cookies</a></li>
+                <li class="third-level"><a href="#es06-rf53-atribuido-filtrar-artigos-faq-resolve-conflito-v02-da-it1">ES.06 — RF53 Atribuído: Filtrar Artigos FAQ (resolve conflito V.02 da IT1)</a></li>
+                <li class="third-level"><a href="#es07-renumeracao-rf49rf50-e-rf50rf51">ES.07 — Renumeração RF49→RF50 e RF50→RF51</a></li>
+                <li class="third-level"><a href="#es08-pendentes-da-it1-nao-aplicados-carry-forward">ES.08 — Pendentes da IT1 Não Aplicados (carry-forward)</a></li>
             <li class="second-level"><a href="#3-achados-de-verificacao">3. Achados de Verificação</a></li>
                 
+                <li class="third-level"><a href="#v01-rf54-e-rf55-referenciados-em-features-sem-detalhe-na-tabela-de-rfs">V.01 — RF54 e RF55 Referenciados em Features sem Detalhe na Tabela de RFs</a></li>
+                <li class="third-level"><a href="#v02-referencia-cruzada-incorreta-f10-aponta-rf50">V.02 — Referência Cruzada Incorreta: F10 Aponta RF50</a></li>
     </ul>
 </div></div>
         <div class="col-md-9" role="main">
@@ -515,22 +527,447 @@
 </thead>
 <tbody>
 <tr>
-<td>—</td>
-<td>—</td>
-<td>—</td>
-<td>—</td>
+<td>Processo</td>
+<td>MP.01</td>
+<td>Seção de Regras de Negócio (RN01–RN12) formalizada na rastreabilidade</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Processo</td>
+<td>MP.02</td>
+<td>Coluna INVEST adicionada à tabela de Features</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Escopo</td>
+<td>ES.01</td>
+<td>RF48 adicionado — Editar próprio perfil no painel (F10, CP5)</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Escopo</td>
+<td>ES.02</td>
+<td>RF49 adicionado — Aceitar conformidade LGPD (F14, CP4)</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Escopo</td>
+<td>ES.03</td>
+<td>RF50 adicionado — Consultar detalhes de produto SaaS na vitrine (F15, CP4)</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Escopo</td>
+<td>ES.04</td>
+<td>RF51 adicionado — Acessar página de conformidade LGPD na vitrine (F14, CP4)</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Escopo</td>
+<td>ES.05</td>
+<td>RF52 adicionado — Permitir utilização de cookies no sistema (F14, CP4)</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Escopo</td>
+<td>ES.06</td>
+<td>RF53 atribuído — Filtrar artigos FAQ (F18, CP6); resolve conflito V.02 da IT1</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Escopo</td>
+<td>ES.07</td>
+<td>RF49→RF50 e RF50→RF51 renumerados após inserção do novo RF49</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Escopo</td>
+<td>ES.08</td>
+<td>IT1 pendentes (ES.01–ES.04): F02/F05/F07 e RF42 ainda não corrigidos</td>
+<td>⏳</td>
+</tr>
+<tr>
+<td>Verificação</td>
+<td>V.01</td>
+<td>RF54 e RF55 referenciados em Features mas ausentes na tabela de RFs</td>
+<td>⚠️</td>
+</tr>
+<tr>
+<td>Verificação</td>
+<td>V.02</td>
+<td>Referência cruzada incorreta: F10 aponta RF50 (deveria ser RF48)</td>
+<td>⚠️</td>
 </tr>
 </tbody>
 </table>
 <hr />
 <h2 id="1-mudancas-de-processo">1. Mudanças de Processo<a class="headerlink" href="#1-mudancas-de-processo" title="Permanent link">&para;</a></h2>
-<p><em>A ser preenchido.</em></p>
+<h3 id="mp01-secao-de-regras-de-negocio-formalizada">MP.01 — Seção de Regras de Negócio Formalizada<a class="headerlink" href="#mp01-secao-de-regras-de-negocio-formalizada" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Conteúdo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Adição</strong></td>
+<td>Seção "Regras de Negócio (RNs)" criada na <code>rastreabilidade.md</code> (versão 1.4, 09/06/2026) com RN01–RN12</td>
+</tr>
+<tr>
+<td><strong>Motivação</strong></td>
+<td>RNs descrevem políticas e restrições que governam o comportamento do sistema independente de tecnologia — complementam RFs sem serem comportamentos de sistema em si</td>
+</tr>
+<tr>
+<td><strong>Cobertura</strong></td>
+<td>RN01–RN12 cobrem: visibilidade de produtos/FAQ, controle de acesso por papel (Owner/Member), inativação, senha temporária, avaliação anônima, cookies, LGPD, design system e ordem de produtos</td>
+</tr>
+<tr>
+<td><strong>Status</strong></td>
+<td>✅ Aplicado</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="mp02-coluna-invest-adicionada-a-tabela-de-features">MP.02 — Coluna INVEST Adicionada à Tabela de Features<a class="headerlink" href="#mp02-coluna-invest-adicionada-a-tabela-de-features" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Conteúdo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Adição</strong></td>
+<td>Coluna INVEST inserida na tabela de Features (versão 1.2, 06/06/2026), avaliando cada feature pelos critérios I/N/V/E/S/T</td>
+</tr>
+<tr>
+<td><strong>Motivação</strong></td>
+<td>Evidenciar quais critérios INVEST cada feature satisfaz e identificar features que ainda faltam atributos como Independência (I)</td>
+</tr>
+<tr>
+<td><strong>Achado</strong></td>
+<td>F12 (Gerenciar produtos SaaS) apresenta <code>N-V-E-T</code> — ausente de I (não independente de F09/F10) e S (escopo não pequeno)</td>
+</tr>
+<tr>
+<td><strong>Status</strong></td>
+<td>✅ Aplicado — revisão de features sem <code>I</code> fica como ação para IT3</td>
+</tr>
+</tbody>
+</table>
 <hr />
 <h2 id="2-mudancas-de-escopo">2. Mudanças de Escopo<a class="headerlink" href="#2-mudancas-de-escopo" title="Permanent link">&para;</a></h2>
-<p><em>A ser preenchido.</em></p>
+<h3 id="es01-rf48-adicionado-editar-proprio-perfil-no-painel">ES.01 — RF48 Adicionado: Editar Próprio Perfil no Painel<a class="headerlink" href="#es01-rf48-adicionado-editar-proprio-perfil-no-painel" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Conteúdo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>RF adicionado</strong></td>
+<td><strong>RF48</strong> — Editar próprio perfil no painel</td>
+</tr>
+<tr>
+<td><strong>Feature / CP</strong></td>
+<td>F10 · CP5 · OE2</td>
+</tr>
+<tr>
+<td><strong>Motivo</strong></td>
+<td>Comportamento implementado (ProfileModal + PATCH /profile/me) que não possuía RF correspondente na rastreabilidade da IT1</td>
+</tr>
+<tr>
+<td><strong>Status</strong></td>
+<td>✅ Adicionado na versão 1.4; marcado ✅ na v1.5</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="es02-rf49-adicionado-aceitar-conformidade-lgpd">ES.02 — RF49 Adicionado: Aceitar Conformidade LGPD<a class="headerlink" href="#es02-rf49-adicionado-aceitar-conformidade-lgpd" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Conteúdo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>RF adicionado</strong></td>
+<td><strong>RF49</strong> — Aceitar as leis LGPDs</td>
+</tr>
+<tr>
+<td><strong>Feature / CP</strong></td>
+<td>F14 · CP4 · OE2</td>
+</tr>
+<tr>
+<td><strong>Motivo</strong></td>
+<td>Requisito de conformidade legal identificado durante a implementação do formulário de contato; campo de aceite de política de privacidade exigido</td>
+</tr>
+<tr>
+<td><strong>Impacto</strong></td>
+<td>Inserção deste RF deslocou os anteriores RF49→RF50 e RF50→RF51 (ver ES.07)</td>
+</tr>
+<tr>
+<td><strong>Status</strong></td>
+<td>✅ Inserido na versão 1.5; marcado ✅</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="es03-rf50-adicionado-consultar-detalhes-de-produto-saas-na-vitrine">ES.03 — RF50 Adicionado: Consultar Detalhes de Produto SaaS na Vitrine<a class="headerlink" href="#es03-rf50-adicionado-consultar-detalhes-de-produto-saas-na-vitrine" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Conteúdo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>RF adicionado</strong></td>
+<td><strong>RF50</strong> — Consultar detalhes de produto SaaS na vitrine</td>
+</tr>
+<tr>
+<td><strong>Feature / CP</strong></td>
+<td>F15 · CP4 · OE2</td>
+</tr>
+<tr>
+<td><strong>Implementação</strong></td>
+<td>Página <code>/produtos/[slug]</code> com detalhes completos do produto</td>
+</tr>
+<tr>
+<td><strong>Motivo</strong></td>
+<td>Comportamento implementado sem RF correspondente — cada produto possui página de detalhe individual</td>
+</tr>
+<tr>
+<td><strong>Status</strong></td>
+<td>✅ Adicionado (originalmente como RF49, renumerado para RF50 na v1.5)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="es04-rf51-adicionado-acessar-pagina-de-conformidade-lgpd-na-vitrine">ES.04 — RF51 Adicionado: Acessar Página de Conformidade LGPD na Vitrine<a class="headerlink" href="#es04-rf51-adicionado-acessar-pagina-de-conformidade-lgpd-na-vitrine" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Conteúdo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>RF adicionado</strong></td>
+<td><strong>RF51</strong> — Acessar página de conformidade LGPD na vitrine</td>
+</tr>
+<tr>
+<td><strong>Feature / CP</strong></td>
+<td>F14 · CP4 · OE2</td>
+</tr>
+<tr>
+<td><strong>Implementação</strong></td>
+<td>Páginas <code>/privacidade</code> (política de privacidade) e <code>/cookies</code> (uso de cookies)</td>
+</tr>
+<tr>
+<td><strong>Motivo</strong></td>
+<td>Exigência LGPD de acesso público às políticas de privacidade e cookies sem autenticação</td>
+</tr>
+<tr>
+<td><strong>Status</strong></td>
+<td>✅ Adicionado (originalmente como RF50, renumerado para RF51 na v1.5)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="es05-rf52-adicionado-permitir-utilizacao-de-cookies">ES.05 — RF52 Adicionado: Permitir Utilização de Cookies<a class="headerlink" href="#es05-rf52-adicionado-permitir-utilizacao-de-cookies" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Conteúdo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>RF adicionado</strong></td>
+<td><strong>RF52</strong> — Permitir a utilização de cookies no sistema</td>
+</tr>
+<tr>
+<td><strong>Feature / CP</strong></td>
+<td>F14 · CP4 · OE2</td>
+</tr>
+<tr>
+<td><strong>Motivo</strong></td>
+<td>Banner de consentimento de cookies implementado — comportamento sem RF correspondente na rastreabilidade da IT1</td>
+</tr>
+<tr>
+<td><strong>Status</strong></td>
+<td>✅ Adicionado na versão 1.5</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="es06-rf53-atribuido-filtrar-artigos-faq-resolve-conflito-v02-da-it1">ES.06 — RF53 Atribuído: Filtrar Artigos FAQ (resolve conflito V.02 da IT1)<a class="headerlink" href="#es06-rf53-atribuido-filtrar-artigos-faq-resolve-conflito-v02-da-it1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Conteúdo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Resolução</strong></td>
+<td>O número <strong>RF53</strong> foi formalmente atribuído a "Filtrar artigos FAQ" (F18 · CP6 · OE2), resolvendo o conflito de numeração V.02 registrado na IT1</td>
+</tr>
+<tr>
+<td><strong>Decisão</strong></td>
+<td>O RF de filtro financeiro proposto na IT1 (ES.02) não foi criado nesta iteração; RF53 permanece com a funcionalidade de FAQ já implementada</td>
+</tr>
+<tr>
+<td><strong>Impacto</strong></td>
+<td>O RF de filtro financeiro (originalmente cogitado como RF53) deverá receber numeração RF56 ou superior quando criado, conforme determinado na ação corretiva da IT1</td>
+</tr>
+<tr>
+<td><strong>Status</strong></td>
+<td>✅ Conflito resolvido</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="es07-renumeracao-rf49rf50-e-rf50rf51">ES.07 — Renumeração RF49→RF50 e RF50→RF51<a class="headerlink" href="#es07-renumeracao-rf49rf50-e-rf50rf51" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Conteúdo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Antes</strong></td>
+<td>RF49: Consultar detalhes de produto SaaS · RF50: Acessar página de conformidade LGPD</td>
+</tr>
+<tr>
+<td><strong>Depois</strong></td>
+<td>RF49: Aceitar LGPDs (novo) · RF50: Consultar detalhes de produto SaaS · RF51: Acessar página de conformidade LGPD</td>
+</tr>
+<tr>
+<td><strong>Motivo</strong></td>
+<td>Inserção de RF49 (LGPD) no início do bloco deslocou os dois RFs seguintes; referências cruzadas nas Features e RNFs foram atualizadas na v1.5</td>
+</tr>
+<tr>
+<td><strong>Status</strong></td>
+<td>✅ Aplicado — verificar se todas as referências cruzadas foram propagadas corretamente (ver V.02)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="es08-pendentes-da-it1-nao-aplicados-carry-forward">ES.08 — Pendentes da IT1 Não Aplicados (carry-forward)<a class="headerlink" href="#es08-pendentes-da-it1-nao-aplicados-carry-forward" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Item IT1</th>
+<th>Descrição</th>
+<th>Estado atual na rastreabilidade</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ES.01</td>
+<td>Remover F02 (RF único — absorvida por F01)</td>
+<td>⏳ F02 e RF03 ainda existem</td>
+</tr>
+<tr>
+<td>ES.02</td>
+<td>Remover F05 (RF único), renomear RF07, criar RF F04</td>
+<td>⏳ F05 e RF07 ainda existem</td>
+</tr>
+<tr>
+<td>ES.03</td>
+<td>Remover F07 (RF único), mover RF18 para F06</td>
+<td>⏳ F07 e RF18 ainda existem</td>
+</tr>
+<tr>
+<td>ES.04</td>
+<td>Decompor RF42 em 3 RFs (registrar, remover, editar)</td>
+<td>⏳ RF42 permanece como RF único</td>
+</tr>
+<tr>
+<td>MP.02</td>
+<td>Recalcular priorização top-down (IP = VB/ES)</td>
+<td>⏳ Não recalculado</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Estes itens devem ser priorizados no início da IT3 antes do Iteration Commitment.</p>
+</blockquote>
 <hr />
 <h2 id="3-achados-de-verificacao">3. Achados de Verificação<a class="headerlink" href="#3-achados-de-verificacao" title="Permanent link">&para;</a></h2>
-<p><em>A ser preenchido.</em></p></div>
+<h3 id="v01-rf54-e-rf55-referenciados-em-features-sem-detalhe-na-tabela-de-rfs">V.01 — RF54 e RF55 Referenciados em Features sem Detalhe na Tabela de RFs<a class="headerlink" href="#v01-rf54-e-rf55-referenciados-em-features-sem-detalhe-na-tabela-de-rfs" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Conteúdo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Achado</strong></td>
+<td>As features F14 (RF55) e F15 (RF54) referenciam RF54 e RF55, mas esses requisitos <strong>não possuem entradas na tabela de RFs</strong></td>
+</tr>
+<tr>
+<td><strong>Impacto</strong></td>
+<td>Rastreabilidade incompleta: não é possível saber o nome, descrição ou critérios de aceite desses requisitos a partir do documento</td>
+</tr>
+<tr>
+<td><strong>Ação necessária</strong></td>
+<td>Adicionar RF54 e RF55 à tabela de Requisitos Funcionais com nome, feature, CP e observação de implementação</td>
+</tr>
+<tr>
+<td><strong>Severidade</strong></td>
+<td>⚠️ Atenção</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="v02-referencia-cruzada-incorreta-f10-aponta-rf50">V.02 — Referência Cruzada Incorreta: F10 Aponta RF50<a class="headerlink" href="#v02-referencia-cruzada-incorreta-f10-aponta-rf50" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Conteúdo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Achado</strong></td>
+<td>A tabela de Features lista F10 com os RFs <code>RF10, RF50</code>. Porém, RF50 ("Consultar detalhes de produto SaaS") pertence a <strong>F15</strong>, não a F10</td>
+</tr>
+<tr>
+<td><strong>Causa provável</strong></td>
+<td>Durante a renumeração ES.07 (v1.5), a célula de F10 foi atualizada para RF50 sem verificar se o RF corresponde à feature correta</td>
+</tr>
+<tr>
+<td><strong>Correto deveria</strong></td>
+<td>F10 deve referenciar <strong>RF10</strong> e <strong>RF48</strong> (Editar próprio perfil) — RF48 aponta para F10 na tabela de RFs mas F10 não o lista</td>
+</tr>
+<tr>
+<td><strong>Ação necessária</strong></td>
+<td>Corrigir F10 na tabela de Features: substituir <code>RF10, RF50</code> por <code>RF10, RF48</code>; verificar se F15 já lista RF50 corretamente</td>
+</tr>
+<tr>
+<td><strong>Severidade</strong></td>
+<td>⚠️ Atenção</td>
+</tr>
+</tbody>
+</table></div>
         
         
     </div>
