@@ -104,7 +104,7 @@
 
   // tag abertura/fechamento concatenadas para não confundir o parser do Svelte
   let ldScript = $derived(
-    '<' + `script type="application/ld+json">${JSON.stringify(faqSchema)}<` + '/script>',
+    '<' + `script type="application/ld+json">${JSON.stringify(faqSchema)}<` + '/script>'
   );
 </script>
 
