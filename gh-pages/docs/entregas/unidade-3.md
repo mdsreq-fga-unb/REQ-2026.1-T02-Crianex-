@@ -68,11 +68,12 @@ O registro completo das features entregues, com vídeos de evidência e validaç
 
 ### Cerimônias Realizadas
 
-| Cerimônia                            | Data       | Registro                                                             |
-| ------------------------------------ | ---------- | -------------------------------------------------------------------- |
-| Formal Client Validation IT1         | 07/06/2026 | [Formal Validation IT1](../iteracoes/iteracao-1/validacao/formal.md) |
-| Artifact Closure IT1                 | 14/06/2026 | [Ata Artifact Closure](../iteracoes/iteracao-1/atas/2026-06-14.md)   |
-| IT2 Replenishment Micro + Commitment | 15/06/2026 | [Ata IT2 Commitment](../iteracoes/iteracao-2/atas/2026-06-15.md)     |
+| Cerimônia                            | Data       | Registro                                                                 |
+| ------------------------------------ | ---------- | ------------------------------------------------------------------------ |
+| Formal Client Validation IT1         | 03/06/2026 | [Formal Validation IT1](../iteracoes/iteracao-1/validacao/formal.md)     |
+| Artifact Closure IT1                 | 06/06/2026 | [Ata Artifact Closure](../iteracoes/iteracao-1/atas/2026-06-14.md)       |
+| IT2 Replenishment Micro + Commitment | 09/06/2026 | [Ata IT2 Commitment](../iteracoes/iteracao-2/atas/reuniao_commitment.md) |
+| Technical Design Review              | 11/06/2026 | [Technical Design Review](../iteracoes/iteracao-2/atas/reuniao_TDR2.md)  |
 
 ### Evidências IT1
 
@@ -86,6 +87,12 @@ O registro completo das features entregues, com vídeos de evidência e validaç
 ### IT2 — Lead Capture (Iniciada)
 
 A IT2 foi iniciada em 08/06/2026 com foco nas CPs: **CP1** (CRM de Leads), **CP8** (Tickets de Suporte) e **CP9** (Notificações). O resumo e o planejamento da IT2 estão em: [IT2 — Resumo](../iteracoes/iteracao-2/index.md)
+
+### Evidências IT2
+
+| Artefato                   | Link                                                                   |
+| -------------------------- | ---------------------------------------------------------------------- |
+| Diagrama de Sequência Leve | [Design tecnico](../iteracoes/iteracao-2/evidencias/design-tecnico.md) |
 
 ---
 

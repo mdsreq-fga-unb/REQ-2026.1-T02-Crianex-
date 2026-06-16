@@ -1,6 +1,6 @@
 # IT2 — Lead Capture
 
-**Período:** 26/05/2026 – 21/06/2026  
+**Período:** 08/06/2026 – 28/06/2026  
 **Status:** 🔄 Em andamento
 
 ## Iteration Goal
@@ -20,20 +20,18 @@ Ao fim da IT2: (1) um administrador autenticado cadastra, edita e inativa client
 
 ## Cerimônias e Reuniões (FDD + Kanban)
 
-| Data       | Cerimônia                                        | Participantes                        | Ata                               |
-| ---------- | ------------------------------------------------ | ------------------------------------ | --------------------------------- |
-| 09/06/2026 | **Iteration 2 Replenishment Micro e Commitment** | Lucas, Heitor, Hugo, Philipe, Camile | [Ver ata →](./atas/2026-06-15.md) |
+| Data       | Cerimônia                                        | Participantes                        | Ata                                       |
+| ---------- | ------------------------------------------------ | ------------------------------------ | ----------------------------------------- |
+| 09/06/2026 | **Iteration 2 Replenishment Micro e Commitment** | Lucas, Heitor, Hugo, Philipe, Camile | [Ver ata →](./atas/reuniao_commitment.md) |
+| 11/06/2026 | **Technical Design Review Iteration 2**          | Lucas, Heitor, Hugo, Philipe, Camile | [Ver ata →](./atas/reuniao_TDR2.md)       |
 
 ---
 
 ## Evidências e Validação
 
-| #   | Evidência                             | Descrição                                                                              | Link                                             |
-| --- | ------------------------------------- | -------------------------------------------------------------------------------------- | ------------------------------------------------ |
-| 1   | Design Técnico                        | Diagramas leves, feature cards, glossário de domínio produzidos na TDR                 | [Ver detalhes →](./evidencias/design-tecnico.md) |
-| 2   | Features Entregues (F19–F22, F25–F27) | Diagramas de sequência, critérios de aceite atendidos e screenshots por feature        | [Ver detalhes →](./features-entregues.md)        |
-| 3   | Validação Parcial do Cliente          | Vídeo compilado das sessões de validação parcial com o cliente + feedbacks registrados | [Ver detalhes →](./validacao/partial.md)         |
-| 4   | Validação Formal do Cliente           | Reunião formal de aceite com o cliente                                                 | [Ver detalhes →](./validacao/formal.md)          |
+| #   | Evidência      | Descrição                                                              | Link                                             |
+| --- | -------------- | ---------------------------------------------------------------------- | ------------------------------------------------ |
+| 1   | Design Técnico | Diagramas leves, feature cards, glossário de domínio produzidos na TDR | [Ver detalhes →](./evidencias/design-tecnico.md) |
 
 ---
 

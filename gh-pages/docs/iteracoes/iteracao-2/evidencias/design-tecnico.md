@@ -2,9 +2,9 @@
 
 ## Histórico de Revisão
 
-| Versão | Data       | Descrição                                                   | Autor(es)             |
-| ------ | ---------- | ----------------------------------------------------------- | --------------------- |
-| 1.0    | 15/06/2026 | Criação do documento com artefatos do TDR da IT2            | Heitor Macedo Ricardo |
+| Versão | Data       | Descrição                                        | Autor(es)             |
+| ------ | ---------- | ------------------------------------------------ | --------------------- |
+| 1.0    | 15/06/2026 | Criação do documento com artefatos do TDR da IT2 | Heitor Macedo Ricardo |
 
 ---
 
