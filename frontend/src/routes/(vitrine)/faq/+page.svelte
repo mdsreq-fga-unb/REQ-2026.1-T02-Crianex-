@@ -102,9 +102,9 @@
       .filter((q) => q.acceptedAnswer.text),
   });
 
-  // </script> partido para evitar que o parser do Svelte/ESLint engasgue
+  // tag abertura/fechamento concatenadas para não confundir o parser do Svelte
   let ldScript = $derived(
-    `<script type="application/ld+json">${JSON.stringify(faqSchema)}<` + `/script>`,
+    '<' + `script type="application/ld+json">${JSON.stringify(faqSchema)}<` + '/script>',
   );
 </script>
 
