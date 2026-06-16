@@ -21,8 +21,16 @@ A Unidade 3 cobriu a execução completa da IT1 — do início do desenvolviment
 
 ## Apresentação em Vídeo
 
-!!! info "Em breve"
-O vídeo de apresentação da Unidade 3 será adicionado após a gravação (prevista para 15/06/2026).
+<div style="width: 100%; max-width: 900px; margin: 1.5rem 0; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.15);">
+  <iframe 
+    style="width: 100%; aspect-ratio: 16/9; display: block;" 
+    src="https://www.youtube.com/embed/1fa0KSSVMQs" 
+    title="Apresentação da Unidade 3" 
+    frameborder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+    allowfullscreen>
+  </iframe>
+</div>
 
 ---
 

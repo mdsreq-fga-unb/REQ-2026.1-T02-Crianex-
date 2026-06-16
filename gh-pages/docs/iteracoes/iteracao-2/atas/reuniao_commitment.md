@@ -1,6 +1,6 @@
-# Reunião — 15/06/2026
+# Reunião — 09/06/2026
 
-**Data:** 15 de junho de 2026  
+**Data:** 09 de junho de 2026  
 **Horário:** 00h30  
 **Duração:** 34 minutos e 45 segundos  
 **Local:** Google Meet  

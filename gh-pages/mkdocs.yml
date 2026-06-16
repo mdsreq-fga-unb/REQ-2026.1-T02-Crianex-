@@ -79,7 +79,8 @@ nav:
               - 'Formal Client Validation': iteracoes/iteracao-2/validacao/formal.md
           - 'Resultados V&V': iteracoes/iteracao-2/vv.md
           - 'Atas de Reunião':
-              - 'Ata Iteration 2 Replenishment Micro e Commitment — 15/06/2026': iteracoes/iteracao-2/atas/2026-06-15.md
+              - 'Ata Iteration 2 Replenishment Micro e Commitment': iteracoes/iteracao-2/atas/reuniao_commitment.md
+              - 'Technical Design Review IT2': iteracoes/iteracao-2/atas/reuniao_TDR2.md
       - 'IT3 — Núcleo Operacional':
           - 'Resumo — Evidências': iteracoes/iteracao-3/index.md
   - Lista de Funcionalidades:
