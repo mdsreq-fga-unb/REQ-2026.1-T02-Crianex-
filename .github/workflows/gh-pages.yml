@@ -1,18 +1,27 @@
-name: CI
+name: Deploy Docs (Multi-version)
 
 on:
   push:
-    branches: ["main"]
+    branches: ['main', 'developer']
   workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  deploy:
+  deploy-docs:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Resolve deployment folder
+        id: meta
+        run: |
+          if [ "${{ github.ref_name }}" = "main" ]; then
+            echo "folder=unidade2" >> $GITHUB_OUTPUT
+          else
+            echo "folder=unidade3" >> $GITHUB_OUTPUT
+          fi
+
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
@@ -20,19 +29,42 @@ jobs:
         with:
           python-version: 3.x
 
-      - name: Cache MkDocs dependencies
-        uses: actions/cache@v4
+      - name: Cache pip
+        uses: actions/cache@v5
         with:
-          key: mkdocs-cinder-${{ hashFiles('gh-pages/requirements.txt','.github/workflows/gh-pages.yml') }}
+          key: mkdocs-cinder-${{ hashFiles('gh-pages/requirements.txt', '.github/workflows/gh-pages.yml') }}
           path: ~/.cache/pip
-          restore-keys: |
-            mkdocs-cinder-
+          restore-keys: mkdocs-cinder-
 
       - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          if [ -f gh-pages/requirements.txt ]; then pip install -r gh-pages/requirements.txt; fi
+        run: pip install -r gh-pages/requirements.txt
 
-      - name: Deploy to GitHub Pages
-        run: mkdocs gh-deploy --force --config-file gh-pages/mkdocs.yml
-        
+      - name: Build docs
+        run: mkdocs build --config-file gh-pages/mkdocs.yml --site-dir $GITHUB_WORKSPACE/site
+
+      - name: Deploy to /${{ steps.meta.outputs.folder }}
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site
+          destination_dir: ${{ steps.meta.outputs.folder }}
+          keep_files: true
+
+  deploy-root-index:
+    runs-on: ubuntu-latest
+    if: github.ref_name == 'main'
+    needs: deploy-docs
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Create root index
+        run: |
+          mkdir -p ./root-site
+          cp .github/gh-pages-root/index.html ./root-site/index.html
+
+      - name: Deploy root index
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./root-site
+          keep_files: true

@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crianex Hub — Documentação</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background: #0d1117;
+        color: #e6edf3;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 2rem;
+      }
+      .card-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 1.5rem;
+        max-width: 680px;
+        width: 100%;
+      }
+      header {
+        text-align: center;
+        margin-bottom: 2.5rem;
+      }
+      header h1 {
+        font-size: 1.8rem;
+        font-weight: 700;
+      }
+      header p {
+        color: #8b949e;
+        margin-top: 0.4rem;
+        font-size: 0.95rem;
+      }
+      .container {
+        max-width: 680px;
+        width: 100%;
+      }
+      a.card {
+        display: block;
+        background: #161b22;
+        border: 1px solid #30363d;
+        border-radius: 10px;
+        padding: 1.5rem 1.8rem;
+        text-decoration: none;
+        color: inherit;
+        transition:
+          border-color 0.2s,
+          background 0.2s;
+      }
+      a.card:hover {
+        border-color: #58a6ff;
+        background: #1c2128;
+      }
+      .card-label {
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #8b949e;
+        margin-bottom: 0.5rem;
+      }
+      .card h2 {
+        font-size: 1.1rem;
+        font-weight: 600;
+      }
+      .card p {
+        margin-top: 0.4rem;
+        font-size: 0.875rem;
+        color: #8b949e;
+        line-height: 1.5;
+      }
+      .badge {
+        display: inline-block;
+        margin-top: 0.8rem;
+        padding: 0.2rem 0.6rem;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 600;
+      }
+      .badge-main {
+        background: #0d4429;
+        color: #3fb950;
+      }
+      .badge-dev {
+        background: #161b22;
+        color: #58a6ff;
+        border: 1px solid #30363d;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Crianex Hub</h1>
+        <p>Selecione a versão da documentação que deseja acessar</p>
+      </header>
+      <div class="card-grid">
+        <a class="card" href="./unidade2/">
+          <div class="card-label">branch: main</div>
+          <h2>Unidade 2</h2>
+          <p>Versão revisada pelo professor. Contém IT1 (Vitrine Pública) concluída.</p>
+          <span class="badge badge-main">✓ Revisado</span>
+        </a>
+        <a class="card" href="./unidade3/">
+          <div class="card-label">branch: developer</div>
+          <h2>Unidade 3</h2>
+          <p>Versão com IT2 (Lead Capture) e documentação da unidade 3 em andamento.</p>
+          <span class="badge badge-dev">Em andamento</span>
+        </a>
+      </div>
+    </div>
+  </body>
+</html>
