@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Plataforma de Gestão e Portfólio de Projetos SaaS">
+    <meta name="author" content="Equipe Crianex">
+    
+    <link rel="shortcut icon" href="../../../../img/favicon.ico">
+
+    
+    <title>Ata Refinamento Requisitos — 14/05/2026 - Crianex</title>
+    
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/v4-shims.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.min.css">
+    <link href='//rsms.me/inter/inter.css' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
+    <link href="../../../../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="../../../../css/base.min.css" rel="stylesheet">
+    <link href="../../../../css/cinder.min.css" rel="stylesheet">
+
+    
+        
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/styles/github.min.css">
+        
+    
+    <link href="../../../../assets/extra.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+        <![endif]-->
+
+    
+
+     
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+
+            
+              <a class="navbar-brand" href="../../../..">Crianex</a>
+            
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="../../../..">Home</a>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Visão <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../../../../visao/cenario/">1 · Cenário</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../../../visao/solucao/">2 · Solução</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../../../visao/estrategias/">3 · Estratégias</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../../../visao/er/">4 · Eng. de Requisitos</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../../../visao/cronograma/">5 · Cronograma</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../../../visao/equipe/">6 · Equipe e Iteração</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../../../visao/dor-dod/">7 · DoR e DoD</a>
+</li>
+
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Lições Aprendidas</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../../../visao/10-licoes/10-1/">10.1 · Unidade 1</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../../../visao/10-licoes/10-2/">10.2 · Unidade 2</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../../../visao/10-licoes/10-3/">10.3 · Unidade 3</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Iterações <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../../../">Visão Geral</a>
+</li>
+
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Unidade 1</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../../unidade-1/">Resumo — Evidências</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../../unidade-1/atas/2026-04-09/">Ata — 09/04/2026</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../../unidade-1/atas/2026-04-22/">Ata Domain Modeling, Replenishment Macro e Commitment — 22/04/2026</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">IT1 — Vitrine Pública</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../">Resumo</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../features-entregues/">Features Entregues</a>
+</li>
+
+        
+            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Evidências</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../evidencias/design-tecnico/">Design Técnico</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../evidencias/prototipo/">Protótipo</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+        
+            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Validação</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../validacao/partial/">Partial Client Validation</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../validacao/formal/">Formal Client Validation</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+        
+            
+<li >
+    <a href="../../vv/">Resultados V&V</a>
+</li>
+
+        
+            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Atas de Reunião</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../2026-05-01/">Ata Compromisso das correções — 01/05/2026</a>
+</li>
+
+        
+            
+<li >
+    <a href="../2026-05-11/">Ata Feature Discovery Session — 11/05/2026</a>
+</li>
+
+        
+            
+<li class="active">
+    <a href="./">Ata Refinamento Requisitos — 14/05/2026</a>
+</li>
+
+        
+            
+<li >
+    <a href="../2026-05-17/">Ata Technical Design Review — 17/05/2026</a>
+</li>
+
+        
+            
+<li >
+    <a href="../2026-06-14/">Ata Artifact Closure — 14/06/2026</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+        
+    </ul>
+  </li>
+
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">IT2 — Lead Capture</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../../iteracao-2/">Resumo</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../../iteracao-2/features-entregues/">Features Entregues</a>
+</li>
+
+        
+            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Evidências</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../../iteracao-2/evidencias/design-tecnico/">Design Técnico</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+        
+            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Validação</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../../iteracao-2/validacao/partial/">Partial Client Validation</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../../iteracao-2/validacao/formal/">Formal Client Validation</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+        
+            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Atas de Reunião</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../../iteracao-2/atas/reuniao_commitment/">Ata Iteration 2 Replenishment Micro e Commitment</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../../iteracao-2/atas/reuniao_TDR2/">Technical Design Review IT2</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+        
+    </ul>
+  </li>
+
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">IT3 — Núcleo Operacional</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../../iteracao-3/">Resumo — Evidências</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Lista de Funcionalidades <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../../../../backlog/rastreabilidade/">Rastreabilidade</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../../../backlog/priorizacao/">Priorização</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../../../backlog/dependencias/">Mapa de Dependências</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Arquitetura <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../../../../arquitetura/">Arquitetura</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../../../arquitetura/roles/">Roles</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Entregas <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../../../../entregas/">Visão Geral</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../../../entregas/unidade-1/">Unidade 1</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../../../entregas/unidade-2/">Unidade 2</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../../../entregas/unidade-3/">Unidade 3</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../../../entregas/unidade-4/">Unidade 4</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../../../../referencias/">Referências</a>
+                    </li>
+                
+                
+                </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                            <i class="fas fa-search"></i> Search
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <div class="container">
+        
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="first-level active"><a href="#reuniao-14052026">Reunião — 14/05/2026</a></li>
+            <li class="second-level"><a href="#participantes">Participantes</a></li>
+                
+            <li class="second-level"><a href="#pauta">Pauta</a></li>
+                
+            <li class="second-level"><a href="#discussoes-e-decisoes">Discussões e Decisões</a></li>
+                
+                <li class="third-level"><a href="#1-reorganizacao-das-caracteristicas-de-produto-cps">1. Reorganização das Características de Produto (CPs)</a></li>
+                <li class="third-level"><a href="#2-mapeamento-de-requisitos-nao-funcionais-rnfs">2. Mapeamento de Requisitos Não Funcionais (RNFs)</a></li>
+                <li class="third-level"><a href="#3-matriz-de-valor-x-esforco">3. Matriz de Valor x Esforço</a></li>
+                <li class="third-level"><a href="#4-mudanca-estrategica-no-cronograma-o-pivo-da-unidade-2">4. Mudança Estratégica no Cronograma (O Pivô da Unidade 2)</a></li>
+            <li class="second-level"><a href="#encaminhamentos">Encaminhamentos</a></li>
+                
+            <li class="second-level"><a href="#proximos-passos-coletivos">Próximos Passos Coletivos</a></li>
+                
+            <li class="second-level"><a href="#gravacao-da-reuniao">Gravação da Reunião</a></li>
+                
+            <li class="second-level"><a href="#_1"></a></li>
+                
+    </ul>
+</div></div>
+        <div class="col-md-9" role="main">
+
+<h1 id="reuniao-14052026">Reunião — 14/05/2026<a class="headerlink" href="#reuniao-14052026" title="Permanent link">&para;</a></h1>
+<p><strong>Data:</strong> 14 de Maio de 2026
+<strong>Local:</strong> Google Meet / Ferramenta Miro (Duração: ~3h10)
+<strong>Assunto:</strong> Engenharia de Requisitos, Matriz de Rastreabilidade e Planejamento Estratégico de Entrega</p>
+<hr />
+<h2 id="participantes">Participantes<a class="headerlink" href="#participantes" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Nome</th>
+<th>Papel</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Lucas Zanetti</td>
+<td>Project Manager · Chief Architect · Development Manager(Backup)</td>
+<td>Presente</td>
+</tr>
+<tr>
+<td>Heitor</td>
+<td>Development Manager · Class Owner</td>
+<td>Presente</td>
+</tr>
+<tr>
+<td>Hugo</td>
+<td>Class Owner</td>
+<td>Presente</td>
+</tr>
+<tr>
+<td>Philipe</td>
+<td>Chief Programmer · Class Owner</td>
+<td>Presente</td>
+</tr>
+<tr>
+<td>Leonardo</td>
+<td>Chief Programmer · Class Owner</td>
+<td>Presente</td>
+</tr>
+<tr>
+<td>Camile</td>
+<td>Class Owner · Documentation Lead · Requirements Custodian</td>
+<td>Presente (Afastou-se aos 01h11m)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="pauta">Pauta<a class="headerlink" href="#pauta" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Reorganização das Características de Produto (CPs)</li>
+<li>Mapeamento de Requisitos Não Funcionais (RNFs)</li>
+<li>Matriz de Valor x Esforço</li>
+<li>Mudança Estratégica no Cronograma (O Pivô da Unidade 2)</li>
+</ol>
+<hr />
+<h2 id="discussoes-e-decisoes">Discussões e Decisões<a class="headerlink" href="#discussoes-e-decisoes" title="Permanent link">&para;</a></h2>
+<h3 id="1-reorganizacao-das-caracteristicas-de-produto-cps">1. Reorganização das Características de Produto (CPs)<a class="headerlink" href="#1-reorganizacao-das-caracteristicas-de-produto-cps" title="Permanent link">&para;</a></h3>
+<p>Para sanar críticas anteriores do professor ("Páginas não são funcionalidades") e otimizar o escopo, o grupo tomou uma decisão estrutural importante:</p>
+<ul>
+<li><strong>Fusão de CPs:</strong> A antiga CP5 (Página Institucional) foi formalmente extinta e integrada como sub-funcionalidade dentro da CP4.</li>
+<li><strong>Nova Nomenclatura:</strong> A CP4 foi renomeada de "Vitrine Pública de Produtos SAS" para <strong>Plataforma Pública de Apresentação da Empresa</strong>. Essa macroestrutura agora centraliza tanto a exibição do portfólio de produtos quanto as seções institucionais de credibilidade ("Sobre Nós").</li>
+<li><strong>Separação de Contextos:</strong> Dentro da CP4, dividiu-se nitidamente as features de <strong>Exibição Pública</strong> das features de <strong>Gerenciamento Administrativo</strong> (CRUD de produtos, despublicar, reordenar por drag-and-drop). Isso foi feito para permitir que os Requisitos Não Funcionais de segurança e isolamento de rotas fossem aplicados cirurgicamente apenas nas features do painel interno.</li>
+</ul>
+<h3 id="2-mapeamento-de-requisitos-nao-funcionais-rnfs">2. Mapeamento de Requisitos Não Funcionais (RNFs)<a class="headerlink" href="#2-mapeamento-de-requisitos-nao-funcionais-rnfs" title="Permanent link">&para;</a></h3>
+<p>O grupo utilizou a classificação de Sommerville (organizacional, produto e externo) para vincular os RNFs diretamente às features do Miro:</p>
+<ul>
+<li><strong>Desempenho (Tempo de Resposta):</strong> Fixou-se o limite tolerável de <strong>3 segundos</strong> para o carregamento de relatórios e indicadores na área administrativa (módulo financeiro e dashboard executivo), garantindo uma margem de segurança técnica realista.</li>
+<li><strong>Segurança e RLS (Row Level Security):</strong> O RLS foi mapeado como obrigatório em todas as tabelas do banco de dados (Supabase) que envolvem dados internos, logs de auditoria, CRM, faturamento e tickets de suporte, restringindo os acessos estritamente aos perfis autorizados. A Vitrine Pública é a única isenta.</li>
+<li><strong>Criptografia e OWASP:</strong> Requisitos de criptografia de credenciais foram vinculados à feature de autenticação de perfis. A conformidade com as diretrizes do OWASP (contra injeções de SQL/HTTP) foi movida para o escopo global.</li>
+<li><strong>LGPD (Privacidade):</strong> Mapeado o direito de exclusão e anonimização de dados pessoais de forma restrita às features de "Inativar cliente/lead" e históricos de tickets de suporte. Dados agregados (como métricas financeiras ou operacionais gerais) não herdarão essa regra.</li>
+<li><strong>Integridade Transacional (ACID):</strong> Aplicada especificamente ao fluxo de captação de leads para assegurar que nenhuma submissão de formulário sofra perda parcial de dados em caso de falha de conexão.</li>
+</ul>
+<h4 id="21-centralizacao-de-rnfs-globais">2.1 Centralização de RNFs Globais<a class="headerlink" href="#21-centralizacao-de-rnfs-globais" title="Permanent link">&para;</a></h4>
+<p>Para evitar redundâncias visuais exaustivas no Miro, definiu-se uma seção de <strong>RNFs Globais</strong> para comportar os critérios que regem o sistema como um todo:</p>
+<ul>
+<li>Portabilidade de navegador (<em>cross-browser</em>).</li>
+<li>Responsividade global da interface (Vitrine e Admin).</li>
+<li>Cobertura mínima de <strong>50% de testes automatizados</strong>.</li>
+<li>Definição unificada da Stack Tecnológica.</li>
+</ul>
+<h3 id="3-matriz-de-valor-x-esforco">3. Matriz de Valor x Esforço<a class="headerlink" href="#3-matriz-de-valor-x-esforco" title="Permanent link">&para;</a></h3>
+<p>A equipe refinou o quadrante de priorização com base nos feedbacks coletados do cliente (Otávio):</p>
+<ul>
+<li><strong>Alto Valor / Médio-Alto Esforço:</strong> Toda a estrutura do CRM interno e controle de colunas (Kanban).</li>
+<li><strong>Médio-Baixo Valor / Alto Esforço:</strong> Módulo de faturamento/relatórios financeiros e o sistema de tickets de suporte. O cliente havia sinalizado que essas ferramentas têm menor urgência no MVP, pois as interações comerciais ocorrem predominantemente via WhatsApp.</li>
+<li><strong>Alto Valor / Baixo Esforço:</strong> Features da Plataforma Pública (Vitrine e Institucional), consolidando-as como o foco de largada da iteração.</li>
+</ul>
+<h3 id="4-mudanca-estrategica-no-cronograma-o-pivo-da-unidade-2">4. Mudança Estratégica no Cronograma (O Pivô da Unidade 2)<a class="headerlink" href="#4-mudanca-estrategica-no-cronograma-o-pivo-da-unidade-2" title="Permanent link">&para;</a></h3>
+<p>Diante do tempo escasso para codificação até a data limite da Unidade 2 (<strong>19/05/2026</strong>), o Development Manager Leonardo propôs uma mudança de estratégia aceita por unanimidade:</p>
+<ul>
+<li><strong>Foco nas Cerimônias e Processo:</strong> Como a disciplina avalia a maturidade do processo de engenharia e não apenas o software, o grupo focará em consolidar <strong>100% das evidências metodológicas até terça-feira (19/05)</strong>. Isso inclui o deploy do Git Pages atualizado, Documento de Visão preenchido, especificações de cards, protótipo de alta fidelidade no Figma e os diagramas.</li>
+<li><strong>Extensão do Prazo do Código:</strong> A entrega final do incremento de software funcional (código e issues resolvidas da Vitrine) foi estendida internamente para a <strong>sexta-feira subsequente (22/05)</strong>. Isso concederá aos desenvolvedores 4 dias adicionais e contínuos de programação limpa, evitando uma entrega instável.</li>
+</ul>
+<hr />
+<h2 id="encaminhamentos">Encaminhamentos<a class="headerlink" href="#encaminhamentos" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Tarefa</th>
+<th>Responsável</th>
+<th>Prazo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Desenvolver os Diagramas de Sequência Leves baseados nas macro-features do Miro (usando suporte do FDD/NotebookLM)</td>
+<td>Heitor e Lucas</td>
+<td>15/05/2026</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Finalizar as seções pendentes (3 e 4) do Documento de Visão no GitHub</td>
+<td>Camile</td>
+<td>15/05/2026</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Resolver a issue pendente de Estratégias no repositório</td>
+<td>Camile</td>
+<td>16/05/2026</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Atualizar a numeração, nomenclatura de CPs (1 a 10) e rastreabilidade no Git Pages</td>
+<td>Lucas</td>
+<td>17/05/2026</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Concluir o protótipo de alta fidelidade no Figma para validação do cliente</td>
+<td>Lucas / Camile</td>
+<td>18/05/2026</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Transcrever e estruturar as <em>Features Cards Specifications</em> (BDD) de cada item validado</td>
+<td>Toda a Equipe</td>
+<td>18/05/2026</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="proximos-passos-coletivos">Próximos Passos Coletivos<a class="headerlink" href="#proximos-passos-coletivos" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Reunião de Technical Design Review:</strong> Agendada para o início da próxima semana para revisar os diagramas criados, fechar os consensos de arquitetura e pastas do monorrepo antes da abertura oficial das branches/issues de código.</li>
+</ul>
+<h2 id="gravacao-da-reuniao">Gravação da Reunião<a class="headerlink" href="#gravacao-da-reuniao" title="Permanent link">&para;</a></h2>
+<h2 id="_1"><iframe width="560" height="315" src="https://www.youtube.com/embed/dwk5SJKgG3I?si=k0B2hQEOskiMufm1" title="Gravação da Reunião" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p><em>Ata redigida por Heitor Macedo Ricardo para registro e consulta dos membros da equipe.</em></p></div>
+        
+        
+    </div>
+
+    
+      <footer class="col-md-12 text-center">
+          
+          
+            <hr>
+            <p>
+            <small>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</small>
+            </p>
+          
+
+          
+          
+      </footer>
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../../../../js/bootstrap-3.0.3.min.js"></script>
+
+    
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/highlight.min.js"></script>
+        
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    <script>var base_url = "../../../.."</script>
+    
+    <script src="../../../../js/base.js"></script>
+    <script src="../../../../assets/nav-click.js"></script>
+    <script src="../../../../search/main.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+    </body>
+
+</html>

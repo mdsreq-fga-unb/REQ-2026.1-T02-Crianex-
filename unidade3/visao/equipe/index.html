@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Plataforma de Gestão e Portfólio de Projetos SaaS">
+    <meta name="author" content="Equipe Crianex">
+    
+    <link rel="shortcut icon" href="../../img/favicon.ico">
+
+    
+    <title>6 · Equipe e Iteração - Crianex</title>
+    
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/v4-shims.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.min.css">
+    <link href='//rsms.me/inter/inter.css' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
+    <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="../../css/base.min.css" rel="stylesheet">
+    <link href="../../css/cinder.min.css" rel="stylesheet">
+
+    
+        
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/styles/github.min.css">
+        
+    
+    <link href="../../assets/extra.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+        <![endif]-->
+
+    
+
+     
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+
+            
+              <a class="navbar-brand" href="../..">Crianex</a>
+            
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="../..">Home</a>
+                    </li>
+                
+                
+                
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Visão <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../cenario/">1 · Cenário</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../solucao/">2 · Solução</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../estrategias/">3 · Estratégias</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../er/">4 · Eng. de Requisitos</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../cronograma/">5 · Cronograma</a>
+</li>
+
+                        
+                            
+<li class="active">
+    <a href="./">6 · Equipe e Iteração</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../dor-dod/">7 · DoR e DoD</a>
+</li>
+
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Lições Aprendidas</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../10-licoes/10-1/">10.1 · Unidade 1</a>
+</li>
+
+        
+            
+<li >
+    <a href="../10-licoes/10-2/">10.2 · Unidade 2</a>
+</li>
+
+        
+            
+<li >
+    <a href="../10-licoes/10-3/">10.3 · Unidade 3</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Iterações <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../../iteracoes/">Visão Geral</a>
+</li>
+
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Unidade 1</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../iteracoes/unidade-1/">Resumo — Evidências</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../iteracoes/unidade-1/atas/2026-04-09/">Ata — 09/04/2026</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../iteracoes/unidade-1/atas/2026-04-22/">Ata Domain Modeling, Replenishment Macro e Commitment — 22/04/2026</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">IT1 — Vitrine Pública</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../iteracoes/iteracao-1/">Resumo</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../iteracoes/iteracao-1/features-entregues/">Features Entregues</a>
+</li>
+
+        
+            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Evidências</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../iteracoes/iteracao-1/evidencias/design-tecnico/">Design Técnico</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../iteracoes/iteracao-1/evidencias/prototipo/">Protótipo</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+        
+            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Validação</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../iteracoes/iteracao-1/validacao/partial/">Partial Client Validation</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../iteracoes/iteracao-1/validacao/formal/">Formal Client Validation</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+        
+            
+<li >
+    <a href="../../iteracoes/iteracao-1/vv/">Resultados V&V</a>
+</li>
+
+        
+            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Atas de Reunião</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../iteracoes/iteracao-1/atas/2026-05-01/">Ata Compromisso das correções — 01/05/2026</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../iteracoes/iteracao-1/atas/2026-05-11/">Ata Feature Discovery Session — 11/05/2026</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../iteracoes/iteracao-1/atas/2026-05-14/">Ata Refinamento Requisitos — 14/05/2026</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../iteracoes/iteracao-1/atas/2026-05-17/">Ata Technical Design Review — 17/05/2026</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../iteracoes/iteracao-1/atas/2026-06-14/">Ata Artifact Closure — 14/06/2026</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+        
+    </ul>
+  </li>
+
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">IT2 — Lead Capture</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../iteracoes/iteracao-2/">Resumo</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../iteracoes/iteracao-2/features-entregues/">Features Entregues</a>
+</li>
+
+        
+            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Evidências</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../iteracoes/iteracao-2/evidencias/design-tecnico/">Design Técnico</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+        
+            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Validação</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../iteracoes/iteracao-2/validacao/partial/">Partial Client Validation</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../iteracoes/iteracao-2/validacao/formal/">Formal Client Validation</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+        
+            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Atas de Reunião</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../iteracoes/iteracao-2/atas/reuniao_commitment/">Ata Iteration 2 Replenishment Micro e Commitment</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../iteracoes/iteracao-2/atas/reuniao_TDR2/">Technical Design Review IT2</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+        
+    </ul>
+  </li>
+
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">IT3 — Núcleo Operacional</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../iteracoes/iteracao-3/">Resumo — Evidências</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Lista de Funcionalidades <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../../backlog/rastreabilidade/">Rastreabilidade</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../backlog/priorizacao/">Priorização</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../backlog/dependencias/">Mapa de Dependências</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Arquitetura <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../../arquitetura/">Arquitetura</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../arquitetura/roles/">Roles</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Entregas <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../../entregas/">Visão Geral</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../entregas/unidade-1/">Unidade 1</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../entregas/unidade-2/">Unidade 2</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../entregas/unidade-3/">Unidade 3</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../entregas/unidade-4/">Unidade 4</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../../referencias/">Referências</a>
+                    </li>
+                
+                
+                </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                            <i class="fas fa-search"></i> Search
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <div class="container">
+        
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="first-level active"><a href="#6-interacao-equipe-cliente">6. Interação Equipe-Cliente</a></li>
+            <li class="second-level"><a href="#historico-de-revisao">Histórico de Revisão</a></li>
+                
+            <li class="second-level"><a href="#61-composicao-da-equipe">6.1 Composição da Equipe</a></li>
+                
+            <li class="second-level"><a href="#62-estrutura-de-comunicacao">6.2 Estrutura de Comunicação</a></li>
+                
+                <li class="third-level"><a href="#links-das-ferramentas">Links das Ferramentas</a></li>
+            <li class="second-level"><a href="#63-cadencia-de-cerimonias">6.3 Cadência de Cerimônias</a></li>
+                
+                <li class="third-level"><a href="#64-cerimonias-unicas-inicio-do-projeto">6.4 Cerimônias Únicas — Início do Projeto</a></li>
+                <li class="third-level"><a href="#65-cerimonias-iterativas-repetidas-em-cada-iteracao">6.5 Cerimônias Iterativas — Repetidas em Cada Iteração</a></li>
+                <li class="third-level"><a href="#66-cadencia-detalhada-por-semana">6.6 Cadência Detalhada por Semana</a></li>
+    </ul>
+</div></div>
+        <div class="col-md-9" role="main">
+
+<h1 id="6-interacao-equipe-cliente">6. Interação Equipe-Cliente<a class="headerlink" href="#6-interacao-equipe-cliente" title="Permanent link">&para;</a></h1>
+<h2 id="historico-de-revisao">Histórico de Revisão<a class="headerlink" href="#historico-de-revisao" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Versão</th>
+<th>Data</th>
+<th>Descrição</th>
+<th>Autor(es)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.0</td>
+<td>11/04/2026</td>
+<td>Criação das seções 6.1 a 6.6</td>
+<td>Lucas A. Zanetti</td>
+</tr>
+<tr>
+<td>1.1</td>
+<td>13/04/2026</td>
+<td>Revisão das seções 6.1 a 6.6</td>
+<td>Equipe Crianex</td>
+</tr>
+<tr>
+<td>1.2</td>
+<td>03/05/2026</td>
+<td>Atualização da composição da equipe</td>
+<td>Lucas A. Zanetti</td>
+</tr>
+<tr>
+<td>1.3</td>
+<td>05/05/2026</td>
+<td>Seções 6.2–6.6 reescritas: metodologia FDD + fluxogramas de validação e Kanban</td>
+<td>Lucas A. Zanetti</td>
+</tr>
+<tr>
+<td>1.4</td>
+<td>06/06/2026</td>
+<td>Separação de cerimônias únicas e iterativas; distinção Replenishment Macro/Micro; correção das Etapas FDD nas tabelas semanais</td>
+<td>Lucas A. Zanetti</td>
+</tr>
+<tr>
+<td>1.5</td>
+<td>15/06/2026</td>
+<td>Correção de sintaxe na tabela 6.4 (texto colado ao separador de cabeçalho removido)</td>
+<td>Heitor Macedo Ricardo</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="61-composicao-da-equipe">6.1 Composição da Equipe<a class="headerlink" href="#61-composicao-da-equipe" title="Permanent link">&para;</a></h2>
+<p>Os papéis seguem o modelo FDD + Kanban adotado pela equipe. Cada integrante pode acumular mais de um papel; as responsabilidades, no entanto, permanecem individuais e rastreáveis.</p>
+<table>
+<thead>
+<tr>
+<th>Integrante</th>
+<th>Papel FDD</th>
+<th>Responsabilidades Principais</th>
+<th>Disponibilidade</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Lucas Andrade Zanetti</strong></td>
+<td>Project Manager · Chief Architect · Development Manager(Backup)</td>
+<td><strong>(PM/DM):</strong> Gerenciar o roadmap, prazos e interface principal com o cliente/professor; conduzir <em>Replenishment</em>.<br><strong>(Chief Architect):</strong> Liderar a modelagem de domínio e arbitrar decisões estruturais gerais da arquitetura.<br><strong>(DM Backup):</strong> Desbloquear issues críticas.</td>
+<td>9 h/sem</td>
+</tr>
+<tr>
+<td><strong>Heitor Macedo Ricardo</strong></td>
+<td>Development Manager · Class Owner</td>
+<td><strong>(DM):</strong> Coordenar o progresso técnico diário da iteração (Kanban), acompanhar WIP limits, desbloquear issues da equipe e liderar a consolidação final da fase de Build.<br><strong>(Class Owner):</strong> Assumir o desenvolvimento e testes de classes/features específicas.</td>
+<td>5–8 h/sem</td>
+</tr>
+<tr>
+<td><strong>Leonardo Fachinello Bonetti</strong></td>
+<td>Chief Programmer · Class Owner</td>
+<td><strong>(Chief Programmer):</strong> Conduzir o <em>Technical Design Review</em> e mentorar decisões técnicas (especialmente Backend/Infra/K8s); aprovar Pull Requests estruturais.<br><strong>(Class Owner):</strong> Desenvolver o código das responsabilidades que assumiu no design.</td>
+<td>5–8 h/sem</td>
+</tr>
+<tr>
+<td><strong>Philipe Amancio Reis Caetano</strong></td>
+<td>Chief Programmer · Class Owner</td>
+<td><strong>(Chief Programmer):</strong> Conduzir decisões técnicas e revisões de código (PRs) focadas em Frontend e QA; auxiliar no design detalhado de features.<br><strong>(Class Owner):</strong> Implementar de ponta a ponta as partes da interface pelas quais é responsável.</td>
+<td>até 4 h/sem</td>
+</tr>
+<tr>
+<td><strong>Hugo Freitas Silva</strong></td>
+<td>Class Owner</td>
+<td><strong>(Class Owner):</strong> Implementação primária de código , garantindo que as regras de negócio e critérios de aceite sejam codificados e testados; atualização do <em>board</em> em tempo real e <em>code review</em> em PRs entre pares.</td>
+<td>até 4 h/sem</td>
+</tr>
+<tr>
+<td><strong>Camile Barbosa Gonzaga de Oliveira</strong></td>
+<td>Class Owner · Documentation Lead · Requirements Custodian</td>
+<td><strong>(Requirements/Docs):</strong> Gestão dos artefatos (feature cards, rastreabilidade e critérios de aceite); manutenção do Documento de Visão no MkDocs e consolidação das evidências de fechamento das iterações.<br><strong>(Class Owner):</strong> Desenvolver e testar features alocadas.</td>
+<td>até 4 h/sem</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Papéis rotativos por iteração</strong></p>
+<table>
+<thead>
+<tr>
+<th>Papel</th>
+<th>Responsabilidade</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Facilitador Metodológico</strong></td>
+<td>Conduz cerimônias semanais; garante adesão ao processo; sinaliza desvios na retrospectiva</td>
+</tr>
+<tr>
+<td><strong>Responsável por Validação</strong></td>
+<td>Coordena Partial e Formal Client Validation com Otavio; prepara checklists e materiais de demo; documenta aprovações nas issues</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="62-estrutura-de-comunicacao">6.2 Estrutura de Comunicação<a class="headerlink" href="#62-estrutura-de-comunicacao" title="Permanent link">&para;</a></h2>
+<p>Cada ferramenta tem escopo exclusivo — o que vai para o Miro não vai para o Discord. Isso evita decisões tomadas no canal errado e mantém rastreabilidade.</p>
+<table>
+<thead>
+<tr>
+<th>Ferramenta</th>
+<th>Tipo</th>
+<th>Finalidade</th>
+<th>Não é usado para</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Miro</strong></td>
+<td>Assíncrono + Síncrono</td>
+<td>Roadmap IT1–IT5, backlog macro, Feature Cards, Iteration Goal, modelo de domínio, atas de cerimônias, lições aprendidas</td>
+<td>Acompanhamento operacional de issues</td>
+</tr>
+<tr>
+<td><strong>GitHub Projects (Kanban)</strong></td>
+<td>Assíncrono</td>
+<td>Issues fluindo pelas colunas Backlog → Done; WIP limit visível</td>
+<td>Cerimônias, alinhamento estratégico</td>
+</tr>
+<tr>
+<td><strong>GitHub (repositório)</strong></td>
+<td>Assíncrono</td>
+<td>Código-fonte, Pull Requests, code review, CI/CD, evidências de execução</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>GitHub Pages (MkDocs)</strong></td>
+<td>Assíncrono</td>
+<td>Documento de Visão, rastreabilidade OE → CP → Feature, artefatos formais</td>
+<td>Operação diária</td>
+</tr>
+<tr>
+<td><strong>Discord</strong></td>
+<td>Assíncrono e Síncrono</td>
+<td>Comunicação da semana e reuniões da equipe, dúvidas técnicas, MidWeek Sync ("Ontem fiz / Hoje farei / Bloqueios")</td>
+<td>-</td>
+</tr>
+<tr>
+<td><strong>WhatsApp</strong></td>
+<td>Assíncrono</td>
+<td>Canal direto com Otavio para validações parciais e alinhamentos urgentes</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Google Meets</strong></td>
+<td>Síncrono</td>
+<td>Reuniões formais com o cliente</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h3 id="links-das-ferramentas">Links das Ferramentas<a class="headerlink" href="#links-das-ferramentas" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Ferramenta</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Miro</strong> (board principal)</td>
+<td><a href="https://miro.com/app/board/uXjVGl991V0=/?share_link_id=878597873452">Acessar board</a></td>
+</tr>
+<tr>
+<td><strong>GitHub Projects (Kanban)</strong></td>
+<td><a href="https://github.com/orgs/mdsreq-fga-unb/projects/96">Acessar board</a></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="63-cadencia-de-cerimonias">6.3 Cadência de Cerimônias<a class="headerlink" href="#63-cadencia-de-cerimonias" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>Princípio:</strong> máximo <strong>2–3 reuniões por semana</strong>. Cerimônias relacionadas são agrupadas no mesmo dia. O Midweek Sync e a validação parcial com o cliente são sempre <strong>assíncronos</strong>; apenas o encerramento formal de iteração ocorre via <strong>reunião</strong>.</p>
+</blockquote>
+<hr />
+<h3 id="64-cerimonias-unicas-inicio-do-projeto">6.4 Cerimônias Únicas — Início do Projeto<a class="headerlink" href="#64-cerimonias-unicas-inicio-do-projeto" title="Permanent link">&para;</a></h3>
+<p>Realizadas <strong>uma única vez</strong> antes da primeira iteração de construção. Correspondem às Etapas 1–3 do FDD e produzem os artefatos que servem de insumo para todas as iterações seguintes.</p>
+<table>
+<thead>
+<tr>
+<th>Cerimônia</th>
+<th>Formato</th>
+<th>Quando</th>
+<th>Participantes</th>
+<th>Duração est.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Domain Modeling Workshop</strong></td>
+<td>Reunião</td>
+<td>Antes da IT1</td>
+<td>PM, Chief Architect, Otavio</td>
+<td>~3h</td>
+</tr>
+<tr>
+<td><strong>Feature Discovery Session</strong></td>
+<td>Reunião</td>
+<td>Antes da IT1</td>
+<td>Equipe (sem cliente)</td>
+<td>~1h</td>
+</tr>
+<tr>
+<td><strong>Iteration Replenishment Macro</strong></td>
+<td>Reunião</td>
+<td>Antes da IT1</td>
+<td>PM, CPs, Otavio</td>
+<td>~1h</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Nota:</strong> Devido correções de urgência ao modelo FDD implementado à partir do feedback do professor George, tanto <em>Feature Discovery Session</em> como <em>Iteration Replenishment Macro</em> foram feitas no ínicio da Iteração 1, uma vez que já haviamos iniciado.</p>
+</blockquote>
+<hr />
+<h3 id="65-cerimonias-iterativas-repetidas-em-cada-iteracao">6.5 Cerimônias Iterativas — Repetidas em Cada Iteração<a class="headerlink" href="#65-cerimonias-iterativas-repetidas-em-cada-iteracao" title="Permanent link">&para;</a></h3>
+<p>Correspondem às Etapas 4–5 do FDD. O <strong>Replenishment Micro</strong> é a versão iterativa do planejamento: seleciona as features da iteração corrente com base no IP e na capacidade disponível, diferente do Macro que definiu o roadmap completo.</p>
+<table>
+<thead>
+<tr>
+<th>Cerimônia</th>
+<th>Formato</th>
+<th>Frequência</th>
+<th>Participantes</th>
+<th>Duração est.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Iteration Replenishment Micro + Commitment</strong></td>
+<td>Reunião</td>
+<td>Início de cada iteração</td>
+<td>PM, CPs, Otavio</td>
+<td>~1h</td>
+</tr>
+<tr>
+<td><strong>Technical Design Review</strong></td>
+<td>Reunião</td>
+<td>Por feature comprometida</td>
+<td>PM, CPs, Class Owners</td>
+<td>~1h</td>
+</tr>
+<tr>
+<td><strong>Midweek Sync / Kanban Pull Execution</strong></td>
+<td>Assíncrono — Discord/Whatsapp</td>
+<td>Meio de cada semana de Build</td>
+<td>Toda a equipe</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Feature Build Consolidation</strong></td>
+<td>Reunião</td>
+<td>Fim de cada semana de Build</td>
+<td>Toda a equipe</td>
+<td>~45min</td>
+</tr>
+<tr>
+<td><strong>Partial Client Validation</strong></td>
+<td>Assíncrono — WhatsApp</td>
+<td>Fim de cada semana de Build</td>
+<td>Resp. Validação + Otavio</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Formal Client Validation</strong></td>
+<td>Reunião</td>
+<td>Fim da iteração</td>
+<td>Toda a equipe + Otavio</td>
+<td>~1h</td>
+</tr>
+<tr>
+<td><strong>Iteration Artifact Closure</strong></td>
+<td>Reunião</td>
+<td>Fim da iteração</td>
+<td>Toda a equipe</td>
+<td>~1h</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="66-cadencia-detalhada-por-semana">6.6 Cadência Detalhada por Semana<a class="headerlink" href="#66-cadencia-detalhada-por-semana" title="Permanent link">&para;</a></h3>
+<p>Cada iteração segue fases com objetivos distintos. As cerimônias únicas (Domain Modeling, Feature Discovery, Replenishment Macro) <strong>não se repetem</strong> — apenas o Replenishment Micro inicia cada ciclo.</p>
+<h4 id="fase-de-planejamento-inicio-da-iteracao">Fase de Planejamento — Início da Iteração<a class="headerlink" href="#fase-de-planejamento-inicio-da-iteracao" title="Permanent link">&para;</a></h4>
+<p>Seleção e comprometimento com o escopo da iteração. Novas features só entram no Kanban após o Technical Design Review estar concluído.</p>
+<table>
+<thead>
+<tr>
+<th>Atividade</th>
+<th>Etapa FDD</th>
+<th>Formato</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Iteration Replenishment Micro + Commitment</td>
+<td>Etapa 4</td>
+<td>Síncrono</td>
+</tr>
+<tr>
+<td>Technical Design Review</td>
+<td>Etapa 4</td>
+<td>Síncrono</td>
+</tr>
+</tbody>
+</table>
+<h4 id="fase-de-build-semanas-de-execucao">Fase de Build — Semanas de Execução<a class="headerlink" href="#fase-de-build-semanas-de-execucao" title="Permanent link">&para;</a></h4>
+<p>Features fluem pelo Kanban. Pode se repetir por mais de uma semana conforme o escopo da iteração.</p>
+<table>
+<thead>
+<tr>
+<th>Atividade</th>
+<th>Etapa FDD</th>
+<th>Formato</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kanban Pull Execution</td>
+<td>Etapa 5</td>
+<td>Contínuo</td>
+</tr>
+<tr>
+<td>Midweek Sync</td>
+<td>Etapa 5</td>
+<td>Assíncrono</td>
+</tr>
+<tr>
+<td>Feature Build Consolidation</td>
+<td>Etapa 5</td>
+<td>Síncrono</td>
+</tr>
+<tr>
+<td>Partial Client Validation</td>
+<td>Etapa 5</td>
+<td>Assíncrono</td>
+</tr>
+</tbody>
+</table>
+<h4 id="fase-de-encerramento-fim-da-iteracao">Fase de Encerramento — Fim da Iteração<a class="headerlink" href="#fase-de-encerramento-fim-da-iteracao" title="Permanent link">&para;</a></h4>
+<p>Features consolidadas, rastreabilidade auditada e artefatos empacotados.</p>
+<table>
+<thead>
+<tr>
+<th>Atividade</th>
+<th>Etapa FDD</th>
+<th>Formato</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Preparação da demo e fechamento de PRs</td>
+<td>—</td>
+<td>Assíncrono</td>
+</tr>
+<tr>
+<td>Formal Client Validation</td>
+<td>Etapa 5</td>
+<td>Síncrono</td>
+</tr>
+<tr>
+<td>Iteration Artifact Closure</td>
+<td>Etapa 5</td>
+<td>Síncrono</td>
+</tr>
+<tr>
+<td>Backlog Reorganization (se necessário)</td>
+<td>Etapa 5</td>
+<td>Síncrono</td>
+</tr>
+</tbody>
+</table></div>
+        
+        
+    </div>
+
+    
+      <footer class="col-md-12 text-center">
+          
+          
+            <hr>
+            <p>
+            <small>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</small>
+            </p>
+          
+
+          
+          
+      </footer>
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../../js/bootstrap-3.0.3.min.js"></script>
+
+    
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/highlight.min.js"></script>
+        
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    <script>var base_url = "../.."</script>
+    
+    <script src="../../js/base.js"></script>
+    <script src="../../assets/nav-click.js"></script>
+    <script src="../../search/main.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+    </body>
+
+</html>

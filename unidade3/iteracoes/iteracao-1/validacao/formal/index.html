@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Plataforma de Gestão e Portfólio de Projetos SaaS">
+    <meta name="author" content="Equipe Crianex">
+    
+    <link rel="shortcut icon" href="../../../../img/favicon.ico">
+
+    
+    <title>Formal Client Validation - Crianex</title>
+    
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/v4-shims.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.min.css">
+    <link href='//rsms.me/inter/inter.css' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
+    <link href="../../../../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="../../../../css/base.min.css" rel="stylesheet">
+    <link href="../../../../css/cinder.min.css" rel="stylesheet">
+
+    
+        
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/styles/github.min.css">
+        
+    
+    <link href="../../../../assets/extra.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+        <![endif]-->
+
+    
+
+     
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+
+            
+              <a class="navbar-brand" href="../../../..">Crianex</a>
+            
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="../../../..">Home</a>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Visão <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../../../../visao/cenario/">1 · Cenário</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../../../visao/solucao/">2 · Solução</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../../../visao/estrategias/">3 · Estratégias</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../../../visao/er/">4 · Eng. de Requisitos</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../../../visao/cronograma/">5 · Cronograma</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../../../visao/equipe/">6 · Equipe e Iteração</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../../../visao/dor-dod/">7 · DoR e DoD</a>
+</li>
+
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Lições Aprendidas</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../../../visao/10-licoes/10-1/">10.1 · Unidade 1</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../../../visao/10-licoes/10-2/">10.2 · Unidade 2</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../../../visao/10-licoes/10-3/">10.3 · Unidade 3</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Iterações <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../../../">Visão Geral</a>
+</li>
+
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Unidade 1</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../../unidade-1/">Resumo — Evidências</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../../unidade-1/atas/2026-04-09/">Ata — 09/04/2026</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../../unidade-1/atas/2026-04-22/">Ata Domain Modeling, Replenishment Macro e Commitment — 22/04/2026</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">IT1 — Vitrine Pública</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../">Resumo</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../features-entregues/">Features Entregues</a>
+</li>
+
+        
+            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Evidências</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../evidencias/design-tecnico/">Design Técnico</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../evidencias/prototipo/">Protótipo</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+        
+            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Validação</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../partial/">Partial Client Validation</a>
+</li>
+
+        
+            
+<li class="active">
+    <a href="./">Formal Client Validation</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+        
+            
+<li >
+    <a href="../../vv/">Resultados V&V</a>
+</li>
+
+        
+            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Atas de Reunião</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../atas/2026-05-01/">Ata Compromisso das correções — 01/05/2026</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../atas/2026-05-11/">Ata Feature Discovery Session — 11/05/2026</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../atas/2026-05-14/">Ata Refinamento Requisitos — 14/05/2026</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../atas/2026-05-17/">Ata Technical Design Review — 17/05/2026</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../atas/2026-06-14/">Ata Artifact Closure — 14/06/2026</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+        
+    </ul>
+  </li>
+
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">IT2 — Lead Capture</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../../iteracao-2/">Resumo</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../../iteracao-2/features-entregues/">Features Entregues</a>
+</li>
+
+        
+            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Evidências</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../../iteracao-2/evidencias/design-tecnico/">Design Técnico</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+        
+            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Validação</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../../iteracao-2/validacao/partial/">Partial Client Validation</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../../iteracao-2/validacao/formal/">Formal Client Validation</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+        
+            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Atas de Reunião</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../../iteracao-2/atas/reuniao_commitment/">Ata Iteration 2 Replenishment Micro e Commitment</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../../iteracao-2/atas/reuniao_TDR2/">Technical Design Review IT2</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+        
+    </ul>
+  </li>
+
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">IT3 — Núcleo Operacional</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../../iteracao-3/">Resumo — Evidências</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Lista de Funcionalidades <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../../../../backlog/rastreabilidade/">Rastreabilidade</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../../../backlog/priorizacao/">Priorização</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../../../backlog/dependencias/">Mapa de Dependências</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Arquitetura <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../../../../arquitetura/">Arquitetura</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../../../arquitetura/roles/">Roles</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Entregas <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../../../../entregas/">Visão Geral</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../../../entregas/unidade-1/">Unidade 1</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../../../entregas/unidade-2/">Unidade 2</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../../../entregas/unidade-3/">Unidade 3</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../../../entregas/unidade-4/">Unidade 4</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../../../../referencias/">Referências</a>
+                    </li>
+                
+                
+                </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                            <i class="fas fa-search"></i> Search
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <div class="container">
+        
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="first-level active"><a href="#it1-validacao-formal-do-cliente-formal-client-validation">IT1 — Validação Formal do Cliente (Formal Client Validation)</a></li>
+            <li class="second-level"><a href="#gravacao-da-reuniao">Gravação da Reunião</a></li>
+                
+            <li class="second-level"><a href="#ata-da-reuniao">Ata da Reunião</a></li>
+                
+                <li class="third-level"><a href="#pauta">Pauta</a></li>
+                <li class="third-level"><a href="#pontos-discutidos">Pontos Discutidos</a></li>
+                <li class="third-level"><a href="#decisoes">Decisões</a></li>
+                <li class="third-level"><a href="#itens-de-acao">Itens de Ação</a></li>
+            <li class="second-level"><a href="#resultado-da-validacao">Resultado da Validação</a></li>
+                
+            <li class="second-level"><a href="#feedbacks-e-acoes">Feedbacks e Ações</a></li>
+                
+    </ul>
+</div></div>
+        <div class="col-md-9" role="main">
+
+<h1 id="it1-validacao-formal-do-cliente-formal-client-validation">IT1 — Validação Formal do Cliente (Formal Client Validation)<a class="headerlink" href="#it1-validacao-formal-do-cliente-formal-client-validation" title="Permanent link">&para;</a></h1>
+<p>Registro da reunião formal de aceite realizada com o cliente (CEO da Crianex) ao final da IT1. A Formal Client Validation marca o encerramento oficial da iteração e é pré-requisito para a abertura da próxima.</p>
+<hr />
+<h2 id="gravacao-da-reuniao">Gravação da Reunião<a class="headerlink" href="#gravacao-da-reuniao" title="Permanent link">&para;</a></h2>
+<div class="video-wrapper">
+  <iframe
+    width="100%"
+    height="480"
+    src="https://www.youtube.com/embed/xCj1GN0pBkA"
+    title="IT1 — Validação Formal do Cliente"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+  </iframe>
+</div>
+
+<hr />
+<h2 id="ata-da-reuniao">Ata da Reunião<a class="headerlink" href="#ata-da-reuniao" title="Permanent link">&para;</a></h2>
+<p><strong>Participantes:</strong> Lucas Zanetti (Developer), Vitor (CEO da Crianex)</p>
+<h3 id="pauta">Pauta<a class="headerlink" href="#pauta" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Validação da IT1 — Vitrine Pública e Painel Admin</li>
+<li>Feedback sobre a Vitrine</li>
+<li>Demonstração do Painel Admin (Produtos, Perfil, Membros, FAQ)</li>
+<li>Próximos Passos — CRM e Notificações (IT2)</li>
+</ol>
+<h3 id="pontos-discutidos">Pontos Discutidos<a class="headerlink" href="#pontos-discutidos" title="Permanent link">&para;</a></h3>
+<h4 id="vitrine-publica">Vitrine Pública<a class="headerlink" href="#vitrine-publica" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Objetivo da iteração: criar vitrine para a Crianex, aumentar visibilidade dos produtos e desenvolver painel de gestão operacional.</li>
+<li>A vitrine inclui portfólio de produtos, seção "Sobre Nós" e formulário de contato.</li>
+<li>Textos e imagens são editáveis via painel admin.</li>
+<li>Formulário de contato possui campo de aceite da política de privacidade (requisito legal).</li>
+<li>Funcionalidade de envio de e-mail de contato implementada e pronta para ativação.</li>
+<li>Seção "Sobre" com animações e perfis da equipe (atualizáveis).</li>
+<li>FAQ categorizado por produto com avaliação de utilidade pelo usuário.</li>
+<li>Suporte a múltiplos idiomas (PT/EN) via biblioteca i18n.</li>
+<li><strong>Feedback do CEO:</strong> elogiou design, animações e diferenciação de cores por seção — considerou condizente com a identidade da Crianex.</li>
+<li>Sugestão: puxar imagens de capa dos produtos diretamente do site dos produtos (ex: avali, notify, pontua).</li>
+</ul>
+<h4 id="painel-admin">Painel Admin<a class="headerlink" href="#painel-admin" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Acessível via subdomínio separado (ex: <code>admin.crianex.com</code>) para segurança.</li>
+<li>Login com Google disponível (temporariamente desativado).</li>
+<li><strong>Gestão de Produtos:</strong> alterar imagem de capa, reordenar exibição na vitrine, cadastrar/publicar/despublicar/rascunho, suporte PT/EN.</li>
+<li><strong>Gestão de Membros:</strong> dashboard com distribuição por papel, membros ativos e total; papéis Owner/Membro.</li>
+<li><strong>Gestão de FAQ:</strong> categorias e artigos em PT/EN, associados a produtos; métricas de utilidade.</li>
+<li><strong>Perfil:</strong> alteração de senha, encerramento de sessão; 2FA não essencial no momento.</li>
+</ul>
+<h4 id="proximos-passos-crm-it2">Próximos Passos — CRM (IT2)<a class="headerlink" href="#proximos-passos-crm-it2" title="Permanent link">&para;</a></h4>
+<ul>
+<li>CRM para visualizar leads, enviar e-mails/mensagens e registrar reuniões.</li>
+<li>Sistema de etapas (campanha) para acompanhar o lead até tornar-se cliente.</li>
+<li>4 features divididas em sub-funcionalidades: editar cliente, inativar cliente, cadastrar lead, adicionar/remover colunas do CRM.</li>
+<li><strong>CEO:</strong> elogiou organização e dashboard; parabenizou equipe por seguir o cronograma.</li>
+</ul>
+<h3 id="decisoes">Decisões<a class="headerlink" href="#decisoes" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Vitrine e painel admin aprovados conforme protótipo e feedbacks anteriores.</li>
+<li>Funcionalidade de envio de e-mail pronta para ativação.</li>
+<li>Próxima iteração: implementação do CRM.</li>
+</ul>
+<h3 id="itens-de-acao">Itens de Ação<a class="headerlink" href="#itens-de-acao" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Tarefa</th>
+<th>Responsável</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Ajustar textos e imagens da vitrine com base no feedback do cliente</td>
+<td>Developer</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Implementar pull de imagens de capa dos produtos a partir dos sites dos produtos</td>
+<td>Developer</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Reativar login com Google no painel admin</td>
+<td>Developer</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Implementar módulo CRM (leads, e-mails, reuniões, etapas)</td>
+<td>Developer</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Testar o dashboard</td>
+<td>CEO</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Repassar informações ao time comercial</td>
+<td>CEO</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="resultado-da-validacao">Resultado da Validação<a class="headerlink" href="#resultado-da-validacao" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Item Validado</th>
+<th>Status</th>
+<th>Observação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vitrine Pública (CP4)</td>
+<td>✅</td>
+<td>Aprovado pelo CEO</td>
+</tr>
+<tr>
+<td>Painel de Gerenciamento Admin (CP5)</td>
+<td>✅</td>
+<td>Aprovado pelo CEO</td>
+</tr>
+<tr>
+<td>FAQ e Base de Conhecimentos (CP6)</td>
+<td>✅</td>
+<td>Aprovado pelo CEO</td>
+</tr>
+<tr>
+<td>Layout responsivo mobile (≥ 375 px)</td>
+<td>✅</td>
+<td>Validado na demonstração</td>
+</tr>
+<tr>
+<td>Layout responsivo desktop (≥ 1 280 px)</td>
+<td>✅</td>
+<td>Validado na demonstração</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="feedbacks-e-acoes">Feedbacks e Ações<a class="headerlink" href="#feedbacks-e-acoes" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Feedback do Cliente</th>
+<th>Ação à ser tomada</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Elogios ao design, animações e diferenciação de cores por seção</td>
+<td>Mantido — condizente com identidade da Crianex</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Fazer uma reunião ou troca de mensagens para alterar as informações (texto e imagens) dentro do site caso seja necessário</td>
+<td>Agendar reunião ou mandar screenshots e perguntar</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2FA não essencial no momento</td>
+<td>Adiado para iterações futuras</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Desejo de testar o dashboard</td>
+<td>Acesso será disponibilizado ao CEO</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Colocar uma visualização da senha durante o login</td>
+<td>techdebt jogado para IT2</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Implementar esqueci minha senha no login direto com o email(com verficação antecipada da existência do email)</td>
+<td>techdebt jogado para IT2</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Implementar esqueci minha senha no login direto com o email(com verficação antecipada da existência do email)</td>
+<td>techdebt jogado para IT2</td>
+</tr>
+</tbody>
+</table></div>
+        
+        
+    </div>
+
+    
+      <footer class="col-md-12 text-center">
+          
+          
+            <hr>
+            <p>
+            <small>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</small>
+            </p>
+          
+
+          
+          
+      </footer>
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../../../../js/bootstrap-3.0.3.min.js"></script>
+
+    
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/highlight.min.js"></script>
+        
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    <script>var base_url = "../../../.."</script>
+    
+    <script src="../../../../js/base.js"></script>
+    <script src="../../../../assets/nav-click.js"></script>
+    <script src="../../../../search/main.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+    </body>
+
+</html>

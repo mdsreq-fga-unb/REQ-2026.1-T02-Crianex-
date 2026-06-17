@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Plataforma de Gestão e Portfólio de Projetos SaaS">
+    <meta name="author" content="Equipe Crianex">
+    
+    <link rel="shortcut icon" href="../../../../img/favicon.ico">
+
+    
+    <title>Ata Technical Design Review — 17/05/2026 - Crianex</title>
+    
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/v4-shims.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.min.css">
+    <link href='//rsms.me/inter/inter.css' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
+    <link href="../../../../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="../../../../css/base.min.css" rel="stylesheet">
+    <link href="../../../../css/cinder.min.css" rel="stylesheet">
+
+    
+        
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/styles/github.min.css">
+        
+    
+    <link href="../../../../assets/extra.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+        <![endif]-->
+
+    
+
+     
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+
+            
+              <a class="navbar-brand" href="../../../..">Crianex</a>
+            
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="../../../..">Home</a>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Visão <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../../../../visao/cenario/">1 · Cenário</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../../../visao/solucao/">2 · Solução</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../../../visao/estrategias/">3 · Estratégias</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../../../visao/er/">4 · Eng. de Requisitos</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../../../visao/cronograma/">5 · Cronograma</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../../../visao/equipe/">6 · Equipe e Iteração</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../../../visao/dor-dod/">7 · DoR e DoD</a>
+</li>
+
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Lições Aprendidas</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../../../visao/10-licoes/10-1/">10.1 · Unidade 1</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../../../visao/10-licoes/10-2/">10.2 · Unidade 2</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../../../visao/10-licoes/10-3/">10.3 · Unidade 3</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Iterações <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../../../">Visão Geral</a>
+</li>
+
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Unidade 1</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../../unidade-1/">Resumo — Evidências</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../../unidade-1/atas/2026-04-09/">Ata — 09/04/2026</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../../unidade-1/atas/2026-04-22/">Ata Domain Modeling, Replenishment Macro e Commitment — 22/04/2026</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">IT1 — Vitrine Pública</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../">Resumo</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../features-entregues/">Features Entregues</a>
+</li>
+
+        
+            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Evidências</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../evidencias/design-tecnico/">Design Técnico</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../evidencias/prototipo/">Protótipo</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+        
+            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Validação</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../validacao/partial/">Partial Client Validation</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../validacao/formal/">Formal Client Validation</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+        
+            
+<li >
+    <a href="../../vv/">Resultados V&V</a>
+</li>
+
+        
+            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Atas de Reunião</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../2026-05-01/">Ata Compromisso das correções — 01/05/2026</a>
+</li>
+
+        
+            
+<li >
+    <a href="../2026-05-11/">Ata Feature Discovery Session — 11/05/2026</a>
+</li>
+
+        
+            
+<li >
+    <a href="../2026-05-14/">Ata Refinamento Requisitos — 14/05/2026</a>
+</li>
+
+        
+            
+<li class="active">
+    <a href="./">Ata Technical Design Review — 17/05/2026</a>
+</li>
+
+        
+            
+<li >
+    <a href="../2026-06-14/">Ata Artifact Closure — 14/06/2026</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+        
+    </ul>
+  </li>
+
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">IT2 — Lead Capture</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../../iteracao-2/">Resumo</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../../iteracao-2/features-entregues/">Features Entregues</a>
+</li>
+
+        
+            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Evidências</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../../iteracao-2/evidencias/design-tecnico/">Design Técnico</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+        
+            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Validação</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../../iteracao-2/validacao/partial/">Partial Client Validation</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../../iteracao-2/validacao/formal/">Formal Client Validation</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+        
+            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Atas de Reunião</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../../iteracao-2/atas/reuniao_commitment/">Ata Iteration 2 Replenishment Micro e Commitment</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../../iteracao-2/atas/reuniao_TDR2/">Technical Design Review IT2</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+        
+    </ul>
+  </li>
+
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">IT3 — Núcleo Operacional</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../../iteracao-3/">Resumo — Evidências</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Lista de Funcionalidades <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../../../../backlog/rastreabilidade/">Rastreabilidade</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../../../backlog/priorizacao/">Priorização</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../../../backlog/dependencias/">Mapa de Dependências</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Arquitetura <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../../../../arquitetura/">Arquitetura</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../../../arquitetura/roles/">Roles</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Entregas <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../../../../entregas/">Visão Geral</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../../../entregas/unidade-1/">Unidade 1</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../../../entregas/unidade-2/">Unidade 2</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../../../entregas/unidade-3/">Unidade 3</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../../../entregas/unidade-4/">Unidade 4</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../../../../referencias/">Referências</a>
+                    </li>
+                
+                
+                </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                            <i class="fas fa-search"></i> Search
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <div class="container">
+        
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="first-level active"><a href="#reuniao-17052026">Reunião — 17/05/2026</a></li>
+            <li class="second-level"><a href="#participantes">Participantes</a></li>
+                
+            <li class="second-level"><a href="#pauta">Pauta</a></li>
+                
+            <li class="second-level"><a href="#discussoes-e-decisoes">Discussões e Decisões</a></li>
+                
+                <li class="third-level"><a href="#1-priorizacao-matematica-objetiva-e-criterios-do-mvp">1. Priorização Matemática Objetiva e Critérios do MVP</a></li>
+                <li class="third-level"><a href="#2-ajustes-estruturais-e-impacto-no-cronograma">2. Ajustes Estruturais e Impacto no Cronograma</a></li>
+                <li class="third-level"><a href="#3-alinhamento-do-github-e-governanca-dor-dod">3. Alinhamento do GitHub e Governança (DOR / DOD)</a></li>
+                <li class="third-level"><a href="#4-technical-design-review-diagramas-e-feature-cards">4. Technical Design Review (Diagramas e Feature Cards)</a></li>
+                <li class="third-level"><a href="#5-homologacao-do-prototipo-de-alta-fidelidade-figma">5. Homologação do Protótipo de Alta Fidelidade (Figma)</a></li>
+            <li class="second-level"><a href="#encaminhamentos">Encaminhamentos</a></li>
+                
+            <li class="second-level"><a href="#metas-para-a-entrega-de-terca-feira-1905-foco-em-processo">Metas para a Entrega de Terça-Feira (19/05) — Foco em Processo</a></li>
+                
+            <li class="second-level"><a href="#gravacao-da-reuniao">Gravação da Reunião</a></li>
+                
+    </ul>
+</div></div>
+        <div class="col-md-9" role="main">
+
+<h1 id="reuniao-17052026">Reunião — 17/05/2026<a class="headerlink" href="#reuniao-17052026" title="Permanent link">&para;</a></h1>
+<p><strong>Data:</strong> 17 de Maio de 2026
+<strong>Local:</strong> Google meets / Compartilhamento de Tela (Miro e Figma)
+<strong>Assunto:</strong> Technical Design Review, Matriz de Priorização Matemática e Homologação de Protótipo</p>
+<hr />
+<h2 id="participantes">Participantes<a class="headerlink" href="#participantes" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Nome</th>
+<th>Papel</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Lucas Zanetti</td>
+<td>Project Manager · Chief Architect · Development Manager(Backup)</td>
+<td>Presente</td>
+</tr>
+<tr>
+<td>Heitor</td>
+<td>Development Manager · Class Owner</td>
+<td>Presente</td>
+</tr>
+<tr>
+<td>Hugo</td>
+<td>Class Owner</td>
+<td>Presente</td>
+</tr>
+<tr>
+<td>Philipe</td>
+<td>Chief Programmer · Class Owner</td>
+<td>Presente</td>
+</tr>
+<tr>
+<td>Leonardo</td>
+<td>Chief Programmer · Class Owner</td>
+<td>Presente</td>
+</tr>
+<tr>
+<td>Camile</td>
+<td>Class Owner · Documentation Lead · Requirements Custodian</td>
+<td>Presente</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="pauta">Pauta<a class="headerlink" href="#pauta" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Priorização Matemática Objetiva e Critérios do MVP</li>
+<li>Ajustes Estruturais e Impacto no Cronograma</li>
+<li>Alinhamento do GitHub e Governança (DOR / DOD)</li>
+<li>Technical Design Review (Diagramas e Feature Cards)</li>
+<li>Homologação do Protótipo de Alta Fidelidade (Figma)</li>
+</ol>
+<hr />
+<h2 id="discussoes-e-decisoes">Discussões e Decisões<a class="headerlink" href="#discussoes-e-decisoes" title="Permanent link">&para;</a></h2>
+<h3 id="1-priorizacao-matematica-objetiva-e-criterios-do-mvp">1. Priorização Matemática Objetiva e Critérios do MVP<a class="headerlink" href="#1-priorizacao-matematica-objetiva-e-criterios-do-mvp" title="Permanent link">&para;</a></h3>
+<p>O PM Lucas Zanetti apresentou a estruturação matemática utilizada para gerar a Matriz de Valor x Esforço de forma 100% objetiva, atendendo aos feedbacks do professor orientador. O cálculo foi dividido em pesos específicos:</p>
+<ul>
+<li><strong>Cálculo de Valor:</strong> Valor = (Impacto de Negócio x 3) + (Frequência de Uso x 3) + (Valor para o Usuário x 2) + (Impacto Estratégico x 2)</li>
+<li><strong>Cálculo de Esforço:</strong> Esforço = (Complexidade Técnica x 3) + (Dependências x 2) + (Risco x 2) + (Tempo x 1)</li>
+<li><strong>Índice de Prioridade (IP):</strong> Determinado pela razão Valor/Esforço. Toda feature ou requisito com <strong>IP &gt; 1,5</strong> foi automaticamente classificado como integrante do <strong>MVP (Quadrante 1)</strong>. As tabelas calculadas foram enviadas para validação final assíncrona do cliente Otávio.</li>
+</ul>
+<h3 id="2-ajustes-estruturais-e-impacto-no-cronograma">2. Ajustes Estruturais e Impacto no Cronograma<a class="headerlink" href="#2-ajustes-estruturais-e-impacto-no-cronograma" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Redução definitiva de CPs:</strong> Três CPs redundantes foram formalmente eliminadas ou fundidas na árvore de rastreabilidade (ex: unificação da parte institucional na CP4).</li>
+<li><strong>Antecipação do Painel Admin:</strong> O Painel de Gerenciamento do Administrador foi trazido para a iteração atual (atrelado à OE2), visto que as operações de CRUD e reordenação por <em>drag-and-drop</em> da CP4 dependem diretamente dessa estrutura de login e rotas seguras.</li>
+<li><strong>Nova Timeline:</strong> A entrega final de software/código funcional da Interação 1 foi estendida para o dia <strong>25/05/2026</strong> (uma segunda-feira). A iteração subsequente será focada em <em>Lead Capture</em> devido ao seu maior peso de prioridade frente ao Núcleo Operacional.</li>
+</ul>
+<h3 id="3-alinhamento-do-github-e-governanca-dor-dod">3. Alinhamento do GitHub e Governança (DOR / DOD)<a class="headerlink" href="#3-alinhamento-do-github-e-governanca-dor-dod" title="Permanent link">&para;</a></h3>
+<p>Foi aberta uma macro issue de governança com 7 sub-issues para organizar as pendências imediatas do repositório:</p>
+<ul>
+<li><strong>Philipe e Hugo:</strong> Revisar e aprovar o PR com a árvore de requisitos no GitHub Pages.</li>
+<li><strong>Camile:</strong> Finalizar a seção de "Estratégias" no documento de visão e Git Pages.</li>
+<li><strong>Lucas:</strong> Ajustar as definições de DOR (<em>Definition of Ready</em>) e DOD (<em>Definition of Done</em>) no Pages para refletir as especificidades do rito do FDD.</li>
+</ul>
+<h3 id="4-technical-design-review-diagramas-e-feature-cards">4. Technical Design Review (Diagramas e Feature Cards)<a class="headerlink" href="#4-technical-design-review-diagramas-e-feature-cards" title="Permanent link">&para;</a></h3>
+<p>O grupo validou o fluxo de dados dos Diagramas de Sequência Leves, mapeando cada macro feature como uma issue mãe e seus desdobramentos técnicos (requisitos, RNFs e critérios de design) como sub-issues.</p>
+<h4 id="41-modulo-plataforma-publica-cp4">4.1 Módulo Plataforma Pública (CP4)<a class="headerlink" href="#41-modulo-plataforma-publica-cp4" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Feature 12 (Gerenciar Produto SAS):</strong> Admin atua → Frontend valida básico → API intercepta → Supabase Auth/RLS valida privilégios do token JWT → DB processa a transação (<code>INSERT</code>/<code>UPDATE</code>/<code>DELETE</code>) sem quebrar integridade com histórico de tickets. O fluxo foi simplificado para mover o grosso das validações lógicas e de privilégios para a camada do Supabase. Esforço estimado: <strong>3</strong>.</li>
+<li><strong>Feature 13 (Controlar Publicação):</strong> Fluxo simplificado para gerenciar a flag ativo/inativo de exibição pública. Em caso de requisição direta maliciosa via console do navegador sem token válido, o backend interceptará via RLS e retornará erro 403 (<em>Forbidden</em>). No frontend, os elementos visuais de controle serão ocultados nativamente para usuários sem a role administrativa. Esforço estimado: <strong>2</strong>.</li>
+<li><strong>Feature 14 (Exibir Contato / Capturar Lead):</strong> Fluxo público de envio. Foi decidido a <strong>eliminação do ReCAPTCHA</strong> para mitigar estresse na experiência do usuário, substituindo-o estritamente por regras robustas de <strong>Rate Limit</strong> na API contra ataques de spam. O backend garante transações ACID para evitar salvamento de leads parciais ou corrompidos. Esforço estimado: <strong>2</strong>.</li>
+<li><strong>Feature 16 (Disponibilizar Informações Institucionais):</strong> Simplificação total do fluxo. Removida a necessidade de cache complexo no backend para dados institucionais, assumindo que textos e imagens de apresentação serão renderizados de forma direta e estática pela interface. Esforço estimado: <strong>1</strong>.</li>
+</ul>
+<h4 id="42-modulo-autenticacao-e-gestao-interna-cp6cp7-antiga">4.2 Módulo Autenticação e Gestão Interna (CP6/CP7 antiga)<a class="headerlink" href="#42-modulo-autenticacao-e-gestao-interna-cp6cp7-antiga" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Feature 26 (Autenticar Acesso Seguro):</strong> Mapeamento do login via Supabase Auth com geração de sessão JWT e redirecionamento para <code>/admin</code>. Tentativas inválidas disparam mensagens genéricas para segurança. O Logout executa o <em>signout</em> no banco, limpa o <em>local storage</em> e protege a rota via <em>refresh token</em> no <em>server-side</em>, bloqueando acessos diretos por URL. Removida a ideia de login social com Google por complexidade desnecessária neste MVP. Esforço estimado: <strong>4</strong>.</li>
+<li><strong>Feature 27 (Permitir Acesso ao Painel Admin):</strong> Validação em tempo real do JWT e da <em>role</em> do administrador, garantindo o isolamento completo de dados por perfil. Esforço estimado: <strong>3</strong>.</li>
+<li><strong>Feature 28 (Gerenciar Membros):</strong> Interface para CRUD completo da equipe técnica Crianex com tratamento nativo de falhas de autorização. Esforço estimado: <strong>4</strong>.</li>
+</ul>
+<h4 id="43-modulo-faq-e-base-de-conhecimento-cp8">4.3 Módulo FAQ e Base de Conhecimento (CP8)<a class="headerlink" href="#43-modulo-faq-e-base-de-conhecimento-cp8" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Leonardo</strong> apresentou os feature cards do FAQ, padronizando as operações de CRUD e categorização em macro-estruturas (<code>Gerenciar Artigos de FAQ</code> e <code>Controlar Publicação de FAQ</code>) com integridade referencial ligada aos IDs dos produtos. Esforço estimado: <strong>2</strong>.</li>
+<li><strong>Feature 17 (Coletar Avaliação de Utilidade):</strong> Fluxo de feedback anônimo ("Útil / Não Útil") integrado no final dos artigos. O clique envia a requisição de forma assíncrona dentro do limite de 2 segundos, desabilita os botões e oculta o componente sem a necessidade de alertas intrusivos ou <em>reloads</em> na tela. Esforço estimado: <strong>1</strong>.</li>
+</ul>
+<h3 id="5-homologacao-do-prototipo-de-alta-fidelidade-figma">5. Homologação do Protótipo de Alta Fidelidade (Figma)<a class="headerlink" href="#5-homologacao-do-prototipo-de-alta-fidelidade-figma" title="Permanent link">&para;</a></h3>
+<p>O PM Lucas demonstrou o protótipo de alta fidelidade em ambiente navegável. A interface pública conta com a Home corporativa, carrossel de produtos com métricas integradas, seção "Sobre Nós", suporte a Dark Mode e internacionalização funcional (PT/EN via i18n). A área administrativa compreende a tela de login isolada, dashboard com histórico de notificações, visão em Kanban das colunas do CRM de Leads, painel de inventário de produtos SAS, gerenciador de FAQ e histórico de logs de auditoria. A equipe aprovou o layout por unanimidade, pontuando apenas a necessidade futura de uma seção dedicada para relatórios financeiros.</p>
+<hr />
+<h2 id="encaminhamentos">Encaminhamentos<a class="headerlink" href="#encaminhamentos" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Tarefa</th>
+<th>Responsável</th>
+<th>Prazo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Gravação e edição do vídeo de apresentação da Unidade 2</td>
+<td>Toda a Equipe</td>
+<td>18/05/2026</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Ajustar no Miro as correções levantadas nos fluxos (F13, F14 e F16)</td>
+<td>Philipe / Lucas</td>
+<td>18/05/2026</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Revisar e aprovar o PR com a tabela de requisitos no Git Pages</td>
+<td>Philipe / Hugo</td>
+<td>18/05/2026</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="metas-para-a-entrega-de-terca-feira-1905-foco-em-processo">Metas para a Entrega de Terça-Feira (19/05) — Foco em Processo<a class="headerlink" href="#metas-para-a-entrega-de-terca-feira-1905-foco-em-processo" title="Permanent link">&para;</a></h2>
+<p>Para a apresentação oficial com o professor no dia 19/05, a equipe se compromete a entregar todos os artefatos de planejamento prontos e validados:</p>
+<ul>
+<li><strong>Miro:</strong> Árvore de Rastreabilidade, Matrizes de Valor x Esforço calculadas e Diagramas de Sequência revisados.</li>
+<li><strong>GitHub:</strong> Issues totalmente cadastradas e descritas com critérios de aceitação em formato BDD.</li>
+<li><strong>Protótipo HTML:</strong> Evidências do protótipo e validação do Cliente.</li>
+</ul>
+<hr />
+<h2 id="gravacao-da-reuniao">Gravação da Reunião<a class="headerlink" href="#gravacao-da-reuniao" title="Permanent link">&para;</a></h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/N9WbRTMmQks?si=xEf4q-teQCbsJvT6" title="Gravação da Reunião" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<hr />
+<p><em>Ata redigida por Heitor Macedo Ricardo para registro e consulta dos membros da equipe.</em></p></div>
+        
+        
+    </div>
+
+    
+      <footer class="col-md-12 text-center">
+          
+          
+            <hr>
+            <p>
+            <small>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</small>
+            </p>
+          
+
+          
+          
+      </footer>
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../../../../js/bootstrap-3.0.3.min.js"></script>
+
+    
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/highlight.min.js"></script>
+        
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    <script>var base_url = "../../../.."</script>
+    
+    <script src="../../../../js/base.js"></script>
+    <script src="../../../../assets/nav-click.js"></script>
+    <script src="../../../../search/main.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+    </body>
+
+</html>
