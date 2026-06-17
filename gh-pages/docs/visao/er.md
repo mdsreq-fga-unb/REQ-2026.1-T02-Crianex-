@@ -2,29 +2,67 @@
 
 ## Histórico de Revisão
 
-| Versão | Data       | Descrição                                                                                                                 | Autor(es)        |
-| ------ | ---------- | ------------------------------------------------------------------------------------------------------------------------- | ---------------- |
-| 1.0    | 12/04/2026 | Criação das seções 4.1 a 4.4                                                                                              | Heitor e Lucas   |
-| 1.1    | 13/04/2026 | Revisão da seção 4                                                                                                        | Equipe Crianex   |
-| 1.2    | 04/05/2026 | Ajustes da seção 4.1                                                                                                      | Heitor           |
-| 1.3    | 04/05/2026 | Ajustes da seção 4.2                                                                                                      | Heitor           |
-| 1.4    | 06/05/2026 | Revisão dos ajustes da seção 4.1 e reajustes                                                                              | Philipe          |
-| 1.5    | 05/05/2026 | Ajustes de clareza e consistência na seção 4                                                                              | Hugo             |
-| 1.6    | 08/05/2026 | Ajustes de cerimônias e técnicas                                                                                          | Lucas e Philipe  |
-| 1.7    | 18/05/2026 | Reestruturação completa: separação entre etapas únicas e iterativas do FDD; adição da tabela de atividades de ER          | Lucas A. Zanetti |
-| 1.8    | 06/06/2026 | Reestruturação da tabela 4.5: colunas Etapa FDD · Atividade de ER · Técnicas; enunciação explícita das 6 atividades de ER | Lucas A. Zanetti |
+| Versão | Data       | Descrição                                                                                                                                                                  | Autor(es)        |
+| ------ | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
+| 1.0    | 12/04/2026 | Criação das seções 4.1 a 4.4                                                                                                                                               | Heitor e Lucas   |
+| 1.1    | 13/04/2026 | Revisão da seção 4                                                                                                                                                         | Equipe Crianex   |
+| 1.2    | 04/05/2026 | Ajustes da seção 4.1                                                                                                                                                       | Heitor           |
+| 1.3    | 04/05/2026 | Ajustes da seção 4.2                                                                                                                                                       | Heitor           |
+| 1.4    | 06/05/2026 | Revisão dos ajustes da seção 4.1 e reajustes                                                                                                                               | Philipe          |
+| 1.5    | 05/05/2026 | Ajustes de clareza e consistência na seção 4                                                                                                                               | Hugo             |
+| 1.6    | 08/05/2026 | Ajustes de cerimônias e técnicas                                                                                                                                           | Lucas e Philipe  |
+| 1.7    | 18/05/2026 | Reestruturação completa: separação entre etapas únicas e iterativas do FDD; adição da tabela de atividades de ER                                                           | Lucas A. Zanetti |
+| 1.8    | 06/06/2026 | Reestruturação da tabela 4.5: colunas Etapa FDD · Atividade de ER · Técnicas; enunciação explícita das 6 atividades de ER                                                  | Lucas A. Zanetti |
+| 1.9    | 17/06/2026 | Inversão da lógica de apresentação: a seção passa a partir das **atividades de ER** (o quê e como) antes de encaixá-las nas **etapas do FDD** (quando e em qual cerimônia) | Lucas A. Zanetti |
 
 ---
 
 ## 4.1 Abordagem de Engenharia de Requisitos
 
-O projeto Crianex adota um **Processo Híbrido (FDD + Kanban)**. O FDD (Feature-Driven Development) estrutura o planejamento orientado a valor — o que construir —, enquanto o Kanban fornece o controle visual da execução — quando puxar o trabalho e quando parar — por meio da limitação de Work in Progress (WIP).
+O projeto Crianex adota um **Processo Híbrido (FDD + Kanban)**. O FDD (Feature-Driven Development) estrutura o planejamento orientado a valor (o que construir), enquanto o Kanban fornece o controle visual da execução (quando puxar o trabalho e quando parar) por meio da limitação de Work in Progress (WIP).
 
-O FDD é composto por **5 etapas**, mas elas **não são todas iterativas**. A separação entre o que ocorre uma única vez e o que se repete em cada iteração é central para entender como o processo funciona no projeto Crianex:
+Antes de descrever **quando** cada técnica é usada (etapas e cerimônias do FDD), é preciso deixar claro **o quê** é feito em termos de Engenharia de Requisitos e **como** cada técnica é aplicada. Por isso, a seção segue uma ordem deliberada:
+
+1. **4.2 — Atividades e Técnicas de ER**: tabela mestre com todas as técnicas utilizadas no projeto, a atividade clássica de ER à qual cada uma pertence e o formato/especificação concreta de uso.
+2. **4.3 a 4.6 — Etapas do FDD**: como essas mesmas técnicas (já apresentadas em 4.2) são encaixadas nas etapas e cerimônias do FDD, distinguindo o que é feito uma única vez do que se repete a cada iteração.
 
 ---
 
-## 4.2 Etapas Únicas — Realizadas uma vez no início do projeto
+## 4.2 Atividades e Técnicas de Engenharia de Requisitos
+
+Esta tabela é a fonte da verdade sobre **o que** o projeto Crianex usa de Engenharia de Requisitos, independentemente de qual etapa do FDD a aplica. Toda técnica do processo está classificada em uma das seis atividades clássicas de ER — **Elicitação e Descoberta**, **Análise e Consenso**, **Declaração**, **Representação**, **Verificação e Validação** e **Organização e Atualização** — e acompanhada do formato/especificação concreta usado pela equipe (não apenas o nome da técnica).
+
+| Atividade de ER                 | Técnica                               | Especificação / Formato de uso                                                                                                                                               |
+| ------------------------------- | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Elicitação e Descoberta**     | Color Modeling                        | Workshop com o Domain Expert (Otávio) para identificar visualmente classes, papéis, eventos e agregados do domínio, antes de qualquer feature ser escrita.                   |
+|                                 | Feature Discovery Session             | Sessão dedicada com o Domain Expert para transformar necessidades de negócio brutas em candidatas a feature, ainda sem formato final.                                        |
+| **Análise e Consenso**          | Vertical Slicing                      | Toda feature é decomposta em fatias que entregam valor de ponta a ponta (UI → API → dado), nunca em camadas técnicas isoladas.                                               |
+|                                 | Matriz Valor × Esforço                | Cada feature é posicionada em quadrantes (alto/baixo valor × alto/baixo esforço) para apoiar a priorização macro e por iteração.                                             |
+|                                 | Priorização por IP                    | `IP = VB / PT`, onde `PT = (CX + ES) / 2`. VB, CX e ES em escala 1–5. IP ≥ 1,50 = alta prioridade; 1,00–1,49 = média; < 1,00 = baixa.                                        |
+|                                 | Iteration Goal Statement              | Uma frase única, demonstrável e orientada a valor que sintetiza o objetivo da iteração, acordada na Iteration Commitment.                                                    |
+| **Declaração de Requisitos**    | Feature Card Specification            | Toda feature é escrita no formato fixo `<ação> <resultado> <de/para/no/com> <objeto>` (ex.: "Cadastrar produto SaaS para o portfólio").                                      |
+|                                 | Critérios de aceite em BDD            | Cada issue/feature tem critérios de aceite escritos em **Dado / Quando / Então**, nunca como User Story solta — é parte do Definition of Ready.                              |
+| **Representação de Requisitos** | Diagrama de domínio + Glossário       | Diagrama de classes do domínio produzido no Color Modeling, acompanhado de um glossário de termos de negócio compartilhado pela equipe.                                      |
+|                                 | Feature Cards (Miro)                  | Cada feature aprovada é registrada como card visual no Miro, linkado à sua CP de origem e rastreável até os RFs/RNFs.                                                        |
+|                                 | Diagrama de sequência leve            | Esboço rápido de interações entre componentes/integrações de uma feature, usado na Technical Design Review antes do diagrama formal.                                         |
+|                                 | Diagrama de sequência formal          | Versão detalhada do diagrama de sequência para features com integrações ou regras de negócio complexas, produzida quando o esboço leve não é suficiente.                     |
+|                                 | Prototipagem                          | Mockup ou protótipo de tela usado quando a feature tem impacto direto de UI/UX, para validar fluxo antes da codificação.                                                     |
+| **Verificação e Validação**     | INVEST                                | Checklist aplicado a cada fatia de feature: Independente, Negociável, Valiosa, Estimável, Pequena, Testável — usado para verificar se a fatia está apta a entrar no backlog. |
+|                                 | Smoke test end-to-end                 | Teste rápido de ponta a ponta executado na Feature Build Consolidation para confirmar que todas as fatias da feature estão integradas.                                       |
+|                                 | Verificação de critérios de aceite    | Conferência item a item dos critérios BDD/checklist da feature contra o comportamento implementado.                                                                          |
+|                                 | Validação assíncrona                  | Vídeo curto ou screenshots + checklist de critérios de aceite, enviados a Otávio via WhatsApp em até 24h, sem esperar reunião formal.                                        |
+|                                 | Demo orientada a valor                | Demonstração na Formal Client Validation narrada pelo Iteration Goal ("o cliente consegue X"), não por lista de features isoladas.                                           |
+| **Organização e Atualização**   | Backlog macro priorizado              | Lista de todas as features do projeto, ordenada por IP, mantida no Miro/GitHub Projects e revisada a cada replenishment macro.                                               |
+|                                 | Roadmap de iterações + Feature Matrix | Visão de qual feature entra em qual iteração e quem é o Chief Programmer responsável, atualizada no Plan by Feature.                                                         |
+|                                 | Requirements Traceability Matrix      | Tabela viva ligando OE → CP → Feature → RF/RNF, atualizada a cada Feature Build Consolidation (ver `rastreabilidade.md`).                                                    |
+|                                 | Backlog Reorganization                | Sessão (eventual) de reordenação do backlog a partir do feedback capturado na Formal Client Validation.                                                                      |
+|                                 | Checklist de empacotamento            | Lista de verificação usada na Iteration Artifact Closure para garantir que todos os artefatos exigidos pelo cliente acadêmico foram entregues.                               |
+
+A partir de 4.3, o documento mostra **onde** (em qual etapa e cerimônia do FDD) cada uma dessas técnicas é efetivamente colocada em prática.
+
+---
+
+## 4.3 Etapas Únicas — Realizadas uma vez no início do projeto
 
 As três primeiras etapas do FDD constroem a fundação do produto: o modelo de domínio, a lista de funcionalidades e o plano de desenvolvimento. São executadas **uma única vez**, antes da primeira iteração de construção, e seus artefatos servem de insumo para todas as iterações seguintes.
 
@@ -77,7 +115,7 @@ A priorização é feita com base na matriz **Valor × Esforço** e no **Índice
 
 ---
 
-## 4.3 Etapas Iterativas — Repetidas em cada iteração
+## 4.4 Etapas Iterativas — Repetidas em cada iteração
 
 As duas últimas etapas do FDD são executadas **a cada iteração**, para cada conjunto de features comprometido. É aqui que o Kanban entra como sistema de gestão de fluxo, complementando o FDD com visibilidade operacional e controle de WIP.
 
@@ -181,7 +219,7 @@ Cerimônia de fechamento da iteração que empacota todos os artefatos que o cli
 
 ---
 
-## 4.4 Visão Consolidada do Processo
+## 4.5 Visão Consolidada do Processo
 
 ```mermaid
 flowchart TD
@@ -204,25 +242,3 @@ flowchart TD
     style unico fill:#e3f2fd,stroke:#1565c0,color:#000
     style iter fill:#e8f5e9,stroke:#2e7d32,color:#000
 ```
-
----
-
-## 4.5 Atividades de Engenharia de Requisitos
-
-O processo híbrido FDD + Kanban cobre as seis atividades clássicas de Engenharia de Requisitos — **Elicitação e Descoberta**, **Análise e Consenso**, **Declaração**, **Representação**, **Verificação e Validação** e **Organização e Atualização** — distribuídas entre as cinco etapas do FDD. A tabela abaixo mapeia, por etapa, quais atividades de ER são realizadas e quais técnicas cada uma emprega.
-
-| Etapa FDD                                     | Atividade de ER           | Técnicas                                                                                                                                     |
-| --------------------------------------------- | ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Etapa 1** — Develop an Overall Model        | Elicitação e Descoberta   | Color Modeling                                                                                                                               |
-|                                               | Representação             | Diagrama de domínio · Glossário de termos                                                                                                    |
-| **Etapa 2** — Build a Feature List            | Elicitação e Descoberta   | Feature Discovery Session                                                                                                                    |
-|                                               | Análise e Consenso        | Vertical Slicing · INVEST                                                                                                                    |
-|                                               | Declaração                | Feature Card Specification (`<ação> <resultado> <de/para/no/com> <objeto>`)                                                                  |
-|                                               | Representação             | Feature Cards                                                                                                                                |
-| **Etapa 3** — Plan by Feature                 | Análise e Consenso        | Matriz Valor × Esforço · Priorização IP (VB / PT)                                                                                            |
-|                                               | Organização e Atualização | Backlog macro priorizado · Roadmap de iterações · Feature Matrix                                                                             |
-| **Etapa 4** — Design by Feature _(iterativa)_ | Análise e Consenso        | Reordenação por IP · Iteration Goal Statement                                                                                                |
-|                                               | Declaração                | Critérios de aceite BDD (Dado / Quando / Então) · Notas de design técnico                                                                    |
-|                                               | Representação             | Diagrama de sequência leve · Análise de impacto · Prototipagem                                                                               |
-| **Etapa 5** — Build by Feature _(iterativa)_  | Verificação e Validação   | Smoke test end-to-end · Verificação de critérios de aceite · Validação assíncrona (vídeo / screenshots + checklist) · Demo orientada a valor |
-|                                               | Organização e Atualização | Requirements Traceability Matrix · Backlog Reorganization · Checklist de empacotamento                                                       |
