@@ -15,6 +15,7 @@
 | 1.8    | 06/06/2026 | Reestruturação da tabela 4.5: colunas Etapa FDD · Atividade de ER · Técnicas; enunciação explícita das 6 atividades de ER                                                                | Lucas A. Zanetti |
 | 1.9    | 17/06/2026 | Reestruturação ER-primeiro: atividades de Engenharia de Requisitos promovidas a nível principal; processo FDD + Kanban rebaixado a camada de execução (§4.3)                             | Heitor           |
 | 1.10   | 17/06/2026 | Separação ER × ESw: artefatos de design técnico e smoke test movidos para nova trilha de Engenharia de Software (§4.5); V&V de requisitos reforçada com DoR, DoD e inspeção de requisito | Heitor           |
+| 1.11   | 18/06/2026 | Consolidação do PR #174: técnicas do §4.2 enriquecidas com o formato/especificação concreta de uso de cada uma (IP, INVEST, Vertical Slicing, Feature Card, validações etc.)             | Heitor           |
 
 ---
 
@@ -40,8 +41,8 @@ Esta seção é o nível principal da documentação de requisitos do Crianex. C
 
 **Técnicas.**
 
-- _Color Modeling_ — organização visual dos elementos do domínio para identificar classes, papéis, eventos e agregados
-- _Feature Discovery Session_ — descoberta e refinamento de funcionalidades junto ao Domain Expert
+- _Color Modeling_ — workshop com o Domain Expert (Otávio) para identificar visualmente classes, papéis, eventos e agregados do domínio, antes de qualquer feature ser escrita
+- _Feature Discovery Session_ — sessão dedicada com o Domain Expert para transformar necessidades de negócio brutas em candidatas a feature, ainda sem formato final
 
 **Artefatos gerados:** diagrama de domínio, glossário de termos, Feature Cards e ata da sessão.
 
@@ -55,12 +56,12 @@ Esta seção é o nível principal da documentação de requisitos do Crianex. C
 
 **Técnicas.**
 
-- _Vertical Slicing_ — decomposição em partes menores com valor demonstrável de ponta a ponta
-- _INVEST_ — garante que cada fatia seja independente, negociável, valiosa, estimável, pequena e testável
-- _Matriz Valor × Esforço_ — posiciona cada feature em quadrantes de prioridade
-- _Priorização IP (VB / PT)_ — ordena features por IP = VB / PT, onde PT = (CX + ES) / 2
+- _Vertical Slicing_ — toda feature é decomposta em fatias que entregam valor de ponta a ponta (UI → API → dado), nunca em camadas técnicas isoladas
+- _INVEST_ — checklist aplicado a cada fatia de feature (Independente, Negociável, Valiosa, Estimável, Pequena, Testável) para verificar se está apta a entrar no backlog
+- _Matriz Valor × Esforço_ — cada feature é posicionada em quadrantes (alto/baixo valor × alto/baixo esforço) para apoiar a priorização macro e por iteração
+- _Priorização IP (VB / PT)_ — `IP = VB / PT`, onde `PT = (CX + ES) / 2`; VB, CX e ES em escala 1–5. IP ≥ 1,50 = alta prioridade; 1,00–1,49 = média; < 1,00 = baixa
 - _Reordenação por IP_ — reordenação das features conforme o contexto da iteração
-- _Iteration Goal Statement_ — formulação do objetivo principal da iteração
+- _Iteration Goal Statement_ — uma frase única, demonstrável e orientada a valor que sintetiza o objetivo da iteração, acordada na Iteration Commitment
 
 **Artefatos gerados:** backlog macro priorizado, roadmap de iterações, Feature Matrix, backlog priorizado da iteração, lista de features comprometidas e Iteration Goal documentado.
 
@@ -74,8 +75,8 @@ Esta seção é o nível principal da documentação de requisitos do Crianex. C
 
 **Técnicas.**
 
-- _Feature Card Specification_ — padroniza a escrita da feature na formulação `<ação> <resultado> <de/para/no/com> <objeto>`
-- _Critérios de aceite BDD_ — formulação Dado / Quando / Então
+- _Feature Card Specification_ — toda feature é escrita no formato fixo `<ação> <resultado> <de/para/no/com> <objeto>` (ex.: "Cadastrar produto SaaS para o portfólio")
+- _Critérios de aceite BDD_ — cada issue/feature tem critérios de aceite escritos em Dado / Quando / Então, nunca como User Story solta — é parte do Definition of Ready
 
 **Artefatos gerados:** Feature Cards com critérios de aceite documentados.
 
@@ -89,10 +90,10 @@ Esta seção é o nível principal da documentação de requisitos do Crianex. C
 
 **Técnicas.**
 
-- _Diagrama de domínio_ — representa entidades, relacionamentos e regras centrais do negócio
-- _Glossário de termos_ — vocabulário compartilhado do domínio
-- _Feature Cards_ — representação das funcionalidades como unidades de valor
-- _Prototipagem_ — validação visual do requisito com o cliente, quando aplicável
+- _Diagrama de domínio_ — diagrama de classes do domínio produzido no Color Modeling, representando entidades, relacionamentos e regras centrais do negócio
+- _Glossário de termos_ — vocabulário de negócio compartilhado pela equipe
+- _Feature Cards (Miro)_ — cada feature aprovada é registrada como card visual no Miro, linkada à sua CP de origem e rastreável até os RFs/RNFs
+- _Prototipagem_ — mockup ou protótipo de tela usado quando a feature tem impacto direto de UI/UX, para validar o fluxo antes da codificação
 
 **Artefatos gerados:** diagrama de domínio, glossário de termos, Feature Cards e Feature Matrix.
 
@@ -109,9 +110,9 @@ Esta seção é o nível principal da documentação de requisitos do Crianex. C
 - _Definition of Ready (DoR)_ — gate de verificação de **entrada** do requisito: confirma que o requisito está claro, completo e testável antes de entrar na iteração ([§7 · DoR e DoD](dor-dod.md))
 - _Definition of Done (DoD)_ — gate de validação de **saída** do requisito: confirma que o requisito foi efetivamente atendido ([§7 · DoR e DoD](dor-dod.md))
 - _Inspeção do requisito / critério de aceite_ — revisão da **qualidade do requisito** e de seus critérios de aceite. Distingue-se da revisão de código em Pull Request, que é verificação de Engenharia de Software (§4.5): aqui o foco é inspecionar o requisito, não a implementação
-- _Verificação de critérios de aceite_ — checagem dos critérios definidos para cada feature
-- _Validação assíncrona_ — vídeo curto ou screenshots + checklist de critérios de aceite
-- _Demo orientada a valor_ — narrativa centrada no Iteration Goal, não em funcionalidades isoladas
+- _Verificação de critérios de aceite_ — conferência item a item dos critérios BDD/checklist da feature contra o comportamento implementado
+- _Validação assíncrona_ — vídeo curto ou screenshots + checklist de critérios de aceite, enviados a Otávio via WhatsApp em até 24h, sem esperar reunião formal
+- _Demo orientada a valor_ — demonstração na Formal Client Validation narrada pelo Iteration Goal ("o cliente consegue X"), não por lista de features isoladas
 
 **Artefatos gerados:** DoR e DoD aplicados, matriz de rastreabilidade atualizada, comentário de validação na issue, checklist marcado, ata da demo e aprovação formal de Otávio.
 
@@ -125,12 +126,11 @@ Esta seção é o nível principal da documentação de requisitos do Crianex. C
 
 **Técnicas.**
 
-- _Backlog macro priorizado_ — visão priorizada de todas as features
-- _Roadmap de iterações_ — sequência de entrega orientada a valor, com CPs por iteração
-- _Feature Matrix_ — mapa consolidado das funcionalidades
-- _Requirements Traceability Matrix_ — rastreabilidade entre requisitos, features e entregas
-- _Backlog Reorganization_ — reorganização do backlog a partir do feedback capturado
-- _Checklist de empacotamento_ — garantia de completude dos artefatos da iteração
+- _Backlog macro priorizado_ — lista de todas as features do projeto, ordenada por IP, mantida no Miro/GitHub Projects e revisada a cada replenishment macro
+- _Roadmap de iterações + Feature Matrix_ — visão de qual feature entra em qual iteração e quem é o Chief Programmer responsável, atualizada no Plan by Feature
+- _Requirements Traceability Matrix_ — tabela viva ligando OE → CP → Feature → RF/RNF, atualizada a cada Feature Build Consolidation (ver [rastreabilidade](../backlog/rastreabilidade.md))
+- _Backlog Reorganization_ — sessão (eventual) de reordenação do backlog a partir do feedback capturado na Formal Client Validation
+- _Checklist de empacotamento_ — lista de verificação usada na Iteration Artifact Closure para garantir que todos os artefatos exigidos pelo cliente acadêmico foram entregues
 
 **Artefatos gerados:** backlog macro priorizado, roadmap de iterações, Feature Matrix, matriz de rastreabilidade, Documento de Visão e GitHub Pages atualizados, e backlog congelado da iteração.
 
