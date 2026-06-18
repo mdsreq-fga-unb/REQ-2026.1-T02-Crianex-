@@ -256,12 +256,12 @@ Artefato gerado a partir da **Domain Modeling** do FDD em reunião com os stakeh
   <p><em>Fonte: Comunicação direta com o cliente (Domain Expert), 17/05/2026.</em></p>
 </div>
 
-| Feedback Recebido                                                                   | Aprovação   | Ação Tomada                                                                                           |
-| ----------------------------------------------------------------------------------- | ----------- | ----------------------------------------------------------------------------------------------------- |
-| Formato de priorização muito claro — motivo de cada item priorizado está explícito  | ✅ Elogio   | Mantido                                                                                               |
-| Features (RFs agrupados) não estão ordenados por prioridade — ao contrário dos RNFs | ✅ Correção | Tabela de Features reordenada por IP decrescente em [priorizacao.md](../../../backlog/priorizacao.md) |
-| Ausência de flag ou coluna indicando o que entra no MVP                             | ✅ Adição   | Coluna **MVP** adicionada nas tabelas de Features e RNFs (✅ Q1 = Alta / ❌ Q2 em diante)             |
-| Dificuldade de leitura de algumas tabelas no GitHub Pages                           | ✅ Registro | Tabelas revisadas                                                                                     |
+| Feedback Recebido                                                                   | Aprovação | Ação Tomada                                                                                           |
+| ----------------------------------------------------------------------------------- | --------- | ----------------------------------------------------------------------------------------------------- |
+| Formato de priorização muito claro — motivo de cada item priorizado está explícito  | Elogio    | Mantido                                                                                               |
+| Features (RFs agrupados) não estão ordenados por prioridade — ao contrário dos RNFs | Correção  | Tabela de Features reordenada por IP decrescente em [priorizacao.md](../../../backlog/priorizacao.md) |
+| Ausência de flag ou coluna indicando o que entra no MVP                             | Adição    | Coluna **MVP** adicionada nas tabelas de Features e RNFs (Q1 = Alta / Q2 em diante)                   |
+| Dificuldade de leitura de algumas tabelas no GitHub Pages                           | Registro  | Tabelas revisadas                                                                                     |
 
 ### Feedback sobre o Protótipo
 

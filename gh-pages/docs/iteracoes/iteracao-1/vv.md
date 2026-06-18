@@ -15,13 +15,13 @@ Registro formal das mudanças de processo, escopo e achados de verificação ide
 | ----------- | ----- | ------------------------------------------------------------------------------------------- | ------ |
 | Processo    | MP.01 | Modelo FDD: 100% iterativo → fase de construção iterativa                                   | ✅     |
 | Processo    | MP.02 | Direção da priorização: bottom-up → top-down                                                | ✅     |
-| Escopo      | ES.01 | F02 removida — absorvida por F01                                                            | ⏳     |
-| Escopo      | ES.02 | F05 removida — RF07 reproposto + novo RF para F04                                           | ⏳     |
-| Escopo      | ES.03 | F07 absorvida por F06 — RF18 migra para F06                                                 | ⏳     |
-| Escopo      | ES.04 | F22 — RF42 detalhado em 3 RFs                                                               | ⏳     |
+| Escopo      | ES.01 | F02 removida — absorvida por F01                                                            | ✅     |
+| Escopo      | ES.02 | F05 removida — RF07 reproposto + novo RF para F04                                           | ✅     |
+| Escopo      | ES.03 | F07 absorvida por F06 — RF18 migra para F06                                                 | ✅     |
+| Escopo      | ES.04 | F22 — RF42 detalhado em 3 RFs                                                               | ✅     |
 | Escopo      | ES.05 | F25/F26/F27 — agrupadora dividida em 3 features atômicas                                    | ✅     |
 | Verificação | V.01  | MFA/2FA: decisão de não implementar por solicitação do cliente                              | ✅     |
-| Verificação | V.02  | Conflito de numeração RF53 após mudanças de escopo                                          | ⚠️     |
+| Verificação | V.02  | Conflito de numeração RF53 após mudanças de escopo                                          | ✅     |
 | Escopo      | ES.06 | F10 — Adicionado RF48 para edição de dados do próprio perfil                                | ✅     |
 | Escopo      | ES.07 | F14 — Adicionado RF49 para consentimento e detalhamento de LGPD                             | ✅     |
 | Escopo      | ES.08 | F15 — Adicionado RF50 para consulta de detalhes de produtos SaaS                            | ✅     |
@@ -65,7 +65,7 @@ Registro formal das mudanças de processo, escopo e achados de verificação ide
 | **RF removido**      | **RF03** — Auditar alterações realizadas                                                                                                                                                                                                                                                     |
 | **Motivo**           | Auditoria é uma atividade dos gestores realizada **a partir** de F01 (RF01 — Consultar histórico de logs + RF02 — Filtrar logs do sistema). Ter feature e requisito separados para "auditar" é redundante — o ato de auditar emerge do uso de F01, não exige comportamento sistêmico próprio |
 | **Absorvida por**    | F01 — Consultar logs operacionais para auditoria de atividades                                                                                                                                                                                                                               |
-| **Status**           | ⏳ Remover F02 e RF03 da rastreabilidade                                                                                                                                                                                                                                                     |
+| **Status**           | ✅ Remover F02 e RF03 da rastreabilidade                                                                                                                                                                                                                                                     |
 
 ---
 
@@ -78,7 +78,7 @@ Registro formal das mudanças de processo, escopo e achados de verificação ide
 | **Motivo**           | Feature com único RF funcional não justifica existência autônoma. Indicadores operacionais e financeiros têm contextos distintos e não devem compartilhar o mesmo filtro |
 | **Substituído por**  | **RF07 (renomeado)** — Filtrar indicadores operacionais → pertence a **F03**                                                                                             |
 |                      | **Novo RF** — Filtrar indicadores financeiros → pertence a **F04**                                                                                                       |
-| **Status**           | ⏳ Renomear RF07, criar novo RF, remover F05 da rastreabilidade                                                                                                          |
+| **Status**           | ✅ Renomear RF07, criar novo RF, remover F05 da rastreabilidade                                                                                                          |
 
 ---
 
@@ -91,7 +91,7 @@ Registro formal das mudanças de processo, escopo e achados de verificação ide
 | **F06 antes**        | RF16, RF17                                                                                                                                                                                             |
 | **F06 depois**       | RF16, RF17, RF18                                                                                                                                                                                       |
 | **Motivo**           | Filtro de registros financeiros é subcomportamento natural de F06 (consulta de registros financeiros). Feature isolada com um único RF de filtro não é atômica o suficiente para existir separadamente |
-| **Status**           | ⏳ Remover F07, mover RF18 para F06 na rastreabilidade                                                                                                                                                 |
+| **Status**           | ✅ Remover F07, mover RF18 para F06 na rastreabilidade                                                                                                                                                 |
 
 ---
 
@@ -105,7 +105,7 @@ Registro formal das mudanças de processo, escopo e achados de verificação ide
 |                  | **Novo RF** — Remover interação comercial                                                                                        |
 |                  | **Novo RF** — Editar anotação de interação comercial                                                                             |
 | **Motivo**       | CRUD completo para interações comerciais; RF único agregava comportamentos distintos que geram critérios de aceite independentes |
-| **Status**       | ⏳ RF42 atualizado; criar e numerar os 2 novos RFs na rastreabilidade                                                            |
+| **Status**       | ✅ RF42 atualizado; criar e numerar os 2 novos RFs na rastreabilidade                                                            |
 
 ---
 
@@ -204,4 +204,4 @@ Registro formal das mudanças de processo, escopo e achados de verificação ide
 | **Achado**          | O número **RF53** está atualmente em uso como "Filtrar artigos FAQ" (F18, CP6). A mudança ES.02 (remoção de F05) propõe criar um novo RF "Filtrar indicadores financeiros" que foi provisoriamente referenciado como RF53 |
 | **Impacto**         | Ao atualizar a rastreabilidade, adotar RF53 para o novo requisito causaria sobrescrita do RF existente                                                                                                                    |
 | **Ação necessária** | Atribuir o novo RF de filtro financeiro ao próximo número disponível (RF56 ou superior, confirmar com rastreabilidade atualizada)                                                                                         |
-| **Severidade**      | ⚠️ Atenção                                                                                                                                                                                                                |
+| **Severidade**      | ✅ Atenção                                                                                                                                                                                                                |
