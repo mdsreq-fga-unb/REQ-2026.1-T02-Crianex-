@@ -196,12 +196,3 @@ Registro formal das mudanças de processo, escopo e achados de verificação ide
 | **Status**             | <span class="badge badge--green">Aplicado</span> Decisão documentada — ajustes de backlog pendentes                                                                                         |
 
 ---
-
-### V.02 — Conflito de Numeração: RF53
-
-| Campo               | Conteúdo                                                                                                                                                                                                                  |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Achado**          | O número **RF53** está atualmente em uso como "Filtrar artigos FAQ" (F18, CP6). A mudança ES.02 (remoção de F05) propõe criar um novo RF "Filtrar indicadores financeiros" que foi provisoriamente referenciado como RF53 |
-| **Impacto**         | Ao atualizar a rastreabilidade, adotar RF53 para o novo requisito causaria sobrescrita do RF existente                                                                                                                    |
-| **Ação necessária** | Atribuir o novo RF de filtro financeiro ao próximo número disponível (RF56 ou superior, confirmar com rastreabilidade atualizada)                                                                                         |
-| **Severidade**      | <span class="badge badge--yellow">Atenção</span> Atenção                                                                                                                                                                                                                |
