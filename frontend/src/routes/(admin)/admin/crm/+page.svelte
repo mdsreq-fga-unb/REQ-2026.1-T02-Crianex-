@@ -251,6 +251,7 @@
   .crm-root {
     flex: 1;
     min-height: 0;
+    min-width: 0;
     display: flex; flex-direction: column;
     background: var(--bg); color: var(--text); overflow: hidden;
   }
@@ -264,7 +265,7 @@
   .grow { flex: 1; }
 
   /* ── Body ── */
-  .crm-body { flex: 1; overflow: auto; padding: 16px 20px 28px; }
+  .crm-body { flex: 1; min-width: 0; overflow: auto; padding: 16px 20px 28px; }
 
   /* ── Empty / loading states ── */
   .crm-loading {
@@ -286,7 +287,7 @@
   /* ── Kanban ── */
   .crm-kanban { display: flex; gap: 12px; align-items: flex-start; min-height: 100%; }
   .crm-col {
-    flex: 1 1 0; min-width: 220px; background: var(--bg-soft); border-radius: 12px;
+    flex: 0 0 260px; background: var(--bg-soft); border-radius: 12px;
     padding: 10px; display: flex; flex-direction: column; gap: 8px;
     border: 1px solid var(--line);
   }
