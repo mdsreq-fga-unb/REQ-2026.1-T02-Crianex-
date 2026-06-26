@@ -31,7 +31,7 @@
       label: 'Geral',
       items: [
         { href: NAO_IMPL, label: 'Dashboard', icon: LayoutDashboard, module: 'dashboard' },
-        { href: '/crm', label: 'CRM · Leads', icon: Users, module: 'crm' },
+        { href: '/admin/crm', label: 'CRM · Leads', icon: Users, module: 'crm' },
         { href: NAO_IMPL, label: 'Financeiro', icon: ChartBar, module: 'finance' },
       ],
     },
