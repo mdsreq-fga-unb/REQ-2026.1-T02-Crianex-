@@ -6,6 +6,7 @@ import {
   createColumn,
   updateColumn,
   reorderColumns,
+  deleteColumn,
   CrmColumnError,
 } from './crm-columns.service.js';
 
@@ -101,6 +102,34 @@ crmColumnsRouter.patch('/:id', ...ownerGuard, async (req, res) => {
     }
     console.error('[crm-columns] update error:', err);
     res.status(500).json({ message: 'Falha ao atualizar coluna.' });
+  }
+});
+
+// DELETE /api/admin/crm/columns/:id — remoção protegida (RF39)
+// Retorna 409 se a coluna tem cards vinculados ou é a default
+crmColumnsRouter.delete('/:id', ...ownerGuard, async (req, res) => {
+  const id = typeof req.params?.['id'] === 'string' ? req.params['id'].trim() : '';
+  if (!id) {
+    res.status(400).json({ message: 'ID da coluna é obrigatório.' });
+    return;
+  }
+
+  try {
+    await deleteColumn(id);
+    res.status(204).send();
+  } catch (err) {
+    if (err instanceof CrmColumnError) {
+      if (err.code === 'NOT_FOUND') {
+        res.status(404).json({ message: err.message });
+        return;
+      }
+      if (err.code === 'IS_DEFAULT' || err.code === 'HAS_CARDS' || err.code === 'LAST_COLUMN') {
+        res.status(409).json({ message: err.message, code: err.code });
+        return;
+      }
+    }
+    console.error('[crm-columns] delete error:', err);
+    res.status(500).json({ message: 'Falha ao remover coluna.' });
   }
 });
 

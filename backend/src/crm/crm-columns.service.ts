@@ -127,3 +127,58 @@ export async function reorderColumns(order: { id: string; position: number }[]):
     )
   );
 }
+
+export async function deleteColumn(id: string): Promise<void> {
+  if (!id) throw new CrmColumnError('ID da coluna é obrigatório.', 'MISSING_ID');
+
+  const supabase = getSupabaseClient();
+
+  // Fetch column metadata in a single query
+  const { data: col } = await supabase
+    .from('crm_columns')
+    .select('id, is_default')
+    .eq('id', id)
+    .maybeSingle();
+
+  if (!col) throw new CrmColumnError('Coluna não encontrada.', 'NOT_FOUND');
+  if (col.is_default) {
+    throw new CrmColumnError(
+      'Não é possível remover a coluna padrão. Defina outra como padrão antes de removê-la.',
+      'IS_DEFAULT'
+    );
+  }
+
+  // Enforce ≥1 column invariant
+  const { count } = await supabase
+    .from('crm_columns')
+    .select('*', { count: 'exact', head: true });
+
+  if ((count ?? 0) <= 1) {
+    throw new CrmColumnError(
+      'O funil precisa ter ao menos uma coluna.',
+      'LAST_COLUMN'
+    );
+  }
+
+  // Verify no cards remain in this column. Table may not exist yet (F19 not shipped).
+  // Uses a raw RPC-free count; silently skips check if table is absent.
+  try {
+    const { count: cardCount, error: cardErr } = await supabase
+      .from('crm_client_cards')
+      .select('*', { count: 'exact', head: true })
+      .eq('column_id', id);
+
+    if (!cardErr && (cardCount ?? 0) > 0) {
+      throw new CrmColumnError(
+        'A coluna contém leads vinculados. Mova-os para outra coluna antes de remover.',
+        'HAS_CARDS'
+      );
+    }
+  } catch (e) {
+    // Re-throw only our own domain errors; table-not-found errors from Supabase are skipped
+    if (e instanceof CrmColumnError) throw e;
+  }
+
+  const { error } = await supabase.from('crm_columns').delete().eq('id', id);
+  if (error) throw error;
+}
