@@ -171,7 +171,7 @@
     return true;
   }));
 
-  const stats = $derived(() => {
+  const stats = $derived.by(() => {
     const openIds = columns.filter(c => !/fech|perd/.test(c.id)).map(c => c.id);
     const wonId = columns.find(c => /fech/.test(c.id))?.id;
     const pf = productFilter !== 'all' ? productFilter : null;
@@ -188,8 +188,8 @@
   const activeLead = $derived(activeLeadId ? leads.find(l => l.id === activeLeadId) ?? null : null);
   const activeCol = $derived(activeLead ? columns.find(c => c.id === activeLead.stage) ?? null : null);
 
-  const sortedLeads = $derived(() => {
-    const val = (l: Lead): string | number => {
+  const sortedLeads = $derived.by(() => {
+    const valOf = (l: Lead): string | number => {
       switch (sortKey) {
         case 'company': return l.company.toLowerCase();
         case 'value': return leadValue(l, productFilter !== 'all' ? productFilter : null);
@@ -200,7 +200,7 @@
       }
     };
     return [...filtered].sort((a, b) => {
-      const va = val(a), vb = val(b);
+      const va = valOf(a), vb = valOf(b);
       if (va < vb) return -sortDir;
       if (va > vb) return sortDir;
       return 0;
@@ -394,9 +394,9 @@
 
   <!-- ── Stats ── -->
   <div class="crm-stats">
-    <div class="stat"><div class="k">Leads {productFilter !== 'all' ? '· ' + PRODUCT_BY_ID[productFilter]?.name : 'no filtro'}</div><div class="v">{stats().count}</div></div>
-    <div class="stat"><div class="k">Pipeline em aberto</div><div class="v">{fmtBRL(stats().open)}<small>/mo</small></div></div>
-    <div class="stat"><div class="k">Fechado (recorrente)</div><div class="v" style="color:var(--green)">{fmtBRL(stats().won)}<small>/mo</small></div></div>
+    <div class="stat"><div class="k">Leads {productFilter !== 'all' ? '· ' + PRODUCT_BY_ID[productFilter]?.name : 'no filtro'}</div><div class="v">{stats.count}</div></div>
+    <div class="stat"><div class="k">Pipeline em aberto</div><div class="v">{fmtBRL(stats.open)}<small>/mo</small></div></div>
+    <div class="stat"><div class="k">Fechado (recorrente)</div><div class="v" style="color:var(--green)">{fmtBRL(stats.won)}<small>/mo</small></div></div>
     <div class="stat"><div class="k">Colunas no pipeline</div><div class="v">{columns.length}</div></div>
   </div>
 
@@ -469,7 +469,7 @@
                       <FileText size={10}/> 1 pedido
                     {/if}
                   </span>
-                  <span class="val">{fmtBRL(val)}{val ? <span style="color:var(--text-faint);font-weight:400">/mo</span> : ''}</span>
+                  <span class="val">{fmtBRL(val)}{#if val}<span style="color:var(--text-faint);font-weight:400">/mo</span>{/if}</span>
                 </div>
                 <div class="meta-row" style="border-top:0;padding-top:0">
                   <span class="respo">
@@ -508,7 +508,7 @@
             </tr>
           </thead>
           <tbody>
-            {#each sortedLeads() as l (l.id)}
+            {#each sortedLeads as l (l.id)}
               {@const open = tableExpanded[l.id]}
               {@const val = leadValue(l, productFilter !== 'all' ? productFilter : null)}
               {@const col = columns.find(c => c.id === l.stage)}
@@ -569,7 +569,7 @@
             {/each}
           </tbody>
         </table>
-        {#if sortedLeads().length === 0}
+        {#if sortedLeads.length === 0}
           <div class="crm-empty">
             <div class="ico"><Users size={18}/></div>
             Nenhum lead corresponde aos filtros atuais.
@@ -709,7 +709,7 @@
         {/if}
         <div class="crm-coleditor">
           {#each editCols as c (c.id)}
-            <div class="crm-colrow {colDragId === c.id ? 'dragging' : ''} {colDropTarget?.id === c.id ? (colDropTarget.after ? 'drop-after' : 'drop-before') : ''}"
+            <div class="crm-colrow {colDragId === c.id ? 'dragging' : ''} {colDropTarget?.id === c.id ? (colDropTarget?.after ? 'drop-after' : 'drop-before') : ''}"
               ondragover={(e) => { if (colDragId && colDragId !== c.id) { e.preventDefault(); const r = e.currentTarget.getBoundingClientRect(); colDropTarget = { id: c.id, after: e.clientY > r.top + r.height / 2 }; } }}
               ondrop={(e) => { e.preventDefault(); editorDrop(c.id); }}>
               <div class="r1">
