@@ -1,0 +1,73 @@
+---
+title: F13 — Controlar publicação de produto SaaS
+sidebar_label: "F13 · Controlar publicação de produto "
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# F13 — Controlar publicação de produto SaaS
+
+<span className="badge badge--green">IT1</span> · Rastreabilidade: [F13](/backlog/requisitos#f13) · [CP4](/visao/solucao#cp4) · [OE2](/visao/solucao#oe2)
+
+**Issue da Feature (GitHub):** [abrir no repositório](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues) — _nº a definir_
+
+:::note[Acesso para avaliação]
+Esta funcionalidade exige **login de administrador**. Credenciais para o professor: **e-mail** `a definir` · **senha** `a definir`.
+:::
+
+## Requisitos (evidências)
+
+Selecione um requisito na navegação abaixo. Cada um traz seus critérios de aceite, regras de negócio e um espaço para o **screenshot da funcionalidade em funcionamento** (substitua a imagem de placeholder pela captura real).
+
+<Tabs>
+<TabItem value="rf25" label="RF25">
+
+#### RF25 — Publicar produto SaaS
+
+**Critérios de aceite (BDD)**
+
+- **Dado** admin autenticado, **quando** acionar toggle ON, **então** `published = true` + confirmação visual em ≤ 2s.
+- **Dado** credenciais inválidas no toggle, **quando** a requisição chega à API, **então** é rejeitada e o toggle revertido na UI.
+
+**Regras de negócio:** [RN01](/backlog/requisitos#rns) — Visibilidade de produtos — só `published = true` aparece na vitrine; efeito imediato · [RN12](/backlog/requisitos#rns) — Ordem de exibição de produtos definida pelo administrador
+
+**Evidência (screenshot):**
+
+![Evidência de RF25 — F13](./img/f13-rf25.png)
+
+**Deploy:** _link a definir_
+
+</TabItem>
+<TabItem value="rf26" label="RF26">
+
+#### RF26 — Despublicar produto SaaS
+
+**Critérios de aceite (BDD)**
+
+- **Dado** admin autenticado, **quando** acionar toggle OFF, **então** o produto é ocultado da vitrine com os dados preservados no banco.
+
+**Regras de negócio:** [RN01](/backlog/requisitos#rns) — Visibilidade de produtos — só `published = true` aparece na vitrine; efeito imediato
+
+**Evidência (screenshot):**
+
+![Evidência de RF26 — F13](./img/f13-rf26.png)
+
+**Deploy:** _link a definir_
+
+</TabItem>
+<TabItem value="rnf03" label="RNF03">
+
+#### RNF03 — Tempo de resposta da área administrativa
+
+**Classificação:** Eficiência  
+**Descrição:** Operações de leitura no painel em ≤ 2s em 95% das requisições.
+
+**Evidência (screenshot):**
+
+![Evidência de RNF03 — F13](./img/f13-rnf03.png)
+
+**Verificação:** [Resultados V&V da IT1](/iteracoes/iteracao-1/vv)
+
+</TabItem>
+</Tabs>

@@ -1,5 +1,6 @@
 # ── Documentação ─────────────────────────────────────
 gh-pages/site/
+gh-pages/docusaurus/.docusaurus/
 .venv/
 __pycache__/
 

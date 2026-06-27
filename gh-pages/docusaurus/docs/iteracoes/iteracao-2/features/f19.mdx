@@ -1,0 +1,163 @@
+---
+title: F19 — Gerenciar clientes e leads no CRM
+sidebar_label: "F19 · Gerenciar clientes e leads no CR"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# F19 — Gerenciar clientes e leads no CRM
+
+<span className="badge badge--purple">IT2</span> · Rastreabilidade: [F19](/backlog/requisitos#f19) · [CP1](/visao/solucao#cp1) · [OE3](/visao/solucao#oe3)
+
+**Issue da Feature (GitHub):** [abrir no repositório](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues) — _nº a definir_
+
+:::note[Acesso para avaliação]
+Esta funcionalidade exige **login de administrador**. Credenciais para o professor: **e-mail** `a definir` · **senha** `a definir`.
+:::
+
+## Requisitos (evidências)
+
+Selecione um requisito na navegação abaixo. Cada um traz seus critérios de aceite, regras de negócio e um espaço para o **screenshot da funcionalidade em funcionamento** (substitua a imagem de placeholder pela captura real).
+
+<Tabs>
+<TabItem value="rf37" label="RF37">
+
+#### RF37 — Cadastrar lead no CRM
+
+**Critérios de aceite (BDD)**
+
+- **Dado** admin autenticado, **quando** cadastrar lead, **então** um card é criado no CRM com dados persistidos na coluna inicial.
+
+**Regras de negócio:** —
+
+**Evidência (screenshot):**
+
+![Evidência de RF37 — F19](./img/f19-rf37.png)
+
+**Deploy:** _link a definir_
+
+</TabItem>
+<TabItem value="rf35" label="RF35">
+
+#### RF35 — Editar dados do cliente/lead
+
+**Critérios de aceite (BDD)**
+
+- **Dado** card existente, **quando** editar os dados do cliente/lead, **então** as alterações são persistidas sem duplicar o registro.
+
+**Regras de negócio:** —
+
+**Evidência (screenshot):**
+
+![Evidência de RF35 — F19](./img/f19-rf35.png)
+
+**Deploy:** _link a definir_
+
+</TabItem>
+<TabItem value="rf36" label="RF36">
+
+#### RF36 — Inativar cliente/lead
+
+**Critérios de aceite (BDD)**
+
+- **Dado** cliente/lead ativo, **quando** inativar, **então** o registro passa a `inactive` e sai do fluxo ativo do funil.
+
+**Regras de negócio:** —
+
+**Evidência (screenshot):**
+
+![Evidência de RF36 — F19](./img/f19-rf36.png)
+
+**Deploy:** _link a definir_
+
+</TabItem>
+<TabItem value="rf41" label="RF41">
+
+#### RF41 — Atualizar dados operacionais dos cards
+
+**Critérios de aceite (BDD)**
+
+- **Dado** card no CRM, **quando** arrastar para outra coluna (drag-and-drop), **então** o estágio é atualizado em ≤ 1,5s sem reload.
+- **Dado** card com dados visíveis, **quando** clicar, **então** os detalhes expandem sem redirecionamento de página.
+
+**Regras de negócio:** —
+
+**Evidência (screenshot):**
+
+![Evidência de RF41 — F19](./img/f19-rf41.png)
+
+**Deploy:** _link a definir_
+
+</TabItem>
+<TabItem value="rnf01" label="RNF01">
+
+#### RNF01 — Isolamento de acesso administrativo
+
+**Classificação:** Segurança da Informação  
+**Descrição:** Área administrativa em endpoint distinto, acessível apenas mediante autenticação.
+
+**Evidência (screenshot):**
+
+![Evidência de RNF01 — F19](./img/f19-rnf01.png)
+
+**Verificação:** [Resultados V&V da IT2](/iteracoes/iteracao-2/vv)
+
+</TabItem>
+<TabItem value="rnf03" label="RNF03">
+
+#### RNF03 — Tempo de resposta da área administrativa
+
+**Classificação:** Eficiência  
+**Descrição:** Operações de leitura no painel em ≤ 2s em 95% das requisições.
+
+**Evidência (screenshot):**
+
+![Evidência de RNF03 — F19](./img/f19-rnf03.png)
+
+**Verificação:** [Resultados V&V da IT2](/iteracoes/iteracao-2/vv)
+
+</TabItem>
+<TabItem value="rnf09" label="RNF09">
+
+#### RNF09 — Controle de acesso por linha (RLS)
+
+**Classificação:** Segurança da Informação  
+**Descrição:** Row Level Security restringindo leitura ao perfil autorizado.
+
+**Evidência (screenshot):**
+
+![Evidência de RNF09 — F19](./img/f19-rnf09.png)
+
+**Verificação:** [Resultados V&V da IT2](/iteracoes/iteracao-2/vv)
+
+</TabItem>
+<TabItem value="rnf24" label="RNF24">
+
+#### RNF24 — Cards do CRM resumidos e expansíveis
+
+**Classificação:** Usabilidade  
+**Descrição:** Informação essencial no card, expansível sem redirecionamento.
+
+**Evidência (screenshot):**
+
+![Evidência de RNF24 — F19](./img/f19-rnf24.png)
+
+**Verificação:** [Resultados V&V da IT2](/iteracoes/iteracao-2/vv)
+
+</TabItem>
+<TabItem value="rnf25" label="RNF25">
+
+#### RNF25 — Atualização drag-and-drop dos cards do CRM
+
+**Classificação:** Usabilidade  
+**Descrição:** Atualização visual imediata em ≤ 1,5s sem recarregar a página.
+
+**Evidência (screenshot):**
+
+![Evidência de RNF25 — F19](./img/f19-rnf25.png)
+
+**Verificação:** [Resultados V&V da IT2](/iteracoes/iteracao-2/vv)
+
+</TabItem>
+</Tabs>

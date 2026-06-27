@@ -1,0 +1,83 @@
+---
+title: F15 — Disponibilizar informações institucionais
+sidebar_label: "F15 · Disponibilizar informações insti"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# F15 — Disponibilizar informações institucionais
+
+<span className="badge badge--green">IT1</span> · Rastreabilidade: [F15](/backlog/requisitos#f15) · [CP4](/visao/solucao#cp4) · [OE2](/visao/solucao#oe2)
+
+**Issue da Feature (GitHub):** [abrir no repositório](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues) — _nº a definir_
+
+## Requisitos (evidências)
+
+Selecione um requisito na navegação abaixo. Cada um traz seus critérios de aceite, regras de negócio e um espaço para o **screenshot da funcionalidade em funcionamento** (substitua a imagem de placeholder pela captura real).
+
+<Tabs>
+<TabItem value="rf50" label="RF50">
+
+#### RF50 — Consultar detalhes de produto na vitrine
+
+**Critérios de aceite (BDD)**
+
+- **Dado** visitante, **quando** acessar `/produtos/[slug]`, **então** o SSR retorna os detalhes completos do produto em ≤ 2s com Open Graph.
+- **Dado** acesso sem autenticação, **quando** GET da página, **então** nenhum guard intercepta e o conteúdo é exibido.
+
+**Regras de negócio:** [RN11](/backlog/requisitos#rns) — Conteúdo institucional obrigatório (Missão, Visão, Valores)
+
+**Evidência (screenshot):**
+
+![Evidência de RF50 — F15](./img/f15-rf50.png)
+
+**Deploy:** _link a definir_
+
+</TabItem>
+<TabItem value="rf51" label="RF51">
+
+#### RF51 — Permitir utilização de cookies
+
+**Critérios de aceite (BDD)**
+
+- **Dado** primeiro acesso, **quando** a vitrine carrega, **então** exibe o banner de consentimento de cookies; a preferência é persistida.
+
+**Regras de negócio:** [RN08](/backlog/requisitos#rns) — Consentimento de cookies obrigatório no 1º acesso · [RN09](/backlog/requisitos#rns) — Políticas de conformidade sempre acessíveis no rodapé
+
+**Evidência (screenshot):**
+
+![Evidência de RF51 — F15](./img/f15-rf51.png)
+
+**Deploy:** _link a definir_
+
+</TabItem>
+<TabItem value="rnf02" label="RNF02">
+
+#### RNF02 — Tempo de resposta da vitrine
+
+**Classificação:** Eficiência  
+**Descrição:** Carregamento das páginas públicas em ≤ 2s em 95% das requisições (4G).
+
+**Evidência (screenshot):**
+
+![Evidência de RNF02 — F15](./img/f15-rnf02.png)
+
+**Verificação:** [Resultados V&V da IT1](/iteracoes/iteracao-1/vv)
+
+</TabItem>
+<TabItem value="rnf20" label="RNF20">
+
+#### RNF20 — Disponibilidade das informações institucionais
+
+**Classificação:** Dependabilidade  
+**Descrição:** Informações institucionais públicas sem necessidade de autenticação.
+
+**Evidência (screenshot):**
+
+![Evidência de RNF20 — F15](./img/f15-rnf20.png)
+
+**Verificação:** [Resultados V&V da IT1](/iteracoes/iteracao-1/vv)
+
+</TabItem>
+</Tabs>

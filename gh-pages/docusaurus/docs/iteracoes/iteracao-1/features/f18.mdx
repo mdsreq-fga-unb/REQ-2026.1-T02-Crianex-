@@ -1,0 +1,69 @@
+---
+title: F18 — Melhorar correspondência FAQ e dúvidas dos leads
+sidebar_label: "F18 · Melhorar correspondência FAQ e d"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# F18 — Melhorar correspondência FAQ e dúvidas dos leads
+
+<span className="badge badge--green">IT1</span> · Rastreabilidade: [F18](/backlog/requisitos#f18) · [CP6](/visao/solucao#cp6) · [OE2](/visao/solucao#oe2)
+
+**Issue da Feature (GitHub):** [abrir no repositório](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues) — _nº a definir_
+
+## Requisitos (evidências)
+
+Selecione um requisito na navegação abaixo. Cada um traz seus critérios de aceite, regras de negócio e um espaço para o **screenshot da funcionalidade em funcionamento** (substitua a imagem de placeholder pela captura real).
+
+<Tabs>
+<TabItem value="rf34" label="RF34">
+
+#### RF34 — Avaliar artigo de FAQ
+
+**Critérios de aceite (BDD)**
+
+- **Dado** visitante clica "Útil"/"Não Útil", **quando** a avaliação é submetida, **então** é persistida anonimamente + feedback em ≤ 2s.
+- **Dado** `session_hash` já existe para o artigo, **quando** o backend recebe a avaliação, **então** retorna 409 sem duplicata.
+
+**Regras de negócio:** [RN07](/backlog/requisitos#rns) — Avaliação anônima de artigo FAQ
+
+**Evidência (screenshot):**
+
+![Evidência de RF34 — F18](./img/f18-rf34.png)
+
+**Deploy:** _link a definir_
+
+</TabItem>
+<TabItem value="rf52" label="RF52">
+
+#### RF52 — Filtrar artigos FAQ
+
+**Critérios de aceite (BDD)**
+
+- **Dado** visitante na FAQ, **quando** filtrar artigos, **então** a lista é refinada conforme o critério de busca.
+
+**Regras de negócio:** —
+
+**Evidência (screenshot):**
+
+![Evidência de RF52 — F18](./img/f18-rf52.png)
+
+**Deploy:** _link a definir_
+
+</TabItem>
+<TabItem value="rnf02" label="RNF02">
+
+#### RNF02 — Tempo de resposta da vitrine
+
+**Classificação:** Eficiência  
+**Descrição:** Carregamento das páginas públicas em ≤ 2s em 95% das requisições (4G).
+
+**Evidência (screenshot):**
+
+![Evidência de RNF02 — F18](./img/f18-rnf02.png)
+
+**Verificação:** [Resultados V&V da IT1](/iteracoes/iteracao-1/vv)
+
+</TabItem>
+</Tabs>

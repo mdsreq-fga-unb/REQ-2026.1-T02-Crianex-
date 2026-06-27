@@ -1,0 +1,163 @@
+---
+title: F12 — Gerenciar produtos SaaS da vitrine
+sidebar_label: "F12 · Gerenciar produtos SaaS da vitri"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# F12 — Gerenciar produtos SaaS da vitrine
+
+<span className="badge badge--green">IT1</span> · Rastreabilidade: [F12](/backlog/requisitos#f12) · [CP4](/visao/solucao#cp4) · [OE2](/visao/solucao#oe2)
+
+**Issue da Feature (GitHub):** [abrir no repositório](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues) — _nº a definir_
+
+:::note[Acesso para avaliação]
+Esta funcionalidade exige **login de administrador**. Credenciais para o professor: **e-mail** `a definir` · **senha** `a definir`.
+:::
+
+## Requisitos (evidências)
+
+Selecione um requisito na navegação abaixo. Cada um traz seus critérios de aceite, regras de negócio e um espaço para o **screenshot da funcionalidade em funcionamento** (substitua a imagem de placeholder pela captura real).
+
+<Tabs>
+<TabItem value="rf21" label="RF21">
+
+#### RF21 — Cadastrar produto SaaS
+
+**Critérios de aceite (BDD)**
+
+- **Dado** admin autenticado, **quando** cadastrar produto, **então** é persistido em transação ACID e fica apto à publicação.
+- **Dado** produto publicado, **quando** a vitrine é carregada, **então** o SSR retorna apenas `published = true` em ≤ 2s.
+
+**Regras de negócio:** —
+
+**Evidência (screenshot):**
+
+![Evidência de RF21 — F12](./img/f12-rf21.png)
+
+**Deploy:** _link a definir_
+
+</TabItem>
+<TabItem value="rf22" label="RF22">
+
+#### RF22 — Editar produto SaaS
+
+**Critérios de aceite (BDD)**
+
+- **Dado** admin autenticado, **quando** editar produto, **então** PATCH `/admin/products/:id` atualiza os dados refletidos na vitrine.
+
+**Regras de negócio:** —
+
+**Evidência (screenshot):**
+
+![Evidência de RF22 — F12](./img/f12-rf22.png)
+
+**Deploy:** _link a definir_
+
+</TabItem>
+<TabItem value="rf23" label="RF23">
+
+#### RF23 — Remover produto SaaS
+
+**Critérios de aceite (BDD)**
+
+- **Dado** admin autenticado, **quando** remover produto, **então** DELETE `/admin/products/:id` o remove da vitrine e do banco.
+
+**Regras de negócio:** —
+
+**Evidência (screenshot):**
+
+![Evidência de RF23 — F12](./img/f12-rf23.png)
+
+**Deploy:** _link a definir_
+
+</TabItem>
+<TabItem value="rf24" label="RF24">
+
+#### RF24 — Reordenar produtos SaaS
+
+**Critérios de aceite (BDD)**
+
+- **Dado** lista de produtos, **quando** reordenar via drag-and-drop, **então** PATCH `/admin/products/reorder` persiste a nova ordem em ≤ 1,5s.
+
+**Regras de negócio:** [RN12](/backlog/requisitos#rns) — Ordem de exibição de produtos definida pelo administrador
+
+**Evidência (screenshot):**
+
+![Evidência de RF24 — F12](./img/f12-rf24.png)
+
+**Deploy:** _link a definir_
+
+</TabItem>
+<TabItem value="rnf03" label="RNF03">
+
+#### RNF03 — Tempo de resposta da área administrativa
+
+**Classificação:** Eficiência  
+**Descrição:** Operações de leitura no painel em ≤ 2s em 95% das requisições.
+
+**Evidência (screenshot):**
+
+![Evidência de RNF03 — F12](./img/f12-rnf03.png)
+
+**Verificação:** [Resultados V&V da IT1](/iteracoes/iteracao-1/vv)
+
+</TabItem>
+<TabItem value="rnf04" label="RNF04">
+
+#### RNF04 — Renderização server-side da vitrine
+
+**Classificação:** Eficiência  
+**Descrição:** Páginas públicas renderizadas via SSR para indexação completa.
+
+**Evidência (screenshot):**
+
+![Evidência de RNF04 — F12](./img/f12-rnf04.png)
+
+**Verificação:** [Resultados V&V da IT1](/iteracoes/iteracao-1/vv)
+
+</TabItem>
+<TabItem value="rnf05" label="RNF05">
+
+#### RNF05 — Otimização para mecanismos de busca (SEO)
+
+**Classificação:** Usabilidade  
+**Descrição:** Metadados semânticos, sitemap.xml, robots.txt e Open Graph.
+
+**Evidência (screenshot):**
+
+![Evidência de RNF05 — F12](./img/f12-rnf05.png)
+
+**Verificação:** [Resultados V&V da IT1](/iteracoes/iteracao-1/vv)
+
+</TabItem>
+<TabItem value="rnf13" label="RNF13">
+
+#### RNF13 — Bilinguismo da vitrine
+
+**Classificação:** Usabilidade  
+**Descrição:** Conteúdo em PT e EN, com troca de idioma em até 1 clique (i18n).
+
+**Evidência (screenshot):**
+
+![Evidência de RNF13 — F12](./img/f12-rnf13.png)
+
+**Verificação:** [Resultados V&V da IT1](/iteracoes/iteracao-1/vv)
+
+</TabItem>
+<TabItem value="rnf19" label="RNF19">
+
+#### RNF19 — Facilidade de navegação da vitrine
+
+**Classificação:** Usabilidade  
+**Descrição:** Seções principais acessíveis em no máximo 3 interações.
+
+**Evidência (screenshot):**
+
+![Evidência de RNF19 — F12](./img/f12-rnf19.png)
+
+**Verificação:** [Resultados V&V da IT1](/iteracoes/iteracao-1/vv)
+
+</TabItem>
+</Tabs>

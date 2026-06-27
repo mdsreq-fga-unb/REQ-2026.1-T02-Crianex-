@@ -1,0 +1,117 @@
+---
+title: F21 — Registrar interações comerciais
+sidebar_label: "F21 · Registrar interações comerciais"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# F21 — Registrar interações comerciais
+
+<span className="badge badge--purple">IT2</span> · Rastreabilidade: [F21](/backlog/requisitos#f21) · [CP1](/visao/solucao#cp1) · [OE3](/visao/solucao#oe3)
+
+**Issue da Feature (GitHub):** [abrir no repositório](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues) — _nº a definir_
+
+:::note[Acesso para avaliação]
+Esta funcionalidade exige **login de administrador**. Credenciais para o professor: **e-mail** `a definir` · **senha** `a definir`.
+:::
+
+## Requisitos (evidências)
+
+Selecione um requisito na navegação abaixo. Cada um traz seus critérios de aceite, regras de negócio e um espaço para o **screenshot da funcionalidade em funcionamento** (substitua a imagem de placeholder pela captura real).
+
+<Tabs>
+<TabItem value="rf42" label="RF42">
+
+#### RF42 — Adicionar interação comercial
+
+**Critérios de aceite (BDD)**
+
+- **Dado** admin autenticado, **quando** adicionar interação a um card, **então** é persistida com timestamp e tipo.
+
+**Regras de negócio:** —
+
+**Evidência (screenshot):**
+
+![Evidência de RF42 — F21](./img/f21-rf42.png)
+
+**Deploy:** _link a definir_
+
+</TabItem>
+<TabItem value="rf59" label="RF59">
+
+#### RF59 — Editar interação comercial
+
+**Critérios de aceite (BDD)**
+
+- **Dado** interação registrada, **quando** editar, **então** os dados são atualizados sem criar duplicata.
+
+**Regras de negócio:** —
+
+**Evidência (screenshot):**
+
+![Evidência de RF59 — F21](./img/f21-rf59.png)
+
+**Deploy:** _link a definir_
+
+</TabItem>
+<TabItem value="rf53" label="RF53">
+
+#### RF53 — Remover interação comercial
+
+**Critérios de aceite (BDD)**
+
+- **Dado** interação registrada, **quando** remover, **então** é excluída permanentemente do histórico do card.
+
+**Regras de negócio:** —
+
+**Evidência (screenshot):**
+
+![Evidência de RF53 — F21](./img/f21-rf53.png)
+
+**Deploy:** _link a definir_
+
+</TabItem>
+<TabItem value="rnf01" label="RNF01">
+
+#### RNF01 — Isolamento de acesso administrativo
+
+**Classificação:** Segurança da Informação  
+**Descrição:** Área administrativa em endpoint distinto, acessível apenas mediante autenticação.
+
+**Evidência (screenshot):**
+
+![Evidência de RNF01 — F21](./img/f21-rnf01.png)
+
+**Verificação:** [Resultados V&V da IT2](/iteracoes/iteracao-2/vv)
+
+</TabItem>
+<TabItem value="rnf03" label="RNF03">
+
+#### RNF03 — Tempo de resposta da área administrativa
+
+**Classificação:** Eficiência  
+**Descrição:** Operações de leitura no painel em ≤ 2s em 95% das requisições.
+
+**Evidência (screenshot):**
+
+![Evidência de RNF03 — F21](./img/f21-rnf03.png)
+
+**Verificação:** [Resultados V&V da IT2](/iteracoes/iteracao-2/vv)
+
+</TabItem>
+<TabItem value="rnf09" label="RNF09">
+
+#### RNF09 — Controle de acesso por linha (RLS)
+
+**Classificação:** Segurança da Informação  
+**Descrição:** Row Level Security restringindo leitura ao perfil autorizado.
+
+**Evidência (screenshot):**
+
+![Evidência de RNF09 — F21](./img/f21-rnf09.png)
+
+**Verificação:** [Resultados V&V da IT2](/iteracoes/iteracao-2/vv)
+
+</TabItem>
+</Tabs>

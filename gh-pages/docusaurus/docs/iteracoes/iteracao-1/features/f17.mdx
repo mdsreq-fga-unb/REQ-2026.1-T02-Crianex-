@@ -1,0 +1,86 @@
+---
+title: F17 — Controlar publicação de artigos FAQ
+sidebar_label: "F17 · Controlar publicação de artigos "
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# F17 — Controlar publicação de artigos FAQ
+
+<span className="badge badge--green">IT1</span> · Rastreabilidade: [F17](/backlog/requisitos#f17) · [CP6](/visao/solucao#cp6) · [OE2](/visao/solucao#oe2)
+
+**Issue da Feature (GitHub):** [abrir no repositório](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues) — _nº a definir_
+
+:::note[Acesso para avaliação]
+Esta funcionalidade exige **login de administrador**. Credenciais para o professor: **e-mail** `a definir` · **senha** `a definir`.
+:::
+
+## Requisitos (evidências)
+
+Selecione um requisito na navegação abaixo. Cada um traz seus critérios de aceite, regras de negócio e um espaço para o **screenshot da funcionalidade em funcionamento** (substitua a imagem de placeholder pela captura real).
+
+<Tabs>
+<TabItem value="rf32" label="RF32">
+
+#### RF32 — Publicar artigo de FAQ
+
+**Critérios de aceite (BDD)**
+
+- **Dado** admin autenticado, **quando** publicar artigo, **então** `published = true` + visível na próxima requisição da vitrine sem reload.
+
+**Regras de negócio:** [RN02](/backlog/requisitos#rns) — Visibilidade de artigos FAQ — `published = false` não aparece; despublicação não exclui
+
+**Evidência (screenshot):**
+
+![Evidência de RF32 — F17](./img/f17-rf32.png)
+
+**Deploy:** _link a definir_
+
+</TabItem>
+<TabItem value="rf33" label="RF33">
+
+#### RF33 — Despublicar artigo de FAQ
+
+**Critérios de aceite (BDD)**
+
+- **Dado** admin autenticado, **quando** despublicar artigo, **então** ele some da vitrine com o conteúdo preservado no banco.
+
+**Regras de negócio:** [RN02](/backlog/requisitos#rns) — Visibilidade de artigos FAQ — `published = false` não aparece; despublicação não exclui
+
+**Evidência (screenshot):**
+
+![Evidência de RF33 — F17](./img/f17-rf33.png)
+
+**Deploy:** _link a definir_
+
+</TabItem>
+<TabItem value="rnf01" label="RNF01">
+
+#### RNF01 — Isolamento de acesso administrativo
+
+**Classificação:** Segurança da Informação  
+**Descrição:** Área administrativa em endpoint distinto, acessível apenas mediante autenticação.
+
+**Evidência (screenshot):**
+
+![Evidência de RNF01 — F17](./img/f17-rnf01.png)
+
+**Verificação:** [Resultados V&V da IT1](/iteracoes/iteracao-1/vv)
+
+</TabItem>
+<TabItem value="rnf04" label="RNF04">
+
+#### RNF04 — Renderização server-side da vitrine
+
+**Classificação:** Eficiência  
+**Descrição:** Páginas públicas renderizadas via SSR para indexação completa.
+
+**Evidência (screenshot):**
+
+![Evidência de RNF04 — F17](./img/f17-rnf04.png)
+
+**Verificação:** [Resultados V&V da IT1](/iteracoes/iteracao-1/vv)
+
+</TabItem>
+</Tabs>

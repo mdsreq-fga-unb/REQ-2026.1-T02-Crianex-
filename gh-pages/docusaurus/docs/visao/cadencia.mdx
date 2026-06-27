@@ -1,0 +1,71 @@
+---
+title: Cadência de Cerimônias
+sidebar_label: Cadência de Cerimônias
+---
+
+# 6.3 Cadência de Cerimônias {#63-cadencia-de-cerimonias}
+
+> **Princípio:** máximo **2–3 reuniões por semana**. Cerimônias relacionadas são agrupadas no mesmo dia. O Midweek Sync e a validação parcial com o cliente são sempre **assíncronos**; apenas o encerramento formal de iteração ocorre via **reunião**.
+
+Esta página detalha a cadência de cerimônias. A composição da equipe e a estrutura de comunicação estão em **[Equipe e Interação](/visao/equipe)**.
+
+## 6.4 Cerimônias Únicas — Início do Projeto
+
+Realizadas **uma única vez** antes da primeira iteração de construção. Correspondem às Etapas 1–3 do FDD e produzem os artefatos que servem de insumo para todas as iterações seguintes.
+
+| Cerimônia | Formato | Quando | Participantes | Duração est. |
+| --------- | ------- | ------ | ------------- | ------------ |
+| **Domain Modeling Workshop** | Reunião | Antes da IT1 | PM, Chief Architect, Otávio | ~3h |
+| **Feature Discovery Session** | Reunião | Antes da IT1 | Equipe (sem cliente) | ~1h |
+| **Iteration Replenishment Macro** | Reunião | Antes da IT1 | PM, CPs, Otávio | ~1h |
+
+> **Nota:** devido a correções de urgência ao modelo FDD a partir do feedback do professor George, tanto a _Feature Discovery Session_ quanto o _Iteration Replenishment Macro_ foram feitas no início da Iteração 1, uma vez que já havíamos iniciado.
+
+## 6.5 Cerimônias Iterativas — Repetidas em Cada Iteração
+
+Correspondem às Etapas 4–5 do FDD. O **Replenishment Micro** é a versão iterativa do planejamento: seleciona as features da iteração corrente com base no IP e na capacidade disponível, diferente do Macro que definiu o roadmap completo.
+
+| Cerimônia | Formato | Frequência | Participantes | Duração est. |
+| --------- | ------- | ---------- | ------------- | ------------ |
+| **Iteration Replenishment Micro + Commitment** | Reunião | Início de cada iteração | PM, CPs, Otávio | ~1h |
+| **Technical Design Review** | Reunião | Por feature comprometida | PM, CPs, Class Owners | ~1h |
+| **Midweek Sync / Kanban Pull Execution** | Assíncrono — Discord/WhatsApp | Meio de cada semana de Build | Toda a equipe | — |
+| **Feature Build Consolidation** | Reunião | Fim de cada semana de Build | Toda a equipe | ~45min |
+| **Partial Client Validation** | Assíncrono — WhatsApp | Fim de cada semana de Build | Resp. Validação + Otávio | — |
+| **Formal Client Validation** | Reunião | Fim da iteração | Toda a equipe + Otávio | ~1h |
+| **Iteration Artifact Closure** | Reunião | Fim da iteração | Toda a equipe | ~1h |
+
+## 6.6 Cadência Detalhada por Semana
+
+Cada iteração segue fases com objetivos distintos. As cerimônias únicas (Domain Modeling, Feature Discovery, Replenishment Macro) **não se repetem** — apenas o Replenishment Micro inicia cada ciclo.
+
+### Fase de Planejamento — Início da Iteração
+
+Seleção e comprometimento com o escopo da iteração. Novas features só entram no Kanban após o Technical Design Review estar concluído.
+
+| Atividade | Etapa FDD | Formato |
+| --------- | --------- | ------- |
+| Iteration Replenishment Micro + Commitment | Etapa 4 | Síncrono |
+| Technical Design Review | Etapa 4 | Síncrono |
+
+### Fase de Build — Semanas de Execução
+
+Features fluem pelo Kanban. Pode se repetir por mais de uma semana conforme o escopo.
+
+| Atividade | Etapa FDD | Formato |
+| --------- | --------- | ------- |
+| Kanban Pull Execution | Etapa 5 | Contínuo |
+| Midweek Sync | Etapa 5 | Assíncrono |
+| Feature Build Consolidation | Etapa 5 | Síncrono |
+| Partial Client Validation | Etapa 5 | Assíncrono |
+
+### Fase de Encerramento — Fim da Iteração
+
+Features consolidadas, rastreabilidade auditada e artefatos empacotados.
+
+| Atividade | Etapa FDD | Formato |
+| --------- | --------- | ------- |
+| Preparação da demo e fechamento de PRs | — | Assíncrono |
+| Formal Client Validation | Etapa 5 | Síncrono |
+| Iteration Artifact Closure | Etapa 5 | Síncrono |
+| Backlog Reorganization (se necessário) | Etapa 5 | Síncrono |

@@ -1,0 +1,77 @@
+---
+title: Cronograma e Entregas
+sidebar_label: Cronograma
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ProcessFlows from '@site/src/components/ProcessFlows';
+import ProjectCalendar from '@site/src/components/ProjectCalendar';
+import RevisionHistory from '@site/src/components/RevisionHistory';
+
+# 5 · Cronograma e Entregas
+
+## Detalhamento das Iterações {#iteracoes}
+
+Quadro principal das iterações FDD — cada cerimônia citada é um link direto para sua ata/evidência. O FDD usa **iterações longas** (3–4 semanas), por isso há poucas iterações no semestre; cada uma é organizada por semana (ver [Cadência de Cerimônias](/visao/cadencia#63-cadencia-de-cerimonias)).
+
+<div className="crianex-compact">
+
+| Iteração | Período | Status | CPs | Resultados do ciclo | Cerimônias (com evidência) | Board |
+| -------- | ------- | ------ | --- | ------------------- | -------------------------- | ----- |
+| **IT1 — Vitrine Pública** | 28/04 – 07/06 | <span className="badge badge--green">Concluída</span> | [CP4](solucao#cp4) · [CP5](solucao#cp5) · [CP6](solucao#cp6) | [F09](/iteracoes/iteracao-1/features/f09) · [F10](/iteracoes/iteracao-1/features/f10) · [F11](/iteracoes/iteracao-1/features/f11) · [F12](/iteracoes/iteracao-1/features/f12) · [F13](/iteracoes/iteracao-1/features/f13) · [F14](/iteracoes/iteracao-1/features/f14) · [F15](/iteracoes/iteracao-1/features/f15) · [F16](/iteracoes/iteracao-1/features/f16) · [F17](/iteracoes/iteracao-1/features/f17) · [F18](/iteracoes/iteracao-1/features/f18) | [Feature Discovery](/iteracoes/iteracao-1/atas/ata_feature_discovery_session) · [Replenishment + Commitment](/iteracoes/iteracao-1/atas/ata_replenishment_micro_commitment) · [Technical Design Review](/iteracoes/iteracao-1/atas/ata_technical_design_review) · [Partial Validation](/iteracoes/iteracao-1/validacao/partial) · [Formal Validation](/iteracoes/iteracao-1/validacao/formal) · [Artifact Closure](/iteracoes/iteracao-1/atas/ata_artifact_closure) · [Resultados V&V](/iteracoes/iteracao-1/vv) · [Arquitetura](/arquitetura/) | [GitHub Projects](https://github.com/orgs/mdsreq-fga-unb/projects/96) |
+| **IT2 — Lead Capture** | 08/06 – 30/06 | <span className="badge badge--blue">Em andamento</span> | [CP1](solucao#cp1) · [CP8](solucao#cp8) · [CP9](solucao#cp9) | [F19](/iteracoes/iteracao-2/features/f19) · [F20](/iteracoes/iteracao-2/features/f20) · [F21](/iteracoes/iteracao-2/features/f21) · [F07](/iteracoes/iteracao-2/features/f07) · [F08](/iteracoes/iteracao-2/features/f08) · [F22](/iteracoes/iteracao-2/features/f22) · [F23](/iteracoes/iteracao-2/features/f23) | [Replenishment + Commitment](/iteracoes/iteracao-2/atas/reuniao_commitment) · [Technical Design Review](/iteracoes/iteracao-2/atas/reuniao_TDR2) · [Formal Validation](/iteracoes/iteracao-2/validacao/formal) · [Resultados V&V](/iteracoes/iteracao-2/vv) | [GitHub Projects](https://github.com/orgs/mdsreq-fga-unb/projects/96) |
+| **IT3 — Núcleo Operacional** | Pós-disciplina | <span className="badge badge--gray">Pausada</span> | [CP2](solucao#cp2) · [CP3](solucao#cp3) · [CP7](solucao#cp7) |  | — | — |
+
+</div>
+
+:::note[Adiamento do calendário acadêmico (18/06/2026)]
+O prazo final da disciplina foi adiado: a Unidade 4 passa a ser a última entrega do semestre. A **IT3 — Núcleo Operacional** fica **pausada** (só será iniciada, se for o caso, pós-disciplina). Registro em [Resultados V&V da IT2](/iteracoes/iteracao-2/vv).
+:::
+
+## Calendário {#calendario}
+
+Consolidação temporal de iterações, cerimônias FDD, entregas da disciplina e feriados (abril–julho/2026). Selecione o mês:
+
+<ProjectCalendar />
+
+## Fluxos do Processo
+
+Dois diagramas descrevem o processo. Use a navbar abaixo para alternar entre o **ciclo de vida de uma feature** e a **sequência de execução de uma iteração**.
+
+<ProcessFlows />
+
+### Regras do fluxo
+
+| Regra | Descrição |
+| ----- | --------- |
+| **Sem atalhos** | Uma issue não pode pular colunas no Kanban (ex.: In Progress direto para Done). |
+| **WIP limit é lei** | Máx. 2 issues In Progress por Class Owner; ao atingir o limite, ajude a destravar antes de iniciar nova. |
+| **Design antes de código** | Nenhuma linha é escrita sem Technical Design Review e critérios de aceite definidos. |
+| **Entrega contínua** | Features são entregues a Otávio conforme ficam prontas — sem esperar a data da unidade acadêmica. |
+| **Rastreabilidade mandatória** | Toda issue é linkada à Feature parent no Miro e à CP no Documento de Visão. |
+
+## Marcos e Critérios de Encerramento
+
+Cada iteração só é **encerrada** quando todos os critérios abaixo estão satisfeitos:
+
+| # | Critério | Responsável |
+| - | -------- | ----------- |
+| 1 | Issues comprometidas em Done ou com carry-over documentado | Development Manager |
+| 2 | Formal Client Validation realizada e aprovação registrada na ata | Responsável por Validação |
+| 3 | Matriz de rastreabilidade OE → CP → Feature → Issue → PR → Validação atualizada | Documentation Lead |
+| 4 | Documento de Visão (Pages) atualizado com artefatos da iteração | Documentation Lead + PM |
+| 5 | Retrospectiva realizada e lições aprendidas registradas | Facilitador Metodológico |
+| 6 | Backlog macro reordenado por IP para a próxima iteração | Project Manager |
+
+<RevisionHistory
+  headers={['Versão', 'Data', 'Descrição', 'Autor(es)']}
+  rows={[
+    ['1.0', '11/04/2026', 'Criação do cronograma de sprints', 'Lucas A. Zanetti'],
+    ['1.3', '05/05/2026', 'Reestruturação: ciclo de vida, cadência semanal e marcos de validação', 'Lucas A. Zanetti'],
+    ['1.9', '07/06/2026', 'Seção 5.6 — Calendário (abril–julho) com iterações e cerimônias', 'Lucas A. Zanetti'],
+    ['1.10', '18/06/2026', 'Adiamento do prazo: Unidade 4 vira última entrega; IT3 pausada; IT2 até 30/06', 'Equipe Crianex'],
+    ['2.0', '26/06/2026', 'Tabela §5.2.1 enriquecida e §5.7 com tabs BDD por feature', 'Equipe Crianex'],
+    ['3.0', '26/06/2026', 'Migração Docusaurus: detalhe das iterações no topo com links de cerimônias; diagramas em React Flow (tabs); calendário em componente React', 'Equipe Crianex'],
+  ]}
+/>
