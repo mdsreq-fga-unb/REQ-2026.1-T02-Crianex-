@@ -8,13 +8,13 @@ SELECT plan(31);
 SELECT has_table('public', 'clients', 'clients table exists');
 
 SELECT has_column('public', 'clients', 'id',         'clients has id');
-SELECT has_column('public', 'clients', 'name',       'clients has name');
+SELECT has_column('public', 'clients', 'nome',       'clients has nome');
 SELECT has_column('public', 'clients', 'email',      'clients has email');
-SELECT has_column('public', 'clients', 'phone',      'clients has phone');
+SELECT has_column('public', 'clients', 'telefone',   'clients has telefone');
 SELECT has_column('public', 'clients', 'status',     'clients has status');
 SELECT has_column('public', 'clients', 'created_at', 'clients has created_at');
 
-SELECT col_not_null('public', 'clients', 'name',       'clients.name is NOT NULL');
+SELECT col_not_null('public', 'clients', 'nome',       'clients.nome is NOT NULL');
 SELECT col_not_null('public', 'clients', 'email',      'clients.email is NOT NULL');
 SELECT col_not_null('public', 'clients', 'status',     'clients.status is NOT NULL');
 SELECT col_not_null('public', 'clients', 'created_at', 'clients.created_at is NOT NULL');
@@ -22,17 +22,17 @@ SELECT col_not_null('public', 'clients', 'created_at', 'clients.created_at is NO
 -- ── Schema: client_cards ─────────────────────────────────────────────────────
 SELECT has_table('public', 'client_cards', 'client_cards table exists');
 
-SELECT has_column('public', 'client_cards', 'id',          'client_cards has id');
-SELECT has_column('public', 'client_cards', 'client_id',   'client_cards has client_id');
-SELECT has_column('public', 'client_cards', 'column_id',   'client_cards has column_id');
-SELECT has_column('public', 'client_cards', 'product_id',  'client_cards has product_id');
-SELECT has_column('public', 'client_cards', 'responsible', 'client_cards has responsible');
-SELECT has_column('public', 'client_cards', 'created_at',  'client_cards has created_at');
+SELECT has_column('public', 'client_cards', 'id',                'client_cards has id');
+SELECT has_column('public', 'client_cards', 'client_id',         'client_cards has client_id');
+SELECT has_column('public', 'client_cards', 'column_id',         'client_cards has column_id');
+SELECT has_column('public', 'client_cards', 'produto_vinculado', 'client_cards has produto_vinculado');
+SELECT has_column('public', 'client_cards', 'responsavel',       'client_cards has responsavel');
+SELECT has_column('public', 'client_cards', 'created_at',        'client_cards has created_at');
 
 -- ── Foreign keys ─────────────────────────────────────────────────────────────
-SELECT col_is_fk('public', 'client_cards', 'client_id',  'client_cards.client_id is a FK');
-SELECT col_is_fk('public', 'client_cards', 'column_id',  'client_cards.column_id is a FK');
-SELECT col_is_fk('public', 'client_cards', 'product_id', 'client_cards.product_id is a FK');
+SELECT col_is_fk('public', 'client_cards', 'client_id',         'client_cards.client_id is a FK');
+SELECT col_is_fk('public', 'client_cards', 'column_id',         'client_cards.column_id is a FK');
+SELECT col_is_fk('public', 'client_cards', 'produto_vinculado', 'client_cards.produto_vinculado is a FK');
 
 SELECT fk_ok('public', 'client_cards', 'column_id', 'public', 'crm_columns', 'id',
   'client_cards.column_id references crm_columns(id)');
@@ -70,7 +70,7 @@ SELECT ok(NOT has_table_privilege('anon', 'public.client_cards', 'SELECT'),
 
 -- ── Constraints ──────────────────────────────────────────────────────────────
 SELECT throws_ok(
-  $$INSERT INTO public.clients (name, email, status) VALUES ('T', 'e@e.com', 'invalido')$$,
+  $$INSERT INTO public.clients (nome, email, status) VALUES ('T', 'e@e.com', 'invalido')$$,
   '23514',
   NULL,
   'invalid clients.status rejected by CHECK constraint'
@@ -78,7 +78,7 @@ SELECT throws_ok(
 
 -- RF37: a card with no column_id is routed to the default crm_columns stage.
 SELECT lives_ok(
-  $$WITH c AS (INSERT INTO public.clients (name, email) VALUES ('RF37', 'rf37@e.com') RETURNING id)
+  $$WITH c AS (INSERT INTO public.clients (nome, email) VALUES ('RF37', 'rf37@e.com') RETURNING id)
     INSERT INTO public.client_cards (client_id) SELECT id FROM c$$,
   'inserting a card without column_id succeeds (default stage trigger)'
 );

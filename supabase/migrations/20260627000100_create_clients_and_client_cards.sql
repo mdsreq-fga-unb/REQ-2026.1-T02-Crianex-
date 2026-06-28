@@ -5,9 +5,9 @@
 -- ── clients ────────────────────────────────────────────────────────────────────
 CREATE TABLE public.clients (
   id          uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
-  name        text        NOT NULL CHECK (length(trim(name)) > 0),
+  nome        text        NOT NULL CHECK (length(trim(nome)) > 0),
   email       text        NOT NULL,
-  phone       text,
+  telefone    text,
   status      text        NOT NULL DEFAULT 'ativo'
                           CHECK (status IN ('ativo', 'inativo')),
   created_at  timestamptz NOT NULL DEFAULT now()
@@ -21,21 +21,21 @@ CREATE INDEX clients_created_at_idx ON public.clients (created_at DESC);
 -- ── client_cards ───────────────────────────────────────────────────────────────
 -- A card places a client on the CRM board (a crm_columns pipeline stage).
 CREATE TABLE public.client_cards (
-  id          uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
-  client_id   uuid        NOT NULL REFERENCES public.clients(id)     ON DELETE CASCADE,
-  column_id   uuid        NOT NULL REFERENCES public.crm_columns(id) ON DELETE RESTRICT,
-  product_id  uuid                 REFERENCES public.products(id)     ON DELETE SET NULL,
-  responsible text,
-  created_at  timestamptz NOT NULL DEFAULT now()
+  id                uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
+  client_id         uuid        NOT NULL REFERENCES public.clients(id)     ON DELETE CASCADE,
+  column_id         uuid        NOT NULL REFERENCES public.crm_columns(id) ON DELETE RESTRICT,
+  produto_vinculado uuid                 REFERENCES public.products(id)     ON DELETE SET NULL,
+  responsavel       text,
+  created_at        timestamptz NOT NULL DEFAULT now()
 );
 
 COMMENT ON TABLE public.client_cards IS
   'Places a client on the CRM board. column_id defaults to the crm_columns '
-  'default stage at creation (RF37); product_id links the related SaaS product.';
+  'default stage at creation (RF37); produto_vinculado links the related SaaS product.';
 
-CREATE INDEX client_cards_client_id_idx ON public.client_cards (client_id);
-CREATE INDEX client_cards_column_id_idx ON public.client_cards (column_id);
-CREATE INDEX client_cards_product_id_idx ON public.client_cards (product_id);
+CREATE INDEX client_cards_client_id_idx         ON public.client_cards (client_id);
+CREATE INDEX client_cards_column_id_idx         ON public.client_cards (column_id);
+CREATE INDEX client_cards_produto_vinculado_idx ON public.client_cards (produto_vinculado);
 
 -- RF37: a new card lands in the default pipeline column when none is given.
 -- Resolved at insert time so the card always references the current default.
