@@ -2,7 +2,7 @@
 -- Run with: supabase test db
 BEGIN;
 
-SELECT plan(31);
+SELECT plan(33);
 
 -- ── Schema: clients ──────────────────────────────────────────────────────────
 SELECT has_table('public', 'clients', 'clients table exists');
@@ -74,6 +74,16 @@ SELECT throws_ok(
   '23514',
   NULL,
   'invalid clients.status rejected by CHECK constraint'
+);
+
+SELECT col_is_unique('public', 'clients', 'email', 'clients.email has UNIQUE constraint');
+
+SELECT throws_ok(
+  $$INSERT INTO public.clients (nome, email) VALUES ('A', 'dup@e.com');
+    INSERT INTO public.clients (nome, email) VALUES ('B', 'dup@e.com')$$,
+  '23505',
+  NULL,
+  'duplicate clients.email rejected by UNIQUE constraint'
 );
 
 -- RF37: a card with no column_id is routed to the default crm_columns stage.

@@ -6,7 +6,7 @@
 CREATE TABLE public.clients (
   id          uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
   nome        text        NOT NULL CHECK (length(trim(nome)) > 0),
-  email       text        NOT NULL,
+  email       text        NOT NULL UNIQUE,
   telefone    text,
   status      text        NOT NULL DEFAULT 'ativo'
                           CHECK (status IN ('ativo', 'inativo')),
@@ -39,7 +39,7 @@ CREATE INDEX client_cards_produto_vinculado_idx ON public.client_cards (produto_
 
 -- RF37: a new card lands in the default pipeline column when none is given.
 -- Resolved at insert time so the card always references the current default.
-CREATE OR REPLACE FUNCTION public.set_default_crm_column()
+CREATE OR REPLACE FUNCTION public.client_cards_set_default_column()
 RETURNS trigger
 LANGUAGE plpgsql
 AS $$
@@ -60,7 +60,7 @@ $$;
 
 CREATE TRIGGER client_cards_set_default_column
   BEFORE INSERT ON public.client_cards
-  FOR EACH ROW EXECUTE FUNCTION public.set_default_crm_column();
+  FOR EACH ROW EXECUTE FUNCTION public.client_cards_set_default_column();
 
 -- ── Grants ───────────────────────────────────────────────────────────────────
 -- service_role bypasses RLS (backend admin queries); authenticated is gated by
