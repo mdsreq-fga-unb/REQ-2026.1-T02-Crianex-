@@ -3,11 +3,13 @@
   import { Button } from '$lib/components/ui/button';
   import { Input } from '$lib/components/ui/input';
   import { Label } from '$lib/components/ui/label';
+  import { Eye, EyeOff } from 'lucide-svelte';
   import { ApiError } from '$lib/api/backend';
   import { syncAdminSession } from '$lib/api/admin-session';
 
   let email = $state('');
   let password = $state('');
+  let showPassword = $state(false);
   let loading = $state(false);
   let errorMessage = $state('');
   let submitHovered = $state(false);
@@ -171,16 +173,31 @@
               <Label for="admin-password">Senha</Label>
               <a href="/admin/login" aria-label="Recuperar senha">Esqueci</a>
             </div>
-            <Input
-              class="login-input"
-              id="admin-password"
-              type="password"
-              placeholder="••••••••"
-              autocomplete="current-password"
-              bind:value={password}
-              disabled={loading}
-              required
-            />
+            <div class="password-wrap">
+              <Input
+                class="login-input"
+                id="admin-password"
+                type={showPassword ? 'text' : 'password'}
+                placeholder="••••••••"
+                autocomplete="current-password"
+                bind:value={password}
+                disabled={loading}
+                required
+              />
+              <button
+                type="button"
+                class="eye-btn"
+                onclick={() => (showPassword = !showPassword)}
+                aria-label={showPassword ? 'Ocultar senha' : 'Mostrar senha'}
+                tabindex="-1"
+              >
+                {#if showPassword}
+                  <EyeOff size={16} />
+                {:else}
+                  <Eye size={16} />
+                {/if}
+              </button>
+            </div>
           </div>
 
           <button
@@ -471,6 +488,30 @@
     text-decoration: none;
   }
 
+  .password-wrap {
+    position: relative;
+  }
+
+  .eye-btn {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: rgba(252, 252, 252, 0.45);
+    display: flex;
+    align-items: center;
+    line-height: 0;
+    transition: color 0.15s;
+  }
+
+  .eye-btn:hover {
+    color: rgba(252, 252, 252, 0.85);
+  }
+
   :global(.login-input) {
     height: 44px;
     border-radius: 8px;
@@ -480,6 +521,7 @@
     font-family: var(--font-sans);
     font-size: 14px;
     padding-left: 16px;
+    padding-right: 40px;
     outline: none;
     caret-color: #fcfcfc;
     -webkit-text-fill-color: rgba(252, 252, 252, 0.62);
