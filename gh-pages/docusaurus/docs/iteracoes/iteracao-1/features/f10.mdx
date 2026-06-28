@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 
 <span className="badge badge--green">IT1</span> · Rastreabilidade: [F10](/backlog/requisitos#f10) · [CP5](/visao/solucao#cp5) · [OE2](/visao/solucao#oe2)
 
-**Issue da Feature (GitHub):** [abrir no repositório](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues) — _nº a definir_
+**Issue da Feature (GitHub):** [#57 — abrir no GitHub](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/57)
 
 :::note[Acesso para avaliação]
 Esta funcionalidade exige **login de administrador**. Credenciais para o professor: **e-mail** `a definir` · **senha** `a definir`.
@@ -27,9 +27,11 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 
 **Critérios de aceite (BDD)**
 
-- **Dado** JWT válido com `role = owner`, **quando** GET `/admin/dashboard`, **então** o RLS filtra por `auth.uid()` e o painel é renderizado.
+- **Dado** JWT válido com `role = owner`, **quando** GET `/admin/dashboard`, **então** o RLS filtra por `auth.uid()` e o painel é renderizado com acesso irrestrito.
+- **Dado** `member` com permissão de visualização (`v`) no módulo, **quando** acessar, **então** o conteúdo é renderizado; sem a permissão, o acesso é negado.
 - **Dado** JWT expirado, **quando** acesso ao painel, **então** tenta `refreshSession()`; se falhar, redireciona para `/admin/login`.
 - **Dado** token sem permissão, **quando** GET de rota admin, **então** retorna 401/403 e redireciona sem expor a estrutura.
+- **Dado** membro `status = inactive`, **quando** acessar rota protegida, **então** o acesso é bloqueado.
 
 **Regras de negócio:** [RN03](/backlog/requisitos#rns) — Controle de acesso modular por permissão (v/e/a) · [RN04](/backlog/requisitos#rns) — Owner com acesso irrestrito a todos os módulos · [RN05](/backlog/requisitos#rns) — Membro inativo bloqueado no painel
 
@@ -46,9 +48,12 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 
 **Critérios de aceite (BDD)**
 
-- **Dado** admin autenticado, **quando** editar o próprio perfil, **então** PATCH `/profile/me` (e `/profile/me/password`) atualiza os dados sem reload.
+- **Dado** admin autenticado, **quando** editar o próprio perfil, **então** PATCH `/profile/me` atualiza os dados sem reload.
+- **Dado** troca de senha, **quando** submeter em `/profile/me/password`, **então** exige validação de força e confirmação antes de persistir.
+- **Dado** dados inválidos (ex.: e-mail malformado), **quando** submeter, **então** a validação impede e nada é persistido.
+- **Dado** tentativa de editar perfil de outro usuário, **quando** a requisição chega, **então** o RLS permite apenas auto-edição (self-edit).
 
-**Regras de negócio:** —
+**Regras de negócio:** [RN17](/backlog/requisitos#rns) — Autogestão do perfil próprio (cada usuário edita apenas os próprios dados, sem acessar perfis de terceiros)
 
 **Evidência (screenshot):**
 

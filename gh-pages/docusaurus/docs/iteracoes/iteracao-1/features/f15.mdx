@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 
 <span className="badge badge--green">IT1</span> · Rastreabilidade: [F15](/backlog/requisitos#f15) · [CP4](/visao/solucao#cp4) · [OE2](/visao/solucao#oe2)
 
-**Issue da Feature (GitHub):** [abrir no repositório](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues) — _nº a definir_
+**Issue da Feature (GitHub):** [#63 — abrir no GitHub](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/63)
 
 ## Requisitos (evidências)
 
@@ -25,6 +25,7 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 
 - **Dado** visitante, **quando** acessar `/produtos/[slug]`, **então** o SSR retorna os detalhes completos do produto em ≤ 2s com Open Graph.
 - **Dado** acesso sem autenticação, **quando** GET da página, **então** nenhum guard intercepta e o conteúdo é exibido.
+- **Dado** slug inexistente ou produto despublicado, **quando** acessar, **então** retorna 404.
 
 **Regras de negócio:** [RN11](/backlog/requisitos#rns) — Conteúdo institucional obrigatório (Missão, Visão, Valores)
 
@@ -41,7 +42,9 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 
 **Critérios de aceite (BDD)**
 
-- **Dado** primeiro acesso, **quando** a vitrine carrega, **então** exibe o banner de consentimento de cookies; a preferência é persistida.
+- **Dado** primeiro acesso, **quando** a vitrine carrega, **então** exibe o banner de consentimento de cookies.
+- **Dado** escolha de aceitar ou recusar, **quando** confirmada, **então** a preferência é persistida e respeitada nos acessos seguintes (sem reexibir o banner).
+- **Dado** qualquer página, **quando** renderizada, **então** a política de cookies permanece acessível no rodapé.
 
 **Regras de negócio:** [RN08](/backlog/requisitos#rns) — Consentimento de cookies obrigatório no 1º acesso · [RN09](/backlog/requisitos#rns) — Políticas de conformidade sempre acessíveis no rodapé
 

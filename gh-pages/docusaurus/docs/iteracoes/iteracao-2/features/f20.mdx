@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 
 <span className="badge badge--purple">IT2</span> · Rastreabilidade: [F20](/backlog/requisitos#f20) · [CP1](/visao/solucao#cp1) · [OE3](/visao/solucao#oe3)
 
-**Issue da Feature (GitHub):** [abrir no repositório](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues) — _nº a definir_
+**Issue da Feature (GitHub):** [#176 — abrir no GitHub](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/176)
 
 :::note[Acesso para avaliação]
 Esta funcionalidade exige **login de administrador**. Credenciais para o professor: **e-mail** `a definir` · **senha** `a definir`.
@@ -28,6 +28,8 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 **Critérios de aceite (BDD)**
 
 - **Dado** admin autenticado, **quando** adicionar coluna, **então** uma nova coluna é criada no funil e persistida.
+- **Dado** nome de coluna vazio ou duplicado, **quando** submeter, **então** a validação impede a criação.
+- **Dado** requisição sem permissão, **quando** POST da coluna, **então** o RLS bloqueia com 403.
 
 **Regras de negócio:** —
 
@@ -44,9 +46,11 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 
 **Critérios de aceite (BDD)**
 
-- **Dado** coluna existente, **quando** remover, **então** a coluna é excluída do funil.
+- **Dado** coluna existente sem cards, **quando** remover, **então** a coluna é excluída do funil.
+- **Dado** coluna padrão ou com cards, **quando** tentar remover, **então** a remoção é impedida ou exige realocação dos cards (invariante de board não vazio).
+- **Dado** remoção, **quando** acionada, **então** exige confirmação antes de excluir.
 
-**Regras de negócio:** —
+**Regras de negócio:** [RN21](/backlog/requisitos#rns) — Integridade do funil (board sempre com ao menos uma coluna; coluna com cards exige realocação)
 
 **Evidência (screenshot):**
 
@@ -61,7 +65,9 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 
 **Critérios de aceite (BDD)**
 
-- **Dado** coluna existente, **quando** editar/arrastar, **então** o nome ou a ordem é atualizado com reflexo visual em ≤ 1,5s.
+- **Dado** coluna existente, **quando** editar o nome, **então** a alteração é persistida e refletida no board.
+- **Dado** coluna existente, **quando** arrastar para reordenar, **então** a nova ordem é persistida com reflexo visual em ≤ 1,5s.
+- **Dado** nome inválido ou vazio, **quando** submeter, **então** a validação impede e mantém o nome anterior.
 
 **Regras de negócio:** —
 

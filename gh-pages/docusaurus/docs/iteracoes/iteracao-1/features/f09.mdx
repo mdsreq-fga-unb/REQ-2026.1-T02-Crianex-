@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 
 <span className="badge badge--green">IT1</span> · Rastreabilidade: [F09](/backlog/requisitos#f09) · [CP5](/visao/solucao#cp5) · [OE2](/visao/solucao#oe2)
 
-**Issue da Feature (GitHub):** [abrir no repositório](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues) — _nº a definir_
+**Issue da Feature (GitHub):** [#54 — abrir no GitHub](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/54)
 
 :::note[Acesso para avaliação]
 Esta funcionalidade exige **login de administrador**. Credenciais para o professor: **e-mail** `a definir` · **senha** `a definir`.
@@ -28,7 +28,9 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 **Critérios de aceite (BDD)**
 
 - **Dado** credenciais válidas, **quando** POST `/admin/login`, **então** o Supabase Auth gera a sessão JWT e redireciona para `/admin/dashboard`.
-- **Dado** credenciais inválidas, **quando** POST `/admin/login`, **então** retorna mensagem genérica sem expor detalhes internos.
+- **Dado** credenciais inválidas, **quando** POST `/admin/login`, **então** retorna 401 com mensagem genérica sem expor detalhes internos.
+- **Dado** membro `status = inactive` com credenciais corretas, **quando** autenticar, **então** o acesso é bloqueado.
+- **Dado** campos de login vazios, **quando** submeter, **então** a validação client-side impede o envio.
 - **Dado** acesso a `/admin` sem sessão, **quando** GET de rota protegida, **então** redireciona para `/admin/login` sem renderizar dados.
 
 **Regras de negócio:** [RN05](/backlog/requisitos#rns) — Membro inativo bloqueado no painel
@@ -47,6 +49,7 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 **Critérios de aceite (BDD)**
 
 - **Dado** sessão ativa, **quando** POST `/admin/logout`, **então** executa `signOut()`, limpa o cookie e redireciona para `/admin/login`.
+- **Dado** sessão encerrada, **quando** tentar acessar rota protegida, **então** o acesso é negado e redireciona para o login (sessão invalidada server-side).
 
 **Regras de negócio:** —
 

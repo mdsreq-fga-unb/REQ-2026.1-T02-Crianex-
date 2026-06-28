@@ -182,8 +182,19 @@ Catálogo completo de **Features, Requisitos Funcionais (RF), Não Funcionais (R
 | RN08 | Consentimento de cookies | Banner no 1º acesso; preferência persistida e respeitada | F15 | RF49, RF51 |
 | RN09 | Políticas sempre acessíveis | Links de privacidade/cookies no rodapé de todas as páginas | F14, F15 | RF49, RF51 |
 | RN10 | Conformidade com o design system | Paleta oficial (#E71F84, #66DF7A, #7F3FE5) e tipografia aprovada | F12, F14, F15 | — |
-| RN11 | Conteúdo institucional obrigatório | Missão, Visão e Valores + logotipo na página institucional | F15 | — |
+| RN11 | Conteúdo institucional obrigatório | Missão, Visão e Valores + logotipo na página institucional | F15 | RF50 |
 | RN12 | Ordem de produtos pelo administrador | Sequência definida por drag-and-drop reflete a curadoria do portfólio | F12, F13, F15 | RF24, RF25 |
+| RN13 | Geração automática de notificações | Notificações são criadas automaticamente por eventos-chave do sistema (ex.: captação de lead), nunca manualmente pelo usuário | F07 | RF46 |
+| RN14 | Template de notificação por evento | Cada evento usa o template do seu tipo; na ausência de um específico, recorre-se ao template padrão de fallback, sem deixar evento sem notificação | F08 | RF15, RF56, RF57 |
+| RN15 | Proteção contra autoexclusão de conta | Um administrador não pode inativar nem remover a própria conta | F11 | RF13, RF14 |
+| RN16 | Publicação explícita de conteúdo | Produtos e artigos de FAQ nascem despublicados; só ficam visíveis ao público após publicação explícita do administrador | F12, F16 | RF21, RF28 |
+| RN17 | Autogestão do perfil próprio | Qualquer usuário autenticado edita apenas os próprios dados de perfil, sem acessar perfis de terceiros, independentemente das permissões de módulo | F10 | RF48 |
+| RN18 | Consentimento LGPD na captação de lead | A captação de lead pela vitrine exige consentimento LGPD registrado antes de persistir os dados do visitante | F14 | RF27 |
+| RN19 | Entrada do lead no funil | Todo lead/cliente cadastrado no CRM entra na coluna inicial padrão do funil | F19 | RF37 |
+| RN20 | Inativação preserva o registro | Cliente/lead inativado sai do fluxo ativo do funil, mas é preservado no banco (soft-delete), nunca excluído fisicamente | F19 | RF36 |
+| RN21 | Integridade do funil | O funil mantém ao menos uma coluna; coluna padrão ou com cards não é removida sem realocação dos cards | F20 | RF39 |
+| RN22 | Remoção definitiva de interação | A remoção de uma interação comercial é permanente (hard-delete), excluindo-a do histórico do card | F21 | RF53 |
+| RN23 | Categorização vinculada a produto | Categorias de FAQ são vinculadas a produtos, organizando os artigos da base de conhecimento por produto | F16 | RF31 |
 
 <RevisionHistory
   headers={['Versão', 'Data', 'Descrição', 'Autor(es)']}
@@ -191,5 +202,6 @@ Catálogo completo de **Features, Requisitos Funcionais (RF), Não Funcionais (R
     ['1.0', '17/05/2026', 'Features, RFs e RNFs extraídos da rastreabilidade', 'Lucas A. Zanetti'],
     ['1.1', '09/06/2026', 'Status IT1; Regras de Negócio (RN01–RN12)', 'Lucas A. Zanetti'],
     ['2.0', '26/06/2026', 'Página criada no Docusaurus: tabelas de RF/RNF/RN separadas da rastreabilidade, com tabs por iteração', 'Equipe Crianex'],
+    ['2.1', '28/06/2026', 'Novas Regras de Negócio (RN13–RN23) cobrindo RFs sem RN; RN11 vinculada a RF50', 'Equipe Crianex'],
   ]}
 />

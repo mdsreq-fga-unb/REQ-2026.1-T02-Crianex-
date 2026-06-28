@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 
 <span className="badge badge--green">IT1</span> · Rastreabilidade: [F11](/backlog/requisitos#f11) · [CP5](/visao/solucao#cp5) · [OE2](/visao/solucao#oe2)
 
-**Issue da Feature (GitHub):** [abrir no repositório](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues) — _nº a definir_
+**Issue da Feature (GitHub):** [#58 — abrir no GitHub](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/58)
 
 :::note[Acesso para avaliação]
 Esta funcionalidade exige **login de administrador**. Credenciais para o professor: **e-mail** `a definir` · **senha** `a definir`.
@@ -28,6 +28,8 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 **Critérios de aceite (BDD)**
 
 - **Dado** `role = owner`, **quando** editar um membro, **então** o MemberModal atualiza perfil e permissões sem reload.
+- **Dado** membro sem permissão de edição (`e`), **quando** tentar editar, **então** a ação fica indisponível/bloqueada.
+- **Dado** campos inválidos, **quando** submeter a edição, **então** a validação impede e mantém os dados anteriores.
 
 **Regras de negócio:** [RN03](/backlog/requisitos#rns) — Controle de acesso modular por permissão (v/e/a)
 
@@ -44,8 +46,10 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 
 **Critérios de aceite (BDD)**
 
-- **Dado** `role = owner`, **quando** cadastrar membro, **então** `createUser()` + insert em `profiles` + lista atualizada sem reload.
+- **Dado** `role = owner` com dados válidos, **quando** cadastrar membro, **então** `createUser()` + insert em `profiles` + lista atualizada sem reload.
 - **Dado** e-mail duplicado, **quando** cadastrar, **então** erro informativo sem criar registro duplicado.
+- **Dado** campos obrigatórios vazios, **quando** submeter, **então** a validação impede a criação.
+- **Dado** membro recém-criado, **quando** o cadastro conclui, **então** uma senha temporária é gerada, não retornada pela API e exigida a troca no 1º acesso.
 
 **Regras de negócio:** [RN06](/backlog/requisitos#rns) — Senha temporária gerada no cadastro de membro
 
@@ -62,9 +66,11 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 
 **Critérios de aceite (BDD)**
 
-- **Dado** `role = owner`, **quando** inativar membro, **então** `active = false` e lista atualizada; auto-inativação é bloqueada.
+- **Dado** `role = owner`, **quando** inativar membro, **então** `active = false` e a lista é atualizada.
+- **Dado** o próprio usuário logado, **quando** tentar se inativar, **então** a auto-inativação é bloqueada.
+- **Dado** membro inativo, **quando** reativar, **então** `active = true` e ele volta ao fluxo.
 
-**Regras de negócio:** —
+**Regras de negócio:** [RN15](/backlog/requisitos#rns) — Proteção contra autoexclusão de conta (não é possível inativar a própria conta)
 
 **Evidência (screenshot):**
 
@@ -80,8 +86,11 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 **Critérios de aceite (BDD)**
 
 - **Dado** `role = owner`, **quando** remover membro, **então** `deleteUser()` + remoção de `profiles` sem reload.
+- **Dado** remoção, **quando** acionada, **então** exige confirmação antes de excluir.
+- **Dado** o próprio usuário logado, **quando** tentar se remover, **então** a auto-remoção é bloqueada.
+- **Dado** membro inexistente, **quando** remover, **então** o erro é tratado sem quebrar a lista.
 
-**Regras de negócio:** —
+**Regras de negócio:** [RN15](/backlog/requisitos#rns) — Proteção contra autoexclusão de conta (não é possível remover a própria conta)
 
 **Evidência (screenshot):**
 

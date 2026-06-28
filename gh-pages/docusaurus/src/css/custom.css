@@ -29,7 +29,33 @@
   --crianex-radius: 14px;
 
   /* sidebar mais compacta (ocupa menos espaço) */
-  --doc-sidebar-width: 250px;
+  --doc-sidebar-width: 210px;
+}
+
+/* ---------- Sidebar compacta (força via attribute selector) ---------- */
+@media (min-width: 997px) {
+  [class*='docSidebarContainer'] {
+    width: var(--doc-sidebar-width) !important;
+  }
+}
+
+/* ---------- TOC compacto: expande a coluna de conteúdo ---------- */
+@media (min-width: 997px) {
+  [class*='docItemCol'] {
+    max-width: 82% !important;
+  }
+}
+
+.table-of-contents {
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+.table-of-contents__link {
+  padding: 0.18rem 0;
+  display: block;
+}
+.table-of-contents .table-of-contents {
+  padding-left: 0.65rem;
 }
 
 /* ---------- Sidebar compacta ---------- */

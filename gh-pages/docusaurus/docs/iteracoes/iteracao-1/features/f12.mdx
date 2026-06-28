@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 
 <span className="badge badge--green">IT1</span> · Rastreabilidade: [F12](/backlog/requisitos#f12) · [CP4](/visao/solucao#cp4) · [OE2](/visao/solucao#oe2)
 
-**Issue da Feature (GitHub):** [abrir no repositório](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues) — _nº a definir_
+**Issue da Feature (GitHub):** [#55 — abrir no GitHub](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/55)
 
 :::note[Acesso para avaliação]
 Esta funcionalidade exige **login de administrador**. Credenciais para o professor: **e-mail** `a definir` · **senha** `a definir`.
@@ -27,10 +27,11 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 
 **Critérios de aceite (BDD)**
 
-- **Dado** admin autenticado, **quando** cadastrar produto, **então** é persistido em transação ACID e fica apto à publicação.
+- **Dado** admin autenticado com dados válidos, **quando** cadastrar produto, **então** é persistido em transação ACID e fica apto à publicação.
+- **Dado** campos obrigatórios vazios, **quando** submeter, **então** a validação impede a criação.
 - **Dado** produto publicado, **quando** a vitrine é carregada, **então** o SSR retorna apenas `published = true` em ≤ 2s.
 
-**Regras de negócio:** —
+**Regras de negócio:** [RN16](/backlog/requisitos#rns) — Publicação explícita de conteúdo (produto nasce despublicado até liberação do administrador)
 
 **Evidência (screenshot):**
 
@@ -46,6 +47,8 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 **Critérios de aceite (BDD)**
 
 - **Dado** admin autenticado, **quando** editar produto, **então** PATCH `/admin/products/:id` atualiza os dados refletidos na vitrine.
+- **Dado** campos inválidos, **quando** submeter, **então** a validação impede e mantém a versão anterior.
+- **Dado** produto inexistente, **quando** editar, **então** retorna 404 sem efeito.
 
 **Regras de negócio:** —
 
@@ -63,6 +66,8 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 **Critérios de aceite (BDD)**
 
 - **Dado** admin autenticado, **quando** remover produto, **então** DELETE `/admin/products/:id` o remove da vitrine e do banco.
+- **Dado** remoção, **quando** acionada, **então** exige confirmação antes de excluir.
+- **Dado** produto inexistente, **quando** remover, **então** retorna 404 sem efeito.
 
 **Regras de negócio:** —
 
@@ -80,6 +85,8 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 **Critérios de aceite (BDD)**
 
 - **Dado** lista de produtos, **quando** reordenar via drag-and-drop, **então** PATCH `/admin/products/reorder` persiste a nova ordem em ≤ 1,5s.
+- **Dado** falha ao persistir a nova ordem, **quando** o PATCH não confirma, **então** a UI reverte para a ordem anterior.
+- **Dado** nova ordem persistida, **quando** a vitrine carrega, **então** os produtos respeitam a sequência definida pelo administrador.
 
 **Regras de negócio:** [RN12](/backlog/requisitos#rns) — Ordem de exibição de produtos definida pelo administrador
 

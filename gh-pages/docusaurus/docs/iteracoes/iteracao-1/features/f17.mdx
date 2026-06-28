@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 
 <span className="badge badge--green">IT1</span> · Rastreabilidade: [F17](/backlog/requisitos#f17) · [CP6](/visao/solucao#cp6) · [OE2](/visao/solucao#oe2)
 
-**Issue da Feature (GitHub):** [abrir no repositório](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues) — _nº a definir_
+**Issue da Feature (GitHub):** [#60 — abrir no GitHub](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/60)
 
 :::note[Acesso para avaliação]
 Esta funcionalidade exige **login de administrador**. Credenciais para o professor: **e-mail** `a definir` · **senha** `a definir`.
@@ -28,6 +28,7 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 **Critérios de aceite (BDD)**
 
 - **Dado** admin autenticado, **quando** publicar artigo, **então** `published = true` + visível na próxima requisição da vitrine sem reload.
+- **Dado** falha na requisição de publicação, **quando** não confirma, **então** o estado é revertido na UI.
 
 **Regras de negócio:** [RN02](/backlog/requisitos#rns) — Visibilidade de artigos FAQ — `published = false` não aparece; despublicação não exclui
 
@@ -45,6 +46,7 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 **Critérios de aceite (BDD)**
 
 - **Dado** admin autenticado, **quando** despublicar artigo, **então** ele some da vitrine com o conteúdo preservado no banco.
+- **Dado** falha na requisição, **quando** a despublicação não confirma, **então** o estado é revertido na UI.
 
 **Regras de negócio:** [RN02](/backlog/requisitos#rns) — Visibilidade de artigos FAQ — `published = false` não aparece; despublicação não exclui
 

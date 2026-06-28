@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 
 <span className="badge badge--green">IT1</span> · Rastreabilidade: [F14](/backlog/requisitos#f14) · [CP4](/visao/solucao#cp4) · [OE2](/visao/solucao#oe2)
 
-**Issue da Feature (GitHub):** [abrir no repositório](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues) — _nº a definir_
+**Issue da Feature (GitHub):** [#61 — abrir no GitHub](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/61)
 
 ## Requisitos (evidências)
 
@@ -24,9 +24,11 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 **Critérios de aceite (BDD)**
 
 - **Dado** visitante preenche o formulário, **quando** POST válido, **então** o lead é persistido em transação ACID + alerta de sucesso em ≤ 2s.
+- **Dado** campos obrigatórios vazios ou e-mail inválido, **quando** submeter, **então** a validação client-side impede o envio e sinaliza os campos.
 - **Dado** IP que excede 5 requisições em 10 min, **quando** POST ao formulário, **então** retorna 429 com "Tente novamente mais tarde".
+- **Dado** o envio do formulário, **quando** o lead é coletado, **então** o consentimento LGPD é exigido/registrado antes da persistência.
 
-**Regras de negócio:** —
+**Regras de negócio:** [RN18](/backlog/requisitos#rns) — Consentimento LGPD registrado antes de persistir os dados do lead
 
 **Evidência (screenshot):**
 
@@ -42,6 +44,7 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 **Critérios de aceite (BDD)**
 
 - **Dado** visitante na vitrine, **quando** acessar `/privacidade` ou `/cookies`, **então** as páginas de conformidade com a LGPD são exibidas.
+- **Dado** qualquer página da vitrine, **quando** renderizada, **então** os links de privacidade e cookies estão sempre acessíveis no rodapé.
 
 **Regras de negócio:** [RN08](/backlog/requisitos#rns) — Consentimento de cookies obrigatório no 1º acesso · [RN09](/backlog/requisitos#rns) — Políticas de conformidade sempre acessíveis no rodapé
 

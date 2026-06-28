@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 
 <span className="badge badge--purple">IT2</span> · Rastreabilidade: [F19](/backlog/requisitos#f19) · [CP1](/visao/solucao#cp1) · [OE3](/visao/solucao#oe3)
 
-**Issue da Feature (GitHub):** [abrir no repositório](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues) — _nº a definir_
+**Issue da Feature (GitHub):** [#177 — abrir no GitHub](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/177)
 
 :::note[Acesso para avaliação]
 Esta funcionalidade exige **login de administrador**. Credenciais para o professor: **e-mail** `a definir` · **senha** `a definir`.
@@ -27,9 +27,11 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 
 **Critérios de aceite (BDD)**
 
-- **Dado** admin autenticado, **quando** cadastrar lead, **então** um card é criado no CRM com dados persistidos na coluna inicial.
+- **Dado** admin autenticado com dados válidos, **quando** cadastrar lead, **então** um card é criado na coluna inicial com os dados persistidos.
+- **Dado** campos obrigatórios vazios, **quando** submeter, **então** a validação impede a criação.
+- **Dado** requisição sem permissão, **quando** POST do lead, **então** o RLS bloqueia com 403.
 
-**Regras de negócio:** —
+**Regras de negócio:** [RN19](/backlog/requisitos#rns) — Entrada do lead no funil (todo lead cadastrado entra na coluna inicial padrão)
 
 **Evidência (screenshot):**
 
@@ -45,6 +47,8 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 **Critérios de aceite (BDD)**
 
 - **Dado** card existente, **quando** editar os dados do cliente/lead, **então** as alterações são persistidas sem duplicar o registro.
+- **Dado** campos inválidos, **quando** submeter, **então** a validação impede e mantém os dados anteriores.
+- **Dado** cliente/lead inexistente, **quando** editar, **então** retorna 404 sem efeito.
 
 **Regras de negócio:** —
 
@@ -62,8 +66,9 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 **Critérios de aceite (BDD)**
 
 - **Dado** cliente/lead ativo, **quando** inativar, **então** o registro passa a `inactive` e sai do fluxo ativo do funil.
+- **Dado** cliente/lead inativo, **quando** reativar, **então** volta ao fluxo ativo.
 
-**Regras de negócio:** —
+**Regras de negócio:** [RN20](/backlog/requisitos#rns) — Inativação preserva o registro (soft-delete; cliente/lead sai do fluxo ativo mas não é excluído)
 
 **Evidência (screenshot):**
 
@@ -80,6 +85,7 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 
 - **Dado** card no CRM, **quando** arrastar para outra coluna (drag-and-drop), **então** o estágio é atualizado em ≤ 1,5s sem reload.
 - **Dado** card com dados visíveis, **quando** clicar, **então** os detalhes expandem sem redirecionamento de página.
+- **Dado** falha ao persistir o novo estágio, **quando** o drag não confirma, **então** o card retorna à coluna de origem (rollback visual).
 
 **Regras de negócio:** —
 

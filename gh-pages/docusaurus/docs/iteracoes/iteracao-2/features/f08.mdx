@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 
 <span className="badge badge--purple">IT2</span> · Rastreabilidade: [F08](/backlog/requisitos#f08) · [CP9](/visao/solucao#cp9) · [OE3](/visao/solucao#oe3)
 
-**Issue da Feature (GitHub):** [abrir no repositório](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues) — _nº a definir_
+**Issue da Feature (GitHub):** [#180 — abrir no GitHub](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/180)
 
 :::note[Acesso para avaliação]
 Esta funcionalidade exige **login de administrador**. Credenciais para o professor: **e-mail** `a definir` · **senha** `a definir`.
@@ -27,9 +27,12 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 
 **Critérios de aceite (BDD)**
 
-- **Dado** admin autenticado, **quando** criar template, **então** é persistido e associado a um tipo de evento.
+- **Dado** admin autenticado com dados válidos, **quando** criar template, **então** é persistido e associado a um tipo de evento.
+- **Dado** campos obrigatórios vazios (nome, conteúdo ou evento), **quando** submeter, **então** a validação impede a criação e sinaliza os campos.
+- **Dado** tipo de evento que já possui template, **quando** criar outro para o mesmo evento, **então** o sistema impede a duplicidade conforme a regra de associação.
+- **Dado** requisição sem permissão, **quando** POST do template, **então** o RLS bloqueia com 403.
 
-**Regras de negócio:** —
+**Regras de negócio:** [RN14](/backlog/requisitos#rns) — Template de notificação por evento, com fallback para o template padrão
 
 **Evidência (screenshot):**
 
@@ -44,9 +47,12 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 
 **Critérios de aceite (BDD)**
 
-- **Dado** template existente, **quando** editar, **então** os dados são atualizados sem duplicata.
+- **Dado** template existente, **quando** editar, **então** os dados são atualizados sem duplicar o registro.
+- **Dado** campos inválidos na edição, **quando** submeter, **então** a validação impede e a versão anterior é mantida.
+- **Dado** template inexistente ou removido, **quando** editar, **então** retorna 404 sem efeito.
+- **Dado** requisição sem permissão, **quando** PATCH do template, **então** o RLS bloqueia com 403.
 
-**Regras de negócio:** —
+**Regras de negócio:** [RN14](/backlog/requisitos#rns) — Template de notificação por evento, com fallback para o template padrão
 
 **Evidência (screenshot):**
 
@@ -62,8 +68,12 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 **Critérios de aceite (BDD)**
 
 - **Dado** template existente, **quando** remover, **então** é excluído e não é mais usado em novos disparos.
+- **Dado** remoção, **quando** acionada, **então** exige confirmação explícita antes de excluir.
+- **Dado** template vinculado a evento ativo, **quando** removido, **então** novos disparos caem para o template de fallback padrão sem quebrar o envio.
+- **Dado** template já removido, **quando** remover novamente, **então** retorna 404 de forma idempotente.
+- **Dado** requisição sem permissão, **quando** DELETE do template, **então** o RLS bloqueia com 403.
 
-**Regras de negócio:** —
+**Regras de negócio:** [RN14](/backlog/requisitos#rns) — Template de notificação por evento, com fallback para o template padrão
 
 **Evidência (screenshot):**
 

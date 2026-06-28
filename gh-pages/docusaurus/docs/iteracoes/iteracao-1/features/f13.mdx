@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 
 <span className="badge badge--green">IT1</span> · Rastreabilidade: [F13](/backlog/requisitos#f13) · [CP4](/visao/solucao#cp4) · [OE2](/visao/solucao#oe2)
 
-**Issue da Feature (GitHub):** [abrir no repositório](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues) — _nº a definir_
+**Issue da Feature (GitHub):** [#56 — abrir no GitHub](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/56)
 
 :::note[Acesso para avaliação]
 Esta funcionalidade exige **login de administrador**. Credenciais para o professor: **e-mail** `a definir` · **senha** `a definir`.
@@ -27,8 +27,8 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 
 **Critérios de aceite (BDD)**
 
-- **Dado** admin autenticado, **quando** acionar toggle ON, **então** `published = true` + confirmação visual em ≤ 2s.
-- **Dado** credenciais inválidas no toggle, **quando** a requisição chega à API, **então** é rejeitada e o toggle revertido na UI.
+- **Dado** admin autenticado, **quando** acionar toggle ON, **então** `published = true` com confirmação visual em ≤ 2s e o produto aparece na vitrine imediatamente.
+- **Dado** requisição não autorizada no toggle, **quando** a requisição chega à API, **então** é rejeitada e o toggle revertido na UI.
 
 **Regras de negócio:** [RN01](/backlog/requisitos#rns) — Visibilidade de produtos — só `published = true` aparece na vitrine; efeito imediato · [RN12](/backlog/requisitos#rns) — Ordem de exibição de produtos definida pelo administrador
 
@@ -46,6 +46,7 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 **Critérios de aceite (BDD)**
 
 - **Dado** admin autenticado, **quando** acionar toggle OFF, **então** o produto é ocultado da vitrine com os dados preservados no banco.
+- **Dado** falha na requisição, **quando** o toggle OFF não confirma, **então** a UI reverte para o estado publicado.
 
 **Regras de negócio:** [RN01](/backlog/requisitos#rns) — Visibilidade de produtos — só `published = true` aparece na vitrine; efeito imediato
 
