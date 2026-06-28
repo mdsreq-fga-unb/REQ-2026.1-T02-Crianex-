@@ -306,12 +306,8 @@ if (isProduction) {
     const res = await fetch(url, { method: 'GET', signal: controller.signal });
     clearTimeout(timeout);
 
-    if (res.ok || res.status === 401 || res.status === 403) {
-      supabaseClient = createClient(url, key);
-    } else {
-      console.warn('[supabase] ping returned non-OK status, using in-memory fallback');
-      supabaseClient = createInMemorySupabase() as unknown as ReturnType<typeof createClient>;
-    }
+    // Any HTTP response (including 404) means the server is reachable.
+    supabaseClient = createClient(url, key);
   } catch {
     console.warn('[supabase] could not reach Supabase at %s, using in-memory fallback', url);
     supabaseClient = createInMemorySupabase() as unknown as ReturnType<typeof createClient>;
