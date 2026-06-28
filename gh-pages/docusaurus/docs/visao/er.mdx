@@ -60,7 +60,8 @@ A **Engenharia de Requisitos** define _o quê_ — as seis atividades canônicas
 | ------- | ---------------- |
 | **Definition of Ready** | Gate de **entrada**: requisito claro, completo e testável ([DoR/DoD](dor-dod)) |
 | **Definition of Done** | Gate de **saída**: requisito efetivamente atendido |
-| **Inspeção do requisito** | Revisão da qualidade do requisito e dos critérios de aceite |
+| **Inspeção do requisito** | Revisão da qualidade do requisito e dos critérios de aceite — técnica central da cerimônia de **Refinamento de Requisitos** |
+| **Análise de rastreabilidade** | Auditoria da matriz OE → CP → Feature → RF/RNF → Issue para verificar cobertura, consistência e ausência de órfãos — aplicada no **Refinamento de Requisitos** |
 | **Verificação de critérios** | Conferência item a item dos critérios BDD vs. comportamento implementado |
 | **Validação assíncrona** | Vídeo/screenshots + checklist enviados a Otávio via WhatsApp em até 24h |
 | **Demo orientada a valor** | Demonstração na Formal Client Validation narrada pelo Iteration Goal |
@@ -100,6 +101,7 @@ O FDD + Kanban operacionaliza as atividades acima em **5 etapas**: as três prim
 | | Technical Design Review | Declaração · V&V (DoR) | Issues com critérios; notas de design |
 | **5 · Build by Feature** | Kanban Pull Execution | execução (WIP ≤ 2) | Board, commits, PRs |
 | | Feature Build Consolidation | Organização · V&V | Rastreabilidade atualizada |
+| | Refinamento de Requisitos | V&V (análise de rastreabilidade · inspeção) | Requisitos refinados, matriz de rastreabilidade revisada, ata |
 | | Partial Client Validation | V&V | Validação assíncrona na issue |
 | | Formal Client Validation | V&V | Ata da demo, aprovação de Otávio |
 | | Iteration Artifact Closure | Organização | GitHub Pages atualizado, backlog congelado |
@@ -140,5 +142,6 @@ Os artefatos abaixo descrevem e verificam a _solução técnica_, não o requisi
     ['1.10', '17/06/2026', 'Separação ER × ESw; V&V reforçada com DoR, DoD e inspeção', 'Heitor'],
     ['1.11', '18/06/2026', 'Técnicas enriquecidas com formato/especificação de uso', 'Heitor'],
     ['2.0', '26/06/2026', 'Migração para Docusaurus: atividades de ER em tabs; tabelas compactadas', 'Equipe Crianex'],
+    ['2.1', '28/06/2026', 'Cerimônia de Refinamento de Requisitos (V&V) adicionada às etapas iterativas; técnica de Análise de rastreabilidade incluída em V&V', 'Equipe Crianex'],
   ]}
 />
