@@ -650,6 +650,14 @@ article {
   padding: 0.4rem 0.55rem;
   line-height: 1.35;
 }
+/* conteúdo de cada coluna centralizado horizontal e verticalmente */
+.markdown table.crianex-compact th,
+.crianex-compact table th,
+.markdown table.crianex-compact td,
+.crianex-compact table td {
+  text-align: center;
+  vertical-align: middle;
+}
 
 /* ---------- Flow diagram (StepFlow) ---------- */
 .crianex-stepflow {
@@ -783,3 +791,230 @@ article {
 .lc-facultativo { background: #fef9c3; border-color: #fde68a; }
 .lc-outro { background: #f3f4f6; border-color: #e5e7eb; }
 .lc-semestre { background: #111827; }
+
+/* ---------- Feature evidence pair (diagrama + feature card) ---------- */
+.crianex-feature-evidence {
+  margin: 1.25rem 0 2rem;
+  border: 1px solid var(--crianex-border);
+  border-radius: var(--crianex-radius);
+  background: var(--crianex-surface-alt);
+  overflow: hidden;
+}
+.crianex-feature-evidence__header {
+  padding: 0.9rem 1.25rem;
+  background: linear-gradient(120deg, var(--crianex-roxo), var(--crianex-rosa));
+  color: #fff;
+}
+.crianex-feature-evidence__header strong {
+  font-size: 1.02rem;
+}
+.crianex-feature-evidence__body {
+  display: block;
+}
+.crianex-feature-evidence__diagram,
+.crianex-feature-evidence__card {
+  padding: 1.1rem 1.4rem;
+}
+.crianex-feature-evidence__diagram {
+  background: var(--crianex-surface);
+  border-bottom: 1px solid var(--crianex-border);
+  overflow-x: auto;
+}
+/* Diagrama Mermaid ocupa toda a largura do card e fica grande */
+.crianex-feature-evidence__diagram .docusaurus-mermaid-container {
+  width: 100%;
+  text-align: center;
+}
+.crianex-feature-evidence__diagram .docusaurus-mermaid-container svg {
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+}
+.crianex-feature-evidence__card img {
+  display: block;
+  margin: 0.4rem auto 0;
+  max-width: 100%;
+  border-radius: 8px;
+  border: 1px solid var(--crianex-border);
+}
+.crianex-feature-evidence__card {
+  background: var(--crianex-surface-alt);
+}
+.crianex-feature-evidence__label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ifm-color-primary);
+  margin-bottom: 0.5rem;
+  display: block;
+}
+.crianex-feature-evidence__card ul {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+.crianex-feature-evidence__card li {
+  font-size: 0.86rem;
+  margin-bottom: 0.45rem;
+  line-height: 1.4;
+}
+.crianex-feature-evidence__meta {
+  font-size: 0.78rem;
+  color: var(--ifm-color-emphasis-700);
+  margin: 0.2rem 0 0.7rem;
+}
+
+/* ---------- Conteúdo central mais largo (complementa a sidebar compacta) ---------- */
+@media (min-width: 997px) {
+  /* TOC (direita) mais estreito → libera espaço pro centro */
+  .col--3:has(.theme-doc-toc-desktop) {
+    flex: 0 0 16%;
+    max-width: 16%;
+  }
+}
+/* artigos das páginas de evidência podem usar mais largura */
+article { max-width: 1100px; }
+
+/* ---------- Diagramas Mermaid maiores em qualquer página ---------- */
+.docusaurus-mermaid-container {
+  text-align: center;
+}
+.docusaurus-mermaid-container svg {
+  width: 100% !important;
+  max-width: 920px !important;
+  height: auto !important;
+}
+
+/* ---------- Cards retráteis de mudança (V&V) ---------- */
+details.crianex-change {
+  border: 1px solid var(--crianex-border);
+  border-radius: var(--crianex-radius);
+  background: var(--crianex-surface);
+  box-shadow: var(--crianex-shadow);
+  margin: 0.7rem 0;
+  padding: 0;
+  overflow: hidden;
+}
+details.crianex-change > summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 0.85rem 1.15rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  background: var(--crianex-surface-alt);
+  font-size: 0.9rem;
+}
+details.crianex-change > summary::-webkit-details-marker { display: none; }
+details.crianex-change > summary::before {
+  content: "▸";
+  color: var(--ifm-color-primary);
+  font-size: 0.9rem;
+  transition: transform 0.15s ease;
+}
+details.crianex-change[open] > summary::before { transform: rotate(90deg); }
+details.crianex-change > summary .crianex-change__id {
+  font-weight: 800;
+  color: var(--ifm-color-primary);
+  font-family: var(--ifm-font-family-monospace);
+}
+details.crianex-change > summary .crianex-change__sum {
+  color: var(--ifm-color-emphasis-800);
+  flex: 1 1 auto;
+  min-width: 180px;
+}
+details.crianex-change__body,
+details.crianex-change > div {
+  padding: 0.4rem 1.15rem 1rem;
+}
+details.crianex-change table { margin: 0.6rem 0 0; }
+
+/* ---------- Feature card final (página de diagramas formais) ---------- */
+.crianex-final-card {
+  border: 1px solid var(--crianex-border);
+  border-radius: 10px;
+  background: var(--crianex-surface-alt);
+  padding: 0.9rem 1.15rem;
+  margin-top: 0.4rem;
+}
+.crianex-final-card__meta {
+  font-size: 0.8rem;
+  color: var(--ifm-color-emphasis-700);
+  margin-bottom: 0.6rem;
+}
+
+/* ---------- Mermaid lightbox (pop-up de zoom para diagramas) ---------- */
+.docusaurus-mermaid-container svg {
+  transition: filter 0.15s ease;
+}
+.docusaurus-mermaid-container svg:hover {
+  filter: drop-shadow(0 4px 14px rgba(127, 63, 229, 0.25));
+}
+.crianex-mermaid-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: none;
+  background: rgba(15, 12, 24, 0.78);
+  backdrop-filter: blur(2px);
+}
+.crianex-mermaid-modal--open {
+  display: flex;
+  flex-direction: column;
+}
+.crianex-mermaid-modal__toolbar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  flex: 0 0 auto;
+}
+.crianex-mermaid-modal__btn {
+  background: var(--crianex-surface);
+  color: var(--ifm-heading-color);
+  border: 1px solid var(--crianex-border);
+  border-radius: 8px;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  line-height: 1;
+}
+.crianex-mermaid-modal__btn:hover {
+  border-color: var(--ifm-color-primary-lighter);
+  color: var(--ifm-color-primary);
+}
+.crianex-mermaid-modal__close {
+  margin-left: 0.5rem;
+}
+.crianex-mermaid-modal__viewport {
+  flex: 1 1 auto;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+}
+.crianex-mermaid-modal__viewport--panning {
+  cursor: grabbing;
+}
+.crianex-mermaid-modal__content {
+  width: min(92vw, 1400px);
+  max-height: 82vh;
+  background: var(--crianex-surface);
+  color: var(--ifm-font-color-base);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+  transition: transform 0.05s linear;
+  user-select: none;
+  flex: 0 0 auto;
+}
+.crianex-mermaid-modal__content svg {
+  display: block;
+  width: 100% !important;
+  height: auto !important;
+  max-width: none !important;
+  pointer-events: none;
+}

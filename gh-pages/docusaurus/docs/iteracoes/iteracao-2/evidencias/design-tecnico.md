@@ -5,6 +5,10 @@ Artefatos produzidos durante a fase de **Technical Design Review (TDR)** da IT2,
 
 ---
 
+## Mapa de Dependências {#mapa-dependencias}
+
+Artefato do TDR que mapeia o bloqueio lógico entre as features comprometidas na IT2 (CP1 e CP9) — usado para sequenciar o início das issues e verificar o DoR. Versão completa, com legenda, em [Mapa de Dependências — IT2](/backlog/dependencias#it2).
+
 ## Diagramas Leves e Feature Cards por Feature
 
 ### CP1 — CRM Interno de Clientes
@@ -78,6 +82,7 @@ Artefatos produzidos durante a fase de **Technical Design Review (TDR)** da IT2,
 | Versão | Data       | Descrição                                        | Autor(es)             |
 | ------ | ---------- | ------------------------------------------------ | --------------------- |
 | 1.0    | 15/06/2026 | Criação do documento com artefatos do TDR da IT2 | Heitor Macedo Ricardo |
+| 1.1    | 29/06/2026 | Adição do Mapa de Dependências da IT2 como artefato do TDR | Equipe Crianex |
 
 </div>
 </details>

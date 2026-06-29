@@ -2,33 +2,23 @@
 
 Artefatos produzidos durante a fase de **Technical Design Review (TDR)** da IT1, aplicando a **Formalização Seletiva**: diagramas leves e acordos de arquitetura para mitigar riscos antes do desenvolvimento, seguidos de validação com os stakeholders.
 
+Esta página reúne os **diagramas de sequência leves** e os **feature cards iniciais** (planejamento). Os **diagramas formais** e os **feature cards finais** (pós-implementação, com status de cada critério) estão em [Features Entregues — Diagramas Formais](/iteracoes/iteracao-1/evidencias/diagrama-formal).
+
 ---
 
 ## O que é um Diagrama Leve?
 
-Representação visual simplificada do fluxo de comunicação entre as entidades do sistema (Frontend, API, Banco de Dados, etc.). Em vez de utilizar toda a notação formal da UML, o diagrama leve foca no essencial: ilustrar de forma clara e ágil como os dados transitam para resolver uma funcionalidade específica. Facilita o alinhamento técnico sem gerar sobrecarga de documentação.
+Representação visual simplificada do fluxo de comunicação entre as entidades do sistema (Frontend, API, Banco de Dados, etc.), focando no **caminho feliz** sem cobrir cenários de erro. Renderizado em [Mermaid](https://mermaid.js.org/) diretamente na página — não é mais uma captura de tela.
 
 ## O que é um Feature Card?
 
-Elemento visual utilizado na fase de planejamento que documenta uma funcionalidade de forma atômica. Consolida título da feature, regras de negócio e critérios de aceitação (formato BDD — _Dado/Quando/Então_). Garante que toda a equipe tenha clareza do escopo antes de escrever a primeira linha de código, servindo como insumo direto para a criação das issues.
+Documenta uma funcionalidade de forma atômica: título, regras de negócio e critérios de aceitação (BDD — _Dado/Quando/Então_). A versão abaixo é a **inicial** (planejamento); a **final** (com status de cada critério) está em [Features Entregues](/iteracoes/iteracao-1/evidencias/diagrama-formal).
 
 ---
 
-## Exemplos de Referência
+## Mapa de Dependências {#mapa-dependencias}
 
-<div align="center">
-  <p><strong>Figura 1</strong> — Exemplo de Diagrama Leve</p>
-  <img src="../../images/diagramaleveex.png" alt="Exemplo de Diagrama Leve" width="800" />
-  <p><em>Fonte: Wondershare, 2026.</em></p>
-</div>
-
-<div align="center">
-  <p><strong>Figura 2</strong> — Exemplo de Feature Card</p>
-  <img src="../../images/featurecardex.png" alt="Exemplo de Feature Card" width="800" />
-  <p><em>Fonte: Elaborado pelos autores.</em></p>
-</div>
-
----
+Artefato do TDR que mapeia o bloqueio lógico entre as features comprometidas na IT1 — usado para sequenciar o início das issues e verificar o DoR. Versão completa, com legenda, em [Mapa de Dependências — IT1](/backlog/dependencias#it1).
 
 ## Artefatos de Domain Modeling {#color-modeling}
 
@@ -36,25 +26,25 @@ Elemento visual utilizado na fase de planejamento que documenta uma funcionalida
 
 Artefato gerado a partir da **Domain Modeling** do FDD em reunião com os stakeholders Otávio e Vitor. Lista e explica palavras que devem ter significado explícito para o consenso do grupo.
 
-<div align="center">
-  <p><strong>Figura 3</strong> — Glossário de Palavras (parte 1)</p>
-  <img src="../../images/gloassario1.png" alt="Glossário de Palavras — parte 1" width="800" />
-  <p><em>Fonte: Elaborado pelos autores.</em></p>
-</div>
+**Figura 1** — Glossário de Palavras (parte 1)
 
-<div align="center">
-  <p><strong>Figura 4</strong> — Glossário de Palavras (parte 2)</p>
-  <img src="../../images/glossario2.png" alt="Glossário de Palavras — parte 2" width="800" />
-  <p><em>Fonte: Elaborado pelos autores.</em></p>
-</div>
+![Glossário de Palavras — parte 1](../images/gloassario1.png)
+
+_Fonte: Elaborado pelos autores._
+
+**Figura 2** — Glossário de Palavras (parte 2)
+
+![Glossário de Palavras — parte 2](../images/glossario2.png)
+
+_Fonte: Elaborado pelos autores._
 
 ### Diagrama de Domínio {#diagrama-dominio}
 
-<div align="center">
-  <p><strong>Figura 5</strong> — Diagrama de Domínio</p>
-  <img src="../../images/diagrama_dominio.png" alt="Diagrama de Domínio" width="800" />
-  <p><em>Fonte: Elaborado pelos autores.</em></p>
-</div>
+**Figura 3** — Diagrama de Domínio
+
+![Diagrama de Domínio](../images/diagrama_dominio.png)
+
+_Fonte: Elaborado pelos autores._
 
 ---
 
@@ -62,215 +52,309 @@ Artefato gerado a partir da **Domain Modeling** do FDD em reunião com os stakeh
 
 ### CP5 — Painel de Gerenciamento do Administrador
 
-#### F09 — Autenticar administradores
+<div className="crianex-feature-evidence">
+<div className="crianex-feature-evidence__header"><strong>F09 — Autenticar administradores</strong></div>
+<div className="crianex-feature-evidence__body">
+<div className="crianex-feature-evidence__diagram">
+<span className="crianex-feature-evidence__label">Diagrama Leve</span>
 
-**Diagrama Leve**
+```mermaid
+sequenceDiagram
+    participant U as Usuário
+    participant SK as SvelteKit
+    participant SA as Supabase Auth
+    U->>SK: POST /admin/login (email, senha)
+    SK->>SA: signInWithPassword()
+    SA-->>SK: sessão JWT
+    SK-->>U: redireciona para /admin/dashboard
+```
 
-<div align="center">
-  <img src="../../images/diagrama_sequencia/diagramaleveF09.png" alt="Diagrama Leve — F09" width="800" />
-  <p><em>Fonte: Elaborado pelos autores.</em></p>
+</div>
+<div className="crianex-feature-evidence__card">
+<span className="crianex-feature-evidence__label">Feature Card (inicial — completo)</span>
+
+![Feature Card inicial — F09](../images/feature_card/featurecardF09.png)
+
+</div>
+</div>
 </div>
 
-**Feature Card**
+<div className="crianex-feature-evidence">
+<div className="crianex-feature-evidence__header"><strong>F10 — Acessar painel administrativo</strong></div>
+<div className="crianex-feature-evidence__body">
+<div className="crianex-feature-evidence__diagram">
+<span className="crianex-feature-evidence__label">Diagrama Leve</span>
 
-<div align="center">
-  <img src="../../images/feature_card/featurecardF09.png" alt="Feature Card — F09" width="800" />
-  <p><em>Fonte: Elaborado pelos autores.</em></p>
+```mermaid
+sequenceDiagram
+    participant U as Usuário
+    participant SK as SvelteKit
+    participant EX as Express API
+    participant DB as Supabase DB
+    U->>SK: GET /admin/dashboard
+    SK->>EX: Authorization Bearer token
+    EX->>DB: query (RLS por auth.uid)
+    DB-->>EX: dados autorizados
+    EX-->>SK: 200 OK
+    SK-->>U: painel renderizado
+```
+
+</div>
+<div className="crianex-feature-evidence__card">
+<span className="crianex-feature-evidence__label">Feature Card (inicial — completo)</span>
+
+![Feature Card inicial — F10](../images/feature_card/featurecardF10.png)
+
+</div>
+</div>
 </div>
 
----
+<div className="crianex-feature-evidence">
+<div className="crianex-feature-evidence__header"><strong>F11 — Gerenciar membros da Crianex</strong></div>
+<div className="crianex-feature-evidence__body">
+<div className="crianex-feature-evidence__diagram">
+<span className="crianex-feature-evidence__label">Diagrama Leve</span>
 
-#### F10 — Acessar painel administrativo
+```mermaid
+sequenceDiagram
+    participant O as Owner
+    participant SK as SvelteKit
+    participant EX as Express API
+    participant DB as Supabase DB
+    O->>SK: cadastrar/editar/remover membro
+    SK->>EX: requisição autenticada
+    EX->>EX: requireRole owner
+    EX->>DB: insert/update/delete em profiles
+    DB-->>EX: ok
+    EX-->>SK: 200
+    SK-->>O: lista atualizada sem reload
+```
 
-**Diagrama Leve**
-
-<div align="center">
-  <img src="../../images/diagrama_sequencia/diagramaleveF10.png" alt="Diagrama Leve — F10" width="800" />
-  <p><em>Fonte: Elaborado pelos autores.</em></p>
 </div>
+<div className="crianex-feature-evidence__card">
+<span className="crianex-feature-evidence__label">Feature Card (inicial — completo)</span>
 
-**Feature Card**
+![Feature Card inicial — F11](../images/feature_card/featurecardF11.png)
 
-<div align="center">
-  <img src="../../images/feature_card/featurecardF10.png" alt="Feature Card — F10" width="800" />
-  <p><em>Fonte: Elaborado pelos autores.</em></p>
 </div>
-
----
-
-#### F11 — Gerenciar membros da Crianex
-
-**Diagrama Leve**
-
-<div align="center">
-  <img src="../../images/diagrama_sequencia/diagramaleveF11.png" alt="Diagrama Leve — F11" width="800" />
-  <p><em>Fonte: Elaborado pelos autores.</em></p>
 </div>
-
-**Feature Card**
-
-<div align="center">
-  <img src="../../images/feature_card/featurecardF11.png" alt="Feature Card — F11" width="800" />
-  <p><em>Fonte: Elaborado pelos autores.</em></p>
 </div>
-
----
 
 ### CP4 — Vitrine Pública de Produtos SaaS
 
-#### F12 — Gerenciar produtos SaaS
+<div className="crianex-feature-evidence">
+<div className="crianex-feature-evidence__header"><strong>F12 — Gerenciar produtos SaaS</strong></div>
+<div className="crianex-feature-evidence__body">
+<div className="crianex-feature-evidence__diagram">
+<span className="crianex-feature-evidence__label">Diagrama Leve</span>
 
-**Diagrama Leve**
+```mermaid
+sequenceDiagram
+    participant A as Admin
+    participant EX as Express API
+    participant DB as Supabase DB
+    participant V as Vitrine
+    A->>EX: cadastrar/editar/remover produto
+    EX->>DB: persiste alteração (ACID)
+    DB-->>EX: ok
+    EX-->>A: lista atualizada
+    V->>DB: GET produtos published true
+    DB-->>V: catálogo público
+```
 
-<div align="center">
-  <img src="../../images/diagrama_sequencia/diagramaleveF12.png" alt="Diagrama Leve — F12" width="800" />
-  <p><em>Fonte: Elaborado pelos autores.</em></p>
+</div>
+<div className="crianex-feature-evidence__card">
+<span className="crianex-feature-evidence__label">Feature Card (inicial — completo)</span>
+
+![Feature Card inicial — F12](../images/feature_card/feturecardF12.png)
+
+</div>
+</div>
 </div>
 
-**Feature Card**
+<div className="crianex-feature-evidence">
+<div className="crianex-feature-evidence__header"><strong>F13 — Publicar / despublicar produto SaaS</strong></div>
+<div className="crianex-feature-evidence__body">
+<div className="crianex-feature-evidence__diagram">
+<span className="crianex-feature-evidence__label">Diagrama Leve</span>
 
-<div align="center">
-  <img src="../../images/feature_card/feturecardF12.png" alt="Feature Card — F12" width="800" />
-  <p><em>Fonte: Elaborado pelos autores.</em></p>
+```mermaid
+sequenceDiagram
+    participant A as Admin
+    participant EX as Express API
+    participant DB as Supabase DB
+    participant V as Vitrine
+    A->>EX: toggle publicar/despublicar
+    EX->>DB: UPDATE products SET published
+    DB-->>EX: ok
+    EX-->>A: confirmação visual (<= 2s)
+    V->>DB: vitrine reflete o novo estado
+```
+
+</div>
+<div className="crianex-feature-evidence__card">
+<span className="crianex-feature-evidence__label">Feature Card (inicial — completo)</span>
+
+![Feature Card inicial — F13](../images/feature_card/featurecardF13.png)
+
+</div>
+</div>
 </div>
 
----
+<div className="crianex-feature-evidence">
+<div className="crianex-feature-evidence__header"><strong>F14 — Formulário de contato</strong></div>
+<div className="crianex-feature-evidence__body">
+<div className="crianex-feature-evidence__diagram">
+<span className="crianex-feature-evidence__label">Diagrama Leve</span>
 
-#### F13 — Publicar / despublicar produto SaaS
+```mermaid
+sequenceDiagram
+    participant V as Visitante
+    participant EX as Express API
+    participant RL as Rate Limiter
+    participant DB as Supabase DB
+    V->>EX: POST /api/public/contact
+    EX->>RL: verifica limite (5/IP/10min)
+    RL-->>EX: permitido
+    EX->>DB: INSERT lead (transação ACID)
+    DB-->>EX: ok
+    EX-->>V: alerta de sucesso
+```
 
-**Diagrama Leve**
+</div>
+<div className="crianex-feature-evidence__card">
+<span className="crianex-feature-evidence__label">Feature Card (inicial — completo)</span>
 
-<div align="center">
-  <img src="../../images/diagrama_sequencia/diagramaleveF13.png" alt="Diagrama Leve — F13" width="800" />
-  <p><em>Fonte: Elaborado pelos autores.</em></p>
+![Feature Card inicial — F14](../images/feature_card/featurecardF14.png)
+
+</div>
+</div>
 </div>
 
-**Feature Card**
+<div className="crianex-feature-evidence">
+<div className="crianex-feature-evidence__header"><strong>F15 — Página institucional</strong></div>
+<div className="crianex-feature-evidence__body">
+<div className="crianex-feature-evidence__diagram">
+<span className="crianex-feature-evidence__label">Diagrama Leve</span>
 
-<div align="center">
-  <img src="../../images/feature_card/featurecardF13.png" alt="Feature Card — F13" width="800" />
-  <p><em>Fonte: Elaborado pelos autores.</em></p>
+```mermaid
+sequenceDiagram
+    participant V as Visitante
+    participant SK as SvelteKit SSR
+    participant I18N as i18n JSON
+    V->>SK: GET /sobre
+    SK->>I18N: carrega conteúdo (pt/en)
+    I18N-->>SK: missão, visão, valores
+    SK-->>V: HTML com SEO/OG (<= 2s)
+```
+
 </div>
+<div className="crianex-feature-evidence__card">
+<span className="crianex-feature-evidence__label">Feature Card (inicial — completo)</span>
 
----
+![Feature Card inicial — F15](../images/feature_card/featurecardF15.png)
 
-#### F14 — Formulário de contato
-
-**Diagrama Leve**
-
-<div align="center">
-  <img src="../../images/diagrama_sequencia/diagramaleveF14.png" alt="Diagrama Leve — F14" width="800" />
-  <p><em>Fonte: Elaborado pelos autores.</em></p>
 </div>
-
-**Feature Card**
-
-<div align="center">
-  <img src="../../images/feature_card/featurecardF14.png" alt="Feature Card — F14" width="800" />
-  <p><em>Fonte: Elaborado pelos autores.</em></p>
 </div>
-
----
-
-#### F15 — Página institucional
-
-**Diagrama Leve**
-
-<div align="center">
-  <img src="../../images/diagrama_sequencia/diagramaleveF15.png" alt="Diagrama Leve — F15" width="800" />
-  <p><em>Fonte: Elaborado pelos autores.</em></p>
 </div>
-
-**Feature Card**
-
-<div align="center">
-  <img src="../../images/feature_card/featurecardF15.png" alt="Feature Card — F15" width="800" />
-  <p><em>Fonte: Elaborado pelos autores.</em></p>
-</div>
-
----
 
 ### CP6 — FAQ e Base de Conhecimentos por Produto
 
-#### F16 — CRUD de artigos de FAQ
+<div className="crianex-feature-evidence">
+<div className="crianex-feature-evidence__header"><strong>F16 — CRUD de artigos de FAQ</strong></div>
+<div className="crianex-feature-evidence__body">
+<div className="crianex-feature-evidence__diagram">
+<span className="crianex-feature-evidence__label">Diagrama Leve</span>
 
-**Diagrama Leve**
+```mermaid
+sequenceDiagram
+    participant A as Admin
+    participant EX as Express API
+    participant DB as Supabase DB
+    A->>EX: cadastrar/editar/categorizar artigo
+    EX->>EX: requireRole (RNF01)
+    EX->>DB: insert/update em faq_articles
+    DB-->>EX: ok (published false por padrão)
+    EX-->>A: lista atualizada
+```
 
-<div align="center">
-  <img src="../../images/diagrama_sequencia/diagramaleveF16.png" alt="Diagrama Leve — F16" width="800" />
-  <p><em>Fonte: Elaborado pelos autores.</em></p>
+</div>
+<div className="crianex-feature-evidence__card">
+<span className="crianex-feature-evidence__label">Feature Card (inicial — completo)</span>
+
+![Feature Card inicial — F16](../images/feature_card/featurecardF16.png)
+
+</div>
+</div>
 </div>
 
-**Feature Card**
+<div className="crianex-feature-evidence">
+<div className="crianex-feature-evidence__header"><strong>F17 — Publicar / despublicar artigo de FAQ</strong></div>
+<div className="crianex-feature-evidence__body">
+<div className="crianex-feature-evidence__diagram">
+<span className="crianex-feature-evidence__label">Diagrama Leve</span>
 
-<div align="center">
-  <img src="../../images/feature_card/featurecardF16.png" alt="Feature Card — F16" width="800" />
-  <p><em>Fonte: Elaborado pelos autores.</em></p>
+```mermaid
+sequenceDiagram
+    participant A as Admin
+    participant EX as Express API
+    participant DB as Supabase DB
+    participant V as Vitrine SSR
+    A->>EX: toggle publicar/despublicar artigo
+    EX->>DB: UPDATE faq_articles SET published
+    DB-->>EX: ok (registro preservado)
+    EX-->>A: confirmação sem reload
+    V->>DB: SSR reflete o novo estado
+```
+
+</div>
+<div className="crianex-feature-evidence__card">
+<span className="crianex-feature-evidence__label">Feature Card (inicial — completo)</span>
+
+![Feature Card inicial — F17](../images/feature_card/featurecardF17.png)
+
+</div>
+</div>
+</div>
+
+<div className="crianex-feature-evidence">
+<div className="crianex-feature-evidence__header"><strong>F18 — Avaliação de artigos de FAQ</strong></div>
+<div className="crianex-feature-evidence__body">
+<div className="crianex-feature-evidence__diagram">
+<span className="crianex-feature-evidence__label">Diagrama Leve</span>
+
+```mermaid
+sequenceDiagram
+    participant V as Visitante
+    participant SK as SvelteKit
+    participant EX as Express API
+    participant DB as Supabase DB
+    V->>SK: clica Útil / Não Útil
+    SK->>EX: POST rating + session_hash
+    EX->>DB: verifica dedup + INSERT (anônimo)
+    DB-->>EX: ok
+    EX-->>V: feedback visual (<= 2s)
+```
+
+</div>
+<div className="crianex-feature-evidence__card">
+<span className="crianex-feature-evidence__label">Feature Card (inicial — completo)</span>
+
+![Feature Card inicial — F18](../images/feature_card/featurecardF18.png)
+
+</div>
+</div>
 </div>
 
 ---
 
-#### F17 — Publicar / despublicar artigo de FAQ
+<details className="crianex-revisions">
+<summary>Histórico de Revisão</summary>
+<div className="crianex-revisions__body">
 
-**Diagrama Leve**
+| Versão | Data       | Descrição                                                   | Autor(es)      |
+| ------ | ---------- | ------------------------------------------------------------ | -------------- |
+| 1.1    | 29/06/2026 | Adição do Mapa de Dependências da IT1 como artefato do TDR | Equipe Crianex |
 
-<div align="center">
-  <img src="../../images/diagrama_sequencia/diagramaleveF17.png" alt="Diagrama Leve — F17" width="800" />
-  <p><em>Fonte: Elaborado pelos autores.</em></p>
 </div>
-
-**Feature Card**
-
-<div align="center">
-  <img src="../../images/feature_card/featurecardF17.png" alt="Feature Card — F17" width="800" />
-  <p><em>Fonte: Elaborado pelos autores.</em></p>
-</div>
-
----
-
-#### F18 — Avaliação de artigos de FAQ
-
-**Diagrama Leve**
-
-<div align="center">
-  <img src="../../images/diagrama_sequencia/diagramaleveF18.png" alt="Diagrama Leve — F18" width="800" />
-  <p><em>Fonte: Elaborado pelos autores.</em></p>
-</div>
-
-**Feature Card**
-
-<div align="center">
-  <img src="../../images/feature_card/featurecardF18.png" alt="Feature Card — F18" width="800" />
-  <p><em>Fonte: Elaborado pelos autores.</em></p>
-</div>
-
----
-
-## Validação pelo Cliente (Domain Expert)
-
-### Feedback sobre a Priorização do Backlog
-
-<div align="center">
-  <p><strong>Figura 6</strong> — Feedback do cliente Otávio sobre a Priorização do Backlog</p>
-  <img src="../../images/feedback_priorizacao.png" alt="Feedback sobre priorização" width="600" />
-  <p><em>Fonte: Comunicação direta com o cliente (Domain Expert), 17/05/2026.</em></p>
-</div>
-
-| Feedback Recebido                                                                   | Aprovação   | Ação Tomada                                                                                           |
-| ----------------------------------------------------------------------------------- | ----------- | ----------------------------------------------------------------------------------------------------- |
-| Formato de priorização muito claro — motivo de cada item priorizado está explícito  | <span className="badge badge--green">Elogio</span>   | Mantido                                                                                               |
-| Features (RFs agrupados) não estão ordenados por prioridade — ao contrário dos RNFs | <span className="badge badge--green">Correção</span> | Tabela de Features reordenada por IP decrescente em [priorizacao.md](/backlog/priorizacao) |
-| Ausência de flag ou coluna indicando o que entra no MVP                             | <span className="badge badge--green">Adição</span>   | Coluna **MVP** adicionada nas tabelas de Features e RNFs (<span className="badge badge--green">Q1 = Alta</span> / <span className="badge badge--gray">Q2 em diante</span>)             |
-| Dificuldade de leitura de algumas tabelas no GitHub Pages                           | <span className="badge badge--green">Registro</span> | Tabelas revisadas                                                                                     |
-
-### Feedback sobre o Protótipo
-
-O feedback do cliente sobre o protótipo está registrado na página dedicada: [Protótipo de Alta Fidelidade](/iteracoes/iteracao-1/evidencias/prototipo).
-
-### Feedback Geral
-
-<div align="center">
-  <p><strong>Figura 8</strong> — Feedback geral do cliente (Domain Expert)</p>
-  <img src="../../images/feedback.png" alt="Feedback geral do cliente" width="800" />
-  <p><em>Fonte: Elaborado pelos autores.</em></p>
-</div>
+</details>

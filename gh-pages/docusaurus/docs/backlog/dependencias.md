@@ -7,9 +7,13 @@ Rastreabilidade visual entre as features de cada iteração. Use este mapa para:
 - Verificar se todos os bloqueantes de uma issue estão fechados (DoR)
 - Planejar o que pode ser paralelizado
 
+:::note[Artefato do Technical Design Review]
+O mapa de dependências de cada iteração é produzido e validado durante a cerimônia de **Technical Design Review (TDR)** — junto com os diagramas leves e feature cards — e referenciado como artefato no [Cronograma](/visao/cronograma#iteracoes) e no [Design Técnico](/iteracoes/iteracao-1/evidencias/design-tecnico) de cada iteração.
+:::
+
 ---
 
-## IT1 — Vitrine Pública (28/04 – 07/06)
+## IT1 — Vitrine Pública (28/04 – 07/06) {#it1}
 
 Dependências entre as features comprometidas na IT1. Cada nó é a issue pai de especificação da feature. Vale ressaltar que essa depedência é lógica e não técnica, ou seja, não é necessário uma feature inteira completa para iniciar outras, mas algumas implementações dentro da issue devem ser implementados para liberar a proxima Feature. Esse bloqueio e dependências é especificado em cada sub-issue das features.
 
@@ -49,13 +53,13 @@ graph LR
 
 ---
 
-## IT2 — Lead Capture (08/06 – 28/06)
+## IT2 — Lead Capture (08/06 – 28/06) {#it2}
 
 ![Mapa de dependências IT2 — CP1 e CP9](../iteracoes/iteracao-2/images/dependencias-CP1-CP9.svg)
 
 ---
 
-## IT3 — Núcleo Operacional (29/06 – 05/07)
+## IT3 — Núcleo Operacional (29/06 – 05/07) {#it3}
 
 > Mapa de dependências a ser preenchido ao início da iteração.
 
@@ -80,6 +84,7 @@ graph LR
 | 1.0    | 06/06/2026 | Segmentação por iteração; remoção do mapa completo de sub-issues; adição de placeholders IT2/IT3 | Lucas A. Zanetti      |
 | 1.1    | 15/06/2026 | Atualização das datas: IT1 (28/04–07/06), IT2 (08/06–28/06), IT3 (29/06–05/07)                   | Heitor Macedo Ricardo |
 | 1.2    | 15/06/2026 | Adição do mapa de dependências da IT2 (CP1 e CP9)                                                | Heitor Macedo Ricardo |
+| 1.3    | 29/06/2026 | Mapa de dependências formalizado como artefato do Technical Design Review; âncoras por iteração (#it1/#it2/#it3) e link cruzado no Design Técnico e no Cronograma | Equipe Crianex |
 
 </div>
 </details>

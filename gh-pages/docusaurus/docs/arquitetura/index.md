@@ -16,6 +16,18 @@ A arquitetura adotada é **Monolito Modular** — uma aplicação Express.js com
 
 A estrutura modular garante que, se necessário no futuro, módulos possam ser extraídos como microsserviços sem refatoração estrutural — o desacoplamento lógico já está preservado.
 
+### Visão Rápida (Stack)
+
+| Camada | Tecnologia | Papel |
+| ------ | ---------- | ----- |
+| Frontend | SvelteKit + TypeScript | SSR, rotas `(vitrine)` públicas e `(admin)` autenticadas |
+| Backend | Express.js + TypeScript | API modular (auth, products, leads, members, faq) |
+| Autenticação | Supabase Auth | Login, sessão JWT, cookie `httpOnly` |
+| Dados | PostgreSQL (Supabase) | Persistência + Row Level Security (RLS) |
+| Armazenamento | Supabase Storage | Upload de imagens de produtos |
+| CI/CD | GitHub Actions | Lint → typecheck → test → build → (pós-venda) deploy |
+| Infra futura | Kubernetes | Escala horizontal — só ativa pós-venda |
+
 ---
 
 ## 2. Diagrama de Arquitetura Geral {#diagrama}
@@ -81,17 +93,12 @@ graph LR
 
 
 :::note[Kubernetes — pós-venda]
-
-:::
-
 O nó Kubernetes está presente na arquitetura, mas não é utilizado durante as iterações de desenvolvimento (IT1–IT3). O ambiente de desenvolvimento usa Docker Compose local + Supabase gerenciado na nuvem.
-
-
-:::note[Duas estratégias de leitura pública]
-
 :::
 
+:::tip[Duas estratégias de leitura pública]
 Produtos e leads passam pelo Express (controle de rate limit e lógica de negócio no servidor). Os artigos FAQ públicos são lidos via Supabase Client diretamente do SvelteKit SSR — a RLS do PostgreSQL (`published = true`) garante que apenas artigos publicados são retornados, sem necessidade de endpoint Express intermediário.
+:::
 
 ---
 
@@ -150,10 +157,8 @@ sequenceDiagram
 
 
 :::note[RLS como segunda linha de defesa]
-
-:::
-
 Mesmo na leitura direta via Supabase Client, a política RLS `published = true` é aplicada no banco — dados não publicados nunca chegam ao cliente, independente de quem faz a query.
+:::
 
 ---
 
@@ -227,10 +232,8 @@ sequenceDiagram
 
 
 :::warning[Mitigação OWASP A07 — XSS]
-
-:::
-
 O cookie `httpOnly` impede que qualquer script client-side acesse o token de sessão. Combinado com `Secure` (HTTPS only) e `SameSite=Strict` (bloqueio CSRF), essa configuração atende ao controle A07 do OWASP Top 10 sem necessidade de lógica adicional na aplicação.
+:::
 
 ---
 
@@ -263,14 +266,22 @@ graph LR
 
 
 :::tip[Módulos futuros (IT2 e IT3)]
-
-:::
-
 CRM, tickets, financeiro e notificações serão adicionados nas iterações IT2 e IT3. A estrutura modular do Express permite adicionar novos módulos sem alterar os existentes.
+:::
 
 ---
 
-## 7. ADR-001 {#adr-001}
+## 7. Decisões Arquiteturais (ADRs)
+
+| ADR | Decisão | Motivador principal |
+| --- | ------- | -------------------- |
+| [ADR-001](#adr-001) | Monolito Modular em vez de Microsserviços | Prazo, RNF02/RNF03 (latência), RNF07 (segurança) |
+| ADR-002 | SvelteKit em vez de React/Next.js | SSR nativo + bundle pequeno (SEO, OE2) |
+| ADR-003 | paraglide-js para i18n | Vitrine bilíngue PT/EN sem overhead no cliente (RNF13) |
+| ADR-004 | Argon2id / bcrypt para senhas | Hash de senha gerenciado pelo Supabase Auth (RNF08) |
+| ADR-005 | RLS como primeira linha de defesa | Isolamento de dados no banco, independente da camada de aplicação (RNF07) |
+
+### ADR-001 — Monolito Modular em vez de Microsserviços {#adr-001}
 
 **Título:** ADR-001 — Adoção de Monolito Modular em vez de Microsserviços
 
@@ -329,6 +340,35 @@ A alternativa de microsserviços foi avaliada e rejeitada pelos seguintes motivo
 
 ---
 
+### ADR-002 — SvelteKit em vez de React/Next.js
+
+**Contexto:** necessidade de SSR para SEO (OE2) e bundle pequeno para vitrine pública.
+
+| Critério             | SvelteKit                     | React / Next.js            |
+| -------------------- | ----------------------------- | --------------------------- |
+| Bundle size          | Sem runtime virtual DOM       | Runtime React incluído     |
+| SSR + SEO            | Nativo, simples               | Configuração extra         |
+| Curva de aprendizado | HTML/CSS/JS puro              | JSX + hooks                |
+| Bilinguismo          | paraglide-js nativo SvelteKit | next-intl ou react-i18next |
+
+**Decisão:** SvelteKit com `adapter-node` para SSR em produção.
+
+### ADR-003 — paraglide-js para i18n
+
+**Contexto:** vitrine bilíngue PT/EN com troca em 1 clique (RNF13), SSR obrigatório.
+
+**Decisão:** `@inlang/paraglide-sveltekit` — integração nativa com SvelteKit, mensagens tree-shakeable (só o que é usado vai para o bundle), sem overhead de runtime no cliente.
+
+### ADR-004 — Argon2id / bcrypt para senhas
+
+Supabase Auth gerencia o hash. Fator mínimo 12 (RNF08).
+
+### ADR-005 — RLS como primeira linha de defesa
+
+Row Level Security no PostgreSQL garante isolamento de dados mesmo em acessos diretos do frontend via Supabase JS client — não depender apenas de validações da camada de aplicação.
+
+---
+
 ## 8. Estratégia de Deploy por Fase
 
 ### Ambientes
@@ -342,13 +382,11 @@ A alternativa de microsserviços foi avaliada e rejeitada pelos seguintes motivo
 
 
 :::note[Fluxo de schema (issues de DB)]
-
-:::
-
 Cada issue de schema gera **um arquivo de migration SQL** em `supabase/migrations/`. O dev escreve
 a migration localmente (`supabase start` + `supabase db diff`), testa com `supabase db reset` e
 abre PR com o arquivo versionado. O CI aplica automaticamente no projeto de integração da equipe.
 O projeto da Crianex só recebe a migration na entrega de cada iteração.
+:::
 
 ### Pipeline CI/CD
 
@@ -371,37 +409,8 @@ Durante as iterações IT1–IT3, o pipeline para após o `build` — o deploy e
 
 
 :::warning[Proteção da branch main]
-
-:::
-
 Todo merge em `main` requer ao menos 1 aprovação de revisor via Pull Request. Commits diretos na `main` são bloqueados por regra de branch protection no GitHub. Essa regra está alinhada com o DoD da metodologia FDD + Scrumban Enxuto do projeto.
-
-### ADR-001 — SvelteKit em vez de React/Next.js
-
-**Contexto:** necessidade de SSR para SEO (OE2) e bundle pequeno para vitrine pública.
-
-| Critério             | SvelteKit                     | React / Next.js            |
-| -------------------- | ----------------------------- | -------------------------- |
-| Bundle size          | Sem runtime virtual DOM       | Runtime React incluído     |
-| SSR + SEO            | Nativo, simples               | Configuração extra         |
-| Curva de aprendizado | HTML/CSS/JS puro              | JSX + hooks                |
-| Bilinguismo          | paraglide-js nativo SvelteKit | next-intl ou react-i18next |
-
-**Decisão:** SvelteKit com `adapter-node` para SSR em produção.
-
-### ADR-002 — paraglide-js para i18n
-
-**Contexto:** vitrine bilíngue PT/EN com troca em 1 clique (RNF13), SSR obrigatório.
-
-**Decisão:** `@inlang/paraglide-sveltekit` — integração nativa com SvelteKit, mensagens tree-shakeable (só o que é usado vai para o bundle), sem overhead de runtime no cliente.
-
-### ADR-003 — Argon2id / bcrypt para senhas
-
-Supabase Auth gerencia o hash. Fator mínimo 12 (RNF08).
-
-### ADR-004 — RLS como primeira linha de defesa
-
-Row Level Security no PostgreSQL garante isolamento de dados mesmo em acessos diretos do frontend via Supabase JS client — não depender apenas de validações da camada de aplicação.
+:::
 
 ## 9. Rastreabilidade Arquitetural → RNFs
 
@@ -426,6 +435,7 @@ Row Level Security no PostgreSQL garante isolamento de dados mesmo em acessos di
 | ------ | ---------- | ---------------------------------------------------------------------------------------------------------------------- | ---------------- |
 | v1.0   | 20/05/2026 | Documentação inicial da arquitetura                                                                                    | Equipe Crianex   |
 | v1.1   | 06/06/2026 | Correção do diagrama geral (rotas públicas, módulos reais do backend, estrutura do repositório) e fluxos de requisição | Lucas A. Zanetti |
+| v1.2   | 29/06/2026 | Correção dos admonitions quebrados (texto fora da caixa); consolidação dos ADRs em seção única e renumeração (eliminado ADR-001 duplicado); tabela de Visão Rápida da stack e índice de ADRs | Equipe Crianex |
 
 </div>
 </details>

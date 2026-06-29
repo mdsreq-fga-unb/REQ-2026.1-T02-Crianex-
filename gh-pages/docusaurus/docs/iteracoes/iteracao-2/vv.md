@@ -9,20 +9,13 @@ Registro formal das mudanças de processo e cronograma identificadas durante a I
 
 ---
 
-## Resumo das Mudanças
-
-| Categoria | ID    | Descrição resumida                                                                  | Status |
-| --------- | ----- | ------------------------------------------------------------------------------------ | ------ |
-| Processo  | MP.03 | Adiamento do prazo final da disciplina — Unidade 4 passa a ser a última entrega      | <span className="badge badge--green">Aplicado</span>     |
-| Processo  | MP.04 | IT3 — Núcleo Operacional pausada (sem janela dentro da disciplina)                   | <span className="badge badge--green">Aplicado</span>     |
-| Processo  | MP.05 | Extensão da IT2 de 28/06 para 30/06, com remarcação de Validação e Artifact Closure  | <span className="badge badge--green">Aplicado</span>     |
-| Processo  | MP.06 | Gravação e apresentações da Unidade 4 remarcadas (gravação 01/07, apresentações 02–09/07) | <span className="badge badge--green">Aplicado</span>     |
-
----
-
 ## 1. Mudanças de Processo
 
-### MP.03 — Adiamento do Prazo Final da Disciplina
+<details className="crianex-change">
+<summary><span className="crianex-change__id">MP.03</span> <span className="crianex-change__sum">Adiamento do prazo final da disciplina — Unidade 4 passa a ser a última entrega</span> <span className="badge badge--green">Aplicado</span></summary>
+<div className="crianex-change__body">
+
+**MP.03 — Adiamento do Prazo Final da Disciplina**
 
 | Campo         | Conteúdo                                                                                                                                                                    |
 | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -32,9 +25,14 @@ Registro formal das mudanças de processo e cronograma identificadas durante a I
 | **Impacto**   | Recalendarização de IT2 (encerramento) e da Unidade 4; pausa da IT3                                                                                                         |
 | **Status**    | <span className="badge badge--green">Aplicado</span> em [Cronograma 5.2/5.6](/visao/cronograma#iteracoes)                                                                                     |
 
----
+</div>
+</details>
 
-### MP.04 — Pausa da IT3 — Núcleo Operacional
+<details className="crianex-change">
+<summary><span className="crianex-change__id">MP.04</span> <span className="crianex-change__sum">IT3 — Núcleo Operacional pausada (sem janela dentro da disciplina)</span> <span className="badge badge--green">Aplicado</span></summary>
+<div className="crianex-change__body">
+
+**MP.04 — Pausa da IT3 — Núcleo Operacional**
 
 | Campo         | Conteúdo                                                                                                                                                |
 | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -44,9 +42,14 @@ Registro formal das mudanças de processo e cronograma identificadas durante a I
 | **Impacto**   | CP2, CP3 e CP7 (Núcleo Operacional) não serão entregues nem validados dentro da disciplina                                                                |
 | **Status**    | <span className="badge badge--green">Aplicado</span> Atualizado em [IT3 — Resumo](/iteracoes/iteracao-3/) e [Iterações — Visão Geral](/iteracoes/)                                                          |
 
----
+</div>
+</details>
 
-### MP.05 — Extensão da IT2
+<details className="crianex-change">
+<summary><span className="crianex-change__id">MP.05</span> <span className="crianex-change__sum">Extensão da IT2 de 28/06 para 30/06, com remarcação de Validação e Artifact Closure</span> <span className="badge badge--green">Aplicado</span></summary>
+<div className="crianex-change__body">
+
+**MP.05 — Extensão da IT2**
 
 | Campo         | Conteúdo                                                                                                                  |
 | ------------- | --------------------------------------------------------------------------------------------------------------------------- |
@@ -55,9 +58,14 @@ Registro formal das mudanças de processo e cronograma identificadas durante a I
 | **Motivação** | Folga adicional de 2 dias liberada pelo adiamento do prazo final (MP.03), usada para consolidar a entrega da IT2 com mais segurança |
 | **Status**    | <span className="badge badge--green">Aplicado</span> em [Cronograma 5.6 — Calendário (Junho)](/visao/cronograma#calendario)                                |
 
----
+</div>
+</details>
 
-### MP.06 — Remarcação da Unidade 4
+<details className="crianex-change">
+<summary><span className="crianex-change__id">MP.06</span> <span className="crianex-change__sum">Gravação e apresentações da Unidade 4 remarcadas (gravação 01/07, apresentações 02–09/07)</span> <span className="badge badge--green">Aplicado</span></summary>
+<div className="crianex-change__body">
+
+**MP.06 — Remarcação da Unidade 4**
 
 | Campo         | Conteúdo                                                                                                                                          |
 | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -65,3 +73,6 @@ Registro formal das mudanças de processo e cronograma identificadas durante a I
 | **Para**      | **Gravação do vídeo e preparação dos slides em 01/07**; **apresentações de 02/07 até 09/07**                                                       |
 | **Motivação** | Alinhamento ao novo prazo final comunicado pelo professor em 18/06/2026                                                                            |
 | **Status**    | <span className="badge badge--green">Aplicado</span> em [Cronograma 5.6 — Calendário (Julho)](/visao/cronograma#calendario) e em [Entrega — Unidade 4](/entregas/unidade-4) |
+
+</div>
+</details>

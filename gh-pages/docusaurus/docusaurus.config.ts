@@ -29,6 +29,8 @@ const config: Config = {
   },
   themes: ['@docusaurus/theme-mermaid'],
 
+  clientModules: [require.resolve('./src/clientModules/mermaidLightbox.js')],
+
   presets: [
     [
       'classic',
@@ -51,6 +53,13 @@ const config: Config = {
     colorMode: {
       defaultMode: 'light',
       respectPrefersColorScheme: true,
+    },
+    docs: {
+      sidebar: {
+        // Permite minimizar/retrair a sidebar (botão na base). Começa sempre aberta.
+        hideable: true,
+        autoCollapseCategories: false,
+      },
     },
     navbar: {
       title: 'Crianex Hub',

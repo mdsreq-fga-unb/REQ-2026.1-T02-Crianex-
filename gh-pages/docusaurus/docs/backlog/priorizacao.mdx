@@ -39,18 +39,29 @@ A tabela abaixo é a visão de execução do MVP. Os valores completos de VB, ES
 
 ## Matriz Valor × Esforço
 
-Cada ponto é uma feature, posicionada pelos valores reais de **VB** (eixo Y) e **ES** (eixo X). A região verde (alto valor, baixo esforço) delimita o **MVP**.
+Cada ponto é uma feature, posicionada pelos valores reais de **VB** (eixo Y) e **ES** (eixo X). Duas linhas de corte dividem o plano em **4 quadrantes**; o **Quadrante I** (alto valor + baixo esforço, canto superior-esquerdo) é o único pintado em verde e reúne exatamente as features do **MVP**.
 
 <ValueEffortMatrix />
+
+| Quadrante | Posição | Significado |
+| --------- | ------- | ----------- |
+| **I — MVP** | Alto valor / Baixo esforço | Maior retorno relativo — prioridade máxima, compõe o MVP |
+| **II** | Alto valor / Alto esforço | Boas candidatas, mas exigem mais esforço — reavaliar na próxima iteração |
+| **III** | Baixo valor / Baixo esforço | Ganhos rápidos de baixo impacto — fazer se houver capacidade ociosa |
+| **IV** | Baixo valor / Alto esforço | Pior retorno relativo — não priorizar |
+
+:::note[F08 é exceção, não erro de cálculo]
+F08 cai fora do Quadrante I (IP 1,31) e por isso não é classificada como MVP pela matriz. Ainda assim, entra na IT2 por **dependência lógica** com F07 (o histórico de notificações pressupõe templates existentes) — ver observação na tabela de features do MVP.
+:::
 
 ## Método de Cálculo
 
 ```
 IP = VB / ES   (aplicado diretamente à Feature)
 
-IP ≥ 1,50      → Alta prioridade   (Q1)
-IP 1,00–1,49   → Média prioridade  (Q2)
-IP < 1,00      → Baixa prioridade  (Q3/Q4)
+IP ≥ 1,50      → Alta prioridade   (Quadrante I — MVP)
+IP 1,00–1,49   → Média prioridade  (Quadrante II)
+IP < 1,00      → Baixa prioridade  (Quadrantes III/IV)
 ```
 
 | Sigla | Descrição |
@@ -123,6 +134,7 @@ Cálculo detalhado de cada feature — critério por critério, com notas e just
 | 1.1 | 17/05/2026 | Tabela com diagrama valor × esforço | Lucas A. Zanetti |
 | 2.0 | 15/06/2026 | Refatoração top-down (Feature como unidade); nova matriz | Lucas A. Zanetti |
 | 3.0 | 26/06/2026 | Migração Docusaurus: tabela MVP no topo, matriz em Recharts, critérios em tabs; tabela de cálculos movida para página própria | Equipe Crianex |
+| 3.1 | 29/06/2026 | Correção da matriz: substituída a reta diagonal de IP por divisão em 4 quadrantes; Quadrante I (alto valor/baixo esforço) em verde contendo exatamente as features do MVP; F08 corrigida para "fora do MVP" no gráfico (estava marcada como MVP, contradizendo o texto) | Equipe Crianex |
 
 </div>
 </details>
