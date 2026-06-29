@@ -303,7 +303,9 @@ if (isProduction) {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 2000);
 
-    const res = await fetch(url, { method: 'GET', signal: controller.signal });
+    // We only care that the request resolves (server reachable); the response
+    // body/status is irrelevant, so it isn't bound.
+    await fetch(url, { method: 'GET', signal: controller.signal });
     clearTimeout(timeout);
 
     // Any HTTP response (including 404) means the server is reachable.
