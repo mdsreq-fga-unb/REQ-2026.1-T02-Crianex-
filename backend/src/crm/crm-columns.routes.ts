@@ -31,9 +31,21 @@ crmColumnsRouter.post('/', ...ownerGuard, async (req, res) => {
   const position = typeof req.body?.['position'] === 'number' ? req.body['position'] : undefined;
   const entry_hint = typeof req.body?.['entry_hint'] === 'string' ? req.body['entry_hint'] : undefined;
   const exit_hint = typeof req.body?.['exit_hint'] === 'string' ? req.body['exit_hint'] : undefined;
+  const input: {
+    title: string;
+    color?: string;
+    position?: number;
+    entry_hint?: string;
+    exit_hint?: string;
+  } = { title };
+
+  if (color !== undefined) input.color = color;
+  if (position !== undefined) input.position = position;
+  if (entry_hint !== undefined) input.entry_hint = entry_hint;
+  if (exit_hint !== undefined) input.exit_hint = exit_hint;
 
   try {
-    const column = await createColumn({ title, color, position, entry_hint, exit_hint });
+    const column = await createColumn(input);
     res.status(201).json(column);
   } catch (err) {
     if (err instanceof CrmColumnError) {
