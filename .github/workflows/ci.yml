@@ -130,7 +130,22 @@ jobs:
           set -euo pipefail
 
           supabase telemetry disable
-          supabase start
+
+          # docker.io rate-limits anonymous pulls on shared GitHub-hosted runners;
+          # `supabase start` pulls ~6 images, so transient 429s are common. Retry
+          # with backoff instead of failing the whole job on a registry hiccup.
+          for attempt in 1 2 3; do
+            if supabase start; then
+              break
+            fi
+            if [ "$attempt" = 3 ]; then
+              echo "::error::supabase start failed after 3 attempts"
+              exit 1
+            fi
+            echo "supabase start failed (attempt $attempt/3), retrying in $((attempt * 20))s..."
+            supabase stop --no-backup || true
+            sleep $((attempt * 20))
+          done
 
           # Capture and parse supabase status to extract the actual API keys.
           # Strips ANSI escape codes before parsing.
@@ -160,6 +175,40 @@ jobs:
           set -euo pipefail
 
           supabase db reset --local --yes
+
+      - name: Wait for PostgREST schema reload
+        run: |
+          set -euo pipefail
+
+          # `db reset` restarts all containers including Kong (the Supabase API
+          # gateway). Kong reloads its API-key config from Postgres after restart,
+          # which takes longer than PostgREST itself — so an HTTP probe via Kong
+          # returns 403 until Kong finishes, even when the DB is ready.
+          #
+          # Bypass Kong entirely: poll Postgres directly on port 54322 (the raw
+          # DB port), then explicitly trigger a PostgREST schema-cache reload via
+          # NOTIFY so fresh migrations are visible without any timing guesswork.
+          DB_URL="postgresql://postgres:postgres@127.0.0.1:54322/postgres"
+
+          for attempt in $(seq 1 20); do
+            if PGPASSWORD=postgres psql "$DB_URL" -c "SELECT 1" >/dev/null 2>&1; then
+              echo "Postgres ready (attempt $attempt/20)"
+              break
+            fi
+            if [ "$attempt" = 20 ]; then
+              echo "::error::Postgres did not become ready in 40 s"
+              exit 1
+            fi
+            echo "Waiting for Postgres... (attempt $attempt/20)"
+            sleep 2
+          done
+
+          # Trigger PostgREST schema-cache reload so all migration changes
+          # are immediately visible without a further timing window.
+          PGPASSWORD=postgres psql "$DB_URL" \
+            -c "NOTIFY pgrst, 'reload schema'"
+          echo "PostgREST schema reload triggered — waiting 3 s"
+          sleep 3
 
       - name: Test — backend
         run: npm test

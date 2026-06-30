@@ -22,7 +22,8 @@ export class CrmColumnError extends Error {
   }
 }
 
-const SELECT = 'id, title, color, position, is_default, entry_hint, exit_hint, created_at, updated_at';
+const SELECT =
+  'id, title, color, position, is_default, entry_hint, exit_hint, created_at, updated_at';
 
 const COLOR_RE = /^#[0-9a-fA-F]{6}$/;
 
@@ -48,7 +49,8 @@ export async function createColumn(input: {
   if (!title) throw new CrmColumnError('Título da coluna é obrigatório.', 'INVALID_TITLE');
 
   const color = input.color ?? '#7f3fe5';
-  if (!COLOR_RE.test(color)) throw new CrmColumnError('Cor inválida. Use formato hex #RRGGBB.', 'INVALID_COLOR');
+  if (!COLOR_RE.test(color))
+    throw new CrmColumnError('Cor inválida. Use formato hex #RRGGBB.', 'INVALID_COLOR');
 
   const supabase = getSupabaseClient();
 
@@ -59,7 +61,7 @@ export async function createColumn(input: {
     .limit(1)
     .maybeSingle();
 
-  const position = input.position ?? ((maxRow?.position ?? -1) + 1);
+  const position = input.position ?? (maxRow?.position ?? -1) + 1;
 
   const { data, error } = await supabase
     .from('crm_columns')
@@ -122,9 +124,7 @@ export async function reorderColumns(order: { id: string; position: number }[]):
   if (!order.length) return;
   const supabase = getSupabaseClient();
   await Promise.all(
-    order.map(({ id, position }) =>
-      supabase.from('crm_columns').update({ position }).eq('id', id)
-    )
+    order.map(({ id, position }) => supabase.from('crm_columns').update({ position }).eq('id', id))
   );
 }
 
@@ -149,15 +149,10 @@ export async function deleteColumn(id: string): Promise<void> {
   }
 
   // Enforce ≥1 column invariant
-  const { count } = await supabase
-    .from('crm_columns')
-    .select('*', { count: 'exact', head: true });
+  const { count } = await supabase.from('crm_columns').select('*', { count: 'exact', head: true });
 
   if ((count ?? 0) <= 1) {
-    throw new CrmColumnError(
-      'O funil precisa ter ao menos uma coluna.',
-      'LAST_COLUMN'
-    );
+    throw new CrmColumnError('O funil precisa ter ao menos uma coluna.', 'LAST_COLUMN');
   }
 
   // Verify no cards remain in this column before deleting.

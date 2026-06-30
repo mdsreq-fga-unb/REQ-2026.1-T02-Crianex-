@@ -27,13 +27,22 @@ crmColumnsRouter.get('/', ...ownerGuard, async (_req, res) => {
 // POST /api/admin/crm/columns — cria nova coluna no funil (RF38)
 crmColumnsRouter.post('/', ...ownerGuard, async (req, res) => {
   const title = typeof req.body?.['title'] === 'string' ? req.body['title'] : '';
-  const color = typeof req.body?.['color'] === 'string' ? req.body['color'] : undefined;
-  const position = typeof req.body?.['position'] === 'number' ? req.body['position'] : undefined;
-  const entry_hint = typeof req.body?.['entry_hint'] === 'string' ? req.body['entry_hint'] : undefined;
-  const exit_hint = typeof req.body?.['exit_hint'] === 'string' ? req.body['exit_hint'] : undefined;
+
+  const input: {
+    title: string;
+    color?: string;
+    position?: number;
+    entry_hint?: string;
+    exit_hint?: string;
+  } = { title };
+
+  if (typeof req.body?.['color'] === 'string') input.color = req.body['color'];
+  if (typeof req.body?.['position'] === 'number') input.position = req.body['position'];
+  if (typeof req.body?.['entry_hint'] === 'string') input.entry_hint = req.body['entry_hint'];
+  if (typeof req.body?.['exit_hint'] === 'string') input.exit_hint = req.body['exit_hint'];
 
   try {
-    const column = await createColumn({ title, color, position, entry_hint, exit_hint });
+    const column = await createColumn(input);
     res.status(201).json(column);
   } catch (err) {
     if (err instanceof CrmColumnError) {
@@ -50,7 +59,10 @@ crmColumnsRouter.post('/', ...ownerGuard, async (req, res) => {
 // PATCH /api/admin/crm/columns/reorder — reordena múltiplas colunas (RF40 · RNF22)
 crmColumnsRouter.patch('/reorder', ...ownerGuard, async (req, res) => {
   const order = req.body?.['order'];
-  if (!Array.isArray(order) || order.some((o) => typeof o.id !== 'string' || typeof o.position !== 'number')) {
+  if (
+    !Array.isArray(order) ||
+    order.some((o) => typeof o.id !== 'string' || typeof o.position !== 'number')
+  ) {
     res.status(400).json({ message: 'Body deve ser { order: [{id, position}] }.' });
     return;
   }

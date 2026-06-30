@@ -16,9 +16,7 @@ Produto: **Crianex Hub** — plataforma administrativa centralizada e vitrine di
 
 - **Cliente:** Crianex (CTO: Otávio Maya)
 - **Metodologia:** FDD + Kanban
-- **Docs (Unidade 2):** [/unidade2](https://mdsreq-fga-unb.github.io/REQ-2026.1-T02-Crianex-/)
-- **Docs (Unidade 3):** [/unidade3](https://mdsreq-fga-unb.github.io/REQ-2026.1-T02-Crianex-/unidade3/)
-
+- **Docs:** [mdsreq-fga-unb.github.io/REQ-2026.1-T02-Crianex-](https://mdsreq-fga-unb.github.io/REQ-2026.1-T02-Crianex-/)
 
 <p align="center">
   <img 
