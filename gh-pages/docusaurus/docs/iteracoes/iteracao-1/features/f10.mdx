@@ -90,4 +90,43 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 **Verificação:** [Resultados V&V da IT1](/iteracoes/iteracao-1/vv)
 
 </TabItem>
+<TabItem value="dor" label="DoR">
+
+## Definition of Ready — Evidências
+
+Checklist do DoR aplicado à F10 antes de entrar em execução. Todos os itens foram atendidos conforme o critério definido em [DoR e DoD](/visao/dor-dod).
+
+| Critério DoR | Status | Evidência |
+| ------------ | ------ | --------- |
+| Título no padrão FDD `<ação> <resultado> <de/para/no/com> <objeto>` | ✅ | [Issue #57](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/57) — título conforme o padrão |
+| Critérios de aceite escritos e verificáveis (Given/When/Then) | ✅ | Ver abas RF/RNF desta página — todos os cenários BDD documentados |
+| Estimativa registrada: VB, CX e IP calculados | ✅ | [Priorização do Backlog](/backlog/priorizacao) — coluna IP da tabela de features |
+| Dependências identificadas; bloqueantes resolvidos | ✅ | [Mapa de Dependências — IT1](/backlog/dependencias#it1) — bloqueantes verificados antes do início |
+| Class Owner designado e linkada à Feature parent e à CP de origem | ✅ | [Issue #57](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/57) — assignees e labels de CP/Feature registrados |
+| Protótipo revisado pelo cliente | ✅ | [Protótipo de Alta Fidelidade — IT1](/iteracoes/iteracao-1/evidencias/prototipo) |
+| Technical Design Review (TDR) concluída | ✅ | [Design Técnico IT1](/iteracoes/iteracao-1/evidencias/design-tecnico) — diagramas leves e feature cards elaborados |
+| Ao menos um critério de segurança ou usabilidade identificado | ✅ | Ver aba RNF desta página |
+
+</TabItem>
+<TabItem value="dod" label="DoD">
+
+## Definition of Done — Evidências
+
+Checklist do DoD verificado ao encerrar a F10. Todos os itens foram atendidos antes de mover a issue para Done no Kanban.
+
+| Critério DoD | Status | Evidência |
+| ------------ | ------ | --------- |
+| Critérios de aceite validados (BDD cobertos) | ✅ | Ver abas RF/RNF desta página — screenshots e cenários verificados |
+| Testes automatizados passando (unitários + integração) | ✅ | [Resultados V&V IT1](/iteracoes/iteracao-1/vv) |
+| Lint sem erros e formatação OK (ESLint + Prettier) | ✅ | [Resultados V&V IT1](/iteracoes/iteracao-1/vv) |
+| CI verde (build + testes + lint) | ✅ | [Resultados V&V IT1](/iteracoes/iteracao-1/vv) |
+| PR aprovado por Chief Programmer ou Project Manager | ✅ | [Issue #57](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/57) — PR de resolução com approve registrado |
+| Migration de banco | — | Não aplicável para esta feature |
+| Sem vulnerabilidades críticas (SAST/linting de segurança) | ✅ | [Resultados V&V IT1](/iteracoes/iteracao-1/vv) |
+| Validação parcial do cliente registrada | ✅ | [Validação Parcial IT1](/iteracoes/iteracao-1/validacao/partial) |
+| Validação Formal aprovada pelo cliente | ✅ | [Validação Formal IT1](/iteracoes/iteracao-1/validacao/formal) |
+| Rastreabilidade atualizada | ✅ | [Tabela de Requisitos](/backlog/requisitos) — RF/RNF vinculados |
+| Issue movida para Done no GitHub Projects | ✅ | [Issue #57](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/57) — fechada via merge do PR (`closes #N`) |
+
+</TabItem>
 </Tabs>
