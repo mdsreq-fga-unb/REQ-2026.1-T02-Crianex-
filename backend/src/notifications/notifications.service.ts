@@ -45,3 +45,22 @@ export async function countUnread(): Promise<number> {
   if (error) throw error;
   return count ?? 0;
 }
+
+// Atualiza o status de uma notificação (ex.: marcar como lida). Idempotente:
+// o UPDATE filtra apenas por id, então reaplicar o mesmo status retorna o
+// registro sem erro. Retorna null quando o id não existe (0 linhas afetadas).
+export async function updateNotificationStatus(
+  id: string,
+  status: NotificationStatus
+): Promise<NotificationRecord | null> {
+  const supabase = getSupabaseClient();
+  const { data, error } = await supabase
+    .from('notifications')
+    .update({ status })
+    .eq('id', id)
+    .select(SELECT)
+    .maybeSingle();
+
+  if (error) throw error;
+  return (data as NotificationRecord) ?? null;
+}

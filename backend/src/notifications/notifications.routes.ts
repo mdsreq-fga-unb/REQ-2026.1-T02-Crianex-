@@ -1,7 +1,12 @@
 import { Router } from 'express';
 import { validateJWT } from '../middleware/validate-jwt.js';
 import { requireRole } from '../middleware/require-role.js';
-import { listNotifications, countUnread, isNotificationStatus } from './notifications.service.js';
+import {
+  listNotifications,
+  countUnread,
+  isNotificationStatus,
+  updateNotificationStatus,
+} from './notifications.service.js';
 
 const notificationsRouter = Router();
 const ownerGuard = [validateJWT, requireRole('owner')];
@@ -25,6 +30,34 @@ notificationsRouter.get('/', ...ownerGuard, async (req, res) => {
   } catch (err) {
     console.error('[notifications] list error:', err);
     res.status(500).json({ message: 'Falha ao listar notificações.' });
+  }
+});
+
+// PATCH /api/admin/notifications/:id — marca uma notificação como lida (status).
+// Idempotente: reenviar o mesmo status numa notificação já lida retorna 200. (F07 · #188)
+notificationsRouter.patch('/:id', ...ownerGuard, async (req, res) => {
+  const id = typeof req.params['id'] === 'string' ? req.params['id'].trim() : '';
+  const status = req.body?.['status'];
+
+  if (!id) {
+    res.status(400).json({ message: 'ID da notificação é obrigatório.' });
+    return;
+  }
+  if (!isNotificationStatus(status)) {
+    res.status(400).json({ message: "Campo 'status' deve ser 'unread' ou 'read'." });
+    return;
+  }
+
+  try {
+    const updated = await updateNotificationStatus(id, status);
+    if (!updated) {
+      res.status(404).json({ message: 'Notificação não encontrada.' });
+      return;
+    }
+    res.status(200).json(updated);
+  } catch (err) {
+    console.error('[notifications] update status error:', err);
+    res.status(500).json({ message: 'Falha ao atualizar notificação.' });
   }
 });
 

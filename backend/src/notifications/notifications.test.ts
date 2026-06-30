@@ -103,3 +103,53 @@ describe('Suite de testes de integração — GET /api/admin/notifications', () 
     }
   });
 });
+
+describe('Suite de testes de integração — PATCH /api/admin/notifications/:id (#188)', () => {
+  let id: string;
+
+  beforeAll(async () => {
+    const supabase = getSupabaseClient();
+    const { data, error } = await supabase
+      .from('notifications')
+      .insert({ tipo: TEST_TIPO, conteudo: 'para marcar como lida', status: 'unread' })
+      .select('id')
+      .single();
+    if (error) throw error;
+    id = (data as { id: string }).id;
+  });
+
+  it('Marca como lida e retorna 200 com o registro atualizado', async () => {
+    const res = await request(app)
+      .patch(`/admin/notifications/${id}`)
+      .send({ status: 'read' })
+      .expect(200);
+
+    expect(res.body.id).toBe(id);
+    expect(res.body.status).toBe('read');
+  });
+
+  it('É idempotente: reenviar o mesmo PATCH numa notificação já lida retorna 200', async () => {
+    const res = await request(app)
+      .patch(`/admin/notifications/${id}`)
+      .send({ status: 'read' })
+      .expect(200);
+
+    expect(res.body.status).toBe('read');
+  });
+
+  it('status inválido retorna 400 com { message }', async () => {
+    const res = await request(app)
+      .patch(`/admin/notifications/${id}`)
+      .send({ status: 'foo' })
+      .expect(400);
+    expect(res.body).toHaveProperty('message');
+  });
+
+  it('id inexistente retorna 404', async () => {
+    const res = await request(app)
+      .patch('/admin/notifications/00000000-0000-0000-0000-000000000000')
+      .send({ status: 'read' })
+      .expect(404);
+    expect(res.body).toHaveProperty('message');
+  });
+});
