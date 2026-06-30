@@ -6,7 +6,8 @@ import { describe, expect, it } from 'vitest';
 const migrationsDir = resolve(import.meta.dirname, '../../../supabase/migrations');
 
 // Whitespace é normalizado para que os asserts não dependam do alinhamento das colunas.
-const norm = (path: string) => readFileSync(resolve(migrationsDir, path), 'utf8').replace(/\s+/g, ' ');
+const norm = (path: string) =>
+  readFileSync(resolve(migrationsDir, path), 'utf8').replace(/\s+/g, ' ');
 
 const tableSql = norm('20260625000100_create_crm_columns.sql');
 const seedSql = norm('20260625000200_seed_crm_default_column.sql');

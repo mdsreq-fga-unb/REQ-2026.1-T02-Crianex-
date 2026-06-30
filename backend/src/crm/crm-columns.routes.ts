@@ -29,7 +29,8 @@ crmColumnsRouter.post('/', ...ownerGuard, async (req, res) => {
   const title = typeof req.body?.['title'] === 'string' ? req.body['title'] : '';
   const color = typeof req.body?.['color'] === 'string' ? req.body['color'] : undefined;
   const position = typeof req.body?.['position'] === 'number' ? req.body['position'] : undefined;
-  const entry_hint = typeof req.body?.['entry_hint'] === 'string' ? req.body['entry_hint'] : undefined;
+  const entry_hint =
+    typeof req.body?.['entry_hint'] === 'string' ? req.body['entry_hint'] : undefined;
   const exit_hint = typeof req.body?.['exit_hint'] === 'string' ? req.body['exit_hint'] : undefined;
 
   try {
@@ -56,7 +57,10 @@ crmColumnsRouter.post('/', ...ownerGuard, async (req, res) => {
 // PATCH /api/admin/crm/columns/reorder — reordena múltiplas colunas (RF40 · RNF22)
 crmColumnsRouter.patch('/reorder', ...ownerGuard, async (req, res) => {
   const order = req.body?.['order'];
-  if (!Array.isArray(order) || order.some((o) => typeof o.id !== 'string' || typeof o.position !== 'number')) {
+  if (
+    !Array.isArray(order) ||
+    order.some((o) => typeof o.id !== 'string' || typeof o.position !== 'number')
+  ) {
     res.status(400).json({ message: 'Body deve ser { order: [{id, position}] }.' });
     return;
   }

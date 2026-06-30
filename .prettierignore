@@ -1,0 +1,17 @@
+# Subprojeto Docusaurus — possui estrutura/formatação próprias, não é checado
+# pelo Prettier da raiz (evita que ~77 docs bloqueiem o job de Lint da CI).
+gh-pages/
+
+# Dependências e artefatos gerados / build
+node_modules/
+**/dist/
+**/build/
+**/.svelte-kit/
+frontend/src/lib/paraglide/
+gh-pages/site/
+gh-pages/docusaurus/.docusaurus/
+
+# Ambiente / lockfiles
+.env
+.env.*
+package-lock.json

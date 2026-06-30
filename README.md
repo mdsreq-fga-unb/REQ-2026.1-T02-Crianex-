@@ -19,7 +19,6 @@ Produto: **Crianex Hub** — plataforma administrativa centralizada e vitrine di
 - **Docs (Unidade 2):** [/unidade2](https://mdsreq-fga-unb.github.io/REQ-2026.1-T02-Crianex-/)
 - **Docs (Unidade 3):** [/unidade3](https://mdsreq-fga-unb.github.io/REQ-2026.1-T02-Crianex-/unidade3/)
 
-
 <p align="center">
   <img 
     src="https://capsule-render.vercel.app/api?type=rect&color=0:004d1a,50:800040,100:33001a&height=2&section=header"
