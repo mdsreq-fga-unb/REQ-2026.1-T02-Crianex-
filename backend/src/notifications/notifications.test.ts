@@ -42,7 +42,13 @@ const app = express();
 app.use(express.json());
 app.use('/admin/notifications', notificationsRouter);
 
-type NotificationDto = { id: string; tipo: string; conteudo: string; status: string; created_at: string };
+type NotificationDto = {
+  id: string;
+  tipo: string;
+  conteudo: string;
+  status: string;
+  created_at: string;
+};
 const fromSuite = (list: NotificationDto[]) => list.filter((n) => n.tipo === TEST_TIPO);
 
 describe('Suite de testes de integração — GET /api/admin/notifications', () => {
