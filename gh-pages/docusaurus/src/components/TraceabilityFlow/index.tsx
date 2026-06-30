@@ -53,7 +53,7 @@ function featureHref(featId: string): string {
 function rfHref(rfId: string): string {
   const feat = RF_TO_FEATURE[rfId];
   if (feat && IT1_FEATURE_PATHS[feat]) {
-    return IT1_FEATURE_PATHS[feat];
+    return `${IT1_FEATURE_PATHS[feat]}?tab=${rfId.toLowerCase()}`;
   }
   return '/backlog/requisitos';
 }
@@ -118,27 +118,29 @@ export const TREE: OEDef[] = [
 ];
 
 /* ── RNFs — seção independente ─────────────────────────────────── */
+/* href = feature page com ?tab=rnfNN quando existe aba dedicada,
+   ou /backlog/requisitos#rnfs para RNFs gerais sem página de feature. */
 const RNFS: RnfDef[] = [
-  {id: 'RNF01', label: 'RNF01 · Isolamento admin',    href: '/iteracoes/iteracao-1/features/f09'},
-  {id: 'RNF02', label: 'RNF02 · Tempo vitrine',       href: '/iteracoes/iteracao-1/features/f14'},
-  {id: 'RNF03', label: 'RNF03 · Tempo adm.',          href: '/iteracoes/iteracao-1/features/f09'},
-  {id: 'RNF04', label: 'RNF04 · SSR vitrine',         href: '/iteracoes/iteracao-1/features/f12'},
-  {id: 'RNF05', label: 'RNF05 · SEO',                 href: '/iteracoes/iteracao-1/features/f12'},
+  {id: 'RNF01', label: 'RNF01 · Isolamento admin',    href: '/iteracoes/iteracao-1/features/f09?tab=rnf01'},
+  {id: 'RNF02', label: 'RNF02 · Tempo vitrine',       href: '/iteracoes/iteracao-1/features/f14?tab=rnf02'},
+  {id: 'RNF03', label: 'RNF03 · Tempo adm.',          href: '/iteracoes/iteracao-1/features/f09?tab=rnf03'},
+  {id: 'RNF04', label: 'RNF04 · SSR vitrine',         href: '/iteracoes/iteracao-1/features/f12?tab=rnf04'},
+  {id: 'RNF05', label: 'RNF05 · SEO',                 href: '/iteracoes/iteracao-1/features/f12?tab=rnf05'},
   {id: 'RNF07', label: 'RNF07 · OWASP Top 10',        href: '/backlog/requisitos#rnfs'},
-  {id: 'RNF08', label: 'RNF08 · Criptografia',        href: '/iteracoes/iteracao-1/features/f09'},
-  {id: 'RNF09', label: 'RNF09 · RLS por linha',       href: '/backlog/requisitos#rnfs'},
-  {id: 'RNF10', label: 'RNF10 · Rate limit form.',    href: '/iteracoes/iteracao-1/features/f14'},
-  {id: 'RNF11', label: 'RNF11 · Conformidade LGPD',   href: '/backlog/requisitos#rnfs'},
+  {id: 'RNF08', label: 'RNF08 · Criptografia',        href: '/iteracoes/iteracao-1/features/f09?tab=rnf08'},
+  {id: 'RNF09', label: 'RNF09 · RLS por linha',       href: '/iteracoes/iteracao-1/features/f10?tab=rnf09'},
+  {id: 'RNF10', label: 'RNF10 · Rate limit form.',    href: '/iteracoes/iteracao-1/features/f14?tab=rnf10'},
+  {id: 'RNF11', label: 'RNF11 · Conformidade LGPD',   href: '/iteracoes/iteracao-1/features/f14?tab=rnf11'},
   {id: 'RNF12', label: 'RNF12 · Responsividade',      href: '/backlog/requisitos#rnfs'},
-  {id: 'RNF13', label: 'RNF13 · Bilinguismo',         href: '/iteracoes/iteracao-1/features/f12'},
+  {id: 'RNF13', label: 'RNF13 · Bilinguismo',         href: '/iteracoes/iteracao-1/features/f12?tab=rnf13'},
   {id: 'RNF14', label: 'RNF14 · Escalabilidade',      href: '/backlog/requisitos#rnfs'},
-  {id: 'RNF15', label: 'RNF15 · Carga concorrente',   href: '/iteracoes/iteracao-1/features/f12'},
+  {id: 'RNF15', label: 'RNF15 · Carga concorrente',   href: '/backlog/requisitos#rnfs'},
   {id: 'RNF16', label: 'RNF16 · Stack obrigatório',   href: '/backlog/requisitos#rnfs'},
   {id: 'RNF17', label: 'RNF17 · Cobertura testes',    href: '/backlog/requisitos#rnfs'},
   {id: 'RNF18', label: 'RNF18 · Portabilidade',       href: '/backlog/requisitos#rnfs'},
-  {id: 'RNF19', label: 'RNF19 · Navegação intuitiva', href: '/iteracoes/iteracao-1/features/f12'},
-  {id: 'RNF20', label: 'RNF20 · Disponibilidade',     href: '/iteracoes/iteracao-1/features/f15'},
-  {id: 'RNF21', label: 'RNF21 · Drag-drop cards',     href: '/iteracoes/iteracao-1/features/f15'},
+  {id: 'RNF19', label: 'RNF19 · Navegação intuitiva', href: '/iteracoes/iteracao-1/features/f12?tab=rnf19'},
+  {id: 'RNF20', label: 'RNF20 · Disponibilidade',     href: '/iteracoes/iteracao-1/features/f15?tab=rnf20'},
+  {id: 'RNF21', label: 'RNF21 · Drag-drop cards',     href: '/backlog/requisitos#rnfs'},
   {id: 'RNF22', label: 'RNF22 · Drag-drop colunas',   href: '/backlog/requisitos#rnfs'},
   {id: 'RNF23', label: 'RNF23 · Resumo tickets',      href: '/backlog/requisitos#rnfs'},
   {id: 'RNF24', label: 'RNF24 · Cards CRM',           href: '/backlog/requisitos#rnfs'},
