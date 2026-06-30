@@ -95,7 +95,7 @@ function Chart(): ReactNode {
       <g>
         {/* Q1 — MVP: alto valor + baixo esforço */}
         <rect x={left} y={top} width={wL} height={hT} fill="#22c55e" fillOpacity={0.12} />
-        <rect x={left} y={top} width={wL} height={hT} fill="none" stroke="#22c55e" strokeWidth={2} strokeDasharray="6 3" />
+        <rect x={left} y={top} width={wL} height={hT} fill="none" stroke="#22c55e" strokeWidth={2.5} />
         {/* Q2 — avaliar: alto valor + alto esforço */}
         <rect x={split_x} y={top} width={wR} height={hT} fill="#3b82f6" fillOpacity={0.08} />
         {/* Q3 — quick wins: baixo valor + baixo esforço */}
