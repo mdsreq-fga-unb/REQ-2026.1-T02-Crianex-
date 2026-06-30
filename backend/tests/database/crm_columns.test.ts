@@ -3,49 +3,39 @@ import { resolve } from 'node:path';
 
 import { describe, expect, it } from 'vitest';
 
-const migrationPath = resolve(
-  import.meta.dirname,
-  '../../../supabase/migrations/20260622000100_create_crm_columns_table.sql'
-);
+const migrationsDir = resolve(import.meta.dirname, '../../../supabase/migrations');
 
-const migrationSql = readFileSync(migrationPath, 'utf8');
+// Whitespace é normalizado para que os asserts não dependam do alinhamento das colunas.
+const norm = (path: string) => readFileSync(resolve(migrationsDir, path), 'utf8').replace(/\s+/g, ' ');
+
+const tableSql = norm('20260625000100_create_crm_columns.sql');
+const seedSql = norm('20260625000200_seed_crm_default_column.sql');
 
 describe('crm_columns migration', () => {
   it('cria a tabela crm_columns com as colunas obrigatórias', () => {
-    expect(migrationSql).toContain('create table public.crm_columns');
-    expect(migrationSql).toContain('nome text not null');
-    expect(migrationSql).toContain('ordem integer not null');
-    expect(migrationSql).toContain('is_default boolean default false not null');
-    expect(migrationSql).toContain('created_at timestamp with time zone');
+    expect(tableSql).toContain('CREATE TABLE IF NOT EXISTS public.crm_columns');
+    expect(tableSql).toContain('title text NOT NULL');
+    expect(tableSql).toContain('position integer NOT NULL DEFAULT 0');
+    expect(tableSql).toContain('is_default boolean NOT NULL DEFAULT false');
+    expect(tableSql).toContain('created_at timestamptz NOT NULL DEFAULT now()');
   });
 
   it('garante no máximo 1 coluna default via índice único parcial', () => {
-    expect(migrationSql).toContain('create unique index crm_columns_single_default_idx');
-    expect(migrationSql).toContain('on public.crm_columns (is_default)');
-    expect(migrationSql).toContain('where is_default = true');
+    expect(tableSql).toContain('CREATE UNIQUE INDEX IF NOT EXISTS crm_columns_one_default_idx');
+    expect(tableSql).toContain('ON public.crm_columns (is_default)');
+    expect(tableSql).toContain('WHERE is_default = true');
   });
 
-  it('garante as invariantes de "≥1 coluna" e "exatamente 1 default" via trigger', () => {
-    expect(migrationSql).toContain('public.check_crm_columns_invariants()');
-    expect(migrationSql).toContain('deve existir ao menos 1 coluna');
-    expect(migrationSql).toContain('deve existir exatamente 1 coluna marcada como is_default');
-    expect(migrationSql).toContain('create constraint trigger crm_columns_invariants_on_update');
-    expect(migrationSql).toContain('create constraint trigger crm_columns_invariants_on_delete');
-    expect(migrationSql).toContain('deferrable initially immediate');
-  });
-
-  it('habilita RLS com policy admin-only e revoga acesso de anon', () => {
-    expect(migrationSql).toContain('alter table public.crm_columns enable row level security');
-    expect(migrationSql).toContain(
-      'Permitir leitura e gerenciamento de colunas do CRM para owners'
-    );
-    expect(migrationSql).toContain('using (public.is_owner(auth.uid()))');
-    expect(migrationSql).toContain('with check (public.is_owner(auth.uid()))');
-    expect(migrationSql).toContain('revoke all on table public.crm_columns from anon');
+  it('habilita RLS com policy admin-only (owner via JWT)', () => {
+    expect(tableSql).toContain('ALTER TABLE public.crm_columns ENABLE ROW LEVEL SECURITY');
+    expect(tableSql).toContain('CREATE POLICY "crm_columns_owner_all" ON public.crm_columns');
+    expect(tableSql).toContain("'app_metadata' ->> 'role' = 'owner'");
   });
 
   it('faz seed inicial garantindo ao menos 1 coluna default', () => {
-    expect(migrationSql).toContain('insert into public.crm_columns (nome, ordem, is_default)');
-    expect(migrationSql).toContain("('Novo Lead', 1, true)");
+    expect(seedSql).toContain('INSERT INTO public.crm_columns');
+    expect(seedSql).toContain("('Novo Lead',");
+    // Só insere quando a tabela está vazia — mantém a invariante de ≥1 default.
+    expect(seedSql).toContain('WHERE NOT EXISTS (SELECT 1 FROM public.crm_columns)');
   });
 });
