@@ -243,7 +243,7 @@
 <!-- ── Column Editor Modal ── -->
 {#if editingCols}
   <div class="admin-overlay" role="presentation" onclick={() => editingCols = false}>
-    <div class="admin-modal wide" role="dialog" aria-modal="true" aria-label="Editar colunas do pipeline" onclick={(e) => e.stopPropagation()}>
+    <div class="admin-modal wide" role="dialog" aria-modal="true" aria-label="Editar colunas do pipeline" tabindex="-1" onclick={(e) => e.stopPropagation()} onkeydown={(e) => e.stopPropagation()}>
       <div class="admin-modal-head">
         <h3>Editar colunas do pipeline</h3>
         <span class="crumbs">/ crm / colunas</span>
@@ -253,13 +253,14 @@
         {#if colsError}
           <div class="crm-err-banner">{colsError}</div>
         {/if}
-        <div class="crm-coleditor" ondragover={(e) => e.preventDefault()}>
+        <div class="crm-coleditor" role="list" ondragover={(e) => e.preventDefault()}>
           {#each editCols as c (c.id)}
             <div class="crm-colrow {colDragId === c.id ? 'dragging' : ''} {colDropTarget?.id === c.id ? (colDropTarget?.after ? 'drop-after' : 'drop-before') : ''}"
+              role="listitem"
               ondragover={(e) => { e.preventDefault(); if (colDragId && colDragId !== c.id) { const r = e.currentTarget.getBoundingClientRect(); colDropTarget = { id: c.id, after: e.clientY > r.top + r.height / 2 }; } }}
               ondrop={(e) => { e.preventDefault(); editorDrop(c.id); }}>
               <div class="r1">
-                <span class="handle" draggable="true"
+                <span class="handle" draggable="true" role="button" tabindex="0" aria-label="Arraste para reordenar a coluna"
                   ondragstart={() => colDragId = c.id}
                   ondragend={() => { colDragId = null; colDropTarget = null; }}
                   title="arraste para reordenar">
@@ -269,7 +270,7 @@
                   oninput={() => { if (c.title.trim() && invalidColIds.has(c.id)) { invalidColIds = new Set([...invalidColIds].filter(id => id !== c.id)); } }}/>
                 <div class="crm-swatches">
                   {#each COL_COLORS as col}
-                    <button type="button" class="crm-swatch {c.color === col ? 'on' : ''}" style="background:{col}" onclick={() => editorUpd(c.id, { color: col })}></button>
+                    <button type="button" class="crm-swatch {c.color === col ? 'on' : ''}" style="background:{col}" aria-label={`Cor ${col}`} onclick={() => editorUpd(c.id, { color: col })}></button>
                   {/each}
                 </div>
                 {#if c.is_default}
@@ -282,12 +283,14 @@
               </div>
               <div class="crit">
                 <div class="f">
-                  <label>Critério de entrada</label>
-                  <textarea bind:value={c.entry_hint} placeholder="Quando um lead entra nesta coluna?"></textarea>
+                  <label>Critério de entrada
+                    <textarea bind:value={c.entry_hint} placeholder="Quando um lead entra nesta coluna?"></textarea>
+                  </label>
                 </div>
                 <div class="f">
-                  <label>Critério de saída</label>
-                  <textarea bind:value={c.exit_hint} placeholder="Quando um lead sai desta coluna?"></textarea>
+                  <label>Critério de saída
+                    <textarea bind:value={c.exit_hint} placeholder="Quando um lead sai desta coluna?"></textarea>
+                  </label>
                 </div>
               </div>
             </div>
@@ -313,7 +316,7 @@
 <!-- ── Quick column editor (gear button on the card) ── -->
 {#if quickCol}
   <div class="admin-overlay" role="presentation" onclick={closeQuickEditor}>
-    <div class="admin-modal" role="dialog" aria-modal="true" aria-label="Editar coluna" onclick={(e) => e.stopPropagation()}>
+    <div class="admin-modal" role="dialog" aria-modal="true" aria-label="Editar coluna" tabindex="-1" onclick={(e) => e.stopPropagation()} onkeydown={(e) => e.stopPropagation()}>
       <div class="admin-modal-head">
         <h3>Editar coluna</h3>
         <span class="crumbs">/ crm / colunas / {quickCol.title}</span>
@@ -328,7 +331,7 @@
             <input class="cname {!quickCol.title.trim() ? 'invalid' : ''}" bind:value={quickCol.title}/>
             <div class="crm-swatches">
               {#each COL_COLORS as col}
-                <button type="button" class="crm-swatch {quickCol.color === col ? 'on' : ''}" style="background:{col}" onclick={() => quickCol = quickCol && { ...quickCol, color: col }}></button>
+                <button type="button" class="crm-swatch {quickCol.color === col ? 'on' : ''}" style="background:{col}" aria-label={`Cor ${col}`} onclick={() => quickCol = quickCol && { ...quickCol, color: col }}></button>
               {/each}
             </div>
             {#if quickCol.is_default}
@@ -340,12 +343,14 @@
           </div>
           <div class="crit">
             <div class="f">
-              <label>Critério de entrada</label>
-              <textarea bind:value={quickCol.entry_hint} placeholder="Quando um lead entra nesta coluna?"></textarea>
+              <label>Critério de entrada
+                <textarea bind:value={quickCol.entry_hint} placeholder="Quando um lead entra nesta coluna?"></textarea>
+              </label>
             </div>
             <div class="f">
-              <label>Critério de saída</label>
-              <textarea bind:value={quickCol.exit_hint} placeholder="Quando um lead sai desta coluna?"></textarea>
+              <label>Critério de saída
+                <textarea bind:value={quickCol.exit_hint} placeholder="Quando um lead sai desta coluna?"></textarea>
+              </label>
             </div>
           </div>
         </div>
