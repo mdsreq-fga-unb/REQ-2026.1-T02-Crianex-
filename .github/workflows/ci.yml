@@ -180,25 +180,35 @@ jobs:
         run: |
           set -euo pipefail
 
-          # `db reset` restarts the postgrest container; on slower CI runners
-          # the API can accept connections slightly before its schema cache is
-          # fully (re)loaded, so the first request after a reset can 400 with
-          # "column not found in schema cache". Poll a real table until the
-          # API actually serves it before letting the test suite run.
-          for attempt in $(seq 1 15); do
-            status=$(curl -s -o /dev/null -w '%{http_code}' \
-              -H "apikey: ${SUPABASE_SECRET_KEY}" \
-              "${SUPABASE_URL}/rest/v1/products?select=id&limit=1")
-            if [ "$status" = "200" ]; then
-              echo "PostgREST schema ready (attempt $attempt/15)"
-              exit 0
+          # `db reset` restarts all containers including Kong (the Supabase API
+          # gateway). Kong reloads its API-key config from Postgres after restart,
+          # which takes longer than PostgREST itself — so an HTTP probe via Kong
+          # returns 403 until Kong finishes, even when the DB is ready.
+          #
+          # Bypass Kong entirely: poll Postgres directly on port 54322 (the raw
+          # DB port), then explicitly trigger a PostgREST schema-cache reload via
+          # NOTIFY so fresh migrations are visible without any timing guesswork.
+          DB_URL="postgresql://postgres:postgres@127.0.0.1:54322/postgres"
+
+          for attempt in $(seq 1 20); do
+            if PGPASSWORD=postgres psql "$DB_URL" -c "SELECT 1" >/dev/null 2>&1; then
+              echo "Postgres ready (attempt $attempt/20)"
+              break
             fi
-            echo "PostgREST not ready yet (status $status, attempt $attempt/15)..."
+            if [ "$attempt" = 20 ]; then
+              echo "::error::Postgres did not become ready in 40 s"
+              exit 1
+            fi
+            echo "Waiting for Postgres... (attempt $attempt/20)"
             sleep 2
           done
 
-          echo "::error::PostgREST did not become ready in time"
-          exit 1
+          # Trigger PostgREST schema-cache reload so all migration changes
+          # are immediately visible without a further timing window.
+          PGPASSWORD=postgres psql "$DB_URL" \
+            -c "NOTIFY pgrst, 'reload schema'"
+          echo "PostgREST schema reload triggered — waiting 3 s"
+          sleep 3
 
       - name: Test — backend
         run: npm test
