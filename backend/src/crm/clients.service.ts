@@ -34,7 +34,6 @@ export type ClientPatch = {
   status?: 'ativo' | 'inativo';
 };
 
-
 export async function updateClient(id: string, patch: ClientPatch): Promise<Client> {
   if (!id) throw new ClientError('ID do cliente é obrigatório.', 'MISSING_ID');
 
