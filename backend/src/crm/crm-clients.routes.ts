@@ -4,6 +4,7 @@ import { requireRole } from '../middleware/require-role.js';
 import {
   createClientInteraction,
   CrmInteractionError,
+  listClientInteractions,
   softDeleteClientInteraction,
   updateClientInteraction,
 } from './crm-interactions.service.js';
@@ -33,6 +34,23 @@ function handleInteractionError(err: unknown, res: Response): boolean {
 
   return false;
 }
+
+// GET /api/crm/clients/:id/interactions - lista o histórico de interações em ordem cronológica (RF42)
+crmClientsRouter.get('/:id/interactions', ...ownerGuard, async (req, res) => {
+  const clientId = typeof req.params?.['id'] === 'string' ? req.params['id'] : '';
+
+  try {
+    const interactions = await listClientInteractions(clientId);
+    res.status(200).json(interactions);
+  } catch (err) {
+    if (handleInteractionError(err, res)) {
+      return;
+    }
+
+    console.error('[crm-clients] list interactions error:', err);
+    res.status(500).json({ message: 'Falha ao listar interações.' });
+  }
+});
 
 // POST /api/crm/clients/:id/interactions - registra interação comercial (RF42)
 crmClientsRouter.post('/:id/interactions', ...ownerGuard, async (req, res) => {

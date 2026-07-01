@@ -5,11 +5,15 @@ import express from 'express';
 const mocks = vi.hoisted(() => {
   const maybeSingle = vi.fn();
   const single = vi.fn();
+  const order = vi.fn();
+  const in_ = vi.fn();
   const query = {
     delete: vi.fn(),
     eq: vi.fn(),
+    in: in_,
     insert: vi.fn(),
     maybeSingle,
+    order,
     select: vi.fn(),
     single,
     update: vi.fn(),
@@ -17,12 +21,14 @@ const mocks = vi.hoisted(() => {
 
   query.delete.mockReturnValue(query);
   query.eq.mockReturnValue(query);
+  query.in.mockResolvedValue({ data: [], error: null });
   query.insert.mockReturnValue(query);
+  query.order.mockResolvedValue({ data: [], error: null });
   query.select.mockReturnValue(query);
   query.update.mockReturnValue(query);
   const from = vi.fn(() => query);
 
-  return { from, maybeSingle, query, single };
+  return { from, maybeSingle, order, in_, query, single };
 });
 
 vi.mock('../config/supabase.js', () => ({
@@ -80,6 +86,62 @@ beforeEach(() => {
       removed: false,
     },
     error: null,
+  });
+});
+
+describe('GET /crm/clients/:id/interactions', () => {
+  it('lista interações em ordem cronológica (mais recente primeiro) com o nome do autor', async () => {
+    mocks.order.mockResolvedValueOnce({
+      data: [
+        {
+          id: interactionId,
+          client_id: clientId,
+          autor_id: authorId,
+          tipo: 'ligacao',
+          conteudo: 'Cliente pediu proposta.',
+          data: originalDate,
+          removed: false,
+        },
+      ],
+      error: null,
+    });
+    mocks.in_.mockResolvedValueOnce({
+      data: [{ id: authorId, name: 'Admin Teste' }],
+      error: null,
+    });
+
+    const res = await request(app).get(`/crm/clients/${clientId}/interactions`).expect(200);
+
+    expect(res.body).toEqual([
+      {
+        id: interactionId,
+        client_id: clientId,
+        autor_id: authorId,
+        autor_nome: 'Admin Teste',
+        tipo: 'ligacao',
+        conteudo: 'Cliente pediu proposta.',
+        data: originalDate,
+        removed: false,
+      },
+    ]);
+    expect(mocks.from).toHaveBeenCalledWith('interactions');
+    expect(mocks.query.eq).toHaveBeenCalledWith('client_id', clientId);
+    expect(mocks.query.eq).toHaveBeenCalledWith('removed', false);
+    expect(mocks.query.order).toHaveBeenCalledWith('data', { ascending: false });
+  });
+
+  it('retorna lista vazia quando não há interações', async () => {
+    mocks.order.mockResolvedValueOnce({ data: [], error: null });
+
+    const res = await request(app).get(`/crm/clients/${clientId}/interactions`).expect(200);
+
+    expect(res.body).toEqual([]);
+  });
+
+  it('retorna 400 quando o ID do cliente é inválido', async () => {
+    const res = await request(app).get('/crm/clients/not-a-uuid/interactions').expect(400);
+
+    expect(res.body.code).toBe('INVALID_CLIENT_ID');
   });
 });
 

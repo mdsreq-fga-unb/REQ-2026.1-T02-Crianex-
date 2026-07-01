@@ -10,6 +10,10 @@ export type CrmInteraction = {
   removed: boolean;
 };
 
+export type CrmInteractionWithAuthor = CrmInteraction & {
+  autor_nome: string | null;
+};
+
 export class CrmInteractionError extends Error {
   constructor(
     message: string,
@@ -22,6 +26,37 @@ export class CrmInteractionError extends Error {
 
 const SELECT = 'id, client_id, autor_id, tipo, conteudo, data, removed';
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+
+export async function listClientInteractions(
+  clientId: string
+): Promise<CrmInteractionWithAuthor[]> {
+  const normalizedClientId = clientId.trim();
+
+  if (!UUID_RE.test(normalizedClientId)) {
+    throw new CrmInteractionError('ID do cliente é inválido.', 'INVALID_CLIENT_ID');
+  }
+
+  const supabase = getSupabaseClient();
+  const { data, error } = await supabase
+    .from('interactions')
+    .select(SELECT)
+    .eq('client_id', normalizedClientId)
+    .eq('removed', false)
+    .order('data', { ascending: false });
+
+  if (error) throw error;
+  if (!data?.length) return [];
+
+  const authorIds = [...new Set(data.map((row) => row['autor_id'] as string))];
+  const { data: profiles } = await supabase.from('profiles').select('id, name').in('id', authorIds);
+
+  const nameById = new Map((profiles ?? []).map((p) => [p.id, p['name'] as string | null]));
+
+  return (data as CrmInteraction[]).map((row) => ({
+    ...row,
+    autor_nome: nameById.get(row.autor_id) ?? null,
+  }));
+}
 
 export async function createClientInteraction(input: {
   clientId: string;

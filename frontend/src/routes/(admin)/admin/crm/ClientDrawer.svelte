@@ -1,7 +1,8 @@
 <script lang="ts">
   import { apiFetch } from '$lib/api/backend';
-  import { X, Headphones, Mail, ArrowRight, Bot, Edit2, Check } from 'lucide-svelte';
+  import { X, Headphones, Mail, ArrowRight, Bot, Edit2, Check, Trash2 } from 'lucide-svelte';
   import type { CrmClient } from './+page.svelte';
+  import type { CrmInteraction, InteractionType } from '$lib/types/crm';
 
   let { client, currentUser, columnTitle, columnColor, onClose, onUpdate } = $props<{
     client: CrmClient;
@@ -30,8 +31,6 @@
     editForm = { ...client };
   });
 
-  type InteractionType = 'nota' | 'call' | 'email';
-
   let activeTab = $state<InteractionType>('nota');
   let inputText = $state('');
   let isLoggingInteraction = $state(false);
@@ -42,39 +41,108 @@
     email: 'Conteúdo enviado, anexos...',
   };
 
-  type Interaction = {
-    id: number | string;
-    type: InteractionType;
-    author: string;
-    text: string;
-    time: string;
-  };
+  function formatTime(iso: string): string {
+    const date = new Date(iso);
+    if (Number.isNaN(date.getTime())) return iso;
+    const diffMs = Date.now() - date.getTime();
+    const diffMin = Math.round(diffMs / 60000);
+    if (diffMin < 1) return 'agora';
+    if (diffMin < 60) return `há ${diffMin} min`;
+    const diffH = Math.round(diffMin / 60);
+    if (diffH < 24) return `há ${diffH}h`;
+    return date.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
+  }
 
-  let interactions = $state<Interaction[]>([]);
+  let interactions = $state<CrmInteraction[]>([]);
+  let interactionsLoading = $state(false);
+  let interactionsError = $state('');
+
+  let editingInteractionId = $state<string | null>(null);
+  let editingText = $state('');
+  let confirmDeleteId = $state<string | null>(null);
+  let interactionActionError = $state('');
+
+  async function loadInteractions() {
+    interactionsLoading = true;
+    interactionsError = '';
+    try {
+      interactions = await apiFetch<CrmInteraction[]>(`/crm/clients/${client.id}/interactions`);
+    } catch (err) {
+      const e = err as { message?: string };
+      interactionsError = e.message || 'Erro ao carregar histórico de interações.';
+    } finally {
+      interactionsLoading = false;
+    }
+  }
+
+  $effect(() => {
+    // Re-fetch whenever a different client's drawer is opened.
+    void client.id;
+    loadInteractions();
+  });
 
   async function registerInteraction() {
     if (!inputText.trim()) return;
     isLoggingInteraction = true;
     try {
-      await apiFetch(`/crm/clients/${client.id}/interactions`, {
+      const created = await apiFetch<CrmInteraction>(`/crm/clients/${client.id}/interactions`, {
         method: 'POST',
         body: JSON.stringify({ tipo: activeTab, conteudo: inputText.trim() }),
       });
-      interactions = [
-        {
-          id: Date.now(),
-          type: activeTab,
-          author: currentUser,
-          text: inputText.trim(),
-          time: 'agora',
-        },
-        ...interactions,
-      ];
+      interactions = [{ ...created, autor_nome: currentUser }, ...interactions];
       inputText = '';
     } catch (err) {
-      console.error('Erro ao registrar interação:', err);
+      const e = err as { message?: string };
+      interactionActionError = e.message || 'Erro ao registrar interação.';
     } finally {
       isLoggingInteraction = false;
+    }
+  }
+
+  function startEditInteraction(inter: CrmInteraction) {
+    editingInteractionId = inter.id;
+    editingText = inter.conteudo;
+    confirmDeleteId = null;
+    interactionActionError = '';
+  }
+
+  function cancelEditInteraction() {
+    editingInteractionId = null;
+    editingText = '';
+  }
+
+  async function saveEditInteraction(inter: CrmInteraction) {
+    const conteudo = editingText.trim();
+    if (!conteudo) return;
+    try {
+      const updated = await apiFetch<CrmInteraction>(
+        `/crm/clients/${client.id}/interactions/${inter.id}`,
+        {
+          method: 'PATCH',
+          body: JSON.stringify({ conteudo }),
+        }
+      );
+      // Backend preserves autor_id/data; keep the author name already resolved locally.
+      interactions = interactions.map((i) =>
+        i.id === inter.id ? { ...updated, autor_nome: inter.autor_nome } : i
+      );
+      editingInteractionId = null;
+      editingText = '';
+    } catch (err) {
+      const e = err as { message?: string };
+      interactionActionError = e.message || 'Erro ao editar interação.';
+    }
+  }
+
+  async function removeInteraction(inter: CrmInteraction) {
+    try {
+      await apiFetch(`/crm/clients/${client.id}/interactions/${inter.id}`, { method: 'DELETE' });
+      interactions = interactions.filter((i) => i.id !== inter.id);
+      confirmDeleteId = null;
+    } catch (err) {
+      const e = err as { message?: string };
+      interactionActionError = e.message || 'Erro ao remover interação.';
+      confirmDeleteId = null;
     }
   }
 
@@ -192,26 +260,86 @@
           <span class="badge">{interactions.length}</span>
         </h3>
 
-        {#if interactions.length === 0}
+        {#if interactionActionError}
+          <div class="crm-err-banner">{interactionActionError}</div>
+        {/if}
+
+        {#if interactionsLoading}
+          <p class="no-interactions">Carregando histórico…</p>
+        {:else if interactionsError}
+          <div class="crm-err-banner">{interactionsError}</div>
+        {:else if interactions.length === 0}
           <p class="no-interactions">Nenhuma interação registrada ainda.</p>
         {:else}
           <div class="timeline">
             {#each interactions as inter (inter.id)}
               <div class="interaction-card">
-                <div class="icon-wrapper {inter.type}">
-                  {#if inter.type === 'nota'}
+                <div class="icon-wrapper {inter.tipo}">
+                  {#if inter.tipo === 'nota'}
                     <Bot size={13} />
-                  {:else if inter.type === 'call'}
+                  {:else if inter.tipo === 'call'}
                     <Headphones size={13} />
                   {:else}
                     <Mail size={13} />
                   {/if}
                 </div>
                 <div class="interaction-content">
-                  <div class="meta">{inter.time} • {inter.type}</div>
-                  <div class="text">
-                    <strong>{inter.author}</strong> • {inter.text}
+                  <div class="meta">
+                    {formatTime(inter.data)} • {inter.tipo}
+                    {#if editingInteractionId !== inter.id}
+                      <span class="inter-actions">
+                        <button
+                          type="button"
+                          class="inter-action-btn"
+                          title="Editar interação"
+                          onclick={() => startEditInteraction(inter)}
+                        >
+                          <Edit2 size={11} />
+                        </button>
+                        {#if confirmDeleteId === inter.id}
+                          <button
+                            type="button"
+                            class="inter-action-btn confirm"
+                            onclick={() => removeInteraction(inter)}>Confirmar</button
+                          >
+                          <button
+                            type="button"
+                            class="inter-action-btn"
+                            onclick={() => (confirmDeleteId = null)}>Cancelar</button
+                          >
+                        {:else}
+                          <button
+                            type="button"
+                            class="inter-action-btn danger"
+                            title="Remover interação"
+                            onclick={() => (confirmDeleteId = inter.id)}
+                          >
+                            <Trash2 size={11} />
+                          </button>
+                        {/if}
+                      </span>
+                    {/if}
                   </div>
+                  {#if editingInteractionId === inter.id}
+                    <div class="inter-edit">
+                      <textarea bind:value={editingText}></textarea>
+                      <div class="inter-edit-actions">
+                        <button type="button" class="tab" onclick={cancelEditInteraction}
+                          >Cancelar</button
+                        >
+                        <button
+                          type="button"
+                          class="tab active"
+                          disabled={!editingText.trim()}
+                          onclick={() => saveEditInteraction(inter)}>Salvar</button
+                        >
+                      </div>
+                    </div>
+                  {:else}
+                    <div class="text">
+                      <strong>{inter.autor_nome || 'Usuário'}</strong> • {inter.conteudo}
+                    </div>
+                  {/if}
                 </div>
               </div>
             {/each}
@@ -456,6 +584,72 @@
     font-family: var(--font-mono, monospace);
     font-size: 10px;
     color: #6b7280;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .inter-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: auto;
+  }
+  .inter-action-btn {
+    background: transparent;
+    border: 0;
+    color: #6b7280;
+    cursor: pointer;
+    padding: 2px 6px;
+    border-radius: 5px;
+    display: inline-flex;
+    align-items: center;
+    font-size: 10px;
+    font-family: var(--font-mono, monospace);
+  }
+  .inter-action-btn:hover {
+    color: #ffffff;
+    background: #1f1f24;
+  }
+  .inter-action-btn.danger:hover {
+    color: #f472b6;
+    background: rgba(236, 72, 153, 0.12);
+  }
+  .inter-action-btn.confirm {
+    color: #f472b6;
+  }
+  .inter-edit {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 4px;
+  }
+  .inter-edit textarea {
+    background: #09090b;
+    border: 1px solid #2d2d35;
+    border-radius: 6px;
+    padding: 8px;
+    color: #e4e4e7;
+    font-size: 12.5px;
+    font-family: inherit;
+    resize: vertical;
+    min-height: 50px;
+    outline: none;
+  }
+  .inter-edit textarea:focus {
+    border-color: #7f3fe5;
+  }
+  .inter-edit-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 6px;
+  }
+  .crm-err-banner {
+    background: rgba(231, 31, 132, 0.1);
+    border: 1px solid rgba(231, 31, 132, 0.3);
+    border-radius: 9px;
+    padding: 8px 12px;
+    font-size: 12px;
+    color: #e4e4e7;
   }
   .interaction-content .text {
     font-size: 13px;
