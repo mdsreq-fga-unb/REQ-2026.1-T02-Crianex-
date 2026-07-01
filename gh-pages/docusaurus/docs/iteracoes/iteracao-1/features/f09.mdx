@@ -20,7 +20,7 @@ Esta funcionalidade exige **login de administrador**. Credenciais para o profess
 
 Selecione um requisito na navegação abaixo. Cada um traz seus critérios de aceite, regras de negócio e um espaço para o **screenshot da funcionalidade em funcionamento** (substitua a imagem de placeholder pela captura real).
 
-<Tabs>
+<Tabs queryString="tab">
 <TabItem value="rf08" label="RF08">
 
 #### RF08 — Autenticar perfil de usuário
@@ -100,6 +100,45 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 ![Evidência de RNF08 — F09](./img/f09-rnf08.png)
 
 **Verificação:** [Resultados V&V da IT1](/iteracoes/iteracao-1/vv)
+
+</TabItem>
+<TabItem value="dor" label="DoR">
+
+## Definition of Ready — Evidências
+
+Checklist do DoR aplicado à F09 antes de entrar em execução. Todos os itens foram atendidos conforme o critério definido em [DoR e DoD](/visao/dor-dod).
+
+| Critério DoR | Status | Evidência |
+| ------------ | ------ | --------- |
+| Título no padrão FDD `<ação> <resultado> <de/para/no/com> <objeto>` | ✅ | [Issue #54](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/54) — título conforme o padrão |
+| Critérios de aceite escritos e verificáveis (Given/When/Then) | ✅ | Ver abas RF/RNF desta página — todos os cenários BDD documentados |
+| Estimativa registrada: VB, CX e IP calculados | ✅ | [Priorização do Backlog](/backlog/priorizacao) — coluna IP da tabela de features |
+| Dependências identificadas; bloqueantes resolvidos | ✅ | [Mapa de Dependências — IT1](/backlog/dependencias#it1) — bloqueantes verificados antes do início |
+| Class Owner designado e linkada à Feature parent e à CP de origem | ✅ | [Issue #54](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/54) — assignees e labels de CP/Feature registrados |
+| Protótipo revisado pelo cliente | ✅ | [Protótipo de Alta Fidelidade — IT1](/iteracoes/iteracao-1/evidencias/prototipo) |
+| Technical Design Review (TDR) concluída | ✅ | [Design Técnico IT1](/iteracoes/iteracao-1/evidencias/design-tecnico) — diagramas leves e feature cards elaborados |
+| Ao menos um critério de segurança ou usabilidade identificado | ✅ | Ver aba RNF desta página |
+
+</TabItem>
+<TabItem value="dod" label="DoD">
+
+## Definition of Done — Evidências
+
+Checklist do DoD verificado ao encerrar a F09. Todos os itens foram atendidos antes de mover a issue para Done no Kanban.
+
+| Critério DoD | Status | Evidência |
+| ------------ | ------ | --------- |
+| Critérios de aceite validados (BDD cobertos) | ✅ | [Issue #54](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/54) — evidências anexadas na descrição da issue |
+| Testes automatizados passando (unitários + integração) | ✅ | [Issue #54](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/54) — evidências anexadas na descrição da issue |
+| Lint sem erros e formatação OK (ESLint + Prettier) | ✅ | [Issue #54](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/54) — evidências anexadas na descrição da issue |
+| CI verde (build + testes + lint) | ✅ | [Issue #54](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/54) — evidências anexadas na descrição da issue |
+| PR aprovado por Chief Programmer ou Project Manager | ✅ | [Issue #54](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/54) — PR de resolução com approve registrado |
+| Migration de banco aplicada | ✅ | [Issue #54](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/54) — evidências anexadas na descrição da issue |
+| Sem vulnerabilidades críticas (SAST/linting de segurança) | ✅ | [Issue #54](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/54) — evidências anexadas na descrição da issue |
+| Validação parcial do cliente registrada | ✅ | [Validação Parcial IT1](/iteracoes/iteracao-1/validacao/partial) |
+| Validação Formal aprovada pelo cliente | ✅ | [Validação Formal IT1](/iteracoes/iteracao-1/validacao/formal) |
+| Rastreabilidade atualizada | ✅ | [V&V IT1 — V.01](/iteracoes/iteracao-1/vv#v01) — impacto em RNF08/F09 registrado |
+| Issue movida para Done no GitHub Projects | ✅ | [Issue #54](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/54) — fechada via merge do PR (`closes #N`) |
 
 </TabItem>
 </Tabs>

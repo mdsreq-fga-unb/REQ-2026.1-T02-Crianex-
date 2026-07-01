@@ -1,6 +1,6 @@
 # IT1 — Resultados de V&V
 
-Registro formal das mudanças de processo, escopo e achados de verificação identificados durante e após a IT1. As alterações de backlog aqui documentadas **ainda não foram aplicadas na tabela de rastreabilidade** — ficam registradas para atualização futura.
+Registro formal das mudanças de processo, escopo e achados de verificação identificados durante e após a IT1. Todas as alterações de backlog aqui documentadas foram **aplicadas na tabela de rastreabilidade** — cada item exibe seu status de consolidação com data e link do commit/documentação correspondente.
 
 - **Estratégia:** Verificação
 - **Técnica:** Análise de rastreabilidade e Inspeção
@@ -137,7 +137,7 @@ Registro formal das mudanças de processo, escopo e achados de verificação ide
 </div>
 </details>
 
-<details className="crianex-change">
+<details id="es06" className="crianex-change">
 <summary><span className="crianex-change__id">ES.06</span> <span className="crianex-change__sum">F10 — Adicionado RF48 para edição de dados do próprio perfil</span> <span className="badge badge--green">Aplicado</span></summary>
 <div className="crianex-change__body">
 
@@ -154,7 +154,7 @@ Registro formal das mudanças de processo, escopo e achados de verificação ide
 </div>
 </details>
 
-<details className="crianex-change">
+<details id="es07" className="crianex-change">
 <summary><span className="crianex-change__id">ES.07</span> <span className="crianex-change__sum">F14 — Adicionado RF49 para consentimento e detalhamento de LGPD</span> <span className="badge badge--green">Aplicado</span></summary>
 <div className="crianex-change__body">
 
@@ -171,7 +171,7 @@ Registro formal das mudanças de processo, escopo e achados de verificação ide
 </div>
 </details>
 
-<details className="crianex-change">
+<details id="es08" className="crianex-change">
 <summary><span className="crianex-change__id">ES.08</span> <span className="crianex-change__sum">F15 — Adicionado RF50 para consulta de detalhes de produtos SaaS</span> <span className="badge badge--green">Aplicado</span></summary>
 <div className="crianex-change__body">
 
@@ -188,7 +188,7 @@ Registro formal das mudanças de processo, escopo e achados de verificação ide
 </div>
 </details>
 
-<details className="crianex-change">
+<details id="es09" className="crianex-change">
 <summary><span className="crianex-change__id">ES.09</span> <span className="crianex-change__sum">F15 — Adicionado RF51 para consentimento e política de cookies</span> <span className="badge badge--green">Aplicado</span></summary>
 <div className="crianex-change__body">
 
@@ -225,7 +225,7 @@ Registro formal das mudanças de processo, escopo e achados de verificação ide
 
 ## 3. Achados de Verificação
 
-<details className="crianex-change">
+<details id="v01" className="crianex-change">
 <summary><span className="crianex-change__id">V.01</span> <span className="crianex-change__sum">MFA/2FA: decisão de não implementar por solicitação do cliente</span> <span className="badge badge--green">Aplicado</span></summary>
 <div className="crianex-change__body">
 

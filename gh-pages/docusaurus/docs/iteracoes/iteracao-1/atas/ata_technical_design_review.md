@@ -1,21 +1,34 @@
-# Reunião — 17/05/2026
+# Technical Design Review — 17/05/2026
 
-**Data:** 17 de Maio de 2026
-**Local:** Google meets / Compartilhamento de Tela (Miro e Figma)
-**Assunto:** Technical Design Review, Matriz de Priorização Matemática e Homologação de Protótipo
+**Data:** 17 de Maio de 2026  
+**Local:** Google Meet / Compartilhamento de Tela (Miro e Figma)  
+**Assunto:** Technical Design Review, Matriz de Priorização Matemática e Homologação do Protótipo
+
+---
+
+## Artefatos Relacionados
+
+| # | Artefato | Papel na Cerimônia | Link |
+|---|----------|--------------------|------|
+| 1 | Diagramas de Sequência Leve | Gerado — validação dos fluxos de dados por módulo (CP4, CP5, CP6) | [Ver design técnico →](/iteracoes/iteracao-1/evidencias/design-tecnico) |
+| 2 | Feature Cards | Gerado — mapeamento das macro-features como issues-mãe com sub-issues técnicas | [Ver feature cards →](/iteracoes/iteracao-1/evidencias/design-tecnico#feature-cards) |
+| 3 | Protótipo V1 | Usado — apresentado e aprovado pela equipe; base para solicitar ajustes ao cliente | [Ver Protótipo V1 →](/iteracoes/iteracao-1/evidencias/prototipo) |
+| 4 | Protótipo V2 | Gerado — versão com correções pós-homologação interna | [Ver Protótipo V2 →](/iteracoes/iteracao-1/evidencias/prototipo) |
+| 5 | Priorização (Matriz IP = VB/ES) | Gerado — cálculo objetivo de Valor, Esforço e IP por feature | [Ver priorização →](/backlog/priorizacao) |
+| 6 | Mapa de Dependências | Gerado — dependências mapeadas entre features para ordenação de build | [Ver dependências →](/backlog/dependencias#it1) |
 
 ---
 
 ## Participantes
 
-| Nome          | Papel                                                           | Status   |
-| ------------- | --------------------------------------------------------------- | -------- |
-| Lucas Zanetti | Project Manager · Chief Architect · Development Manager(Backup) | Presente |
-| Heitor        | Development Manager · Class Owner                               | Presente |
-| Hugo          | Class Owner                                                     | Presente |
-| Philipe       | Chief Programmer · Class Owner                                  | Presente |
-| Leonardo      | Chief Programmer · Class Owner                                  | Presente |
-| Camile        | Class Owner · Documentation Lead · Requirements Custodian       | Presente |
+| Nome | Papel | Status |
+|------|-------|--------|
+| Lucas Zanetti | Project Manager · Chief Architect · Development Manager (Backup) | Presente |
+| Heitor | Development Manager · Class Owner | Presente |
+| Hugo | Class Owner | Presente |
+| Philipe | Chief Programmer · Class Owner | Presente |
+| Leonardo | Chief Programmer · Class Owner | Presente |
+| Camile | Class Owner · Documentation Lead · Requirements Custodian | Presente |
 
 ---
 
@@ -23,11 +36,15 @@
 
 1. Priorização Matemática Objetiva e Critérios do MVP
 2. Ajustes Estruturais e Impacto no Cronograma
-3. Alinhamento do GitHub e Governança (DOR / DOD)
+3. Alinhamento do GitHub e Governança (DoR / DoD)
 4. Technical Design Review (Diagramas e Feature Cards)
-5. Homologação do Protótipo de Alta Fidelidade (Figma)
+5. Homologação do Protótipo de Alta Fidelidade
 
 ---
+
+<details className="crianex-revisions">
+<summary>📋 Ata completa — Discussões, decisões e encaminhamentos</summary>
+<div className="crianex-revisions__body">
 
 ## Discussões e Decisões
 
@@ -43,15 +60,15 @@ O PM Lucas Zanetti apresentou a estruturação matemática utilizada para gerar 
 
 - **Redução definitiva de CPs:** Três CPs redundantes foram formalmente eliminadas ou fundidas na árvore de rastreabilidade (ex: unificação da parte institucional na CP4).
 - **Antecipação do Painel Admin:** O Painel de Gerenciamento do Administrador foi trazido para a iteração atual (atrelado à OE2), visto que as operações de CRUD e reordenação por _drag-and-drop_ da CP4 dependem diretamente dessa estrutura de login e rotas seguras.
-- **Nova Timeline:** A entrega final de software/código funcional da Interação 1 foi estendida para o dia **25/05/2026** (uma segunda-feira). A iteração subsequente será focada em _Lead Capture_ devido ao seu maior peso de prioridade frente ao Núcleo Operacional.
+- **Nova Timeline:** A entrega final de software/código funcional da IT1 foi estendida para o dia **25/05/2026**. A iteração subsequente será focada em _Lead Capture_ devido ao seu maior peso de prioridade frente ao Núcleo Operacional.
 
-### 3. Alinhamento do GitHub e Governança (DOR / DOD)
+### 3. Alinhamento do GitHub e Governança (DoR / DoD)
 
 Foi aberta uma macro issue de governança com 7 sub-issues para organizar as pendências imediatas do repositório:
 
 - **Philipe e Hugo:** Revisar e aprovar o PR com a árvore de requisitos no GitHub Pages.
 - **Camile:** Finalizar a seção de "Estratégias" no documento de visão e Git Pages.
-- **Lucas:** Ajustar as definições de DOR (_Definition of Ready_) e DOD (_Definition of Done_) no Pages para refletir as especificidades do rito do FDD.
+- **Lucas:** Ajustar as definições de DoR (_Definition of Ready_) e DoD (_Definition of Done_) no Pages para refletir as especificidades do rito do FDD.
 
 ### 4. Technical Design Review (Diagramas e Feature Cards)
 
@@ -59,23 +76,23 @@ O grupo validou o fluxo de dados dos Diagramas de Sequência Leves, mapeando cad
 
 #### 4.1 Módulo Plataforma Pública (CP4)
 
-- **Feature 12 (Gerenciar Produto SAS):** Admin atua → Frontend valida básico → API intercepta → Supabase Auth/RLS valida privilégios do token JWT → DB processa a transação (`INSERT`/`UPDATE`/`DELETE`) sem quebrar integridade com histórico de tickets. O fluxo foi simplificado para mover o grosso das validações lógicas e de privilégios para a camada do Supabase. Esforço estimado: **3**.
-- **Feature 13 (Controlar Publicação):** Fluxo simplificado para gerenciar a flag ativo/inativo de exibição pública. Em caso de requisição direta maliciosa via console do navegador sem token válido, o backend interceptará via RLS e retornará erro 403 (_Forbidden_). No frontend, os elementos visuais de controle serão ocultados nativamente para usuários sem a role administrativa. Esforço estimado: **2**.
+- **Feature 12 (Gerenciar Produto SaaS):** Admin atua → Frontend valida básico → API intercepta → Supabase Auth/RLS valida privilégios do token JWT → DB processa a transação (`INSERT`/`UPDATE`/`DELETE`) sem quebrar integridade com histórico de tickets. O fluxo foi simplificado para mover o grosso das validações lógicas e de privilégios para a camada do Supabase. Esforço estimado: **3**.
+- **Feature 13 (Controlar Publicação):** Fluxo simplificado para gerenciar a flag ativo/inativo de exibição pública. Em caso de requisição direta maliciosa via console do navegador sem token válido, o backend interceptará via RLS e retornará erro 403 (_Forbidden_). Esforço estimado: **2**.
 - **Feature 14 (Exibir Contato / Capturar Lead):** Fluxo público de envio. Foi decidido a **eliminação do ReCAPTCHA** para mitigar estresse na experiência do usuário, substituindo-o estritamente por regras robustas de **Rate Limit** na API contra ataques de spam. O backend garante transações ACID para evitar salvamento de leads parciais ou corrompidos. Esforço estimado: **2**.
-- **Feature 16 (Disponibilizar Informações Institucionais):** Simplificação total do fluxo. Removida a necessidade de cache complexo no backend para dados institucionais, assumindo que textos e imagens de apresentação serão renderizados de forma direta e estática pela interface. Esforço estimado: **1**.
+- **Feature 16 (Disponibilizar Informações Institucionais):** Simplificação total do fluxo. Removida a necessidade de cache complexo no backend para dados institucionais. Esforço estimado: **1**.
 
-#### 4.2 Módulo Autenticação e Gestão Interna (CP6/CP7 antiga)
+#### 4.2 Módulo Autenticação e Gestão Interna (CP5)
 
 - **Feature 26 (Autenticar Acesso Seguro):** Mapeamento do login via Supabase Auth com geração de sessão JWT e redirecionamento para `/admin`. Tentativas inválidas disparam mensagens genéricas para segurança. O Logout executa o _signout_ no banco, limpa o _local storage_ e protege a rota via _refresh token_ no _server-side_, bloqueando acessos diretos por URL. Removida a ideia de login social com Google por complexidade desnecessária neste MVP. Esforço estimado: **4**.
 - **Feature 27 (Permitir Acesso ao Painel Admin):** Validação em tempo real do JWT e da _role_ do administrador, garantindo o isolamento completo de dados por perfil. Esforço estimado: **3**.
 - **Feature 28 (Gerenciar Membros):** Interface para CRUD completo da equipe técnica Crianex com tratamento nativo de falhas de autorização. Esforço estimado: **4**.
 
-#### 4.3 Módulo FAQ e Base de Conhecimento (CP8)
+#### 4.3 Módulo FAQ e Base de Conhecimento (CP6)
 
 - **Leonardo** apresentou os feature cards do FAQ, padronizando as operações de CRUD e categorização em macro-estruturas (`Gerenciar Artigos de FAQ` e `Controlar Publicação de FAQ`) com integridade referencial ligada aos IDs dos produtos. Esforço estimado: **2**.
 - **Feature 17 (Coletar Avaliação de Utilidade):** Fluxo de feedback anônimo ("Útil / Não Útil") integrado no final dos artigos. O clique envia a requisição de forma assíncrona dentro do limite de 2 segundos, desabilita os botões e oculta o componente sem a necessidade de alertas intrusivos ou _reloads_ na tela. Esforço estimado: **1**.
 
-### 5. Homologação do Protótipo de Alta Fidelidade (Figma)
+### 5. Homologação do Protótipo de Alta Fidelidade
 
 O PM Lucas demonstrou o protótipo de alta fidelidade em ambiente navegável. A interface pública conta com a Home corporativa, carrossel de produtos com métricas integradas, seção "Sobre Nós", suporte a Dark Mode e internacionalização funcional (PT/EN via i18n). A área administrativa compreende a tela de login isolada, dashboard com histórico de notificações, visão em Kanban das colunas do CRM de Leads, painel de inventário de produtos SAS, gerenciador de FAQ e histórico de logs de auditoria. A equipe aprovou o layout por unanimidade, pontuando apenas a necessidade futura de uma seção dedicada para relatórios financeiros.
 
@@ -83,11 +100,11 @@ O PM Lucas demonstrou o protótipo de alta fidelidade em ambiente navegável. A 
 
 ## Encaminhamentos
 
-| #   | Tarefa                                                              | Responsável     | Prazo      |
-| --- | ------------------------------------------------------------------- | --------------- | ---------- |
-| 1   | Gravação e edição do vídeo de apresentação da Unidade 2             | Toda a Equipe   | 18/05/2026 |
-| 2   | Ajustar no Miro as correções levantadas nos fluxos (F13, F14 e F16) | Philipe / Lucas | 18/05/2026 |
-| 3   | Revisar e aprovar o PR com a tabela de requisitos no Git Pages      | Philipe / Hugo  | 18/05/2026 |
+| # | Tarefa | Responsável | Prazo |
+|---|--------|-------------|-------|
+| 1 | Gravação e edição do vídeo de apresentação da Unidade 2 | Toda a Equipe | 18/05/2026 |
+| 2 | Ajustar no Miro as correções levantadas nos fluxos (F13, F14 e F16) | Philipe / Lucas | 18/05/2026 |
+| 3 | Revisar e aprovar o PR com a tabela de requisitos no Git Pages | Philipe / Hugo | 18/05/2026 |
 
 ---
 
@@ -99,11 +116,22 @@ Para a apresentação oficial com o professor no dia 19/05, a equipe se comprome
 - **GitHub:** Issues totalmente cadastradas e descritas com critérios de aceitação em formato BDD.
 - **Protótipo HTML:** Evidências do protótipo e validação do Cliente.
 
+</div>
+</details>
+
 ---
 
 ## Gravação da Reunião
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/N9WbRTMmQks?si=xEf4q-teQCbsJvT6" title="Gravação da Reunião" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+<div style={{position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', borderRadius: '8px', margin: '1rem 0', boxShadow: '0 4px 16px rgba(0,0,0,0.12)'}}>
+  <iframe
+    style={{position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none'}}
+    src="https://www.youtube.com/embed/N9WbRTMmQks"
+    title="Technical Design Review — 17/05/2026"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowFullScreen>
+  </iframe>
+</div>
 
 ---
 

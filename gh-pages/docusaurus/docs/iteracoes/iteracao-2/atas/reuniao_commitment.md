@@ -1,21 +1,32 @@
-# Reunião — 09/06/2026
+# Iteration 2 Replenishment Micro + Commitment — 09/06/2026
 
 **Data:** 09 de junho de 2026  
 **Horário:** 00h30  
 **Duração:** 34 minutos e 45 segundos  
 **Local:** Google Meet  
-**Assunto:** Iteration 2 Replenishment Micro e Commitment — Kickoff e Backlog da IT2
+**Assunto:** Kickoff e Backlog da IT2 — CRM, Autenticação e Notificações
+
+---
+
+## Artefatos Relacionados
+
+| # | Artefato | Papel na Cerimônia | Link |
+|---|----------|--------------------|------|
+| 1 | Backlog IT2 (seleção de escopo) | Usado/Confirmado — features F07, F08, F19, F20, F21 comprometidas para a IT2 | [Ver priorização →](/backlog/priorizacao) |
+| 2 | Rastreabilidade IT2 | Revisado — mapeamento de RFs por feature no início da iteração | [Ver rastreabilidade →](/backlog/rastreabilidade) |
+| 3 | GitHub Projects (Kanban) | Planejado — abertura das features e sub-issues de desenvolvimento | [Ver board →](https://github.com/orgs/mdsreq-fga-unb/projects/96) |
+| 4 | Miro board | Usado — consulta ao mapa de prioridades FDD para seleção de escopo | [Abrir Miro →](https://miro.com/app/board/uXjVGl991V0=/?share_link_id=878597873452) |
 
 ---
 
 ## Participantes
 
-| Nome          | Papel                                                            | Status   |
-| ------------- | ---------------------------------------------------------------- | -------- |
+| Nome | Papel | Status |
+|------|-------|--------|
 | Lucas Zanetti | Project Manager · Chief Architect · Development Manager (Backup) | Presente |
-| Heitor        | Development Manager · Class Owner                                | Presente |
-| Hugo          | Class Owner                                                      | Presente |
-| Philipe       | Chief Programmer · Class Owner                                   | Presente |
+| Heitor | Development Manager · Class Owner | Presente |
+| Hugo | Class Owner | Presente |
+| Philipe | Chief Programmer · Class Owner | Presente |
 
 ---
 
@@ -27,6 +38,10 @@
 4. Distribuir frentes de trabalho (Frontend e Backend) entre os membros
 
 ---
+
+<details className="crianex-revisions">
+<summary>📋 Ata completa — Discussões, decisões e encaminhamentos</summary>
+<div className="crianex-revisions__body">
 
 ## Discussões e Decisões
 
@@ -66,19 +81,30 @@
 
 ## Encaminhamentos
 
-| #   | Tarefa                                                                       | Responsável | Prazo      |
-| --- | ---------------------------------------------------------------------------- | ----------- | ---------- |
-| 1   | Publicar documentação da IT1 finalizada no GitHub Pages                      | Equipe      | 16/06/2026 |
-| 2   | Iniciar implementação do módulo CRM (F19–F21) — Frontend                     | Heitor      | A definir  |
-| 3   | Iniciar implementação do módulo CRM (F19–F21) — Backend                      | Philipe     | A definir  |
-| 4   | Implementar fluxo de recuperação de senha e toggle de visibilidade (F07/F08) | Hugo        | A definir  |
-| 5   | Publicar diagrama RBAC na Wiki do projeto                                    | Lucas       | 16/06/2026 |
+| # | Tarefa | Responsável | Prazo |
+|---|--------|-------------|-------|
+| 1 | Publicar documentação da IT1 finalizada no GitHub Pages | Equipe | 16/06/2026 |
+| 2 | Iniciar implementação do módulo CRM (F19–F21) — Frontend | Heitor | A definir |
+| 3 | Iniciar implementação do módulo CRM (F19–F21) — Backend | Philipe | A definir |
+| 4 | Implementar fluxo de recuperação de senha e toggle de visibilidade (F07/F08) | Hugo | A definir |
+| 5 | Publicar diagrama RBAC na Wiki do projeto | Lucas | 16/06/2026 |
+
+</div>
+</details>
 
 ---
 
 ## Gravação da Reunião
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/x13gsi8StuA" title="IT2 Replenishment Micro e Commitment — Kickoff e Backlog" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+<div style={{position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', borderRadius: '8px', margin: '1rem 0', boxShadow: '0 4px 16px rgba(0,0,0,0.12)'}}>
+  <iframe
+    style={{position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none'}}
+    src="https://www.youtube.com/embed/x13gsi8StuA"
+    title="Iteration 2 Replenishment Micro + Commitment — 09/06/2026"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowFullScreen>
+  </iframe>
+</div>
 
 ---
 

@@ -29,20 +29,53 @@
   --crianex-radius: 14px;
 
   /* sidebar mais compacta (ocupa menos espaço) */
-  --doc-sidebar-width: 210px;
+  --doc-sidebar-width: 200px;
 }
 
-/* ---------- Sidebar compacta (força via attribute selector) ---------- */
+/* ---------- SIDEBAR HAMBURGER EM TODAS AS RESOLUÇÕES ---------- */
+/* Ocultar sidebar por padrão (toggle desativado) */
+[class*='docSidebarContainer'] {
+  display: none !important;
+  width: 0 !important;
+  min-width: 0 !important;
+}
+
+/* Quando toggle é acionado (navbar-sidebar) */
+.navbar-sidebar [class*='docSidebarContainer'] {
+  display: block !important;
+  width: var(--doc-sidebar-width) !important;
+  min-width: var(--doc-sidebar-width) !important;
+  position: fixed;
+  left: 0;
+  top: 60px;
+  bottom: 0;
+  z-index: 99;
+  background: var(--ifm-background-color);
+  border-right: 1px solid var(--ifm-color-emphasis-200);
+  overflow-y: auto;
+  padding-top: 1rem;
+}
+
+/* Conteúdo expandido quando sidebar está escondida (padrão) */
+[class*='docItemCol'] {
+  max-width: 100% !important;
+  margin: 0 auto !important;
+}
+
+article {
+  max-width: 900px;
+  margin: 0 auto !important;
+}
+
+/* Quando sidebar está visível (drawer aberto) */
 @media (min-width: 997px) {
-  [class*='docSidebarContainer'] {
-    width: var(--doc-sidebar-width) !important;
+  .navbar-sidebar [class*='docItemCol'] {
+    max-width: 80% !important;
+    margin-left: var(--doc-sidebar-width);
   }
-}
 
-/* ---------- TOC compacto: expande a coluna de conteúdo ---------- */
-@media (min-width: 997px) {
-  [class*='docItemCol'] {
-    max-width: 82% !important;
+  .navbar-sidebar article {
+    max-width: 800px;
   }
 }
 
@@ -56,6 +89,55 @@
 }
 .table-of-contents .table-of-contents {
   padding-left: 0.65rem;
+}
+
+/* ---------- Botão Toggle Hamburger FORÇADO visível SEMPRE ---------- */
+.navbar-sidebar-toggle,
+button[aria-label*="menu"],
+button[aria-label*="Menu"],
+button[aria-label*="toggle"] {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  width: auto !important;
+  height: auto !important;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0.5rem;
+  margin: 0 0.5rem;
+  color: var(--ifm-color-primary);
+  transition: color 0.3s ease;
+}
+
+.navbar-sidebar-toggle:hover {
+  color: var(--ifm-color-primary-dark);
+}
+
+.navbar-sidebar-toggle svg {
+  width: 24px;
+  height: 24px;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+}
+
+/* Sobrescrever TODAS as media queries do Docusaurus */
+@media (max-width: 996px) {
+  .navbar-sidebar-toggle { display: flex !important; }
+}
+
+@media (min-width: 997px) {
+  .navbar-sidebar-toggle { display: flex !important; }
+}
+
+@media (min-width: 1280px) {
+  .navbar-sidebar-toggle { display: flex !important; }
+}
+
+@media (min-width: 1600px) {
+  .navbar-sidebar-toggle { display: flex !important; }
 }
 
 /* ---------- Sidebar compacta ---------- */
@@ -866,14 +948,27 @@ article {
 
 /* ---------- Conteúdo central mais largo (complementa a sidebar compacta) ---------- */
 @media (min-width: 997px) {
-  /* TOC (direita) mais estreito → libera espaço pro centro */
+  /* Ocultar TOC desktop completamente */
+  .theme-doc-toc-desktop {
+    display: none;
+  }
+
+  /* Coluna do TOC fica invisível e não ocupa espaço */
   .col--3:has(.theme-doc-toc-desktop) {
-    flex: 0 0 16%;
-    max-width: 16%;
+    display: none;
+  }
+
+  /* Conteúdo central expande para ocupar o espaço */
+  .col--8 {
+    flex: 0 0 auto !important;
+    max-width: 100% !important;
   }
 }
-/* artigos das páginas de evidência podem usar mais largura */
-article { max-width: 1100px; }
+/* artigos expandem com a tela */
+article { max-width: 1200px; }
+@media (min-width: 1400px) {
+  article { max-width: 1400px; }
+}
 
 /* ---------- Diagramas Mermaid maiores em qualquer página ---------- */
 .docusaurus-mermaid-container {
