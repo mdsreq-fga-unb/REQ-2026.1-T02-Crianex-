@@ -51,7 +51,7 @@
       items: [
         { href: NAO_IMPL, label: 'Tickets', icon: Ticket, module: 'tickets' },
         { href: NAO_IMPL, label: 'Logs de Produtos', icon: FileText, module: 'productLogs' },
-        { href: '/notificacoes', label: 'Notificações', icon: Bell, module: 'notifications' },
+        { href: '/admin/notificacoes', label: 'Notificações', icon: Bell, module: 'notifications' },
         { href: '/admin/membros', label: 'Membros', icon: Users, module: 'members' },
         { href: NAO_IMPL, label: 'Auditoria', icon: ShieldCheck, module: 'auditLogs' },
       ],
@@ -261,7 +261,7 @@
       </div>
 
       <a
-        href="/notificacoes"
+        href="/admin/notificacoes"
         class="bell-wrap topbar-bell"
         aria-label={$unreadCount > 0 ? `Notificações — ${$unreadCount} não lidas` : 'Notificações'}
         title="Notificações"
