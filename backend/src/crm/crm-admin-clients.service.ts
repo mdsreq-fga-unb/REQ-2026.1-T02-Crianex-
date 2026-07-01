@@ -336,11 +336,8 @@ export async function patchCrmAdminClient(
     }
   }
 
-  if (
-    patch.responsible_name &&
-    patch.responsible_name !== previousResponsible
-  ) {
-    const leadName = clientUpdates['nome'] as string | undefined ?? existing.nome;
+  if (patch.responsible_name && patch.responsible_name !== previousResponsible) {
+    const leadName = (clientUpdates['nome'] as string | undefined) ?? existing.nome;
     await notifyResponsibleAssigned(patch.responsible_name, leadName);
   }
 

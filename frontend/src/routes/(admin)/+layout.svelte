@@ -344,7 +344,9 @@
         <button
           type="button"
           class="bell-wrap topbar-bell"
-          aria-label={$unreadCount > 0 ? `Notificações — ${$unreadCount} não lidas` : 'Notificações'}
+          aria-label={$unreadCount > 0
+            ? `Notificações — ${$unreadCount} não lidas`
+            : 'Notificações'}
           aria-expanded={notifOpen}
           aria-haspopup="true"
           title="Notificações"

@@ -29,7 +29,7 @@ function applyVisibility(query: any, viewer: { id: string; role: string }) {
 // Lista notificações ordenadas por created_at DESC; filtra por status quando informado.
 // O índice composto (status, created_at DESC) de #186 garante a listagem em ≤ 2s (RNF03).
 export async function listNotifications(
-  viewer: {id: string; role: string},
+  viewer: { id: string; role: string },
   status?: NotificationStatus
 ): Promise<NotificationRecord[]> {
   const supabase = getSupabaseClient();
@@ -47,7 +47,7 @@ export async function listNotifications(
 }
 
 // Contador de não lidas via COUNT agregado (head: true → não traz linhas).
-export async function countUnread(viewer: {id: string; role: string}): Promise<number> {
+export async function countUnread(viewer: { id: string; role: string }): Promise<number> {
   const supabase = getSupabaseClient();
   let query = supabase
     .from('notifications')
