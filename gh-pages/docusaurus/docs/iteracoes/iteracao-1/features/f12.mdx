@@ -1,0 +1,209 @@
+---
+title: F12 — Gerenciar produtos SaaS da vitrine
+sidebar_label: "F12 · Gerenciar produtos SaaS da vitri"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# F12 — Gerenciar produtos SaaS da vitrine
+
+<span className="badge badge--green">IT1</span> · Rastreabilidade: [F12](/backlog/requisitos#f12) · [CP4](/visao/solucao#cp4) · [OE2](/visao/solucao#oe2)
+
+**Issue da Feature (GitHub):** [#55 — abrir no GitHub](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/55)
+
+:::note[Acesso para avaliação]
+Esta funcionalidade exige **login de administrador**. Credenciais para o professor: **e-mail** `a definir` · **senha** `a definir`.
+:::
+
+## Requisitos (evidências)
+
+Selecione um requisito na navegação abaixo. Cada um traz seus critérios de aceite, regras de negócio e um espaço para o **screenshot da funcionalidade em funcionamento** (substitua a imagem de placeholder pela captura real).
+
+<Tabs queryString="tab">
+<TabItem value="rf21" label="RF21">
+
+#### RF21 — Cadastrar produto SaaS
+
+**Critérios de aceite (BDD)**
+
+- **Dado** admin autenticado com dados válidos, **quando** cadastrar produto, **então** é persistido em transação ACID e fica apto à publicação.
+- **Dado** campos obrigatórios vazios, **quando** submeter, **então** a validação impede a criação.
+- **Dado** produto publicado, **quando** a vitrine é carregada, **então** o SSR retorna apenas `published = true` em ≤ 2s.
+
+**Regras de negócio:** [RN16](/backlog/requisitos#rns) — Publicação explícita de conteúdo (produto nasce despublicado até liberação do administrador)
+
+**Evidência (screenshot):**
+
+![Evidência de RF21 — F12](./img/f12-rf21.png)
+
+**Deploy:** _link a definir_
+
+</TabItem>
+<TabItem value="rf22" label="RF22">
+
+#### RF22 — Editar produto SaaS
+
+**Critérios de aceite (BDD)**
+
+- **Dado** admin autenticado, **quando** editar produto, **então** PATCH `/admin/products/:id` atualiza os dados refletidos na vitrine.
+- **Dado** campos inválidos, **quando** submeter, **então** a validação impede e mantém a versão anterior.
+- **Dado** produto inexistente, **quando** editar, **então** retorna 404 sem efeito.
+
+**Regras de negócio:** —
+
+**Evidência (screenshot):**
+
+![Evidência de RF22 — F12](./img/f12-rf22.png)
+
+**Deploy:** _link a definir_
+
+</TabItem>
+<TabItem value="rf23" label="RF23">
+
+#### RF23 — Remover produto SaaS
+
+**Critérios de aceite (BDD)**
+
+- **Dado** admin autenticado, **quando** remover produto, **então** DELETE `/admin/products/:id` o remove da vitrine e do banco.
+- **Dado** remoção, **quando** acionada, **então** exige confirmação antes de excluir.
+- **Dado** produto inexistente, **quando** remover, **então** retorna 404 sem efeito.
+
+**Regras de negócio:** —
+
+**Evidência (screenshot):**
+
+![Evidência de RF23 — F12](./img/f12-rf23.png)
+
+**Deploy:** _link a definir_
+
+</TabItem>
+<TabItem value="rf24" label="RF24">
+
+#### RF24 — Reordenar produtos SaaS
+
+**Critérios de aceite (BDD)**
+
+- **Dado** lista de produtos, **quando** reordenar via drag-and-drop, **então** PATCH `/admin/products/reorder` persiste a nova ordem em ≤ 1,5s.
+- **Dado** falha ao persistir a nova ordem, **quando** o PATCH não confirma, **então** a UI reverte para a ordem anterior.
+- **Dado** nova ordem persistida, **quando** a vitrine carrega, **então** os produtos respeitam a sequência definida pelo administrador.
+
+**Regras de negócio:** [RN12](/backlog/requisitos#rns) — Ordem de exibição de produtos definida pelo administrador
+
+**Evidência (screenshot):**
+
+![Evidência de RF24 — F12](./img/f12-rf24.png)
+
+**Deploy:** _link a definir_
+
+</TabItem>
+<TabItem value="rnf03" label="RNF03">
+
+#### RNF03 — Tempo de resposta da área administrativa
+
+**Classificação:** Eficiência  
+**Descrição:** Operações de leitura no painel em ≤ 2s em 95% das requisições.
+
+**Evidência (screenshot):**
+
+![Evidência de RNF03 — F12](./img/f12-rnf03.png)
+
+**Verificação:** [Resultados V&V da IT1](/iteracoes/iteracao-1/vv)
+
+</TabItem>
+<TabItem value="rnf04" label="RNF04">
+
+#### RNF04 — Renderização server-side da vitrine
+
+**Classificação:** Eficiência  
+**Descrição:** Páginas públicas renderizadas via SSR para indexação completa.
+
+**Evidência (screenshot):**
+
+![Evidência de RNF04 — F12](./img/f12-rnf04.png)
+
+**Verificação:** [Resultados V&V da IT1](/iteracoes/iteracao-1/vv)
+
+</TabItem>
+<TabItem value="rnf05" label="RNF05">
+
+#### RNF05 — Otimização para mecanismos de busca (SEO)
+
+**Classificação:** Usabilidade  
+**Descrição:** Metadados semânticos, sitemap.xml, robots.txt e Open Graph.
+
+**Evidência (screenshot):**
+
+![Evidência de RNF05 — F12](./img/f12-rnf05.png)
+
+**Verificação:** [Resultados V&V da IT1](/iteracoes/iteracao-1/vv)
+
+</TabItem>
+<TabItem value="rnf13" label="RNF13">
+
+#### RNF13 — Bilinguismo da vitrine
+
+**Classificação:** Usabilidade  
+**Descrição:** Conteúdo em PT e EN, com troca de idioma em até 1 clique (i18n).
+
+**Evidência (screenshot):**
+
+![Evidência de RNF13 — F12](./img/f12-rnf13.png)
+
+**Verificação:** [Resultados V&V da IT1](/iteracoes/iteracao-1/vv)
+
+</TabItem>
+<TabItem value="rnf19" label="RNF19">
+
+#### RNF19 — Facilidade de navegação da vitrine
+
+**Classificação:** Usabilidade  
+**Descrição:** Seções principais acessíveis em no máximo 3 interações.
+
+**Evidência (screenshot):**
+
+![Evidência de RNF19 — F12](./img/f12-rnf19.png)
+
+**Verificação:** [Resultados V&V da IT1](/iteracoes/iteracao-1/vv)
+
+</TabItem>
+<TabItem value="dor" label="DoR">
+
+## Definition of Ready — Evidências
+
+Checklist do DoR aplicado à F12 antes de entrar em execução. Todos os itens foram atendidos conforme o critério definido em [DoR e DoD](/visao/dor-dod).
+
+| Critério DoR | Status | Evidência |
+| ------------ | ------ | --------- |
+| Título no padrão FDD `<ação> <resultado> <de/para/no/com> <objeto>` | ✅ | [Issue #55](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/55) — título conforme o padrão |
+| Critérios de aceite escritos e verificáveis (Given/When/Then) | ✅ | Ver abas RF/RNF desta página — todos os cenários BDD documentados |
+| Estimativa registrada: VB, CX e IP calculados | ✅ | [Priorização do Backlog](/backlog/priorizacao) — coluna IP da tabela de features |
+| Dependências identificadas; bloqueantes resolvidos | ✅ | [Mapa de Dependências — IT1](/backlog/dependencias#it1) — bloqueantes verificados antes do início |
+| Class Owner designado e linkada à Feature parent e à CP de origem | ✅ | [Issue #55](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/55) — assignees e labels de CP/Feature registrados |
+| Protótipo revisado pelo cliente | ✅ | [Protótipo de Alta Fidelidade — IT1](/iteracoes/iteracao-1/evidencias/prototipo) |
+| Technical Design Review (TDR) concluída | ✅ | [Design Técnico IT1](/iteracoes/iteracao-1/evidencias/design-tecnico) — diagramas leves e feature cards elaborados |
+| Ao menos um critério de segurança ou usabilidade identificado | ✅ | Ver aba RNF desta página |
+
+</TabItem>
+<TabItem value="dod" label="DoD">
+
+## Definition of Done — Evidências
+
+Checklist do DoD verificado ao encerrar a F12. Todos os itens foram atendidos antes de mover a issue para Done no Kanban.
+
+| Critério DoD | Status | Evidência |
+| ------------ | ------ | --------- |
+| Critérios de aceite validados (BDD cobertos) | ✅ | [Issue #55](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/55) — evidências anexadas na descrição da issue |
+| Testes automatizados passando (unitários + integração) | ✅ | [Issue #55](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/55) — evidências anexadas na descrição da issue |
+| Lint sem erros e formatação OK (ESLint + Prettier) | ✅ | [Issue #55](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/55) — evidências anexadas na descrição da issue |
+| CI verde (build + testes + lint) | ✅ | [Issue #55](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/55) — evidências anexadas na descrição da issue |
+| PR aprovado por Chief Programmer ou Project Manager | ✅ | [Issue #55](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/55) — PR de resolução com approve registrado |
+| Migration de banco aplicada | ✅ | [Issue #55](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/55) — evidências anexadas na descrição da issue |
+| Sem vulnerabilidades críticas (SAST/linting de segurança) | ✅ | [Issue #55](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/55) — evidências anexadas na descrição da issue |
+| Validação parcial do cliente registrada | ✅ | [Validação Parcial IT1](/iteracoes/iteracao-1/validacao/partial) |
+| Validação Formal aprovada pelo cliente | ✅ | [Validação Formal IT1](/iteracoes/iteracao-1/validacao/formal) |
+| Rastreabilidade atualizada | ✅ | [Tabela de Requisitos](/backlog/requisitos) — RF/RNF vinculados |
+| Issue movida para Done no GitHub Projects | ✅ | [Issue #55](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/55) — fechada via merge do PR (`closes #N`) |
+
+</TabItem>
+</Tabs>

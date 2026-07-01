@@ -1,0 +1,143 @@
+---
+title: Priorização de Features
+sidebar_label: Priorização
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ValueEffortMatrix from '@site/src/components/ValueEffortMatrix';
+
+# Priorização de Features — Crianex Hub
+
+Priorização **top-down**: a unidade de decisão é a **Feature**, priorizada por `IP = VB / ES`. As features com melhor retorno relativo formam o **MVP**.
+
+:::tip[Resultado dos cálculos]
+A tabela abaixo é a visão de execução do MVP. Os valores completos de VB, ES, IP e quadrante por feature estão em **[Tabela de Priorização — Cálculos](/backlog/priorizacao-tabela)**.
+:::
+
+## Features do MVP
+
+| Feature | CP | Requisitos Funcionais | Status | Observações |
+| ------- | -- | --------------------- | ------ | ----------- |
+| [F09 — Autenticar](/iteracoes/iteracao-1/features/f09) | [CP5](/visao/solucao#cp5) | [RF08](/iteracoes/iteracao-1/features/f09?tab=rf08) · [RF09](/iteracoes/iteracao-1/features/f09?tab=rf09) | <span className="badge badge--green">Concluída</span> | — |
+| [F10 — Painel administrativo](/iteracoes/iteracao-1/features/f10) | [CP5](/visao/solucao#cp5) | [RF10](/iteracoes/iteracao-1/features/f10?tab=rf10) · [RF48](/iteracoes/iteracao-1/features/f10?tab=rf48) | <span className="badge badge--green">Concluída</span> | RF48 incorporado via refinamento V&V IT1 ([ES.06](/iteracoes/iteracao-1/vv#es06)) |
+| [F11 — Gerenciar usuários](/iteracoes/iteracao-1/features/f11) | [CP5](/visao/solucao#cp5) | [RF11](/iteracoes/iteracao-1/features/f11?tab=rf11) · [RF12](/iteracoes/iteracao-1/features/f11?tab=rf12) · [RF13](/iteracoes/iteracao-1/features/f11?tab=rf13) · [RF14](/iteracoes/iteracao-1/features/f11?tab=rf14) | <span className="badge badge--green">Concluída</span> | — |
+| [F12 — Produtos SaaS](/iteracoes/iteracao-1/features/f12) | [CP4](/visao/solucao#cp4) | [RF21](/iteracoes/iteracao-1/features/f12?tab=rf21) · [RF22](/iteracoes/iteracao-1/features/f12?tab=rf22) · [RF23](/iteracoes/iteracao-1/features/f12?tab=rf23) · [RF24](/iteracoes/iteracao-1/features/f12?tab=rf24) | <span className="badge badge--green">Concluída</span> | Maior IP (5,00) — primeira a entrar |
+| [F13 — Publicar produto](/iteracoes/iteracao-1/features/f13) | [CP4](/visao/solucao#cp4) | [RF25](/iteracoes/iteracao-1/features/f13?tab=rf25) · [RF26](/iteracoes/iteracao-1/features/f13?tab=rf26) | <span className="badge badge--green">Concluída</span> | — |
+| [F14 — Contato / Leads](/iteracoes/iteracao-1/features/f14) | [CP4](/visao/solucao#cp4) | [RF27](/iteracoes/iteracao-1/features/f14?tab=rf27) · [RF49](/iteracoes/iteracao-1/features/f14?tab=rf49) | <span className="badge badge--green">Concluída</span> | RF49 incorporado via refinamento V&V IT1 ([ES.07](/iteracoes/iteracao-1/vv#es07)) |
+| [F15 — Institucional](/iteracoes/iteracao-1/features/f15) | [CP4](/visao/solucao#cp4) | [RF50](/iteracoes/iteracao-1/features/f15?tab=rf50) · [RF51](/iteracoes/iteracao-1/features/f15?tab=rf51) | <span className="badge badge--green">Concluída</span> | RF50 e RF51 incorporados via refinamento V&V IT1 ([ES.08](/iteracoes/iteracao-1/vv#es08) · [ES.09](/iteracoes/iteracao-1/vv#es09)) |
+| [F16 — Artigos de FAQ](/iteracoes/iteracao-1/features/f16) | [CP6](/visao/solucao#cp6) | [RF28](/iteracoes/iteracao-1/features/f16?tab=rf28) · [RF29](/iteracoes/iteracao-1/features/f16?tab=rf29) · [RF30](/iteracoes/iteracao-1/features/f16?tab=rf30) · [RF31](/iteracoes/iteracao-1/features/f16?tab=rf31) | <span className="badge badge--green">Concluída</span> | — |
+| [F17 — Publicar FAQ](/iteracoes/iteracao-1/features/f17) | [CP6](/visao/solucao#cp6) | [RF32](/iteracoes/iteracao-1/features/f17?tab=rf32) · [RF33](/iteracoes/iteracao-1/features/f17?tab=rf33) | <span className="badge badge--green">Concluída</span> | — |
+| [F18 — Avaliação de FAQ](/iteracoes/iteracao-1/features/f18) | [CP6](/visao/solucao#cp6) | [RF34](/iteracoes/iteracao-1/features/f18?tab=rf34) · [RF52](/iteracoes/iteracao-1/features/f18?tab=rf52) | <span className="badge badge--green">Concluída</span> | — |
+| [F19 — CRM Clientes/Leads](/iteracoes/iteracao-2/features/f19) | [CP1](/visao/solucao#cp1) | [RF35](/iteracoes/iteracao-2/features/f19?tab=rf35) · [RF36](/iteracoes/iteracao-2/features/f19?tab=rf36) · [RF37](/iteracoes/iteracao-2/features/f19?tab=rf37) · [RF41](/iteracoes/iteracao-2/features/f19?tab=rf41) | <span className="badge badge--blue">Em andamento</span> | — |
+| [F20 — CRM Colunas](/iteracoes/iteracao-2/features/f20) | [CP1](/visao/solucao#cp1) | [RF38](/iteracoes/iteracao-2/features/f20?tab=rf38) · [RF39](/iteracoes/iteracao-2/features/f20?tab=rf39) · [RF40](/iteracoes/iteracao-2/features/f20?tab=rf40) | <span className="badge badge--blue">Em andamento</span> | — |
+| [F21 — CRM Interações](/iteracoes/iteracao-2/features/f21) | [CP1](/visao/solucao#cp1) | [RF42](/iteracoes/iteracao-2/features/f21?tab=rf42) · [RF53](/iteracoes/iteracao-2/features/f21?tab=rf53) · [RF59](/iteracoes/iteracao-2/features/f21?tab=rf59) | <span className="badge badge--blue">Em andamento</span> | — |
+| [F07 — Histórico de notificações](/iteracoes/iteracao-2/features/f07) | [CP9](/visao/solucao#cp9) | [RF46](/iteracoes/iteracao-2/features/f07?tab=rf46) · [RF47](/iteracoes/iteracao-2/features/f07?tab=rf47) | <span className="badge badge--blue">Em andamento</span> | — |
+| [F08 — Templates de notificações](/iteracoes/iteracao-2/features/f08) | [CP9](/visao/solucao#cp9) | [RF15](/iteracoes/iteracao-2/features/f08?tab=rf15) · [RF56](/iteracoes/iteracao-2/features/f08?tab=rf56) · [RF57](/iteracoes/iteracao-2/features/f08?tab=rf57) | <span className="badge badge--blue">Em andamento</span> | **Fora do MVP pela matriz** (IP 1,31), incluída na IT2 por dependência com F07 — o histórico pressupõe templates. Implementada por último. |
+
+> Features fora do MVP (tickets, dashboards, financeiro) estão na [Tabela de Priorização — Cálculos](/backlog/priorizacao-tabela) e seriam reavaliadas na IT3 (pausada).
+
+## Matriz Valor × Esforço
+
+Cada ponto é uma feature, posicionada pelos valores reais de **VB** (eixo Y) e **ES** (eixo X). Duas linhas de corte dividem o plano em **4 quadrantes**; o **Quadrante I** (alto valor + baixo esforço, canto superior-esquerdo) é o único pintado em verde e reúne exatamente as features do **MVP**.
+
+<ValueEffortMatrix />
+
+| Quadrante | Posição | Significado |
+| --------- | ------- | ----------- |
+| **I — MVP** | Alto valor / Baixo esforço | Maior retorno relativo — prioridade máxima, compõe o MVP |
+| **II** | Alto valor / Alto esforço | Boas candidatas, mas exigem mais esforço — reavaliar na próxima iteração |
+| **III** | Baixo valor / Baixo esforço | Ganhos rápidos de baixo impacto — fazer se houver capacidade ociosa |
+| **IV** | Baixo valor / Alto esforço | Pior retorno relativo — não priorizar |
+
+:::note[F08 é exceção, não erro de cálculo]
+F08 cai fora do Quadrante I (IP 1,31) e por isso não é classificada como MVP pela matriz. Ainda assim, entra na IT2 por **dependência lógica** com F07 (o histórico de notificações pressupõe templates existentes) — ver observação na tabela de features do MVP.
+:::
+
+## Método de Cálculo
+
+```
+IP = VB / ES   (aplicado diretamente à Feature)
+
+IP ≥ 1,50      → Alta prioridade   (Quadrante I — MVP)
+IP 1,00–1,49   → Média prioridade  (Quadrante II)
+IP < 1,00      → Baixa prioridade  (Quadrantes III/IV)
+```
+
+| Sigla | Descrição |
+| ----- | --------- |
+| **VB** | Valor de Negócio — impacto direto nos OEs |
+| **ES** | Esforço de implementação da Feature completa |
+| **IP** | Índice de Prioridade = VB / ES |
+
+### Por que top-down?
+
+A abordagem anterior calculava o IP de cada RF e **agregava** para estimar a feature (bottom-up) — a média dos RFs nivela diferenças internas e não representa o valor real entregue pela feature como unidade. No **top-down**, priorizamos as **Features** diretamente (unidade de entrega e de decisão); o cálculo de RFs serve apenas para ordenar a implementação _dentro_ de uma feature já priorizada.
+
+## Critérios
+
+<Tabs>
+<TabItem value="valor" label="Critérios de VALOR (VB)">
+
+`VB = (Impacto de Negócio × 3) + (Frequência de Uso × 3) + (Valor ao Usuário × 2) + (Impacto Estratégico × 2)`
+
+| Critério | Peso | Descrição |
+| -------- | :--: | --------- |
+| **Impacto de Negócio** | 3 | Contribuição direta aos objetivos estratégicos/operacionais (produtividade, centralização, valor comercial) |
+| **Frequência de Uso** | 3 | Com que frequência a feature será usada no dia a dia |
+| **Valor percebido pelo Usuário** | 2 | Quanto melhora experiência, praticidade e eficiência percebida |
+| **Impacto Estratégico** | 2 | Diferenciais estratégicos, crescimento futuro e posicionamento |
+
+</TabItem>
+<TabItem value="esforco" label="Critérios de ESFORÇO (ES)">
+
+`ES = (Complexidade × 3) + (Dependências × 2) + (Risco Técnico × 2) + (Tempo × 1)`
+
+> A complexidade considera **RFs e RNFs** — os RNFs impõem restrições de qualidade (segurança, desempenho, conformidade) que aumentam o esforço real.
+
+| Critério | Peso | Descrição |
+| -------- | :--: | --------- |
+| **Complexidade técnica** | 3 | Dificuldade considerando lógica dos RFs, integrações, persistência e restrições dos RNFs |
+| **Dependências** | 2 | Dependência de outros módulos/serviços para funcionar |
+| **Risco técnico** | 2 | Probabilidade de falhas ou inconsistências no desenvolvimento |
+| **Tempo de implementação** | 1 | Esforço temporal para desenvolver, testar e validar |
+
+</TabItem>
+</Tabs>
+
+## Validação com o Cliente
+
+Os scores de **VB** foram derivados a partir dos registros de vídeos de reuniões e conversas com o cliente ao longo do projeto — o histórico de interações com Otávio fundamentou cada nota de 1 a 5 nos critérios de valor. Ao final, os resultados consolidados foram apresentados e **validados diretamente com o cliente via WhatsApp**.
+
+O **ES** (Esforço) não passa por validação com o cliente: é estimado internamente pela equipe de desenvolvimento, que avalia complexidade técnica, dependências, risco e tempo.
+
+## Cálculos no Miro
+
+Cálculo detalhado de cada feature — critério por critério, com notas e justificativas:
+
+<div className="crianex-embed">
+  <iframe
+    src="https://miro.com/app/live-embed/uXjVGl991V0=/?moveToWidget=3458764675237762549&cot=14"
+    height="600"
+    frameBorder="0"
+    scrolling="no"
+    allow="fullscreen; clipboard-read; clipboard-write"
+    allowFullScreen>
+  </iframe>
+</div>
+
+<details className="crianex-revisions">
+<summary>Histórico de Revisão</summary>
+<div className="crianex-revisions__body">
+
+| Versão | Data | Descrição | Autor(es) |
+| ------ | ---- | --------- | --------- |
+| 1.0 | 14/05/2026 | Template de priorização do backlog | Lucas A. Zanetti |
+| 1.1 | 17/05/2026 | Tabela com diagrama valor × esforço | Lucas A. Zanetti |
+| 2.0 | 15/06/2026 | Refatoração top-down (Feature como unidade); nova matriz | Lucas A. Zanetti |
+| 3.0 | 26/06/2026 | Migração Docusaurus: tabela MVP no topo, matriz em Recharts, critérios em tabs; tabela de cálculos movida para página própria | Equipe Crianex |
+| 3.1 | 29/06/2026 | Correção da matriz: substituída a reta diagonal de IP por divisão em 4 quadrantes; Quadrante I (alto valor/baixo esforço) em verde contendo exatamente as features do MVP; F08 corrigida para "fora do MVP" no gráfico (estava marcada como MVP, contradizendo o texto) | Equipe Crianex |
+| 3.2 | 29/06/2026 | Matriz: domínio ajustado para quadrantes proporcionais (X:[5,41] Y:[3,55]); jitter em features sobrepostas; dots clicáveis para páginas de feature; 4 quadrantes coloridos com labels; texto de validação corrigido para refletir método real (VB derivado de registros/reuniões, validado por WhatsApp; ES interno da equipe) | Equipe Crianex |
+
+</div>
+</details>

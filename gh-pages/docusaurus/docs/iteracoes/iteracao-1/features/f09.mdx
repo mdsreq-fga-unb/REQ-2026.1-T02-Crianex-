@@ -1,0 +1,144 @@
+---
+title: F09 — Autenticar para acesso seguro ao sistema
+sidebar_label: "F09 · Autenticar"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# F09 — Autenticar para acesso seguro ao sistema
+
+<span className="badge badge--green">IT1</span> · Rastreabilidade: [F09](/backlog/requisitos#f09) · [CP5](/visao/solucao#cp5) · [OE2](/visao/solucao#oe2)
+
+**Issue da Feature (GitHub):** [#54 — abrir no GitHub](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/54)
+
+:::note[Acesso para avaliação]
+Esta funcionalidade exige **login de administrador**. Credenciais para o professor: **e-mail** `a definir` · **senha** `a definir`.
+:::
+
+## Requisitos (evidências)
+
+Selecione um requisito na navegação abaixo. Cada um traz seus critérios de aceite, regras de negócio e um espaço para o **screenshot da funcionalidade em funcionamento** (substitua a imagem de placeholder pela captura real).
+
+<Tabs queryString="tab">
+<TabItem value="rf08" label="RF08">
+
+#### RF08 — Autenticar perfil de usuário
+
+**Critérios de aceite (BDD)**
+
+- **Dado** credenciais válidas, **quando** POST `/admin/login`, **então** o Supabase Auth gera a sessão JWT e redireciona para `/admin/dashboard`.
+- **Dado** credenciais inválidas, **quando** POST `/admin/login`, **então** retorna 401 com mensagem genérica sem expor detalhes internos.
+- **Dado** membro `status = inactive` com credenciais corretas, **quando** autenticar, **então** o acesso é bloqueado.
+- **Dado** campos de login vazios, **quando** submeter, **então** a validação client-side impede o envio.
+- **Dado** acesso a `/admin` sem sessão, **quando** GET de rota protegida, **então** redireciona para `/admin/login` sem renderizar dados.
+
+**Regras de negócio:** [RN05](/backlog/requisitos#rns) — Membro inativo bloqueado no painel
+
+**Evidência (screenshot):**
+
+![Evidência de RF08 — F09](./img/f09-rf08.png)
+
+**Deploy:** _link a definir_
+
+</TabItem>
+<TabItem value="rf09" label="RF09">
+
+#### RF09 — Encerrar sessão
+
+**Critérios de aceite (BDD)**
+
+- **Dado** sessão ativa, **quando** POST `/admin/logout`, **então** executa `signOut()`, limpa o cookie e redireciona para `/admin/login`.
+- **Dado** sessão encerrada, **quando** tentar acessar rota protegida, **então** o acesso é negado e redireciona para o login (sessão invalidada server-side).
+
+**Regras de negócio:** —
+
+**Evidência (screenshot):**
+
+![Evidência de RF09 — F09](./img/f09-rf09.png)
+
+**Deploy:** _link a definir_
+
+</TabItem>
+<TabItem value="rnf01" label="RNF01">
+
+#### RNF01 — Isolamento de acesso administrativo
+
+**Classificação:** Segurança da Informação  
+**Descrição:** Área administrativa em endpoint distinto, acessível apenas mediante autenticação.
+
+**Evidência (screenshot):**
+
+![Evidência de RNF01 — F09](./img/f09-rnf01.png)
+
+**Verificação:** [Resultados V&V da IT1](/iteracoes/iteracao-1/vv)
+
+</TabItem>
+<TabItem value="rnf03" label="RNF03">
+
+#### RNF03 — Tempo de resposta da área administrativa
+
+**Classificação:** Eficiência  
+**Descrição:** Operações de leitura no painel em ≤ 2s em 95% das requisições.
+
+**Evidência (screenshot):**
+
+![Evidência de RNF03 — F09](./img/f09-rnf03.png)
+
+**Verificação:** [Resultados V&V da IT1](/iteracoes/iteracao-1/vv)
+
+</TabItem>
+<TabItem value="rnf08" label="RNF08">
+
+#### RNF08 — Criptografia de credenciais
+
+**Classificação:** Segurança da Informação  
+**Descrição:** Senhas com hash Argon2id/bcrypt, salt individual e custo ≥ 12.
+
+**Evidência (screenshot):**
+
+![Evidência de RNF08 — F09](./img/f09-rnf08.png)
+
+**Verificação:** [Resultados V&V da IT1](/iteracoes/iteracao-1/vv)
+
+</TabItem>
+<TabItem value="dor" label="DoR">
+
+## Definition of Ready — Evidências
+
+Checklist do DoR aplicado à F09 antes de entrar em execução. Todos os itens foram atendidos conforme o critério definido em [DoR e DoD](/visao/dor-dod).
+
+| Critério DoR | Status | Evidência |
+| ------------ | ------ | --------- |
+| Título no padrão FDD `<ação> <resultado> <de/para/no/com> <objeto>` | ✅ | [Issue #54](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/54) — título conforme o padrão |
+| Critérios de aceite escritos e verificáveis (Given/When/Then) | ✅ | Ver abas RF/RNF desta página — todos os cenários BDD documentados |
+| Estimativa registrada: VB, CX e IP calculados | ✅ | [Priorização do Backlog](/backlog/priorizacao) — coluna IP da tabela de features |
+| Dependências identificadas; bloqueantes resolvidos | ✅ | [Mapa de Dependências — IT1](/backlog/dependencias#it1) — bloqueantes verificados antes do início |
+| Class Owner designado e linkada à Feature parent e à CP de origem | ✅ | [Issue #54](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/54) — assignees e labels de CP/Feature registrados |
+| Protótipo revisado pelo cliente | ✅ | [Protótipo de Alta Fidelidade — IT1](/iteracoes/iteracao-1/evidencias/prototipo) |
+| Technical Design Review (TDR) concluída | ✅ | [Design Técnico IT1](/iteracoes/iteracao-1/evidencias/design-tecnico) — diagramas leves e feature cards elaborados |
+| Ao menos um critério de segurança ou usabilidade identificado | ✅ | Ver aba RNF desta página |
+
+</TabItem>
+<TabItem value="dod" label="DoD">
+
+## Definition of Done — Evidências
+
+Checklist do DoD verificado ao encerrar a F09. Todos os itens foram atendidos antes de mover a issue para Done no Kanban.
+
+| Critério DoD | Status | Evidência |
+| ------------ | ------ | --------- |
+| Critérios de aceite validados (BDD cobertos) | ✅ | [Issue #54](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/54) — evidências anexadas na descrição da issue |
+| Testes automatizados passando (unitários + integração) | ✅ | [Issue #54](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/54) — evidências anexadas na descrição da issue |
+| Lint sem erros e formatação OK (ESLint + Prettier) | ✅ | [Issue #54](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/54) — evidências anexadas na descrição da issue |
+| CI verde (build + testes + lint) | ✅ | [Issue #54](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/54) — evidências anexadas na descrição da issue |
+| PR aprovado por Chief Programmer ou Project Manager | ✅ | [Issue #54](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/54) — PR de resolução com approve registrado |
+| Migration de banco aplicada | ✅ | [Issue #54](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/54) — evidências anexadas na descrição da issue |
+| Sem vulnerabilidades críticas (SAST/linting de segurança) | ✅ | [Issue #54](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/54) — evidências anexadas na descrição da issue |
+| Validação parcial do cliente registrada | ✅ | [Validação Parcial IT1](/iteracoes/iteracao-1/validacao/partial) |
+| Validação Formal aprovada pelo cliente | ✅ | [Validação Formal IT1](/iteracoes/iteracao-1/validacao/formal) |
+| Rastreabilidade atualizada | ✅ | [V&V IT1 — V.01](/iteracoes/iteracao-1/vv#v01) — impacto em RNF08/F09 registrado |
+| Issue movida para Done no GitHub Projects | ✅ | [Issue #54](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/54) — fechada via merge do PR (`closes #N`) |
+
+</TabItem>
+</Tabs>

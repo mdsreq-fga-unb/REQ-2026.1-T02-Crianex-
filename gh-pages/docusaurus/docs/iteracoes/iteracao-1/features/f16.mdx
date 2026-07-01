@@ -1,0 +1,181 @@
+---
+title: F16 — Gerenciar artigos de FAQ
+sidebar_label: "F16 · Gerenciar artigos de FAQ"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# F16 — Gerenciar artigos de FAQ
+
+<span className="badge badge--green">IT1</span> · Rastreabilidade: [F16](/backlog/requisitos#f16) · [CP6](/visao/solucao#cp6) · [OE2](/visao/solucao#oe2)
+
+**Issue da Feature (GitHub):** [#59 — abrir no GitHub](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/59)
+
+:::note[Acesso para avaliação]
+Esta funcionalidade exige **login de administrador**. Credenciais para o professor: **e-mail** `a definir` · **senha** `a definir`.
+:::
+
+## Requisitos (evidências)
+
+Selecione um requisito na navegação abaixo. Cada um traz seus critérios de aceite, regras de negócio e um espaço para o **screenshot da funcionalidade em funcionamento** (substitua a imagem de placeholder pela captura real).
+
+<Tabs queryString="tab">
+<TabItem value="rf28" label="RF28">
+
+#### RF28 — Cadastrar artigo de FAQ
+
+**Critérios de aceite (BDD)**
+
+- **Dado** admin autenticado com dados válidos (PT e EN), **quando** cadastrar artigo, **então** é persistido com `published = false` por padrão.
+- **Dado** campos obrigatórios vazios, **quando** submeter, **então** a validação impede a criação.
+- **Dado** agente externo sem token, **quando** INSERT/UPDATE direto no Supabase, **então** o RLS bloqueia com 403.
+
+**Regras de negócio:** [RN16](/backlog/requisitos#rns) — Publicação explícita de conteúdo (artigo nasce `published = false` por padrão)
+
+**Evidência (screenshot):**
+
+![Evidência de RF28 — F16](./img/f16-rf28.png)
+
+**Deploy:** _link a definir_
+
+</TabItem>
+<TabItem value="rf29" label="RF29">
+
+#### RF29 — Editar artigo de FAQ
+
+**Critérios de aceite (BDD)**
+
+- **Dado** admin autenticado, **quando** editar artigo, **então** PATCH `/admin/faq/articles/:id` atualiza o conteúdo.
+- **Dado** campos inválidos, **quando** submeter, **então** a validação impede e mantém a versão anterior.
+- **Dado** artigo inexistente, **quando** editar, **então** retorna 404 sem efeito.
+
+**Regras de negócio:** —
+
+**Evidência (screenshot):**
+
+![Evidência de RF29 — F16](./img/f16-rf29.png)
+
+**Deploy:** _link a definir_
+
+</TabItem>
+<TabItem value="rf30" label="RF30">
+
+#### RF30 — Remover artigo de FAQ
+
+**Critérios de aceite (BDD)**
+
+- **Dado** admin autenticado, **quando** remover artigo, **então** DELETE `/admin/faq/articles/:id` o exclui.
+- **Dado** remoção, **quando** acionada, **então** exige confirmação antes de excluir.
+- **Dado** artigo inexistente, **quando** remover, **então** retorna 404 sem efeito.
+
+**Regras de negócio:** —
+
+**Evidência (screenshot):**
+
+![Evidência de RF30 — F16](./img/f16-rf30.png)
+
+**Deploy:** _link a definir_
+
+</TabItem>
+<TabItem value="rf31" label="RF31">
+
+#### RF31 — Categorizar artigo de FAQ
+
+**Critérios de aceite (BDD)**
+
+- **Dado** admin autenticado, **quando** categorizar artigo, **então** a categoria é associada via modal dedicado.
+- **Dado** categoria vinculada a um produto, **quando** associada ao artigo, **então** a relação é persistida corretamente.
+- **Dado** artigo sem categoria, **quando** salvo, **então** recebe tratamento padrão sem quebrar a listagem.
+
+**Regras de negócio:** [RN23](/backlog/requisitos#rns) — Categorização vinculada a produto (categorias de FAQ organizam os artigos por produto)
+
+**Evidência (screenshot):**
+
+![Evidência de RF31 — F16](./img/f16-rf31.png)
+
+**Deploy:** _link a definir_
+
+</TabItem>
+<TabItem value="rnf01" label="RNF01">
+
+#### RNF01 — Isolamento de acesso administrativo
+
+**Classificação:** Segurança da Informação  
+**Descrição:** Área administrativa em endpoint distinto, acessível apenas mediante autenticação.
+
+**Evidência (screenshot):**
+
+![Evidência de RNF01 — F16](./img/f16-rnf01.png)
+
+**Verificação:** [Resultados V&V da IT1](/iteracoes/iteracao-1/vv)
+
+</TabItem>
+<TabItem value="rnf04" label="RNF04">
+
+#### RNF04 — Renderização server-side da vitrine
+
+**Classificação:** Eficiência  
+**Descrição:** Páginas públicas renderizadas via SSR para indexação completa.
+
+**Evidência (screenshot):**
+
+![Evidência de RNF04 — F16](./img/f16-rnf04.png)
+
+**Verificação:** [Resultados V&V da IT1](/iteracoes/iteracao-1/vv)
+
+</TabItem>
+<TabItem value="rnf05" label="RNF05">
+
+#### RNF05 — Otimização para mecanismos de busca (SEO)
+
+**Classificação:** Usabilidade  
+**Descrição:** Metadados semânticos, sitemap.xml, robots.txt e Open Graph.
+
+**Evidência (screenshot):**
+
+![Evidência de RNF05 — F16](./img/f16-rnf05.png)
+
+**Verificação:** [Resultados V&V da IT1](/iteracoes/iteracao-1/vv)
+
+</TabItem>
+<TabItem value="dor" label="DoR">
+
+## Definition of Ready — Evidências
+
+Checklist do DoR aplicado à F16 antes de entrar em execução. Todos os itens foram atendidos conforme o critério definido em [DoR e DoD](/visao/dor-dod).
+
+| Critério DoR | Status | Evidência |
+| ------------ | ------ | --------- |
+| Título no padrão FDD `<ação> <resultado> <de/para/no/com> <objeto>` | ✅ | [Issue #59](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/59) — título conforme o padrão |
+| Critérios de aceite escritos e verificáveis (Given/When/Then) | ✅ | Ver abas RF/RNF desta página — todos os cenários BDD documentados |
+| Estimativa registrada: VB, CX e IP calculados | ✅ | [Priorização do Backlog](/backlog/priorizacao) — coluna IP da tabela de features |
+| Dependências identificadas; bloqueantes resolvidos | ✅ | [Mapa de Dependências — IT1](/backlog/dependencias#it1) — bloqueantes verificados antes do início |
+| Class Owner designado e linkada à Feature parent e à CP de origem | ✅ | [Issue #59](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/59) — assignees e labels de CP/Feature registrados |
+| Protótipo revisado pelo cliente | ✅ | [Protótipo de Alta Fidelidade — IT1](/iteracoes/iteracao-1/evidencias/prototipo) |
+| Technical Design Review (TDR) concluída | ✅ | [Design Técnico IT1](/iteracoes/iteracao-1/evidencias/design-tecnico) — diagramas leves e feature cards elaborados |
+| Ao menos um critério de segurança ou usabilidade identificado | ✅ | Ver aba RNF desta página |
+
+</TabItem>
+<TabItem value="dod" label="DoD">
+
+## Definition of Done — Evidências
+
+Checklist do DoD verificado ao encerrar a F16. Todos os itens foram atendidos antes de mover a issue para Done no Kanban.
+
+| Critério DoD | Status | Evidência |
+| ------------ | ------ | --------- |
+| Critérios de aceite validados (BDD cobertos) | ✅ | [Issue #59](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/59) — evidências anexadas na descrição da issue |
+| Testes automatizados passando (unitários + integração) | ✅ | [Issue #59](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/59) — evidências anexadas na descrição da issue |
+| Lint sem erros e formatação OK (ESLint + Prettier) | ✅ | [Issue #59](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/59) — evidências anexadas na descrição da issue |
+| CI verde (build + testes + lint) | ✅ | [Issue #59](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/59) — evidências anexadas na descrição da issue |
+| PR aprovado por Chief Programmer ou Project Manager | ✅ | [Issue #59](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/59) — PR de resolução com approve registrado |
+| Migration de banco aplicada | ✅ | [Issue #59](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/59) — evidências anexadas na descrição da issue |
+| Sem vulnerabilidades críticas (SAST/linting de segurança) | ✅ | [Issue #59](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/59) — evidências anexadas na descrição da issue |
+| Validação parcial do cliente registrada | ✅ | [Validação Parcial IT1](/iteracoes/iteracao-1/validacao/partial) |
+| Validação Formal aprovada pelo cliente | ✅ | [Validação Formal IT1](/iteracoes/iteracao-1/validacao/formal) |
+| Rastreabilidade atualizada | ✅ | [Tabela de Requisitos](/backlog/requisitos) — RF/RNF vinculados |
+| Issue movida para Done no GitHub Projects | ✅ | [Issue #59](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/59) — fechada via merge do PR (`closes #N`) |
+
+</TabItem>
+</Tabs>

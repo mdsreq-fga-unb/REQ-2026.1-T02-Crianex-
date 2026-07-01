@@ -1,0 +1,78 @@
+# Reunião — 14/06/2026
+
+**Data:** 14 de junho de 2026  
+**Horário:** 23h47  
+**Duração:** 16 minutos e 5 segundos  
+**Local:** Google Meet  
+**Assunto:** Artifact Closure — Fechamento dos Artefatos da Unidade 3
+
+---
+
+## Participantes
+
+| Nome          | Papel                                                            | Status   |
+| ------------- | ---------------------------------------------------------------- | -------- |
+| Lucas Zanetti | Project Manager · Chief Architect · Development Manager (Backup) | Presente |
+| Philipe       | Chief Programmer · Class Owner                                   | Presente |
+| Heitor        | Development Manager · Class Owner                                | Presente |
+| Hugo          | Class Owner                                                      | Presente |
+
+---
+
+## Pauta
+
+1. Revisão das entregas e correções com base no feedback do professor (Rastreabilidade, FDD)
+2. Avaliação dos feedbacks do cliente e mapeamento de débitos técnicos para a IT2
+3. Validação do status de prontidão e checklist final para submissão acadêmica
+
+---
+
+## Discussões e Decisões
+
+### 1. Engenharia de Requisitos e Rastreabilidade (FDD)
+
+O grupo revisou o escopo das features e requisitos com base nas diretrizes do FDD e nos apontamentos do docente:
+
+- **Logs e Monitoramento:** Divididos em duas features distintas, com 2 RFs cada uma.
+- **Filtragem:** Feature exclusiva de filtragem descontinuada. O requisito de filtragem de indicadores foi redistribuído entre F3 e F4; o de artigos FAQ foi realocado para a feature correspondente.
+- **Novos RFs identificados durante a IT1:**
+  - Permissão para editar o próprio perfil pelo painel administrativo.
+  - Dois RFs de conformidade LGPD: página institucional de termos e consentimento de cookies no formulário de contato.
+  - Consulta detalhada de produtos SaaS em F15 (antes continha apenas critérios não-funcionais e de design).
+- **CRM e Notificações:** Informações operacionais do CRM integradas à F19. O mapeamento de interações comerciais originou 3 RFs; o módulo de notificações foi desmembrado em múltiplos RFs específicos.
+
+### 2. Regras de Negócio (RNs)
+
+Documentadas por Hugo e mantidas separadas dos RFs, pois o grupo não recebeu instruções formais sobre como vinculá-las ao modelo atual.
+
+### 3. Correção de Abordagem de Priorização
+
+Priorização corrigida de _bottom-up_ para _top-down_, atendendo ao apontamento do professor. Restam aproximadamente 4 ou 5 features prioritárias a desenvolver, além de uma funcionalidade extra avaliada como de alto valor técnico.
+
+### 4. Checklist da Entrega — Plataforma Aprender
+
+| Item                        | Status                                                                          |
+| --------------------------- | ------------------------------------------------------------------------------- |
+| PBB e BDD                   | <span className="badge badge--green">Confirmado</span> Professor não irá avaliar nestas metodologias nesta entrega |
+| DoR / DoD                   | <span className="badge badge--yellow">Atenção</span> Necessitam pequenos ajustes pela integrante Camille                          |
+| GitHub Pages (documentação) | <span className="badge badge--yellow">Atenção</span> Atualizar com novos diagramas de sequência simplificados da IT2              |
+
+---
+
+## Encaminhamentos
+
+| #   | Tarefa                                                                 | Responsável | Prazo      |
+| --- | ---------------------------------------------------------------------- | ----------- | ---------- |
+| 1   | Ajustar DoR / DoD conforme observações do grupo de verificação cruzada | Camille     | 15/06/2026 |
+| 2   | Publicar diagramas de sequência simplificados da IT2 no GitHub Pages   | Equipe      | 15/06/2026 |
+| 3   | Confirmar submissão dos artefatos na plataforma Aprender               | Lucas       | 15/06/2026 |
+
+---
+
+## Gravação da Reunião
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/d6RymiTNRKE" title="Artifact Closure — Unidade 3" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+
+---
+
+_Ata redigida para registro e consulta dos membros da equipe._

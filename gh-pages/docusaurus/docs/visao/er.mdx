@@ -1,0 +1,147 @@
+---
+title: Engenharia de Requisitos
+sidebar_label: Eng. de Requisitos
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import RevisionHistory from '@site/src/components/RevisionHistory';
+import FddStagesFlow from '@site/src/components/FddStagesFlow';
+
+# 4 · Engenharia de Requisitos
+
+:::tip[ER conduz, FDD executa]
+A **Engenharia de Requisitos** define _o quê_ — as seis atividades canônicas abaixo. O **FDD + Kanban** define _o como_ — a camada de execução descrita em [ER e FDD](#er-e-fdd).
+:::
+
+## Atividades e Técnicas
+
+<Tabs>
+<TabItem value="elicitacao" label="Elicitação e Descoberta">
+
+| Técnica | Como é utilizada |
+| ------- | ---------------- |
+| **Color Modeling** | Workshop visual com o Domain Expert (Otávio) para identificar classes, papéis, eventos e agregados do domínio |
+| **Feature Discovery Session** | Sessão dedicada que transforma necessidades de negócio brutas em candidatas a feature |
+
+</TabItem>
+<TabItem value="analise" label="Análise e Consenso">
+
+| Técnica | Como é utilizada |
+| ------- | ---------------- |
+| **Vertical Slicing** | Toda feature é decomposta em fatias UI → API → dado, nunca em camadas técnicas isoladas |
+| **INVEST** | Checklist de entrada no backlog: Independente, Negociável, Valiosa, Estimável, Pequena, Testável |
+| **Matriz Valor × Esforço** | Features posicionadas em quadrantes de valor e esforço |
+| **Priorização IP = VB / PT** | `PT = (CX + ES) / 2`, escala 1–5; IP ≥ 1,50 alta · 1,00–1,49 média · < 1,00 baixa |
+| **Iteration Goal Statement** | Frase única, demonstrável e orientada a valor, acordada no Commitment |
+
+</TabItem>
+<TabItem value="declaracao" label="Declaração">
+
+| Técnica | Como é utilizada |
+| ------- | ---------------- |
+| **Feature Card Specification** | Formato fixo `<ação> <resultado> <objeto>` — ex.: "Cadastrar produto SaaS para o portfólio" |
+| **Critérios de aceite BDD** | Cada feature/issue tem critérios **Dado / Quando / Então** (parte do DoR) |
+
+</TabItem>
+<TabItem value="representacao" label="Representação">
+
+| Técnica | Como é utilizada |
+| ------- | ---------------- |
+| **Diagrama de domínio** | Classes do domínio (Color Modeling): entidades, relacionamentos e regras centrais |
+| **Glossário de termos** | Vocabulário de negócio compartilhado pela equipe e pelo cliente |
+| **Feature Cards (Miro)** | Cada feature aprovada vira card visual, rastreável até RFs/RNFs |
+| **Prototipagem** | Mockup das telas com impacto de UI, validado antes da codificação |
+
+</TabItem>
+<TabItem value="vv" label="Verificação e Validação">
+
+| Técnica | Como é utilizada |
+| ------- | ---------------- |
+| **Definition of Ready** | Gate de **entrada**: requisito claro, completo e testável ([DoR/DoD](dor-dod)) |
+| **Definition of Done** | Gate de **saída**: requisito efetivamente atendido |
+| **Inspeção do requisito** | Revisão da qualidade do requisito e dos critérios de aceite — técnica central da cerimônia de **Refinamento de Requisitos** |
+| **Análise de rastreabilidade** | Auditoria da matriz OE → CP → Feature → RF/RNF → Issue para verificar cobertura, consistência e ausência de órfãos — aplicada no **Refinamento de Requisitos** |
+| **Verificação de critérios** | Conferência item a item dos critérios BDD vs. comportamento implementado |
+| **Validação assíncrona** | Vídeo/screenshots + checklist enviados a Otávio via WhatsApp em até 24h |
+| **Demo orientada a valor** | Demonstração na Formal Client Validation narrada pelo Iteration Goal |
+
+</TabItem>
+<TabItem value="organizacao" label="Organização e Atualização">
+
+| Técnica | Como é utilizada |
+| ------- | ---------------- |
+| **Backlog macro priorizado** | Lista de features ordenada por IP, revisada a cada replenishment |
+| **Requirements Traceability Matrix** | Tabela viva OE → CP → Feature → RF/RNF ([rastreabilidade](/backlog/rastreabilidade)) |
+| **Backlog Reorganization** | Reordenação a partir do feedback da Formal Client Validation |
+| **Checklist de empacotamento** | Verificação na Iteration Artifact Closure de todos os artefatos entregues |
+
+</TabItem>
+</Tabs>
+
+## ER e FDD {#er-e-fdd}
+
+O FDD + Kanban operacionaliza as atividades acima em **5 etapas**: as três primeiras executadas **uma única vez** (fundação do produto); as duas últimas **repetidas a cada iteração**.
+
+<Tabs>
+<TabItem value="unicas" label="Etapas Únicas (início do projeto)">
+
+| Etapa FDD | Cerimônia | Atividade de ER | Artefatos |
+| --------- | --------- | --------------- | --------- |
+| **1 · Develop an Overall Model** | Domain Modeling Workshop | Elicitação · Representação | Diagrama de domínio, glossário |
+| **2 · Build a Feature List** | Feature Discovery Session | Elicitação · Declaração · Representação · Análise | Feature Cards, ata |
+| **3 · Plan by Feature** | Iteration Replenishment (macro) | Análise · Organização | Backlog priorizado, roadmap, Feature Matrix |
+
+</TabItem>
+<TabItem value="iterativas" label="Etapas Iterativas (por iteração)">
+
+| Etapa FDD | Cerimônia | Atividade de ER | Artefatos |
+| --------- | --------- | --------------- | --------- |
+| **4 · Design by Feature** | Replenishment Micro + Commitment | Análise | Backlog da iteração, Iteration Goal |
+| | Technical Design Review | Declaração · V&V (DoR) | Issues com critérios; notas de design |
+| **5 · Build by Feature** | Kanban Pull Execution | execução (WIP ≤ 2) | Board, commits, PRs |
+| | Feature Build Consolidation | Organização · V&V | Rastreabilidade atualizada |
+| | Refinamento de Requisitos | V&V (análise de rastreabilidade · inspeção) | Requisitos refinados, matriz de rastreabilidade revisada, ata |
+| | Partial Client Validation | V&V | Validação assíncrona na issue |
+| | Formal Client Validation | V&V | Ata da demo, aprovação de Otávio |
+| | Iteration Artifact Closure | Organização | GitHub Pages atualizado, backlog congelado |
+
+</TabItem>
+</Tabs>
+
+<FddStagesFlow />
+
+<p style={{textAlign: 'center', fontSize: '0.82rem', color: 'var(--ifm-color-emphasis-700)', marginTop: '-0.5rem'}}>
+  <span style={{color: '#1565c0', fontWeight: 700}}>■</span> Etapas 1–3 (únicas) · <span style={{color: '#2e7d32', fontWeight: 700}}>■</span> Etapas 4–5 (iterativas, com loop por iteração)
+</p>
+
+## Artefatos de Engenharia de Software
+
+:::note[Separação ER × ESw]
+Os artefatos abaixo descrevem e verificam a _solução técnica_, não o requisito. São produzidos na Technical Design Review e na Build by Feature — não constituem atividades de Engenharia de Requisitos.
+:::
+
+| Artefato de ESw | Natureza | Onde é produzido | Evidência |
+| --------------- | -------- | ---------------- | --------- |
+| Diagrama de Arquitetura do Sistema | Representação da arquitetura | Develop an Overall Model (Etapa 1) | [Arquitetura](/arquitetura/#diagrama) |
+| Estrutura de módulos do backend | Design arquitetural | Develop an Overall Model (Etapa 1) | [Arquitetura](/arquitetura/#6-estrutura-de-módulos-do-backend) |
+| ADR — Architecture Decision Record | Decisão arquitetural registrada | Plan by Feature (Etapa 3) | [ADR-001](/arquitetura/#adr-001) |
+| Diagrama de sequência (leve e formal) | Representação da solução técnica | Technical Design Review (Etapa 4) | [Design Técnico](/iteracoes/iteracao-1/evidencias/design-tecnico#feature-cards) |
+| Análise de impacto e pontos de extensão | Design técnico | Technical Design Review (Etapa 4) | [Design Técnico](/iteracoes/iteracao-1/evidencias/design-tecnico) |
+| Notas de design técnico por feature | Design técnico | Technical Design Review (Etapa 4) | [Design Técnico](/iteracoes/iteracao-1/evidencias/design-tecnico) |
+| Smoke test end-to-end | Verificação da implementação | Feature Build Consolidation (Etapa 5) | [Resultados V&V](/iteracoes/iteracao-1/vv) |
+
+> Todos os artefatos de evidência estão centralizados na página de [Evidências](/iteracoes/).
+
+<RevisionHistory
+  headers={['Versão', 'Data', 'Descrição', 'Autor(es)']}
+  rows={[
+    ['1.0', '12/04/2026', 'Criação das seções 4.1 a 4.4', 'Heitor e Lucas'],
+    ['1.7', '18/05/2026', 'Separação entre etapas únicas e iterativas do FDD', 'Lucas A. Zanetti'],
+    ['1.9', '17/06/2026', 'Reestruturação ER-primeiro: atividades de ER promovidas a nível principal', 'Heitor'],
+    ['1.10', '17/06/2026', 'Separação ER × ESw; V&V reforçada com DoR, DoD e inspeção', 'Heitor'],
+    ['1.11', '18/06/2026', 'Técnicas enriquecidas com formato/especificação de uso', 'Heitor'],
+    ['2.0', '26/06/2026', 'Migração para Docusaurus: atividades de ER em tabs; tabelas compactadas', 'Equipe Crianex'],
+    ['2.1', '28/06/2026', 'Cerimônia de Refinamento de Requisitos (V&V) adicionada às etapas iterativas; técnica de Análise de rastreabilidade incluída em V&V', 'Equipe Crianex'],
+  ]}
+/>

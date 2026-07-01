@@ -1,0 +1,107 @@
+---
+title: Equipe e Interação
+sidebar_label: Equipe e Iteração
+---
+
+import TeamMembers from '@site/src/components/TeamMembers';
+
+# 6. Interação Equipe-Cliente
+
+## 6.1 Composição da Equipe
+
+Os papéis seguem o modelo **FDD + Kanban**. Cada integrante pode acumular papéis; as responsabilidades permanecem individuais e rastreáveis. **Passe o mouse (ou toque) em cada membro** para ver papel, responsabilidades e disponibilidade.
+
+<TeamMembers />
+
+**Papéis rotativos por iteração**
+
+| Papel | Responsabilidade |
+| ----- | ---------------- |
+| **Facilitador Metodológico** | Conduz cerimônias semanais; garante adesão ao processo; sinaliza desvios na retrospectiva |
+| **Responsável por Validação** | Coordena Partial e Formal Client Validation com Otávio; prepara checklists e materiais de demo; documenta aprovações nas issues |
+
+## 6.2 Estrutura de Comunicação
+
+Cada ferramenta tem **escopo exclusivo** — o que vai para o Miro não vai para o Discord. Isso evita decisões tomadas no canal errado e mantém rastreabilidade.
+
+<div className="crianex-tools">
+  <div className="crianex-tool">
+    <div className="crianex-tool__logo"><img src="https://cdn.simpleicons.org/miro/FFD02F" alt="Miro" /></div>
+    <div>
+      <div className="crianex-tool__tipo">Assíncrono + Síncrono</div>
+      <div className="crianex-tool__name">Miro</div>
+      <p className="crianex-tool__desc">Roadmap, backlog macro, Feature Cards, Iteration Goal, modelo de domínio, atas e lições aprendidas. <em>Não</em> para acompanhamento de issues.</p>
+    </div>
+  </div>
+  <div className="crianex-tool">
+    <div className="crianex-tool__logo"><img src="https://cdn.simpleicons.org/github/181717" alt="GitHub Projects" /></div>
+    <div>
+      <div className="crianex-tool__tipo">Assíncrono</div>
+      <div className="crianex-tool__name">GitHub Projects (Kanban)</div>
+      <p className="crianex-tool__desc">Issues fluindo de Backlog → Done com WIP limit visível. <em>Não</em> para cerimônias ou alinhamento estratégico.</p>
+    </div>
+  </div>
+  <div className="crianex-tool">
+    <div className="crianex-tool__logo"><img src="https://cdn.simpleicons.org/github/181717" alt="GitHub" /></div>
+    <div>
+      <div className="crianex-tool__tipo">Assíncrono</div>
+      <div className="crianex-tool__name">GitHub (repositório)</div>
+      <p className="crianex-tool__desc">Código-fonte, Pull Requests, code review, CI/CD e evidências de execução.</p>
+    </div>
+  </div>
+  <div className="crianex-tool">
+    <div className="crianex-tool__logo"><img src="https://cdn.simpleicons.org/readthedocs/8CA1AF" alt="GitHub Pages" /></div>
+    <div>
+      <div className="crianex-tool__tipo">Assíncrono</div>
+      <div className="crianex-tool__name">GitHub Pages (docs)</div>
+      <p className="crianex-tool__desc">Documento de Visão, rastreabilidade OE → CP → Feature e artefatos formais. <em>Não</em> para operação diária.</p>
+    </div>
+  </div>
+  <div className="crianex-tool">
+    <div className="crianex-tool__logo"><img src="https://cdn.simpleicons.org/discord/5865F2" alt="Discord" /></div>
+    <div>
+      <div className="crianex-tool__tipo">Assíncrono + Síncrono</div>
+      <div className="crianex-tool__name">Discord</div>
+      <p className="crianex-tool__desc">Comunicação da semana, reuniões da equipe, dúvidas técnicas e Midweek Sync ("Ontem fiz / Hoje farei / Bloqueios").</p>
+    </div>
+  </div>
+  <div className="crianex-tool">
+    <div className="crianex-tool__logo"><img src="https://cdn.simpleicons.org/whatsapp/25D366" alt="WhatsApp" /></div>
+    <div>
+      <div className="crianex-tool__tipo">Assíncrono</div>
+      <div className="crianex-tool__name">WhatsApp</div>
+      <p className="crianex-tool__desc">Canal direto com Otávio para validações parciais e alinhamentos urgentes.</p>
+    </div>
+  </div>
+  <div className="crianex-tool">
+    <div className="crianex-tool__logo"><img src="https://cdn.simpleicons.org/googlemeet/00897B" alt="Google Meet" /></div>
+    <div>
+      <div className="crianex-tool__tipo">Síncrono</div>
+      <div className="crianex-tool__name">Google Meet</div>
+      <p className="crianex-tool__desc">Reuniões formais com o cliente.</p>
+    </div>
+  </div>
+</div>
+
+### Links das Ferramentas
+
+| Ferramenta | Link |
+| ---------- | ---- |
+| **Miro** (board principal) | [Acessar board](https://miro.com/app/board/uXjVGl991V0=/?share_link_id=878597873452) |
+| **GitHub Projects (Kanban)** | [Acessar board](https://github.com/orgs/mdsreq-fga-unb/projects/96) |
+
+> A **cadência de cerimônias** (única e iterativa) e o detalhamento semanal estão em **[Cadência de Cerimônias](/visao/cadencia)**.
+
+<details className="crianex-revisions">
+<summary>Histórico de Revisão</summary>
+<div className="crianex-revisions__body">
+
+| Versão | Data | Descrição | Autor(es) |
+| ------ | ---- | --------- | --------- |
+| 1.0 | 11/04/2026 | Criação das seções 6.1 a 6.6 | Lucas A. Zanetti |
+| 1.4 | 06/06/2026 | Separação de cerimônias únicas e iterativas | Lucas A. Zanetti |
+| 1.5 | 15/06/2026 | Correção de sintaxe nas tabelas | Heitor Macedo Ricardo |
+| 2.0 | 26/06/2026 | Migração Docusaurus: membros em cards com popover; ferramentas com logos; cadência movida para página própria | Equipe Crianex |
+
+</div>
+</details>

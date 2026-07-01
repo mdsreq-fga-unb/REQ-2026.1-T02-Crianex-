@@ -8,6 +8,7 @@ import { faqRouter, faqPublicRouter } from '../faq/faq.routes.js';
 import { profileRouter } from '../profile/profile.routes.js';
 import { crmColumnsRouter } from '../crm/crm-columns.routes.js';
 import { crmClientsRouter } from '../crm/crm-clients.routes.js';
+import { notificationsRouter } from '../notifications/notifications.routes.js';
 
 export const router = Router();
 
@@ -22,3 +23,4 @@ router.use('/public/faq', faqPublicRouter);
 router.use('/profile', profileRouter);
 router.use('/admin/crm/columns', crmColumnsRouter);
 router.use('/crm/clients', crmClientsRouter);
+router.use('/admin/notifications', notificationsRouter);

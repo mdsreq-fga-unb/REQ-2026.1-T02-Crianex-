@@ -1,0 +1,132 @@
+---
+title: F10 — Permitir acesso ao painel administrativo
+sidebar_label: "F10 · Permitir acesso ao painel admini"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# F10 — Permitir acesso ao painel administrativo
+
+<span className="badge badge--green">IT1</span> · Rastreabilidade: [F10](/backlog/requisitos#f10) · [CP5](/visao/solucao#cp5) · [OE2](/visao/solucao#oe2)
+
+**Issue da Feature (GitHub):** [#57 — abrir no GitHub](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/57)
+
+:::note[Acesso para avaliação]
+Esta funcionalidade exige **login de administrador**. Credenciais para o professor: **e-mail** `a definir` · **senha** `a definir`.
+:::
+
+## Requisitos (evidências)
+
+Selecione um requisito na navegação abaixo. Cada um traz seus critérios de aceite, regras de negócio e um espaço para o **screenshot da funcionalidade em funcionamento** (substitua a imagem de placeholder pela captura real).
+
+<Tabs queryString="tab">
+<TabItem value="rf10" label="RF10">
+
+#### RF10 — Acessar painel administrativo
+
+**Critérios de aceite (BDD)**
+
+- **Dado** JWT válido com `role = owner`, **quando** GET `/admin/dashboard`, **então** o RLS filtra por `auth.uid()` e o painel é renderizado com acesso irrestrito.
+- **Dado** `member` com permissão de visualização (`v`) no módulo, **quando** acessar, **então** o conteúdo é renderizado; sem a permissão, o acesso é negado.
+- **Dado** JWT expirado, **quando** acesso ao painel, **então** tenta `refreshSession()`; se falhar, redireciona para `/admin/login`.
+- **Dado** token sem permissão, **quando** GET de rota admin, **então** retorna 401/403 e redireciona sem expor a estrutura.
+- **Dado** membro `status = inactive`, **quando** acessar rota protegida, **então** o acesso é bloqueado.
+
+**Regras de negócio:** [RN03](/backlog/requisitos#rns) — Controle de acesso modular por permissão (v/e/a) · [RN04](/backlog/requisitos#rns) — Owner com acesso irrestrito a todos os módulos · [RN05](/backlog/requisitos#rns) — Membro inativo bloqueado no painel
+
+**Evidência (screenshot):**
+
+![Evidência de RF10 — F10](./img/f10-rf10.png)
+
+**Deploy:** _link a definir_
+
+</TabItem>
+<TabItem value="rf48" label="RF48">
+
+#### RF48 — Editar próprio perfil no painel
+
+**Critérios de aceite (BDD)**
+
+- **Dado** admin autenticado, **quando** editar o próprio perfil, **então** PATCH `/profile/me` atualiza os dados sem reload.
+- **Dado** troca de senha, **quando** submeter em `/profile/me/password`, **então** exige validação de força e confirmação antes de persistir.
+- **Dado** dados inválidos (ex.: e-mail malformado), **quando** submeter, **então** a validação impede e nada é persistido.
+- **Dado** tentativa de editar perfil de outro usuário, **quando** a requisição chega, **então** o RLS permite apenas auto-edição (self-edit).
+
+**Regras de negócio:** [RN17](/backlog/requisitos#rns) — Autogestão do perfil próprio (cada usuário edita apenas os próprios dados, sem acessar perfis de terceiros)
+
+**Evidência (screenshot):**
+
+![Evidência de RF48 — F10](./img/f10-rf48.png)
+
+**Deploy:** _link a definir_
+
+</TabItem>
+<TabItem value="rnf01" label="RNF01">
+
+#### RNF01 — Isolamento de acesso administrativo
+
+**Classificação:** Segurança da Informação  
+**Descrição:** Área administrativa em endpoint distinto, acessível apenas mediante autenticação.
+
+**Evidência (screenshot):**
+
+![Evidência de RNF01 — F10](./img/f10-rnf01.png)
+
+**Verificação:** [Resultados V&V da IT1](/iteracoes/iteracao-1/vv)
+
+</TabItem>
+<TabItem value="rnf09" label="RNF09">
+
+#### RNF09 — Controle de acesso por linha (RLS)
+
+**Classificação:** Segurança da Informação  
+**Descrição:** Row Level Security restringindo leitura ao perfil autorizado.
+
+**Evidência (screenshot):**
+
+![Evidência de RNF09 — F10](./img/f10-rnf09.png)
+
+**Verificação:** [Resultados V&V da IT1](/iteracoes/iteracao-1/vv)
+
+</TabItem>
+<TabItem value="dor" label="DoR">
+
+## Definition of Ready — Evidências
+
+Checklist do DoR aplicado à F10 antes de entrar em execução. Todos os itens foram atendidos conforme o critério definido em [DoR e DoD](/visao/dor-dod).
+
+| Critério DoR | Status | Evidência |
+| ------------ | ------ | --------- |
+| Título no padrão FDD `<ação> <resultado> <de/para/no/com> <objeto>` | ✅ | [Issue #57](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/57) — título conforme o padrão |
+| Critérios de aceite escritos e verificáveis (Given/When/Then) | ✅ | Ver abas RF/RNF desta página — todos os cenários BDD documentados |
+| Estimativa registrada: VB, CX e IP calculados | ✅ | [Priorização do Backlog](/backlog/priorizacao) — coluna IP da tabela de features |
+| Dependências identificadas; bloqueantes resolvidos | ✅ | [Mapa de Dependências — IT1](/backlog/dependencias#it1) — bloqueantes verificados antes do início |
+| Class Owner designado e linkada à Feature parent e à CP de origem | ✅ | [Issue #57](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/57) — assignees e labels de CP/Feature registrados |
+| Protótipo revisado pelo cliente | ✅ | [Protótipo de Alta Fidelidade — IT1](/iteracoes/iteracao-1/evidencias/prototipo) |
+| Technical Design Review (TDR) concluída | ✅ | [Design Técnico IT1](/iteracoes/iteracao-1/evidencias/design-tecnico) — diagramas leves e feature cards elaborados |
+| Ao menos um critério de segurança ou usabilidade identificado | ✅ | Ver aba RNF desta página |
+
+</TabItem>
+<TabItem value="dod" label="DoD">
+
+## Definition of Done — Evidências
+
+Checklist do DoD verificado ao encerrar a F10. Todos os itens foram atendidos antes de mover a issue para Done no Kanban.
+
+| Critério DoD | Status | Evidência |
+| ------------ | ------ | --------- |
+| Critérios de aceite validados (BDD cobertos) | ✅ | [Issue #57](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/57) — evidências anexadas na descrição da issue |
+| Testes automatizados passando (unitários + integração) | ✅ | [Issue #57](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/57) — evidências anexadas na descrição da issue |
+| Lint sem erros e formatação OK (ESLint + Prettier) | ✅ | [Issue #57](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/57) — evidências anexadas na descrição da issue |
+| CI verde (build + testes + lint) | ✅ | [Issue #57](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/57) — evidências anexadas na descrição da issue |
+| PR aprovado por Chief Programmer ou Project Manager | ✅ | [Issue #57](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/57) — PR de resolução com approve registrado |
+| Migration de banco | — | Não aplicável para esta feature |
+| Sem vulnerabilidades críticas (SAST/linting de segurança) | ✅ | [Issue #57](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/57) — evidências anexadas na descrição da issue |
+| Validação parcial do cliente registrada | ✅ | [Validação Parcial IT1](/iteracoes/iteracao-1/validacao/partial) |
+| Validação Formal aprovada pelo cliente | ✅ | [Validação Formal IT1](/iteracoes/iteracao-1/validacao/formal) |
+| Rastreabilidade atualizada | ✅ | [V&V IT1 — ES.06](/iteracoes/iteracao-1/vv#es06) — RF48 adicionado à feature |
+| Issue movida para Done no GitHub Projects | ✅ | [Issue #57](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/57) — fechada via merge do PR (`closes #N`) |
+
+</TabItem>
+</Tabs>
