@@ -1,39 +1,54 @@
-# Reunião — 01/05/2026
+# Commitment + Kickoff FDD — 01/05/2026
 
-**Data:** 01 de Maio de 2026
-**Local:** Discord / Chamada de Vídeo com Compartilhamento de Tela
-**Assunto:** Alinhamento para Interação 2, Migração para FDD e Correção de Issues
+**Data:** 01 de Maio de 2026  
+**Local:** Discord / Chamada de Vídeo com Compartilhamento de Tela  
+**Assunto:** Alinhamento para IT1, Migração para FDD puro e Correção de Issues da Unidade 1
+
+---
+
+## Artefatos Relacionados
+
+| # | Artefato | Papel na Cerimônia | Link |
+|---|----------|--------------------|------|
+| 1 | Equipe e Papéis FDD | Gerado — redefinição formal dos papéis FDD | [Ver equipe →](/visao/equipe) |
+| 2 | Kanban (GitHub Projects) | Configurado — colunas `Backlog → Design → Build → Review → Done` | [Ver board →](https://github.com/orgs/mdsreq-fga-unb/projects/96) |
+| 3 | Cadência de Cerimônias | Definida — adoção do FDD puro, eliminando ritos Scrum | [Ver cadência →](/visao/cadencia) |
+| 4 | Estratégias e Processo | Referenciado — mudança de FDD+Scrumban para FDD+Kanban | [Ver estratégias →](/visao/estrategias) |
 
 ---
 
 ## Participantes
 
-| Nome          | Papel                                                           |
-| ------------- | --------------------------------------------------------------- |
-| Lucas Zanetti | Project Manager · Chief Architect · Development Manager(Backup) |
-| Camile        | Class Owner · Documentation Lead · Requirements Custodian       |
-| Leonardo      | Chief Programmer · Class Owner                                  |
-| Heitor        | Development Manager · Class Owner                               |
-| Philipe       | Chief Programmer · Class Owner                                  |
-| Hugo          | Class Owner                                                     |
-| Otávio        | Cliente / Domain Expert                                         |
+| Nome | Papel |
+|------|-------|
+| Lucas Zanetti | Project Manager · Chief Architect · Development Manager (Backup) |
+| Camile | Class Owner · Documentation Lead · Requirements Custodian |
+| Leonardo | Chief Programmer · Class Owner |
+| Heitor | Development Manager · Class Owner |
+| Philipe | Chief Programmer · Class Owner |
+| Hugo | Class Owner |
+| Otávio | Cliente / Domain Expert |
 
 ---
 
 ## Pauta
 
-1. Contextualização da Interação 2 e Prazos
+1. Contextualização da IT1 e Prazos
 2. Mudanças Metodológicas (Full FDD)
 3. Redefinição de Papéis da Equipe (FDD)
 4. Permissões e Acesso ao Repositório
 
 ---
 
+<details className="crianex-revisions">
+<summary>📋 Ata completa — Discussões, decisões e encaminhamentos</summary>
+<div className="crianex-revisions__body">
+
 ## Discussões e Decisões
 
-### 1. Contextualização da Interação 2 e Prazos
+### 1. Contextualização da IT1 e Prazos
 
-A Interação 2 correrá em paralelo com a Unidade 2 da disciplina, tendo um prazo curto com entrega final marcada para o dia **19/05/2026**. O cronograma passa a ser focado em Interações baseadas em Valores de Negócio (e objetivos específicos), dividindo-se em 4 pilares:
+A IT1 correrá em paralelo com a Unidade 2 da disciplina, tendo um prazo curto com entrega final marcada para o dia **19/05/2026**. O cronograma passa a ser focado em Iterações baseadas em Valores de Negócio (e objetivos específicos), dividindo-se em 4 pilares:
 
 - **Vitrine Pública:** Vitrine e portfólio.
 - **Núcleo Admin:** Parte de gestão.
@@ -52,14 +67,14 @@ O grupo identificou que o modelo anterior (FDD com Scrumban) estava, na prática
 
 ### 3. Redefinição de Papéis da Equipe (FDD)
 
-| Papel FDD               | Responsável                    | Atribuição no Contexto                                                                             |
-| ----------------------- | ------------------------------ | -------------------------------------------------------------------------------------------------- |
-| **Project Manager**     | Lucas Zanetti                  | Gestão geral e cronograma.                                                                         |
-| **Chief Architect**     | Lucas + Camile                 | Decisões técnicas e documentação/visão.                                                            |
-| **Development Manager** | Leonardo + Lucas               | Coordenar progresso técnico. Lucas apoiará para evitar bloqueios em caso de sobrecarga de membros. |
-| **Chief Programmer**    | Heitor + Philipe + Hugo        | Liderar o design e a construção das features.                                                      |
-| **Class Owner**         | Hugo, Camile, Leonardo, Heitor | Desenvolvimento e responsabilidade sobre módulos/classes específicas (Atuação Full Stack).         |
-| **Domain Expert**       | Otávio                         | Validar regras de negócio e funcionalidades.                                                       |
+| Papel FDD | Responsável | Atribuição no Contexto |
+|-----------|-------------|------------------------|
+| **Project Manager** | Lucas Zanetti | Gestão geral e cronograma. |
+| **Chief Architect** | Lucas + Camile | Decisões técnicas e documentação/visão. |
+| **Development Manager** | Leonardo + Lucas | Coordenar progresso técnico. Lucas apoiará para evitar bloqueios em caso de sobrecarga de membros. |
+| **Chief Programmer** | Heitor + Philipe + Hugo | Liderar o design e a construção das features. |
+| **Class Owner** | Hugo, Camile, Leonardo, Heitor | Desenvolvimento e responsabilidade sobre módulos/classes específicas (Atuação Full Stack). |
+| **Domain Expert** | Otávio | Validar regras de negócio e funcionalidades. |
 
 ### 4. Permissões e Acesso ao Repositório
 
@@ -73,45 +88,53 @@ Foi identificado que o integrante **Philipe** não está conseguindo ser marcado
 
 As issues concluídas **não devem ser fechadas pelos alunos**. Deve-se apenas comentar "Issue realizada", referenciar a branch correspondente e aguardar o fechamento por parte do monitor/professor.
 
-| #   | Tarefa / Issue                                                                                                                                                                         | Responsável               | Prazo                                    |
-| --- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- | ---------------------------------------- |
-| 1   | **Issue Foto de Perfil:** Adicionar imagens PNG/JPEG diretamente na pasta do Git Pages (Leonardo e Camile sem foto)                                                                    | Leonardo e Camile         | 05/05/2026                               |
-| 2   | **Issue Estrutura do Git Pages:** Reduzir a segmentação excessiva de tópicos e links                                                                                                   | Lucas                     | 05/05/2026                               |
-| 3   | **Issue Transição Metodológica:** Adequar a documentação de comunicação, cerimônias e processos ao FDD                                                                                 | Lucas e Leonardo          | 05/05/2026                               |
-| 4   | **Issue Papéis da Equipe:** Atualizar os papéis conforme a nova estrutura FDD                                                                                                          | Lucas                     | 05/05/2026                               |
-| 5   | **Issue Cronograma FDD:** Remodelar o cronograma para o formato de Interações                                                                                                          | Lucas e Heitor            | 05/05/2026                               |
-| 6   | **Issue Alinhamento de Requisitos:** Corrigir nomenclaturas erradas, processos e retirar técnicas onde não deve conter                                                                 | Heitor e Hugo             | 05/05/2026                               |
-| 7   | **Issue Abordagem de Eng. de Requisitos (4.1):** Retirar a ferramenta MoSCoW e corrigir tabelas (Git Projects/Issues listados incorretamente como técnicas, sendo que são ferramentas) | Heitor e Philipe          | 05/05/2026                               |
-| 8   | **Issue Elementos de Requisitos (3):** Ajustar e revisar inconsistências apontadas pelo professor                                                                                      | Lucas, Leonardo e Philipe | 05/05/2026                               |
-| 9   | **Issue Quadro Comparativo (3.2):** Substituir a menção ao modelo Cascata por um processo ágil                                                                                         | Camile                    | 05/05/2026                               |
-| 10  | **Issue Introdução ao Problema:** Pequeno ajuste focado em detalhar melhor a solução proposta                                                                                          | Lucas                     | 05/05/2026                               |
-| 11  | **Documento de Visão:** Dar andamento e completar as seções restantes                                                                                                                  | Lucas e Camile            | 10/05/2026 (Revisão: 12/05 por Leonardo) |
+| # | Tarefa / Issue | Responsável | Prazo |
+|---|----------------|-------------|-------|
+| 1 | **Issue Foto de Perfil:** Adicionar imagens PNG/JPEG diretamente na pasta do Git Pages (Leonardo e Camile sem foto) | Leonardo e Camile | 05/05/2026 |
+| 2 | **Issue Estrutura do Git Pages:** Reduzir a segmentação excessiva de tópicos e links | Lucas | 05/05/2026 |
+| 3 | **Issue Transição Metodológica:** Adequar a documentação de comunicação, cerimônias e processos ao FDD | Lucas e Leonardo | 05/05/2026 |
+| 4 | **Issue Papéis da Equipe:** Atualizar os papéis conforme a nova estrutura FDD | Lucas | 05/05/2026 |
+| 5 | **Issue Cronograma FDD:** Remodelar o cronograma para o formato de Iterações | Lucas e Heitor | 05/05/2026 |
+| 6 | **Issue Alinhamento de Requisitos:** Corrigir nomenclaturas erradas, processos e retirar técnicas onde não deve conter | Heitor e Hugo | 05/05/2026 |
+| 7 | **Issue Abordagem de Eng. de Requisitos (4.1):** Retirar a ferramenta MoSCoW e corrigir tabelas | Heitor e Philipe | 05/05/2026 |
+| 8 | **Issue Elementos de Requisitos (3):** Ajustar e revisar inconsistências apontadas pelo professor | Lucas, Leonardo e Philipe | 05/05/2026 |
+| 9 | **Issue Quadro Comparativo (3.2):** Substituir a menção ao modelo Cascata por um processo ágil | Camile | 05/05/2026 |
+| 10 | **Issue Introdução ao Problema:** Detalhar melhor a solução proposta | Lucas | 05/05/2026 |
+| 11 | **Documento de Visão:** Dar andamento e completar as seções restantes | Lucas e Camile | 10/05/2026 |
 
 ---
 
 ## Cronograma Imediato e Próximos Passos
 
-| Data              | Atividade                                                                                                  |
-| ----------------- | ---------------------------------------------------------------------------------------------------------- |
-| **Até 05/05**     | Força-tarefa para conclusão de todas as correções de Issues no Git Pages (Bloqueia o restante do projeto). |
-| **05/05**         | Reunião com o Domain Expert (Otávio) para Engenharia de Requisitos (Fase 1: Captura e Absorção).           |
-| **A definir**     | Segunda reunião com Otávio (Fase 2: Validação da análise e representação visual).                          |
-| **Até 12/05**     | Entrega do Documento de Visão revisado.                                                                    |
-| **12/05 a 17/05** | Início efetivo do desenvolvimento técnico (Programação Full Stack voltada para a Vitrine Pública).         |
-| **17/05**         | Prazo interno final para revisões de funcionalidades.                                                      |
-
+| Data | Atividade |
+|------|-----------|
+| **Até 05/05** | Força-tarefa para conclusão de todas as correções de Issues no Git Pages (Bloqueia o restante do projeto). |
+| **05/05** | Reunião com o Domain Expert (Otávio) para Engenharia de Requisitos (Fase 1: Captura e Absorção). |
+| **A definir** | Segunda reunião com Otávio (Fase 2: Validação da análise e representação visual). |
+| **Até 12/05** | Entrega do Documento de Visão revisado. |
+| **12/05 a 17/05** | Início efetivo do desenvolvimento técnico (Programação Full Stack voltada para a Vitrine Pública). |
+| **17/05** | Prazo interno final para revisões de funcionalidades. |
 
 :::warning[Atenção ao Cronograma de Requisitos]
-
+O cronograma detalhado contendo as etapas visuais, de refinamento e planejamento exigidas pelo professor será gerado pelo PM logo após a limpeza das issues atuais do Git Pages.
 :::
 
-O cronograma detalhado contendo as etapas visuais, de refinamento e planejamento exigidas pelo professor será gerado pelo PM logo após a limpeza das issues atuais do Git Pages.
+</div>
+</details>
 
 ---
 
 ## Gravação da Reunião
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/CmvAYdoIrE4" title="Gravação da Reunião" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+<div style={{position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', borderRadius: '8px', margin: '1rem 0', boxShadow: '0 4px 16px rgba(0,0,0,0.12)'}}>
+  <iframe
+    style={{position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none'}}
+    src="https://www.youtube.com/embed/CmvAYdoIrE4"
+    title="Commitment + Kickoff FDD — 01/05/2026"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowFullScreen>
+  </iframe>
+</div>
 
 ---
 

@@ -1,6 +1,6 @@
 # IT1 — Resultados de V&V
 
-Registro formal das mudanças de processo, escopo e achados de verificação identificados durante e após a IT1. As alterações de backlog aqui documentadas **ainda não foram aplicadas na tabela de rastreabilidade** — ficam registradas para atualização futura.
+Registro formal das mudanças de processo, escopo e achados de verificação identificados durante e após a IT1. Todas as alterações de backlog aqui documentadas foram **aplicadas na tabela de rastreabilidade** — cada item exibe seu status de consolidação com data e link do commit/documentação correspondente.
 
 - **Estratégia:** Verificação
 - **Técnica:** Análise de rastreabilidade e Inspeção

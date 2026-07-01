@@ -1,3 +1,5 @@
+import ProtoEmbed from '@site/src/components/ProtoEmbed';
+
 # IT2 — Protótipo do CRM Interno (CP1)
 
 Protótipo de alta fidelidade do CRM interno (pipeline de leads em Kanban) desenvolvido em HTML, produzido para validar o fluxo com o cliente antes da codificação.
@@ -19,13 +21,7 @@ Protótipo de alta fidelidade do CRM interno (pipeline de leads em Kanban) desen
 
 ## Protótipo Interativo
 
-[🔗 Abrir protótipo em tela cheia](pathname:///proto/iteracao-2/PrototipoCrianexCRM/)
-
-<iframe
-  src="pathname:///proto/iteracao-2/PrototipoCrianexCRM/"
-  style={{width: '100%', height: '600px', border: '1px solid var(--crianex-border)', borderRadius: '8px', display: 'block'}}
-  allowFullScreen>
-</iframe>
+<ProtoEmbed path="proto/iteracao-2/PrototipoCrianexCRM/" height={620} label="Abrir protótipo CRM em tela cheia" />
 
 ## Feedback do Cliente
 

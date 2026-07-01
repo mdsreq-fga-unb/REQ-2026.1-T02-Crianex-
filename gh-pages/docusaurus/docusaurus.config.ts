@@ -98,6 +98,7 @@ const config: Config = {
         },
         {type: 'doc', docId: 'iteracoes/index', label: 'Evidências', position: 'left'},
         {type: 'doc', docId: 'entregas/index', label: 'Entregas', position: 'left'},
+        {type: 'doc', docId: 'referencias', label: 'Referências', position: 'left'},
         {
           href: 'https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-',
           label: 'GitHub',
