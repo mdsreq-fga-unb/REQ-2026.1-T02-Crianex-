@@ -1,4 +1,4 @@
-import React, {type ReactNode, useCallback} from 'react';
+import React, {type ReactNode, useCallback, useState} from 'react';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 import {useBaseUrlUtils} from '@docusaurus/useBaseUrl';
 
@@ -348,8 +348,26 @@ function buildGraph() {
   return {nodes, edges};
 }
 
-function FlowInner(): ReactNode {
-  const {ReactFlow, Background, Controls} = require('@xyflow/react');
+/* Bounds de foco por OE — derivados da árvore em tempo de módulo */
+const OE_FOCUS_BOUNDS = (() => {
+  let col = 0;
+  return TREE.map(oe => {
+    const start = col;
+    for (const cp of oe.cps) for (const feat of cp.features) col += feat.rfs.length;
+    return {
+      id: oe.id,
+      color: oe.color,
+      border: oe.border,
+      x: start * COL_W,
+      y: Y_OE - 20,
+      width: (col - start) * COL_W,
+      height: Y_RF - Y_OE + 80,
+    };
+  });
+})();
+
+function FlowInner({onFullscreen}: {onFullscreen?: () => void}): ReactNode {
+  const {ReactFlow, Background, Controls, Panel, useReactFlow} = require('@xyflow/react');
   require('@xyflow/react/dist/style.css');
   const {withBaseUrl} = useBaseUrlUtils();
   const {nodes, edges} = buildGraph();
@@ -361,6 +379,39 @@ function FlowInner(): ReactNode {
     },
     [withBaseUrl],
   );
+
+  /* Renderizado dentro do contexto ReactFlow para ter acesso a useReactFlow */
+  function OEButtons() {
+    const {fitBounds} = useReactFlow();
+    const btnBase: React.CSSProperties = {
+      display: 'block', width: '100%', padding: '5px 10px',
+      fontSize: 11, fontWeight: 600, cursor: 'pointer',
+      borderRadius: 6, border: '1.5px solid', lineHeight: 1.3, textAlign: 'left',
+    };
+    return (
+      <Panel position="top-left" style={{display: 'flex', flexDirection: 'column', gap: 4, padding: 6}}>
+        {OE_FOCUS_BOUNDS.map(oe => (
+          <button
+            key={oe.id}
+            title={`Centralizar na ${oe.id}`}
+            onClick={() => fitBounds({x: oe.x, y: oe.y, width: oe.width, height: oe.height}, {padding: 0.1, duration: 500})}
+            style={{...btnBase, background: oe.color, borderColor: oe.border, color: '#111'}}
+          >
+            ⊕ {oe.id}
+          </button>
+        ))}
+        {onFullscreen && (
+          <button
+            onClick={onFullscreen}
+            title="Abrir em tela cheia"
+            style={{...btnBase, marginTop: 3, background: '#f3f4f6', borderColor: '#6b7280', color: '#374151'}}
+          >
+            ⛶ Tela cheia
+          </button>
+        )}
+      </Panel>
+    );
+  }
 
   return (
     <ReactFlow
@@ -376,11 +427,14 @@ function FlowInner(): ReactNode {
     >
       <Background gap={20} color="var(--crianex-border)" />
       <Controls showInteractive={false} />
+      <OEButtons />
     </ReactFlow>
   );
 }
 
 export default function TraceabilityFlow(): ReactNode {
+  const [fullscreen, setFullscreen] = useState(false);
+
   return (
     <>
       <div className="crianex-flow__legend" style={{marginBottom: '0.5rem'}}>
@@ -392,7 +446,7 @@ export default function TraceabilityFlow(): ReactNode {
       </div>
       <div className="crianex-flow" style={{height: 860}}>
         <BrowserOnly fallback={<div style={{padding: '2rem', textAlign: 'center'}}>Carregando matriz…</div>}>
-          {() => <FlowInner />}
+          {() => <FlowInner onFullscreen={() => setFullscreen(true)} />}
         </BrowserOnly>
       </div>
       <div className="crianex-flow__legend">
@@ -401,6 +455,35 @@ export default function TraceabilityFlow(): ReactNode {
           Clique: Feature/RF → página da feature com aba correta · OE/CP → Solução
         </span>
       </div>
+      {fullscreen && (
+        <div style={{
+          position: 'fixed', inset: 0, zIndex: 9999,
+          background: 'var(--ifm-background-color)',
+          display: 'flex', flexDirection: 'column',
+        }}>
+          <div style={{
+            padding: '6px 14px', display: 'flex', alignItems: 'center',
+            justifyContent: 'space-between', borderBottom: '1px solid var(--crianex-border)',
+            background: 'var(--ifm-navbar-background-color)',
+          }}>
+            <span style={{fontSize: 13, fontWeight: 600}}>Árvore de Rastreabilidade</span>
+            <button
+              onClick={() => setFullscreen(false)}
+              style={{
+                padding: '5px 14px', fontSize: 12, fontWeight: 600, cursor: 'pointer',
+                background: '#fee2e2', border: '1px solid #dc2626', borderRadius: 6, color: '#991b1b',
+              }}
+            >
+              ✕ Fechar
+            </button>
+          </div>
+          <div style={{flex: 1}}>
+            <BrowserOnly>
+              {() => <FlowInner />}
+            </BrowserOnly>
+          </div>
+        </div>
+      )}
     </>
   );
 }

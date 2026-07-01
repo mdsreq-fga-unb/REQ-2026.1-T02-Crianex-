@@ -1,4 +1,4 @@
-# Reunião — 14/06/2026
+# Artifact Closure — Fechamento Unidade 3 — 14/06/2026
 
 **Data:** 14 de junho de 2026  
 **Horário:** 23h47  
@@ -8,14 +8,26 @@
 
 ---
 
+## Artefatos Relacionados
+
+| # | Artefato | Papel na Cerimônia | Link |
+|---|----------|--------------------|------|
+| 1 | Resultados V&V IT1 | Revisado — consolidação das mudanças de escopo e achados de verificação | [Ver V&V IT1 →](/iteracoes/iteracao-1/vv) |
+| 2 | Features F09–F18 (DoR/DoD) | Revisado — checklist de critérios de aceite e DoD verificados por feature | [Ver evidências IT1 →](/iteracoes/iteracao-1/) |
+| 3 | GitHub Projects (Kanban) | Verificado — status das issues e features no board | [Ver board →](https://github.com/orgs/mdsreq-fga-unb/projects/96) |
+| 4 | Rastreabilidade | Atualizado — novos RFs identificados durante a IT1 incorporados | [Ver rastreabilidade →](/backlog/rastreabilidade) |
+| 5 | DoR e DoD | Revisado — pequenos ajustes necessários identificados (Camille) | [Ver DoR/DoD →](/visao/dor-dod) |
+
+---
+
 ## Participantes
 
-| Nome          | Papel                                                            | Status   |
-| ------------- | ---------------------------------------------------------------- | -------- |
+| Nome | Papel | Status |
+|------|-------|--------|
 | Lucas Zanetti | Project Manager · Chief Architect · Development Manager (Backup) | Presente |
-| Philipe       | Chief Programmer · Class Owner                                   | Presente |
-| Heitor        | Development Manager · Class Owner                                | Presente |
-| Hugo          | Class Owner                                                      | Presente |
+| Philipe | Chief Programmer · Class Owner | Presente |
+| Heitor | Development Manager · Class Owner | Presente |
+| Hugo | Class Owner | Presente |
 
 ---
 
@@ -26,6 +38,10 @@
 3. Validação do status de prontidão e checklist final para submissão acadêmica
 
 ---
+
+<details className="crianex-revisions">
+<summary>📋 Ata completa — Discussões, decisões e encaminhamentos</summary>
+<div className="crianex-revisions__body">
 
 ## Discussões e Decisões
 
@@ -51,27 +67,38 @@ Priorização corrigida de _bottom-up_ para _top-down_, atendendo ao apontamento
 
 ### 4. Checklist da Entrega — Plataforma Aprender
 
-| Item                        | Status                                                                          |
-| --------------------------- | ------------------------------------------------------------------------------- |
-| PBB e BDD                   | <span className="badge badge--green">Confirmado</span> Professor não irá avaliar nestas metodologias nesta entrega |
-| DoR / DoD                   | <span className="badge badge--yellow">Atenção</span> Necessitam pequenos ajustes pela integrante Camille                          |
-| GitHub Pages (documentação) | <span className="badge badge--yellow">Atenção</span> Atualizar com novos diagramas de sequência simplificados da IT2              |
+| Item | Status |
+|------|--------|
+| PBB e BDD | <span className="badge badge--green">Confirmado</span> Professor não irá avaliar nestas metodologias nesta entrega |
+| DoR / DoD | <span className="badge badge--yellow">Atenção</span> Necessitam pequenos ajustes pela integrante Camille |
+| GitHub Pages (documentação) | <span className="badge badge--yellow">Atenção</span> Atualizar com novos diagramas de sequência simplificados da IT2 |
 
 ---
 
 ## Encaminhamentos
 
-| #   | Tarefa                                                                 | Responsável | Prazo      |
-| --- | ---------------------------------------------------------------------- | ----------- | ---------- |
-| 1   | Ajustar DoR / DoD conforme observações do grupo de verificação cruzada | Camille     | 15/06/2026 |
-| 2   | Publicar diagramas de sequência simplificados da IT2 no GitHub Pages   | Equipe      | 15/06/2026 |
-| 3   | Confirmar submissão dos artefatos na plataforma Aprender               | Lucas       | 15/06/2026 |
+| # | Tarefa | Responsável | Prazo |
+|---|--------|-------------|-------|
+| 1 | Ajustar DoR / DoD conforme observações do grupo de verificação cruzada | Camille | 15/06/2026 |
+| 2 | Publicar diagramas de sequência simplificados da IT2 no GitHub Pages | Equipe | 15/06/2026 |
+| 3 | Confirmar submissão dos artefatos na plataforma Aprender | Lucas | 15/06/2026 |
+
+</div>
+</details>
 
 ---
 
 ## Gravação da Reunião
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/d6RymiTNRKE" title="Artifact Closure — Unidade 3" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+<div style={{position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', borderRadius: '8px', margin: '1rem 0', boxShadow: '0 4px 16px rgba(0,0,0,0.12)'}}>
+  <iframe
+    style={{position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none'}}
+    src="https://www.youtube.com/embed/d6RymiTNRKE"
+    title="Artifact Closure — Fechamento Unidade 3 — 14/06/2026"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowFullScreen>
+  </iframe>
+</div>
 
 ---
 
