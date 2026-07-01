@@ -68,3 +68,97 @@ export async function createClientInteraction(input: {
 
   return data as CrmInteraction;
 }
+
+export async function updateClientInteraction(
+  clientId: string,
+  interactionId: string,
+  patch: {
+    tipo?: string;
+    conteudo?: string;
+  }
+): Promise<CrmInteraction> {
+  const normalizedClientId = clientId.trim();
+  const normalizedInteractionId = interactionId.trim();
+
+  if (!UUID_RE.test(normalizedClientId)) {
+    throw new CrmInteractionError('ID do cliente é inválido.', 'INVALID_CLIENT_ID');
+  }
+  if (!UUID_RE.test(normalizedInteractionId)) {
+    throw new CrmInteractionError('ID da interação é inválido.', 'INVALID_INTERACTION_ID');
+  }
+
+  const updates: { tipo?: string; conteudo?: string } = {};
+
+  if (patch.tipo !== undefined) {
+    const tipo = patch.tipo.trim();
+    if (!tipo) {
+      throw new CrmInteractionError('Tipo da interação é obrigatório.', 'INVALID_TIPO');
+    }
+    updates.tipo = tipo;
+  }
+
+  if (patch.conteudo !== undefined) {
+    const conteudo = patch.conteudo.trim();
+    if (!conteudo) {
+      throw new CrmInteractionError('Conteúdo da interação é obrigatório.', 'INVALID_CONTEUDO');
+    }
+    updates.conteudo = conteudo;
+  }
+
+  if (Object.keys(updates).length === 0) {
+    throw new CrmInteractionError('Informe tipo ou conteúdo para atualizar.', 'EMPTY_PATCH');
+  }
+
+  const supabase = getSupabaseClient();
+  const { data, error } = await supabase
+    .from('interactions')
+    .update(updates)
+    .eq('id', normalizedInteractionId)
+    .eq('client_id', normalizedClientId)
+    .eq('removed', false)
+    .select(SELECT)
+    .maybeSingle();
+
+  if (error) {
+    throw error;
+  }
+  if (!data) {
+    throw new CrmInteractionError('Interação não encontrada.', 'NOT_FOUND');
+  }
+
+  return data as CrmInteraction;
+}
+
+export async function softDeleteClientInteraction(
+  clientId: string,
+  interactionId: string
+): Promise<CrmInteraction> {
+  const normalizedClientId = clientId.trim();
+  const normalizedInteractionId = interactionId.trim();
+
+  if (!UUID_RE.test(normalizedClientId)) {
+    throw new CrmInteractionError('ID do cliente é inválido.', 'INVALID_CLIENT_ID');
+  }
+  if (!UUID_RE.test(normalizedInteractionId)) {
+    throw new CrmInteractionError('ID da interação é inválido.', 'INVALID_INTERACTION_ID');
+  }
+
+  const supabase = getSupabaseClient();
+  const { data, error } = await supabase
+    .from('interactions')
+    .update({ removed: true })
+    .eq('id', normalizedInteractionId)
+    .eq('client_id', normalizedClientId)
+    .eq('removed', false)
+    .select(SELECT)
+    .maybeSingle();
+
+  if (error) {
+    throw error;
+  }
+  if (!data) {
+    throw new CrmInteractionError('Interação não encontrada.', 'NOT_FOUND');
+  }
+
+  return data as CrmInteraction;
+}
