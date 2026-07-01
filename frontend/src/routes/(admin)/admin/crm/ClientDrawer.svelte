@@ -448,8 +448,10 @@
                   {:else}
                     <div class="text">
                       <strong>
-                        {inter.autor_nome || (inter.tipo === 'formulario' ? 'Lead (formulário público)' : 'Usuário')}
-                      </strong> • {inter.conteudo}
+                        {inter.autor_nome ||
+                          (inter.tipo === 'formulario' ? 'Lead (formulário público)' : 'Usuário')}
+                      </strong>
+                      • {inter.conteudo}
                     </div>
                   {/if}
                 </div>
@@ -521,8 +523,8 @@
       <div class="confirm-icon"><UserX size={20} /></div>
       <h3>Inativar lead?</h3>
       <p>
-        <strong>{client.name}</strong> será inativado e deixa de aparecer no board do funil. O
-        cadastro e o histórico de interações são preservados para auditoria — nada é excluído.
+        <strong>{client.name}</strong> será inativado e deixa de aparecer no board do funil. O cadastro
+        e o histórico de interações são preservados para auditoria — nada é excluído.
       </p>
       {#if deleteError}
         <div class="crm-err-banner">{deleteError}</div>

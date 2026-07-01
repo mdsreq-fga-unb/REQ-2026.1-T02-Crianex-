@@ -144,9 +144,7 @@ describe('POST /admin/crm/clients/:id/reactivate', () => {
       .mockResolvedValueOnce({ data: null, error: null }) // client_cards lookup em buildClientView
       .mockResolvedValueOnce({ data: null, error: null }); // lastInter lookup em buildClientView
 
-    const res = await request(app)
-      .post(`/admin/crm/clients/${clientId}/reactivate`)
-      .expect(200);
+    const res = await request(app).post(`/admin/crm/clients/${clientId}/reactivate`).expect(200);
 
     expect(mocks.query.update).toHaveBeenCalledWith({ status: 'ativo' });
     expect(mocks.query.eq).toHaveBeenCalledWith('status', 'inativo');
@@ -156,9 +154,7 @@ describe('POST /admin/crm/clients/:id/reactivate', () => {
   it('cliente inexistente ou já ativo retorna 404', async () => {
     mocks.maybeSingle.mockResolvedValueOnce({ data: null, error: null });
 
-    const res = await request(app)
-      .post(`/admin/crm/clients/${clientId}/reactivate`)
-      .expect(404);
+    const res = await request(app).post(`/admin/crm/clients/${clientId}/reactivate`).expect(404);
     expect(res.body).toHaveProperty('message');
   });
 });
