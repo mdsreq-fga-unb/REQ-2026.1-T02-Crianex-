@@ -17,6 +17,7 @@
   let isSaving = $state(false);
   let editForm = $state<CrmClient>({
     id: '',
+    card_id: null,
     name: '',
     email: '',
     status: 'ativo',
