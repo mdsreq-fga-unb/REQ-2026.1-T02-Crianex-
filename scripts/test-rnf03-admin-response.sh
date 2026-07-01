@@ -72,7 +72,7 @@ measure_admin() {
     status=$(echo "$result" | awk '{print $1}')
     time_s=$(echo "$result" | awk '{print $2}')
     local time_ms
-    time_ms=$(echo "$time_s * 1000" | bc | cut -d. -f1)
+    time_ms=$(awk "BEGIN {printf \"%d\", $time_s * 1000}")
 
     if [ "$status" -ne 200 ]; then errors=$((errors + 1)); fi
     times="${times}${time_ms}
