@@ -20,6 +20,7 @@
 
   export type CrmClient = {
     id: string;
+    card_id: string | null;
     name: string;
     email: string;
     status: 'ativo' | 'inativo';
@@ -72,6 +73,11 @@
   let quickCol = $state<CrmColumn | null>(null);
   let quickSaving = $state(false);
   let quickError = $state('');
+
+  // Card drag-and-drop between columns (RNF25 — optimistic move + rollback on failure)
+  let dragClientId = $state<string | null>(null);
+  let dropColId = $state<string | null>(null);
+  let cardMoveError = $state('');
 
   $effect(() => {
     if (data.columns?.length) {
@@ -265,6 +271,36 @@
     showNewLeadModal = true;
   }
 
+  // ── Card drag-and-drop ──
+  function handleCardDrop(targetColId: string) {
+    const id = dragClientId;
+    dragClientId = null;
+    dropColId = null;
+    if (!id) return;
+
+    const client = clients.find((c) => c.id === id);
+    if (!client || client.column_id === targetColId) return;
+    if (!client.card_id) {
+      cardMoveError = 'Este lead ainda não possui um card no pipeline.';
+      return;
+    }
+
+    const previousColumnId = client.column_id;
+    // Optimistic move: reflect the new column immediately, then confirm with the backend.
+    clients = clients.map((c) => (c.id === id ? { ...c, column_id: targetColId } : c));
+    cardMoveError = '';
+
+    apiFetch(`/crm/cards/${client.card_id}`, {
+      method: 'PATCH',
+      body: JSON.stringify({ column_id: targetColId }),
+    }).catch((err) => {
+      // Rollback: the backend rejected the move, so revert the card to its original column.
+      clients = clients.map((c) => (c.id === id ? { ...c, column_id: previousColumnId } : c));
+      const e = err as { message?: string };
+      cardMoveError = e.message || 'Não foi possível mover o lead. Tente novamente.';
+    });
+  }
+
   onMount(async () => {
     try {
       colsLoading = true;
@@ -310,10 +346,30 @@
         </button>
       </div>
     {:else}
+      {#if cardMoveError}
+        <div class="crm-err-banner" style="margin-bottom:12px">{cardMoveError}</div>
+      {/if}
       <div class="crm-kanban">
         {#each columns as col (col.id)}
           {@const colClients = clients.filter((c) => c.column_id === col.id)}
-          <div class="crm-col" role="region" aria-label={col.title}>
+          <div
+            class="crm-col {dropColId === col.id ? 'drop-active' : ''}"
+            role="region"
+            aria-label={col.title}
+            ondragover={(e) => {
+              if (dragClientId) {
+                e.preventDefault();
+                dropColId = col.id;
+              }
+            }}
+            ondragleave={(e) => {
+              if (!e.currentTarget.contains(e.relatedTarget as Node)) dropColId = null;
+            }}
+            ondrop={(e) => {
+              e.preventDefault();
+              handleCardDrop(col.id);
+            }}
+          >
             <div class="crm-col-head">
               <span class="dot" style="background:{col.color}"></span>
               <span class="title">{col.title}</span>
@@ -338,7 +394,16 @@
             {:else}
               <div class="crm-col-body">
                 {#each colClients as client (client.id)}
-                  <ClientCard {client} onclick={() => (activeClient = client)} />
+                  <ClientCard
+                    {client}
+                    dragging={dragClientId === client.id}
+                    onclick={() => (activeClient = client)}
+                    ondragstart={() => (dragClientId = client.id)}
+                    ondragend={() => {
+                      dragClientId = null;
+                      dropColId = null;
+                    }}
+                  />
                 {/each}
                 <button
                   class="crm-addcard"
@@ -689,6 +754,13 @@
     flex-direction: column;
     gap: 8px;
     border: 1px solid var(--line);
+    transition:
+      border-color 0.12s,
+      background-color 0.12s;
+  }
+  .crm-col.drop-active {
+    border-color: var(--purple);
+    background: var(--accent-soft);
   }
   .crm-col-body {
     display: flex;
