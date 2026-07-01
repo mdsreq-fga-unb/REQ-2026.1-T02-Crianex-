@@ -28,17 +28,21 @@ export const load: LayoutServerLoad = async ({ cookies, locals }) => {
   let profile: ProfileData | null = null;
   let unreadCount = 0;
   if (token) {
-    try {
-      profile = await apiFetch<ProfileData>('/profile/me', { token });
-    } catch {
-      // fallback to basic session data
-    }
-    try {
-      const notif = await apiFetch<{ unreadCount: number }>('/admin/notifications', { token });
-      unreadCount = notif.unreadCount ?? 0;
-    } catch {
-      // sem permissão / endpoint indisponível → badge fica em 0, não quebra o shell
-    }
+    // Disparadas em paralelo — são independentes uma da outra, e cada `await`
+    // sequencial aqui somava um round-trip inteiro ao tempo do primeiro
+    // carregamento do shell admin.
+    const [profileResult, notifResult] = await Promise.allSettled([
+      apiFetch<ProfileData>('/profile/me', { token }),
+      apiFetch<{ unreadCount: number }>('/admin/notifications', { token }),
+    ]);
+
+    if (profileResult.status === 'fulfilled') {
+      profile = profileResult.value;
+    } // fallback to basic session data
+
+    if (notifResult.status === 'fulfilled') {
+      unreadCount = notifResult.value.unreadCount ?? 0;
+    } // sem permissão / endpoint indisponível → badge fica em 0, não quebra o shell
   }
 
   return {

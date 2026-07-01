@@ -23,5 +23,21 @@ export default defineConfig({
   server: {
     port: 5173,
     strictPort: true,
+    // Pré-transforma o shell admin (layout + hooks + a página mais pesada) na
+    // subida do servidor em vez de no primeiro acesso — em `vite dev` o custo
+    // de compilar sob demanda um grafo de módulos grande (ícones, componentes
+    // do painel) só acontece na primeira requisição, o que somado aos
+    // round-trips de autenticação explicava boa parte da demora inicial.
+    warmup: {
+      clientFiles: [
+        './src/routes/(admin)/+layout.svelte',
+        './src/routes/(admin)/admin/crm/+page.svelte',
+      ],
+      ssrFiles: [
+        './src/hooks.server.ts',
+        './src/routes/(admin)/+layout.server.ts',
+        './src/routes/(admin)/admin/crm/+page.server.ts',
+      ],
+    },
   },
 });

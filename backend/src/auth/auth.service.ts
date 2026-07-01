@@ -330,10 +330,39 @@ export async function loadAdminProfile(
   };
 }
 
+// Uma única carga de página admin dispara várias chamadas autenticadas em
+// paralelo/sequência (sessão, perfil, notificações, colunas do CRM...), cada
+// uma passando por validateJWT → validateAccessToken. Sem cache, cada uma
+// batia de novo em /auth/v1/user (rede) + loadAdminProfile (banco), somando
+// vários round-trips redundantes para o MESMO token na mesma janela de
+// poucos segundos — a causa principal do primeiro carregamento do admin
+// demorar 7-9s. TTL curto (15s) não enfraquece a segurança de forma
+// perceptível: um access token só some da validade real quando expira (em
+// geral ~1h) ou é revogado no logout, e 15s é uma janela ínfima perto disso.
+const ACCESS_TOKEN_VALIDATION_TTL_MS = 15_000;
+const accessTokenCache = new Map<string, { user: AuthenticatedAdminUser; expiresAt: number }>();
+
+function getCachedValidation(accessToken: string): AuthenticatedAdminUser | null {
+  const cached = accessTokenCache.get(accessToken);
+  if (!cached) return null;
+  if (cached.expiresAt <= Date.now()) {
+    accessTokenCache.delete(accessToken);
+    return null;
+  }
+  return cached.user;
+}
+
+export function invalidateAccessTokenCache(accessToken: string): void {
+  accessTokenCache.delete(accessToken);
+}
+
 export async function validateAccessToken(
   supabase: SupabaseClient,
   accessToken: string
 ): Promise<AuthenticatedAdminUser> {
+  const cached = getCachedValidation(accessToken);
+  if (cached) return cached;
+
   const { url, anonKey } = getSupabaseConfig();
 
   const response = await fetch(`${url}/auth/v1/user`, {
@@ -357,7 +386,12 @@ export async function validateAccessToken(
     user_metadata?: Record<string, unknown> | null;
   };
 
-  return loadAdminProfile(supabase, user.id, user.email ?? null, user.user_metadata);
+  const admin = await loadAdminProfile(supabase, user.id, user.email ?? null, user.user_metadata);
+  accessTokenCache.set(accessToken, {
+    user: admin,
+    expiresAt: Date.now() + ACCESS_TOKEN_VALIDATION_TTL_MS,
+  });
+  return admin;
 }
 
 export async function hasVerifiedTotpFactor(accessToken: string): Promise<boolean> {
@@ -491,6 +525,7 @@ export async function challengeAndVerifyTotp(
 
 export async function revokeSession(supabase: SupabaseClient, accessToken: string): Promise<void> {
   const { error } = await supabase.auth.admin.signOut(accessToken, 'local');
+  invalidateAccessTokenCache(accessToken);
 
   if (error) {
     throw createAuthError(error.message, 500);

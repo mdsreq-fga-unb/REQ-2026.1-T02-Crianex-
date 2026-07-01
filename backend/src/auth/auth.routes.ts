@@ -88,9 +88,12 @@ function normalizeProfileStatus(status: string | null | undefined): string {
 
 export const authRouter = Router();
 
-authRouter.use(authRateLimiter);
-
-authRouter.post('/login', async (request, response) => {
+// O rate limit é só para /login (força bruta de credenciais). Aplicá-lo ao
+// router inteiro também limitava /session e /refresh — chamados a cada
+// requisição SSR de página /admin/* pelo hooks.server.ts do frontend para
+// validar/renovar a sessão — então 10 req/min esgotava em poucos cliques e
+// derrubava o admin para a tela de login sem qualquer tentativa de força bruta.
+authRouter.post('/login', authRateLimiter, async (request, response) => {
   const email = typeof request.body?.['email'] === 'string' ? request.body['email'].trim() : '';
   const password = typeof request.body?.['password'] === 'string' ? request.body['password'] : '';
 
