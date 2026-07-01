@@ -2,14 +2,40 @@ import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import request from 'supertest';
 import express from 'express';
 import { productsAdminRouter as productsRouter } from '../products/products.routes.js';
+import { generateSlug } from '../products/products.service.js';
+import { getAdminSupabase } from '../lib/adminSupabase.js';
 
 const originalBypass = process.env['ADMIN_AUTH_BYPASS'];
+
+// Slug é UNIQUE no banco: um nome fixo colidiria entre execuções (e envenenaria
+// o banco se a cadeia falhasse antes do DELETE final). Um sufixo por execução
+// garante a integridade do teste — cada run cria seu próprio produto isolado.
+const RUN = Date.now();
+const nomePt = `Produto TESTE ${RUN}`;
+const nomePtAtualizado = `Produto TESTE Atualizado ${RUN}`;
+const slugBase = generateSlug(nomePt);
+const slugAtualizado = generateSlug(nomePtAtualizado);
+
+// Em escopo de módulo para que o afterAll de limpeza enxergue o id criado.
+let produtoId: string | undefined;
 
 beforeAll(() => {
   process.env['ADMIN_AUTH_BYPASS'] = 'true';
 });
 
-afterAll(() => {
+afterAll(async () => {
+  // Limpeza defensiva: remove o produto de teste mesmo que a cadeia tenha
+  // falhado antes do DELETE final, para não deixar o slug ocupado e quebrar
+  // execuções futuras (ex.: no CI antes de um db reset).
+  try {
+    const supabase = getAdminSupabase();
+    if (produtoId) await supabase.from('products').delete().eq('id', produtoId);
+    await supabase.from('products').delete().eq('slug', slugBase);
+    await supabase.from('products').delete().eq('slug', slugAtualizado);
+  } catch {
+    // banco indisponível na limpeza não deve falhar a suíte
+  }
+
   if (originalBypass === undefined) {
     delete process.env['ADMIN_AUTH_BYPASS'];
   } else {
@@ -23,11 +49,10 @@ app.use(express.json());
 app.use('/admin/products', productsRouter);
 
 describe('Suite de testes de Intergração - Endpoints CRUD', () => {
-  let produtoId: string;
   let imageUrlGuardada: string;
 
   const produotValido = {
-    name_pt: 'Produto TESTE',
+    name_pt: nomePt,
     name_en: 'TEST product',
     tagline_pt: 'não sei',
     tagline_en: 'IDK',
@@ -72,7 +97,7 @@ describe('Suite de testes de Intergração - Endpoints CRUD', () => {
       const res = await request(app).post('/admin/products').send(payload).expect(201);
 
       expect(res.body).toHaveProperty('id');
-      expect(res.body.slug).toBe('produto-teste');
+      expect(res.body.slug).toBe(slugBase);
       produtoId = res.body.id;
     });
   });
@@ -80,7 +105,7 @@ describe('Suite de testes de Intergração - Endpoints CRUD', () => {
   describe('PATCH /admin/products/:id', () => {
     it('Dado que campos parciais são enviados, deve atualizar apenas o payload e resconstruir o slug se necessário', async () => {
       const paricalPayload = {
-        name_pt: 'Produto TESTE Atualizado',
+        name_pt: nomePtAtualizado,
         published: true,
       };
       const res = await request(app)
@@ -88,8 +113,8 @@ describe('Suite de testes de Intergração - Endpoints CRUD', () => {
         .send(paricalPayload)
         .expect(200);
 
-      expect(res.body.name_pt).toBe('Produto TESTE Atualizado');
-      expect(res.body.slug).toBe('produto-teste-atualizado');
+      expect(res.body.name_pt).toBe(nomePtAtualizado);
+      expect(res.body.slug).toBe(slugAtualizado);
       expect(res.body.published).toBe(true);
     });
   });
