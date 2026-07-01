@@ -9,12 +9,24 @@
   import { invalidateAll } from '$app/navigation';
   import type { PageData } from './$types';
   import type { NotificationTemplate } from './+page.server';
+  import {
+    TEMPLATE_COLOR_PALETTE,
+    type NotificationEventType,
+  } from '$lib/constants/notification-types';
   import TemplateModal from './templateModal.svelte';
   import DeleteModal from './deleteModal.svelte';
 
   export let data: PageData;
 
-  const emptyForm = { tipo_evento: '', nome: '', conteudo: '' };
+  const emptyForm = {
+    tipo_evento: '',
+    nome: '',
+    conteudo: '',
+    color: TEMPLATE_COLOR_PALETTE[0] as string,
+  };
+  $: eventTypes = data.eventTypes ?? [];
+  $: eventTypeLabel = (tipo: string) =>
+    eventTypes.find((t: NotificationEventType) => t.value === tipo)?.label ?? tipo;
 
   let isModalOpen = false;
   let isEditingMode = false;
@@ -66,6 +78,7 @@
       tipo_evento: template.tipo_evento,
       nome: template.nome,
       conteudo: template.conteudo,
+      color: template.color,
     };
     modalError = '';
     isModalOpen = true;
@@ -86,7 +99,11 @@
       if (isEditingMode) {
         await apiFetch(`/admin/notification-templates/${currentTemplateId}`, {
           method: 'PATCH',
-          body: JSON.stringify({ nome: modalData.nome, conteudo: modalData.conteudo }),
+          body: JSON.stringify({
+            nome: modalData.nome,
+            conteudo: modalData.conteudo,
+            color: modalData.color,
+          }),
         });
       } else {
         await apiFetch('/admin/notification-templates', {
@@ -229,7 +246,10 @@
               </div>
               <span class="t-desc">{template.conteudo}</span>
             </div>
-            <span class="t-event mono">{template.tipo_evento}</span>
+            <span class="t-event mono">
+              <span class="t-color-dot" style="background:{template.color}"></span>
+              {eventTypeLabel(template.tipo_evento)}
+            </span>
 
             {#if canEdit || canAdmin}
               <div class="t-actions">
@@ -268,6 +288,7 @@
   bind:isOpen={isModalOpen}
   bind:isEditing={isEditingMode}
   bind:formData={modalData}
+  {eventTypes}
   errorMessage={modalError}
   onSave={handleSaveModal}
 />
@@ -363,6 +384,15 @@
   .t-event {
     font-size: 11px;
     color: var(--text-muted);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .t-color-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
   }
   .mono {
     font-family: var(--font-mono);

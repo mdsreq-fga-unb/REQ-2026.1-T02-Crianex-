@@ -1,10 +1,12 @@
 import { getSupabaseClient } from '../config/supabase.js';
+import { getNotificationEventType, HEX_COLOR_RE } from './notification-event-types.js';
 
 export type NotificationTemplateRecord = {
   id: string;
   tipo_evento: string;
   nome: string;
   conteudo: string;
+  color: string;
   is_default: boolean;
   active: boolean;
   created_at: string;
@@ -15,6 +17,7 @@ export type NotificationTemplateInput = {
   tipo_evento: string;
   nome: string;
   conteudo: string;
+  color?: string;
 };
 
 export type NotificationTemplateUpdateInput = Partial<NotificationTemplateInput>;
@@ -23,7 +26,7 @@ export type NotificationTemplateUpdateInput = Partial<NotificationTemplateInput>
 // nunca pode ser usado por um template comum, para não colidir com o fallback.
 export const DEFAULT_TEMPLATE_TIPO_EVENTO = '__default__';
 
-const SELECT = 'id, tipo_evento, nome, conteudo, is_default, active, created_at, updated_at';
+const SELECT = 'id, tipo_evento, nome, conteudo, color, is_default, active, created_at, updated_at';
 
 export class NotificationTemplateServiceError extends Error {
   constructor(
@@ -54,6 +57,7 @@ export function validateTemplateInput(input: {
   tipo_evento?: unknown;
   nome?: unknown;
   conteudo?: unknown;
+  color?: unknown;
 }): string | null {
   if (input.tipo_evento !== undefined && !isNonEmptyString(input.tipo_evento)) {
     return "Campo 'tipo_evento' é obrigatório.";
@@ -66,6 +70,21 @@ export function validateTemplateInput(input: {
   }
   if (input.tipo_evento === DEFAULT_TEMPLATE_TIPO_EVENTO) {
     return 'Tipo de evento reservado para o template padrão do sistema.';
+  }
+  if (input.tipo_evento !== undefined && isNonEmptyString(input.tipo_evento)) {
+    const eventType = getNotificationEventType(input.tipo_evento.trim());
+    if (!eventType) {
+      return "Campo 'tipo_evento' inválido. Escolha um dos tipos disponíveis.";
+    }
+    if (!eventType.implemented) {
+      return `O tipo '${eventType.label}' ainda não está implementado e não pode ser usado em templates.`;
+    }
+  }
+  if (
+    input.color !== undefined &&
+    (!isNonEmptyString(input.color) || !HEX_COLOR_RE.test(input.color))
+  ) {
+    return "Campo 'color' deve ser uma cor hexadecimal válida (ex.: #7f3fe5).";
   }
   return null;
 }
@@ -83,19 +102,49 @@ export async function listActiveTemplates(): Promise<NotificationTemplateRecord[
   return (data ?? []) as NotificationTemplateRecord[];
 }
 
-// Cria um template associado a um tipo de evento (RF15). Duplicidade (mais de um
-// template ativo por tipo_evento) é impedida pelo índice único parcial da migration.
+// Desativa (soft) qualquer template ativo do tipo informado, exceto o próprio
+// registro sendo editado (excludeId). Usado para que escolher um tipo em
+// create/update ative aquele template automaticamente, substituindo qualquer
+// template anterior do mesmo tipo em vez de bloquear com duplicidade — o índice
+// único parcial da migration continua como rede de segurança contra corrida.
+async function deactivatePreviousActiveForType(
+  tipoEvento: string,
+  excludeId?: string
+): Promise<void> {
+  const supabase = getSupabaseClient();
+  let query = supabase
+    .from('notification_templates')
+    .update({ active: false })
+    .eq('tipo_evento', tipoEvento)
+    .eq('active', true)
+    .eq('is_default', false);
+
+  if (excludeId) query = query.neq('id', excludeId);
+
+  const { error } = await query;
+  if (error) throw error;
+}
+
+// Cria um template associado a um tipo de evento (RF15). O tipo escolhido é ativado
+// automaticamente ao salvar: qualquer template ativo anterior do mesmo tipo_evento é
+// desativado antes do insert, então só existe 1 template ativo por tipo por vez.
 export async function createTemplate(
   input: NotificationTemplateInput
 ): Promise<NotificationTemplateRecord> {
   const supabase = getSupabaseClient();
+  const tipoEvento = input.tipo_evento.trim();
+  const color = input.color?.trim() || getNotificationEventType(tipoEvento)?.color || '#7f3fe5';
+
+  await deactivatePreviousActiveForType(tipoEvento);
+
   const { data, error } = await supabase
     .from('notification_templates')
     .insert([
       {
-        tipo_evento: input.tipo_evento.trim(),
+        tipo_evento: tipoEvento,
         nome: input.nome.trim(),
         conteudo: input.conteudo,
+        color,
       },
     ])
     .select(SELECT)
@@ -105,7 +154,9 @@ export async function createTemplate(
   return data as NotificationTemplateRecord;
 }
 
-// Edita um template existente sem duplicar o registro (RF56).
+// Edita um template existente sem duplicar o registro (RF56). Se o tipo_evento for
+// alterado, o mesmo comportamento de ativação automática do create se aplica:
+// qualquer outro template ativo do novo tipo é desativado antes do update.
 export async function updateTemplate(
   id: string,
   input: NotificationTemplateUpdateInput
@@ -113,9 +164,14 @@ export async function updateTemplate(
   const supabase = getSupabaseClient();
 
   const payload: Record<string, unknown> = {};
-  if (input.tipo_evento !== undefined) payload['tipo_evento'] = input.tipo_evento.trim();
+  if (input.tipo_evento !== undefined) {
+    const tipoEvento = input.tipo_evento.trim();
+    payload['tipo_evento'] = tipoEvento;
+    await deactivatePreviousActiveForType(tipoEvento, id);
+  }
   if (input.nome !== undefined) payload['nome'] = input.nome.trim();
   if (input.conteudo !== undefined) payload['conteudo'] = input.conteudo;
+  if (input.color !== undefined) payload['color'] = input.color.trim();
 
   const { data, error } = await supabase
     .from('notification_templates')

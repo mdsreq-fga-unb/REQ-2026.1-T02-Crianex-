@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Bell, Users, Check, ShieldAlert, X } from 'lucide-svelte';
+  import { Bell, Users, Check, Shield, ShieldAlert, X } from 'lucide-svelte';
   import { apiFetch } from '$lib/api/backend';
   import { unreadCount } from '$lib/stores/notifications';
   import {
@@ -39,7 +39,7 @@
     unreadCount.set(data.unreadCount);
   });
 
-  const ICONS = { users: Users, check: Check, bell: Bell } as const;
+  const ICONS = { users: Users, shield: Shield, check: Check, bell: Bell } as const;
 
   function humanize(tipo: string): string {
     const s = tipo.replace(/_/g, ' ').trim();
@@ -123,7 +123,7 @@
               {@const vis = iconForTipo(n.tipo)}
               {@const Cmp = ICONS[vis.icon]}
               <li class="notif-feed-row {n.status === 'unread' ? 'unread' : ''}">
-                <span class="ico-cell" style="background:{vis.color}">
+                <span class="ico-cell" style="background:{n.color ?? vis.color}">
                   <Cmp size={15} />
                 </span>
                 <div class="body">

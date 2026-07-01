@@ -9,6 +9,9 @@ export type Notification = {
   conteudo: string;
   status: NotificationStatus;
   created_at: string;
+  // Cor resolvida pelo backend a partir do template ativo do tipo (F08 → F07);
+  // ausente apenas em dados legados antes da personalização de templates.
+  color?: string;
 };
 
 export type DayGroup = {
@@ -79,14 +82,19 @@ export function relativeTime(iso: string, now: Date = new Date()): string {
   return `${days}d`;
 }
 
-// Mapeia o tipo da notificação para um ícone (chave lucide) e cor de destaque.
-// Chaves de ícone são resolvidas para componentes no +page.svelte.
-export type NotifVisual = { icon: 'users' | 'check' | 'bell'; color: string };
+// Mapeia o tipo da notificação para um ícone (chave lucide) e cor de destaque de
+// fallback. A cor "de verdade" vem de `Notification.color` (resolvida pelo backend a
+// partir do template ativo do tipo — F08 → F07); esta função só decide o ÍCONE e
+// serve de fallback de cor para dados legados sem `color`. Chaves de ícone são
+// resolvidas para componentes no +page.svelte.
+export type NotifVisual = { icon: 'users' | 'shield' | 'check' | 'bell'; color: string };
 
 export function iconForTipo(tipo: string): NotifVisual {
   switch (tipo) {
     case 'novo_lead':
       return { icon: 'users', color: '#7f3fe5' };
+    case 'seguranca_controle':
+      return { icon: 'shield', color: '#eab308' };
     default:
       return { icon: 'bell', color: '#7f3fe5' };
   }

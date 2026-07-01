@@ -9,9 +9,17 @@ import {
   validateTemplateInput,
   NotificationTemplateServiceError,
 } from './notification-templates.service.js';
+import { NOTIFICATION_EVENT_TYPES } from './notification-event-types.js';
 
 const notificationTemplatesRouter = Router();
 const ownerGuard = [validateJWT, requireRole('owner')];
+
+// GET /api/admin/notification-templates/event-types — catálogo fixo de tipos de
+// evento (label, grupo, cor sugerida, se já está implementado), usado pelo select
+// de tipo no formulário de template. Rota fixa antes de '/:id' para não colidir.
+notificationTemplatesRouter.get('/event-types', ...ownerGuard, (_req, res) => {
+  res.status(200).json({ eventTypes: NOTIFICATION_EVENT_TYPES });
+});
 
 // GET /api/admin/notification-templates — lista templates ativos (F08 · #204).
 notificationTemplatesRouter.get('/', ...ownerGuard, async (_req, res) => {
@@ -26,16 +34,16 @@ notificationTemplatesRouter.get('/', ...ownerGuard, async (_req, res) => {
 
 // POST /api/admin/notification-templates — cria template (RF15 · #202).
 notificationTemplatesRouter.post('/', ...ownerGuard, async (req, res) => {
-  const { tipo_evento, nome, conteudo } = req.body ?? {};
+  const { tipo_evento, nome, conteudo, color } = req.body ?? {};
 
-  const validationError = validateTemplateInput({ tipo_evento, nome, conteudo });
+  const validationError = validateTemplateInput({ tipo_evento, nome, conteudo, color });
   if (validationError || !tipo_evento || !nome || !conteudo) {
     res.status(400).json({ message: validationError ?? 'Campos obrigatórios ausentes.' });
     return;
   }
 
   try {
-    const template = await createTemplate({ tipo_evento, nome, conteudo });
+    const template = await createTemplate({ tipo_evento, nome, conteudo, color });
     res.status(201).json(template);
   } catch (err) {
     if (err instanceof NotificationTemplateServiceError && err.code === 'DUPLICATE_EVENT') {
@@ -50,21 +58,21 @@ notificationTemplatesRouter.post('/', ...ownerGuard, async (req, res) => {
 // PATCH /api/admin/notification-templates/:id — edita template (RF56 · #202).
 notificationTemplatesRouter.patch('/:id', ...ownerGuard, async (req, res) => {
   const id = typeof req.params['id'] === 'string' ? req.params['id'].trim() : '';
-  const { tipo_evento, nome, conteudo } = req.body ?? {};
+  const { tipo_evento, nome, conteudo, color } = req.body ?? {};
 
   if (!id) {
     res.status(400).json({ message: 'ID do template é obrigatório.' });
     return;
   }
 
-  const validationError = validateTemplateInput({ tipo_evento, nome, conteudo });
+  const validationError = validateTemplateInput({ tipo_evento, nome, conteudo, color });
   if (validationError) {
     res.status(400).json({ message: validationError });
     return;
   }
 
   try {
-    const template = await updateTemplate(id, { tipo_evento, nome, conteudo });
+    const template = await updateTemplate(id, { tipo_evento, nome, conteudo, color });
     res.status(200).json(template);
   } catch (err) {
     if (err instanceof NotificationTemplateServiceError) {

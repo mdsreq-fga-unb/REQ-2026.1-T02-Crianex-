@@ -1,195 +1,298 @@
-import { afterAll, beforeAll, describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import request from 'supertest';
 import express from 'express';
-import { notificationTemplatesRouter } from './notification-templates.routes.js';
-import { getSupabaseClient } from '../config/supabase.js';
-import { getTemplateForEvent } from './notification-templates.service.js';
 
-const originalBypass = process.env['ADMIN_AUTH_BYPASS'];
+// Migrado de integração contra o Supabase real para mocks (#TEMPLATE-CATALOG): com a
+// validação de tipo_evento restrita ao catálogo fixo (novo_lead, seguranca_controle),
+// testes de integração não podem mais usar tipo_evento arbitrário/único por execução
+// sem colidir com o template ativo real que um admin configurou em produção — criar um
+// template de teste para 'novo_lead' desativaria o template real durante o CI. Mockar o
+// Supabase evita esse efeito colateral e segue o mesmo padrão já usado em
+// crm-clients.routes.test.ts.
+const mocks = vi.hoisted(() => {
+  const maybeSingle = vi.fn();
+  const single = vi.fn();
+  const query: Record<string, unknown> = {
+    delete: vi.fn(),
+    eq: vi.fn(),
+    insert: vi.fn(),
+    maybeSingle,
+    neq: vi.fn(),
+    order: vi.fn(),
+    select: vi.fn(),
+    single,
+    update: vi.fn(),
+  };
 
-// tipo_evento exclusivo desta suíte — permite limpar resíduos sem afetar dados reais.
-const TEST_TIPO = `template-ci-${Date.now()}`;
+  (query['delete'] as ReturnType<typeof vi.fn>).mockReturnValue(query);
+  (query['eq'] as ReturnType<typeof vi.fn>).mockReturnValue(query);
+  (query['insert'] as ReturnType<typeof vi.fn>).mockReturnValue(query);
+  (query['neq'] as ReturnType<typeof vi.fn>).mockReturnValue(query);
+  (query['order'] as ReturnType<typeof vi.fn>).mockReturnValue(query);
+  (query['select'] as ReturnType<typeof vi.fn>).mockReturnValue(query);
+  (query['update'] as ReturnType<typeof vi.fn>).mockReturnValue(query);
+  // Torna `query` "thenable": chains que terminam em .eq()/.neq() (ex.:
+  // deactivatePreviousActiveForType, sem .single()/.maybeSingle() no fim) resolvem
+  // via `await query` direto, como o query builder real do supabase-js faz.
+  query['then'] = (resolve: (v: { data: null; error: null }) => void) =>
+    resolve({ data: null, error: null });
 
-beforeAll(async () => {
-  process.env['ADMIN_AUTH_BYPASS'] = 'true';
-  const supabase = getSupabaseClient();
-  await supabase.from('notification_templates').delete().like('tipo_evento', `${TEST_TIPO}%`);
+  const from = vi.fn(() => query);
+
+  return { from, maybeSingle, query, single };
 });
 
-afterAll(async () => {
-  const supabase = getSupabaseClient();
-  await supabase.from('notification_templates').delete().like('tipo_evento', `${TEST_TIPO}%`);
+vi.mock('../config/supabase.js', () => ({
+  getSupabaseClient: () => ({ from: mocks.from }),
+}));
 
-  if (originalBypass === undefined) {
-    delete process.env['ADMIN_AUTH_BYPASS'];
-  } else {
-    process.env['ADMIN_AUTH_BYPASS'] = originalBypass;
-  }
-});
+vi.mock('../middleware/validate-jwt.js', () => ({
+  validateJWT: (_req: unknown, res: { locals: Record<string, unknown> }, next: () => void) => {
+    res.locals['auth'] = {
+      accessToken: 'test-token',
+      user: { id: '22222222-2222-4222-8222-222222222222', name: 'Admin', role: 'owner' },
+    };
+    next();
+  },
+}));
+
+vi.mock('../middleware/require-role.js', () => ({
+  requireRole: () => (_req: unknown, _res: unknown, next: () => void) => next(),
+}));
+
+const { notificationTemplatesRouter } = await import('./notification-templates.routes.js');
+const { getTemplateForEvent } = await import('./notification-templates.service.js');
 
 const app = express();
 app.use(express.json());
 app.use('/admin/notification-templates', notificationTemplatesRouter);
 
-describe('Suite de testes de integração — POST /api/admin/notification-templates (RF15 · #202)', () => {
-  it('Com dados válidos, cria e persiste o template associado ao tipo de evento', async () => {
+const templateId = '44444444-4444-4444-8444-444444444444';
+
+function mockTemplateRow(overrides: Record<string, unknown> = {}) {
+  return {
+    id: templateId,
+    tipo_evento: 'novo_lead',
+    nome: 'Novo lead',
+    conteudo: 'Chegou um lead novo.',
+    color: '#7f3fe5',
+    is_default: false,
+    active: true,
+    created_at: '2026-07-01T12:00:00.000Z',
+    updated_at: '2026-07-01T12:00:00.000Z',
+    ...overrides,
+  };
+}
+
+beforeEach(() => {
+  vi.clearAllMocks();
+});
+
+describe('GET /admin/notification-templates/event-types', () => {
+  it('retorna o catálogo fixo com tipos implementados e não implementados', async () => {
+    const res = await request(app).get('/admin/notification-templates/event-types').expect(200);
+
+    const values = res.body.eventTypes.map((t: { value: string }) => t.value);
+    expect(values).toContain('novo_lead');
+    expect(values).toContain('seguranca_controle');
+
+    const financeiro = res.body.eventTypes.find((t: { value: string }) => t.value === 'financeiro');
+    expect(financeiro.implemented).toBe(false);
+  });
+});
+
+describe('POST /admin/notification-templates (RF15)', () => {
+  it('cria o template com a cor sugerida do catálogo quando color não é enviado', async () => {
+    mocks.single.mockResolvedValueOnce({ data: mockTemplateRow(), error: null });
+
     const res = await request(app)
       .post('/admin/notification-templates')
-      .send({ tipo_evento: `${TEST_TIPO}-create`, nome: 'Novo lead', conteudo: 'Chegou um lead.' })
+      .send({ tipo_evento: 'novo_lead', nome: 'Novo lead', conteudo: 'Chegou um lead novo.' })
       .expect(201);
 
-    expect(res.body.tipo_evento).toBe(`${TEST_TIPO}-create`);
-    expect(res.body.active).toBe(true);
+    expect(res.body.tipo_evento).toBe('novo_lead');
+    expect(res.body.color).toBe('#7f3fe5');
+    expect(mocks.query.insert).toHaveBeenCalledWith([
+      expect.objectContaining({ tipo_evento: 'novo_lead', color: '#7f3fe5' }),
+    ]);
   });
 
-  it('Com campos obrigatórios vazios, a validação impede a criação e sinaliza os campos', async () => {
+  it('cria o template com a cor customizada enviada pelo admin', async () => {
+    mocks.single.mockResolvedValueOnce({
+      data: mockTemplateRow({ tipo_evento: 'seguranca_controle', color: '#eab308' }),
+      error: null,
+    });
+
+    const res = await request(app)
+      .post('/admin/notification-templates')
+      .send({
+        tipo_evento: 'seguranca_controle',
+        nome: 'Segurança e controle',
+        conteudo: 'Alerta de segurança.',
+        color: '#eab308',
+      })
+      .expect(201);
+
+    expect(res.body.color).toBe('#eab308');
+  });
+
+  it('desativa qualquer template ativo anterior do mesmo tipo antes de criar o novo (ativação automática)', async () => {
+    mocks.single.mockResolvedValueOnce({ data: mockTemplateRow(), error: null });
+
+    await request(app)
+      .post('/admin/notification-templates')
+      .send({ tipo_evento: 'novo_lead', nome: 'Novo lead', conteudo: 'x' })
+      .expect(201);
+
+    expect(mocks.query.update).toHaveBeenCalledWith({ active: false });
+    expect(mocks.query.eq).toHaveBeenCalledWith('tipo_evento', 'novo_lead');
+    expect(mocks.query.eq).toHaveBeenCalledWith('active', true);
+    expect(mocks.query.eq).toHaveBeenCalledWith('is_default', false);
+  });
+
+  it('rejeita tipo_evento fora do catálogo fixo (400)', async () => {
+    const res = await request(app)
+      .post('/admin/notification-templates')
+      .send({ tipo_evento: 'tipo_inventado', nome: 'x', conteudo: 'y' })
+      .expect(400);
+
+    expect(res.body.message).toMatch(/inválido/i);
+    expect(mocks.query.insert).not.toHaveBeenCalled();
+  });
+
+  it('rejeita tipo_evento do catálogo ainda não implementado (400)', async () => {
+    const res = await request(app)
+      .post('/admin/notification-templates')
+      .send({ tipo_evento: 'financeiro', nome: 'x', conteudo: 'y' })
+      .expect(400);
+
+    expect(res.body.message).toMatch(/não está implementado/i);
+    expect(mocks.query.insert).not.toHaveBeenCalled();
+  });
+
+  it('rejeita cor em formato inválido (400)', async () => {
+    const res = await request(app)
+      .post('/admin/notification-templates')
+      .send({ tipo_evento: 'novo_lead', nome: 'x', conteudo: 'y', color: 'amarelo' })
+      .expect(400);
+
+    expect(res.body.message).toMatch(/hexadecimal/i);
+    expect(mocks.query.insert).not.toHaveBeenCalled();
+  });
+
+  it('com campos obrigatórios vazios, a validação impede a criação', async () => {
     const res = await request(app)
       .post('/admin/notification-templates')
       .send({ tipo_evento: '', nome: '', conteudo: '' })
       .expect(400);
     expect(res.body).toHaveProperty('message');
-  });
-
-  it('Para um tipo de evento que já possui template ativo, impede a duplicidade', async () => {
-    const tipo = `${TEST_TIPO}-dup`;
-    await request(app)
-      .post('/admin/notification-templates')
-      .send({ tipo_evento: tipo, nome: 'Primeiro', conteudo: 'x' })
-      .expect(201);
-
-    const res = await request(app)
-      .post('/admin/notification-templates')
-      .send({ tipo_evento: tipo, nome: 'Segundo', conteudo: 'y' })
-      .expect(409);
-    expect(res.body).toHaveProperty('message');
-  });
-
-  it('Sem token válido retorna 401 sem executar a query', async () => {
-    const saved = process.env['ADMIN_AUTH_BYPASS'];
-    delete process.env['ADMIN_AUTH_BYPASS'];
-    try {
-      const res = await request(app)
-        .post('/admin/notification-templates')
-        .send({ tipo_evento: 'x', nome: 'y', conteudo: 'z' })
-        .expect(401);
-      expect(res.body).toEqual({ error: 'Unauthorized' });
-    } finally {
-      process.env['ADMIN_AUTH_BYPASS'] = saved;
-    }
+    expect(mocks.query.insert).not.toHaveBeenCalled();
   });
 });
 
-describe('Suite de testes de integração — PATCH /api/admin/notification-templates/:id (RF56 · #202)', () => {
-  let id: string;
+describe('PATCH /admin/notification-templates/:id (RF56)', () => {
+  it('edita nome e cor sem alterar o tipo_evento', async () => {
+    mocks.maybeSingle.mockResolvedValueOnce({
+      data: mockTemplateRow({ nome: 'Atualizado', color: '#06b6d4' }),
+      error: null,
+    });
 
-  beforeAll(async () => {
     const res = await request(app)
-      .post('/admin/notification-templates')
-      .send({ tipo_evento: `${TEST_TIPO}-edit`, nome: 'Original', conteudo: 'Original.' })
-      .expect(201);
-    id = res.body.id;
-  });
-
-  it('Edita o template existente sem duplicar o registro', async () => {
-    const res = await request(app)
-      .patch(`/admin/notification-templates/${id}`)
-      .send({ nome: 'Atualizado' })
+      .patch(`/admin/notification-templates/${templateId}`)
+      .send({ nome: 'Atualizado', color: '#06b6d4' })
       .expect(200);
 
-    expect(res.body.id).toBe(id);
     expect(res.body.nome).toBe('Atualizado');
-
-    const supabase = getSupabaseClient();
-    const { count } = await supabase
-      .from('notification_templates')
-      .select('*', { count: 'exact', head: true })
-      .eq('tipo_evento', `${TEST_TIPO}-edit`);
-    expect(count).toBe(1);
+    expect(res.body.color).toBe('#06b6d4');
+    expect(mocks.query.update).toHaveBeenCalledWith(
+      expect.objectContaining({ nome: 'Atualizado', color: '#06b6d4' })
+    );
   });
 
-  it('Com campos inválidos na edição, a validação impede e a versão anterior é mantida', async () => {
-    const res = await request(app)
-      .patch(`/admin/notification-templates/${id}`)
-      .send({ nome: '' })
-      .expect(400);
-    expect(res.body).toHaveProperty('message');
+  it('ao alterar o tipo_evento, desativa qualquer outro template ativo desse novo tipo', async () => {
+    mocks.maybeSingle.mockResolvedValueOnce({
+      data: mockTemplateRow({ tipo_evento: 'seguranca_controle' }),
+      error: null,
+    });
 
-    const supabase = getSupabaseClient();
-    const { data } = await supabase
-      .from('notification_templates')
-      .select('nome')
-      .eq('id', id)
-      .single();
-    expect(data?.nome).toBe('Atualizado');
+    await request(app)
+      .patch(`/admin/notification-templates/${templateId}`)
+      .send({ tipo_evento: 'seguranca_controle' })
+      .expect(200);
+
+    expect(mocks.query.update).toHaveBeenCalledWith({ active: false });
+    expect(mocks.query.neq).toHaveBeenCalledWith('id', templateId);
   });
 
-  it('Template inexistente retorna 404 sem efeito', async () => {
+  it('template inexistente retorna 404', async () => {
+    mocks.maybeSingle.mockResolvedValueOnce({ data: null, error: null });
+
     const res = await request(app)
       .patch('/admin/notification-templates/00000000-0000-0000-0000-000000000000')
       .send({ nome: 'x' })
       .expect(404);
     expect(res.body).toHaveProperty('message');
   });
+
+  it('com nome vazio, a validação impede a edição', async () => {
+    const res = await request(app)
+      .patch(`/admin/notification-templates/${templateId}`)
+      .send({ nome: '' })
+      .expect(400);
+    expect(res.body).toHaveProperty('message');
+    expect(mocks.query.update).not.toHaveBeenCalled();
+  });
 });
 
-describe('Suite de testes de integração — DELETE /api/admin/notification-templates/:id (RF57 · #203)', () => {
-  let id: string;
+describe('DELETE /admin/notification-templates/:id (RF57)', () => {
+  it('inativa o template e retorna 200 com active=false', async () => {
+    mocks.maybeSingle
+      .mockResolvedValueOnce({ data: { is_default: false }, error: null })
+      .mockResolvedValueOnce({ data: mockTemplateRow({ active: false }), error: null });
 
-  beforeAll(async () => {
     const res = await request(app)
-      .post('/admin/notification-templates')
-      .send({ tipo_evento: `${TEST_TIPO}-delete`, nome: 'A remover', conteudo: 'x' })
-      .expect(201);
-    id = res.body.id;
-  });
-
-  it('Remove (inativa) o template e retorna 200 com active=false', async () => {
-    const res = await request(app).delete(`/admin/notification-templates/${id}`).expect(200);
+      .delete(`/admin/notification-templates/${templateId}`)
+      .expect(200);
     expect(res.body.active).toBe(false);
   });
 
-  it('Template já removido retorna 404 de forma idempotente', async () => {
-    const res = await request(app).delete(`/admin/notification-templates/${id}`).expect(404);
-    expect(res.body).toHaveProperty('message');
-  });
+  it('template já inativo ou inexistente retorna 404', async () => {
+    mocks.maybeSingle.mockResolvedValueOnce({ data: null, error: null });
 
-  it('id inexistente retorna 404', async () => {
     const res = await request(app)
-      .delete('/admin/notification-templates/00000000-0000-0000-0000-000000000000')
+      .delete(`/admin/notification-templates/${templateId}`)
       .expect(404);
     expect(res.body).toHaveProperty('message');
   });
 
-  it('O template padrão de fallback não pode ser removido (409)', async () => {
-    const supabase = getSupabaseClient();
-    const { data: fallback } = await supabase
-      .from('notification_templates')
-      .select('id')
-      .eq('is_default', true)
-      .single();
+  it('o template padrão de fallback não pode ser removido (409)', async () => {
+    mocks.maybeSingle.mockResolvedValueOnce({ data: { is_default: true }, error: null });
 
     const res = await request(app)
-      .delete(`/admin/notification-templates/${fallback?.id}`)
+      .delete(`/admin/notification-templates/${templateId}`)
       .expect(409);
     expect(res.body).toHaveProperty('message');
   });
 });
 
-describe('Suite de testes de integração — getTemplateForEvent (fallback, RF57 · #203)', () => {
-  it('Quando não há template ativo para o tipo de evento, resolve para o template padrão', async () => {
-    const template = await getTemplateForEvent(`${TEST_TIPO}-sem-template`);
+describe('getTemplateForEvent (fallback, RF57 · #203)', () => {
+  it('quando não há template ativo específico, resolve para o template padrão', async () => {
+    mocks.maybeSingle
+      .mockResolvedValueOnce({ data: null, error: null }) // busca específica
+      .mockResolvedValueOnce({ data: mockTemplateRow({ is_default: true }), error: null }); // fallback
+
+    const template = await getTemplateForEvent('novo_lead');
     expect(template?.is_default).toBe(true);
   });
 
-  it('Quando há template ativo específico, resolve para ele em vez do padrão', async () => {
-    const tipo = `${TEST_TIPO}-fallback-especifico`;
-    await request(app)
-      .post('/admin/notification-templates')
-      .send({ tipo_evento: tipo, nome: 'Específico', conteudo: 'Específico.' })
-      .expect(201);
+  it('quando há template ativo específico, resolve para ele em vez do padrão', async () => {
+    mocks.maybeSingle.mockResolvedValueOnce({
+      data: mockTemplateRow({ tipo_evento: 'seguranca_controle', is_default: false }),
+      error: null,
+    });
 
-    const template = await getTemplateForEvent(tipo);
-    expect(template?.tipo_evento).toBe(tipo);
+    const template = await getTemplateForEvent('seguranca_controle');
+    expect(template?.tipo_evento).toBe('seguranca_controle');
     expect(template?.is_default).toBe(false);
   });
 });

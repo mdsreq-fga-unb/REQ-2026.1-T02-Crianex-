@@ -1,5 +1,9 @@
 <script lang="ts">
-  import { X } from 'lucide-svelte';
+  import { X, Check } from 'lucide-svelte';
+  import {
+    TEMPLATE_COLOR_PALETTE,
+    type NotificationEventType,
+  } from '$lib/constants/notification-types';
 
   export let isOpen = false;
   export let isEditing = false;
@@ -7,9 +11,11 @@
     tipo_evento: '',
     nome: '',
     conteudo: '',
+    color: TEMPLATE_COLOR_PALETTE[0] as string,
   };
   export let errorMessage = '';
   export let onSave: () => Promise<void>;
+  export let eventTypes: NotificationEventType[] = [];
 
   function fechar() {
     isOpen = false;
@@ -18,6 +24,17 @@
   async function submit(e: Event) {
     e.preventDefault();
     await onSave();
+  }
+
+  // Ao escolher o tipo pela primeira vez (criação), pré-preenche a cor sugerida do
+  // catálogo — o admin ainda pode trocar livremente pelo seletor de cor abaixo.
+  function onTipoChange(e: Event) {
+    const value = (e.target as HTMLSelectElement).value;
+    formData = { ...formData, tipo_evento: value };
+    if (!isEditing) {
+      const eventType = eventTypes.find((t) => t.value === value);
+      if (eventType) formData = { ...formData, color: eventType.color };
+    }
   }
 </script>
 
@@ -52,17 +69,45 @@
 
           <div class="field-group">
             <span class="field-label">Tipo de evento</span>
-            <input
-              type="text"
+            <select
               class="field-input"
-              placeholder="Ex.: novo_lead"
-              bind:value={formData.tipo_evento}
+              value={formData.tipo_evento}
+              on:change={onTipoChange}
               disabled={isEditing}
               required
-            />
+            >
+              <option value="" disabled>Selecione um tipo…</option>
+              {#each eventTypes as eventType}
+                <option value={eventType.value} disabled={!eventType.implemented}>
+                  {eventType.label}{!eventType.implemented ? ' (em breve)' : ''}
+                </option>
+              {/each}
+            </select>
             <span class="field-hint">
-              Identifica o evento do sistema que dispara este template. Apenas um template ativo por
-              tipo de evento.
+              {eventTypes.find((t) => t.value === formData.tipo_evento)?.descricao ??
+                'Escolhendo um tipo, ele é ativado automaticamente ao salvar — só existe 1 template ativo por tipo.'}
+            </span>
+          </div>
+
+          <div class="field-group">
+            <span class="field-label">Cor de destaque</span>
+            <div class="color-swatches">
+              {#each TEMPLATE_COLOR_PALETTE as color}
+                <button
+                  type="button"
+                  class="color-swatch"
+                  style="background:{color}"
+                  aria-label="Usar cor {color}"
+                  aria-pressed={formData.color === color}
+                  on:click={() => (formData = { ...formData, color })}
+                >
+                  {#if formData.color === color}<Check size={12} color="#09090b" />{/if}
+                </button>
+              {/each}
+            </div>
+            <span class="field-hint">
+              Cor usada para destacar as notificações resultantes deste tipo de evento na central de
+              notificações.
             </span>
           </div>
 
@@ -247,6 +292,34 @@
   }
   .field-textarea {
     resize: none;
+  }
+
+  select.field-input {
+    appearance: none;
+    cursor: pointer;
+  }
+  select.field-input option:disabled {
+    color: #52525b;
+  }
+
+  .color-swatches {
+    display: flex;
+    gap: 8px;
+  }
+  .color-swatch {
+    width: 26px;
+    height: 26px;
+    border-radius: 7px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    padding: 0;
+    display: grid;
+    place-items: center;
+    transition: border-color 0.12s;
+  }
+  .color-swatch[aria-pressed='true'] {
+    border-color: #f4f4f5;
+    box-shadow: 0 0 0 2px #121214;
   }
 
   .error-bar {
