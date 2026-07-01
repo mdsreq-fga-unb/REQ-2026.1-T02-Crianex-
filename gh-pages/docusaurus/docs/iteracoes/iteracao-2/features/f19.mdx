@@ -5,16 +5,31 @@ sidebar_label: "F19 · Gerenciar clientes e leads no CR"
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import ProtoEmbed from '@site/src/components/ProtoEmbed';
 
 # F19 — Gerenciar clientes e leads no CRM
 
-<span className="badge badge--purple">IT2</span> · Rastreabilidade: [F19](/backlog/requisitos#f19) · [CP1](/visao/solucao#cp1) · [OE3](/visao/solucao#oe3)
+<span className="badge badge--purple">IT2</span> <span className="badge badge--green">Concluída</span> · Rastreabilidade: [F19](/backlog/requisitos#f19) · [CP1](/visao/solucao#cp1) · [OE3](/visao/solucao#oe3)
 
 **Issue da Feature (GitHub):** [#177 — abrir no GitHub](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/177)
+
+**Deploy:** _link a definir_
 
 :::note[Acesso para avaliação]
 Esta funcionalidade exige **login de administrador**. Credenciais para o professor: **e-mail** `a definir` · **senha** `a definir`.
 :::
+
+:::info[Refinamento pós-implementação]
+RF60, RF61 e RF62 foram adicionados após a entrega inicial, a partir de uma auditoria de rastreabilidade — cobrem busca/filtros, exportação CSV e visualização em tabela/indicadores do funil, capacidades que faltavam além do CRUD básico de leads. Detalhamento completo em [Resultados V&V da IT2 — MR.02](/iteracoes/iteracao-2/vv#mr02).
+:::
+
+## Protótipo
+
+Protótipo de alta fidelidade do CRM interno (compartilhado entre F19, F20 e F21 — mesmo board Kanban), validado com o cliente antes da implementação.
+
+<ProtoEmbed path="proto/iteracao-2/PrototipoCrianexCRM/" height={480} label="Abrir protótipo do CRM em tela cheia" />
+
+Ver também: [Página de evidências do protótipo](/iteracoes/iteracao-2/evidencias/prototipo).
 
 ## Requisitos (evidências)
 
@@ -92,6 +107,70 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 **Evidência (screenshot):**
 
 ![Evidência de RF41 — F19](./img/f19-rf41.png)
+
+**Deploy:** _link a definir_
+
+</TabItem>
+<TabItem value="rf60" label="RF60">
+
+#### RF60 — Filtrar e buscar leads no CRM
+
+<span className="badge badge--secondary">Novo — refinamento pós-implementação</span>
+
+**Critérios de aceite (BDD)**
+
+- **Dado** leads cadastrados no funil, **quando** o admin digita um termo na busca, **então** os cards exibidos são filtrados por nome ou e-mail em tempo real, sem reload.
+- **Dado** um produto selecionado no filtro, **quando** aplicado, **então** somente leads vinculados a esse produto são exibidos, com a contagem por produto refletida nos chips de filtro.
+- **Dado** um responsável selecionado no filtro, **quando** aplicado, **então** somente leads atribuídos a esse responsável são exibidos.
+- **Dado** múltiplos filtros combinados (produto + responsável + busca), **quando** aplicados, **então** os resultados atendem a todos os critérios simultaneamente (E lógico).
+
+**Regras de negócio:** [RN24](/backlog/requisitos#rns) — Escopo de busca, filtros e exportação do CRM (opera somente sobre leads ativos)
+
+**Evidência (screenshot):**
+
+![Evidência de RF60 — F19](./img/f19-rf60.png)
+
+**Deploy:** _link a definir_
+
+</TabItem>
+<TabItem value="rf61" label="RF61">
+
+#### RF61 — Exportar leads do CRM em CSV
+
+<span className="badge badge--secondary">Novo — refinamento pós-implementação</span>
+
+**Critérios de aceite (BDD)**
+
+- **Dado** leads visíveis após os filtros aplicados, **quando** o admin aciona "Exportar CSV", **então** um arquivo CSV é gerado e baixado contendo apenas os leads filtrados.
+- **Dado** o arquivo exportado, **quando** aberto, **então** contém nome, e-mail, telefone, estágio, responsável, produto, status e última interação de cada lead.
+- **Dado** nenhum filtro aplicado, **quando** exportado, **então** todos os leads ativos são incluídos.
+
+**Regras de negócio:** [RN24](/backlog/requisitos#rns) — Escopo de busca, filtros e exportação do CRM (exportação reflete os filtros aplicados)
+
+**Evidência (screenshot):**
+
+![Evidência de RF61 — F19](./img/f19-rf61.png)
+
+**Deploy:** _link a definir_
+
+</TabItem>
+<TabItem value="rf62" label="RF62">
+
+#### RF62 — Visualizar leads em tabela e indicadores do funil
+
+<span className="badge badge--secondary">Novo — refinamento pós-implementação</span>
+
+**Critérios de aceite (BDD)**
+
+- **Dado** leads no funil após os filtros aplicados, **quando** o admin acessa o CRM, **então** um painel exibe total de leads, leads sem interação há 7+ dias, total de interações registradas e número de colunas do pipeline.
+- **Dado** um filtro aplicado (produto/responsável/busca), **quando** alterado, **então** os indicadores são recalculados imediatamente para refletir o subconjunto filtrado.
+- **Dado** a visualização em Kanban, **quando** o admin alterna para o formato de tabela, **então** os mesmos leads filtrados são exibidos em linhas ordenáveis por nome, produto, estágio, responsável e atividade.
+
+**Regras de negócio:** [RN24](/backlog/requisitos#rns) — Escopo de busca, filtros e exportação do CRM (indicadores refletem os filtros aplicados)
+
+**Evidência (screenshot):**
+
+![Evidência de RF62 — F19](./img/f19-rf62.png)
 
 **Deploy:** _link a definir_
 

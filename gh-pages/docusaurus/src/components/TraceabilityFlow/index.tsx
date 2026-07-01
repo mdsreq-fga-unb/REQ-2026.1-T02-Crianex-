@@ -19,8 +19,8 @@ interface RnfDef    {id: string; label: string; href: string}
 
 const f = (id: string, label: string, rfs: string[]): FeatureDef => ({id, label, rfs});
 
-/* ── Rotas das features da IT1 ─────────────────────────────────── */
-const IT1_FEATURE_PATHS: Record<string, string> = {
+/* ── Rotas das features com página dedicada (IT1 + IT2 concluídas) ──── */
+const FEATURE_PATHS: Record<string, string> = {
   F09: '/iteracoes/iteracao-1/features/f09',
   F10: '/iteracoes/iteracao-1/features/f10',
   F11: '/iteracoes/iteracao-1/features/f11',
@@ -31,6 +31,11 @@ const IT1_FEATURE_PATHS: Record<string, string> = {
   F16: '/iteracoes/iteracao-1/features/f16',
   F17: '/iteracoes/iteracao-1/features/f17',
   F18: '/iteracoes/iteracao-1/features/f18',
+  F19: '/iteracoes/iteracao-2/features/f19',
+  F20: '/iteracoes/iteracao-2/features/f20',
+  F21: '/iteracoes/iteracao-2/features/f21',
+  F07: '/iteracoes/iteracao-2/features/f07',
+  F08: '/iteracoes/iteracao-2/features/f08',
 };
 
 /* RF → feature pai (para abrir a aba correta via ?tab=) */
@@ -45,16 +50,21 @@ const RF_TO_FEATURE: Record<string, string> = {
   RF28: 'F16', RF29: 'F16', RF30: 'F16', RF31: 'F16',
   RF32: 'F17', RF33: 'F17',
   RF34: 'F18', RF52: 'F18',
+  RF35: 'F19', RF36: 'F19', RF37: 'F19', RF41: 'F19', RF60: 'F19', RF61: 'F19', RF62: 'F19',
+  RF38: 'F20', RF39: 'F20', RF40: 'F20',
+  RF42: 'F21', RF53: 'F21', RF59: 'F21',
+  RF46: 'F07', RF47: 'F07',
+  RF15: 'F08', RF56: 'F08', RF57: 'F08', RF63: 'F08',
 };
 
 function featureHref(featId: string): string {
-  return IT1_FEATURE_PATHS[featId] ?? `/backlog/requisitos#${featId.toLowerCase()}`;
+  return FEATURE_PATHS[featId] ?? `/backlog/requisitos#${featId.toLowerCase()}`;
 }
 
 function rfHref(rfId: string): string {
   const feat = RF_TO_FEATURE[rfId];
-  if (feat && IT1_FEATURE_PATHS[feat]) {
-    return `${IT1_FEATURE_PATHS[feat]}?tab=${rfId.toLowerCase()}`;
+  if (feat && FEATURE_PATHS[feat]) {
+    return `${FEATURE_PATHS[feat]}?tab=${rfId.toLowerCase()}`;
   }
   return '/backlog/requisitos';
 }
@@ -103,7 +113,7 @@ export const TREE: OEDef[] = [
     id: 'OE3', label: 'OE3 · Leads e clientes', color: '#fce7f3', cpColor: '#fbcfe8', border: '#db2777',
     cps: [
       {id: 'CP1', label: 'CP1 · CRM Kanban', features: [
-        f('F19', 'F19 · Clientes/leads', ['RF35', 'RF36', 'RF37', 'RF41']),
+        f('F19', 'F19 · Clientes/leads', ['RF35', 'RF36', 'RF37', 'RF41', 'RF60', 'RF61', 'RF62']),
         f('F20', 'F20 · Colunas funil', ['RF38', 'RF39', 'RF40']),
         f('F21', 'F21 · Interações com.', ['RF42', 'RF53', 'RF59']),
       ]},
@@ -113,7 +123,7 @@ export const TREE: OEDef[] = [
       ]},
       {id: 'CP9', label: 'CP9 · Notificações', features: [
         f('F07', 'F07 · Histórico notif.', ['RF46', 'RF47']),
-        f('F08', 'F08 · Templates notif.', ['RF15', 'RF56', 'RF57']),
+        f('F08', 'F08 · Templates notif.', ['RF15', 'RF56', 'RF57', 'RF63']),
       ]},
     ],
   },
@@ -173,12 +183,17 @@ const RNF_COL_GAP = 16;
 const RNF_ROW_H   = 52;
 const RNF_GAP_Y   = 100;
 
-/* RFs concluídos na IT1 */
+/* RFs concluídos (IT1 completa + IT2: F07/F08/F19/F20/F21) */
 const RF_DONE = new Set([
   'rf08','rf09','rf10','rf11','rf12','rf13','rf14',
   'rf21','rf22','rf23','rf24','rf25','rf26','rf27',
   'rf28','rf29','rf30','rf31','rf32','rf33','rf34',
   'rf48','rf49','rf50','rf51','rf52',
+  'rf35','rf36','rf37','rf41','rf60','rf61','rf62',
+  'rf38','rf39','rf40',
+  'rf42','rf53','rf59',
+  'rf46','rf47',
+  'rf15','rf56','rf57','rf63',
 ]);
 
 function compColor(done: number, total: number) {

@@ -8,13 +8,23 @@ import TabItem from '@theme/TabItem';
 
 # F08 — Gerenciar templates de notificações
 
-<span className="badge badge--purple">IT2</span> · Rastreabilidade: [F08](/backlog/requisitos#f08) · [CP9](/visao/solucao#cp9) · [OE3](/visao/solucao#oe3)
+<span className="badge badge--purple">IT2</span> <span className="badge badge--green">Concluída</span> · Rastreabilidade: [F08](/backlog/requisitos#f08) · [CP9](/visao/solucao#cp9) · [OE3](/visao/solucao#oe3)
 
 **Issue da Feature (GitHub):** [#180 — abrir no GitHub](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/180)
+
+**Deploy:** _link a definir_
 
 :::note[Acesso para avaliação]
 Esta funcionalidade exige **login de administrador**. Credenciais para o professor: **e-mail** `a definir` · **senha** `a definir`.
 :::
+
+:::info[Refinamento pós-implementação]
+RF63 foi adicionado após a entrega inicial (seleção de tipo por catálogo fixo + cor personalizável por template). O AC de RF15 também foi revisado: o bloqueio de duplicidade por tipo de evento (409) foi substituído por ativação automática com substituição do template anterior. Detalhamento completo em [Resultados V&V da IT2 — MR.03/MR.04](/iteracoes/iteracao-2/vv#mr03).
+:::
+
+## Protótipo
+
+Não há protótipo de alta fidelidade dedicado a esta feature — a tela de gestão de templates foi validada diretamente na Technical Design Review e nas evidências abaixo, sem etapa de prototipagem em Figma/HTML separada.
 
 ## Requisitos (evidências)
 
@@ -29,10 +39,10 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 
 - **Dado** admin autenticado com dados válidos, **quando** criar template, **então** é persistido e associado a um tipo de evento.
 - **Dado** campos obrigatórios vazios (nome, conteúdo ou evento), **quando** submeter, **então** a validação impede a criação e sinaliza os campos.
-- **Dado** tipo de evento que já possui template, **quando** criar outro para o mesmo evento, **então** o sistema impede a duplicidade conforme a regra de associação.
+- **Dado** tipo de evento que já possui um template ativo, **quando** criar outro template para o mesmo evento, **então** o template anterior é desativado automaticamente e o novo passa a ser o único ativo para aquele tipo (ativação automática por substituição, sem exigir remoção manual prévia). <span className="badge badge--secondary">Critério revisado</span>
 - **Dado** requisição sem permissão, **quando** POST do template, **então** o RLS bloqueia com 403.
 
-**Regras de negócio:** [RN14](/backlog/requisitos#rns) — Template de notificação por evento, com fallback para o template padrão
+**Regras de negócio:** [RN14](/backlog/requisitos#rns) — Template de notificação por evento, com fallback para o template padrão · [RN25](/backlog/requisitos#rns) — Ativação exclusiva de template por tipo de evento
 
 **Evidência (screenshot):**
 
@@ -78,6 +88,28 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 **Evidência (screenshot):**
 
 ![Evidência de RF57 — F08](./img/f08-rf57.png)
+
+**Deploy:** _link a definir_
+
+</TabItem>
+<TabItem value="rf63" label="RF63">
+
+#### RF63 — Personalizar cor e tipo de template de notificação
+
+<span className="badge badge--secondary">Novo — refinamento pós-implementação</span>
+
+**Critérios de aceite (BDD)**
+
+- **Dado** o formulário de criação/edição de template, **quando** o admin abre o campo "tipo de evento", **então** as opções são carregadas de um catálogo fixo de tipos, não um campo de texto livre.
+- **Dado** um tipo de evento do catálogo ainda não implementado no sistema, **quando** exibido no seletor, **então** aparece desabilitado/acinzentado e não pode ser selecionado.
+- **Dado** o formulário de template, **quando** o admin escolhe uma cor na paleta, **então** a cor é persistida e usada para destacar as notificações resultantes daquele tipo de evento na central de notificações.
+- **Dado** nenhuma cor selecionada explicitamente, **quando** o template é salvo, **então** a cor sugerida do catálogo para aquele tipo é aplicada como padrão.
+
+**Regras de negócio:** [RN25](/backlog/requisitos#rns) — Ativação exclusiva de template por tipo de evento · [RN26](/backlog/requisitos#rns) — Catálogo fixo de tipos de notificação
+
+**Evidência (screenshot):**
+
+![Evidência de RF63 — F08](./img/f08-rf63.png)
 
 **Deploy:** _link a definir_
 

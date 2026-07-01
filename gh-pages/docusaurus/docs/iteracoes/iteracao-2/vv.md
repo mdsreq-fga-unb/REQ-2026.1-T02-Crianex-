@@ -76,3 +76,98 @@ Registro formal das mudanças de processo e cronograma identificadas durante a I
 
 </div>
 </details>
+
+---
+
+## 2. Mudanças de Requisitos
+
+Registro da auditoria de rastreabilidade realizada em 01/07/2026 sobre as features F07, F08, F19, F20 e F21 (IT2 — CP1 e CP9), decorrente da conclusão da implementação dessas features. Cobre: status atualizado (Em andamento → Concluída), requisitos funcionais novos identificados a partir de capacidades já implementadas mas não documentadas, um critério de aceite existente revisado, e dois achados de auditoria (itens em aberto) a levar para a próxima reunião de refinamento.
+
+<details className="crianex-change" id="mr01">
+<summary><span className="crianex-change__id">MR.01</span> <span className="crianex-change__sum">Achados de auditoria — ACs marcados concluídos sem implementação/documentação correspondente</span> <span className="badge badge--yellow">Atenção</span></summary>
+<div className="crianex-change__body">
+
+**MR.01 — Descasamentos entre AC documentado e comportamento real**
+
+| Campo         | Conteúdo                                                                                                                                                                                                                                                                                                              |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Achado 1**  | [RF36](/iteracoes/iteracao-2/features/f19?tab=rf36) (F19) tem um AC marcado concluído — *"Dado cliente/lead inativo, quando reativar, então volta ao fluxo ativo"* — mas **não existe reativação implementada** (nem endpoint, nem UI); só a inativação (soft-delete) existe.                                        |
+| **Achado 2**  | [RF53](/iteracoes/iteracao-2/features/f21?tab=rf53) (F21) e [RN22](/backlog/requisitos#rns) descrevem remoção de interação comercial como **exclusão permanente (hard-delete)**. A implementação real é **remoção lógica (soft-delete, `removed=true`)** — preserva o histórico, comportamento mais seguro, mas diverge do texto documentado.                |
+| **Motivação** | Auditoria de rastreabilidade realizada ao atualizar o status de F07/F08/F19/F20/F21 para Concluída — comparação linha a linha entre AC documentado e código implementado.                                                                                                                                            |
+| **Impacto**   | Nenhum código foi alterado para "corrigir" esses ACs — são **pauta aberta para a próxima reunião de refinamento**: decidir se a reativação de lead entra no escopo agora (débito técnico registrado) e se o texto de RF53/RN22 deve ser corrigido para refletir soft-delete (recomendado) ou se o comportamento deve mudar para hard-delete. |
+| **Status**    | <span className="badge badge--yellow">Atenção</span> sinalizado em [F19 — RF36](/iteracoes/iteracao-2/features/f19?tab=rf36) e [F21 — RF53](/iteracoes/iteracao-2/features/f21?tab=rf53); ainda não resolvido                                                                                                        |
+
+</div>
+</details>
+
+<details className="crianex-change" id="mr02">
+<summary><span className="crianex-change__id">MR.02</span> <span className="crianex-change__sum">RF60–RF62 novos — busca, filtros, exportação CSV, tabela e indicadores do CRM (F19)</span> <span className="badge badge--green">Aplicado</span></summary>
+<div className="crianex-change__body">
+
+**MR.02 — Novos Requisitos Funcionais de F19**
+
+| Campo         | Conteúdo                                                                                                                                                                                                                    |
+| ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **De**        | F19 cobria apenas CRUD de leads (RF35, RF36, RF37, RF41) — sem nenhum RF de consulta, filtro ou exportação, apesar de o protótipo de alta fidelidade do CRM já prever busca, filtros por produto/pessoa, exportação CSV, visualização em tabela e mini-dashboard. |
+| **Para**      | Três RFs novos, mesmo nível de abstração dos RFs existentes de F19 (um por capacidade, seguindo o padrão de RF52/RF19 no restante do catálogo): **RF60** — Filtrar e buscar leads no CRM · **RF61** — Exportar leads do CRM em CSV · **RF62** — Visualizar leads em tabela e indicadores do funil. Critérios de aceite BDD completos em [F19 — RF60](/iteracoes/iteracao-2/features/f19?tab=rf60) / [RF61](/iteracoes/iteracao-2/features/f19?tab=rf61) / [RF62](/iteracoes/iteracao-2/features/f19?tab=rf62). |
+| **Motivação** | Capacidades já implementadas e comparadas com o protótipo de alta fidelidade do CRM, mas sem RF correspondente no backlog — gap identificado na auditoria de rastreabilidade.                                             |
+| **Regra de negócio** | [RN24](/backlog/requisitos#rns) criada — escopo de busca/filtros/exportação/indicadores restrito a leads ativos, refletindo os filtros aplicados no momento da ação.                                               |
+| **Rastreabilidade** | [Issue #177 (F19)](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/177) atualizada · sub-issue [#243](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/243) criada e fechada · [Tabela de Requisitos](/backlog/requisitos#rfs) · [Priorização](/backlog/priorizacao) · [Árvore de Rastreabilidade](/backlog/rastreabilidade) |
+| **Status**    | <span className="badge badge--green">Aplicado</span> — implementado, documentado e rastreado                                                                                                                              |
+
+</div>
+</details>
+
+<details className="crianex-change" id="mr03">
+<summary><span className="crianex-change__id">MR.03</span> <span className="crianex-change__sum">RF15 revisado — bloqueio de duplicidade de template substituído por ativação automática (F08)</span> <span className="badge badge--green">Aplicado</span></summary>
+<div className="crianex-change__body">
+
+**MR.03 — Critério de Aceite Revisado (incremento, não requisito novo)**
+
+| Campo         | Conteúdo                                                                                                                                                                                            |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **De**        | RF15, AC 3: *"Dado tipo de evento que já possui template, quando criar outro para o mesmo evento, então o sistema impede a duplicidade"* (erro 409, exige remoção manual antes de criar um novo).    |
+| **Para**      | *"Dado tipo de evento que já possui um template ativo, quando criar outro template para o mesmo evento, então o template anterior é desativado automaticamente e o novo passa a ser o único ativo"* — ativação automática por substituição. Ver [F08 — RF15](/iteracoes/iteracao-2/features/f08?tab=rf15). |
+| **Motivação** | Melhoria de UX solicitada pelo Product Manager: escolher um tipo já deve deixá-lo ativo imediatamente, sem exigir que o admin remova manualmente o template anterior primeiro.                       |
+| **Classificação** | Incremento/refinamento de AC existente — **não é requisito novo** (RF15 continua sendo "Adicionar template de notificações").                                                                  |
+| **Regra de negócio** | [RN25](/backlog/requisitos#rns) criada — ativação exclusiva de template por tipo de evento (no máximo 1 ativo por tipo, sem remoção manual prévia).                                          |
+| **Rastreabilidade** | [Issue #180 (F08)](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/180) atualizada · [Tabela de Requisitos](/backlog/requisitos#rfs)                                        |
+| **Status**    | <span className="badge badge--green">Aplicado</span>                                                                                                                                                 |
+
+</div>
+</details>
+
+<details className="crianex-change" id="mr04">
+<summary><span className="crianex-change__id">MR.04</span> <span className="crianex-change__sum">RF63 novo — cor e catálogo fixo de tipos para templates de notificação (F08)</span> <span className="badge badge--green">Aplicado</span></summary>
+<div className="crianex-change__body">
+
+**MR.04 — Novo Requisito Funcional de F08**
+
+| Campo         | Conteúdo                                                                                                                                                                                                             |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **De**        | Templates de notificação tinham `tipo_evento` como campo de texto livre, sem cor associada — qualquer string era aceita, sem checagem contra os eventos reais do sistema.                                            |
+| **Para**      | **RF63 — Personalizar cor e tipo de template de notificação**: tipo escolhido a partir de um catálogo fixo (tipos ainda não implementados aparecem desabilitados) + cor personalizável por template, usada para destacar as notificações resultantes na central. Critérios de aceite BDD completos em [F08 — RF63](/iteracoes/iteracao-2/features/f08?tab=rf63). |
+| **Motivação** | Necessidade de diferenciar visualmente notificações por categoria (ex.: segurança e controle) e de impedir tipos de evento inválidos/inexistentes no cadastro de template.                                          |
+| **Regra de negócio** | [RN25](/backlog/requisitos#rns) (ativação exclusiva, compartilhada com RF15) e [RN26](/backlog/requisitos#rns) criada — catálogo fixo de tipos de notificação.                                                 |
+| **Rastreabilidade** | [Issue #180 (F08)](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/180) atualizada · sub-issue [#244](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/244) criada e fechada · [Tabela de Requisitos](/backlog/requisitos#rfs) · [Priorização](/backlog/priorizacao) · [Árvore de Rastreabilidade](/backlog/rastreabilidade) |
+| **Status**    | <span className="badge badge--green">Aplicado</span> — implementado, documentado e rastreado                                                                                                                        |
+
+</div>
+</details>
+
+<details className="crianex-change" id="mr05">
+<summary><span className="crianex-change__id">MR.05</span> <span className="crianex-change__sum">Status de F07/F08/F19/F20/F21 atualizado para Concluída — impacto na priorização</span> <span className="badge badge--green">Aplicado</span></summary>
+<div className="crianex-change__body">
+
+**MR.05 — Status e Priorização**
+
+| Campo         | Conteúdo                                                                                                                                                                                                    |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **De**        | F07, F08, F19, F20 e F21 marcadas <span className="badge badge--blue">Em andamento</span> em [Priorização](/backlog/priorizacao) e com os RFs correspondentes na aba "Planejados (IT2/IT3)" da [Tabela de Requisitos](/backlog/requisitos#rfs), apesar de todas as sub-issues das 5 features estarem fechadas. |
+| **Para**      | As 5 features marcadas <span className="badge badge--green">Concluída</span>; RFs movidos para a aba "Implementados (IT1 + IT2)"; badge "Concluída" adicionado nas 5 páginas individuais de feature.        |
+| **Impacto na priorização** | **RF60–RF63 (novos) e o AC revisado de RF15 não reduzem a prioridade das features F19 e F08.** O cálculo de IP (`VB/ES`) permanece o registrado originalmente nas issues #177 e #180 — essas capacidades foram um refinamento de escopo dentro de features já priorizadas como Q1/Alta (F19: IP 2,5) e aceita conscientemente fora do Quadrante I por dependência lógica (F08: IP 1,31, depende de F07). Se algo, o valor de negócio entregue por F19 e F08 é **maior** do que o estimado originalmente — reforça a prioridade já atribuída, não a enfraquece. Nenhum recálculo de VB/ES/IP foi feito; ver nota na [Tabela MVP](/backlog/priorizacao#features-do-mvp). |
+| **Rastreabilidade** | [Tabela de Requisitos v2.2](/backlog/requisitos#features) · [Priorização v3.3](/backlog/priorizacao#features-do-mvp) · [Árvore de Rastreabilidade](/backlog/rastreabilidade) (nós de F19/F08 e RF60–RF63 já apontam para as páginas de feature, não mais para a tabela genérica) |
+| **Status**    | <span className="badge badge--green">Aplicado</span>                                                                                                                                                        |
+
+</div>
+</details>

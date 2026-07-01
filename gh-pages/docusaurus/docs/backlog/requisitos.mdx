@@ -27,8 +27,8 @@ Catálogo completo de **Features, Requisitos Funcionais (RF), Não Funcionais (R
 | <a id="f04"/>**F04** | — | Visualizar indicadores financeiros | CP3 | RF07, RF55 | RNF01, RNF03, RNF09, RNF11 | <NW>I-N-V-E-S-T</NW> |
 | <a id="f05"/>**F05** | — | Consultar registros financeiros | CP7 | RF16, RF17, RF18 | RNF01, RNF03, RNF09, RNF11 | <NW>N-V-E-S-T</NW> |
 | <a id="f06"/>**F06** | — | Gerar relatórios financeiros | CP7 | RF19, RF20 | RNF01, RNF03, RNF09, RNF11 | <NW>I-N-V-E-S-T</NW> |
-| <a id="f07"/>**F07** | <IT2/> | Acompanhar histórico e status de notificações | CP9 | RF46, RF47 | RNF03, RNF09 | <NW>N-V-E-S-T</NW> |
-| <a id="f08"/>**F08** | <IT2/> | Gerenciar templates de notificações | CP9 | RF15, RF56, RF57 | RNF03, RNF09 | <NW>N-V-E-S-T</NW> |
+| <a id="f07"/>**F07** | <IT2/> ✅ | Acompanhar histórico e status de notificações | CP9 | RF46, RF47 | RNF03, RNF09 | <NW>N-V-E-S-T</NW> |
+| <a id="f08"/>**F08** | <IT2/> ✅ | Gerenciar templates de notificações | CP9 | RF15, RF56, RF57, RF63 | RNF03, RNF09 | <NW>N-V-E-S-T</NW> |
 | <a id="f09"/>**F09** | <IT1/> | Autenticar para acesso seguro ao sistema | CP5 | RF08, RF09 | RNF01, RNF03, RNF08 | <NW>I-N-V-E-S-T</NW> |
 | <a id="f10"/>**F10** | <IT1/> | Acesso ao painel administrativo | CP5 | RF10, RF48 | RNF09 | <NW>N-V-E-S-T</NW> |
 | <a id="f11"/>**F11** | <IT1/> | Gerenciar usuários da plataforma | CP5 | RF11, RF12, RF13, RF14 | RNF09 | <NW>N-V-E-S-T</NW> |
@@ -39,16 +39,16 @@ Catálogo completo de **Features, Requisitos Funcionais (RF), Não Funcionais (R
 | <a id="f16"/>**F16** | <IT1/> | Gerenciar artigos de FAQ | CP6 | RF28, RF29, RF30, RF31 | RNF01, RNF04, RNF05 | <NW>N-V-E-S-T</NW> |
 | <a id="f17"/>**F17** | <IT1/> | Controlar publicação de artigos FAQ | CP6 | RF32, RF33 | RNF01 | <NW>N-V-E-S-T</NW> |
 | <a id="f18"/>**F18** | <IT1/> | Correspondência FAQ ↔ dúvidas dos leads | CP6 | RF34, RF52 | RNF02 | <NW>N-V-E-S-T</NW> |
-| <a id="f19"/>**F19** | <IT2/> | Gerenciar clientes e leads | CP1 | RF35, RF36, RF37, RF41 | RNF01, RNF03, RNF09, RNF11, RNF24, RNF25 | <NW>I-N-V-E-S-T</NW> |
-| <a id="f20"/>**F20** | <IT2/> | Gerenciar colunas do funil | CP1 | RF38, RF39, RF40 | RNF01, RNF03, RNF09, RNF11, RNF22 | <NW>N-V-E-S-T</NW> |
-| <a id="f21"/>**F21** | <IT2/> | Registrar interações comerciais | CP1 | RF42, RF53, RF59 | RNF01, RNF03, RNF09, RNF11 | <NW>N-V-E-S-T</NW> |
+| <a id="f19"/>**F19** | <IT2/> ✅ | Gerenciar clientes e leads | CP1 | RF35, RF36, RF37, RF41, RF60, RF61, RF62 | RNF01, RNF03, RNF09, RNF11, RNF24, RNF25 | <NW>I-N-V-E-S-T</NW> |
+| <a id="f20"/>**F20** | <IT2/> ✅ | Gerenciar colunas do funil | CP1 | RF38, RF39, RF40 | RNF01, RNF03, RNF09, RNF11, RNF22 | <NW>N-V-E-S-T</NW> |
+| <a id="f21"/>**F21** | <IT2/> ✅ | Registrar interações comerciais | CP1 | RF42, RF53, RF59 | RNF01, RNF03, RNF09, RNF11 | <NW>N-V-E-S-T</NW> |
 | <a id="f22"/>**F22** | — | Acessar tickets para acompanhamento | CP8 | RF43, RF58 | RNF01, RNF03, RNF09, RNF23 | <NW>I-N-V-E-S-T</NW> |
 | <a id="f23"/>**F23** | — | Gerenciar tickets de suporte | CP8 | RF44, RF45 | RNF01, RNF03, RNF09 | <NW>N-V-E-S-T</NW> |
 
 ## Requisitos Funcionais (RFs) {#rfs}
 
 <Tabs>
-<TabItem value="it1" label="Implementados (IT1)">
+<TabItem value="implementados" label="Implementados (IT1 + IT2)">
 
 | ID | Nome | Feature | Observação |
 | -- | ---- | ------- | ---------- |
@@ -59,6 +59,7 @@ Catálogo completo de **Features, Requisitos Funcionais (RF), Não Funcionais (R
 | RF12 | Cadastrar novo membro | F11 | Geração de senha segura + e-mail de boas-vindas |
 | RF13 | Inativar membro cadastrado | F11 | toggleStatus na tabela de membros |
 | RF14 | Remover membro cadastrado | F11 | Modal de confirmação + API DELETE |
+| RF15 | Adicionar template de notificações | F08 | Tipo por catálogo fixo + cor personalizável; ativação automática por substituição (IT2, refinado) |
 | RF21 | Cadastrar produto SaaS | F12 | ProductModal + POST /admin/products |
 | RF22 | Editar produto SaaS | F12 | PATCH /admin/products/:id |
 | RF23 | Remover produto SaaS | F12 | DELETE /admin/products/:id |
@@ -73,14 +74,32 @@ Catálogo completo de **Features, Requisitos Funcionais (RF), Não Funcionais (R
 | RF32 | Publicar artigo de FAQ | F17 | togglePublish published=true |
 | RF33 | Despublicar artigo de FAQ | F17 | togglePublish published=false |
 | RF34 | Avaliar artigo de FAQ | F18 | Botões útil/não útil na vitrine |
+| RF35 | Editar dados do cliente/lead | F19 | PATCH /admin/crm/clients/:id (IT2) |
+| RF36 | Inativar cliente/lead | F19 | Soft-delete (`status=inativo`); **reativação ainda não implementada** — item aberto, ver [V&V IT2 · MR.01](/iteracoes/iteracao-2/vv#mr01) (IT2) |
+| RF37 | Cadastrar lead no CRM | F19 | NewLeadModal + POST /admin/crm/clients (IT2) |
+| RF38 | Adicionar colunas no CRM | F20 | POST /admin/crm/columns (IT2) |
+| RF39 | Remover colunas no CRM | F20 | DELETE protegido (invariante ≥1 coluna) (IT2) |
+| RF40 | Editar colunas no CRM | F20 | Nome, cor e reordenação por drag-and-drop (IT2) |
+| RF41 | Atualizar dados operacionais dos cards | F19 | Drag-and-drop entre colunas com rollback otimista (IT2) |
+| RF42 | Adicionar interação comercial | F21 | Timeline no drawer do card (IT2) |
+| RF46 | Listar histórico de notificações | F07 | Central de notificações, ordenada por data (IT2) |
+| RF47 | Alterar status da notificação | F07 | Marcar como lida, atualização otimista (IT2) |
 | RF48 | Editar próprio perfil no painel | F10 | ProfileModal + PATCH /profile/me |
 | RF49 | Detalhar conformidade com a LGPD | F14 | Páginas /privacidade e /cookies |
 | RF50 | Consultar detalhes de produto na vitrine | F15 | Página /produtos/[slug] |
 | RF51 | Permitir utilização de cookies | F15 | Banner de consentimento |
 | RF52 | Filtrar artigos FAQ | F18 | — |
+| RF53 | Remover interação comercial | F21 | Soft-delete (`removed=true`) — **nota:** RN22/AC original descreviam hard-delete; código implementa remoção lógica, ver [V&V IT2 · MR.01](/iteracoes/iteracao-2/vv#mr01) (IT2) |
+| RF56 | Editar template de notificações | F08 | PATCH /admin/notification-templates/:id (IT2) |
+| RF57 | Remover template de notificações | F08 | Inativação lógica + fallback padrão (IT2) |
+| RF59 | Editar interação comercial | F21 | PATCH preserva autor/data originais (IT2) |
+| RF60 | Filtrar e buscar leads no CRM | F19 | Busca por nome/e-mail + filtros de produto/responsável — **novo**, ver [V&V IT2 · MR.02](/iteracoes/iteracao-2/vv#mr02) (IT2) |
+| RF61 | Exportar leads do CRM em CSV | F19 | Exportação respeita os filtros aplicados — **novo**, ver [V&V IT2 · MR.02](/iteracoes/iteracao-2/vv#mr02) (IT2) |
+| RF62 | Visualizar leads em tabela e indicadores do funil | F19 | Toggle Kanban/Tabela + mini-dashboard — **novo**, ver [V&V IT2 · MR.02](/iteracoes/iteracao-2/vv#mr02) (IT2) |
+| RF63 | Personalizar cor e tipo de template de notificação | F08 | Seletor por catálogo fixo + paleta de cores — **novo**, ver [V&V IT2 · MR.04](/iteracoes/iteracao-2/vv#mr04) (IT2) |
 
 </TabItem>
-<TabItem value="planejados" label="Planejados (IT2/IT3)">
+<TabItem value="planejados" label="Planejados (IT3 — pausada)">
 
 | ID | Nome | Feature | CP | OE |
 | -- | ---- | ------- | -- | -- |
@@ -91,32 +110,17 @@ Catálogo completo de **Features, Requisitos Funcionais (RF), Não Funcionais (R
 | RF05 | Exibir indicadores operacionais do sistema | F03 | CP3 | OE1 |
 | RF06 | Filtrar indicadores operacionais | F03 | CP3 | OE1 |
 | RF07 | Exibir indicadores financeiros | F04 | CP3 | OE1 |
-| RF15 | Adicionar template de notificações | F08 | CP9 | OE3 |
 | RF16 | Consultar histórico financeiro | F05 | CP7 | OE1 |
 | RF17 | Consultar detalhes de registro financeiro | F05 | CP7 | OE1 |
 | RF18 | Filtrar registros financeiros | F05 | CP7 | OE1 |
 | RF19 | Exportar relatório financeiro | F06 | CP7 | OE1 |
 | RF20 | Gerar relatório financeiro | F06 | CP7 | OE1 |
-| RF35 | Editar dados do cliente/lead | F19 | CP1 | OE3 |
-| RF36 | Inativar cliente/lead | F19 | CP1 | OE3 |
-| RF37 | Cadastrar lead no CRM | F19 | CP1 | OE3 |
-| RF38 | Adicionar colunas no CRM | F20 | CP1 | OE3 |
-| RF39 | Remover colunas no CRM | F20 | CP1 | OE3 |
-| RF40 | Editar colunas no CRM | F20 | CP1 | OE3 |
-| RF41 | Atualizar dados operacionais dos cards | F19 | CP1 | OE3 |
-| RF42 | Adicionar interação comercial | F21 | CP1 | OE3 |
 | RF43 | Consultar histórico de tickets | F22 | CP8 | OE3 |
 | RF44 | Alterar status do ticket | F23 | CP8 | OE3 |
 | RF45 | Ocultar tickets | F23 | CP8 | OE3 |
-| RF46 | Listar histórico de notificações | F07 | CP9 | OE3 |
-| RF47 | Alterar status da notificação | F07 | CP9 | OE3 |
-| RF53 | Remover interação comercial | F21 | CP1 | OE3 |
 | RF54 | Configurar limiar de alerta crítico | F02 | CP2 | OE1 |
 | RF55 | Filtrar indicadores financeiros | F04 | CP3 | OE1 |
-| RF56 | Editar template de notificações | F08 | CP9 | OE3 |
-| RF57 | Remover template de notificações | F08 | CP9 | OE3 |
 | RF58 | Detalhar informações do ticket | F22 | CP8 | OE3 |
-| RF59 | Editar interação comercial | F21 | CP1 | OE3 |
 
 </TabItem>
 </Tabs>
@@ -195,6 +199,9 @@ Catálogo completo de **Features, Requisitos Funcionais (RF), Não Funcionais (R
 | RN21 | Integridade do funil | O funil mantém ao menos uma coluna; coluna padrão ou com cards não é removida sem realocação dos cards | F20 | RF39 |
 | RN22 | Remoção definitiva de interação | A remoção de uma interação comercial é permanente (hard-delete), excluindo-a do histórico do card | F21 | RF53 |
 | RN23 | Categorização vinculada a produto | Categorias de FAQ são vinculadas a produtos, organizando os artigos da base de conhecimento por produto | F16 | RF31 |
+| RN24 | Escopo de busca, filtros e exportação do CRM | Busca, filtros por produto/responsável, indicadores do funil e exportação em CSV operam exclusivamente sobre leads com status ativo (mesmo conjunto exibido no board Kanban); a exportação reflete somente os leads visíveis após os filtros aplicados no momento da ação | F19 | RF60, RF61, RF62 |
+| RN25 | Ativação exclusiva de template por tipo de evento | Ao salvar (criar ou editar) um template associando-o a um tipo de evento, qualquer outro template previamente ativo para esse mesmo tipo é desativado automaticamente, garantindo no máximo 1 template ativo por tipo sem exigir remoção manual prévia | F08 | RF15, RF63 |
+| RN26 | Catálogo fixo de tipos de notificação | O tipo de evento de um template é restrito a um catálogo fixo pré-definido (não é texto livre); tipos do catálogo ainda sem nenhum ponto do sistema que dispare notificações reais aparecem desabilitados na interface até que a funcionalidade correspondente seja implementada | F08 | RF63 |
 
 <RevisionHistory
   headers={['Versão', 'Data', 'Descrição', 'Autor(es)']}
@@ -203,5 +210,6 @@ Catálogo completo de **Features, Requisitos Funcionais (RF), Não Funcionais (R
     ['1.1', '09/06/2026', 'Status IT1; Regras de Negócio (RN01–RN12)', 'Lucas A. Zanetti'],
     ['2.0', '26/06/2026', 'Página criada no Docusaurus: tabelas de RF/RNF/RN separadas da rastreabilidade, com tabs por iteração', 'Equipe Crianex'],
     ['2.1', '28/06/2026', 'Novas Regras de Negócio (RN13–RN23) cobrindo RFs sem RN; RN11 vinculada a RF50', 'Equipe Crianex'],
+    ['2.2', '01/07/2026', 'F07/F08/F19/F20/F21 concluídas: RFs movidos para "Implementados"; RF60–RF63 novos (busca/filtros/exportação/dashboard do CRM; cor e catálogo de tipo dos templates); RF15 refinado (ativação automática); RN24–RN26. Ver detalhamento em [V&V IT2](/iteracoes/iteracao-2/vv#mr01)', 'Equipe Crianex'],
   ]}
 />
