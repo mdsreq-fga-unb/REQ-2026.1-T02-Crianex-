@@ -24,6 +24,15 @@ const validBody = {
 };
 
 afterAll(async () => {
+  // interactions.client_id é ON DELETE RESTRICT: precisa limpar antes dos clients.
+  const { data: leftoverClients } = await supabase
+    .from('clients')
+    .select('id')
+    .in('email', [OK_EMAIL, ROLLBACK_EMAIL]);
+  const clientIds = (leftoverClients as { id: string }[] | null)?.map((c) => c.id) ?? [];
+  if (clientIds.length) {
+    await supabase.from('interactions').delete().in('client_id', clientIds);
+  }
   await supabase.from('clients').delete().eq('email', OK_EMAIL);
   await supabase.from('clients').delete().eq('email', ROLLBACK_EMAIL);
   await supabase
@@ -70,6 +79,19 @@ describe('POST /api/public/contact — captação de lead em transação ACID (#
     );
     expect(mine).toHaveLength(1);
     expect(mine[0]!.status).toBe('unread');
+
+    // mensagem do formulário vira a interação inicial do histórico do lead
+    const { data: rawInteractions } = await supabase
+      .from('interactions')
+      .select('tipo, conteudo, autor_id')
+      .eq('client_id', clientId);
+    const interactions = rawInteractions as
+      | { tipo: string; conteudo: string; autor_id: string | null }[]
+      | null;
+    expect(interactions).toHaveLength(1);
+    expect(interactions![0]!.tipo).toBe('formulario');
+    expect(interactions![0]!.conteudo).toBe(validBody.message);
+    expect(interactions![0]!.autor_id).toBeNull();
   });
 
   it('rollback: falha em qualquer etapa não deixa linha parcial', async () => {

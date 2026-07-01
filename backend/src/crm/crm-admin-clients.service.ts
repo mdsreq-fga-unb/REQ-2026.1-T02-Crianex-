@@ -147,13 +147,15 @@ async function buildClientView(clientId: string): Promise<CrmAdminClient | null>
   };
 }
 
-export async function listCrmAdminClients(): Promise<CrmAdminClient[]> {
+export async function listCrmAdminClients(
+  status: 'ativo' | 'inativo' = 'ativo'
+): Promise<CrmAdminClient[]> {
   const supabase = getSupabaseClient();
 
   const { data: clients, error } = await supabase
     .from('clients')
     .select('id, nome, email, telefone, status')
-    .eq('status', 'ativo')
+    .eq('status', status)
     .order('created_at', { ascending: false });
 
   if (error) throw error;
@@ -363,4 +365,27 @@ export async function removeCrmAdminClient(id: string): Promise<void> {
 
   if (error) throw error;
   if (!data) throw new CrmAdminClientError('Cliente não encontrado.', 'NOT_FOUND');
+}
+
+// Reativa um lead inativado: volta clients.status para 'ativo', o que já é
+// suficiente para reaparecer em listCrmAdminClients/buildClientView-callers.
+// O card e o histórico de interações nunca foram apagados (RN20), então o lead
+// retorna ao board exatamente onde estava antes da inativação.
+export async function reactivateCrmAdminClient(id: string): Promise<CrmAdminClient> {
+  const supabase = getSupabaseClient();
+
+  const { data, error } = await supabase
+    .from('clients')
+    .update({ status: 'ativo' })
+    .eq('id', id)
+    .eq('status', 'inativo')
+    .select('id')
+    .maybeSingle();
+
+  if (error) throw error;
+  if (!data) throw new CrmAdminClientError('Cliente inativo não encontrado.', 'NOT_FOUND');
+
+  const result = await buildClientView(id);
+  if (!result) throw new CrmAdminClientError('Falha ao recuperar cliente reativado.', 'NOT_FOUND');
+  return result;
 }

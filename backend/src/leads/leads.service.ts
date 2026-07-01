@@ -94,6 +94,7 @@ export async function captureLead(input: ContactInput): Promise<void> {
     p_nome: input.name,
     p_email: input.email,
     p_conteudo: buildNotificationContent(input),
+    p_mensagem: input.message,
   } as never);
 
   if (error) {

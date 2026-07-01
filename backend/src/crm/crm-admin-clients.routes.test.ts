@@ -118,3 +118,47 @@ describe('DELETE /admin/crm/clients/:id', () => {
     expect(res.body).toHaveProperty('message');
   });
 });
+
+describe('GET /admin/crm/clients/inactive', () => {
+  it('lista clientes com status=inativo', async () => {
+    await request(app).get('/admin/crm/clients/inactive').expect(200);
+
+    expect(mocks.query.eq).toHaveBeenCalledWith('status', 'inativo');
+  });
+});
+
+describe('POST /admin/crm/clients/:id/reactivate', () => {
+  it('marca o cliente inativo como ativo novamente e retorna o cliente atualizado', async () => {
+    mocks.maybeSingle
+      .mockResolvedValueOnce({ data: { id: clientId }, error: null }) // update status=ativo
+      .mockResolvedValueOnce({
+        data: {
+          id: clientId,
+          nome: 'Lead Reativado',
+          email: 'lead@reativado.com',
+          telefone: null,
+          status: 'ativo',
+        },
+        error: null,
+      }) // clients lookup em buildClientView
+      .mockResolvedValueOnce({ data: null, error: null }) // client_cards lookup em buildClientView
+      .mockResolvedValueOnce({ data: null, error: null }); // lastInter lookup em buildClientView
+
+    const res = await request(app)
+      .post(`/admin/crm/clients/${clientId}/reactivate`)
+      .expect(200);
+
+    expect(mocks.query.update).toHaveBeenCalledWith({ status: 'ativo' });
+    expect(mocks.query.eq).toHaveBeenCalledWith('status', 'inativo');
+    expect(res.body.status).toBe('ativo');
+  });
+
+  it('cliente inexistente ou já ativo retorna 404', async () => {
+    mocks.maybeSingle.mockResolvedValueOnce({ data: null, error: null });
+
+    const res = await request(app)
+      .post(`/admin/crm/clients/${clientId}/reactivate`)
+      .expect(404);
+    expect(res.body).toHaveProperty('message');
+  });
+});

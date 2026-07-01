@@ -6,6 +6,7 @@ import {
   createCrmAdminClient,
   patchCrmAdminClient,
   removeCrmAdminClient,
+  reactivateCrmAdminClient,
   CrmAdminClientError,
 } from './crm-admin-clients.service.js';
 
@@ -23,6 +24,17 @@ crmAdminClientsRouter.get('/', ...viewGuard, async (_req, res) => {
   } catch (err) {
     console.error('[crm-admin-clients] list error:', err);
     res.status(500).json({ message: 'Falha ao listar clientes.' });
+  }
+});
+
+// GET /api/admin/crm/clients/inactive — lista leads inativados, para permitir reativação (RF36)
+crmAdminClientsRouter.get('/inactive', ...viewGuard, async (_req, res) => {
+  try {
+    const clients = await listCrmAdminClients('inativo');
+    res.status(200).json(clients);
+  } catch (err) {
+    console.error('[crm-admin-clients] list inactive error:', err);
+    res.status(500).json({ message: 'Falha ao listar clientes inativos.' });
   }
 });
 
@@ -134,6 +146,27 @@ crmAdminClientsRouter.delete('/:id', ...deleteGuard, async (req, res) => {
     }
     console.error('[crm-admin-clients] remove error:', err);
     res.status(500).json({ message: 'Falha ao remover cliente.' });
+  }
+});
+
+// POST /api/admin/crm/clients/:id/reactivate — volta o lead inativado ao board (RF36)
+crmAdminClientsRouter.post('/:id/reactivate', ...editGuard, async (req, res) => {
+  const id = typeof req.params?.['id'] === 'string' ? req.params['id'].trim() : '';
+  if (!id) {
+    res.status(400).json({ message: 'ID do cliente é obrigatório.' });
+    return;
+  }
+
+  try {
+    const client = await reactivateCrmAdminClient(id);
+    res.status(200).json(client);
+  } catch (err) {
+    if (err instanceof CrmAdminClientError && err.code === 'NOT_FOUND') {
+      res.status(404).json({ message: err.message });
+      return;
+    }
+    console.error('[crm-admin-clients] reactivate error:', err);
+    res.status(500).json({ message: 'Falha ao reativar cliente.' });
   }
 });
 

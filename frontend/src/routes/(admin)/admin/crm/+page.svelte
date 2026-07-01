@@ -9,6 +9,7 @@
     Download,
     LayoutGrid,
     Rows3,
+    UserCheck,
   } from 'lucide-svelte';
   import { apiFetch } from '$lib/api/backend';
   import { onMount } from 'svelte';
@@ -126,6 +127,44 @@
   function handleDeleteLead(id: string) {
     clients = clients.filter((c) => c.id !== id);
     activeClient = null;
+  }
+
+  // ── Leads inativos (RN20 — inativação preserva o registro; RF36 — reativação) ──
+  let showInactiveModal = $state(false);
+  let inactiveClients = $state<CrmClient[]>([]);
+  let inactiveLoading = $state(false);
+  let inactiveError = $state('');
+  let reactivatingId = $state<string | null>(null);
+
+  async function openInactiveModal() {
+    showInactiveModal = true;
+    inactiveLoading = true;
+    inactiveError = '';
+    try {
+      inactiveClients = await apiFetch<CrmClient[]>('/admin/crm/clients/inactive');
+    } catch (err) {
+      const e = err as { message?: string };
+      inactiveError = e.message || 'Erro ao carregar leads inativos.';
+    } finally {
+      inactiveLoading = false;
+    }
+  }
+
+  async function reactivateClient(id: string) {
+    reactivatingId = id;
+    inactiveError = '';
+    try {
+      const reactivated = await apiFetch<CrmClient>(`/admin/crm/clients/${id}/reactivate`, {
+        method: 'POST',
+      });
+      inactiveClients = inactiveClients.filter((c) => c.id !== id);
+      clients = [reactivated, ...clients];
+    } catch (err) {
+      const e = err as { message?: string };
+      inactiveError = e.message || 'Erro ao reativar lead.';
+    } finally {
+      reactivatingId = null;
+    }
   }
 
   // Column editor state
@@ -407,6 +446,9 @@
     </button>
     <button class="btn ghost sm" onclick={exportCSV}>
       <Download size={13} /> CSV
+    </button>
+    <button class="btn ghost sm" onclick={openInactiveModal}>
+      <UserCheck size={13} /> Leads inativos
     </button>
     <button class="btn sm" onclick={() => openAddLead(columns[0]?.id || '')}>
       <Plus size={13} /> Novo lead
@@ -798,6 +840,56 @@
     }}
     onDelete={handleDeleteLead}
   />
+{/if}
+
+<!-- ── Leads Inativos Modal ── -->
+{#if showInactiveModal}
+  <div class="admin-overlay" role="presentation" onclick={() => (showInactiveModal = false)}>
+    <div
+      class="admin-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Leads inativos"
+      tabindex="-1"
+      onclick={(e) => e.stopPropagation()}
+      onkeydown={(e) => e.key === 'Escape' && (showInactiveModal = false)}
+    >
+      <div class="admin-modal-head">
+        <h3>Leads inativos</h3>
+        <span class="crumbs">/ crm / inativos</span>
+        <button class="x" onclick={() => (showInactiveModal = false)}><X size={13} /></button>
+      </div>
+      <div class="admin-modal-body">
+        {#if inactiveError}
+          <div class="crm-err-banner">{inactiveError}</div>
+        {/if}
+        {#if inactiveLoading}
+          <p class="crm-inactive-empty">Carregando…</p>
+        {:else if inactiveClients.length === 0}
+          <p class="crm-inactive-empty">Nenhum lead inativo no momento.</p>
+        {:else}
+          <div class="crm-inactive-list">
+            {#each inactiveClients as c (c.id)}
+              <div class="crm-inactive-row">
+                <div class="crm-inactive-info">
+                  <strong>{c.name}</strong>
+                  <span>{c.email}</span>
+                </div>
+                <button
+                  class="btn sm"
+                  disabled={reactivatingId === c.id}
+                  onclick={() => reactivateClient(c.id)}
+                >
+                  <UserCheck size={13} />
+                  {reactivatingId === c.id ? 'Reativando…' : 'Reativar'}
+                </button>
+              </div>
+            {/each}
+          </div>
+        {/if}
+      </div>
+    </div>
+  </div>
 {/if}
 
 <!-- ── New Lead Modal ── -->
@@ -1300,6 +1392,44 @@
     font-size: 12.5px;
     color: var(--text);
     margin-bottom: 12px;
+  }
+
+  /* ── Leads inativos ── */
+  .crm-inactive-empty {
+    font-size: 13px;
+    color: var(--text-faint);
+    text-align: center;
+    padding: 24px 0;
+  }
+  .crm-inactive-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .crm-inactive-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    border-radius: 9px;
+  }
+  .crm-inactive-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+  .crm-inactive-info strong {
+    font-size: 13px;
+  }
+  .crm-inactive-info span {
+    font-size: 12px;
+    color: var(--text-faint);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   /* ── Responsive ── */

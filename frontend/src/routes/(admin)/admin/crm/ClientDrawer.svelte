@@ -11,6 +11,7 @@
     Edit2,
     Check,
     Trash2,
+    UserX,
   } from 'lucide-svelte';
   import type { CrmClient } from './+page.svelte';
   import type { CrmInteraction, InteractionType } from '$lib/types/crm';
@@ -66,8 +67,9 @@
   const mail = $derived(mailLink(client.name, client.email));
   const tel = $derived(phoneDigits(client.phone));
 
-  // ── Excluir lead (soft-delete, com confirmação — não existe no protótipo, mas é
-  // uma ação destrutiva importante o suficiente para exigir um passo extra) ──
+  // ── Inativar lead (soft-delete, com confirmação — não existe no protótipo, mas é
+  // uma ação importante o suficiente para exigir um passo extra). Nunca exclui o
+  // registro: apenas marca status='inativo' (RN20), preservando o histórico ──
   let confirmDeleteLead = $state(false);
   let deleteError = $state('');
   let isDeleting = $state(false);
@@ -80,7 +82,7 @@
       onDelete(client.id);
     } catch (err) {
       const e = err as { message?: string };
-      deleteError = e.message || 'Erro ao remover lead.';
+      deleteError = e.message || 'Erro ao inativar lead.';
       confirmDeleteLead = false;
     } finally {
       isDeleting = false;
@@ -248,9 +250,9 @@
           <button
             class="action-btn danger"
             onclick={() => (confirmDeleteLead = true)}
-            title="Remover lead"
+            title="Inativar lead"
           >
-            <Trash2 size={14} />
+            <UserX size={14} />
           </button>
           <button class="close-btn" onclick={onClose}><X size={16} /></button>
         </div>
@@ -385,6 +387,8 @@
                     <Bot size={13} />
                   {:else if inter.tipo === 'call'}
                     <Headphones size={13} />
+                  {:else if inter.tipo === 'formulario'}
+                    <MessageCircle size={13} />
                   {:else}
                     <Mail size={13} />
                   {/if}
@@ -443,7 +447,9 @@
                     </div>
                   {:else}
                     <div class="text">
-                      <strong>{inter.autor_nome || 'Usuário'}</strong> • {inter.conteudo}
+                      <strong>
+                        {inter.autor_nome || (inter.tipo === 'formulario' ? 'Lead (formulário público)' : 'Usuário')}
+                      </strong> • {inter.conteudo}
                     </div>
                   {/if}
                 </div>
@@ -500,23 +506,23 @@
   </div>
 </div>
 
-<!-- ── Confirmação de remoção do lead ── -->
+<!-- ── Confirmação de inativação do lead ── -->
 {#if confirmDeleteLead}
   <div class="admin-overlay" role="presentation" onclick={() => (confirmDeleteLead = false)}>
     <div
       class="confirm-modal"
       role="dialog"
       aria-modal="true"
-      aria-label="Confirmar remoção do lead"
+      aria-label="Confirmar inativação do lead"
       tabindex="-1"
       onclick={(e) => e.stopPropagation()}
       onkeydown={(e) => e.key === 'Escape' && (confirmDeleteLead = false)}
     >
-      <div class="confirm-icon"><Trash2 size={20} /></div>
-      <h3>Remover lead?</h3>
+      <div class="confirm-icon"><UserX size={20} /></div>
+      <h3>Inativar lead?</h3>
       <p>
-        <strong>{client.name}</strong> será removido do pipeline. O histórico de interações é preservado
-        para auditoria, mas o lead deixa de aparecer no board.
+        <strong>{client.name}</strong> será inativado e deixa de aparecer no board do funil. O
+        cadastro e o histórico de interações são preservados para auditoria — nada é excluído.
       </p>
       {#if deleteError}
         <div class="crm-err-banner">{deleteError}</div>
@@ -526,7 +532,7 @@
           >Cancelar</button
         >
         <button class="btn-confirm-delete" onclick={handleDeleteLead} disabled={isDeleting}>
-          {isDeleting ? 'Removendo…' : 'Remover lead'}
+          {isDeleting ? 'Inativando…' : 'Inativar lead'}
         </button>
       </div>
     </div>
@@ -771,6 +777,10 @@
   .icon-wrapper.email {
     background: rgba(236, 72, 153, 0.15);
     color: #f472b6;
+  }
+  .icon-wrapper.formulario {
+    background: rgba(231, 31, 132, 0.15);
+    color: #e71f84;
   }
 
   .interaction-content {
