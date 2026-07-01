@@ -2,6 +2,7 @@ import { getSupabaseClient } from '../config/supabase.js';
 
 export type CrmAdminClient = {
   id: string;
+  card_id: string | null;
   name: string;
   email: string;
   status: 'ativo' | 'inativo';
@@ -66,7 +67,7 @@ async function buildClientView(clientId: string): Promise<CrmAdminClient | null>
 
   const { data: card } = await supabase
     .from('client_cards')
-    .select('column_id, responsavel, produto_vinculado')
+    .select('id, column_id, responsavel, produto_vinculado')
     .eq('client_id', clientId)
     .maybeSingle();
 
@@ -97,6 +98,7 @@ async function buildClientView(clientId: string): Promise<CrmAdminClient | null>
 
   return {
     id: client.id,
+    card_id: card?.id ?? null,
     name: client.nome,
     email: client.email,
     status: client.status as 'ativo' | 'inativo',
@@ -124,7 +126,7 @@ export async function listCrmAdminClients(): Promise<CrmAdminClient[]> {
 
   const { data: cards } = await supabase
     .from('client_cards')
-    .select('client_id, column_id, responsavel, produto_vinculado')
+    .select('id, client_id, column_id, responsavel, produto_vinculado')
     .in('client_id', clientIds);
 
   const productIds = [...new Set((cards ?? []).map((c) => c.produto_vinculado).filter(Boolean))];
@@ -154,6 +156,7 @@ export async function listCrmAdminClients(): Promise<CrmAdminClient[]> {
     const card = cardMap.get(client.id);
     return {
       id: client.id,
+      card_id: card?.id ?? null,
       name: client.nome,
       email: client.email,
       status: client.status as 'ativo' | 'inativo',

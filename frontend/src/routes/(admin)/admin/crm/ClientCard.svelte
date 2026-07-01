@@ -2,13 +2,32 @@
   import { Bot } from 'lucide-svelte';
   import type { CrmClient } from './+page.svelte';
 
-  let { client, onclick } = $props<{
+  let {
+    client,
+    onclick,
+    dragging = false,
+    ondragstart,
+    ondragend,
+  } = $props<{
     client: CrmClient;
     onclick: () => void;
+    dragging?: boolean;
+    ondragstart?: () => void;
+    ondragend?: () => void;
   }>();
 </script>
 
-<button class="crm-lead-card" {onclick}>
+<button
+  class="crm-lead-card {dragging ? 'dragging' : ''}"
+  {onclick}
+  draggable={true}
+  ondragstart={(e) => {
+    e.dataTransfer?.setData('text/plain', client.id);
+    if (e.dataTransfer) e.dataTransfer.effectAllowed = 'move';
+    ondragstart?.();
+  }}
+  ondragend={() => ondragend?.()}
+>
   <div class="card-header">
     <h4 class="company-name">{client.name}</h4>
     <span class="contact-email">{client.email || 'Sem e-mail'}</span>
@@ -50,6 +69,10 @@
   .crm-lead-card:hover {
     border-color: #4b4b5c;
     background-color: #1a1a1f;
+  }
+
+  .crm-lead-card.dragging {
+    opacity: 0.4;
   }
 
   .card-header {
