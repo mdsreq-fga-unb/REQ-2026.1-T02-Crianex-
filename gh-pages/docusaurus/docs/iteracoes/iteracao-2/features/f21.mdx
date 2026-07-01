@@ -5,7 +5,7 @@ sidebar_label: "F21 · Registrar interações comerciais"
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import ProtoEmbed from '@site/src/components/ProtoEmbed';
+import AccessCredentials from '@site/src/components/AccessCredentials';
 
 # F21 — Registrar interações comerciais
 
@@ -13,23 +13,19 @@ import ProtoEmbed from '@site/src/components/ProtoEmbed';
 
 **Issue da Feature (GitHub):** [#178 — abrir no GitHub](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/178)
 
+**Protótipo:** [Protótipo CRM (IT2)](/iteracoes/iteracao-2/evidencias/prototipo) — compartilhado entre F19, F20 e F21; a timeline de interações está na seção de detalhe do card.
+
 **Deploy:** _link a definir_
 
 :::note[Acesso para avaliação]
-Esta funcionalidade exige **login de administrador**. Credenciais para o professor: **e-mail** `a definir` · **senha** `a definir`.
+Esta funcionalidade exige **login de administrador**.
+
+<AccessCredentials email="owner@crianex.com" password="Crianex@Owner1" />
 :::
 
 :::caution[Achado de auditoria — AC de RF53 desatualizado]
 O critério de aceite original de RF53 (e RN22) descrevia remoção de interação como **exclusão permanente (hard-delete)**. A implementação real é **remoção lógica (soft-delete, `removed=true`)**, que preserva o histórico — comportamento mais seguro, mas diferente do documentado originalmente. Pauta aberta para a reunião de refinamento: ver [Resultados V&V da IT2 — MR.01](/iteracoes/iteracao-2/vv#mr01).
 :::
-
-## Protótipo
-
-Protótipo de alta fidelidade do CRM interno (compartilhado entre F19, F20 e F21 — mesmo board Kanban), validado com o cliente antes da implementação. A timeline de interações está na seção de detalhe do card.
-
-<ProtoEmbed path="proto/iteracao-2/PrototipoCrianexCRM/" height={480} label="Abrir protótipo do CRM em tela cheia" />
-
-Ver também: [Página de evidências do protótipo](/iteracoes/iteracao-2/evidencias/prototipo).
 
 ## Requisitos (evidências)
 

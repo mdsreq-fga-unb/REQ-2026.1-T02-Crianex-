@@ -5,6 +5,7 @@ sidebar_label: "F08 · Gerenciar templates de notificaç"
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import AccessCredentials from '@site/src/components/AccessCredentials';
 
 # F08 — Gerenciar templates de notificações
 
@@ -12,19 +13,19 @@ import TabItem from '@theme/TabItem';
 
 **Issue da Feature (GitHub):** [#180 — abrir no GitHub](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/180)
 
+**Protótipo:** [Protótipo V2 (IT1)](/iteracoes/iteracao-1/evidencias/prototipo) — está na seção de notificações do protótipo geral do painel administrativo.
+
 **Deploy:** _link a definir_
 
 :::note[Acesso para avaliação]
-Esta funcionalidade exige **login de administrador**. Credenciais para o professor: **e-mail** `a definir` · **senha** `a definir`.
+Esta funcionalidade exige **login de administrador**.
+
+<AccessCredentials email="owner@crianex.com" password="Crianex@Owner1" />
 :::
 
 :::info[Refinamento pós-implementação]
 RF63 foi adicionado após a entrega inicial (seleção de tipo por catálogo fixo + cor personalizável por template). O AC de RF15 também foi revisado: o bloqueio de duplicidade por tipo de evento (409) foi substituído por ativação automática com substituição do template anterior. Detalhamento completo em [Resultados V&V da IT2 — MR.03/MR.04](/iteracoes/iteracao-2/vv#mr03).
 :::
-
-## Protótipo
-
-Não há protótipo de alta fidelidade dedicado a esta feature — a tela de gestão de templates foi validada diretamente na Technical Design Review e nas evidências abaixo, sem etapa de prototipagem em Figma/HTML separada.
 
 ## Requisitos (evidências)
 
