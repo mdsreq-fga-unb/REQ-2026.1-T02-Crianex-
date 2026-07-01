@@ -35,7 +35,7 @@ run_concurrent() {
     status=$(echo "$result" | awk '{print $1}')
     time_s=$(echo "$result" | awk '{print $2}')
     local time_ms
-    time_ms=$(echo "$time_s * 1000" | bc 2>/dev/null | cut -d. -f1)
+    time_ms=$(awk "BEGIN {printf \"%d\", $time_s * 1000}")
     time_ms="${time_ms:-9999}"
 
     if [ "$status" -ne 200 ] 2>/dev/null; then errors=$((errors + 1)); fi
