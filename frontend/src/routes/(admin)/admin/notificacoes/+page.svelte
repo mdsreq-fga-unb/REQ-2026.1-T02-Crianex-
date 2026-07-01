@@ -1,10 +1,12 @@
 <script lang="ts">
-  import { Bell, Users, Check, ShieldAlert } from 'lucide-svelte';
+  import { Bell, Users, Check, ShieldAlert, X } from 'lucide-svelte';
+  import { apiFetch } from '$lib/api/backend';
   import { unreadCount } from '$lib/stores/notifications';
   import {
     groupByDay,
     relativeTime,
     iconForTipo,
+    setStatus,
     type Notification,
   } from '$lib/utils/notifications';
 
@@ -18,13 +20,21 @@
   }>();
 
   let tab = $state<'all' | 'unread'>('all');
+  // Cópia local mutável para permitir o update otimista ao marcar como lida.
+  let items = $state<Notification[]>([]);
+  let pending = $state<Set<string>>(new Set());
+  let actionError = $state('');
+
+  $effect(() => {
+    items = data.notifications.map((n) => ({ ...n }));
+  });
 
   const unreadOnly = (list: Notification[]) => list.filter((n) => n.status === 'unread');
-  let filtered = $derived(tab === 'unread' ? unreadOnly(data.notifications) : data.notifications);
+  let filtered = $derived(tab === 'unread' ? unreadOnly(items) : items);
   let groups = $derived(groupByDay(filtered));
-  let unreadTotal = $derived(unreadOnly(data.notifications).length);
+  let unreadTotal = $derived(unreadOnly(items).length);
 
-  // Mantém o badge global do shell em sincronia com o que a central conhece.
+  // Mantém o badge global do shell em sincronia com o load do servidor.
   $effect(() => {
     unreadCount.set(data.unreadCount);
   });
@@ -34,6 +44,32 @@
   function humanize(tipo: string): string {
     const s = tipo.replace(/_/g, ' ').trim();
     return s.charAt(0).toUpperCase() + s.slice(1);
+  }
+
+  // Marca uma notificação como lida com atualização otimista do contador
+  // (badge global + UI da central) e rollback em caso de erro do backend. (#190)
+  async function markAsRead(n: Notification) {
+    if (n.status === 'read' || pending.has(n.id)) return;
+
+    pending = new Set(pending).add(n.id);
+    items = setStatus(items, n.id, 'read'); // otimista
+    unreadCount.update((c) => Math.max(0, c - 1));
+
+    try {
+      await apiFetch(`/admin/notifications/${n.id}`, {
+        method: 'PATCH',
+        body: JSON.stringify({ status: 'read' }),
+      });
+      actionError = '';
+    } catch {
+      items = setStatus(items, n.id, 'unread'); // rollback
+      unreadCount.update((c) => c + 1);
+      actionError = 'Não foi possível marcar como lida. Tente novamente.';
+    } finally {
+      const next = new Set(pending);
+      next.delete(n.id);
+      pending = next;
+    }
   }
 </script>
 
@@ -54,9 +90,18 @@
       {/if}
     </header>
 
+    {#if actionError}
+      <div class="notif-err-banner action">
+        <span>{actionError}</span>
+        <button class="dismiss" aria-label="Fechar aviso" onclick={() => (actionError = '')}>
+          <X size={14} />
+        </button>
+      </div>
+    {/if}
+
     <div class="notif-tabs">
       <button class="tab {tab === 'all' ? 'on' : ''}" onclick={() => (tab = 'all')}>
-        Tudo <span class="badge">{data.notifications.length}</span>
+        Tudo <span class="badge">{items.length}</span>
       </button>
       <button class="tab {tab === 'unread' ? 'on' : ''}" onclick={() => (tab = 'unread')}>
         Não lidas <span class="badge">{unreadTotal}</span>
@@ -86,6 +131,17 @@
                   <div class="desc">{n.conteudo}</div>
                 </div>
                 <span class="t">{relativeTime(n.created_at)}</span>
+                {#if n.status === 'unread'}
+                  <button
+                    class="mark-btn"
+                    title="Marcar como lida"
+                    aria-label="Marcar como lida"
+                    disabled={pending.has(n.id)}
+                    onclick={() => markAsRead(n)}
+                  >
+                    <Check size={14} />
+                  </button>
+                {/if}
               </li>
             {/each}
           </ul>
@@ -270,5 +326,53 @@
     background: var(--hot-soft, rgba(231, 31, 132, 0.08));
     color: var(--text);
     font-size: 13px;
+  }
+  .notif-err-banner.action {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+  .notif-err-banner.action span {
+    flex: 1;
+  }
+  .notif-err-banner .dismiss {
+    background: transparent;
+    border: 0;
+    color: var(--text-muted);
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    padding: 2px;
+    border-radius: 6px;
+  }
+  .notif-err-banner .dismiss:hover {
+    color: var(--text);
+  }
+
+  .mark-btn {
+    flex-shrink: 0;
+    width: 26px;
+    height: 26px;
+    border-radius: 7px;
+    border: 1px solid var(--line);
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    transition:
+      background 0.12s,
+      color 0.12s,
+      border-color 0.12s;
+  }
+  .mark-btn:hover:not(:disabled) {
+    background: var(--pos-soft, rgba(102, 223, 122, 0.18));
+    color: var(--green);
+    border-color: transparent;
+  }
+  .mark-btn:disabled {
+    opacity: 0.5;
+    cursor: default;
   }
 </style>

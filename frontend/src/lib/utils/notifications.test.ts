@@ -4,6 +4,7 @@ import {
   formatDayLabel,
   relativeTime,
   iconForTipo,
+  setStatus,
   type Notification,
 } from './notifications';
 
@@ -69,5 +70,26 @@ describe('iconForTipo', () => {
   it('mapeia novo_lead e tem fallback', () => {
     expect(iconForTipo('novo_lead')).toEqual({ icon: 'users', color: '#7f3fe5' });
     expect(iconForTipo('qualquer_outro').icon).toBe('bell');
+  });
+});
+
+describe('setStatus', () => {
+  const base: Notification[] = [
+    mk('a', '2026-06-30T10:00:00.000Z', 'unread'),
+    mk('b', '2026-06-30T09:00:00.000Z', 'unread'),
+  ];
+
+  it('altera apenas o item alvo, sem mutar o array original', () => {
+    const next = setStatus(base, 'a', 'read');
+    expect(next.find((n) => n.id === 'a')!.status).toBe('read');
+    expect(next.find((n) => n.id === 'b')!.status).toBe('unread');
+    // imutabilidade
+    expect(base.find((n) => n.id === 'a')!.status).toBe('unread');
+    expect(next).not.toBe(base);
+  });
+
+  it('id inexistente mantém os status', () => {
+    const next = setStatus(base, 'zzz', 'read');
+    expect(next.map((n) => n.status)).toEqual(['unread', 'unread']);
   });
 });
