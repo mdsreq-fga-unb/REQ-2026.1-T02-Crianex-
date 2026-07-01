@@ -152,7 +152,7 @@ const RNFS: RnfDef[] = [
   {id: 'RNF16', label: 'RNF16 · Stack obrigatório',   href: '/backlog/requisitos#rnf16'},
   {id: 'RNF17', label: 'RNF17 · Cob. testes',         href: '/backlog/requisitos#rnf17'},
   {id: 'RNF18', label: 'RNF18 · Portabilidade',       href: '/backlog/requisitos#rnf18'},
-  {id: 'RNF19', label: 'RNF19 · Navegação intuitiva', href: '/backlog/requisitos#rnf19'},
+  {id: 'RNF19', label: 'RNF19 · Alcançável em 3 cliques', href: '/backlog/requisitos#rnf19'},
   {id: 'RNF20', label: 'RNF20 · Disponibilidade',     href: '/backlog/requisitos#rnf20'},
   {id: 'RNF21', label: 'RNF21 · Drag-drop cards',     href: '/backlog/requisitos#rnf21'},
   {id: 'RNF22', label: 'RNF22 · Drag-drop colunas',   href: '/backlog/requisitos#rnf22'},

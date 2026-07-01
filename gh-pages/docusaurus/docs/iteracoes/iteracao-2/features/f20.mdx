@@ -89,8 +89,8 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 
 #### RNF01 — Isolamento de acesso administrativo
 
-**Classificação:** Segurança da Informação  
-**Descrição:** Área administrativa em endpoint distinto, acessível apenas mediante autenticação.
+**Classificação:** Segurança  
+**Descrição:** Toda rota do painel administrativo é servida em endpoint/caminho distinto do site público e exige token de sessão (JWT) válido; requisições sem token válido recebem HTTP 401/403 e nunca renderizam dados administrativos, mesmo parcialmente.
 
 **Evidência (screenshot):**
 
@@ -103,8 +103,8 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 
 #### RNF09 — Controle de acesso por linha (RLS)
 
-**Classificação:** Segurança da Informação  
-**Descrição:** Row Level Security restringindo leitura ao perfil autorizado.
+**Classificação:** Segurança  
+**Descrição:** Toda tabela com dados sensíveis (clientes, leads, notificações, membros) tem política de Row Level Security ativa no banco, restringindo leitura/escrita ao perfil autorizado mesmo em acesso direto ao banco; verificado por teste com credencial de perfil não autorizado.
 
 **Evidência (screenshot):**
 
@@ -118,7 +118,7 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 #### RNF22 — Reorganização intuitiva (colunas do CRM)
 
 **Classificação:** Usabilidade  
-**Descrição:** Reordenação de colunas por drag-and-drop com atualização ≤ 1,5s.
+**Descrição:** A reordenação de colunas do funil por arrastar-e-soltar reflete visualmente a nova ordem em até 1,5s após soltar a coluna, sem recarregar a página, com rollback visual para a ordem original em caso de falha ao persistir.
 
 **Evidência (screenshot):**
 

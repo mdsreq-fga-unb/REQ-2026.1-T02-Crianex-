@@ -67,8 +67,8 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 
 #### RNF01 — Isolamento de acesso administrativo
 
-**Classificação:** Segurança da Informação  
-**Descrição:** Área administrativa em endpoint distinto, acessível apenas mediante autenticação.
+**Classificação:** Segurança  
+**Descrição:** Toda rota do painel administrativo é servida em endpoint/caminho distinto do site público e exige token de sessão (JWT) válido; requisições sem token válido recebem HTTP 401/403 e nunca renderizam dados administrativos, mesmo parcialmente.
 
 **Evidência (screenshot):**
 
@@ -82,7 +82,7 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 #### RNF03 — Tempo de resposta da área administrativa
 
 **Classificação:** Eficiência  
-**Descrição:** Operações de leitura no painel em ≤ 2s em 95% das requisições.
+**Descrição:** 95% das operações de leitura no painel administrativo (listagens, dashboards, detalhes de registro) retornam em até 2 segundos, do disparo da requisição HTTP à resposta completa da API, sob carga normal de uso (≤ 10 usuários simultâneos).
 
 **Evidência (screenshot):**
 
@@ -95,8 +95,8 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 
 #### RNF08 — Criptografia de credenciais
 
-**Classificação:** Segurança da Informação  
-**Descrição:** Senhas com hash Argon2id/bcrypt, salt individual e custo ≥ 12.
+**Classificação:** Segurança  
+**Descrição:** Senhas são armazenadas exclusivamente como hash Argon2id (ou bcrypt) com salt único por registro e fator de custo ≥ 12; a senha em texto claro nunca é persistida, logada ou trafegada fora do canal HTTPS de autenticação.
 
 **Evidência (screenshot):**
 

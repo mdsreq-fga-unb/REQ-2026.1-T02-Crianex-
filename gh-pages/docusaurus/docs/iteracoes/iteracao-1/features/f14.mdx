@@ -60,7 +60,7 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 #### RNF02 — Tempo de resposta da vitrine
 
 **Classificação:** Eficiência  
-**Descrição:** Carregamento das páginas públicas em ≤ 2s em 95% das requisições (4G).
+**Descrição:** 95% das requisições de carregamento de páginas públicas (produtos, institucional, FAQ) respondem em até 2 segundos, medidos em condição de rede 4G simulada (Lighthouse/WebPageTest), do primeiro byte à renderização completa do conteúdo principal.
 
 **Evidência (screenshot):**
 
@@ -73,8 +73,8 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 
 #### RNF10 — Proteção contra abuso do formulário público
 
-**Classificação:** Segurança da Informação  
-**Descrição:** Rate limit de 5 submissões por IP a cada 10 minutos.
+**Classificação:** Segurança  
+**Descrição:** O formulário público de contato/captação de lead aplica rate limit de no máximo 5 submissões por IP a cada 10 minutos; submissões acima do limite retornam HTTP 429 sem persistir dados.
 
 **Evidência (screenshot):**
 
@@ -87,8 +87,8 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 
 #### RNF11 — Conformidade parcial com LGPD
 
-**Classificação:** Legal  
-**Descrição:** Consentimento, finalidade, minimização e direito de exclusão (Lei 13.709/2018).
+**Classificação:** Externo  
+**Descrição:** A captação de dados de leads/clientes exige consentimento explícito registrado antes da persistência, informa a finalidade do tratamento, coleta apenas dados estritamente necessários (minimização) e permite exclusão mediante solicitação em até 5 dias úteis.
 
 **Evidência (screenshot):**
 

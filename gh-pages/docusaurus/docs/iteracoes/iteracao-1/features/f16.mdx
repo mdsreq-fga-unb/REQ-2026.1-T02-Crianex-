@@ -104,8 +104,8 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 
 #### RNF01 — Isolamento de acesso administrativo
 
-**Classificação:** Segurança da Informação  
-**Descrição:** Área administrativa em endpoint distinto, acessível apenas mediante autenticação.
+**Classificação:** Segurança  
+**Descrição:** Toda rota do painel administrativo é servida em endpoint/caminho distinto do site público e exige token de sessão (JWT) válido; requisições sem token válido recebem HTTP 401/403 e nunca renderizam dados administrativos, mesmo parcialmente.
 
 **Evidência (screenshot):**
 
@@ -118,8 +118,8 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 
 #### RNF04 — Renderização server-side da vitrine
 
-**Classificação:** Eficiência  
-**Descrição:** Páginas públicas renderizadas via SSR para indexação completa.
+**Classificação:** Organizacional  
+**Descrição:** Todas as páginas públicas da vitrine são renderizadas no servidor (SSR) antes do envio ao cliente: o HTML inicial já contém o conteúdo textual completo, verificável via `curl`/"view-source" sem executar JavaScript.
 
 **Evidência (screenshot):**
 
@@ -132,8 +132,8 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 
 #### RNF05 — Otimização para mecanismos de busca (SEO)
 
-**Classificação:** Usabilidade  
-**Descrição:** Metadados semânticos, sitemap.xml, robots.txt e Open Graph.
+**Classificação:** Externo  
+**Descrição:** Cada página pública expõe meta tags (title, description, Open Graph), `sitemap.xml` atualizado a cada publicação e `robots.txt` permitindo indexação; validado sem erros no Google Rich Results Test e nota ≥ 90 no Lighthouse SEO.
 
 **Evidência (screenshot):**
 

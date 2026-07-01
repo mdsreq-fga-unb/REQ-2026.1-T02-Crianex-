@@ -175,8 +175,8 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 
 #### RNF01 — Isolamento de acesso administrativo
 
-**Classificação:** Segurança da Informação  
-**Descrição:** Área administrativa em endpoint distinto, acessível apenas mediante autenticação.
+**Classificação:** Segurança  
+**Descrição:** Toda rota do painel administrativo é servida em endpoint/caminho distinto do site público e exige token de sessão (JWT) válido; requisições sem token válido recebem HTTP 401/403 e nunca renderizam dados administrativos, mesmo parcialmente.
 
 **Evidência (screenshot):**
 
@@ -190,7 +190,7 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 #### RNF03 — Tempo de resposta da área administrativa
 
 **Classificação:** Eficiência  
-**Descrição:** Operações de leitura no painel em ≤ 2s em 95% das requisições.
+**Descrição:** 95% das operações de leitura no painel administrativo (listagens, dashboards, detalhes de registro) retornam em até 2 segundos, do disparo da requisição HTTP à resposta completa da API, sob carga normal de uso (≤ 10 usuários simultâneos).
 
 **Evidência (screenshot):**
 
@@ -203,8 +203,8 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 
 #### RNF09 — Controle de acesso por linha (RLS)
 
-**Classificação:** Segurança da Informação  
-**Descrição:** Row Level Security restringindo leitura ao perfil autorizado.
+**Classificação:** Segurança  
+**Descrição:** Toda tabela com dados sensíveis (clientes, leads, notificações, membros) tem política de Row Level Security ativa no banco, restringindo leitura/escrita ao perfil autorizado mesmo em acesso direto ao banco; verificado por teste com credencial de perfil não autorizado.
 
 **Evidência (screenshot):**
 
@@ -218,7 +218,7 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 #### RNF24 — Cards do CRM resumidos e expansíveis
 
 **Classificação:** Usabilidade  
-**Descrição:** Informação essencial no card, expansível sem redirecionamento.
+**Descrição:** Cada card de lead/cliente no board Kanban exibe, em estado resumido, nome, produto vinculado e responsável, sendo expansível (clique) para o detalhe completo e o histórico de interações sem redirecionamento de página.
 
 **Evidência (screenshot):**
 
@@ -232,7 +232,7 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 #### RNF25 — Atualização drag-and-drop dos cards do CRM
 
 **Classificação:** Usabilidade  
-**Descrição:** Atualização visual imediata em ≤ 1,5s sem recarregar a página.
+**Descrição:** Mover um card entre colunas do funil por arrastar-e-soltar atualiza visualmente a coluna do card em até 1,5s após soltar, sem recarregar a página; falha ao persistir retorna o card à coluna de origem (rollback visual).
 
 **Evidência (screenshot):**
 

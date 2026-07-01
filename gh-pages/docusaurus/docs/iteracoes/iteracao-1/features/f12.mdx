@@ -105,7 +105,11 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 #### RNF03 — Tempo de resposta da área administrativa
 
 **Classificação:** Eficiência  
-**Descrição:** Operações de leitura no painel em ≤ 2s em 95% das requisições.
+**Descrição:** 95% das operações de leitura no painel administrativo (listagens, dashboards, detalhes de registro) retornam em até 2 segundos, do disparo da requisição HTTP à resposta completa da API, sob carga normal de uso (≤ 10 usuários simultâneos).
+
+:::tip[Como capturar essa evidência]
+Abra o DevTools do navegador (F12) → aba **Network** → recarregue a tela de produtos do painel administrativo → clique na requisição do endpoint que carrega a listagem (ex.: `GET /admin/products`) → tire o print mostrando a coluna **Time**/o waterfall com a duração total da requisição (precisa aparecer bem abaixo de 2000 ms). Alternativa: aba **Lighthouse** do DevTools → relatório de Performance → print do "Time to First Byte" da rota administrativa.
+:::
 
 **Evidência (screenshot):**
 
@@ -118,8 +122,14 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 
 #### RNF04 — Renderização server-side da vitrine
 
-**Classificação:** Eficiência  
-**Descrição:** Páginas públicas renderizadas via SSR para indexação completa.
+**Classificação:** Organizacional  
+**Descrição:** Todas as páginas públicas da vitrine são renderizadas no servidor (SSR) antes do envio ao cliente: o HTML inicial já contém o conteúdo textual completo, verificável via `curl`/"view-source" sem executar JavaScript.
+
+:::tip[Como capturar essa evidência]
+Duas formas simples de provar SSR com um print:
+1. **View-source:** acesse uma página pública de produto (ex.: `/produtos/[slug]`), aperte `Ctrl+U` (ver código-fonte) e tire o print mostrando o texto do produto (nome, descrição) já presente no HTML bruto — sem precisar rodar JavaScript.
+2. **DevTools sem JS:** DevTools (F12) → `Ctrl+Shift+P` → "Disable JavaScript" → recarregue a página → print mostrando o conteúdo completo renderizado mesmo com JS desabilitado.
+:::
 
 **Evidência (screenshot):**
 
@@ -132,8 +142,8 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 
 #### RNF05 — Otimização para mecanismos de busca (SEO)
 
-**Classificação:** Usabilidade  
-**Descrição:** Metadados semânticos, sitemap.xml, robots.txt e Open Graph.
+**Classificação:** Externo  
+**Descrição:** Cada página pública expõe meta tags (title, description, Open Graph), `sitemap.xml` atualizado a cada publicação e `robots.txt` permitindo indexação; validado sem erros no Google Rich Results Test e nota ≥ 90 no Lighthouse SEO.
 
 **Evidência (screenshot):**
 
@@ -147,7 +157,7 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 #### RNF13 — Bilinguismo da vitrine
 
 **Classificação:** Usabilidade  
-**Descrição:** Conteúdo em PT e EN, com troca de idioma em até 1 clique (i18n).
+**Descrição:** Toda a vitrine pública está disponível em português e inglês, com troca de idioma em 1 clique, sem perda de contexto de navegação (permanece na mesma rota); nenhuma string de interface pública fica sem tradução.
 
 **Evidência (screenshot):**
 
@@ -158,10 +168,10 @@ Selecione um requisito na navegação abaixo. Cada um traz seus critérios de ac
 </TabItem>
 <TabItem value="rnf19" label="RNF19">
 
-#### RNF19 — Facilidade de navegação da vitrine
+#### RNF19 — Alcançabilidade de seções em até 3 cliques
 
 **Classificação:** Usabilidade  
-**Descrição:** Seções principais acessíveis em no máximo 3 interações.
+**Descrição:** Qualquer seção da vitrine pública é alcançável a partir da página inicial em no máximo 3 cliques/interações, validado por mapeamento do fluxo de navegação e teste de usuário sem instrução prévia sobre a estrutura do site.
 
 **Evidência (screenshot):**
 
