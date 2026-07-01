@@ -91,3 +91,13 @@ export function iconForTipo(tipo: string): NotifVisual {
       return { icon: 'bell', color: '#7f3fe5' };
   }
 }
+
+// Retorna uma nova lista com o status de um item alterado (imutável). Usado no
+// update otimista e no rollback ao marcar uma notificação como lida (#190).
+export function setStatus(
+  items: Notification[],
+  id: string,
+  status: NotificationStatus
+): Notification[] {
+  return items.map((n) => (n.id === id ? { ...n, status } : n));
+}
