@@ -25,4 +25,10 @@ Protótipo de alta fidelidade do CRM interno (pipeline de leads em Kanban) desen
 
 ## Feedback do Cliente
 
-> Aguardando retorno do cliente sobre o protótipo apresentado no vídeo acima. Esta seção será preenchida após a resposta.
+![Feedback do cliente Otávio sobre o protótipo do CRM](./img/feedback-crm.png)
+
+> "Analisei aqui, e está MUITO BOM, visualmente está muito bom e agradável de se utilizar, vi que vocês pensaram muito sobre os filtros e funcionalidades que seriam boas e estão bem alinhadas com o que precisamos. Acho que está mais do que suficiente para as nossas necessidades. Muito bom o trabalho de vocês! Estou animado para ver o produto final" — Otávio, 01/07/2026
+
+:::info[Feedback exclusivamente positivo — nada a resolver]
+O cliente aprovou o protótipo sem nenhuma ressalva ou pedido de ajuste. Não há itens pendentes de correção ou alteração decorrentes desta rodada de feedback.
+:::
