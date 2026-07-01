@@ -62,11 +62,6 @@
   margin: 0 auto !important;
 }
 
-article {
-  max-width: 900px;
-  margin: 0 auto !important;
-}
-
 /* Quando sidebar está visível (drawer aberto) */
 @media (min-width: 997px) {
   .navbar-sidebar [class*='docItemCol'] {
@@ -92,10 +87,13 @@ article {
 }
 
 /* ---------- Botão Toggle Hamburger FORÇADO visível SEMPRE ---------- */
-.navbar-sidebar-toggle,
-button[aria-label*="menu"],
-button[aria-label*="Menu"],
-button[aria-label*="toggle"] {
+/* Classe real renderizada pelo Docusaurus/Infima é `.navbar__toggle`
+   (não `.navbar-sidebar-toggle`, que não existe no DOM) — Infima o esconde
+   por padrão acima de 996px via `display: none`; forçamos visível em
+   qualquer largura, já que aqui a sidebar só existe dentro do drawer. */
+.navbar__toggle,
+button[aria-label*="toggle" i],
+button[aria-label*="menu" i] {
   display: flex !important;
   visibility: visible !important;
   opacity: 1 !important;
@@ -111,33 +109,16 @@ button[aria-label*="toggle"] {
   transition: color 0.3s ease;
 }
 
-.navbar-sidebar-toggle:hover {
+.navbar__toggle:hover {
   color: var(--ifm-color-primary-dark);
 }
 
-.navbar-sidebar-toggle svg {
+.navbar__toggle svg {
   width: 24px;
   height: 24px;
   stroke: currentColor;
   stroke-width: 2;
   fill: none;
-}
-
-/* Sobrescrever TODAS as media queries do Docusaurus */
-@media (max-width: 996px) {
-  .navbar-sidebar-toggle { display: flex !important; }
-}
-
-@media (min-width: 997px) {
-  .navbar-sidebar-toggle { display: flex !important; }
-}
-
-@media (min-width: 1280px) {
-  .navbar-sidebar-toggle { display: flex !important; }
-}
-
-@media (min-width: 1600px) {
-  .navbar-sidebar-toggle { display: flex !important; }
 }
 
 /* ---------- Sidebar compacta ---------- */
@@ -193,9 +174,6 @@ button[aria-label*="toggle"] {
 }
 .markdown h3 {
   margin-top: 1.6rem;
-}
-article {
-  max-width: 960px;
 }
 
 /* ---------- Tables ---------- */
@@ -276,10 +254,40 @@ article {
   color: #c01169;
   border-color: rgba(231, 31, 132, 0.32);
 }
+.badge--teal {
+  background: rgba(13, 148, 136, 0.14);
+  color: #0f766e;
+  border-color: rgba(13, 148, 136, 0.34);
+}
+.badge--amber {
+  background: rgba(217, 119, 6, 0.14);
+  color: #92400e;
+  border-color: rgba(217, 119, 6, 0.34);
+}
 [data-theme='dark'] .badge--green { color: #7fe89a; }
 [data-theme='dark'] .badge--purple { color: #bca0f4; }
 [data-theme='dark'] .badge--blue { color: #93b4fb; }
 [data-theme='dark'] .badge--rosa { color: #f78bc0; }
+[data-theme='dark'] .badge--teal { color: #5eead4; }
+[data-theme='dark'] .badge--amber { color: #fbbf24; }
+
+/* ---------- Legenda de classificação Sommerville (tabela de RNFs) ---------- */
+.crianex-rnf-legend {
+  margin: 0.6rem 0 1.5rem;
+  font-size: 0.8rem;
+  color: var(--ifm-color-emphasis-700);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 0.7rem;
+}
+
+/* ---------- Deep-link para linha de RNF (âncora #rnfXX) ---------- */
+.markdown table tr:has(a:target) {
+  background: var(--crianex-surface-alt);
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: -2px;
+}
 
 /* ---------- Hero ---------- */
 .crianex-hero {
@@ -595,6 +603,22 @@ article {
   font-size: 0.8rem;
   color: var(--ifm-color-emphasis-600);
   margin-top: 0.6rem;
+}
+
+/* ---------- Par de evidências (screenshot + variante do mesmo requisito) ---------- */
+.crianex-evidence-pair {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+.crianex-evidence-pair img {
+  flex: 1 1 260px;
+  min-width: 0;
+  max-width: 100%;
+  border-radius: var(--crianex-radius);
+  border: 1px solid var(--crianex-border);
+  box-shadow: var(--crianex-shadow);
 }
 
 /* ---------- Revision history (collapsible) ---------- */
@@ -958,16 +982,26 @@ article {
     display: none;
   }
 
-  /* Conteúdo central expande para ocupar o espaço */
+  /* Conteúdo central expande para ocupar todo o espaço da linha — sem isso,
+     flex-grow:0 deixava a coluna do tamanho do conteúdo e encostada à
+     esquerda (TOC removido), impedindo o `margin: auto` do article abaixo
+     de centralizar de fato na página. */
   .col--8 {
-    flex: 0 0 auto !important;
+    flex: 1 1 0 !important;
     max-width: 100% !important;
   }
 }
-/* artigos expandem com a tela */
-article { max-width: 1200px; }
+
+/* Article é a única regra de largura/centralização (evita conflito entre
+   múltiplas declarações de `max-width` espalhadas pelo arquivo). */
+article {
+  max-width: 1200px;
+  margin: 0 auto !important;
+}
 @media (min-width: 1400px) {
-  article { max-width: 1400px; }
+  article {
+    max-width: 1400px;
+  }
 }
 
 /* ---------- Diagramas Mermaid maiores em qualquer página ---------- */
