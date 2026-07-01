@@ -207,7 +207,7 @@
               >
                 <span class="ico"><svelte:component this={item.icon} size={15} /></span>
                 {#if !sidebarCollapsed}<span>{item.label}</span>{/if}
-                {#if item.module === 'notifications' && $unreadCount > 0}
+                {#if item.href === '/admin/notificacoes' && $unreadCount > 0}
                   {#if sidebarCollapsed}
                     <span class="nav-badge-dot" aria-hidden="true"></span>
                   {:else}
