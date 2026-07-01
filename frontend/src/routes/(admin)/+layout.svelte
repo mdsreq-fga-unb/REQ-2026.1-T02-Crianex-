@@ -52,6 +52,12 @@
         { href: NAO_IMPL, label: 'Tickets', icon: Ticket, module: 'tickets' },
         { href: NAO_IMPL, label: 'Logs de Produtos', icon: FileText, module: 'productLogs' },
         { href: '/admin/notificacoes', label: 'Notificações', icon: Bell, module: 'notifications' },
+        {
+          href: '/admin/notification-templates',
+          label: 'Templates de Notificações',
+          icon: FileText,
+          module: 'notifications',
+        },
         { href: '/admin/membros', label: 'Membros', icon: Users, module: 'members' },
         { href: NAO_IMPL, label: 'Auditoria', icon: ShieldCheck, module: 'auditLogs' },
       ],
