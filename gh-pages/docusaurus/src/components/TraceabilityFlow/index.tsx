@@ -129,32 +129,36 @@ export const TREE: OEDef[] = [
   },
 ];
 
-/* ── RNFs — seção independente abaixo da árvore ─────────────────── */
+/* ── RNFs — seção independente abaixo da árvore ─────────────────────────
+   Todos apontam para a linha correspondente na tabela centralizada de RNFs
+   (âncora #rnfXX em /backlog/requisitos), nunca para a ocorrência em uma
+   feature específica — um RNF pode se repetir em várias features, então
+   a página que lista todas as features continua sendo a fonte única. ── */
 const RNFS: RnfDef[] = [
-  {id: 'RNF01', label: 'RNF01 · Isolamento admin',    href: '/iteracoes/iteracao-1/features/f09?tab=rnf01'},
-  {id: 'RNF02', label: 'RNF02 · Tempo vitrine',       href: '/iteracoes/iteracao-1/features/f14?tab=rnf02'},
-  {id: 'RNF03', label: 'RNF03 · Tempo adm.',          href: '/iteracoes/iteracao-1/features/f09?tab=rnf03'},
-  {id: 'RNF04', label: 'RNF04 · SSR vitrine',         href: '/iteracoes/iteracao-1/features/f12?tab=rnf04'},
-  {id: 'RNF05', label: 'RNF05 · SEO',                 href: '/iteracoes/iteracao-1/features/f12?tab=rnf05'},
-  {id: 'RNF07', label: 'RNF07 · OWASP Top 10',        href: '/backlog/requisitos#rnfs'},
-  {id: 'RNF08', label: 'RNF08 · Criptografia',        href: '/iteracoes/iteracao-1/features/f09?tab=rnf08'},
-  {id: 'RNF09', label: 'RNF09 · RLS por linha',       href: '/iteracoes/iteracao-1/features/f10?tab=rnf09'},
-  {id: 'RNF10', label: 'RNF10 · Rate limit form.',    href: '/iteracoes/iteracao-1/features/f14?tab=rnf10'},
-  {id: 'RNF11', label: 'RNF11 · LGPD',                href: '/iteracoes/iteracao-1/features/f14?tab=rnf11'},
-  {id: 'RNF12', label: 'RNF12 · Responsividade',      href: '/backlog/requisitos#rnfs'},
-  {id: 'RNF13', label: 'RNF13 · Bilinguismo',         href: '/iteracoes/iteracao-1/features/f12?tab=rnf13'},
-  {id: 'RNF14', label: 'RNF14 · Escalabilidade',      href: '/backlog/requisitos#rnfs'},
-  {id: 'RNF15', label: 'RNF15 · Carga concorrente',   href: '/backlog/requisitos#rnfs'},
-  {id: 'RNF16', label: 'RNF16 · Stack obrigatório',   href: '/backlog/requisitos#rnfs'},
-  {id: 'RNF17', label: 'RNF17 · Cob. testes',         href: '/backlog/requisitos#rnfs'},
-  {id: 'RNF18', label: 'RNF18 · Portabilidade',       href: '/backlog/requisitos#rnfs'},
-  {id: 'RNF19', label: 'RNF19 · Navegação intuitiva', href: '/iteracoes/iteracao-1/features/f12?tab=rnf19'},
-  {id: 'RNF20', label: 'RNF20 · Disponibilidade',     href: '/iteracoes/iteracao-1/features/f15?tab=rnf20'},
-  {id: 'RNF21', label: 'RNF21 · Drag-drop cards',     href: '/backlog/requisitos#rnfs'},
-  {id: 'RNF22', label: 'RNF22 · Drag-drop colunas',   href: '/backlog/requisitos#rnfs'},
-  {id: 'RNF23', label: 'RNF23 · Resumo tickets',      href: '/backlog/requisitos#rnfs'},
-  {id: 'RNF24', label: 'RNF24 · Cards CRM',           href: '/backlog/requisitos#rnfs'},
-  {id: 'RNF25', label: 'RNF25 · Drag-drop CRM',       href: '/backlog/requisitos#rnfs'},
+  {id: 'RNF01', label: 'RNF01 · Isolamento admin',    href: '/backlog/requisitos#rnf01'},
+  {id: 'RNF02', label: 'RNF02 · Tempo vitrine',       href: '/backlog/requisitos#rnf02'},
+  {id: 'RNF03', label: 'RNF03 · Tempo adm.',          href: '/backlog/requisitos#rnf03'},
+  {id: 'RNF04', label: 'RNF04 · SSR vitrine',         href: '/backlog/requisitos#rnf04'},
+  {id: 'RNF05', label: 'RNF05 · SEO',                 href: '/backlog/requisitos#rnf05'},
+  {id: 'RNF07', label: 'RNF07 · OWASP Top 10',        href: '/backlog/requisitos#rnf07'},
+  {id: 'RNF08', label: 'RNF08 · Criptografia',        href: '/backlog/requisitos#rnf08'},
+  {id: 'RNF09', label: 'RNF09 · RLS por linha',       href: '/backlog/requisitos#rnf09'},
+  {id: 'RNF10', label: 'RNF10 · Rate limit form.',    href: '/backlog/requisitos#rnf10'},
+  {id: 'RNF11', label: 'RNF11 · LGPD',                href: '/backlog/requisitos#rnf11'},
+  {id: 'RNF12', label: 'RNF12 · Responsividade',      href: '/backlog/requisitos#rnf12'},
+  {id: 'RNF13', label: 'RNF13 · Bilinguismo',         href: '/backlog/requisitos#rnf13'},
+  {id: 'RNF14', label: 'RNF14 · Escalabilidade',      href: '/backlog/requisitos#rnf14'},
+  {id: 'RNF15', label: 'RNF15 · Carga concorrente',   href: '/backlog/requisitos#rnf15'},
+  {id: 'RNF16', label: 'RNF16 · Stack obrigatório',   href: '/backlog/requisitos#rnf16'},
+  {id: 'RNF17', label: 'RNF17 · Cob. testes',         href: '/backlog/requisitos#rnf17'},
+  {id: 'RNF18', label: 'RNF18 · Portabilidade',       href: '/backlog/requisitos#rnf18'},
+  {id: 'RNF19', label: 'RNF19 · Navegação intuitiva', href: '/backlog/requisitos#rnf19'},
+  {id: 'RNF20', label: 'RNF20 · Disponibilidade',     href: '/backlog/requisitos#rnf20'},
+  {id: 'RNF21', label: 'RNF21 · Drag-drop cards',     href: '/backlog/requisitos#rnf21'},
+  {id: 'RNF22', label: 'RNF22 · Drag-drop colunas',   href: '/backlog/requisitos#rnf22'},
+  {id: 'RNF23', label: 'RNF23 · Resumo tickets',      href: '/backlog/requisitos#rnf23'},
+  {id: 'RNF24', label: 'RNF24 · Cards CRM',           href: '/backlog/requisitos#rnf24'},
+  {id: 'RNF25', label: 'RNF25 · Drag-drop CRM',       href: '/backlog/requisitos#rnf25'},
 ];
 
 /* ── Constantes de layout vertical ────────────────────────────── */

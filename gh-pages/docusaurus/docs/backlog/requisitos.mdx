@@ -11,6 +11,17 @@ export const IT1 = () => <span className="badge badge--green">IT1</span>;
 export const IT2 = () => <span className="badge badge--purple">IT2</span>;
 export const NW = ({children}) => <span style={{whiteSpace: 'nowrap'}}>{children}</span>;
 
+{/* Classificação de RNFs segundo a taxonomia de Sommerville (Product/Organisational/
+    External requirements) — cada categoria vira uma badge colorida reaproveitando o
+    sistema de badges do design system (ver custom.css). */}
+export const Seguranca = () => <span className="badge badge--rosa">Segurança</span>;
+export const Eficiencia = () => <span className="badge badge--blue">Eficiência</span>;
+export const Usabilidade = () => <span className="badge badge--green">Usabilidade</span>;
+export const Confiabilidade = () => <span className="badge badge--teal">Confiabilidade</span>;
+export const Portabilidade = () => <span className="badge badge--purple">Portabilidade</span>;
+export const Organizacional = () => <span className="badge badge--gray">Organizacional</span>;
+export const Externo = () => <span className="badge badge--amber">Externo</span>;
+
 # Tabela de Requisitos
 
 Catálogo completo de **Features, Requisitos Funcionais (RF), Não Funcionais (RNF) e Regras de Negócio (RN)**. Objetivos (OE) e Características (CP) ficam na [Solução](/visao/solucao); o mapa que conecta tudo é a [Rastreabilidade](/backlog/rastreabilidade).
@@ -127,48 +138,40 @@ Catálogo completo de **Features, Requisitos Funcionais (RF), Não Funcionais (R
 
 ## Requisitos Não Funcionais (RNFs) {#rnfs}
 
-<Tabs>
-<TabItem value="globais" label="Globais">
+> Classificação segundo a taxonomia de Sommerville (*product*, *organisational* e *external requirements*). Tabela única (sem abas) para que o link de um nó RNF na [matriz de rastreabilidade](/backlog/rastreabilidade) sempre role até a linha certa — inclusive quando o mesmo RNF aparece em várias features, cada uma delas continua listando o RNF nas suas próprias evidências.
 
-> Aplicam-se ao sistema inteiro.
+| ID | Nome | Classificação | Aplica-se a | Descrição |
+| -- | ---- | ------------- | ----------- | --------- |
+| <a id="rnf01"/>**RNF01** | Isolamento de acesso administrativo | <Seguranca/> | F01–F06, F09, F16, F17, F19–F21 | Toda rota do painel administrativo é servida em endpoint/caminho distinto do site público e exige token de sessão (JWT) válido; requisições sem token válido recebem HTTP 401/403 e nunca renderizam dados administrativos, mesmo parcialmente. |
+| <a id="rnf02"/>**RNF02** | Tempo de resposta da vitrine | <Eficiencia/> | F01, F14, F15, F18 | 95% das requisições de carregamento de páginas públicas (produtos, institucional, FAQ) respondem em até 2 segundos, medidos em condição de rede 4G simulada (Lighthouse/WebPageTest), do primeiro byte à renderização completa do conteúdo principal. |
+| <a id="rnf03"/>**RNF03** | Tempo de resposta da área administrativa | <Eficiencia/> | múltiplas | 95% das operações de leitura no painel administrativo (listagens, dashboards, detalhes de registro) retornam em até 2 segundos, do disparo da requisição HTTP à resposta completa da API, sob carga normal de uso (≤ 10 usuários simultâneos). |
+| <a id="rnf04"/>**RNF04** | Renderização SSR da vitrine | <Organizacional/> | F12, F16 | Todas as páginas públicas da vitrine são renderizadas no servidor (SSR) antes do envio ao cliente: o HTML inicial já contém o conteúdo textual completo, verificável via `curl`/"view-source" sem executar JavaScript. |
+| <a id="rnf05"/>**RNF05** | SEO | <Externo/> | F12, F16 | Cada página pública expõe meta tags (title, description, Open Graph), `sitemap.xml` atualizado a cada publicação e `robots.txt` permitindo indexação; validado sem erros no Google Rich Results Test e nota ≥ 90 no Lighthouse SEO. |
+| <a id="rnf07"/>**RNF07** | Conformidade com OWASP Top 10 | <Seguranca/> | Global | Nenhuma das 10 categorias de vulnerabilidade do OWASP Top 10 (edição vigente) é explorável no sistema, verificado por checklist de revisão categoria-a-categoria e, quando aplicável, por scanner automatizado (ex.: OWASP ZAP) sem findings de severidade alta/crítica. |
+| <a id="rnf08"/>**RNF08** | Criptografia de credenciais | <Seguranca/> | F09 | Senhas são armazenadas exclusivamente como hash Argon2id (ou bcrypt) com salt único por registro e fator de custo ≥ 12; a senha em texto claro nunca é persistida, logada ou trafegada fora do canal HTTPS de autenticação. |
+| <a id="rnf09"/>**RNF09** | Controle de acesso por linha (RLS) | <Seguranca/> | múltiplas | Toda tabela com dados sensíveis (clientes, leads, notificações, membros) tem política de Row Level Security ativa no banco, restringindo leitura/escrita ao perfil autorizado mesmo em acesso direto ao banco; verificado por teste com credencial de perfil não autorizado. |
+| <a id="rnf10"/>**RNF10** | Proteção do formulário público | <Seguranca/> | F14 | O formulário público de contato/captação de lead aplica rate limit de no máximo 5 submissões por IP a cada 10 minutos; submissões acima do limite retornam HTTP 429 sem persistir dados. |
+| <a id="rnf11"/>**RNF11** | Conformidade parcial com LGPD | <Externo/> | F03–F06, F14, F19–F21 | A captação de dados de leads/clientes exige consentimento explícito registrado antes da persistência, informa a finalidade do tratamento, coleta apenas dados estritamente necessários (minimização) e permite exclusão mediante solicitação em até 5 dias úteis. |
+| <a id="rnf12"/>**RNF12** | Responsividade | <Usabilidade/> | Global | Toda tela do sistema é utilizável sem scroll horizontal e sem sobreposição de elementos nos breakpoints de 360px (mobile), 768px (tablet) e 1280px (desktop), validado por teste manual nos 3 breakpoints em Chrome DevTools. |
+| <a id="rnf13"/>**RNF13** | Bilinguismo da vitrine | <Usabilidade/> | F12 | Toda a vitrine pública está disponível em português e inglês, com troca de idioma em 1 clique, sem perda de contexto de navegação (permanece na mesma rota); nenhuma string de interface pública fica sem tradução. |
+| <a id="rnf14"/>**RNF14** | Escalabilidade horizontal | <Eficiencia/> | Global | O backend suporta aumento do número de réplicas sem qualquer alteração de código-fonte, mantendo estado apenas no banco de dados/sessão externa (nenhum estado em memória do processo); verificado ao escalar de 1 para 3 instâncias sem erros. |
+| <a id="rnf15"/>**RNF15** | Suporte a carga concorrente | <Eficiencia/> | F12 | O sistema atende 50 requisições simultâneas mantendo os limites de RNF02/RNF03 (≤ 2s em 95% dos casos), verificado por teste de carga (ex.: k6/Artillery) com 50 usuários virtuais concorrentes. |
+| <a id="rnf16"/>**RNF16** | Stack tecnológico obrigatório | <Organizacional/> | Global | A implementação usa exclusivamente SvelteKit no frontend, Express no backend e PostgreSQL via Supabase como banco/autenticação, conforme o Documento de Visão; qualquer exceção exige ADR aprovado. |
+| <a id="rnf17"/>**RNF17** | Cobertura mínima de testes | <Organizacional/> | Global | A suíte de testes automatizados (unitários + integração) cobre no mínimo 45% das linhas de código do backend e do frontend, medido por ferramenta de cobertura a cada execução de CI; PRs que reduzem a cobertura abaixo do limiar são bloqueados. |
+| <a id="rnf18"/>**RNF18** | Portabilidade de navegador | <Portabilidade/> | Global | O sistema funciona sem erros visuais ou funcionais nas 2 versões mais recentes de Chrome, Firefox, Safari e Edge, validado por smoke test manual das telas principais em cada navegador antes de cada entrega. |
+| <a id="rnf19"/>**RNF19** | Facilidade de navegação | <Usabilidade/> | F12 | Qualquer seção da vitrine pública é alcançável a partir da página inicial em no máximo 3 cliques/interações, validado por mapeamento do fluxo de navegação e teste de usuário sem instrução prévia sobre a estrutura do site. |
+| <a id="rnf20"/>**RNF20** | Disponibilidade institucional | <Confiabilidade/> | F15 | As páginas institucionais (Missão, Visão, Valores) ficam acessíveis publicamente 24/7 sem exigir autenticação, com disponibilidade mínima de 99% mensal (até ~7h de indisponibilidade/mês), monitorada por verificação periódica de uptime. |
+| <a id="rnf21"/>**RNF21** | Reorganização intuitiva (cards) | <Usabilidade/> | F15 | A reordenação de cards do CRM por arrastar-e-soltar reflete visualmente a nova posição em até 1,5s após soltar o card, sem recarregar a página; falha de rede reverte o card para a posição original (rollback visual). |
+| <a id="rnf22"/>**RNF22** | Reorganização intuitiva (colunas) | <Usabilidade/> | F20 | A reordenação de colunas do funil por arrastar-e-soltar reflete visualmente a nova ordem em até 1,5s após soltar a coluna, sem recarregar a página, com rollback visual para a ordem original em caso de falha ao persistir. |
+| <a id="rnf23"/>**RNF23** | Resumo expansível de tickets | <Usabilidade/> | F22 | Cada ticket de suporte exibe, em estado resumido (fechado), ao menos status, prioridade e responsável, sendo expansível para o detalhe completo sem sair da tela de listagem (sem redirecionamento de página). |
+| <a id="rnf24"/>**RNF24** | Cards do CRM resumidos/expansíveis | <Usabilidade/> | F19 | Cada card de lead/cliente no board Kanban exibe, em estado resumido, nome, produto vinculado e responsável, sendo expansível (clique) para o detalhe completo e o histórico de interações sem redirecionamento de página. |
+| <a id="rnf25"/>**RNF25** | Drag-and-drop dos cards do CRM | <Usabilidade/> | F19 | Mover um card entre colunas do funil por arrastar-e-soltar atualiza visualmente a coluna do card em até 1,5s após soltar, sem recarregar a página; falha ao persistir retorna o card à coluna de origem (rollback visual). |
 
-| ID | Nome | Classificação | Descrição |
-| -- | ---- | ------------- | --------- |
-| RNF07 | Conformidade com OWASP Top 10 | Segurança | Mitigar todas as vulnerabilidades do OWASP Top 10 vigente |
-| RNF12 | Responsividade | Usabilidade | Usabilidade nos breakpoints mobile, tablet e desktop |
-| RNF14 | Escalabilidade horizontal | Eficiência | Aumento horizontal de instâncias sem reescrita |
-| RNF16 | Stack tecnológico obrigatório | Organizacional | SvelteKit + Express + PostgreSQL/Supabase |
-| RNF17 | Cobertura mínima de testes | Dependabilidade | Cobertura mínima de 45% por testes automatizados |
-| RNF18 | Portabilidade de navegador | Usabilidade | 2 versões recentes de Chrome, Firefox, Safari e Edge |
+<div className="crianex-rnf-legend">
 
-</TabItem>
-<TabItem value="especificos" label="Específicos">
+<Seguranca/> Segurança (Dependability) · <Eficiencia/> Eficiência (Efficiency) · <Usabilidade/> Usabilidade (Usability) · <Confiabilidade/> Confiabilidade (Reliability/Availability) · <Portabilidade/> Portabilidade (Portability) · <Organizacional/> Organizacional (Organisational) · <Externo/> Externo (External — legislativo/interoperabilidade)
 
-> Vinculados a Features ou CPs.
-
-| ID | Nome | Features | Descrição |
-| -- | ---- | -------- | --------- |
-| RNF01 | Isolamento de acesso administrativo | F01–F06, F09, F16, F17, F19–F23 | Área adm. em endpoint distinto, só com autenticação |
-| RNF02 | Tempo de resposta da vitrine | F01, F14, F15, F18 | Carregamento ≤ 2s em 95% das req. (4G) |
-| RNF03 | Tempo de resposta da área adm. | múltiplas | Leitura no painel ≤ 2s em 95% das req. |
-| RNF04 | Renderização SSR da vitrine | F12, F16 | SSR para indexação completa |
-| RNF05 | SEO | F12, F16 | Metadados, sitemap, robots.txt, Open Graph |
-| RNF08 | Criptografia de credenciais | F09 | Hash Argon2id/bcrypt, salt, custo ≥ 12 |
-| RNF09 | Controle de acesso por linha (RLS) | múltiplas | RLS restringindo leitura por perfil |
-| RNF10 | Proteção do formulário público | F14 | Rate limit: 5 submissões/IP a cada 10 min |
-| RNF11 | Conformidade parcial com LGPD | F03–F06, F14, F19–F21 | Consentimento, finalidade, minimização, exclusão |
-| RNF13 | Bilinguismo da vitrine | F12 | PT/EN com troca em 1 clique (i18n) |
-| RNF15 | Suporte a carga concorrente | F12 | 50 requisições simultâneas mantendo RNF02/03 |
-| RNF19 | Facilidade de navegação | F12 | Seções acessíveis em até 3 interações |
-| RNF20 | Disponibilidade institucional | F15 | Info institucional pública sem autenticação |
-| RNF21 | Reorganização intuitiva (cards) | F15 | Drag-and-drop com atualização ≤ 1,5s |
-| RNF22 | Reorganização intuitiva (colunas) | F20 | Drag-and-drop de colunas ≤ 1,5s |
-| RNF23 | Resumo expansível de tickets | F22 | Status/prioridade/responsável no resumo, expansível |
-| RNF24 | Cards do CRM resumidos/expansíveis | F19 | Info essencial no card, expansível sem redirect |
-| RNF25 | Drag-and-drop dos cards do CRM | F19 | Atualização visual imediata ≤ 1,5s |
-
-</TabItem>
-</Tabs>
+</div>
 
 ## Regras de Negócio (RNs) {#rns}
 
