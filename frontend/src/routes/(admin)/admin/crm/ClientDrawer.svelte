@@ -61,7 +61,13 @@
         body: JSON.stringify({ tipo: activeTab, conteudo: inputText.trim() }),
       });
       interactions = [
-        { id: Date.now(), type: activeTab, author: currentUser, text: inputText.trim(), time: 'agora' },
+        {
+          id: Date.now(),
+          type: activeTab,
+          author: currentUser,
+          text: inputText.trim(),
+          time: 'agora',
+        },
         ...interactions,
       ];
       inputText = '';

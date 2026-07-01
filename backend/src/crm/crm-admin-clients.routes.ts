@@ -82,8 +82,7 @@ crmAdminClientsRouter.patch('/:id', ...ownerGuard, async (req, res) => {
   if (typeof req.body?.['column_id'] === 'string') patch.column_id = req.body['column_id'];
   if ('responsible_name' in (req.body ?? {}))
     patch.responsible_name = req.body['responsible_name'] ?? '';
-  if ('product_name' in (req.body ?? {}))
-    patch.product_name = req.body['product_name'] ?? '';
+  if ('product_name' in (req.body ?? {})) patch.product_name = req.body['product_name'] ?? '';
 
   try {
     const updated = await patchCrmAdminClient(id, patch);

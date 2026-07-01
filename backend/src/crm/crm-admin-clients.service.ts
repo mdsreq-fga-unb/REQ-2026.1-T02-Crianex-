@@ -172,8 +172,7 @@ export async function createCrmAdminClient(input: CrmAdminClientCreate): Promise
   const name = input.name?.trim() ?? '';
   const email = input.email?.trim().toLowerCase() ?? '';
 
-  if (!NAME_RE.test(name))
-    throw new CrmAdminClientError('Nome é obrigatório.', 'INVALID_NAME');
+  if (!NAME_RE.test(name)) throw new CrmAdminClientError('Nome é obrigatório.', 'INVALID_NAME');
   if (email && !EMAIL_RE.test(email))
     throw new CrmAdminClientError('E-mail inválido.', 'INVALID_EMAIL');
 
@@ -186,7 +185,8 @@ export async function createCrmAdminClient(input: CrmAdminClientCreate): Promise
     .single();
 
   if (cErr) {
-    if (cErr.code === '23505') throw new CrmAdminClientError('E-mail já cadastrado.', 'EMAIL_TAKEN');
+    if (cErr.code === '23505')
+      throw new CrmAdminClientError('E-mail já cadastrado.', 'EMAIL_TAKEN');
     throw cErr;
   }
 
@@ -212,11 +212,7 @@ export async function patchCrmAdminClient(
 ): Promise<CrmAdminClient> {
   const supabase = getSupabaseClient();
 
-  const { data: existing } = await supabase
-    .from('clients')
-    .select('id')
-    .eq('id', id)
-    .maybeSingle();
+  const { data: existing } = await supabase.from('clients').select('id').eq('id', id).maybeSingle();
   if (!existing) throw new CrmAdminClientError('Cliente não encontrado.', 'NOT_FOUND');
 
   const clientUpdates: Record<string, unknown> = {};
@@ -236,14 +232,16 @@ export async function patchCrmAdminClient(
   if (Object.keys(clientUpdates).length) {
     const { error } = await supabase.from('clients').update(clientUpdates).eq('id', id);
     if (error) {
-      if (error.code === '23505') throw new CrmAdminClientError('E-mail já cadastrado.', 'EMAIL_TAKEN');
+      if (error.code === '23505')
+        throw new CrmAdminClientError('E-mail já cadastrado.', 'EMAIL_TAKEN');
       throw error;
     }
   }
 
   const cardUpdates: Record<string, unknown> = {};
   if (patch.column_id !== undefined) cardUpdates['column_id'] = patch.column_id;
-  if (patch.responsible_name !== undefined) cardUpdates['responsavel'] = patch.responsible_name || null;
+  if (patch.responsible_name !== undefined)
+    cardUpdates['responsavel'] = patch.responsible_name || null;
   if (patch.product_name !== undefined) {
     cardUpdates['produto_vinculado'] = patch.product_name
       ? await resolveProductId(patch.product_name)
@@ -261,7 +259,9 @@ export async function patchCrmAdminClient(
       const { error } = await supabase.from('client_cards').update(cardUpdates).eq('client_id', id);
       if (error) throw error;
     } else {
-      const { error } = await supabase.from('client_cards').insert({ client_id: id, ...cardUpdates });
+      const { error } = await supabase
+        .from('client_cards')
+        .insert({ client_id: id, ...cardUpdates });
       if (error) throw error;
     }
   }

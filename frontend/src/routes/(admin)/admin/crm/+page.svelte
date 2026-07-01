@@ -590,7 +590,7 @@
 <!-- ── New Lead Modal ── -->
 {#if showNewLeadModal}
   <NewLeadModal
-    columns={columns}
+    {columns}
     initialColumnId={addLeadColumnId}
     onClose={() => (showNewLeadModal = false)}
     onSave={(newLead) => {

@@ -81,7 +81,13 @@
       <div class="form-grid">
         <div class="input-group">
           <label for="nl-name">Nome da empresa / Lead</label>
-          <input id="nl-name" type="text" placeholder="ex. Folha Sistemas" bind:value={name} required />
+          <input
+            id="nl-name"
+            type="text"
+            placeholder="ex. Folha Sistemas"
+            bind:value={name}
+            required
+          />
         </div>
 
         <div class="input-group">
@@ -101,7 +107,12 @@
 
         <div class="input-group">
           <label for="nl-responsible">Responsável</label>
-          <input id="nl-responsible" type="text" placeholder="Nome do responsável" bind:value={responsibleName} />
+          <input
+            id="nl-responsible"
+            type="text"
+            placeholder="Nome do responsável"
+            bind:value={responsibleName}
+          />
         </div>
 
         <div class="input-group">
@@ -116,7 +127,10 @@
 
       <div class="info-banner">
         <Users size={16} class="info-icon" />
-        <p>O lead aparecerá imediatamente no kanban e pode ser arrastado entre as colunas para mudar de estágio.</p>
+        <p>
+          O lead aparecerá imediatamente no kanban e pode ser arrastado entre as colunas para mudar
+          de estágio.
+        </p>
       </div>
 
       <div class="modal-footer">
