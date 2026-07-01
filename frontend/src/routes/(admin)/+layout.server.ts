@@ -26,15 +26,23 @@ export const load: LayoutServerLoad = async ({ cookies, locals }) => {
   const token = cookies.get('crianex_admin_access_token');
 
   let profile: ProfileData | null = null;
+  let unreadCount = 0;
   if (token) {
     try {
       profile = await apiFetch<ProfileData>('/profile/me', { token });
     } catch {
       // fallback to basic session data
     }
+    try {
+      const notif = await apiFetch<{ unreadCount: number }>('/admin/notifications', { token });
+      unreadCount = notif.unreadCount ?? 0;
+    } catch {
+      // sem permissão / endpoint indisponível → badge fica em 0, não quebra o shell
+    }
   }
 
   return {
+    unreadCount,
     adminUser: {
       id: profile?.id ?? adminUser.id ?? '',
       name: profile?.name ?? adminUser.name ?? 'Admin',

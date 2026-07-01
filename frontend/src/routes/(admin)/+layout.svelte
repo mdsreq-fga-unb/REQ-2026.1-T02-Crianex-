@@ -20,9 +20,13 @@
   } from 'lucide-svelte';
   import type { LayoutData } from './$types';
   import { topbarActions } from '$lib/stores/topbar';
+  import { unreadCount } from '$lib/stores/notifications';
   import ProfileModal from '$lib/components/admin/ProfileModal.svelte';
 
   export let data: LayoutData;
+
+  // Mantém o badge global (topbar + sidebar) em sincronia com o contador do backend.
+  $: unreadCount.set(data.unreadCount ?? 0);
 
   const NAO_IMPL = '/nao-implementado';
 
@@ -47,7 +51,7 @@
       items: [
         { href: NAO_IMPL, label: 'Tickets', icon: Ticket, module: 'tickets' },
         { href: NAO_IMPL, label: 'Logs de Produtos', icon: FileText, module: 'productLogs' },
-        { href: NAO_IMPL, label: 'Notificações', icon: Bell, module: 'notifications' },
+        { href: '/notificacoes', label: 'Notificações', icon: Bell, module: 'notifications' },
         { href: '/admin/membros', label: 'Membros', icon: Users, module: 'members' },
         { href: NAO_IMPL, label: 'Auditoria', icon: ShieldCheck, module: 'auditLogs' },
       ],
@@ -197,6 +201,15 @@
               >
                 <span class="ico"><svelte:component this={item.icon} size={15} /></span>
                 {#if !sidebarCollapsed}<span>{item.label}</span>{/if}
+                {#if item.module === 'notifications' && $unreadCount > 0}
+                  {#if sidebarCollapsed}
+                    <span class="nav-badge-dot" aria-hidden="true"></span>
+                  {:else}
+                    <span class="nav-count" aria-label="{$unreadCount} não lidas"
+                      >{$unreadCount}</span
+                    >
+                  {/if}
+                {/if}
               </a>
             {/each}
           </div>
@@ -246,6 +259,18 @@
         <Search size={14} />
         <input type="text" placeholder="Buscar..." aria-label="Busca global" />
       </div>
+
+      <a
+        href="/notificacoes"
+        class="bell-wrap topbar-bell"
+        aria-label={$unreadCount > 0 ? `Notificações — ${$unreadCount} não lidas` : 'Notificações'}
+        title="Notificações"
+      >
+        <Bell size={18} />
+        {#if $unreadCount > 0}
+          <span class="bell-count">{$unreadCount > 99 ? '99+' : $unreadCount}</span>
+        {/if}
+      </a>
 
       {#each $topbarActions as action}
         <button class="topbar-action-btn" type="button" on:click={action.onClick}>
@@ -359,6 +384,66 @@
   }
   .topbar-action-btn:hover {
     opacity: 0.85;
+  }
+
+  /* Topbar bell (badge global de não lidas) */
+  .topbar-bell {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    color: var(--text-muted);
+    flex-shrink: 0;
+    transition:
+      background 0.15s,
+      color 0.15s;
+  }
+  .topbar-bell:hover {
+    background: var(--bg-soft);
+    color: var(--text);
+  }
+  .topbar-bell .bell-count {
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    min-width: 16px;
+    height: 16px;
+    padding: 0 4px;
+    border-radius: 100px;
+    background: var(--pink);
+    color: #fff;
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    font-weight: 600;
+    display: grid;
+    place-items: center;
+    border: 1.5px solid var(--bg);
+  }
+
+  /* Contador no item da sidebar */
+  .nav-count {
+    margin-left: auto;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    border-radius: 100px;
+    background: var(--pink);
+    color: #fff;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 600;
+    display: inline-grid;
+    place-items: center;
+  }
+  .nav-badge-dot {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--pink);
   }
 
   .profile-btn {

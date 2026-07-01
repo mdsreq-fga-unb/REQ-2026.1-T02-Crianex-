@@ -37,14 +37,12 @@ Produto: **Crianex Hub** — plataforma administrativa centralizada e vitrine di
   />
 </p>
 
-
 <p align="center">
   <img 
     src="https://capsule-render.vercel.app/api?type=rect&color=0:004d1a,50:800040,100:33001a&height=2&section=header"
     width="80%"
   />
 </p>
-
 
 ## Equipe
 
