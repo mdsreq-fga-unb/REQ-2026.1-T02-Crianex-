@@ -53,7 +53,13 @@ const adminAuthHandle: Handle = async ({ event, resolve }) => {
   const pathname = event.url.pathname;
 
   // Public admin paths that don't require redirect
-  const publicAdminPaths = ['/admin/login', '/admin/login/callback', '/admin/logout'];
+  const publicAdminPaths = [
+    '/admin/login',
+    '/admin/login/callback',
+    '/admin/login/esqueci-senha',
+    '/admin/login/redefinir-senha',
+    '/admin/logout',
+  ];
 
   if (!pathname.startsWith('/admin')) {
     return resolve(event);

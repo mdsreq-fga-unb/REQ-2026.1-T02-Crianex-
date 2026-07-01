@@ -171,7 +171,7 @@
           <div class="field">
             <div class="label-row">
               <Label for="admin-password">Senha</Label>
-              <a href="/admin/login" aria-label="Recuperar senha">Esqueci</a>
+              <a href="/admin/login/esqueci-senha" aria-label="Recuperar senha">Esqueci</a>
             </div>
             <div class="password-wrap">
               <Input
@@ -182,6 +182,7 @@
                 autocomplete="current-password"
                 bind:value={password}
                 disabled={loading}
+                maxlength={72}
                 required
               />
               <button
@@ -513,6 +514,8 @@
   }
 
   :global(.login-input) {
+    width: 100%;
+    box-sizing: border-box;
     height: 44px;
     border-radius: 8px;
     border-color: rgba(252, 252, 252, 0.62) !important;

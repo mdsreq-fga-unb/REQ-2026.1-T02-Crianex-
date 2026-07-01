@@ -1,0 +1,57 @@
+---
+title: Rastreabilidade de Requisitos
+sidebar_label: Rastreabilidade
+---
+
+import TraceabilityFlow from '@site/src/components/TraceabilityFlow';
+import RevisionHistory from '@site/src/components/RevisionHistory';
+
+# Rastreabilidade de Requisitos
+
+Mapa vivo que conecta **Objetivos Específicos → Características de Produto → Features**. Os detalhes de cada item vivem em outras páginas: OEs e CPs na [Solução](/visao/solucao); Features, RFs, RNFs e Regras de Negócio na [Tabela de Requisitos](/backlog/requisitos).
+
+## Matriz Interativa
+
+> Clique em qualquer nó para abrir a linha correspondente na tabela. Arraste para navegar, use a roda do mouse para zoom.
+
+<TraceabilityFlow />
+
+## Árvore Completa (Miro)
+
+Visão expandida com o detalhamento até RFs e RNFs, mantida no Miro.
+
+<div className="crianex-embed">
+  <iframe
+    src="https://miro.com/app/live-embed/uXjVGl991V0=/?moveToWidget=3458764671557949874&cot=14"
+    height="620"
+    frameBorder="0"
+    scrolling="no"
+    allow="fullscreen; clipboard-read; clipboard-write"
+    allowFullScreen>
+  </iframe>
+</div>
+
+## Itens Avaliados e Não Implementados
+
+| Origem | Feature | Descrição | Motivo |
+| ------ | ------- | --------- | ------ |
+| [Issue #218](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Crianex-/issues/218) | F12 (CP4) | Capa do produto obtida automaticamente via Open Graph do site do próprio produto, em vez de upload manual | Item de feedback do cliente classificado como pós-MVP / IT3 na própria issue. A IT3 — Núcleo Operacional está pausada e sem previsão dentro da disciplina (ver [Cronograma](/visao/cronograma)); não será implementado neste semestre. |
+
+<RevisionHistory
+  headers={['Versão', 'Data', 'Descrição', 'Autor(es)']}
+  rows={[
+    ['1.0', '14/05/2026', 'Template do backlog', 'Lucas A. Zanetti'],
+    ['1.1', '17/05/2026', 'OEs, CPs, Features, RFs, RNFs com rastreabilidade', 'Lucas A. Zanetti'],
+    ['1.2', '06/06/2026', 'Adição da coluna INVEST na tabela de Features', 'Lucas A. Zanetti'],
+    ['1.3', '09/06/2026', 'Status de conclusão em Features, RFs e RNFs da IT1', 'Lucas A. Zanetti'],
+    ['1.4', '09/06/2026', 'RF49/54/55; Regras de Negócio (RN01–RN12)', 'Lucas A. Zanetti'],
+    ['1.5', '10/06/2026', 'RF08 concluído; renumeração RF49–53; refs cruzadas', 'Lucas A. Zanetti'],
+    ['1.6', '14/06/2026', 'Ajustes do professor sobre relações 1:1', 'Hugo Freitas Silva'],
+    ['1.7', '15/06/2026', 'Emojis → badges; coluna INVEST com nowrap', 'Lucas A. Zanetti'],
+    ['1.8', '15/06/2026', 'Badges IT2; correções de vínculos RF→Feature', 'Heitor Macedo Ricardo'],
+    ['1.9', '15/06/2026', 'Auditoria de bidirecionalidade de RNFs', 'Heitor Macedo Ricardo'],
+    ['2.0', '15/06/2026', 'F21 recebe RNFs de CP1; RNF20→F15', 'Heitor Macedo Ricardo'],
+    ['3.0', '26/06/2026', 'Migração para Docusaurus: página reduzida a Miro + matriz React Flow; tabelas movidas para Tabela de Requisitos', 'Equipe Crianex'],
+    ['3.1', '30/06/2026', 'Seção "Itens Avaliados e Não Implementados" (issue #218 — capa via Open Graph, pós-MVP/IT3 pausada)', 'Equipe Crianex'],
+  ]}
+/>

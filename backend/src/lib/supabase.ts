@@ -272,7 +272,88 @@ const createInMemorySupabase = () => {
             if (row) row['display_order'] = order['display_order'];
           }
         }
+        return { data: null, error: null };
       }
+
+      // Espelha a RPC capture_lead (transação ACID de captação de lead). As mesmas
+      // CHECK constraints do banco são validadas ANTES de qualquer escrita, de modo
+      // que uma falha não deixa linhas parciais — igual ao rollback do PL/pgSQL.
+      if (name === 'capture_lead' && params) {
+        const nome = params['p_nome'];
+        const email = params['p_email'];
+        const conteudo = params['p_conteudo'];
+        const telefone = (params['p_telefone'] as string | undefined) ?? null;
+
+        if (!nome || !String(nome).trim()) {
+          return { data: null, error: { code: '23514', message: 'clients_nome_check' } };
+        }
+        if (!email) {
+          return { data: null, error: { code: '23502', message: 'clients.email NOT NULL' } };
+        }
+        if (!conteudo || !String(conteudo).trim()) {
+          return { data: null, error: { code: '23514', message: 'notifications_conteudo_check' } };
+        }
+
+        const clients = getTable('clients');
+        const cards = getTable('client_cards');
+        const notifications = getTable('notifications');
+        const columns = getTable('crm_columns');
+
+        // Client deduplicado por e-mail.
+        let client = clients.find((c) => c['email'] === email);
+        if (client) {
+          client['nome'] = nome;
+          if (telefone) client['telefone'] = telefone;
+        } else {
+          client = {
+            id: crypto.randomUUID(),
+            nome,
+            email,
+            telefone,
+            status: 'ativo',
+            created_at: new Date().toISOString(),
+          };
+          clients.push(client);
+        }
+
+        // Resolve a coluna default do funil (emula o trigger). Em CI o seed já
+        // garante uma; no fake puro criamos uma sob demanda.
+        let defaultCol = columns.find((c) => c['is_default'] === true);
+        if (!defaultCol) {
+          defaultCol = {
+            id: crypto.randomUUID(),
+            title: 'Novo Lead',
+            position: 0,
+            is_default: true,
+          };
+          columns.push(defaultCol);
+        }
+
+        const card: Row = {
+          id: crypto.randomUUID(),
+          client_id: client['id'],
+          column_id: defaultCol['id'],
+          created_at: new Date().toISOString(),
+        };
+        cards.push(card);
+
+        const notification: Row = {
+          id: crypto.randomUUID(),
+          tipo: 'novo_lead',
+          conteudo,
+          status: 'unread',
+          created_at: new Date().toISOString(),
+        };
+        notifications.push(notification);
+
+        return {
+          data: [
+            { client_id: client['id'], card_id: card['id'], notification_id: notification['id'] },
+          ],
+          error: null,
+        };
+      }
+
       return { data: null, error: null };
     },
   };
@@ -303,7 +384,7 @@ if (isProduction) {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 2000);
 
-    const res = await fetch(url, { method: 'GET', signal: controller.signal });
+    await fetch(url, { method: 'GET', signal: controller.signal });
     clearTimeout(timeout);
 
     // Any HTTP response (including 404) means the server is reachable.

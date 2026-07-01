@@ -1,21 +1,7 @@
 <script lang="ts">
   import { Bot } from 'lucide-svelte';
+  import type { CrmClient } from './+page.svelte';
 
-
-  type CrmClient = {
-    id: string;
-    name: string;
-    email: string | null;
-    column_id: string;
-    product_name: string | null;
-    value: string | null;
-    responsible_name: string | null;
-    last_interaction: string | null;
-    interaction_count: number;
-    status: 'active' | 'inactive';
-  };
-
-  // Recebe os dados do cliente e a ação de clique do componente pai
   let { client, onclick } = $props<{
     client: CrmClient;
     onclick: () => void;
@@ -32,19 +18,19 @@
 
   <div class="card-body">
     <span class="product-badge">{client.product_name || 'Geral'}</span>
-    <span class="deal-value">{client.value || '-'}</span>
+    <span class="deal-value">{client.responsible_name || '-'}</span>
   </div>
 
   <div class="card-footer">
     <Bot size={13} class="interaction-icon" />
     <span class="interaction-text">
-      {client.interaction_count} {client.interaction_count === 1 ? 'interação' : 'interações'}
+      {client.interaction_count}
+      {client.interaction_count === 1 ? 'interação' : 'interações'}
     </span>
   </div>
 </button>
 
 <style>
-  /* Base do Card */
   .crm-lead-card {
     background-color: #16161a;
     border: 1px solid #2d2d35;
@@ -56,7 +42,9 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
-    transition: border-color 0.15s ease, background-color 0.15s ease;
+    transition:
+      border-color 0.15s ease,
+      background-color 0.15s ease;
   }
 
   .crm-lead-card:hover {
@@ -64,7 +52,6 @@
     background-color: #1a1a1f;
   }
 
-  /* Cabeçalho */
   .card-header {
     display: flex;
     flex-direction: column;
@@ -82,7 +69,6 @@
     color: #9ca3af;
   }
 
-  /* Divisória */
   .divider {
     border: 0;
     border-top: 1px solid #2d2d35;
@@ -90,7 +76,6 @@
     width: 100%;
   }
 
-  /* Corpo (Produto e Valor) */
   .card-body {
     display: flex;
     justify-content: space-between;
@@ -105,12 +90,10 @@
     font-weight: 500;
   }
   .deal-value {
-    font-size: 13px;
-    font-weight: 700;
-    color: #ffffff;
+    font-size: 12px;
+    color: #9ca3af;
   }
 
-  /* Rodapé (Interações) */
   .card-footer {
     display: flex;
     align-items: center;
@@ -120,8 +103,5 @@
   .interaction-text {
     font-family: var(--font-mono, monospace);
     font-size: 10px;
-  }
-  :global(.interaction-icon) {
-    color: #6b7280;
   }
 </style>

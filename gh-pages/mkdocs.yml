@@ -35,19 +35,18 @@ extra_javascript:
 
 nav:
   - Home: index.md
-  - Visão:
+  - Visão de Produto:
       - '1 · Cenário': visao/cenario.md
       - '2 · Solução': visao/solucao.md
       - '3 · Estratégias': visao/estrategias.md
       - '4 · Eng. de Requisitos': visao/er.md
-      - '5 · Cronograma': visao/cronograma.md
       - '6 · Equipe e Iteração': visao/equipe.md
       - '7 · DoR e DoD': visao/dor-dod.md
       - Lições Aprendidas:
           - '10.1 · Unidade 1': visao/10-licoes/10-1.md
           - '10.2 · Unidade 2': visao/10-licoes/10-2.md
           - '10.3 · Unidade 3': visao/10-licoes/10-3.md
-  - Iterações:
+  - Evidências:
       - 'Visão Geral': iteracoes/index.md
       - 'Unidade 1':
           - 'Resumo — Evidências': iteracoes/unidade-1/index.md
@@ -84,13 +83,13 @@ nav:
               - 'Technical Design Review IT2': iteracoes/iteracao-2/atas/reuniao_TDR2.md
       - 'IT3 — Núcleo Operacional':
           - 'Resumo — Evidências': iteracoes/iteracao-3/index.md
-  - Lista de Funcionalidades:
+  - '5 · Cronograma': visao/cronograma.md
+  - Funcionalidades:
       - 'Rastreabilidade': backlog/rastreabilidade.md
+      - 'Tabela do MVP': backlog/mvp.md
       - 'Priorização': backlog/priorizacao.md
       - 'Mapa de Dependências': backlog/dependencias.md
-  - Arquitetura:
-      - 'Arquitetura': arquitetura/index.md
-      - 'Roles': arquitetura/roles.md
+      - 'Arquitetura do Sistema': arquitetura/index.md
   - Entregas:
       - 'Visão Geral': entregas/index.md
       - 'Unidade 1': entregas/unidade-1.md
