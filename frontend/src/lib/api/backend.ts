@@ -1,5 +1,6 @@
 import { env } from '$env/dynamic/public';
 import { browser } from '$app/environment';
+import { supabase } from './supabase';
 
 // In Docker, SSR runs inside the frontend container and cannot reach localhost:3000.
 // PUBLIC_API_SSR_BASE_URL uses the Docker service name (http://backend:3000) for
@@ -28,13 +29,23 @@ export async function apiFetch<T>(
 ): Promise<T> {
   const { token, ...fetchInit } = init ?? {};
   const normalizedPath = path.startsWith('/') ? path : `/${path}`;
+
+  // frontend and backend live on different Render subdomains, which the
+  // browser treats as different sites (onrender.com is on the public suffix
+  // list) — cookies set by SvelteKit never reach the backend cross-site, so
+  // the access token must be sent explicitly as a Bearer header.
+  let authToken = token;
+  if (!authToken && browser && supabase) {
+    authToken = (await supabase.auth.getSession()).data.session?.access_token;
+  }
+
   const res = await fetch(`${BASE_URL}${API_PREFIX}${normalizedPath}`, {
     cache: 'no-store',
     ...fetchInit,
     credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      ...(authToken ? { Authorization: `Bearer ${authToken}` } : {}),
       ...fetchInit.headers,
     },
   });
