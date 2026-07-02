@@ -23,7 +23,8 @@ export type FaqPublicArticle = {
 };
 
 export const load: PageServerLoad = async ({ url, locals, fetch }) => {
-  const backendUrl = process.env['BACKEND_URL'] ?? 'http://localhost:3000';
+  const backendUrl =
+    env.PUBLIC_API_SSR_BASE_URL || env.PUBLIC_API_BASE_URL || 'http://localhost:3000';
   const categorySlug = url.searchParams.get('categoria') ?? undefined;
   const origin = url.origin;
   const apiBaseUrl = env.PUBLIC_API_BASE_URL ?? '';
