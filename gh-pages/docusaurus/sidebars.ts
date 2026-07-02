@@ -125,6 +125,7 @@ const sidebars: SidebarsConfig = {
               items: [
                 'iteracoes/iteracao-2/atas/reuniao_commitment',
                 'iteracoes/iteracao-2/atas/reuniao_TDR2',
+                'iteracoes/iteracao-2/atas/reuniao_artifact_closure',
               ],
             },
           ],

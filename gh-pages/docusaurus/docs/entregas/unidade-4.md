@@ -22,10 +22,16 @@ O Sistema de Tickets de Suporte (CP8, F22/F23) foi removido do escopo da IT2 em 
 
 ## Apresentação em Vídeo
 
-:::info[Em breve]
-:::
-
-O vídeo de apresentação da Unidade 4 será adicionado após a gravação.
+<div style={{width: '100%', maxWidth: '900px', margin: '1.5rem 0', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 16px rgba(0,0,0,0.15)'}}>
+  <iframe 
+    style={{width: '100%', aspectRatio: '16/9', display: 'block'}} 
+    src="https://youtube.com/embed/n5Gr9AuKYvo" 
+    title="Apresentação da Unidade 4" 
+    frameBorder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+    allowFullScreen>
+  </iframe>
+</div>
 
 ---
 
@@ -44,7 +50,7 @@ OBJ2 — Organização e Atualização de requisitos
 | Evidências de execução de ESw e ER | Atas, auditoria de rastreabilidade (MR.01–MR.05), Formal Client Validation, registro V&V da IT2 | OBJ1 + OBJ2 | [Atas IT2](/iteracoes/iteracao-2/atas/reuniao_TDR2) · [V&V IT2](/iteracoes/iteracao-2/vv) · [Formal Validation IT2](/iteracoes/iteracao-2/validacao/formal) | <span className="badge badge--green">Concluído</span> |
 | Site do Projeto (GitPages) | Documentação Docusaurus versionada e publicada | — (meio) | [Todo o site](/) | <span className="badge badge--green">Concluído</span> |
 | Retrospectiva final e lições aprendidas | Retrospectiva da IT2 com foco em ER, V&V, segurança e encerramento do projeto na disciplina | OBJ1 + OBJ2 | [10.4 · Lições da Unidade 4](/visao/licoes/unidade-4) | <span className="badge badge--green">Concluído</span> |
-| Vídeo de apresentação | Gravação e apresentação (02–09/07/2026) | — (formato) | [Entrega — Unidade 4](/entregas/unidade-4) | <span className="badge badge--yellow">Pendente</span> |
+| Vídeo de apresentação | Gravação e apresentação (02–09/07/2026) | — (formato) | [Entrega — Unidade 4](/entregas/unidade-4) | <span className="badge badge--green">Concluído</span> |
 
 ---
 
@@ -94,7 +100,7 @@ A mensagem escrita pelo visitante no formulário público de contato não virava
 | Feature Build Consolidation | 26/06/2026 | [V&V IT2](/iteracoes/iteracao-2/vv) |
 | Partial Client Validation IT2 | — | **Não realizada** — ver [justificativa](/iteracoes/iteracao-2/validacao/partial) |
 | Formal Client Validation IT2 | 29/06/2026 | [Formal Validation IT2](/iteracoes/iteracao-2/validacao/formal) |
-| Artifact Closure IT2 | 30/06/2026 | [V&V IT2 — MP.05](/iteracoes/iteracao-2/vv#mp05) |
+| Artifact Closure IT2 | 30/06/2026 | [Ata — Artifact Closure IT2](/iteracoes/iteracao-2/atas/reuniao_artifact_closure) · [V&V IT2 — MP.05](/iteracoes/iteracao-2/vv#mp05) |
 
 ### Evidências IT2
 
@@ -123,6 +129,7 @@ As lições desta unidade estão registradas em: [10.4 · Lições da Unidade 4]
 | 1.0 | 15/06/2026 | Criação da página | Equipe Crianex |
 | 1.1 | 18/06/2026 | Remarcação de datas após adiamento do prazo final da disciplina | Equipe Crianex |
 | 2.0 | 02/07/2026 | Página atualizada com o que foi de fato entregue na IT2 (CP1, CP9), auditoria de rastreabilidade, correções de segurança e lições aprendidas; CP8 sinalizada como fora do escopo | Equipe Crianex |
+| 2.1 | 02/07/2026 | Vídeo de apresentação embutido | Equipe Crianex |
 
 </div>
 </details>

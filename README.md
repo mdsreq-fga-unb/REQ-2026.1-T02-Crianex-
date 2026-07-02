@@ -17,6 +17,10 @@ Produto: **Crianex Hub** — plataforma administrativa centralizada e vitrine di
 - **Cliente:** Crianex (CTO: Otávio Maya)
 - **Metodologia:** FDD + Kanban
 - **Docs:** [mdsreq-fga-unb.github.io/REQ-2026.1-T02-Crianex-](https://mdsreq-fga-unb.github.io/REQ-2026.1-T02-Crianex-/)
+- **Deploy (produção):** [crianex.onrender.com](https://crianex.onrender.com/)
+- **Login de administrador (avaliação):** `owner@crianex.com` · `Crianex@Owner1`
+
+> ⚠️ Os servidores do Supabase podem estar em manutenção periodicamente — se o login não carregar, aguarde alguns minutos e tente novamente.
 
 <p align="center">
   <img 
