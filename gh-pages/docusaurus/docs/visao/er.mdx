@@ -115,6 +115,109 @@ O FDD + Kanban operacionaliza as atividades acima em **5 etapas**: as três prim
   <span style={{color: '#1565c0', fontWeight: 700}}>■</span> Etapas 1–3 (únicas) · <span style={{color: '#2e7d32', fontWeight: 700}}>■</span> Etapas 4–5 (iterativas, com loop por iteração)
 </p>
 
+## Cerimônias — Objetivo e Modalidade {#cerimonias}
+
+Cada cerimônia abaixo tem um objetivo específico dentro da ER/FDD e ocorre de forma **síncrona** (reunião com participantes, geralmente gravada) ou **assíncrona** (sem reunião formal — execução, checagem ou feedback enviado por outro canal). Clique em uma cerimônia para ver seu objetivo.
+
+<details className="crianex-change">
+<summary><span className="crianex-change__id">Domain Modeling Workshop</span> <span className="crianex-change__sum">Etapa 1 · Develop an Overall Model</span> <span className="badge badge--blue">Síncrona</span></summary>
+<div className="crianex-change__body">
+
+Workshop com o Domain Expert (Otávio) para elicitar e representar o domínio do negócio (Color Modeling) — gera o diagrama de domínio e o glossário de termos compartilhado pela equipe e pelo cliente. Ocorre uma única vez, no início do projeto.
+
+</div>
+</details>
+
+<details className="crianex-change">
+<summary><span className="crianex-change__id">Feature Discovery Session</span> <span className="crianex-change__sum">Etapa 2 · Build a Feature List</span> <span className="badge badge--blue">Síncrona</span></summary>
+<div className="crianex-change__body">
+
+Sessão dedicada que transforma necessidades de negócio brutas em candidatas a feature, produzindo a lista inicial de features e os primeiros Feature Cards. Ocorre uma única vez, no início do projeto.
+
+</div>
+</details>
+
+<details className="crianex-change">
+<summary><span className="crianex-change__id">Iteration Replenishment (macro)</span> <span className="crianex-change__sum">Etapa 3 · Plan by Feature</span> <span className="badge badge--blue">Síncrona</span></summary>
+<div className="crianex-change__body">
+
+Prioriza o backlog macro do produto (IP = VB / PT), monta o roadmap de iterações e a Feature Matrix (Valor × Esforço) que baliza o que entra em cada iteração. Ocorre uma única vez, no início do projeto.
+
+</div>
+</details>
+
+<details className="crianex-change">
+<summary><span className="crianex-change__id">Replenishment Micro + Commitment</span> <span className="crianex-change__sum">Etapa 4 · Design by Feature</span> <span className="badge badge--blue">Síncrona</span></summary>
+<div className="crianex-change__body">
+
+Seleciona, a partir do backlog priorizado, as features que entram na iteração corrente e formaliza o compromisso da equipe com o **Iteration Goal Statement** — a frase única e demonstrável que orienta toda a iteração. Repete a cada iteração.
+
+</div>
+</details>
+
+<details className="crianex-change">
+<summary><span className="crianex-change__id">Technical Design Review (TDR)</span> <span className="crianex-change__sum">Etapa 4 · Design by Feature</span> <span className="badge badge--blue">Síncrona</span></summary>
+<div className="crianex-change__body">
+
+Revisa os diagramas de sequência leve, os Feature Cards e os critérios de aceite (BDD) das features planejadas para a iteração, autorizando a abertura das issues de desenvolvimento (gate de entrada — DoR). Repete a cada iteração.
+
+</div>
+</details>
+
+<details className="crianex-change">
+<summary><span className="crianex-change__id">Kanban Pull Execution</span> <span className="crianex-change__sum">Etapa 5 · Build by Feature</span> <span className="badge badge--gray">Assíncrona</span></summary>
+<div className="crianex-change__body">
+
+Execução contínua do desenvolvimento com WIP limitado (≤ 2 issues por Class Owner): cada Class Owner puxa a próxima issue disponível do board conforme sua capacidade, sem reunião formal associada. Repete continuamente ao longo da iteração.
+
+</div>
+</details>
+
+<details className="crianex-change">
+<summary><span className="crianex-change__id">Feature Build Consolidation</span> <span className="crianex-change__sum">Etapa 5 · Build by Feature</span> <span className="badge badge--gray">Assíncrona</span></summary>
+<div className="crianex-change__body">
+
+Checagem feature a feature de que a rastreabilidade (RF/RNF, critérios de aceite) está atualizada e consistente com o comportamento efetivamente implementado — verificação assíncrona feita pelo responsável, sem reunião. Repete a cada iteração.
+
+</div>
+</details>
+
+<details className="crianex-change">
+<summary><span className="crianex-change__id">Refinamento de Requisitos</span> <span className="crianex-change__sum">Etapa 5 · Build by Feature</span> <span className="badge badge--blue">Síncrona</span></summary>
+<div className="crianex-change__body">
+
+Inspeciona a qualidade dos requisitos e das issues já em andamento, e audita a matriz de rastreabilidade (OE → CP → Feature → RF/RNF) em busca de inconsistências, requisitos órfãos ou desatualizados. Repete a cada iteração (pode ocorrer mais de uma vez).
+
+</div>
+</details>
+
+<details className="crianex-change">
+<summary><span className="crianex-change__id">Partial Client Validation</span> <span className="crianex-change__sum">Etapa 5 · Build by Feature</span> <span className="badge badge--gray">Assíncrona</span></summary>
+<div className="crianex-change__body">
+
+Coleta feedback antecipado do cliente sobre funcionalidades já implementadas, através de vídeo/screenshots e checklist enviados por WhatsApp em até 24h — sem reunião síncrona —, permitindo ajustes antes da validação formal. Repete a cada iteração, quando a disponibilidade do cliente permite (na IT2 não ocorreu: ver [justificativa](/iteracoes/iteracao-2/validacao/partial)).
+
+</div>
+</details>
+
+<details className="crianex-change">
+<summary><span className="crianex-change__id">Formal Client Validation</span> <span className="crianex-change__sum">Etapa 5 · Build by Feature</span> <span className="badge badge--blue">Síncrona</span></summary>
+<div className="crianex-change__body">
+
+Demonstração ao vivo do incremento completo da iteração, narrada pelo Iteration Goal Statement, buscando a aprovação formal do cliente — marca o encerramento oficial da iteração e é pré-requisito para a abertura da próxima. Repete a cada iteração.
+
+</div>
+</details>
+
+<details className="crianex-change">
+<summary><span className="crianex-change__id">Iteration Artifact Closure</span> <span className="crianex-change__sum">Etapa 5 · Build by Feature</span> <span className="badge badge--blue">Síncrona</span></summary>
+<div className="crianex-change__body">
+
+Checklist de empacotamento de todos os artefatos da iteração (documentação, evidências, resultados de V&V) antes de congelar o backlog da iteração encerrada e abrir a próxima. Repete a cada iteração.
+
+</div>
+</details>
+
 ## Artefatos de Engenharia de Software
 
 :::note[Separação ER × ESw]
@@ -143,5 +246,6 @@ Os artefatos abaixo descrevem e verificam a _solução técnica_, não o requisi
     ['1.11', '18/06/2026', 'Técnicas enriquecidas com formato/especificação de uso', 'Heitor'],
     ['2.0', '26/06/2026', 'Migração para Docusaurus: atividades de ER em tabs; tabelas compactadas', 'Equipe Crianex'],
     ['2.1', '28/06/2026', 'Cerimônia de Refinamento de Requisitos (V&V) adicionada às etapas iterativas; técnica de Análise de rastreabilidade incluída em V&V', 'Equipe Crianex'],
+    ['2.2', '01/07/2026', 'Nova seção "Cerimônias — Objetivo e Modalidade": minibar retrátil por cerimônia com objetivo e indicação de Síncrona/Assíncrona (Partial Client Validation, Kanban Pull Execution e Feature Build Consolidation são assíncronas)', 'Equipe Crianex'],
   ]}
 />
