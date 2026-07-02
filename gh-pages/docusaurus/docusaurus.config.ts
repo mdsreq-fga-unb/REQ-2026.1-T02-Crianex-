@@ -81,6 +81,7 @@ const config: Config = {
             {type: 'doc', docId: 'visao/equipe', label: 'Equipe'},
             {type: 'doc', docId: 'visao/cadencia', label: 'Cadência de Cerimônias'},
             {type: 'doc', docId: 'visao/dor-dod', label: 'DoR e DoD'},
+            {type: 'doc', docId: 'visao/licoes/index', label: 'Lições Aprendidas'},
           ],
         },
         {type: 'doc', docId: 'visao/cronograma', label: 'Cronograma', position: 'left'},

@@ -11,7 +11,7 @@ Registro formal das mudanças de processo e cronograma identificadas durante a I
 
 ## 1. Mudanças de Processo
 
-<details className="crianex-change">
+<details className="crianex-change" id="mp03">
 <summary><span className="crianex-change__id">MP.03</span> <span className="crianex-change__sum">Adiamento do prazo final da disciplina — Unidade 4 passa a ser a última entrega</span> <span className="badge badge--green">Aplicado</span></summary>
 <div className="crianex-change__body">
 
@@ -28,7 +28,7 @@ Registro formal das mudanças de processo e cronograma identificadas durante a I
 </div>
 </details>
 
-<details className="crianex-change">
+<details className="crianex-change" id="mp04">
 <summary><span className="crianex-change__id">MP.04</span> <span className="crianex-change__sum">IT3 — Núcleo Operacional pausada (sem janela dentro da disciplina)</span> <span className="badge badge--green">Aplicado</span></summary>
 <div className="crianex-change__body">
 
@@ -45,7 +45,7 @@ Registro formal das mudanças de processo e cronograma identificadas durante a I
 </div>
 </details>
 
-<details className="crianex-change">
+<details className="crianex-change" id="mp05">
 <summary><span className="crianex-change__id">MP.05</span> <span className="crianex-change__sum">Extensão da IT2 de 28/06 para 30/06, com remarcação de Validação e Artifact Closure</span> <span className="badge badge--green">Aplicado</span></summary>
 <div className="crianex-change__body">
 
@@ -61,7 +61,7 @@ Registro formal das mudanças de processo e cronograma identificadas durante a I
 </div>
 </details>
 
-<details className="crianex-change">
+<details className="crianex-change" id="mp06">
 <summary><span className="crianex-change__id">MP.06</span> <span className="crianex-change__sum">Gravação e apresentações da Unidade 4 remarcadas (gravação 01/07, apresentações 02–09/07)</span> <span className="badge badge--green">Aplicado</span></summary>
 <div className="crianex-change__body">
 

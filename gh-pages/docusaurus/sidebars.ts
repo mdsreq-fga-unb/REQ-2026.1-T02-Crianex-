@@ -18,10 +18,12 @@ const sidebars: SidebarsConfig = {
         {
           type: 'category',
           label: 'Lições Aprendidas',
+          link: {type: 'doc', id: 'visao/licoes/index'},
           items: [
             'visao/licoes/unidade-1',
             'visao/licoes/unidade-2',
             'visao/licoes/unidade-3',
+            'visao/licoes/unidade-4',
           ],
         },
       ],
